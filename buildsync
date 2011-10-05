@@ -1,0 +1,5 @@
+#!/bin/bash
+
+./buildarchive magit yasnippet markdown-mode deft gist hl-sentence color-theme-solarized
+
+./sync

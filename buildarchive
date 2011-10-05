@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# (load-file "~/.emacs.d/elisp/package-build.el")
+# (package-build-archive
+
+for pkg in $@; do
+    echo "Building package: $pkg"
+    emacs --batch -l package-build.el -u dcurtis --eval "(package-build-archive \"$pkg\")"
+done
+

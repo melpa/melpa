@@ -1,0 +1,4 @@
+/sync
+/archives/*.tar
+/archives/archive-contents
+/working/*/

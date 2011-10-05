@@ -1,0 +1,3 @@
+[submodule "epkgs"]
+	path = epkgs
+	url = https://github.com/emacsmirror/epkgs.git

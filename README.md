@@ -1,6 +1,7 @@
-# ELPA-GIT
+# MELPA
 
-This is some elisp that helps for building ELPA packages based on git
+This is some elisp that helps for building Emacs packages based on
+version control
 repositories.
 
 The `buildarchive` script will create an archive file in the

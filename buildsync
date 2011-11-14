@@ -1,6 +1,12 @@
 #!/bin/bash
 
-./buildarchive magit yasnippet markdown-mode deft gist hl-sentence ido-ubiquitous
+echo "Updating epkgs..."
+cd epkgs
+git pull
+cd ..
+
+
+./buildarchive magit yasnippet markdown-mode deft gist hl-sentence ido-ubiquitous haskell-mode color-theme-solarized full-ack evil undo-tree
 
 ./sync
 

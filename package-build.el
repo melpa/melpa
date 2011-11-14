@@ -145,44 +145,56 @@
                    "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")
                   (match-string-no-properties 1))))))))
 
+(defun package-change-list-elt (lst idx newval)
+  (if (zerop idx)
+      (cons newval (cdr lst))
+    (cons (car lst) (package-change-list-elt (cdr lst) (1- idx) newval))))
 
 (defun package-build-pkg-file (pkg-file file-name version homepage)
   "build the pkg file"
   (let ((print-level nil)
         (print-length nil)
-        (requires nil))
+        (pkglst (or (package-read-from-file pkg-file)
+                    (list 'define-package
+                          file-name
+                          version
+                          homepage
+                          ;; (list 'quote
+                          ;;       ;; Turn version lists into string form.
+                          (list 'quote (mapcar
+                                        (lambda (elt)
+                                          (list (car elt)
+                                                (package-version-join (cadr elt))))
+                                        nil))))))
+    
+    ;; set the packages version
+    (setq pkglst (package-change-list-elt pkglst 2 version))
+
     (write-region
      (concat
       (prin1-to-string
-       (list 'define-package
-             file-name
-             version
-             homepage
-             (list 'quote
-                   ;; Turn version lists into string form.
-                   (mapcar
-                    (lambda (elt)
-                      (list (car elt)
-                            (package-version-join (cadr elt))))
-                    requires))
-             ))
+       pkglst
+       )
       "\n")
      nil
      pkg-file
-     nil nil nil 'excl)))
+     nil nil nil nil)
+    pkglst))
+
+(defun package-read-from-file (file-name)
+  "read one lisp expression from a file"
+  (cond
+   ((file-exists-p file-name)
+    (with-temp-buffer
+      (insert-file-contents-literally file-name)
+      (goto-char (point-min))
+      (car
+       (read-from-string
+        (buffer-substring-no-properties (point-min) (point-max))))))))
 
 (defun package-build-get-config (file-name)
   "get the configuration information for the given file-name"
-  (let ((config-file (format "epkgs/%s/master" file-name)))
-    (cond
-     ((file-exists-p config-file)
-      (with-temp-buffer
-        (insert-file-contents-literally config-file)
-        (goto-char (point-min))
-        (car
-         (read-from-string
-          (buffer-substring-no-properties (point-min) (point-max))))))
-     (t nil))))
+  (package-read-from-file (format "epkgs/%s/master" file-name)))
 
 (defvar package-build-alist '())
 
@@ -225,7 +237,9 @@
              (summary (plist-get desc :summary)))
         (package-build-read-archive-contents)
         
-        (let* ((version
+        (let* ((pkglst)
+               (pkgdeps)
+               (version
                 (cond
                  ((eq repo-type 'svn)
                   (message "Subversion")
@@ -244,14 +258,18 @@
                (default-directory package-build-working-dir))
           (when (file-exists-p local-dir)
             (copy-directory file-name pkg-base-dir)
-            (unless (file-exists-p pkg-file)
-              (package-build-pkg-file pkg-file file-name version summary))
+            (setq pkglst (package-build-pkg-file pkg-file file-name version summary))
+            (setq pkgdeps (mapcar
+                           (lambda (elt)
+                             (list (car elt) (version-to-list (cadr elt))))
+                           (eval (nth 4 pkglst))))
+            (message (prin1-to-string pkgdeps))
             (package-build-create-tar
              pkg-base-dir
              (expand-file-name
               (concat file-name "-" version ".tar") package-build-archive-dir))
             (delete-directory pkg-base-dir t nil)
-            (package-build-add-to-archive-contents name version summary 'tar)
+            (package-build-add-to-archive-contents name version pkgdeps summary 'tar)
             (package-build-dump-archive-contents)
             )
           )
@@ -268,7 +286,7 @@
    (expand-file-name "archive-contents" package-build-archive-dir)
    nil nil nil nil))
 
-(defun package-build-add-to-archive-contents (name version homepage type)
+(defun package-build-add-to-archive-contents (name version deps homepage type)
   "add an archive to the package-build-alist"
   (let ((existing (assq name package-build-alist)))
     (when existing
@@ -277,6 +295,6 @@
                  (cons name
                        (vector
                         (version-to-list version)
-                        nil
+                        deps
                         homepage
                         type)))))

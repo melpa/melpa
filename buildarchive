@@ -4,7 +4,10 @@
 # (package-build-archive
 
 for pkg in $@; do
-    echo "Building package: $pkg"
-    emacs --batch -l package-build.el -u dcurtis --eval "(package-build-archive \"$pkg\")"
+	echo "Building package: $pkg"
+	emacs --batch -l package-build.el -u dcurtis --eval "(package-build-archive \"$pkg\")"
+	echo
+	echo
 done
+
 

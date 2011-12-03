@@ -73,7 +73,7 @@
        "darcs" nil
        (current-buffer)
        t "changes" "--last" "1"))
-    (message 
+    (message
      (format-time-string
       "%Y%m%d"
       (date-to-time
@@ -104,7 +104,7 @@
        "svn" nil
        (current-buffer)
        t "info"))
-    (message 
+    (message
      (format-time-string
       "%Y%m%d"
       (date-to-time
@@ -136,7 +136,7 @@
        "git" nil
        (current-buffer)
        t "show" "-s" "--format='\%ci'" "HEAD"))
-    (message 
+    (message
      (format-time-string
       "%Y%m%d"
       (date-to-time
@@ -154,19 +154,18 @@
   "build the pkg file"
   (let ((print-level nil)
         (print-length nil)
-        (pkglst (or (package-read-from-file pkg-file)
-                    (list 'define-package
-                          file-name
-                          version
-                          homepage
-                          ;; (list 'quote
-                          ;;       ;; Turn version lists into string form.
-                          (list 'quote (mapcar
-                                        (lambda (elt)
-                                          (list (car elt)
-                                                (package-version-join (cadr elt))))
-                                        nil))))))
-    
+        (pkglst
+         (or (package-read-from-file pkg-file)
+             (list 'define-package
+                   file-name
+                   version
+                   homepage
+                   (list 'quote (mapcar
+                                 (lambda (elt)
+                                   (list (car elt)
+                                         (package-version-join (cadr elt))))
+                                 nil))))))
+
     ;; set the packages version
     (setq pkglst (package-change-list-elt pkglst 2 version))
 
@@ -193,6 +192,10 @@
         (buffer-substring-no-properties (point-min) (point-max))))))))
 
 (defun package-build-get-config (file-name)
+  "get the configuration information for the given file-name"
+  (package-read-from-file (format "epkgs/%s/.config" file-name)))
+
+(defun package-build-get-master (file-name)
   "get the configuration information for the given file-name"
   (package-read-from-file (format "epkgs/%s/master" file-name)))
 
@@ -227,16 +230,16 @@
 (defun package-build-archive (file-name)
   "build a git package archive"
   (interactive)
-  (let* ((desc (package-build-get-config file-name))
+  (let* ((desc (package-build-get-master file-name))
+         (cfg (package-build-get-config file-name))
          (name (intern file-name))
          (local-dir (file-name-as-directory (expand-file-name file-name package-build-working-dir))))
     (when desc
-      (let* ((repo (plist-get desc :repository))
-             (repo-type (car repo))
-             (repo-url (cdr repo))
+      (let* ((repo-type (plist-get cfg :fetcher))
+             (repo-url (plist-get cfg :url))
              (summary (plist-get desc :summary)))
         (package-build-read-archive-contents)
-        
+
         (let* ((pkglst)
                (pkgdeps)
                (version
@@ -256,14 +259,14 @@
                           (concat (file-name-as-directory package-build-working-dir)
                                   (file-name-as-directory pkg-base-dir))))
                (default-directory package-build-working-dir))
-          (when (file-exists-p local-dir)
+          (when (and (file-exists-p local-dir) version)
             (copy-directory file-name pkg-base-dir)
             (setq pkglst (package-build-pkg-file pkg-file file-name version summary))
             (setq pkgdeps (mapcar
                            (lambda (elt)
                              (list (car elt) (version-to-list (cadr elt))))
                            (eval (nth 4 pkglst))))
-            (message (prin1-to-string pkgdeps))
+            (message "deps: %s"(prin1-to-string pkgdeps))
             (package-build-create-tar
              pkg-base-dir
              (expand-file-name
@@ -271,9 +274,7 @@
             (delete-directory pkg-base-dir t nil)
             (package-build-add-to-archive-contents name version pkgdeps summary 'tar)
             (package-build-dump-archive-contents)
-            )
-          )
-        ))))
+            (message "Success!")))))))
 
 (defun package-build-dump-archive-contents ()
   "dump the archive contents back to the file"

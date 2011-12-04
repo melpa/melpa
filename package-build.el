@@ -126,7 +126,7 @@
          (current-buffer) nil "pull"))
       )
      (t
-      (message "cloning repository")
+      (message "cloning %s to %s" repo dir)
       (process-file
        "git" nil
        (current-buffer)

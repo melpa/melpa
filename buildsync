@@ -6,7 +6,16 @@ git pull
 cd ..
 
 
+echo
+echo "*** Clearing the archives folder..."
+rm archives/*
+
+
+echo
+echo "*** Building all packages..."
 ./buildarchive magit yasnippet markdown-mode markdown-mode+ deft gist hl-sentence ido-ubiquitous haskell-mode color-theme-solarized full-ack evil undo-tree
 
+echo
+echo "*** Pushing changes to the server..."
 ./sync
 

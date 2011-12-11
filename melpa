@@ -1,0 +1,50 @@
+#!/bin/bash
+
+function melpa_update_epkgs {
+    echo "Updating epkgs..."
+    cd epkgs
+    git pull
+    cd ..
+    echo
+}
+
+function melpa_clear_archives {
+    echo "*** Clearing the archives folder..."
+    rm archives/*
+    echo
+}
+
+
+function melpa_build_pkglist {
+    echo "*** Building all packages..."
+    for pkg in `echo pkglist`; do
+        ./buildarchive
+    done
+    echo
+}
+
+function melpa_build_archive {
+    echo "Building package: $pkg"
+    emacs --batch -l package-build.el -u dcurtis --eval "(package-build-archive \"$1\")"
+    echo
+}
+
+function melpa_sync {
+    echo "*** Pushing changes to the server..."
+    rsync -avz --delete archives/ milkbox.net:webapps/melpa/packages
+    echo
+}
+
+function melpa_generate_html {
+    echo "*** Building webpage..."
+    cd webpage
+    awk '{ if(/<!--list-of-packages-->/)
+while((getline < "../buildlist")>0)
+print "* " $0
+else print}' index.tmpl > index.md
+    cd ..
+    echo
+}
+
+melpa_generate_html
+

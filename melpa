@@ -39,9 +39,10 @@ function melpa_generate_html {
     echo "*** Building webpage..."
     cd webpage
     awk '{ if(/<!--list-of-packages-->/)
-while((getline < "../buildlist")>0)
+while((getline < "../pkglist")>0)
 print "* " $0
 else print}' index.tmpl > index.md
+    pandoc -s --mathml -t html --smart index.md > index.html
     cd ..
     echo
 }

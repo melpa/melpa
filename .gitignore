@@ -2,3 +2,5 @@
 /archives/*.tar
 /archives/archive-contents
 /working/*/
+/webpage/index.html
+/webpage/index.md

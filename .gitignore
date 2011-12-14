@@ -1,6 +1,6 @@
 /sync
-/archives/*.tar
-/archives/archive-contents
+/packages/*.tar
+/packages/archive-contents
 /working/*/
 /webpage/index.html
 /webpage/index.md

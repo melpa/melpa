@@ -1,25 +1,32 @@
 #!/bin/bash
 
+BASEDIR=`dirname $0`
+
 function melpa_update_epkgs {
     echo "Updating epkgs..."
-    cd epkgs
+    pushd ${BASEDIR}/epkgs
     git pull
-    cd ..
+    popd
     echo
 }
 
-function melpa_clear_archives {
-    echo "*** Clearing the archives folder..."
-    rm archives/*
+function melpa_clear_packages {
+    echo "*** Clearing the packages folder..."
+    rm $BASEDIR/packages/*
     echo
 }
 
 
 function melpa_build_pkglist {
     echo "*** Building all packages..."
-    for pkg in `echo pkglist`; do
-        ./buildarchive
+    pushd ${BASEDIR}
+    for pkg in `cat pkglist`; do
+	echo "Building package: $pkg"
+	./buildpkg $pkg
+	echo
+	echo
     done
+    popd
     echo
 }
 
@@ -31,21 +38,37 @@ function melpa_build_archive {
 
 function melpa_sync {
     echo "*** Pushing changes to the server..."
-    rsync -avz --delete archives/ milkbox.net:webapps/melpa/packages
+    rsync -avz --delete packages webpage/index.html milkbox.net:webapps/melpa/
     echo
 }
 
 function melpa_generate_html {
     echo "*** Building webpage..."
-    cd webpage
+    pushd ${BASENAME}/webpage
     awk '{ if(/<!--list-of-packages-->/)
 while((getline < "../pkglist")>0)
 print "* " $0
 else print}' index.tmpl > index.md
     pandoc -s --mathml -t html --smart index.md > index.html
-    cd ..
+    popd
     echo
 }
 
-melpa_generate_html
+args=$@
+
+if [[ "$#" == "0" ]]; then
+    args="update clear build html sync"
+fi
+
+for task in $args; do
+    case $task in
+        update ) melpa_update_epkgs ;;
+        clear ) melpa_clear_packages ;;
+        build ) melpa_build_pkglist ;;
+        html ) melpa_generate_html ;;
+       sync ) melpa_sync ;;
+    esac
+    shift
+done
+
 

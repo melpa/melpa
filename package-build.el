@@ -48,7 +48,7 @@
 (defvar package-build-working-dir (expand-file-name "working/")
   "Directory in which to keep checkouts.")
 
-(defvar package-build-archive-dir (expand-file-name "archives/")
+(defvar package-build-archive-dir (expand-file-name "packages/")
   "Directory in which to keep compiled archives.")
 
 

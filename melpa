@@ -1,63 +1,68 @@
 #!/bin/bash
 
+
 BASEDIR=`dirname $0`
 
 function melpa_update_epkgs {
     echo "Updating epkgs..."
-    pushd ${BASEDIR}/epkgs
+    cd ${BASEDIR}/epkgs || return 1
     git pull
-    popd
+    cd -
     echo
 }
 
 function melpa_clear_packages {
     echo "*** Clearing the packages folder..."
-    rm $BASEDIR/packages/*
+    rm ${BASEDIR}/packages/*
     echo
 }
 
 
 function melpa_build_pkglist {
     echo "*** Building all packages..."
-    pushd ${BASEDIR}
+    cd ${BASEDIR} || return 1
     for pkg in `cat pkglist`; do
 	echo "Building package: $pkg"
 	./buildpkg $pkg
 	echo
 	echo
     done
-    popd
+    cd -
     echo
 }
 
 function melpa_build_archive {
     echo "Building package: $pkg"
+    cd ${BASEDIR} || return 1
     emacs --batch -l package-build.el -u dcurtis --eval "(package-build-archive \"$1\")"
+    cd -
     echo
 }
 
 function melpa_sync {
     echo "*** Pushing changes to the server..."
+    cd ${BASEDIR} || return 1
     rsync -avz --delete packages webpage/index.html milkbox.net:webapps/melpa/
+    cd -
     echo
 }
 
 function melpa_generate_html {
     echo "*** Building webpage..."
-    pushd ${BASENAME}/webpage
+    cd ${BASEDIR}/webpage || return 1
     awk '{ if(/<!--list-of-packages-->/)
 while((getline < "../pkglist")>0)
 print "* " $0
 else print}' index.tmpl > index.md
     pandoc -s --mathml -t html --smart index.md > index.html
-    popd
+    cd -
     echo
 }
 
 args=$@
 
 if [[ "$#" == "0" ]]; then
-    args="update clear build html sync"
+    args="update clear build index sync"
 fi
 
 for task in $args; do
@@ -65,8 +70,8 @@ for task in $args; do
         update ) melpa_update_epkgs ;;
         clear ) melpa_clear_packages ;;
         build ) melpa_build_pkglist ;;
-        html ) melpa_generate_html ;;
-       sync ) melpa_sync ;;
+        html | index ) melpa_generate_html ;;
+        sync ) melpa_sync ;;
     esac
     shift
 done

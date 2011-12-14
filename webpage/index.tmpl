@@ -12,6 +12,8 @@ in your `init.el` file.
     (add-to-list 'package-archives
                  '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
+Please read about [known issues](#known-issues) below before
+attempting to install multiple pacages at once.
 
 ## Known Issues
 
@@ -21,8 +23,14 @@ package is large and takes a while to compile -- like *magit* or *evil*.
 
     (setq url-http-attempt-keepalives nil)
 
-This makes things a tad more slow but means that the install goes OK.
+This makes things a tad more slow but means that the install completes
+correctly. Otherwise the connection times out and the install goes haywire.
 
+## Updating Packages
+
+`package.el` now includes a mechanism to upgrade packages.  After running `package-list-pacages`, type *u* (mark Upgradable packages) and then *x* (eXecute the installs and deletions).  When it's done installing all the packages it will ask if you want to delete the obsolete packages and so you can hit *y* (Yes).
+
+If you run into a problem installing or upgrading, you may need to go into your `~/.emacs.d/elpa/` directory and delete packages that are installed multiple times.  This can happen when the install times out (see [Known Issues](#known-issues)).
 
 ## Development
 

@@ -14,7 +14,7 @@ function melpa_update_epkgs {
 
 function melpa_clear_packages {
     echo "*** Clearing the packages folder..."
-    rm /packages/*
+    rm packages/*
     echo
 }
 

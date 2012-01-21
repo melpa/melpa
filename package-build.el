@@ -59,13 +59,13 @@
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
     (cond
      ((file-exists-p dir)
-      (message "checkout directory exists, updating...")
+      (print "checkout directory exists, updating...")
       (let ((default-directory dir))
         (process-file
          "darcs" nil
          (current-buffer) nil "pull")))
      (t
-      (message "cloning repository")
+      (print "cloning repository")
       (process-file
        "darcs" nil
        (current-buffer)
@@ -75,11 +75,11 @@
        "darcs" nil
        (current-buffer)
        t "changes" "--last" "1"))
-    (message
+    (print
      (format-time-string
       "%Y%m%d"
       (date-to-time
-       (message (progn
+       (print (progn
                   (re-search-backward
                    "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)")
                   (match-string-no-properties 1))))))))
@@ -90,13 +90,13 @@
     (goto-char (point-max))
     (cond
      ((file-exists-p dir)
-      (message "checkout directory exists, updating...")
+      (print "checkout directory exists, updating...")
       (let ((default-directory dir))
         (process-file
          "svn" nil
          (current-buffer) nil "up")))
      (t
-      (message "cloning repository")
+      (print "cloning repository")
       (process-file
        "svn" nil
        (current-buffer)
@@ -106,11 +106,11 @@
        "svn" nil
        (current-buffer)
        t "info"))
-    (message
+    (print
      (format-time-string
       "%Y%m%d"
       (date-to-time
-       (message (progn
+       (print (progn
                   (re-search-backward
                    "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")
                   (match-string-no-properties 1))))))))
@@ -121,14 +121,14 @@
     (goto-char (point-max))
     (cond
      ((file-exists-p dir)
-      (message "checkout directory exists, updating...")
+      (print "checkout directory exists, updating...")
       (let ((default-directory dir))
         (process-file
          "git" nil
          (current-buffer) nil "pull"))
       )
      (t
-      (message "cloning %s to %s" repo dir)
+      (print "cloning %s to %s" repo dir)
       (process-file
        "git" nil
        (current-buffer)
@@ -138,11 +138,11 @@
        "git" nil
        (current-buffer)
        t "show" "-s" "--format='\%ci'" "HEAD"))
-    (message
+    (print
      (format-time-string
       "%Y%m%d"
       (date-to-time
-       (message (progn
+       (print (progn
                   (re-search-backward
                    "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")
                   (match-string-no-properties 1))))))))
@@ -208,8 +208,8 @@
     (if files
         (setq files (mapcar (lambda (fn) (concat dir "/" fn)) files))
       (setq files (list dir)))
-    (message (prin1-to-string files))
-    (message default-directory)
+    (print files)
+    (print default-directory)
     (apply 'process-file
            "tar" nil
            (get-buffer-create "*package-build-checkout*")
@@ -248,13 +248,13 @@
                (version
                 (cond
                  ((eq repo-type 'svn)
-                  (message "Subversion")
+                  (print 'Subversion)
                   (package-build-checkout-svn repo-url pkg-cwd))
                  ((eq repo-type 'git)
-                  (message "Git")
+                  (print 'Git)
                   (package-build-checkout-git repo-url pkg-cwd))
                  ((eq repo-type 'darcs)
-                  (message "Darcs")
+                  (print 'Darcs)
                   (package-build-checkout-darcs repo-url pkg-cwd))))
                (pkg-base-dir (concat file-name "-" version))
                (pkg-file (concat file-name "-pkg.el"))

@@ -44,10 +44,7 @@ function melpa_sync {
 function melpa_generate_html {
     echo "*** Building webpage..."
     cd webpage || return 1
-    awk '{ if(/<!--list-of-packages-->/)
-while((getline < "../pkglist")>0)
-print "* " $0
-else print}' index.tmpl > index.md
+    erb index.erb
     pandoc -s --mathml -t html --smart index.md > index.html
     cd ..
     echo

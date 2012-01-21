@@ -1,4 +1,9 @@
-((markdown-mode
+(
+ (gist
+  :summary "Emacs integration for gist.github.com"
+  :url "git://github.com/defunkt/gist.el.git"
+  :fetcher git)
+ (markdown-mode
   :url "git://github.com/milkypostman/markdown-mode.git"
   :fetcher git
   :summary "Emacs Major mode for Markdown-formatted text files"

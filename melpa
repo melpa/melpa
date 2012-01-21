@@ -69,7 +69,7 @@ set -- $args
 
 for i; do
     case "$i" in
-        -h | -?) print_usage
+        -h | -\?) print_usage
             shift
             exit
             ;;

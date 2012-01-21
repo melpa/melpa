@@ -201,21 +201,24 @@
   "get the configuration information for the given file-name"
   (package-read-from-file (format "epkgs/%s/master" file-name)))
 
-(defun package-build-create-tar (dir file)
-  "create a tar for the file-name with version"
-  (let* ((default-directory package-build-working-dir)
-        )
-    (process-file
-     "tar" nil
-     (get-buffer-create "*package-build-checkout*")
-     nil "-cvf"
-     file
-     "--exclude=.svn"
-     "--exclude=.git*"
-     "--exclude=_darcs"
-     dir)
-    ))
 
+(defun package-build-create-tar (dir file &optional files)
+  "create a tar for the file-name with version"
+  (let* ((default-directory package-build-working-dir))
+    (if files
+        (setq files (mapcar (lambda (fn) (concat dir "/" fn)) files))
+      (setq files (list dir)))
+    (message (prin1-to-string files))
+    (message default-directory)
+    (apply 'process-file
+           "tar" nil
+           (get-buffer-create "*package-build-checkout*")
+           nil "-cvf"
+           file
+           "--exclude=.svn"
+           "--exclude=.git*"
+           "--exclude=_darcs"
+           files)))
 
 (defun package-build-archives (&rest pkgs)
   "build archives"
@@ -254,11 +257,7 @@
                   (message "Darcs")
                   (package-build-checkout-darcs repo-url pkg-cwd))))
                (pkg-base-dir (concat file-name "-" version))
-               (pkg-file (expand-file-name
-                          (concat file-name "-pkg.el")
-                          (concat
-                           (file-name-as-directory package-build-working-dir)
-                           (file-name-as-directory pkg-base-dir))))
+               (pkg-file (concat file-name "-pkg.el"))
                (default-directory package-build-working-dir))
 
           (cond
@@ -272,18 +271,28 @@
            (t
             (copy-directory file-name pkg-base-dir)
             (setq pkglst
-                  (package-build-pkg-file pkg-file file-name version summary))
+                  (package-build-pkg-file
+                   (expand-file-name
+                    pkg-file
+                    (concat
+                     (file-name-as-directory package-build-working-dir)
+                     (file-name-as-directory pkg-base-dir)))
+                   file-name version summary))
             (setq pkgdeps (mapcar
                            (lambda (elt)
                              (list (car elt) (version-to-list (cadr elt))))
                            (eval (nth 4 pkglst))))
+            (when files
+              (add-to-list 'files pkg-file))
             (package-build-create-tar
              pkg-base-dir
              (expand-file-name
-              (concat file-name "-" version ".tar") package-build-archive-dir))
+              (concat file-name "-" version ".tar") package-build-archive-dir)
+             files)
             (delete-directory pkg-base-dir t nil)
             (package-build-add-to-archive-contents
-             name version pkgdeps summary 'tar))))))))
+             name version pkgdeps summary 'tar)))))
+      (package-build-dump-archive-contents))))
 
 
 (defvar package-build-alist

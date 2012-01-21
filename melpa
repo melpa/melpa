@@ -21,7 +21,7 @@ function melpa_clear_packages {
 
 function melpa_build_pkglist {
     echo "*** Building all packages..."
-    for pkg in `cat pkglist`; do
+    for pkg in `cat buildlist`; do
 	./buildpkg $pkg
 	echo
 	echo

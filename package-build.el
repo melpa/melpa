@@ -51,6 +51,8 @@
 (defvar package-build-archive-dir (expand-file-name "packages/")
   "Directory in which to keep compiled archives.")
 
+(defvar package-build-alist-file (expand-file-name "pkglist")
+  "File containing pkg alist")
 
 (defun package-build-checkout-darcs (repo dir)
   "checkout an svn package"
@@ -199,18 +201,6 @@
   "get the configuration information for the given file-name"
   (package-read-from-file (format "epkgs/%s/master" file-name)))
 
-(defvar package-build-alist '())
-
-(defun package-build-read-archive-contents ()
-  (let ((archive-file
-         (expand-file-name "archive-contents" package-build-archive-dir)))
-    (when (file-exists-p archive-file)
-      (with-temp-buffer
-        (insert-file-contents-literally archive-file)
-        (goto-char (point-min))
-        (let ((contents (read (current-buffer))))
-          (setq package-build-alist (cdr contents)))))))
-
 (defun package-build-create-tar (dir file)
   "create a tar for the file-name with version"
   (let* ((default-directory package-build-working-dir)
@@ -227,18 +217,28 @@
     ))
 
 
+(defun package-build-archives (&rest pkgs)
+  "build archives"
+  (interactive)
+  (mapc 'package-build-archive pkgs)
+  (package-build-dump-archive-contents))
+
 (defun package-build-archive (file-name)
   "build a git package archive"
   (interactive)
-  (let* ((desc (package-build-get-master file-name))
-         (cfg (package-build-get-config file-name))
-         (name (intern file-name))
-         (local-dir (file-name-as-directory (expand-file-name file-name package-build-working-dir))))
-    (when desc
+
+  (let* ((name (intern file-name))
+         (cfg (cdr (assoc name package-build-alist)))
+         (pkg-cwd
+          (file-name-as-directory
+           (expand-file-name file-name package-build-working-dir))))
+
+    (when cfg
+
       (let* ((repo-type (plist-get cfg :fetcher))
              (repo-url (plist-get cfg :url))
-             (summary (plist-get desc :summary)))
-        (package-build-read-archive-contents)
+             (summary (plist-get cfg :summary))
+             (files (plist-get cfg :files)))
 
         (let* ((pkglst)
                (pkgdeps)
@@ -246,53 +246,84 @@
                 (cond
                  ((eq repo-type 'svn)
                   (message "Subversion")
-                  (package-build-checkout-svn repo-url local-dir))
+                  (package-build-checkout-svn repo-url pkg-cwd))
                  ((eq repo-type 'git)
                   (message "Git")
-                  (package-build-checkout-git repo-url local-dir))
+                  (package-build-checkout-git repo-url pkg-cwd))
                  ((eq repo-type 'darcs)
                   (message "Darcs")
-                  (package-build-checkout-darcs repo-url local-dir))))
+                  (package-build-checkout-darcs repo-url pkg-cwd))))
                (pkg-base-dir (concat file-name "-" version))
                (pkg-file (expand-file-name
                           (concat file-name "-pkg.el")
-                          (concat (file-name-as-directory package-build-working-dir)
-                                  (file-name-as-directory pkg-base-dir))))
+                          (concat
+                           (file-name-as-directory package-build-working-dir)
+                           (file-name-as-directory pkg-base-dir))))
                (default-directory package-build-working-dir))
-          (when (and (file-exists-p local-dir) version)
+
+          (cond
+           ((= 1 (length files))
+            (copy-file (expand-file-name (car files) pkg-cwd)
+                       (expand-file-name (concat file-name "-" version ".el")
+                                         package-build-archive-dir))
+            (package-build-add-to-archive-contents
+             name version pkgdeps summary 'single))
+
+           (t
             (copy-directory file-name pkg-base-dir)
-            (setq pkglst (package-build-pkg-file pkg-file file-name version summary))
+            (setq pkglst
+                  (package-build-pkg-file pkg-file file-name version summary))
             (setq pkgdeps (mapcar
                            (lambda (elt)
                              (list (car elt) (version-to-list (cadr elt))))
                            (eval (nth 4 pkglst))))
-            (message "deps: %s"(prin1-to-string pkgdeps))
             (package-build-create-tar
              pkg-base-dir
              (expand-file-name
               (concat file-name "-" version ".tar") package-build-archive-dir))
             (delete-directory pkg-base-dir t nil)
-            (package-build-add-to-archive-contents name version pkgdeps summary 'tar)
-            (package-build-dump-archive-contents)
-            (message "Success!")))))))
+            (package-build-add-to-archive-contents
+             name version pkgdeps summary 'tar))))))))
+
+
+(defvar package-build-alist
+  (let ((pkg-file package-build-alist-file))
+    (when (file-exists-p pkg-file)
+      (with-temp-buffer
+        (insert-file-contents-literally pkg-file)
+        (goto-char (point-min))
+        (read (current-buffer))))))
+
+(defvar package-build-archive-alist
+  (let ((archive-file
+         (expand-file-name "archive-contents" package-build-archive-dir)))
+    (when (file-exists-p archive-file)
+      (with-temp-buffer
+        (insert-file-contents-literally archive-file)
+        (goto-char (point-min))
+        (let ((contents (read (current-buffer))))
+          (cdr contents))))))
+
 
 (defun package-build-dump-archive-contents ()
   "dump the archive contents back to the file"
   (write-region
    (concat
     (pp-to-string
-     (cons 1 package-build-alist))
+     (cons 1 package-build-archive-alist))
     "\n")
    nil
    (expand-file-name "archive-contents" package-build-archive-dir)
    nil nil nil nil))
 
+
 (defun package-build-add-to-archive-contents (name version deps homepage type)
-  "add an archive to the package-build-alist"
-  (let ((existing (assq name package-build-alist)))
+  "add an archive to the package-build-archive-contents"
+  (let ((existing (assq name package-build-archive-alist)))
     (when existing
-      (setq package-build-alist (delq existing package-build-alist)))
-    (add-to-list 'package-build-alist
+      (setq package-build-archive-alist
+            (delq existing package-build-archive-alist)))
+    (add-to-list 'package-build-archive-alist
                  (cons name
                        (vector
                         (version-to-list version)

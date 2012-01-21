@@ -1,18 +1,6 @@
-magithub
-rinari
-clojure-mode
-smex
-paredit
-magit
-yasnippet
-markdown-mode
-markdown-mode+
-deft
-gist
-hl-sentence
-ido-ubiquitous
-haskell-mode
-color-theme-solarized
-full-ack
-evil
-undo-tree
+((markdown-mode
+  :url "git://github.com/milkypostman/markdown-mode.git"
+  :fetcher git
+  :summary "Emacs Major mode for Markdown-formatted text files"
+  :files ("markdown-mode.el"))
+ )

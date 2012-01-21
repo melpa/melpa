@@ -53,14 +53,39 @@ else print}' index.tmpl > index.md
     echo
 }
 
-args=$@
+function print_usage {
+    echo "usage: $0 [-h | -?] [update | clear | build | html | sync]"
+}
 
-if [[ "$#" == "0" ]]; then
-    args="update clear build index sync"
+args=`getopt h $*`
+errcode=$?
+
+if [[ "$errcode" > 0 ]]; then
+    print_usage
+    exit $errcode
 fi
 
-for task in $args; do
-    case $task in
+set -- $args
+
+for i; do
+    case "$i" in
+        -h | -?) print_usage
+            shift
+            exit
+            ;;
+        --) shift
+            break
+            ;;
+    esac
+done
+
+
+if [[ "$#" == "0" ]]; then
+    set -- update clear build index sync
+fi
+
+for i; do
+    case $i in
         update ) melpa_update_epkgs ;;
         clear ) melpa_clear_packages ;;
         build ) melpa_build_pkglist ;;
@@ -69,5 +94,9 @@ for task in $args; do
     esac
     shift
 done
+
+exit 1
+
+
 
 

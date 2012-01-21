@@ -44,7 +44,7 @@ function melpa_sync {
 function melpa_generate_html {
     echo "*** Building webpage..."
     cd webpage || return 1
-    erb index.erb
+    erb index.erb > index.md
     pandoc -s --mathml -t html --smart index.md > index.html
     cd ..
     echo

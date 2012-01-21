@@ -12,14 +12,13 @@
         (buffer-substring-no-properties (point-min) (point-max))))))))
 
 (message (prin1-to-string command-line-args-left))
-(when command-line-args-left
-  (let* ((file-name (car command-line-args-left))
-         (config
-          (read-from-file
-           (message (expand-file-name ".config" (expand-file-name file-name "epkgs")))))
-         (master
-          (read-from-file
-           (expand-file-name "master" (expand-file-name file-name "epkgs")))))
+(defun process-one (file-name)
+  (let ((config
+         (read-from-file
+          (expand-file-name ".config" (expand-file-name file-name "epkgs"))))
+        (master
+         (read-from-file
+          (expand-file-name "master" (expand-file-name file-name "epkgs")))))
     (princ
      (pp-to-string
       (cons
@@ -35,3 +34,5 @@
         :fetcher
         (plist-get config :fetcher)))
       ))))
+
+(mapc 'process-one command-line-args-left)

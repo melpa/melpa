@@ -29,4 +29,10 @@
   :fetcher git
   :summary "Saner defaults and goodies for lisp languages"
   :files ("modules/starter-kit-lisp.el"))
+ (undo-tree
+  :summary "Treat undo history as a tree"
+  :url "http://www.dr-qubit.org/git/undo-tree.git"
+  :fetcher git)
+ (full-ack
+  )
  )

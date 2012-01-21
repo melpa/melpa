@@ -3,4 +3,8 @@
   :fetcher git
   :summary "Emacs Major mode for Markdown-formatted text files"
   :files ("markdown-mode.el"))
+ (magit
+  :url "git://github.com/magit/magit.git"
+  :fetcher git
+  :summary "Control Git from Emacs")
  )

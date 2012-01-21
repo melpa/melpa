@@ -1,5 +1,6 @@
 /sync
 /packages/*.tar
+/packages/*.el
 /packages/archive-contents
 /working/*/
 /webpage/index.html

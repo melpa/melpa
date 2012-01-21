@@ -128,7 +128,7 @@
          (current-buffer) nil "pull"))
       )
      (t
-      (print "cloning %s to %s" repo dir)
+      (print (format "cloning %s to %s" repo dir))
       (process-file
        "git" nil
        (current-buffer)

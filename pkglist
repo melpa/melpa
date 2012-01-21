@@ -33,6 +33,9 @@
   :summary "Treat undo history as a tree"
   :url "http://www.dr-qubit.org/git/undo-tree.git"
   :fetcher git)
- (full-ack
-  )
+ (haskell-mode
+  :summary "A Haskell editing mode"
+  :url "http://code.haskell.org/haskellmode-emacs"
+  :fetcher darcs)
  )
+

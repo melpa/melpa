@@ -9,7 +9,30 @@
 
 ## Current List of Packages being Generated Nightly
 
-<%= File.open("../pkglist").readlines.map{ |x| "* " + x }.join %>
+<%=
+def parse str
+  # credit to: http://stackoverflow.com/q/3128406/154508
+  tokens = str.scan(/#{Regexp.escape("(")}|#{Regexp.escape(")")}|[a-zA-Z0-9\-\_]+/)
+
+  stack = [[]]
+
+  tokens.each do |tok|
+    case tok
+      when "("
+      stack << []
+      when ")"
+      stack[-2] << stack.pop
+      else
+      stack[-1] << tok
+    end
+  end
+
+  return stack[-1][-1]
+end
+parse(File.open("../packages/archive-contents").read)[1..-1].map{ |x|
+  "* #{x[0]}-#{x[1]} :: #{x[3..-2].join(" ")}"
+}.join("\n")
+%>
 
 ## Installing
 

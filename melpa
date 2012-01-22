@@ -13,17 +13,7 @@ function melpa_clear_packages {
 
 function melpa_build_pkglist {
     echo "*** Building all packages..."
-    for pkg in `cat buildlist`; do
-	./buildpkg $pkg
-	echo
-	echo
-    done
-    echo
-}
-
-function melpa_build_archive {
-    echo "Building package: $pkg"
-    emacs --batch -l package-build.el -u dcurtis --eval "(package-build-archive \"$1\")"
+    emacs --batch -l package-build.el -u dcurtis --eval "(package-build-all)"
     echo
 }
 

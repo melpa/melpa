@@ -212,12 +212,6 @@
            "--exclude=_darcs"
            files)))
 
-(defun package-build-archives (&rest pkgs)
-  "build archives"
-  (interactive)
-  (mapc 'package-build-archive pkgs)
-  (package-build-dump-archive-contents))
-
 (defun package-build-get-package-info (file-path)
   (when (file-exists-p file-path)
     (ignore-errors
@@ -227,7 +221,6 @@
         ;; commented properly.
         (goto-char (point-max))
         (insert (concat "\n;;; " (file-name-nondirectory file-path) " ends here"))
-        (print (buffer-substring-no-properties (point-min) (point-max)))
         (flet ((package-strip-rcs-id (str) "0"))
           (package-buffer-info))))))
 
@@ -243,6 +236,16 @@
        (nth 2 pkgfile-info)
        (nth 1 pkgfile-info)))))
 
+
+(defun package-build-all ()
+  "build all packages in the `package-build-alist'"
+  (interactive)
+  (apply 'package-build-archives (mapcar 'symbol-name (mapcar 'car package-build-alist))))
+
+(defun package-build-archives (&rest pkgs)
+  "build archives"
+  (interactive)
+  (mapc 'package-build-archive pkgs))
 
 (defun package-build-archive (file-name)
   "build a package archive"

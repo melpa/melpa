@@ -20,7 +20,7 @@ function melpa_build_pkglist {
 
 function melpa_sync {
     echo "*** Pushing changes to the server..."
-    rsync -avz --delete packages html/index.html milkbox.net:webapps/melpa/
+    rsync -avz --delete packages html/style.css html/index.html milkbox.net:webapps/melpa/
     echo
 }
 

@@ -162,9 +162,9 @@
                         (aref pkg-info 3)
                         (aref pkg-info 2)
                         (list 'quote (mapcar
-                          (lambda (elt)
-                            (list (car elt) (package-version-join (cadr elt))))
-                          (aref pkg-info 1))))))
+                                      (lambda (elt)
+                                        (list (car elt) (package-version-join (cadr elt))))
+                                      (aref pkg-info 1))))))
 
     (write-region
      (concat
@@ -221,10 +221,10 @@
 (defun package-build-get-package-info (file-name)
   (when (file-exists-p file-name)
     (ignore-errors
-     (save-window-excursion
-       (find-file file-name)
-       (flet ((package-strip-rcs-id (str) "0"))
-         (package-buffer-info))))))
+      (save-window-excursion
+        (find-file file-name)
+        (flet ((package-strip-rcs-id (str) "0"))
+          (package-buffer-info))))))
 
 (defun package-build-get-pkg-file-info (file-name)
   (when (file-exists-p file-name)
@@ -249,85 +249,84 @@
           (file-name-as-directory
            (expand-file-name file-name package-build-working-dir))))
 
-    (when cfg
-      (let* ((repo-type (plist-get cfg :fetcher))
-             (repo-url (plist-get cfg :url))
-             (files (plist-get cfg :files))
-             (version
-              (cond
-               ((eq repo-type 'svn)
-                (print 'Subversion)
-                (package-build-checkout-svn repo-url pkg-cwd))
-               ((eq repo-type 'git)
-                (print 'Git)
-                (package-build-checkout-git repo-url pkg-cwd))
-               ((eq repo-type 'darcs)
-                (print 'Darcs)
-                (package-build-checkout-darcs repo-url pkg-cwd))))
-             (default-directory package-build-working-dir))
-        (cond
-         ((= 1 (length files))
-          (let* ((pkgsrc (expand-file-name (car files) pkg-cwd))
-                 (pkgdst (expand-file-name (concat file-name "-" version ".el")
-                                           package-build-archive-dir))
-                 (pkg-info (package-build-get-package-info pkgsrc)))
-            (unless pkg-info
-              (setq pkg-info
-                    (vector file-name nil "No description available." version)))
-            (aset pkg-info 3 version)
-            (aset pkg-info 0 (downcase (aref pkg-info 0)))
-            (print pkg-info)
-            (if (file-exists-p pkgdst)
-                (delete-file pkgdst t))
-            (copy-file pkgsrc pkgdst)
-            (package-build-add-to-archive-contents pkg-info 'single)))
-         (t
-          (let* ((pkg-dir (concat file-name "-" version))
-                 (pkg-file (concat file-name "-pkg.el"))
-                 (pkg-info (package-build-get-pkg-file-info
-                            (expand-file-name pkg-file pkg-cwd))))
+    (if cfg
+        (let* ((repo-type (plist-get cfg :fetcher))
+               (repo-url (plist-get cfg :url))
+               (files (plist-get cfg :files))
+               (version
+                (cond
+                 ((eq repo-type 'svn)
+                  (print 'Subversion)
+                  (package-build-checkout-svn repo-url pkg-cwd))
+                 ((eq repo-type 'git)
+                  (print 'Git)
+                  (package-build-checkout-git repo-url pkg-cwd))
+                 ((eq repo-type 'darcs)
+                  (print 'Darcs)
+                  (package-build-checkout-darcs repo-url pkg-cwd))))
+               (default-directory package-build-working-dir))
+          (cond
+           ((= 1 (length files))
+            (let* ((pkgsrc (expand-file-name (car files) pkg-cwd))
+                   (pkgdst (expand-file-name (concat file-name "-" version ".el")
+                                             package-build-archive-dir))
+                   (pkg-info (package-build-get-package-info pkgsrc)))
+              (unless pkg-info
+                (setq pkg-info
+                      (vector file-name nil "No description available." version)))
+              (aset pkg-info 3 version)
+              (aset pkg-info 0 (downcase (aref pkg-info 0)))
+              (print pkg-info)
+              (if (file-exists-p pkgdst)
+                  (delete-file pkgdst t))
+              (copy-file pkgsrc pkgdst)
+              (package-build-add-to-archive-contents pkg-info 'single)))
+           (t
+            (let* ((pkg-dir (concat file-name "-" version))
+                   (pkg-file (concat file-name "-pkg.el"))
+                   (pkg-info (package-build-get-pkg-file-info
+                              (expand-file-name pkg-file pkg-cwd))))
 
-            (copy-directory file-name pkg-dir)
+              (copy-directory file-name pkg-dir)
 
-            (unless pkg-info
-              (setq pkg-info (package-build-get-package-info
-                              (expand-file-name (concat file-name ".el")
-                                                pkg-cwd))))
+              (unless pkg-info
+                (setq pkg-info (package-build-get-package-info
+                                (expand-file-name (concat file-name ".el")
+                                                  pkg-cwd))))
 
-            (unless pkg-info
-              (setq pkg-info (package-build-get-pkg-file-info
-                              (expand-file-name (concat pkg-file ".in")
-                                                pkg-cwd))))
+              (unless pkg-info
+                (setq pkg-info (package-build-get-pkg-file-info
+                                (expand-file-name (concat pkg-file ".in")
+                                                  pkg-cwd))))
 
-            (unless pkg-info
-              (setq pkg-info
-                    (vector file-name nil "No description available." version)))
+              (unless pkg-info
+                (setq pkg-info
+                      (vector file-name nil "No description available." version)))
 
-            (aset pkg-info 3 version)
-            (aset pkg-info 0 (downcase (aref pkg-info 0)))
-            (print pkg-info)
-            (package-build-pkg-file (expand-file-name
-                                     pkg-file
-                                     (file-name-as-directory
-                                      (expand-file-name
-                                       pkg-dir
-                                       package-build-working-dir)))
-                                    pkg-info)
+              (aset pkg-info 3 version)
+              (aset pkg-info 0 (downcase (aref pkg-info 0)))
+              (print pkg-info)
+              (package-build-pkg-file (expand-file-name
+                                       pkg-file
+                                       (file-name-as-directory
+                                        (expand-file-name
+                                         pkg-dir
+                                         package-build-working-dir)))
+                                      pkg-info)
 
-            (when files
-              (add-to-list 'files pkg-file))
+              (when files
+                (add-to-list 'files pkg-file))
 
-            (package-build-create-tar
-             pkg-dir
-             (expand-file-name
-              (concat file-name "-" version ".tar") package-build-archive-dir)
-             files)
+              (package-build-create-tar
+               pkg-dir
+               (expand-file-name
+                (concat file-name "-" version ".tar") package-build-archive-dir)
+               files)
 
-            (delete-directory pkg-dir t nil)
-            (package-build-add-to-archive-contents pkg-info 'tar))
-
-          )))
-      (package-build-dump-archive-contents))))
+              (delete-directory pkg-dir t nil)
+              (package-build-add-to-archive-contents pkg-info 'tar))))
+          (package-build-dump-archive-contents))
+      (message "\nERROR: Cannot find package %s\n" file-name))))
 
 
 (defvar package-build-alist

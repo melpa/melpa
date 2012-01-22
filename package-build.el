@@ -105,7 +105,7 @@
       (process-file
        "svn" nil
        (current-buffer)
-       nil "checkout" (concat repo "/trunk") dir)))
+       nil "checkout" repo dir)))
     (let ((default-directory dir))
       (process-file
        "svn" nil

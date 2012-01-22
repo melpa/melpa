@@ -30,6 +30,11 @@
   :url "git://github.com/technomancy/find-file-in-project.git"
   :fetcher git
   :files ("find-file-in-project.el"))
+  (findr
+   :url "https://github.com/eschulte/jump.el.git"
+   :fetcher git
+   :files ("findr.el")
+   :commit "0def5442723f8a2928eda7bcf428aa29f8aa97c1")
  (full-ack
   :url "git://github.com/nschum/full-ack.git"
   :fetcher git
@@ -57,10 +62,15 @@
   :url "https://github.com/nonsequitur/inf-ruby.git"
   :fetcher git
   :files ("inf-ruby.el"))
+  (inflections
+   :url "https://github.com/eschulte/jump.el.git"
+   :fetcher git
+   :files ("inflections.el")
+   :commit "0def5442723f8a2928eda7bcf428aa29f8aa97c1")
  (jump
   :url "https://github.com/eschulte/jump.el.git"
   :fetcher git
-  :files ("jump.el" "inflections.el" "findr.el")
+  :files ("jump.el")
   :commit "0def5442723f8a2928eda7bcf428aa29f8aa97c1")
  (magit
   :url "git://github.com/magit/magit.git"

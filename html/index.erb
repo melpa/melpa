@@ -11,7 +11,7 @@
 <%
   def parse str
     # credit to: http://stackoverflow.com/q/3128406/154508
-    tokens = str.scan(/#{Regexp.escape("(")}|#{Regexp.escape(")")}|[a-zA-Z0-9\-\_]+/)
+    tokens = str.scan(/#{Regexp.escape("(")}|#{Regexp.escape(")")}|[a-zA-Z0-9\-\_\+]+/)
 
     stack = [[]]
 

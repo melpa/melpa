@@ -45,14 +45,20 @@
 
 (require 'package)
 
-(defvar package-build-working-dir (expand-file-name "working/")
-  "Directory in which to keep checkouts.")
+(defcustom package-build-working-dir (expand-file-name "working/")
+  "Directory in which to keep checkouts."
+  :group 'package-build
+  :type 'string)
 
-(defvar package-build-archive-dir (expand-file-name "packages/")
-  "Directory in which to keep compiled archives.")
+(defcustom package-build-archive-dir (expand-file-name "packages/")
+  "Directory in which to keep compiled archives."
+  :group 'package-build
+  :type 'string)
 
-(defvar package-build-alist-file (expand-file-name "pkglist")
-  "File containing pkg alist")
+(defcustom package-build-alist-file (expand-file-name "pkglist")
+  "File containing pkg alist"
+  :group 'package-build
+  :type 'string)
 
 (defun package-build-checkout-darcs (repo dir)
   "checkout an svn package"
@@ -75,14 +81,13 @@
        "darcs" nil
        (current-buffer)
        t "changes" "--last" "1"))
-    (print
-     (format-time-string
-      "%Y%m%d"
-      (date-to-time
-       (print (progn
-                (re-search-backward
-                 "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)")
-                (match-string-no-properties 1))))))))
+    (format-time-string
+     "%Y%m%d"
+     (date-to-time
+      (print (progn
+               (re-search-backward
+                "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)")
+               (match-string-no-properties 1)))))))
 
 (defun package-build-checkout-svn (repo dir)
   "checkout an svn repo"
@@ -106,14 +111,13 @@
        "svn" nil
        (current-buffer)
        t "info"))
-    (print
-     (format-time-string
-      "%Y%m%d"
-      (date-to-time
-       (print (progn
-                (re-search-backward
-                 "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")
-                (match-string-no-properties 1))))))))
+    (format-time-string
+     "%Y%m%d"
+     (date-to-time
+      (print (progn
+               (re-search-backward
+                "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")
+               (match-string-no-properties 1)))))))
 
 (defun package-build-checkout-git (repo dir)
   "checkout an git repo"
@@ -138,14 +142,13 @@
        "git" nil
        (current-buffer)
        t "show" "-s" "--format='\%ci'" "HEAD"))
-    (print
-     (format-time-string
-      "%Y%m%d"
-      (date-to-time
-       (print (progn
-                (re-search-backward
-                 "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")
-                (match-string-no-properties 1))))))))
+    (format-time-string
+     "%Y%m%d"
+     (date-to-time
+      (print (progn
+               (re-search-backward
+                "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")
+               (match-string-no-properties 1)))))))
 
 (defun package-change-list-elt (lst idx newval)
   (if (zerop idx)
@@ -154,24 +157,24 @@
 
 (defun package-build-pkg-file (pkg-file pkg-info)
   "build the pkg file"
-  (let ((print-level nil)
-        (print-length nil)
-        (pkg-list (list 'define-package
+  (let ((pkg-list (list 'define-package
                         (aref pkg-info 0)
                         (aref pkg-info 3)
                         (aref pkg-info 2)
-                        (aref pkg-info 1))))
+                        (list 'quote (mapcar
+                          (lambda (elt)
+                            (list (car elt) (package-version-join (cadr elt))))
+                          (aref pkg-info 1))))))
 
     (write-region
      (concat
-      (prin1-to-string
-       pkglst
+      (pp-to-string
+       pkg-list
        )
       "\n")
      nil
      pkg-file
-     nil nil nil nil)
-    pkglst))
+     nil nil nil nil)))
 
 (defun package-read-from-file (file-name)
   "read one lisp expression from a file"
@@ -199,8 +202,6 @@
     (if files
         (setq files (mapcar (lambda (fn) (concat dir "/" fn)) files))
       (setq files (list dir)))
-    (print files)
-    (print default-directory)
     (apply 'process-file
            "tar" nil
            (get-buffer-create "*package-build-checkout*")
@@ -217,23 +218,15 @@
   (mapc 'package-build-archive pkgs)
   (package-build-dump-archive-contents))
 
-(defun package-get-package-info (file-name)
+(defun package-build-get-package-info (file-name)
   (when (file-exists-p file-name)
-    (save-window-excursion
-      (find-file file-name)
-      (flet ((package-strip-rcs-id
-              (str)
-              (when str
-                (when (string-match "\\`[ \t]*[$]Revision:[ \t]+" str)
-                  (setq str (substring str (match-end 0))))
-                (setq str (car (split-string str)))
-                (condition-case nil
-                    (if (version-to-list str)
-                        str)
-                  (error nil)))))
-        (package-buffer-info)))))
+    (ignore-errors
+     (save-window-excursion
+       (find-file file-name)
+       (flet ((package-strip-rcs-id (str) "0"))
+         (package-buffer-info))))))
 
-(defun package-get-pkgfile-info (file-name)
+(defun package-build-get-pkg-file-info (file-name)
   (when (file-exists-p file-name)
     (let ((pkgfile-info (cdr (package-read-from-file file-name))))
       (vector
@@ -257,7 +250,6 @@
            (expand-file-name file-name package-build-working-dir))))
 
     (when cfg
-
       (let* ((repo-type (plist-get cfg :fetcher))
              (repo-url (plist-get cfg :url))
              (files (plist-get cfg :files))
@@ -276,45 +268,63 @@
         (cond
          ((= 1 (length files))
           (let* ((pkgsrc (expand-file-name (car files) pkg-cwd))
-                 (pkg-info (package-get-package-info pkgsrc)))
+                 (pkgdst (expand-file-name (concat file-name "-" version ".el")
+                                           package-build-archive-dir))
+                 (pkg-info (package-build-get-package-info pkgsrc)))
             (unless pkg-info
               (setq pkg-info
                     (vector file-name nil "No description available." version)))
-            (aset version 3 pkg-info)
-            (copy-file pkgsrc
-                       (expand-file-name (concat file-name "-" version ".el")
-                                         package-build-archive-dir))
+            (aset pkg-info 3 version)
+            (print pkg-info)
+            (if (file-exists-p pkgdst)
+                (delete-file pkgdst t))
+            (copy-file pkgsrc pkgdst)
             (package-build-add-to-archive-contents pkg-info 'single)))
          (t
           (let* ((pkg-dir (concat file-name "-" version))
-                 (pkg-tar-dir
-                  (file-name-as-directory
-                   (expand-file-name pkg-dir package-build-working-dir)))
                  (pkg-file (concat file-name "-pkg.el"))
-                 (pkg-info (package-get-pkgfile-info
-                            (expand-file-name pkg-file pkg-tar-dir))))
+                 (pkg-info (package-build-get-pkg-file-info
+                            (expand-file-name pkg-file pkg-cwd))))
 
             (copy-directory file-name pkg-dir)
+
             (unless pkg-info
-              (setq pkg-info (package-get-package-info
-                              (expand-file-name file-name pkg-tar-dir))))
+              (setq pkg-info (package-build-get-package-info
+                              (expand-file-name (concat file-name ".el")
+                                                pkg-cwd))))
+
+            (unless pkg-info
+              (setq pkg-info (package-build-get-pkg-file-info
+                              (expand-file-name (concat pkg-file ".in")
+                                                pkg-cwd))))
+
             (unless pkg-info
               (setq pkg-info
                     (vector file-name nil "No description available." version)))
-            (package-build-pkg-file (expand-file-name pkg-file pkg-tar-dir)
-                                    pkg-info))
 
-          (when files
-            (add-to-list 'files pkg-file))
+            (aset pkg-info 3 version)
+            (print pkg-info)
+            (package-build-pkg-file (expand-file-name
+                                     pkg-file
+                                     (file-name-as-directory
+                                      (expand-file-name
+                                       pkg-dir
+                                       package-build-working-dir)))
+                                    pkg-info)
 
-          (package-build-create-tar
-           pkg-dir
-           (expand-file-name
-            (concat file-name "-" version ".tar") package-build-archive-dir)
-           files)
+            (when files
+              (add-to-list 'files pkg-file))
 
-          (delete-directory pkg-dir t nil)
-          (package-build-add-to-archive-contents pkg-info 'tar))))
+            (package-build-create-tar
+             pkg-dir
+             (expand-file-name
+              (concat file-name "-" version ".tar") package-build-archive-dir)
+             files)
+
+            (delete-directory pkg-dir t nil)
+            (package-build-add-to-archive-contents pkg-info 'tar))
+
+          )))
       (package-build-dump-archive-contents))))
 
 
@@ -350,11 +360,11 @@
 
 (defun package-build-add-to-archive-contents (pkg-info type)
   "add an archive to the package-build-archive-contents"
-  (let ((name (aref pkg-info 0))
-        (requires (aref pkg-info 1))
-        (desc (or (aref pkg-info 2) "No description available."))
-        (version (aref pkg-info 3))
-        (existing (assq name package-build-archive-alist)))
+  (let* ((name (intern (aref pkg-info 0)))
+         (requires (aref pkg-info 1))
+         (desc (or (aref pkg-info 2) "No description available."))
+         (version (aref pkg-info 3))
+         (existing (assq name package-build-archive-alist)))
     (when existing
       (setq package-build-archive-alist
             (delq existing package-build-archive-alist)))

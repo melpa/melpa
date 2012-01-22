@@ -1,108 +1,86 @@
 ;; -*- mode: emacs-lisp -*-
 ((clojure-mode
-  :summary "Major mode for Clojure code"
   :url "git://github.com/technomancy/clojure-mode.git"
   :fetcher git
   :files ("clojure-mode.el"))
  (clojure-test-mode
-  :summary "Minor mode for Clojure test"
   :url "git://github.com/technomancy/clojure-mode.git"
   :fetcher git
   :files ("clojure-test-mode.el"))
  (clojurescript-mode
-  :summary "Major mode for ClojureScript code"
   :url "git://github.com/technomancy/clojure-mode.git"
   :fetcher git
   :files ("clojurescript-mode.el"))
  (deft
-   :summary "Quickly browse, filter, and edit plain text notes"
    :url "git://jblevins.org/git/deft.git"
    :fetcher git
    :files ("deft.el"))
  (evil
-  :summary "Extensible vi layer"
   :url "git://gitorious.org/evil/evil.git"
   :fetcher git)
  (full-ack
-  :summary nil
   :url "git://github.com/nschum/full-ack.git"
   :fetcher git
   :files ("full-ack.el"))
  (gist
-  :summary "Emacs integration for gist.github.com"
   :url "git://github.com/defunkt/gist.el.git"
   :fetcher git
   :files ("gist.el"))
  (haskell-mode
-  :summary "A Haskell editing mode"
   :url "http://code.haskell.org/haskellmode-emacs"
   :fetcher darcs)
  (hl-sentence
-  :summary "Highlight a sentence based on customizable face"
   :url "git://github.com/milkypostman/hl-sentence.git"
   :fetcher git
   :files ("hl-sentence.el"))
  (ido-ubiquitous
-  :summary "Use ido (nearly) everywhere"
   :url "git://github.com/technomancy/ido-ubiquitous.git"
   :fetcher git
   :files ("ido-ubiquitous.el"))
  (magit
   :url "git://github.com/magit/magit.git"
-  :fetcher git
-  :summary "Control Git from Emacs")
+  :fetcher git)
  (magithub
-  :summary "Magit extensions for using GitHub"
   :url "git://github.com/nex3/magithub.git"
   :fetcher git
   :files ("magithub.el"))
  (markdown-mode
   :url "git://github.com/milkypostman/markdown-mode.git"
   :fetcher git
-  :summary "Emacs Major mode for Markdown-formatted text files"
   :files ("markdown-mode.el"))
  (markdown-mode+
-  :summary "milkypostman's additions to markdown-mode"
   :url "git://github.com/milkypostman/markdown-mode-plus.git"
   :fetcher git)
  (paredit
-  :summary "Minor mode for editing parentheses"
   :url "http://mumble.net/~campbell/emacs/paredit"
   :fetcher darcs
   :files ("paredit.el"))
  (rinari
-  :summary "Rinari Is Not A Rails IDE"
   :url "git://github.com/eschulte/rinari.git"
   :fetcher git)
  (smex
-  :summary "M-x interface with Ido-style fuzzy matching"
   :url "git://github.com/nonsequitur/smex.git"
   :fetcher git
   :files ("smex.el"))
  (starter-kit
   :url "git://github.com/technomancy/emacs-starter-kit.git"
   :fetcher git
-  :summary "Saner defaults and goodies"
   :files ("starter-kit-defuns.el"
           "starter-kit-misc.el"
           "starter-kit.el"))
  (starter-kit-bindings
   :url "git://github.com/technomancy/emacs-starter-kit.git"
   :fetcher git
-  :summary "Saner defaults and goodies: bindings"
   :files ("modules/starter-kit-bindings.el"))
  (starter-kit-lisp
   :url "git://github.com/technomancy/emacs-starter-kit.git"
   :fetcher git
-  :summary "Saner defaults and goodies for lisp languages"
   :files ("modules/starter-kit-lisp.el"))
  (undo-tree
-  :summary "Treat undo history as a tree"
   :url "http://www.dr-qubit.org/git/undo-tree.git"
   :fetcher git
   :files ("undo-tree.el"))
  (yasnippet
-  :summary "Yet another snippet extension for Emacs"
   :url "https://github.com/capitaomorte/yasnippet"
   :fetcher git)
  )

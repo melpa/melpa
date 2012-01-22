@@ -4,17 +4,9 @@ BASEDIR=`dirname $0`
 
 cd ${BASEDIR} || exit 1
 
-function melpa_update_epkgs {
-    echo "Updating epkgs..."
-    cd epkgs || return 1
-    git pull
-    cd ..
-    echo
-}
-
 function melpa_clear_packages {
     echo "*** Clearing the packages folder..."
-    rm packages/*
+    rm -r packages/*
     echo
 }
 
@@ -78,12 +70,11 @@ done
 
 
 if [[ "$#" == "0" ]]; then
-    set -- update clear build index sync
+    set --  clear build index sync
 fi
 
 for i; do
     case $i in
-        update ) melpa_update_epkgs ;;
         clear ) melpa_clear_packages ;;
         build ) melpa_build_pkglist ;;
         html | index ) melpa_generate_html ;;

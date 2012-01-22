@@ -131,13 +131,3 @@
  )
 
 
-
-
- ;; (findr
- ;;  :url "https://github.com/eschulte/jump.el.git"
- ;;  :fetcher git
- ;;  :files ("findr.el"))
- ;; (inflections
- ;;  :url "https://github.com/eschulte/jump.el.git"
- ;;  :fetcher git
- ;;  :files ("inflections.el"))

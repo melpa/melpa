@@ -1,12 +1,15 @@
+browse-kill-ring
 clojure-mode
 clojure-test-mode
 clojurescript-mode
 deft
 evil
+find-file-in-project
 full-ack
 gist
 haskell-mode
 hl-sentence
+idle-highlight-mode
 ido-ubiquitous
 magit
 magithub

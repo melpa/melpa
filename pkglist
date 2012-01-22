@@ -1,5 +1,9 @@
 ;; -*- mode: emacs-lisp -*-
-((clojure-mode
+((browse-kill-ring
+  :url "git://github.com/todesschaf/browse-kill-ring.git"
+  :fetcher git
+  :files ("browse-kill-ring.el"))
+ (clojure-mode
   :url "git://github.com/technomancy/clojure-mode.git"
   :fetcher git
   :files ("clojure-mode.el"))
@@ -18,6 +22,10 @@
  (evil
   :url "git://gitorious.org/evil/evil.git"
   :fetcher git)
+ (find-file-in-project
+  :url "git://github.com/technomancy/find-file-in-project.git"
+  :fetcher git
+  :files ("find-file-in-project.el"))
  (full-ack
   :url "git://github.com/nschum/full-ack.git"
   :fetcher git
@@ -33,6 +41,10 @@
   :url "git://github.com/milkypostman/hl-sentence.git"
   :fetcher git
   :files ("hl-sentence.el"))
+ (idle-highlight-mode
+  :url "git://github.com/nonsequitur/idle-highlight-mode.git"
+  :fetcher git
+  :files ("idle-highlight-mode.el"))
  (ido-ubiquitous
   :url "git://github.com/technomancy/ido-ubiquitous.git"
   :fetcher git

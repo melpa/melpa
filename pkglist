@@ -84,10 +84,26 @@
   :url "git://github.com/technomancy/emacs-starter-kit.git"
   :fetcher git
   :files ("modules/starter-kit-bindings.el"))
+ (starter-kit-eshell
+  :url "git://github.com/technomancy/emacs-starter-kit.git"
+  :fetcher git
+  :files ("modules/starter-kit-eshell.el"))
+ (starter-kit-js
+  :url "git://github.com/technomancy/emacs-starter-kit.git"
+  :fetcher git
+  :files ("modules/starter-kit-js.el"))
  (starter-kit-lisp
   :url "git://github.com/technomancy/emacs-starter-kit.git"
   :fetcher git
   :files ("modules/starter-kit-lisp.el"))
+ (starter-kit-perl
+  :url "git://github.com/technomancy/emacs-starter-kit.git"
+  :fetcher git
+  :files ("modules/starter-kit-perl.el"))
+ (starter-kit-ruby
+  :url "git://github.com/technomancy/emacs-starter-kit.git"
+  :fetcher git
+  :files ("modules/starter-kit-ruby.el"))
  (undo-tree
   :url "http://www.dr-qubit.org/git/undo-tree.git"
   :fetcher git

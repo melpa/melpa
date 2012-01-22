@@ -20,6 +20,10 @@ rinari
 smex
 starter-kit
 starter-kit-bindings
+starter-kit-eshell
+starter-kit-js
 starter-kit-lisp
+starter-kit-perl
+starter-kit-ruby
 undo-tree
 yasnippet

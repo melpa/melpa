@@ -275,6 +275,7 @@
               (setq pkg-info
                     (vector file-name nil "No description available." version)))
             (aset pkg-info 3 version)
+            (aset pkg-info 0 (downcase (aref pkg-info 0)))
             (print pkg-info)
             (if (file-exists-p pkgdst)
                 (delete-file pkgdst t))
@@ -303,6 +304,7 @@
                     (vector file-name nil "No description available." version)))
 
             (aset pkg-info 3 version)
+            (aset pkg-info 0 (downcase (aref pkg-info 0)))
             (print pkg-info)
             (package-build-pkg-file (expand-file-name
                                      pkg-file

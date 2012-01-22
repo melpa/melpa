@@ -37,7 +37,8 @@
 
   data.map! do |row|
     [row[0], row[1][0], row[3..-2].join(" ")]
-   end
+  end
+  data.sort!
 
   colwidth = [0,0,0]
 

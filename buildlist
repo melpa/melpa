@@ -17,6 +17,7 @@ markdown-mode
 markdown-mode+
 paredit
 rinari
+ruby-mode
 smex
 starter-kit
 starter-kit-bindings

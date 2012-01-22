@@ -3,5 +3,5 @@
 /packages/*.el
 /packages/archive-contents
 /working/*/
-/webpage/index.html
-/webpage/index.md
+/html/index.html
+/html/index.md

@@ -218,17 +218,22 @@
   (mapc 'package-build-archive pkgs)
   (package-build-dump-archive-contents))
 
-(defun package-build-get-package-info (file-name)
-  (when (file-exists-p file-name)
+(defun package-build-get-package-info (file-path)
+  (when (file-exists-p file-path)
     (ignore-errors
       (save-window-excursion
-        (find-file file-name)
+        (find-file file-path)
+        ;; next two lines are a hack for some packages that aren't
+        ;; commented properly.
+        (goto-char (point-max))
+        (insert (concat "\n;;; " (file-name-nondirectory file-path) " ends here"))
+        (print (buffer-substring-no-properties (point-min) (point-max)))
         (flet ((package-strip-rcs-id (str) "0"))
           (package-buffer-info))))))
 
-(defun package-build-get-pkg-file-info (file-name)
-  (when (file-exists-p file-name)
-    (let ((pkgfile-info (cdr (package-read-from-file file-name))))
+(defun package-build-get-pkg-file-info (file-path)
+  (when (file-exists-p file-path)
+    (let ((pkgfile-info (cdr (package-read-from-file file-path))))
       (vector
        (nth 0 pkgfile-info)
        (mapcar

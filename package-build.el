@@ -299,6 +299,7 @@
                                 (expand-file-name (concat file-name ".el")
                                                   pkg-cwd))))
 
+              ;; some packages (like magit) provide name-pkg.el.in
               (unless pkg-info
                 (setq pkg-info (package-build-get-pkg-file-info
                                 (expand-file-name (concat pkg-file ".in")

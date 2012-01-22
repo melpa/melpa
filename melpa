@@ -4,6 +4,7 @@ BASEDIR=`dirname $0`
 
 cd ${BASEDIR} || exit 1
 
+
 function melpa_clear_packages {
     echo "*** Clearing the packages folder..."
     rm -r packages/*
@@ -27,7 +28,7 @@ function melpa_generate_html {
     echo "*** Building html"
     cd html || return 1
     erb index.erb > index.md
-    pandoc -s --mathml -t html --smart index.md > index.html
+    pandoc --css=style.css -s --mathml -t html --smart index.md > index.html
     cd ..
     echo
 }

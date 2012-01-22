@@ -4,34 +4,62 @@
 
 > a repository for development versions of Emacs packages (hot from the repo).
 
-**Last Updated:** <%= Time.now.strftime("%Y.%m.%d %H:%M") %>
+**Last Update:** *<%= Time.now.strftime("%Y.%m.%d %H:%M") %>*
 
 ## Current List of Packages being Generated Nightly
 
-<%=
-def parse str
-  # credit to: http://stackoverflow.com/q/3128406/154508
-  tokens = str.scan(/#{Regexp.escape("(")}|#{Regexp.escape(")")}|[a-zA-Z0-9\-\_]+/)
+<%
+  def parse str
+    # credit to: http://stackoverflow.com/q/3128406/154508
+    tokens = str.scan(/#{Regexp.escape("(")}|#{Regexp.escape(")")}|[a-zA-Z0-9\-\_]+/)
 
-  stack = [[]]
+    stack = [[]]
 
-  tokens.each do |tok|
-    case tok
+    tokens.each do |tok|
+      case tok
       when "("
-      stack << []
+        stack << []
       when ")"
-      stack[-2] << stack.pop
+        stack[-2] << stack.pop
       else
-      stack[-1] << tok
+        stack[-1] << tok
+      end
     end
+
+    return stack[-1][-1]
   end
 
-  return stack[-1][-1]
-end
-parse(File.open("../packages/archive-contents").read)[1..-1].map{ |x|
-  "* #{x[0]}-#{x[1]} :: #{x[3..-2].join(" ")}"
-}.join("\n")
+
+  headers = ["Package", "Version", "Description"]
+
+  data = parse(File.open("../packages/archive-contents").read)[1..-1]
+
+
+  data.map! do |row|
+    [row[0], row[1][0], row[3..-2].join(" ")]
+   end
+
+  colwidth = [0,0,0]
+
+  data.map do |row|
+    row.to_enum(:each_with_index).map do |e,i|
+      colwidth[i] = [colwidth[i], e.length].max
+    end
+  end
 %>
+<%=
+    headers.to_enum(:each_with_index).map{
+      |h,i| h + " "*(colwidth[i]-h.length) }.join(" ")
+%>
+<%= colwidth.map{ |w| "-"*w }.join(" ") %>
+<%=
+    data.map{ |row|
+    row.to_enum(:each_with_index).map{ |c,i|
+       c + " "*(colwidth[i]-c.length)
+       }.join(" ")
+    }.join("\n")
+%>
+
 
 ## Installing
 

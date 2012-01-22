@@ -70,6 +70,9 @@
  (rinari
   :url "git://github.com/eschulte/rinari.git"
   :fetcher git)
+ (ruby-mode
+  :url "http://svn.ruby-lang.org/repos/ruby/trunk/misc"
+  :fetcher svn)
  (smex
   :url "git://github.com/nonsequitur/smex.git"
   :fetcher git

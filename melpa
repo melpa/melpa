@@ -43,7 +43,7 @@ function melpa_generate_html {
 }
 
 function print_usage {
-    echo "usage: $0 [-h | -?] [update | clear | build | html | sync]"
+    echo "usage: $0 [-h | -?] [clear | build | html | sync]"
 }
 
 args=`getopt h $*`

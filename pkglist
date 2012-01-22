@@ -49,6 +49,14 @@
   :url "git://github.com/technomancy/ido-ubiquitous.git"
   :fetcher git
   :files ("ido-ubiquitous.el"))
+ (inf-ruby
+  :url "https://github.com/nonsequitur/inf-ruby.git"
+  :fetcher git
+  :files ("inf-ruby.el"))
+ (jump
+  :url "https://github.com/vhallac/jump.el.git"
+  :fetcher git
+  :files ("jump.el" "inflections.el" "findr.el"))
  (magit
   :url "git://github.com/magit/magit.git"
   :fetcher git)
@@ -69,10 +77,16 @@
   :files ("paredit.el"))
  (rinari
   :url "git://github.com/eschulte/rinari.git"
-  :fetcher git)
+  :fetcher git
+  :files ("rinari.el"))
+ (ruby-compilation
+  :url "https://github.com/eschulte/rinari.git"
+  :fetcher git
+  :files ("util/ruby-compilation.el"))
  (ruby-mode
   :url "http://svn.ruby-lang.org/repos/ruby/trunk/misc"
-  :fetcher svn)
+  :fetcher svn
+  :files ("ruby-mode.el"))
  (smex
   :url "git://github.com/nonsequitur/smex.git"
   :fetcher git
@@ -119,3 +133,11 @@
 
 
 
+ ;; (findr
+ ;;  :url "https://github.com/eschulte/jump.el.git"
+ ;;  :fetcher git
+ ;;  :files ("findr.el"))
+ ;; (inflections
+ ;;  :url "https://github.com/eschulte/jump.el.git"
+ ;;  :fetcher git
+ ;;  :files ("inflections.el"))

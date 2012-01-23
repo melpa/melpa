@@ -19,6 +19,10 @@
    :url "git://jblevins.org/git/deft.git"
    :fetcher git
    :files ("deft.el"))
+ (elisp-slime-nav
+  :url "https://github.com/purcell/elisp-slime-nav.git"
+  :fetcher git
+  :files ("elisp-slime-nav.el"))
  (evil
   :url "git://gitorious.org/evil/evil.git"
   :fetcher git)
@@ -88,6 +92,10 @@
   :url "http://svn.ruby-lang.org/repos/ruby/trunk/misc"
   :fetcher svn
   :files ("ruby-mode.el"))
+ (rvm
+  :url "https://github.com/senny/rvm.el.git"
+  :fetcher git
+  :files ("rvm.el"))
  (smex
   :url "git://github.com/nonsequitur/smex.git"
   :fetcher git

@@ -54,9 +54,10 @@
   :fetcher git
   :files ("inf-ruby.el"))
  (jump
-  :url "https://github.com/vhallac/jump.el.git"
+  :url "https://github.com/eschulte/jump.el.git"
   :fetcher git
-  :files ("jump.el" "inflections.el" "findr.el"))
+  :files ("jump.el" "inflections.el" "findr.el")
+  :commit "0def5442723f8a2928eda7bcf428aa29f8aa97c1")
  (magit
   :url "git://github.com/magit/magit.git"
   :fetcher git)

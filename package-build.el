@@ -119,7 +119,7 @@
                 "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")
                (match-string-no-properties 1)))))))
 
-(defun package-build-checkout-git (repo dir)
+(defun package-build-checkout-git (repo dir &optional commit)
   "checkout an git repo"
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
     (goto-char (point-max))
@@ -137,6 +137,11 @@
        "git" nil
        (current-buffer)
        nil "clone" repo dir)))
+    (if commit
+        (let ((default-directory dir))
+          (process-file
+           "git" nil
+           (current-buffer) nil "checkout" commit)))
     (let ((default-directory dir))
       (process-file
        "git" nil
@@ -268,7 +273,8 @@
                   (package-build-checkout-svn repo-url pkg-cwd))
                  ((eq repo-type 'git)
                   (print 'Git)
-                  (package-build-checkout-git repo-url pkg-cwd))
+                  (package-build-checkout-git repo-url pkg-cwd
+                                              (plist-get cfg :commit)))
                  ((eq repo-type 'darcs)
                   (print 'Darcs)
                   (package-build-checkout-darcs repo-url pkg-cwd))))

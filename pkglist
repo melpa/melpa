@@ -96,6 +96,10 @@
   :url "https://github.com/senny/rvm.el.git"
   :fetcher git
   :files ("rvm.el"))
+ (slime
+  :url "https://github.com/nablaone/slime.git"
+  :fetcher git
+  :files ("slime.el"))
  (smex
   :url "git://github.com/nonsequitur/smex.git"
   :fetcher git

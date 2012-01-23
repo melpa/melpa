@@ -85,7 +85,8 @@
   :files ("markdown-mode.el"))
  (markdown-mode+
   :url "git://github.com/milkypostman/markdown-mode-plus.git"
-  :fetcher git)
+  :fetcher git
+  :files ("markdown-mode+.el" "HTML as Markdown in Emacs.applescript"))
  (paredit
   :url "http://mumble.net/~campbell/emacs/paredit"
   :fetcher darcs

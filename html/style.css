@@ -1,13 +1,15 @@
 body {
     margin-top: 1.0em;
-    /* background-color: #922793; */
-    font-family: Helvetica, Arial, FreeSans, san-serif;
-    /* color: #ffffff; */
+    background-color: #922793;
+    font-family: Verdana, Helvetica, Arial, FreeSans, san-serif;
+    font-size: 13px;
+    line-height: 22px;
+    color: #ffffff;
 }
 
 #container {
     margin: 0 auto;
-    width: 700px;
+    width: 730px;
 }
 
 h1 {
@@ -65,7 +67,7 @@ hr {
 }
 
 table {
-    width: 700px;
+    width: 730px;
     border-spacing: 0px;
     border-top: 1px solid #ccc;
     border-top: 1px solid #777;

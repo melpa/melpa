@@ -65,7 +65,7 @@ hr {
 }
 
 table {
-    width: 800px;
+    width: 700px;
     border-spacing: 0px;
     border-top: 1px solid #ccc;
     border-top: 1px solid #777;
@@ -88,6 +88,3 @@ tr.odd {
     background-color: #ccc;
 }
 
-.gist-syntax .p {
-    color: #000000;
-}

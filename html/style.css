@@ -84,3 +84,6 @@ tr.odd {
     background-color: #ccc;
 }
 
+.gist-syntax .p {
+    color: #000000;
+}

@@ -73,7 +73,11 @@
 To add the repository put this before the call to `package-initialize`
 in your `init.el` file.
 
-<script src="https://gist.github.com/1679158.js"> </script>
+<!-- <script src="https://gist.github.com/1679158.js"> </script> -->
+
+    (add-to-list 'package-archives
+                 '("melpa" . "http://melpa.milkbox.net/packages/") t)
+    
 
 Please read about [known issues](#known-issues) below before
 attempting to install multiple packages at once.
@@ -84,7 +88,9 @@ Due to the way the HTTP routing works on my provider, the HTTP/1.1
 connection will time out for long package installs -- where the
 package is large and takes a while to compile -- like *magit* or *evil*.
 
-<script src="https://gist.github.com/1679208.js"> </script>
+<!-- <script src="https://gist.github.com/1679208.js"> </script> -->
+
+    (setq url-http-attempt-keepalives nil)
 
 This makes things a tad more slow but means that the install completes
 correctly. Otherwise the connection times out and the install goes haywire.
@@ -97,7 +103,25 @@ initialized.  Second, the order for dependencies was coming out
 backwards for what I needed.  Both problems are
  easily patched by some *advice*.  
  
-<script src="https://gist.github.com/1679232.js"> </script>
+<!-- <script src="https://gist.github.com/1679232.js"> </script> -->
+
+    (defadvice package-compute-transaction
+      (before
+       package-compute-transaction-reverse (package-list requirements)
+       activate compile)
+      "reverse the requirements"
+      (setq requirements (reverse requirements))
+      (print requirements))
+    
+    (defadvice package-download-tar
+      (after package-download-tar-initialize activate compile)
+      "initialize the package after compilation"
+      (package-initialize))
+    
+    (defadvice package-download-single
+      (after package-download-single-initialize activate compile)
+      "initialize the package after compilation"
+      (package-initialize))
     
 
 ## Updating Packages

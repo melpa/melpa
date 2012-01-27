@@ -14,9 +14,9 @@ body {
 
 h1 {
     font-size: 3.8em;
-    /* color: #6dd86c; */
     color: #00ad00;
-    /* color: #ff6622; */
+    color: #ff6622;
+    /* color: #6dd86c; */
     margin-bottom: 3px;
 }
 
@@ -29,20 +29,20 @@ h1 a {
 
 h2 {
     font-size: 1.5em;
-    color: #6dd86c;
     color: #00ad00;
+    color: #6dd86c;
 }
 
 h3 {
     /* text-align: center; */
-    color: #6dd86c;
     color: #00ad00;
+    color: #6dd86c;
 }
 
 a {
-    color: #920b5b;
-    color: #ee3333;
     color: #8f3591;
+    color: #ee3333;
+    /* color: #6dd86c; */
     text-decoration: none;
 }
 
@@ -86,7 +86,7 @@ tr.header {
 }
 
 tr.odd {
-    /* background-color: #800083; */
     background-color: #ccc;
+    background-color: #800083;
 }
 

@@ -23,6 +23,9 @@
   :url "https://github.com/purcell/elisp-slime-nav.git"
   :fetcher git
   :files ("elisp-slime-nav.el"))
+ (expand-region
+  :url "https://github.com/magnars/expand-region.el.git"
+  :fetcher git)
  (evil
   :url "git://gitorious.org/evil/evil.git"
   :fetcher git)

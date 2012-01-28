@@ -90,6 +90,10 @@
   :url "git://github.com/milkypostman/markdown-mode-plus.git"
   :fetcher git
   :files ("markdown-mode+.el" "HTML as Markdown in Emacs.applescript"))
+ (mmm-mode
+  :url "git://github.com/purcell/mmm-mode.git"
+  :fetcher git
+  :files ("mmm*.el"))
  (paredit
   :url "http://mumble.net/~campbell/emacs/paredit"
   :fetcher darcs

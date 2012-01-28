@@ -4,7 +4,7 @@
 ;;
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
 ;; URL: https://github.com/milkypostman/melpa
-;; Version: 0.1
+;; Version: 0.2
 ;;
 ;; Installation:
 ;;
@@ -19,19 +19,45 @@
 ;; Code goes here
 ;;
 
-;;;###autoload
- (defcustom melpa-package-enable nil
-   "Exclusive list of package symbols enabled for MELPA versions.
-Empty list enables all packages."
-   :group 'melpa
-   :type '(repeat symbol))
 
 ;;;###autoload
-(defcustom melpa-package-exclude nil
-   "List of package symbols excluded from the MELPA repo.
-Trumps `melpa-package-enable'."
-   :group 'melpa
-   :type '(repeat symbol))
+(defcustom package-archive-enable-alist nil
+  "Optional Alist of enabled packages used by `package-filter'.
+The format is (ARCHIVE . PACKAGE ...), where ARCHIVE is a string
+matching an archive name in `package-archives', PACKAGE is a
+symbol of a package in ARCHIVE to enable.
+
+If no ARCHIVE exists in the alist, all packages are enabled."
+  :group 'package
+  :type '(alist :key-type string :value-type (repeat symbol)))
+
+
+;;;###autoload
+(defcustom package-archive-exclude-alist nil
+  "Alist of packages excluded by `package-filter'.
+The format is (ARCHIVE . PACKAGE ...), where ARCHIVE is a string
+matching an archive name in `package-archives', PACKAGE is a
+symbol of a package in that archive to exclude.
+
+Any specified package is excluded regardless of the value of
+`package-archive-enable-alist'"
+  :group 'package
+  :type '(alist :key-type string :value-type (repeat symbol)))
+
+
+;;;###autoload
+(defcustom package-filter-function 'package-filter
+  "Optional predicate function used to internally
+filter packages used by package.el.
+
+Return nil to filter a function from the list.
+
+The function is called with the arguments PACKAGE VERSION ARCHIVE, where
+PACKAGE is a symbol, VERSION is a vector as produced by `version-to-list', and
+ARCHIVE is the string name of the package archive."
+  :group 'package
+  :type 'function)
+
 
 ;;;###autoload
 (defadvice package-compute-transaction
@@ -42,11 +68,13 @@ Trumps `melpa-package-enable'."
   (setq requirements (reverse requirements))
   (print requirements))
 
+
 ;;;###autoload
 (defadvice package-download-tar
   (after package-download-tar-initialize activate compile)
   "initialize the package after compilation"
   (package-initialize))
+
 
 ;;;###autoload
 (defadvice package-download-single
@@ -54,26 +82,35 @@ Trumps `melpa-package-enable'."
   "initialize the package after compilation"
   (package-initialize))
 
+
 ;;;###autoload
 (defadvice package--add-to-archive-contents
-  (around melpa--add-to-archive-contents (package archive) activate compile)
-  "For the `melpa' archive:
-
-Ignore any packages in `melpa-package-exclude'.
-
-If `melpa-package-enable' is nil, accept any packages from the
-`melpa' archive, otherwise only accpet packages given in
-`melpa-package-enable'.
-
-Both `melpa-package-enable' and `melpa-package-exclude' are lists
-of symbolp."
-  ;; (message (symbol-name (car package)))
-  (when  (or (not (equal archive "melpa"))
-             (and
-              (not (memq (car package) melpa-package-exclude))
-              (or (not melpa-package-enable)
-                  (memq (car package) melpa-package-enable))))
+  (around package-filter-add-to-archive-contents (package archive)
+	  activate compile)
+  "Add filtering of available packages using `package-filter-function',
+if non-nil."
+  (when (and package-filter-function
+	       (funcall package-filter-function
+			(car package)
+			(package-desc-vers (cdr package))
+			archive))
     ad-do-it))
+
+
+;;;###autoload
+(defun package-filter (package version archive)
+  "Check package against enabled and excluded list for the `archive'.
+
+Filter packages not in the associated list for `archive' in
+`package-archive-enable-alist'.
+
+Filter packages in the associated list for `archive' in
+`package-archive-exclude-alist'."
+  (let ((enable-rules (cdr (assoc archive package-archive-enable-alist)))
+	(exclude-rules (cdr (assoc archive package-archive-exclude-alist))))
+    (and (not (memq package exclude-rules))
+	 (or (not enable-rules)
+	     (memq package enable-rules)))))
 
 
 

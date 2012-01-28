@@ -82,6 +82,26 @@ in your `init.el` file.
 Please read about [known issues](#known-issues) below before
 attempting to install multiple packages at once.
 
+### Customizations
+
+There is currently no way in `package.el` to exclude or include versions.  So to remedy this I ahve created a package that will allow you to enable only certain packages or exclude certain packages.  You can install the package by pasting this into yoru `*scratch*` buffer and evaluating it.
+
+    (progn
+      (switch-to-buffer
+       (url-retrieve-synchronously
+        "https://raw.github.com/milkypostman/melpa/master/melpa.el"))
+      (package-install-from-buffer  (package-buffer-info) 'single))
+
+
+You can then customize two variables:
+
+`melpa-package-enable`
+:   List of MELPA packages to enable.  Empty list enables all packages.
+
+`melpa-package-exclude`
+:   List of MELPA package to exclude.  This list trumps those specified in `melpa-package-enable`.
+
+
 ## Known Issues
 
 Due to the way the HTTP routing works on my provider, the HTTP/1.1
@@ -96,6 +116,8 @@ This makes things a tad more slow but means that the install completes
 correctly. Otherwise the connection times out and the install goes haywire.
 
 ### Fixes for `package.el`
+
+**Note:** *These fixes are included in the `melpa.el` package.*
 
 There are a number of small bugs in Emacs24's `package.el`. First,
 when installing dependencies, the packages were not getting

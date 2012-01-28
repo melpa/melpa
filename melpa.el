@@ -5,7 +5,17 @@
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
 ;; URL: https://github.com/milkypostman/melpa
 ;; Version: 0.1
-
+;;
+;; Installation:
+;;
+;; (progn
+;;   (switch-to-buffer
+;;    (url-retrieve-synchronously
+;;     "https://raw.github.com/milkypostman/melpa/master/melpa.el"))
+;;   (package-install-from-buffer  (package-buffer-info) 'single))
+;;
+;;
+;;
 ;; Code goes here
 ;;
 

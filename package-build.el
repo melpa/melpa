@@ -257,7 +257,7 @@
 
 (defun package-build-archive (file-name)
   "build a package archive"
-  (interactive)
+  (interactive (list (completing-read "Package: " (mapc 'car package-build-alist))))
 
   (let* ((name (intern file-name))
          (cfg (cdr (assoc name package-build-alist)))

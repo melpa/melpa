@@ -35,8 +35,6 @@
 ;; "package" here is used to mean a specific version of a project that
 ;; is prepared for download and installation.
 
-;; Currently only supports single-file projects stored in git.
-
 ;;; Code:
 
 ;; Since this library is not meant to be loaded by users
@@ -61,7 +59,7 @@
   :type 'string)
 
 (defun package-build-checkout-darcs (repo dir)
-  "checkout an svn package"
+  "checkout a darcs package"
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
     (cond
      ((file-exists-p dir)
@@ -120,7 +118,7 @@
                (match-string-no-properties 1)))))))
 
 (defun package-build-checkout-git (repo dir &optional commit)
-  "checkout an git repo"
+  "checkout a git repo"
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
     (goto-char (point-max))
     (cond
@@ -252,9 +250,14 @@
   (interactive)
   (mapc 'package-build-archive pkgs))
 
+(defun package-expand-file-list (dir files)
+  "Expand `FILES', some of which may be wildcards, relative to `DIR'."
+  (let ((default-directory dir))
+    (mapcan 'file-expand-wildcards files)))
+
 (defun package-build-archive (file-name)
   "build a package archive"
-  (interactive)
+  (interactive (list (completing-read "Package: " (mapc 'car package-build-alist))))
 
   (let* ((name (intern file-name))
          (cfg (cdr (assoc name package-build-alist)))
@@ -265,7 +268,6 @@
     (if cfg
         (let* ((repo-type (plist-get cfg :fetcher))
                (repo-url (plist-get cfg :url))
-               (files (plist-get cfg :files))
                (version
                 (cond
                  ((eq repo-type 'svn)
@@ -278,6 +280,7 @@
                  ((eq repo-type 'darcs)
                   (print 'Darcs)
                   (package-build-checkout-darcs repo-url pkg-cwd))))
+               (files (package-expand-file-list pkg-cwd (plist-get cfg :files)))
                (default-directory package-build-working-dir))
           (cond
            ((= 1 (length files))

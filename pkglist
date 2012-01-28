@@ -19,6 +19,9 @@
    :url "git://jblevins.org/git/deft.git"
    :fetcher git
    :files ("deft.el"))
+ (dired+
+   :url "git://github.com/emacsmirror/dired-plus.git"
+   :fetcher git)
  (elisp-slime-nav
   :url "https://github.com/purcell/elisp-slime-nav.git"
   :fetcher git
@@ -90,6 +93,10 @@
   :url "git://github.com/milkypostman/markdown-mode-plus.git"
   :fetcher git
   :files ("markdown-mode+.el" "HTML as Markdown in Emacs.applescript"))
+ (mmm-mode
+  :url "git://github.com/purcell/mmm-mode.git"
+  :fetcher git
+  :files ("mmm*.el"))
  (paredit
   :url "http://mumble.net/~campbell/emacs/paredit"
   :fetcher darcs
@@ -157,4 +164,6 @@
   :fetcher git)
  )
 
-
+;; Local Variables:
+;; no-byte-compile: t
+;; End:

@@ -35,8 +35,6 @@
 ;; "package" here is used to mean a specific version of a project that
 ;; is prepared for download and installation.
 
-;; Currently only supports single-file projects stored in git.
-
 ;;; Code:
 
 ;; Since this library is not meant to be loaded by users
@@ -61,7 +59,7 @@
   :type 'string)
 
 (defun package-build-checkout-darcs (repo dir)
-  "checkout an svn package"
+  "checkout a darcs package"
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
     (cond
      ((file-exists-p dir)
@@ -120,7 +118,7 @@
                (match-string-no-properties 1)))))))
 
 (defun package-build-checkout-git (repo dir &optional commit)
-  "checkout an git repo"
+  "checkout a git repo"
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
     (goto-char (point-max))
     (cond

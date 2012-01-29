@@ -102,6 +102,10 @@
   :url "http://mumble.net/~campbell/emacs/paredit"
   :fetcher darcs
   :files ("paredit.el"))
+ (rainbow-delimeters
+   :url "http://www.emacswiki.org/emacs/download/rainbow-delimiters.el"
+   :fetcher wiki
+   :files ("rainbow-delimiters.el"))
  (rinari
   :url "git://github.com/eschulte/rinari.git"
   :fetcher git

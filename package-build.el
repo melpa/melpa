@@ -82,27 +82,23 @@
     (print (progn (re-search-backward regex)
                   (match-string-no-properties 1))))))
 
+(defun package-run-process (dir prog &rest args)
+  "Run command `PROG' with `ARGS' in `DIR', or `default-directory' if unset.
+  Output is written to the current buffer."
+  (let ((default-directory (or dir default-directory)))
+    (apply 'process-file prog nil (current-buffer) t args)))
+
 (defun package-build-checkout-darcs (repo dir)
   "checkout a darcs package"
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
     (cond
      ((file-exists-p dir)
       (print "checkout directory exists, updating...")
-      (let ((default-directory dir))
-        (process-file
-         "darcs" nil
-         (current-buffer) nil "pull")))
+      (package-run-process dir "darcs" "pull"))
      (t
       (print "cloning repository")
-      (process-file
-       "darcs" nil
-       (current-buffer)
-       nil "get" repo dir)))
-    (let ((default-directory dir))
-      (process-file
-       "darcs" nil
-       (current-buffer)
-       t "changes" "--last" "1"))
+      (package-run-process nil "darcs" "get" repo dir)))
+    (package-run-process dir "darcs" "changes" "--last" "1")
     (package-build-find-parse-time
      "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)")))
 
@@ -113,21 +109,11 @@
     (cond
      ((file-exists-p dir)
       (print "checkout directory exists, updating...")
-      (let ((default-directory dir))
-        (process-file
-         "svn" nil
-         (current-buffer) nil "up")))
+      (package-run-process dir "svn" "up"))
      (t
       (print "cloning repository")
-      (process-file
-       "svn" nil
-       (current-buffer)
-       nil "checkout" repo dir)))
-    (let ((default-directory dir))
-      (process-file
-       "svn" nil
-       (current-buffer)
-       t "info"))
+      (package-run-process nil "svn" "checkout" repo dir)))
+    (package-run-process dir "svn" "info")
     (package-build-find-parse-time
      "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")))
 
@@ -138,27 +124,13 @@
     (cond
      ((file-exists-p dir)
       (print "checkout directory exists, updating...")
-      (let ((default-directory dir))
-        (process-file
-         "git" nil
-         (current-buffer) nil "pull"))
-      )
+      (package-run-process dir "git" "pull"))
      (t
       (print (format "cloning %s to %s" repo dir))
-      (process-file
-       "git" nil
-       (current-buffer)
-       nil "clone" repo dir)))
-    (if commit
-        (let ((default-directory dir))
-          (process-file
-           "git" nil
-           (current-buffer) nil "checkout" commit)))
-    (let ((default-directory dir))
-      (process-file
-       "git" nil
-       (current-buffer)
-       t "show" "-s" "--format='\%ci'" "HEAD"))
+      (package-run-process nil "git" "clone" repo dir)))
+    (when commit
+      (package-run-process dir "git" "checkout" commit))
+    (package-run-process dir "git" "show" "-s" "--format='\%ci'" "HEAD")
     (package-build-find-parse-time
      "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")))
 

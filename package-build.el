@@ -74,6 +74,13 @@
       (url-copy-file repo filename t)
       (format-time-string "%Y%m%d" (current-time)))))
 
+(defun package-build-find-parse-time (regex)
+  "Find REGEX in current buffer and format as a proper time version."
+  (format-time-string
+   "%Y%m%d"
+   (date-to-time
+    (print (progn (re-search-backward regex)
+                  (match-string-no-properties 1))))))
 
 (defun package-build-checkout-darcs (repo dir)
   "checkout a darcs package"
@@ -96,13 +103,8 @@
        "darcs" nil
        (current-buffer)
        t "changes" "--last" "1"))
-    (format-time-string
-     "%Y%m%d"
-     (date-to-time
-      (print (progn
-               (re-search-backward
-                "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)")
-               (match-string-no-properties 1)))))))
+    (package-build-find-parse-time
+     "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)")))
 
 (defun package-build-checkout-svn (repo dir)
   "checkout an svn repo"
@@ -126,13 +128,8 @@
        "svn" nil
        (current-buffer)
        t "info"))
-    (format-time-string
-     "%Y%m%d"
-     (date-to-time
-      (print (progn
-               (re-search-backward
-                "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")
-               (match-string-no-properties 1)))))))
+    (package-build-find-parse-time
+     "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")))
 
 (defun package-build-checkout-git (repo dir &optional commit)
   "checkout a git repo"
@@ -162,13 +159,8 @@
        "git" nil
        (current-buffer)
        t "show" "-s" "--format='\%ci'" "HEAD"))
-    (format-time-string
-     "%Y%m%d"
-     (date-to-time
-      (print (progn
-               (re-search-backward
-                "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")
-               (match-string-no-properties 1)))))))
+    (package-build-find-parse-time
+     "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")))
 
 (defun package-change-list-elt (lst idx newval)
   (if (zerop idx)

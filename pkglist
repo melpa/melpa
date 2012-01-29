@@ -19,8 +19,8 @@
   :url "git://github.com/emacsmirror/csv-mode.git"
   :fetcher git)
  (darcsum
-  :url "git://github.com/emacsmirror/darcsum.git"
-  :fetcher git
+  :url "http://joyful.com/repos/darcsum"
+  :fetcher darcs
   :files ("darcsum.el"))
  (deft
    :url "git://jblevins.org/git/deft.git"

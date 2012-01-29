@@ -6,6 +6,11 @@
 ;; URL: https://github.com/milkypostman/melpa
 ;; Version: 0.2
 ;;
+;;
+;; Credits:
+;;   Steve Purcell
+;;
+;;
 ;; Installation:
 ;;
 ;; (progn

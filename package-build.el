@@ -63,6 +63,18 @@
   :group 'package-build
   :type 'string)
 
+(defun package-build-checkout-wiki (repo dir)
+  "checkout a package from the wiki"
+  (with-current-buffer (get-buffer-create "*package-build-checkout*")
+    (message dir)
+    (unless (file-exists-p dir)
+      (make-directory dir))
+    (let ((default-directory dir)
+          (filename (file-name-nondirectory repo)))
+      (url-copy-file repo filename t)
+      (format-time-string "%Y%m%d" (current-time)))))
+
+
 (defun package-build-checkout-darcs (repo dir)
   "checkout a darcs package"
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
@@ -280,6 +292,9 @@
                (repo-url (plist-get cfg :url))
                (version
                 (cond
+                 ((eq repo-type 'wiki)
+                  (print 'EmacsWiki)
+                  (package-build-checkout-wiki repo-url pkg-cwd))
                  ((eq repo-type 'svn)
                   (print 'Subversion)
                   (package-build-checkout-svn repo-url pkg-cwd))
@@ -293,11 +308,13 @@
                (files (package-expand-file-list pkg-cwd (plist-get cfg :files)))
                (default-directory package-build-working-dir))
           (cond
+           ((not version)
+            (print (format "Unable to check out repository: %s" repo-url)))
            ((= 1 (length files))
             (let* ((pkgsrc (expand-file-name (car files) pkg-cwd))
                    (pkgdst (expand-file-name
                             (concat file-name "-" version ".el")
-                                             package-build-archive-dir))
+                            package-build-archive-dir))
                    (pkg-info (package-build-get-package-info pkgsrc)))
               (unless pkg-info
                 (setq pkg-info

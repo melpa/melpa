@@ -20,8 +20,9 @@
    :fetcher git
    :files ("deft.el"))
  (dired+
-   :url "git://github.com/emacsmirror/dired-plus.git"
-   :fetcher git)
+   :url "http://www.emacswiki.org/emacs/download/dired+.el"
+   :fetcher wiki
+   :files ("dired+.el"))
  (elisp-slime-nav
   :url "https://github.com/purcell/elisp-slime-nav.git"
   :fetcher git

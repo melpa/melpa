@@ -191,15 +191,12 @@
      nil nil nil nil)))
 
 (defun package-read-from-file (file-name)
-  "read one lisp expression from a file"
-  (cond
-   ((file-exists-p file-name)
+  "Read and return the lisp data stored in `FILENAME', or nil if no such file exists."
+  (when (file-exists-p file-name)
     (with-temp-buffer
       (insert-file-contents-literally file-name)
       (goto-char (point-min))
-      (car
-       (read-from-string
-        (buffer-substring-no-properties (point-min) (point-max))))))))
+      (read (current-buffer)))))
 
 (defun package-build-get-config (file-name)
   "get the configuration information for the given file-name"
@@ -369,23 +366,15 @@
       (message "\nERROR: Cannot find package %s\n" file-name))))
 
 
+
 (defvar package-build-alist
-  (let ((pkg-file package-build-alist-file))
-    (when (file-exists-p pkg-file)
-      (with-temp-buffer
-        (insert-file-contents-literally pkg-file)
-        (goto-char (point-min))
-        (read (current-buffer))))))
+  (package-read-from-file package-build-alist-file)
+  "List of package build specs.")
 
 (defvar package-build-archive-alist
-  (let ((archive-file
-         (expand-file-name "archive-contents" package-build-archive-dir)))
-    (when (file-exists-p archive-file)
-      (with-temp-buffer
-        (insert-file-contents-literally archive-file)
-        (goto-char (point-min))
-        (let ((contents (read (current-buffer))))
-          (cdr contents))))))
+  (cdr (package-read-from-file
+        (expand-file-name "archive-contents" package-build-archive-dir)))
+  "List of already-built packages, in the standard package.el format.")
 
 
 (defun package-build-dump-archive-contents ()

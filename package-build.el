@@ -160,14 +160,16 @@
 
 (defun package-build-pkg-file (pkg-file pkg-info)
   "build the pkg file"
-  (let ((pkg-list (list 'define-package
-                        (aref pkg-info 0)
-                        (aref pkg-info 3)
-                        (aref pkg-info 2)
-                        (list 'quote (mapcar
-                                      (lambda (elt)
-                                        (list (car elt) (package-version-join (cadr elt))))
-                                      (aref pkg-info 1))))))
+  (let ((pkg-list
+         (list 'define-package
+               (aref pkg-info 0)
+               (aref pkg-info 3)
+               (aref pkg-info 2)
+               (list 'quote (mapcar
+                             (lambda (elt)
+                               (list (car elt)
+                                     (package-version-join (cadr elt))))
+                             (aref pkg-info 1))))))
 
     (write-region
      (concat
@@ -223,7 +225,8 @@
         ;; next two lines are a hack for some packages that aren't
         ;; commented properly.
         (goto-char (point-max))
-        (insert (concat "\n;;; " (file-name-nondirectory file-path) " ends here"))
+        (insert (concat "\n;;; "
+                        (file-name-nondirectory file-path) " ends here"))
         (flet ((package-strip-rcs-id (str) "0"))
           (package-buffer-info))))))
 
@@ -243,7 +246,8 @@
 (defun package-build-all ()
   "build all packages in the `package-build-alist'"
   (interactive)
-  (apply 'package-build-archives (mapcar 'symbol-name (mapcar 'car package-build-alist))))
+  (apply 'package-build-archives
+         (mapcar 'symbol-name (mapcar 'car package-build-alist))))
 
 (defun package-build-archives (&rest pkgs)
   "build archives"
@@ -257,7 +261,8 @@
 
 (defun package-build-archive (file-name)
   "build a package archive"
-  (interactive (list (completing-read "Package: " (mapc 'car package-build-alist))))
+  (interactive (list (completing-read "Package: "
+                                      (mapc 'car package-build-alist))))
 
   (let* ((name (intern file-name))
          (cfg (cdr (assoc name package-build-alist)))
@@ -285,12 +290,14 @@
           (cond
            ((= 1 (length files))
             (let* ((pkgsrc (expand-file-name (car files) pkg-cwd))
-                   (pkgdst (expand-file-name (concat file-name "-" version ".el")
+                   (pkgdst (expand-file-name
+                            (concat file-name "-" version ".el")
                                              package-build-archive-dir))
                    (pkg-info (package-build-get-package-info pkgsrc)))
               (unless pkg-info
                 (setq pkg-info
-                      (vector file-name nil "No description available." version)))
+                      (vector
+                       file-name nil "No description available." version)))
               (aset pkg-info 3 version)
               (aset pkg-info 0 (downcase (aref pkg-info 0)))
               (print pkg-info)
@@ -319,7 +326,8 @@
 
               (unless pkg-info
                 (setq pkg-info
-                      (vector file-name nil "No description available." version)))
+                      (vector
+                       file-name nil "No description available." version)))
 
               (aset pkg-info 3 version)
               (aset pkg-info 0 (downcase (aref pkg-info 0)))

@@ -1,5 +1,8 @@
 ;; -*- mode: emacs-lisp -*-
-((browse-kill-ring
+((ac-dabbrev
+  :url "http://www.emacswiki.org/emacs/download/ac-dabbrev.el"
+  :fetcher wiki)
+ (browse-kill-ring
   :url "git://github.com/todesschaf/browse-kill-ring.git"
   :fetcher git
   :files ("browse-kill-ring.el"))
@@ -105,6 +108,10 @@
   :url "git://github.com/purcell/mmm-mode.git"
   :fetcher git
   :files ("mmm*.el"))
+ (org-fstree
+  :url "http://repo.or.cz/r/org-fstree.git"
+  :fetcher git
+  :files ("org-fstree.el"))
  (paredit
   :url "http://mumble.net/~campbell/emacs/paredit"
   :fetcher darcs

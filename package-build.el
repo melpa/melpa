@@ -63,16 +63,19 @@
   :group 'package-build
   :type 'string)
 
-(defun package-build-checkout-wiki (repo dir)
+(defun package-build-checkout-wiki (filename dir)
   "checkout a package from the wiki"
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
     (message dir)
     (unless (file-exists-p dir)
       (make-directory dir))
     (let ((default-directory dir)
-          (filename (file-name-nondirectory repo)))
-      (url-copy-file repo filename t)
-      (format-time-string "%Y%m%d" (current-time)))))
+          (download-url (format "http://www.emacswiki.org/emacs/download/%s" filename))
+          (wiki-url (format "http://www.emacswiki.org/emacs/%s" filename)))
+      (url-copy-file download-url filename t)
+      (with-current-buffer (url-retrieve-synchronously wiki-url)
+        (package-build-find-parse-time
+         "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)")))))
 
 (defun package-build-find-parse-time (regex)
   "Find REGEX in current buffer and format as a proper time version."
@@ -255,7 +258,9 @@
                 (cond
                  ((eq repo-type 'wiki)
                   (print 'EmacsWiki)
-                  (package-build-checkout-wiki repo-url pkg-cwd))
+                  (package-build-checkout-wiki (or (car (plist-get cfg :files))
+                                                   (concat file-name ".el"))
+                                               pkg-cwd))
                  ((eq repo-type 'svn)
                   (print 'Subversion)
                   (package-build-checkout-svn repo-url pkg-cwd))

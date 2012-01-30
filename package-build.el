@@ -153,10 +153,6 @@ In turn, this function uses the :fetcher option in the config to choose a
       (package-build-find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
-(defun package-change-list-elt (lst idx newval)
-  (if (zerop idx)
-      (cons newval (cdr lst))
-    (cons (car lst) (package-change-list-elt (cdr lst) (1- idx) newval))))
 
 (defun package-build-pkg-file (pkg-file pkg-info)
   "build the pkg file"

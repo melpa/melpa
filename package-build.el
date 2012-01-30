@@ -154,28 +154,23 @@ In turn, this function uses the :fetcher option in the config to choose a
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
 
+(defun package-build-dump (data file)
+  "Write `DATA' to `FILE' as a pretty-printed Lisp sexp."
+  (write-region (concat (pp-to-string data) "\n") nil file nil nil nil nil))
+
 (defun package-build-pkg-file (pkg-file pkg-info)
   "build the pkg file"
-  (let ((pkg-list
-         (list 'define-package
-               (aref pkg-info 0)
-               (aref pkg-info 3)
-               (aref pkg-info 2)
-               (list 'quote (mapcar
-                             (lambda (elt)
-                               (list (car elt)
-                                     (package-version-join (cadr elt))))
-                             (aref pkg-info 1))))))
-
-    (write-region
-     (concat
-      (pp-to-string
-       pkg-list
-       )
-      "\n")
-     nil
-     pkg-file
-     nil nil nil nil)))
+  (package-build-dump
+   `(define-package
+      ,(aref pkg-info 0)
+      ,(aref pkg-info 3)
+      ,(aref pkg-info 2)
+      ,@(mapcar
+         (lambda (elt)
+           (list (car elt)
+                 (package-version-join (cadr elt))))
+         (aref pkg-info 1)))
+   pkg-file))
 
 (defun package-read-from-file (file-name)
   "Read and return the lisp data stored in `FILENAME', or nil if no such file exists."
@@ -350,17 +345,11 @@ In turn, this function uses the :fetcher option in the config to choose a
         (expand-file-name "archive-contents" package-build-archive-dir)))
   "List of already-built packages, in the standard package.el format.")
 
-
 (defun package-build-dump-archive-contents ()
   "dump the archive contents back to the file"
-  (write-region
-   (concat
-    (pp-to-string
-     (cons 1 package-build-archive-alist))
-    "\n")
-   nil
-   (expand-file-name "archive-contents" package-build-archive-dir)
-   nil nil nil nil))
+  (package-build-dump (cons 1 package-build-archive-alist)
+                      (expand-file-name "archive-contents"
+                                        package-build-archive-dir)))
 
 (defun package-build-add-to-archive-contents (pkg-info type)
   "add an archive to the package-build-archive-contents"

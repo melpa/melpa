@@ -274,8 +274,11 @@ In turn, this function uses the :fetcher option in the config to choose a
           (cond
            ((not version)
             (print (format "Unable to check out repository for %s" name)))
-           ((= 1 (length files))
-            (let* ((pkgsrc (expand-file-name (car files) pkg-cwd))
+           ((or (eq 'wiki (plist-get cfg :fetcher))
+                (= 1 (length files)))
+            (let* ((pkgsrc (expand-file-name (or (car files)
+                                                 (concat file-name ".el"))
+                                             pkg-cwd))
                    (pkgdst (expand-file-name
                             (concat file-name "-" version ".el")
                             package-build-archive-dir))

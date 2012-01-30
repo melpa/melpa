@@ -33,8 +33,19 @@ function melpa_generate_html {
     echo
 }
 
+function trim {
+    echo $1
+}
+
+function melpa_validate {
+    NUMPACKAGES=$(trim `grep fetcher pkglist | wc -l`)
+    NUMBUILT=$(trim `ls packages/*.{el,tar} | wc -l`)
+
+    echo "${NUMBUILT}/${NUMPACKAGES} packages built"
+}
+
 function print_usage {
-    echo "usage: $0 [-h | -?] [clear | build | html | sync]"
+    echo "usage: $0 [-h | -?] [clear | build | html | sync | validate]"
 }
 
 args=`getopt h $*`
@@ -61,7 +72,7 @@ done
 
 
 if [[ "$#" == "0" ]]; then
-    set --  clear build index sync
+    set --  clear build index sync validate
 fi
 
 for i; do
@@ -70,6 +81,7 @@ for i; do
         build ) melpa_build_pkglist ;;
         html | index ) melpa_generate_html ;;
         sync ) melpa_sync ;;
+        validate ) melpa_validate ;;
     esac
     shift
 done

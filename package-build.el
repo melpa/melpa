@@ -63,15 +63,17 @@
   :group 'package-build
   :type 'string)
 
-(defun package-build-checkout-wiki (filename dir)
+(defun package-build-checkout-wiki (name config dir)
   "checkout a package from the wiki"
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
     (message dir)
     (unless (file-exists-p dir)
       (make-directory dir))
-    (let ((default-directory dir)
-          (download-url (format "http://www.emacswiki.org/emacs/download/%s" filename))
-          (wiki-url (format "http://www.emacswiki.org/emacs/%s" filename)))
+    (let* ((filename (or (car (plist-get config :files))
+                         (format "%s.el" name)))
+           (default-directory dir)
+           (download-url (format "http://www.emacswiki.org/emacs/download/%s" filename))
+           (wiki-url (format "http://www.emacswiki.org/emacs/%s" filename)))
       (url-copy-file download-url filename t)
       (with-current-buffer (url-retrieve-synchronously wiki-url)
         (package-build-find-parse-time
@@ -91,51 +93,65 @@
   (let ((default-directory (or dir default-directory)))
     (apply 'process-file prog nil (current-buffer) t args)))
 
-(defun package-build-checkout-darcs (repo dir)
+
+(defun package-build-checkout (name config cwd)
+  "Check out source for package `NAME' with `CONFIG' under working dir `CWD'.
+In turn, this function uses the :fetcher option in the config to choose a
+  source-specific fetcher function, which it calls with the same arguments."
+  (let ((repo-type (plist-get config :fetcher)))
+    (print repo-type)
+    (funcall (intern (format "package-build-checkout-%s" repo-type))
+             name config cwd)))
+
+(defun package-build-checkout-darcs (name config dir)
   "checkout a darcs package"
-  (with-current-buffer (get-buffer-create "*package-build-checkout*")
-    (cond
-     ((file-exists-p dir)
-      (print "checkout directory exists, updating...")
-      (package-run-process dir "darcs" "pull"))
-     (t
-      (print "cloning repository")
-      (package-run-process nil "darcs" "get" repo dir)))
-    (package-run-process dir "darcs" "changes" "--last" "1")
-    (package-build-find-parse-time
-     "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)")))
+  (let ((repo (plist-get config :url)))
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (cond
+       ((file-exists-p dir)
+        (print "checkout directory exists, updating...")
+        (package-run-process dir "darcs" "pull"))
+       (t
+        (print "cloning repository")
+        (package-run-process nil "darcs" "get" repo dir)))
+      (package-run-process dir "darcs" "changes" "--last" "1")
+      (package-build-find-parse-time
+       "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)"))))
 
-(defun package-build-checkout-svn (repo dir)
+(defun package-build-checkout-svn (name config dir)
   "checkout an svn repo"
-  (with-current-buffer (get-buffer-create "*package-build-checkout*")
-    (goto-char (point-max))
-    (cond
-     ((file-exists-p dir)
-      (print "checkout directory exists, updating...")
-      (package-run-process dir "svn" "up"))
-     (t
-      (print "cloning repository")
-      (package-run-process nil "svn" "checkout" repo dir)))
-    (package-run-process dir "svn" "info")
-    (package-build-find-parse-time
-     "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")))
+  (let ((repo (plist-get config :url)))
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (goto-char (point-max))
+      (cond
+       ((file-exists-p dir)
+        (print "checkout directory exists, updating...")
+        (package-run-process dir "svn" "up"))
+       (t
+        (print "cloning repository")
+        (package-run-process nil "svn" "checkout" repo dir)))
+      (package-run-process dir "svn" "info")
+      (package-build-find-parse-time
+       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
-(defun package-build-checkout-git (repo dir &optional commit)
+(defun package-build-checkout-git (name config dir)
   "checkout a git repo"
-  (with-current-buffer (get-buffer-create "*package-build-checkout*")
-    (goto-char (point-max))
-    (cond
-     ((file-exists-p dir)
-      (print "checkout directory exists, updating...")
-      (package-run-process dir "git" "pull"))
-     (t
-      (print (format "cloning %s to %s" repo dir))
-      (package-run-process nil "git" "clone" repo dir)))
-    (when commit
-      (package-run-process dir "git" "checkout" commit))
-    (package-run-process dir "git" "show" "-s" "--format='\%ci'" "HEAD")
-    (package-build-find-parse-time
-     "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)")))
+  (let ((repo (plist-get config :url))
+        (commit (plist-get config :commit)))
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (goto-char (point-max))
+      (cond
+       ((file-exists-p dir)
+        (print "checkout directory exists, updating...")
+        (package-run-process dir "git" "pull"))
+       (t
+        (print (format "cloning %s to %s" repo dir))
+        (package-run-process nil "git" "clone" repo dir)))
+      (when commit
+        (package-run-process dir "git" "checkout" commit))
+      (package-run-process dir "git" "show" "-s" "--format='\%ci'" "HEAD")
+      (package-build-find-parse-time
+       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
 (defun package-change-list-elt (lst idx newval)
   (if (zerop idx)
@@ -252,30 +268,12 @@
            (expand-file-name file-name package-build-working-dir))))
 
     (if cfg
-        (let* ((repo-type (plist-get cfg :fetcher))
-               (repo-url (plist-get cfg :url))
-               (version
-                (cond
-                 ((eq repo-type 'wiki)
-                  (print 'EmacsWiki)
-                  (package-build-checkout-wiki (or (car (plist-get cfg :files))
-                                                   (concat file-name ".el"))
-                                               pkg-cwd))
-                 ((eq repo-type 'svn)
-                  (print 'Subversion)
-                  (package-build-checkout-svn repo-url pkg-cwd))
-                 ((eq repo-type 'git)
-                  (print 'Git)
-                  (package-build-checkout-git repo-url pkg-cwd
-                                              (plist-get cfg :commit)))
-                 ((eq repo-type 'darcs)
-                  (print 'Darcs)
-                  (package-build-checkout-darcs repo-url pkg-cwd))))
+        (let* ((version (package-build-checkout name cfg pkg-cwd))
                (files (package-expand-file-list pkg-cwd (plist-get cfg :files)))
                (default-directory package-build-working-dir))
           (cond
            ((not version)
-            (print (format "Unable to check out repository: %s" repo-url)))
+            (print (format "Unable to check out repository for %s" name)))
            ((= 1 (length files))
             (let* ((pkgsrc (expand-file-name (car files) pkg-cwd))
                    (pkgdst (expand-file-name

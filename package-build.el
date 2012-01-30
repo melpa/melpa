@@ -63,22 +63,6 @@
   :group 'package-build
   :type 'string)
 
-(defun package-build-checkout-wiki (name config dir)
-  "checkout a package from the wiki"
-  (with-current-buffer (get-buffer-create "*package-build-checkout*")
-    (message dir)
-    (unless (file-exists-p dir)
-      (make-directory dir))
-    (let* ((filename (or (car (plist-get config :files))
-                         (format "%s.el" name)))
-           (default-directory dir)
-           (download-url (format "http://www.emacswiki.org/emacs/download/%s" filename))
-           (wiki-url (format "http://www.emacswiki.org/emacs/%s" filename)))
-      (url-copy-file download-url filename t)
-      (with-current-buffer (url-retrieve-synchronously wiki-url)
-        (package-build-find-parse-time
-         "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)")))))
-
 (defun package-build-find-parse-time (regex)
   "Find REGEX in current buffer and format as a proper time version."
   (format-time-string
@@ -102,6 +86,22 @@ In turn, this function uses the :fetcher option in the config to choose a
     (print repo-type)
     (funcall (intern (format "package-build-checkout-%s" repo-type))
              name config cwd)))
+
+(defun package-build-checkout-wiki (name config dir)
+  "checkout a package from the wiki"
+  (with-current-buffer (get-buffer-create "*package-build-checkout*")
+    (message dir)
+    (unless (file-exists-p dir)
+      (make-directory dir))
+    (let* ((filename (or (car (plist-get config :files))
+                         (format "%s.el" name)))
+           (default-directory dir)
+           (download-url (format "http://www.emacswiki.org/emacs/download/%s" filename))
+           (wiki-url (format "http://www.emacswiki.org/emacs/%s" filename)))
+      (url-copy-file download-url filename t)
+      (with-current-buffer (url-retrieve-synchronously wiki-url)
+        (package-build-find-parse-time
+         "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)")))))
 
 (defun package-build-checkout-darcs (name config dir)
   "checkout a darcs package"

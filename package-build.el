@@ -251,6 +251,15 @@ The file is written to `package-build-working-dir'."
   (let ((default-directory dir))
     (mapcan 'file-expand-wildcards files)))
 
+(defun package-build-merge-package-info (pkg-info name version)
+  "Return a version of PKG-INFO updated with NAME and VERSION.
+If PKG-INFO is nil, an empty one is created."
+  (let ((merged
+         (or pkg-info (vector name nil "No description available." version))))
+    (aset merged 3 version)
+    (aset merged 0 (downcase name))
+    (copy-seq merged)))
+
 (defun package-build-archive (file-name)
   "Build a package archive for package FILE-NAME."
   (interactive (list (completing-read "Package: "
@@ -277,13 +286,10 @@ The file is written to `package-build-working-dir'."
                    (pkgdst (expand-file-name
                             (concat file-name "-" version ".el")
                             package-build-archive-dir))
-                   (pkg-info (package-build-get-package-info pkgsrc)))
-              (unless pkg-info
-                (setq pkg-info
-                      (vector
-                       file-name nil "No description available." version)))
-              (aset pkg-info 3 version)
-              (aset pkg-info 0 (downcase file-name))
+                   (pkg-info (package-build-merge-package-info
+                              (package-build-get-package-info pkgsrc)
+                              file-name
+                              version)))
               (print pkg-info)
               (if (file-exists-p pkgdst)
                   (delete-file pkgdst t))
@@ -308,14 +314,10 @@ The file is written to `package-build-working-dir'."
                                 (expand-file-name (concat pkg-file ".in")
                                                   pkg-cwd))))
 
-              (unless pkg-info
-                (setq pkg-info
-                      (vector
-                       file-name nil "No description available." version)))
-
-              (aset pkg-info 3 version)
-              (aset pkg-info 0 (downcase (aref pkg-info 0)))
+              (setq pkg-info
+                    (package-build-merge-package-info pkg-info file-name version))
               (print pkg-info)
+
               (package-build-pkg-file (expand-file-name
                                        pkg-file
                                        (file-name-as-directory

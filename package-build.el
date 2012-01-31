@@ -181,17 +181,18 @@ the same arguments."
       (goto-char (point-min))
       (read (current-buffer)))))
 
-(defun package-build-get-config (file-name)
-  "Get the configuration information for the given FILE-NAME."
-  (package-read-from-file (format "epkgs/%s/.config" file-name)))
+(defun package-build-get-config (pkg-name)
+  "Get the configuration information for the given PKG-NAME."
+  (package-read-from-file (format "epkgs/%s/.config" pkg-name)))
 
-(defun package-build-get-master (file-name)
-  "Get the configuration information for the given FILE-NAME."
-  (package-read-from-file (format "epkgs/%s/master" file-name)))
+(defun package-build-get-master (pkg-name)
+  "Get the configuration information for the given PKG-NAME."
+  (package-read-from-file (format "epkgs/%s/master" pkg-name)))
 
 
-(defun package-build-create-tar (dir file &optional files)
-  "Create a tar in DIR with name FILE containing FILES."
+(defun package-build-create-tar (file dir &optional files)
+  "Create a tar FILE containing the contents of DIR, or just FILES if non-nil.
+The file is written to `package-build-working-dir'."
   (let* ((default-directory package-build-working-dir))
     (if files
         (setq files (mapcar (lambda (fn) (concat dir "/" fn)) files))
@@ -327,9 +328,9 @@ the same arguments."
                 (add-to-list 'files pkg-file))
 
               (package-build-create-tar
-               pkg-dir
                (expand-file-name
                 (concat file-name "-" version ".tar") package-build-archive-dir)
+               pkg-dir
                files)
 
               (delete-directory pkg-dir t nil)

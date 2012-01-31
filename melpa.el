@@ -112,10 +112,10 @@ Filter packages not in the associated list for `archive' in
 Filter packages in the associated list for `archive' in
 `package-archive-exclude-alist'."
   (let ((enable-rules (cdr (assoc archive package-archive-enable-alist)))
-	(exclude-rules (cdr (assoc archive package-archive-exclude-alist))))
+        (exclude-rules (cdr (assoc archive package-archive-exclude-alist))))
     (and (not (memq package exclude-rules))
-	 (or (not enable-rules)
-	     (memq package enable-rules)))))
+         (or (not enable-rules)
+             (memq package enable-rules)))))
 
 
 

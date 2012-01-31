@@ -4,7 +4,7 @@
 ;;
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
 ;; URL: https://github.com/milkypostman/melpa
-;; Version: 0.2
+;; Version: 0.3
 ;;
 ;;
 ;; Credits:
@@ -74,31 +74,31 @@ ARCHIVE is the string name of the package archive."
   (print requirements))
 
 
-;;;###autoload
-(defadvice package-download-tar
-  (after package-download-tar-initialize activate compile)
-  "initialize the package after compilation"
-  (package-initialize))
+;; ;;;###autoload
+;; (defadvice package-download-tar
+;;   (after package-download-tar-initialize activate compile)
+;;   "initialize the package after compilation"
+;;   (package-initialize))
 
 
-;;;###autoload
-(defadvice package-download-single
-  (after package-download-single-initialize activate compile)
-  "initialize the package after compilation"
-  (package-initialize))
+;; ;;;###autoload
+;; (defadvice package-download-single
+;;   (after package-download-single-initialize activate compile)
+;;   "initialize the package after compilation"
+;;   (package-initialize))
 
 
 ;;;###autoload
 (defadvice package--add-to-archive-contents
   (around package-filter-add-to-archive-contents (package archive)
-	  activate compile)
+          activate compile)
   "Add filtering of available packages using `package-filter-function',
 if non-nil."
   (when (and package-filter-function
-	       (funcall package-filter-function
-			(car package)
-			(package-desc-vers (cdr package))
-			archive))
+             (funcall package-filter-function
+                      (car package)
+                      (package-desc-vers (cdr package))
+                      archive))
     ad-do-it))
 
 

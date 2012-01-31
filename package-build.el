@@ -59,7 +59,7 @@
   :type 'string)
 
 (defcustom package-build-alist-file (expand-file-name "pkglist")
-  "File containing pkg alist"
+  "File containing pkg alist."
   :group 'package-build
   :type 'string)
 
@@ -72,23 +72,24 @@
                   (match-string-no-properties 1))))))
 
 (defun package-run-process (dir prog &rest args)
-  "Run command `PROG' with `ARGS' in `DIR', or `default-directory' if unset.
-  Output is written to the current buffer."
+  "In DIR (or `default-directory' if unset) run command PROG with ARGS.
+Output is written to the current buffer."
   (let ((default-directory (or dir default-directory)))
     (apply 'process-file prog nil (current-buffer) t args)))
 
 
 (defun package-build-checkout (name config cwd)
-  "Check out source for package `NAME' with `CONFIG' under working dir `CWD'.
-In turn, this function uses the :fetcher option in the config to choose a
-  source-specific fetcher function, which it calls with the same arguments."
+  "Check out source for package NAME with CONFIG under working dir CWD.
+In turn, this function uses the :fetcher option in the config to
+choose a source-specific fetcher function, which it calls with
+the same arguments."
   (let ((repo-type (plist-get config :fetcher)))
     (print repo-type)
     (funcall (intern (format "package-build-checkout-%s" repo-type))
              name config cwd)))
 
 (defun package-build-checkout-wiki (name config dir)
-  "checkout a package from the wiki"
+  "Checkout package NAME with config CONFIG from the EmacsWiki into DIR."
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
     (message dir)
     (unless (file-exists-p dir)
@@ -104,7 +105,7 @@ In turn, this function uses the :fetcher option in the config to choose a
          "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)")))))
 
 (defun package-build-checkout-darcs (name config dir)
-  "checkout a darcs package"
+  "Check package NAME with config CONFIG out of darcs into DIR."
   (let ((repo (plist-get config :url)))
     (with-current-buffer (get-buffer-create "*package-build-checkout*")
       (cond
@@ -119,7 +120,7 @@ In turn, this function uses the :fetcher option in the config to choose a
        "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)"))))
 
 (defun package-build-checkout-svn (name config dir)
-  "checkout an svn repo"
+  "Check package NAME with config CONFIG out of svn into DIR."
   (let ((repo (plist-get config :url)))
     (with-current-buffer (get-buffer-create "*package-build-checkout*")
       (goto-char (point-max))
@@ -135,7 +136,7 @@ In turn, this function uses the :fetcher option in the config to choose a
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
 (defun package-build-checkout-git (name config dir)
-  "checkout a git repo"
+  "Check package NAME with config CONFIG out of git into DIR."
   (let ((repo (plist-get config :url))
         (commit (plist-get config :commit)))
     (with-current-buffer (get-buffer-create "*package-build-checkout*")
@@ -155,11 +156,11 @@ In turn, this function uses the :fetcher option in the config to choose a
 
 
 (defun package-build-dump (data file)
-  "Write `DATA' to `FILE' as a pretty-printed Lisp sexp."
+  "Write DATA to FILE as a pretty-printed Lisp sexp."
   (write-region (concat (pp-to-string data) "\n") nil file nil nil nil nil))
 
 (defun package-build-pkg-file (pkg-file pkg-info)
-  "build the pkg file"
+  "Write PKG-FILE containing PKG-INFO."
   (package-build-dump
    `(define-package
       ,(aref pkg-info 0)
@@ -173,7 +174,7 @@ In turn, this function uses the :fetcher option in the config to choose a
    pkg-file))
 
 (defun package-read-from-file (file-name)
-  "Read and return the lisp data stored in `FILENAME', or nil if no such file exists."
+  "Read and return the Lisp data stored in FILE-NAME, or nil if no such file exists."
   (when (file-exists-p file-name)
     (with-temp-buffer
       (insert-file-contents-literally file-name)
@@ -181,16 +182,16 @@ In turn, this function uses the :fetcher option in the config to choose a
       (read (current-buffer)))))
 
 (defun package-build-get-config (file-name)
-  "get the configuration information for the given file-name"
+  "Get the configuration information for the given FILE-NAME."
   (package-read-from-file (format "epkgs/%s/.config" file-name)))
 
 (defun package-build-get-master (file-name)
-  "get the configuration information for the given file-name"
+  "Get the configuration information for the given FILE-NAME."
   (package-read-from-file (format "epkgs/%s/master" file-name)))
 
 
 (defun package-build-create-tar (dir file &optional files)
-  "create a tar for the file-name with version"
+  "Create a tar in DIR with name FILE containing FILES."
   (let* ((default-directory package-build-working-dir))
     (if files
         (setq files (mapcar (lambda (fn) (concat dir "/" fn)) files))
@@ -206,6 +207,7 @@ In turn, this function uses the :fetcher option in the config to choose a
            files)))
 
 (defun package-build-get-package-info (file-path)
+  "Get a vector of package info from the docstrings in FILE-PATH."
   (when (file-exists-p file-path)
     (ignore-errors
       (save-window-excursion
@@ -219,6 +221,7 @@ In turn, this function uses the :fetcher option in the config to choose a
           (package-buffer-info))))))
 
 (defun package-build-get-pkg-file-info (file-path)
+  "Get a vector of package info from \"-pkg.el\" file FILE-PATH."
   (when (file-exists-p file-path)
     (let ((pkgfile-info (cdr (package-read-from-file file-path))))
       (vector
@@ -232,23 +235,23 @@ In turn, this function uses the :fetcher option in the config to choose a
 
 
 (defun package-build-all ()
-  "build all packages in the `package-build-alist'"
+  "Build all packages in the `package-build-alist'."
   (interactive)
   (apply 'package-build-archives
          (mapcar 'symbol-name (mapcar 'car package-build-alist))))
 
 (defun package-build-archives (&rest pkgs)
-  "build archives"
+  "Build archives for packages PKGS."
   (interactive)
   (mapc 'package-build-archive pkgs))
 
 (defun package-expand-file-list (dir files)
-  "Expand `FILES', some of which may be wildcards, relative to `DIR'."
+  "In DIR, expand FILES, some of which may be shell-style wildcards."
   (let ((default-directory dir))
     (mapcan 'file-expand-wildcards files)))
 
 (defun package-build-archive (file-name)
-  "build a package archive"
+  "Build a package archive for package FILE-NAME."
   (interactive (list (completing-read "Package: "
                                       (mapc 'car package-build-alist))))
 
@@ -346,13 +349,13 @@ In turn, this function uses the :fetcher option in the config to choose a
   "List of already-built packages, in the standard package.el format.")
 
 (defun package-build-dump-archive-contents ()
-  "dump the archive contents back to the file"
+  "Dump the list of built packages back to the archive-contents file."
   (package-build-dump (cons 1 package-build-archive-alist)
                       (expand-file-name "archive-contents"
                                         package-build-archive-dir)))
 
 (defun package-build-add-to-archive-contents (pkg-info type)
-  "add an archive to the package-build-archive-contents"
+  "Add the built archive with info PKG-INFO and TYPE to `package-build-archive-alist'."
   (let* ((name (intern (aref pkg-info 0)))
          (requires (aref pkg-info 1))
          (desc (or (aref pkg-info 2) "No description available."))
@@ -368,3 +371,5 @@ In turn, this function uses the :fetcher option in the config to choose a
                         requires
                         desc
                         type)))))
+
+;;; package-build.el ends here

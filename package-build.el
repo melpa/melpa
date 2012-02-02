@@ -166,7 +166,7 @@ the same arguments."
       ,(aref pkg-info 0)
       ,(aref pkg-info 3)
       ,(aref pkg-info 2)
-      ,@(mapcar
+      ',(mapcar
          (lambda (elt)
            (list (car elt)
                  (package-version-join (cadr elt))))

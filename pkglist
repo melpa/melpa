@@ -56,6 +56,10 @@
   :url "git://github.com/defunkt/gist.el.git"
   :fetcher git
   :files ("gist.el"))
+ (git-blame
+  :url "git://github.com/tsgates/git-emacs.git"
+  :fetcher git
+  :files ("git-blame.el"))
  (haskell-mode
   :url "http://code.haskell.org/haskellmode-emacs"
   :fetcher darcs)

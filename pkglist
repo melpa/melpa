@@ -48,6 +48,8 @@
   :url "https://github.com/milkypostman/jump.el.git"
   :fetcher git
   :files ("findr.el"))
+ (flymake-cursor
+  :fetcher wiki)
  (full-ack
   :url "git://github.com/nschum/full-ack.git"
   :fetcher git

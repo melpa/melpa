@@ -298,25 +298,17 @@ If PKG-INFO is nil, an empty one is created."
            (t
             (let* ((pkg-dir (concat file-name "-" version))
                    (pkg-file (concat file-name "-pkg.el"))
-                   (pkg-info (package-build-get-pkg-file-info
-                              (expand-file-name pkg-file pkg-cwd))))
+                   (pkg-info
+                    (package-build-merge-package-info
+                     (let ((default-directory pkg-cwd))
+                       (or (package-build-get-pkg-file-info pkg-file)
+                           ;; some packages (like magit) provide name-pkg.el.in
+                           (package-build-get-pkg-file-info (concat pkg-file ".in"))
+                           (package-build-get-package-info (concat file-name ".el"))))
+                     file-name version)))
 
-              (copy-directory file-name pkg-dir)
-
-              (unless pkg-info
-                (setq pkg-info (package-build-get-package-info
-                                (expand-file-name (concat file-name ".el")
-                                                  pkg-cwd))))
-
-              ;; some packages (like magit) provide name-pkg.el.in
-              (unless pkg-info
-                (setq pkg-info (package-build-get-pkg-file-info
-                                (expand-file-name (concat pkg-file ".in")
-                                                  pkg-cwd))))
-
-              (setq pkg-info
-                    (package-build-merge-package-info pkg-info file-name version))
               (print pkg-info)
+              (copy-directory file-name pkg-dir)
 
               (package-build-pkg-file (expand-file-name
                                        pkg-file

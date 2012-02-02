@@ -186,6 +186,8 @@
  (textile-mode
   :url "git://github.com/emacsmirror/textile-mode.git"
   :fetcher git)
+ (todochiku
+  :fetcher wiki)
  (undo-tree
   :url "http://www.dr-qubit.org/git/undo-tree.git"
   :fetcher git

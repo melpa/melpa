@@ -29,7 +29,7 @@
    :fetcher git
    :files ("deft.el"))
  (dired+
-   :fetcher wiki)
+  :fetcher wiki)
  (elisp-slime-nav
   :url "https://github.com/purcell/elisp-slime-nav.git"
   :fetcher git
@@ -44,10 +44,10 @@
   :url "git://github.com/technomancy/find-file-in-project.git"
   :fetcher git
   :files ("find-file-in-project.el"))
-  (findr
-   :url "https://github.com/milkypostman/jump.el.git"
-   :fetcher git
-   :files ("findr.el"))
+ (findr
+  :url "https://github.com/milkypostman/jump.el.git"
+  :fetcher git
+  :files ("findr.el"))
  (full-ack
   :url "git://github.com/nschum/full-ack.git"
   :fetcher git
@@ -79,10 +79,10 @@
   :url "https://github.com/nonsequitur/inf-ruby.git"
   :fetcher git
   :files ("inf-ruby.el"))
-  (inflections
-   :url "https://github.com/milkypostman/jump.el.git"
-   :fetcher git
-   :files ("inflections.el"))
+ (inflections
+  :url "https://github.com/milkypostman/jump.el.git"
+  :fetcher git
+  :files ("inflections.el"))
  (js3
   :url "git://github.com/thomblake/js3-mode.git"
   :fetcher git

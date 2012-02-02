@@ -79,6 +79,10 @@
    :url "https://github.com/milkypostman/jump.el.git"
    :fetcher git
    :files ("inflections.el"))
+ (js3
+  :url "git://github.com/thomblake/js3-mode.git"
+  :fetcher git
+  :files ("js3.el"))
  (jump
   :url "https://github.com/milkypostman/jump.el.git"
   :fetcher git

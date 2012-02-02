@@ -106,6 +106,10 @@
   :url "git://github.com/milkypostman/markdown-mode-plus.git"
   :fetcher git
   :files ("markdown-mode+.el" "HTML as Markdown in Emacs.applescript"))
+ (melpa
+  :url "git://github.com/milkypostman/melpa.git"
+  :fetcher git
+  files ("melpa.el"))
  (mmm-mode
   :url "git://github.com/purcell/mmm-mode.git"
   :fetcher git

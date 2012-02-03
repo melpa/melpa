@@ -173,7 +173,7 @@ the same arguments."
          (aref pkg-info 1)))
    pkg-file))
 
-(defun package-read-from-file (file-name)
+(defun package-build-read-from-file (file-name)
   "Read and return the Lisp data stored in FILE-NAME, or nil if no such file exists."
   (when (file-exists-p file-name)
     (with-temp-buffer
@@ -183,11 +183,11 @@ the same arguments."
 
 (defun package-build-get-config (pkg-name)
   "Get the configuration information for the given PKG-NAME."
-  (package-read-from-file (format "epkgs/%s/.config" pkg-name)))
+  (package-build-read-from-file (format "epkgs/%s/.config" pkg-name)))
 
 (defun package-build-get-master (pkg-name)
   "Get the configuration information for the given PKG-NAME."
-  (package-read-from-file (format "epkgs/%s/master" pkg-name)))
+  (package-build-read-from-file (format "epkgs/%s/master" pkg-name)))
 
 
 (defun package-build-create-tar (file dir &optional files)
@@ -224,7 +224,7 @@ The file is written to `package-build-working-dir'."
 (defun package-build-get-pkg-file-info (file-path)
   "Get a vector of package info from \"-pkg.el\" file FILE-PATH."
   (when (file-exists-p file-path)
-    (let ((pkgfile-info (cdr (package-read-from-file file-path))))
+    (let ((pkgfile-info (cdr (package-build-read-from-file file-path))))
       (vector
        (nth 0 pkgfile-info)
        (mapcar
@@ -246,7 +246,7 @@ The file is written to `package-build-working-dir'."
   (interactive)
   (mapc 'package-build-archive pkgs))
 
-(defun package-expand-file-list (dir files)
+(defun package-build-expand-file-list (dir files)
   "In DIR, expand FILES, some of which may be shell-style wildcards."
   (let ((default-directory dir))
     (mapcan 'file-expand-wildcards files)))
@@ -273,7 +273,7 @@ If PKG-INFO is nil, an empty one is created."
 
     (if cfg
         (let* ((version (package-build-checkout name cfg pkg-cwd))
-               (files (package-expand-file-list pkg-cwd (plist-get cfg :files)))
+               (files (package-build-expand-file-list pkg-cwd (plist-get cfg :files)))
                (default-directory package-build-working-dir))
           (cond
            ((not version)
@@ -335,11 +335,11 @@ If PKG-INFO is nil, an empty one is created."
 
 
 (defvar package-build-alist
-  (package-read-from-file package-build-alist-file)
+  (package-build-read-from-file package-build-alist-file)
   "List of package build specs.")
 
 (defvar package-build-archive-alist
-  (cdr (package-read-from-file
+  (cdr (package-build-read-from-file
         (expand-file-name "archive-contents" package-build-archive-dir)))
   "List of already-built packages, in the standard package.el format.")
 

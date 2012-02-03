@@ -63,6 +63,13 @@
   :group 'package-build
   :type 'string)
 
+(defvar package-build-alist nil
+  "List of package build specs.")
+
+(defvar package-build-archive-alist nil
+  "List of already-built packages, in the standard package.el format.")
+
+
 (defun package-build-find-parse-time (regex)
   "Find REGEX in current buffer and format as a proper time version."
   (format-time-string
@@ -334,15 +341,6 @@ If PKG-INFO is nil, an empty one is created."
 
 
 
-(defvar package-build-alist
-  (package-build-read-from-file package-build-alist-file)
-  "List of package build specs.")
-
-(defvar package-build-archive-alist
-  (cdr (package-build-read-from-file
-        (expand-file-name "archive-contents" package-build-archive-dir)))
-  "List of already-built packages, in the standard package.el format.")
-
 (defun package-build-dump-archive-contents ()
   "Dump the list of built packages back to the archive-contents file."
   (package-build-dump (cons 1 package-build-archive-alist)
@@ -366,5 +364,17 @@ If PKG-INFO is nil, an empty one is created."
                         requires
                         desc
                         type)))))
+
+(defun package-build-initialize ()
+  "Load the pkglist and archive-contents files."
+  (interactive)
+  (setq
+   package-build-alist (package-build-read-from-file package-build-alist-file)
+   package-build-archive-alist (cdr (package-build-read-from-file
+                                     (expand-file-name "archive-contents"
+                                                       package-build-archive-dir)))))
+
+
+(package-build-initialize)
 
 ;;; package-build.el ends here

@@ -298,8 +298,8 @@ If PKG-INFO is nil, an empty one is created."
                               file-name
                               version)))
               (print pkg-info)
-              (if (file-exists-p pkgdst)
-                  (delete-file pkgdst t))
+              (when (file-exists-p pkgdst)
+                (delete-file pkgdst t))
               (copy-file pkgsrc pkgdst)
               (package-build-add-to-archive-contents pkg-info 'single)))
            (t

@@ -261,11 +261,11 @@ The file is written to `package-build-working-dir'."
 (defun package-build-merge-package-info (pkg-info name version)
   "Return a version of PKG-INFO updated with NAME and VERSION.
 If PKG-INFO is nil, an empty one is created."
-  (let ((merged
-         (or pkg-info (vector name nil "No description available." version))))
+  (let ((merged (or (copy-seq pkg-info)
+                    (vector name nil "No description available." version))))
     (aset merged 3 version)
     (aset merged 0 (downcase name))
-    (copy-seq merged)))
+    merged))
 
 (defun package-build-archive (file-name)
   "Build a package archive for package FILE-NAME."

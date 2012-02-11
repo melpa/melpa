@@ -288,71 +288,70 @@ If PKG-INFO is nil, an empty one is created."
                                       (mapc 'car package-build-alist))))
 
   (let* ((name (intern file-name))
-         (cfg (cdr (assoc name package-build-alist)))
+         (cfg (or (cdr (assoc name package-build-alist))
+                  (error "Cannot find package %s" file-name)))
          (pkg-cwd
           (file-name-as-directory
            (expand-file-name file-name package-build-working-dir))))
 
-    (if cfg
-        (let* ((version (pb/checkout name cfg pkg-cwd))
-               (files (pb/expand-file-list pkg-cwd (plist-get cfg :files)))
-               (default-directory package-build-working-dir))
-          (cond
-           ((not version)
-            (print (format "Unable to check out repository for %s" name)))
-           ((or (eq 'wiki (plist-get cfg :fetcher))
-                (= 1 (length files)))
-            (let* ((pkgsrc (expand-file-name (or (car files)
-                                                 (concat file-name ".el"))
-                                             pkg-cwd))
-                   (pkgdst (expand-file-name
-                            (concat file-name "-" version ".el")
-                            package-build-archive-dir))
-                   (pkg-info (pb/merge-package-info
-                              (pb/get-package-info pkgsrc)
-                              file-name
-                              version)))
-              (print pkg-info)
-              (when (file-exists-p pkgdst)
-                (delete-file pkgdst t))
-              (copy-file pkgsrc pkgdst)
-              (pb/add-to-archive-contents pkg-info 'single)))
-           (t
-            (let* ((pkg-dir (concat file-name "-" version))
-                   (pkg-file (concat file-name "-pkg.el"))
-                   (pkg-info
-                    (pb/merge-package-info
-                     (let ((default-directory pkg-cwd))
-                       (or (pb/get-pkg-file-info pkg-file)
-                           ;; some packages (like magit) provide name-pkg.el.in
-                           (pb/get-pkg-file-info (concat pkg-file ".in"))
-                           (pb/get-package-info (concat file-name ".el"))))
-                     file-name version)))
+    (let* ((version (pb/checkout name cfg pkg-cwd))
+           (files (pb/expand-file-list pkg-cwd (plist-get cfg :files)))
+           (default-directory package-build-working-dir))
+      (cond
+       ((not version)
+        (print (format "Unable to check out repository for %s" name)))
+       ((or (eq 'wiki (plist-get cfg :fetcher))
+            (= 1 (length files)))
+        (let* ((pkgsrc (expand-file-name (or (car files)
+                                             (concat file-name ".el"))
+                                         pkg-cwd))
+               (pkgdst (expand-file-name
+                        (concat file-name "-" version ".el")
+                        package-build-archive-dir))
+               (pkg-info (pb/merge-package-info
+                          (pb/get-package-info pkgsrc)
+                          file-name
+                          version)))
+          (print pkg-info)
+          (when (file-exists-p pkgdst)
+            (delete-file pkgdst t))
+          (copy-file pkgsrc pkgdst)
+          (pb/add-to-archive-contents pkg-info 'single)))
+       (t
+        (let* ((pkg-dir (concat file-name "-" version))
+               (pkg-file (concat file-name "-pkg.el"))
+               (pkg-info
+                (pb/merge-package-info
+                 (let ((default-directory pkg-cwd))
+                   (or (pb/get-pkg-file-info pkg-file)
+                       ;; some packages (like magit) provide name-pkg.el.in
+                       (pb/get-pkg-file-info (concat pkg-file ".in"))
+                       (pb/get-package-info (concat file-name ".el"))))
+                 file-name version)))
 
-              (print pkg-info)
-              (copy-directory file-name pkg-dir)
+          (print pkg-info)
+          (copy-directory file-name pkg-dir)
 
-              (pb/write-pkg-file (expand-file-name
-                                  pkg-file
-                                  (file-name-as-directory
-                                   (expand-file-name
-                                    pkg-dir
-                                    package-build-working-dir)))
-                                 pkg-info)
+          (pb/write-pkg-file (expand-file-name
+                              pkg-file
+                              (file-name-as-directory
+                               (expand-file-name
+                                pkg-dir
+                                package-build-working-dir)))
+                             pkg-info)
 
-              (when files
-                (add-to-list 'files pkg-file))
+          (when files
+            (add-to-list 'files pkg-file))
 
-              (pb/create-tar
-               (expand-file-name
-                (concat file-name "-" version ".tar") package-build-archive-dir)
-               pkg-dir
-               files)
+          (pb/create-tar
+           (expand-file-name
+            (concat file-name "-" version ".tar") package-build-archive-dir)
+           pkg-dir
+           files)
 
-              (delete-directory pkg-dir t nil)
-              (pb/add-to-archive-contents pkg-info 'tar))))
-          (pb/dump-archive-contents))
-      (message "\nERROR: Cannot find package %s\n" file-name))))
+          (delete-directory pkg-dir t nil)
+          (pb/add-to-archive-contents pkg-info 'tar))))
+      (pb/dump-archive-contents))))
 
 (defun package-build-archives (&rest pkgs)
   "Build archives for packages PKGS."

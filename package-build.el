@@ -201,9 +201,6 @@ the same arguments."
   "Create a tar FILE containing the contents of DIR, or just FILES if non-nil.
 The file is written to `package-build-working-dir'."
   (let* ((default-directory package-build-working-dir))
-    (if files
-        (setq files (mapcar (lambda (fn) (concat dir "/" fn)) files))
-      (setq files (list dir)))
     (apply 'process-file
            "tar" nil
            (get-buffer-create "*package-build-checkout*")
@@ -212,7 +209,8 @@ The file is written to `package-build-working-dir'."
            "--exclude=.svn"
            "--exclude=.git*"
            "--exclude=_darcs"
-           files)))
+           (or (mapcar (lambda (fn) (concat dir "/" fn)) files)
+               (list dir)))))
 
 (defun pb/get-package-info (file-path)
   "Get a vector of package info from the docstrings in FILE-PATH."

@@ -164,7 +164,7 @@ the same arguments."
 
 (defun pb/dump (data file)
   "Write DATA to FILE as a pretty-printed Lisp sexp."
-  (write-region (concat (pp-to-string data) "\n") nil file nil nil nil nil))
+  (write-region (concat (pp-to-string data) "\n") nil file))
 
 (defun pb/write-pkg-file (pkg-file pkg-info)
   "Write PKG-FILE containing PKG-INFO."

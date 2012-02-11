@@ -374,4 +374,5 @@ If PKG-INFO is nil, an empty one is created."
 
 (package-build-initialize)
 
+(provide 'package-build)
 ;;; package-build.el ends here

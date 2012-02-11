@@ -69,6 +69,7 @@
 (defvar package-build-archive-alist nil
   "List of already-built packages, in the standard package.el format.")
 
+;;; Internal functions
 
 (defun pb/find-parse-time (regex)
   "Find REGEX in current buffer and format as a proper time version."
@@ -161,7 +162,6 @@ the same arguments."
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
-
 (defun pb/dump (data file)
   "Write DATA to FILE as a pretty-printed Lisp sexp."
   (write-region (concat (pp-to-string data) "\n") nil file))
@@ -242,17 +242,6 @@ The file is written to `package-build-working-dir'."
        (nth 1 pkgfile-info)))))
 
 
-(defun package-build-all ()
-  "Build all packages in the `package-build-alist'."
-  (interactive)
-  (apply 'package-build-archives
-         (mapcar 'symbol-name (mapcar 'car package-build-alist))))
-
-(defun package-build-archives (&rest pkgs)
-  "Build archives for packages PKGS."
-  (interactive)
-  (mapc 'package-build-archive pkgs))
-
 (defun pb/expand-file-list (dir files)
   "In DIR, expand FILES, some of which may be shell-style wildcards."
   (let ((default-directory dir))
@@ -266,6 +255,32 @@ If PKG-INFO is nil, an empty one is created."
     (aset merged 3 version)
     (aset merged 0 (downcase name))
     merged))
+
+(defun pb/dump-archive-contents ()
+  "Dump the list of built packages back to the archive-contents file."
+  (pb/dump (cons 1 package-build-archive-alist)
+           (expand-file-name "archive-contents"
+                             package-build-archive-dir)))
+
+(defun pb/add-to-archive-contents (pkg-info type)
+  "Add the built archive with info PKG-INFO and TYPE to `package-build-archive-alist'."
+  (let* ((name (intern (aref pkg-info 0)))
+         (requires (aref pkg-info 1))
+         (desc (or (aref pkg-info 2) "No description available."))
+         (version (aref pkg-info 3))
+         (existing (assq name package-build-archive-alist)))
+    (when existing
+      (setq package-build-archive-alist
+            (delq existing package-build-archive-alist)))
+    (add-to-list 'package-build-archive-alist
+                 (cons name
+                       (vector
+                        (version-to-list version)
+                        requires
+                        desc
+                        type)))))
+
+;;; Public interface
 
 (defun package-build-archive (file-name)
   "Build a package archive for package FILE-NAME."
@@ -339,31 +354,16 @@ If PKG-INFO is nil, an empty one is created."
           (pb/dump-archive-contents))
       (message "\nERROR: Cannot find package %s\n" file-name))))
 
+(defun package-build-archives (&rest pkgs)
+  "Build archives for packages PKGS."
+  (interactive)
+  (mapc 'package-build-archive pkgs))
 
-
-(defun pb/dump-archive-contents ()
-  "Dump the list of built packages back to the archive-contents file."
-  (pb/dump (cons 1 package-build-archive-alist)
-           (expand-file-name "archive-contents"
-                             package-build-archive-dir)))
-
-(defun pb/add-to-archive-contents (pkg-info type)
-  "Add the built archive with info PKG-INFO and TYPE to `package-build-archive-alist'."
-  (let* ((name (intern (aref pkg-info 0)))
-         (requires (aref pkg-info 1))
-         (desc (or (aref pkg-info 2) "No description available."))
-         (version (aref pkg-info 3))
-         (existing (assq name package-build-archive-alist)))
-    (when existing
-      (setq package-build-archive-alist
-            (delq existing package-build-archive-alist)))
-    (add-to-list 'package-build-archive-alist
-                 (cons name
-                       (vector
-                        (version-to-list version)
-                        requires
-                        desc
-                        type)))))
+(defun package-build-all ()
+  "Build all packages in the `package-build-alist'."
+  (interactive)
+  (apply 'package-build-archives
+         (mapcar 'symbol-name (mapcar 'car package-build-alist))))
 
 (defun package-build-initialize ()
   "Load the pkglist and archive-contents files."

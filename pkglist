@@ -111,7 +111,7 @@
  (melpa
   :url "git://github.com/milkypostman/melpa.git"
   :fetcher git
-  files ("melpa.el"))
+  :files ("melpa.el"))
  (mmm-mode
   :url "git://github.com/purcell/mmm-mode.git"
   :fetcher git

@@ -18,12 +18,6 @@ function melpa_build_pkglist {
     echo
 }
 
-function melpa_sync {
-    echo "*** Pushing changes to the server..."
-    rsync -avz --delete packages html/* milkbox.net:webapps/melpa/
-    echo
-}
-
 function melpa_generate_html {
     echo "*** Building html"
     cd html || return 1
@@ -45,7 +39,7 @@ function melpa_validate {
 }
 
 function print_usage {
-    echo "usage: $0 [-h | -?] [clear | build | html | sync | validate]"
+    echo "usage: $0 [-h | -?] [clear | build | html | validate]"
 }
 
 args=`getopt h $*`
@@ -72,7 +66,7 @@ done
 
 
 if [[ "$#" == "0" ]]; then
-    set --  clear build index sync validate
+    set --  clear build index validate
 fi
 
 for i; do
@@ -80,7 +74,6 @@ for i; do
         clear ) melpa_clear_packages ;;
         build ) melpa_build_pkglist ;;
         html | index ) melpa_generate_html ;;
-        sync ) melpa_sync ;;
         validate ) melpa_validate ;;
     esac
     shift

@@ -192,6 +192,10 @@
   :url "http://www.dr-qubit.org/git/undo-tree.git"
   :fetcher git
   :files ("undo-tree.el"))
+ (vimgolf
+  :url "git://github.com/timvisher/vimgolf.git"
+  :fetcher git
+  :files ("vimgolf.el"))
  (yasnippet
   :url "https://github.com/capitaomorte/yasnippet"
   :fetcher git)

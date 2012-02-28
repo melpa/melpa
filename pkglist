@@ -116,6 +116,10 @@
   :url "git://github.com/purcell/mmm-mode.git"
   :fetcher git
   :files ("mmm*.el"))
+ (multi-web-mode
+  :url "git://github.com/fgallina/multi-web-mode.git"
+  :fetcher git
+  :files ("multi-web-mode.el"))
  (org-fstree
   :url "http://repo.or.cz/r/org-fstree.git"
   :fetcher git

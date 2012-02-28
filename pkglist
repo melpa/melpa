@@ -203,6 +203,10 @@
  (yasnippet
   :url "https://github.com/capitaomorte/yasnippet"
   :fetcher git)
+ (multi-web-mode
+  :url "git://github.com/fgallina/multi-web-mode.git"
+  :fetcher git
+  :files ("multi-web-mode.el"))
  )
 
 ;; Local Variables:

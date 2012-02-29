@@ -74,7 +74,7 @@
   :fetcher git
   :files ("idle-highlight-mode.el"))
  (ido-ubiquitous
-  :url "git://github.com/technomancy/ido-ubiquitous.git"
+  :url "git://github.com/DarwinAwardWinner/ido-ubiquitous.git"
   :fetcher git
   :files ("ido-ubiquitous.el"))
  (inf-ruby

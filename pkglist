@@ -153,6 +153,10 @@
   :url "https://github.com/nablaone/slime.git"
   :fetcher git
   :files ("slime.el"))
+ (slime-ritz
+  :url "https://github.com/pallet/ritz.git"
+  :fetcher git
+  :files ("src/main/elisp/slime-ritz.el"))
  (smex
   :url "git://github.com/nonsequitur/smex.git"
   :fetcher git

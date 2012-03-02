@@ -17,6 +17,10 @@
   :url "git://github.com/technomancy/clojure-mode.git"
   :fetcher git
   :files ("clojurescript-mode.el"))
+ (color-theme-solarized
+  :url "git://github.com/sellout/emacs-color-theme-solarized.git"
+  :fetcher git
+  :files ("*.el"))
  (csv-mode
   :url "git://github.com/emacsmirror/csv-mode.git"
   :fetcher git)

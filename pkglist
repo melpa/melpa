@@ -136,6 +136,10 @@
   :url "http://mumble.net/~campbell/emacs/paredit"
   :fetcher darcs
   :files ("paredit.el"))
+ (pastels-on-dark-theme
+  :url "git://gist.github.com/1974259.git"
+  :fetcher git
+  :files ("pastels-on-dark-theme.el"))
  (pretty-mode
   :url "git://github.com/emacsmirror/pretty-mode.git"
   :fetcher git)

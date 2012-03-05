@@ -124,6 +124,8 @@
   :url "git://github.com/purcell/mmm-mode.git"
   :fetcher git
   :files ("mmm*.el"))
+ (multi-term
+  :fetcher wiki)
  (multi-web-mode
   :url "git://github.com/fgallina/multi-web-mode.git"
   :fetcher git

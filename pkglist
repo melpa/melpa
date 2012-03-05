@@ -42,6 +42,10 @@
   :url "https://github.com/purcell/elisp-slime-nav.git"
   :fetcher git
   :files ("elisp-slime-nav.el"))
+ (ess
+  :url "https://github.com/milkypostman/ESS.git"
+  :fetcher git
+  :files ("*.el" "lisp/*.el" "etc/*"))
  (expand-region
   :url "https://github.com/magnars/expand-region.el.git"
   :fetcher git)

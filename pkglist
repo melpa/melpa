@@ -127,7 +127,9 @@
   :fetcher git
   :files ("mmm*.el"))
  (multi-term
-  :fetcher wiki)
+  :url "git://github.com/milkypostman/multi-term.git"
+  :fetcher git
+  :files ("multi-term.el"))
  (multi-web-mode
   :url "git://github.com/fgallina/multi-web-mode.git"
   :fetcher git

@@ -57,7 +57,9 @@
   :fetcher git
   :files ("findr.el"))
  (flymake-cursor
-  :fetcher wiki)
+  :url "git://github.com/milkypostman/flymake-cursor"
+  :fetcher git
+  :files ("flymake-cursor.el"))
  (full-ack
   :url "git://github.com/nschum/full-ack.git"
   :fetcher git

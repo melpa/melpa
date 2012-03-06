@@ -1,6 +1,10 @@
 ;; -*- mode: emacs-lisp -*-
 ((ac-dabbrev
   :fetcher wiki)
+ (auto-complete
+  :url "git://github.com/m2ym/auto-complete.git"
+  :fetcher git
+  :files ("*.el" "dict/*"))
  (browse-kill-ring
   :url "git://github.com/todesschaf/browse-kill-ring.git"
   :fetcher git

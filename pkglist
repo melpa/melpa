@@ -148,7 +148,9 @@
   :url "git://github.com/emacsmirror/pretty-mode.git"
   :fetcher git)
  (rainbow-delimiters
-  :fetcher wiki)
+  :fetcher git
+  :url "git://github.com/milkypostman/rainbow-delimiters"
+  :files ("rainbow-delimiters.el"))
  (rinari
   :url "git://github.com/eschulte/rinari.git"
   :fetcher git

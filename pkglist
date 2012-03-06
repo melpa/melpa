@@ -65,9 +65,7 @@
   :fetcher git
   :files ("findr.el"))
  (flymake-cursor
-  :url "git://github.com/milkypostman/flymake-cursor"
-  :fetcher git
-  :files ("flymake-cursor.el"))
+  :fetcher wiki)
  (full-ack
   :url "git://github.com/nschum/full-ack.git"
   :fetcher git
@@ -135,9 +133,7 @@
   :fetcher git
   :files ("mmm*.el"))
  (multi-term
-  :url "git://github.com/milkypostman/multi-term.git"
-  :fetcher git
-  :files ("multi-term.el"))
+  :fetcher wiki)
  (multi-web-mode
   :url "git://github.com/fgallina/multi-web-mode.git"
   :fetcher git
@@ -158,9 +154,7 @@
   :url "git://github.com/emacsmirror/pretty-mode.git"
   :fetcher git)
  (rainbow-delimiters
-  :fetcher git
-  :url "git://github.com/milkypostman/rainbow-delimiters"
-  :files ("rainbow-delimiters.el"))
+  :fetcher wiki)
  (rinari
   :url "git://github.com/eschulte/rinari.git"
   :fetcher git

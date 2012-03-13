@@ -101,6 +101,10 @@
   :url "https://github.com/milkypostman/jump.el.git"
   :fetcher git
   :files ("inflections.el"))
+ (ir_black-theme
+  :url "git://gist.github.com/2029034.git"
+  :fetcher git
+  :files ("ir_black-theme.el"))
  (js3
   :url "git://github.com/thomblake/js3-mode.git"
   :fetcher git

@@ -56,6 +56,10 @@
  (evil
   :url "git://gitorious.org/evil/evil.git"
   :fetcher git)
+ (evil-surround
+  :url "https://github.com/timcharper/evil-surround.git"
+  :fetcher git
+  :files ("surround.el"))
  (find-file-in-project
   :url "git://github.com/technomancy/find-file-in-project.git"
   :fetcher git

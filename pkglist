@@ -136,6 +136,10 @@
   :url "git://github.com/purcell/mmm-mode.git"
   :fetcher git
   :files ("mmm*.el"))
+ (molokai-theme
+  :url "git://gist.github.com/2029061.git"
+  :fetcher git
+  :files ("molokai-theme.el"))
  (multi-term
   :fetcher wiki)
  (multi-web-mode

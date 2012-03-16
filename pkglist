@@ -83,8 +83,8 @@
   :fetcher git
   :files ("git-blame.el"))
  (haskell-mode
-  :url "http://code.haskell.org/haskellmode-emacs"
-  :fetcher darcs)
+  :url "https://github.com/haskell/haskell-mode.git"
+  :fetcher git)
  (hl-sentence
   :url "git://github.com/milkypostman/hl-sentence.git"
   :fetcher git

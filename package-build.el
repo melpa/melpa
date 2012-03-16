@@ -83,7 +83,10 @@
   "In DIR (or `default-directory' if unset) run command PROG with ARGS.
 Output is written to the current buffer."
   (let ((default-directory (or dir default-directory)))
-    (apply 'process-file prog nil (current-buffer) t args)))
+    (let ((exit-code (apply 'process-file prog nil (current-buffer) t args)))
+      (unless (zerop exit-code)
+        (error "Program '%s' with args '%s' exited with non-zero status %d"
+               prog args exit-code)))))
 
 
 (defun pb/checkout (name config cwd)

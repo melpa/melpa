@@ -120,7 +120,7 @@ the same arguments."
   (let ((repo (plist-get config :url)))
     (with-current-buffer (get-buffer-create "*package-build-checkout*")
       (cond
-       ((file-exists-p dir)
+       ((file-exists-p (expand-file-name "_darcs" dir))
         (print "checkout directory exists, updating...")
         (pb/run-process dir "darcs" "pull"))
        (t
@@ -136,7 +136,7 @@ the same arguments."
     (with-current-buffer (get-buffer-create "*package-build-checkout*")
       (goto-char (point-max))
       (cond
-       ((file-exists-p dir)
+       ((file-exists-p (expand-file-name ".svn" dir))
         (print "checkout directory exists, updating...")
         (pb/run-process dir "svn" "up"))
        (t
@@ -153,7 +153,7 @@ the same arguments."
     (with-current-buffer (get-buffer-create "*package-build-checkout*")
       (goto-char (point-max))
       (cond
-       ((file-exists-p dir)
+       ((file-exists-p (expand-file-name ".git" dir))
         (print "checkout directory exists, updating...")
         (pb/run-process dir "git" "pull"))
        (t

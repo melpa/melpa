@@ -2,10 +2,6 @@
 
 Repository of code for *MELPA* or *Milkypostman's ELPA* or *Milkypostman's Experimental Lisp Package Repository* if you're not into the whole brevity thing.
 
-### Checking out
-
-    git clone git://github.com/milkypostman/melpa.git
-
 ## Scripts
 
 * `buildpkg` -- Create an archive of the package(s) passed as

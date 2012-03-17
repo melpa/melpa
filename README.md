@@ -10,8 +10,7 @@ folder with version corresponding to the newest HEAD revision
 available; given according to the `%Y%m%d` format.
 
 * `melpa` -- All the logic for generating everything in
-the repository based on the `pkglist` file.  By default this will
-update the [epkgs] repository, build all packages listed in `pkglist`,
+the repository based on the `pkglist` file.  By default this will build all packages listed in `pkglist`,
 compile the `index.html` file for the [melpa] website front page, and
 sync with the site.
 

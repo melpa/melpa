@@ -359,10 +359,15 @@ If PKG-INFO is nil, an empty one is created."
   (interactive)
   (mapc 'package-build-archive pkgs))
 
+(defun package-build-archives-ignore-errors (&rest pkgs)
+  "Build archives for packages PKGS.  Ignore errors."
+  (interactive)
+  (mapc (lambda (pkg) (ignore-errors (package-build-archive pkg))) pkgs))
+
 (defun package-build-all ()
   "Build all packages in the `package-build-alist'."
   (interactive)
-  (apply 'package-build-archives
+  (apply 'package-build-archives-ignore-errors
          (mapcar 'symbol-name (mapcar 'car package-build-alist))))
 
 (defun package-build-initialize ()

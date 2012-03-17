@@ -115,12 +115,21 @@ the same arguments."
         (pb/find-parse-time
          "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)")))))
 
+(defun pb/darcs-repo (dir)
+  "Get the current darcs repo for DIR."
+  (with-temp-buffer
+    (pb/run-process dir "darcs" "show" "repo")
+    (goto-char (point-min))
+    (re-search-forward "Default Remote: \\(.*\\)")
+    (match-string-no-properties 1)))
+
 (defun pb/checkout-darcs (name config dir)
   "Check package NAME with config CONFIG out of darcs into DIR."
   (let ((repo (plist-get config :url)))
     (with-current-buffer (get-buffer-create "*package-build-checkout*")
       (cond
-       ((file-exists-p (expand-file-name "_darcs" dir))
+       ((and (file-exists-p (expand-file-name "_darcs" dir))
+             (string-equal (pb/darcs-repo dir) repo))
         (print "checkout directory exists, updating...")
         (pb/run-process dir "darcs" "pull"))
        (t
@@ -132,13 +141,22 @@ the same arguments."
       (pb/find-parse-time
        "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)"))))
 
+(defun pb/svn-repo (dir)
+    "Get the current svn repo for DIR."
+  (with-temp-buffer
+    (pb/run-process dir "svn" "info")
+    (goto-char (point-min))
+    (re-search-forward "URL: \\(.*\\)")
+    (match-string-no-properties 1)))
+
 (defun pb/checkout-svn (name config dir)
   "Check package NAME with config CONFIG out of svn into DIR."
   (let ((repo (plist-get config :url)))
     (with-current-buffer (get-buffer-create "*package-build-checkout*")
       (goto-char (point-max))
       (cond
-       ((file-exists-p (expand-file-name ".svn" dir))
+       ((and (file-exists-p (expand-file-name ".svn" dir))
+             (string-equal (pb/svn-repo dir) repo))
         (print "checkout directory exists, updating...")
         (pb/run-process dir "svn" "up"))
        (t
@@ -150,6 +168,14 @@ the same arguments."
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
+(defun pb/git-repo (dir)
+  "Get the current git repo for DIR."
+  (with-temp-buffer
+    (pb/run-process dir "git" "remote" "show" "origin")
+    (goto-char (point-min))
+    (re-search-forward "Fetch URL: \\(.*\\)")
+    (match-string-no-properties 1)))
+
 (defun pb/checkout-git (name config dir)
   "Check package NAME with config CONFIG out of git into DIR."
   (let ((repo (plist-get config :url))
@@ -157,7 +183,8 @@ the same arguments."
     (with-current-buffer (get-buffer-create "*package-build-checkout*")
       (goto-char (point-max))
       (cond
-       ((file-exists-p (expand-file-name ".git" dir))
+       ((and (file-exists-p (expand-file-name ".git" dir))
+             (string-equal (pb/git-repo dir) repo))
         (print "checkout directory exists, updating...")
         (pb/run-process dir "git" "pull"))
        (t

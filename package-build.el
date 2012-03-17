@@ -124,6 +124,8 @@ the same arguments."
         (print "checkout directory exists, updating...")
         (pb/run-process dir "darcs" "pull"))
        (t
+        (when (file-exists-p dir)
+          (delete-directory dir t nil))
         (print "cloning repository")
         (pb/run-process nil "darcs" "get" repo dir)))
       (pb/run-process dir "darcs" "changes" "--last" "1")
@@ -140,6 +142,8 @@ the same arguments."
         (print "checkout directory exists, updating...")
         (pb/run-process dir "svn" "up"))
        (t
+        (when (file-exists-p dir)
+          (delete-directory dir t nil))
         (print "cloning repository")
         (pb/run-process nil "svn" "checkout" repo dir)))
       (pb/run-process dir "svn" "info")
@@ -157,6 +161,8 @@ the same arguments."
         (print "checkout directory exists, updating...")
         (pb/run-process dir "git" "pull"))
        (t
+        (when (file-exists-p dir)
+          (delete-directory dir t nil))
         (print (format "cloning %s to %s" repo dir))
         (pb/run-process nil "git" "clone" repo dir)))
       (when commit

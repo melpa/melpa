@@ -5,9 +5,6 @@ Repository of code for *MELPA* or *Milkypostman's ELPA* or *Milkypostman's Exper
 ### Checking out
 
     git clone git://github.com/milkypostman/melpa.git
-    git sm init
-    git sm update
-
 
 ## Scripts
 
@@ -33,8 +30,8 @@ sync with the site.
     index
     :   build the `index.html` file
 
-    sync
-    :   sync built files with the repository
+    validate
+    :   naively validate that the correct number of packages were built.
 
 [melpa]: http://melpa.milkbox.net
 
@@ -45,15 +42,20 @@ The `package-build.el` file contains all the heavy lifting. The
 scripts above call the `package-build-archive` function from the
 command-line to actually build the package(s).
 
- Alternatively you can
+Use `(package-build-all)` to build all melpa packages.
+
+Alternatively you can
 load this file from within Emacs and issues commands from there.
+
 
 ## Package List
 
 `pkglist` contains a list of all the currently known packages. Entries
 are lisp data of the form,
 
-    (name :url "<repo url>" :fetcher [git|svn|darcs] [:files ("<file1>", ...)])
+    (name :url "<repo url>" 
+     :fetcher [git|svn|darcs] 
+     [:files ("<file1>", ...)])
     
 The `:files` entry is optional but is required for either single-file
 packages or repositories which contain more than one package and
@@ -89,6 +91,7 @@ Open an issue on Github and either paste in the relevant entry for
 ## Developement
 
 Fork away!  Send me some pull requests.
+
 
 ### Notes
 

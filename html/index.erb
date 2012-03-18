@@ -135,6 +135,8 @@ backwards for what I needed.  Both problems are
       (setq requirements (reverse requirements))
       (print requirements))
     
+If you are not using Emacs24 from HEAD, you may also need this to initialize packages after they are downlaoded and installed.
+
     (defadvice package-download-tar
       (after package-download-tar-initialize activate compile)
       "initialize the package after compilation"

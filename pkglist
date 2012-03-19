@@ -70,6 +70,10 @@
   :files ("findr.el"))
  (flymake-cursor
   :fetcher wiki)
+ (flymake-perlcritic
+  :url "git://github.com/illusori/emacs-flymake-perlcritic.git"
+  :fetcher git
+  :files ("flymake-perlcritic.el"))
  (full-ack
   :url "git://github.com/nschum/full-ack.git"
   :fetcher git

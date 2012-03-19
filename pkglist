@@ -44,6 +44,10 @@
    :url "git://jblevins.org/git/deft.git"
    :fetcher git
    :files ("deft.el"))
+ (delim-kill
+  :url "git://github.com/thomas11/delim-kill.git"
+  :fetcher git
+  :files ("delim-kill.el"))
  (dired+
   :fetcher wiki)
  (elisp-slime-nav

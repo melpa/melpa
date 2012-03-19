@@ -104,17 +104,17 @@ the same arguments."
 This is used to avoid exceeding the rate limit of 1 request per 2
 seconds; the server cuts off after 10 requests in 20 seconds.")
 
-(defvar pb/emacswiki-min-request-interval 2
+(defvar pb/wiki-min-request-interval 2
   "The shortest permissible interval between successive requests for Emacswiki URLs.")
 
-(defmacro pb/with-emacswiki-rate-limit (&rest body)
+(defmacro pb/with-wiki-rate-limit (&rest body)
   "Rate-limit BODY code passed to this macro to match EmacsWiki's rate limiting."
   (let ((now (gensym))
         (elapsed (gensym)))
     `(let* ((,now (float-time))
             (,elapsed (- ,now pb/last-wiki-fetch-time)))
-       (when (< ,elapsed pb/emacswiki-min-request-interval)
-         (let ((wait (- pb/emacswiki-min-request-interval ,elapsed)))
+       (when (< ,elapsed pb/wiki-min-request-interval)
+         (let ((wait (- pb/wiki-min-request-interval ,elapsed)))
            (message "Waiting %s secs before hitting Emacswiki again" wait)
            (sleep-for wait)))
        (unwind-protect
@@ -125,9 +125,9 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
   "Download FILENAME from emacswiki, returning its last-modified time."
   (let* ((download-url (format "http://www.emacswiki.org/emacs/download/%s" filename))
          (wiki-url (format "http://www.emacswiki.org/emacs/%s" filename)))
-    (pb/with-emacswiki-rate-limit
+    (pb/with-wiki-rate-limit
      (url-copy-file download-url filename t))
-    (with-current-buffer (pb/with-emacswiki-rate-limit
+    (with-current-buffer (pb/with-wiki-rate-limit
                           (url-retrieve-synchronously wiki-url))
       (pb/find-parse-time
        "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"))))

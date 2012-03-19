@@ -7,7 +7,7 @@ cd ${BASEDIR} || exit 1
 
 function melpa_clear_packages {
     echo "*** Clearing the packages folder..."
-    rm -r packages/*
+    rm -rf packages/*
     echo
 }
 

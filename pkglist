@@ -101,6 +101,22 @@
   :url "git://github.com/milkypostman/hl-sentence.git"
   :fetcher git
   :files ("hl-sentence.el"))
+ (icicles
+  :fetcher wiki
+  :files ("icicles.el"      ;; main library
+          "icicles-chg.el"  ;; change logs (no code)
+          "icicles-cmd1.el" ;; top-level commands, part 1
+          "icicles-cmd2.el" ;; top-level commands, part 2
+          "icicles-doc1.el" ;; first part of the doc (Commentary, no code)
+          "icicles-doc2.el" ;; second part of the doc (Commentary, no code)
+          "icicles-face.el" ;; faces (customizable)
+          "icicles-fn.el"   ;; non-interactive functions
+          "icicles-mac.el"  ;; macros
+          "icicles-mcmd.el" ;; minibuffer commands
+          "icicles-mode.el" ;; Icicle mode definition
+          "icicles-opt.el"  ;; user options (customizable variables)
+          "icicles-var.el"  ;; internal variables
+          ))
  (idle-highlight-mode
   :url "git://github.com/nonsequitur/idle-highlight-mode.git"
   :fetcher git

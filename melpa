@@ -14,7 +14,7 @@ function melpa_clear_packages {
 
 function melpa_build_pkglist {
     echo "*** Building all packages..."
-    emacs --batch -l package-build.el -u dcurtis --eval "(package-build-all)"
+    emacs --batch -l package-build.el --eval "(package-build-all)"
     echo
 }
 

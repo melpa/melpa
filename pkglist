@@ -191,7 +191,7 @@
   :url "https://github.com/pallet/ritz.git"
   :fetcher git
   :files ("src/main/elisp/slime-ritz.el"))
- (smart-tabe
+ (smart-tab
   :url "git://github.com/genehack/smart-tab.git"
   :fetcher git
   :files ("smart-tab.el"))

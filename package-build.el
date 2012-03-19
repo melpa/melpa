@@ -99,21 +99,49 @@ the same arguments."
     (funcall (intern (format "pb/checkout-%s" repo-type))
              name config cwd)))
 
+(defvar pb/last-wiki-fetch-time 0
+  "The time at which an emacswiki URL was last requested.
+This is used to avoid exceeding the rate limit of 1 request per 2
+seconds; the server cuts off after 10 requests in 20 seconds.")
+
+(defvar pb/emacswiki-min-request-interval 2
+  "The shortest permissible interval between successive requests for Emacswiki URLs.")
+
+(defmacro pb/with-emacswiki-rate-limit (&rest body)
+  "Rate-limit BODY code passed to this macro to match EmacsWiki's rate limiting."
+  (let ((now (gensym))
+        (elapsed (gensym)))
+    `(let* ((,now (float-time))
+            (,elapsed (- ,now pb/last-wiki-fetch-time)))
+       (when (< ,elapsed pb/emacswiki-min-request-interval)
+         (let ((wait (- pb/emacswiki-min-request-interval ,elapsed)))
+           (message "Waiting %s secs before hitting Emacswiki again" wait)
+           (sleep-for wait)))
+       (unwind-protect
+           (progn ,@body)
+         (setq pb/last-wiki-fetch-time (float-time))))))
+
+(defun pb/grab-wiki-file (filename)
+  "Download FILENAME from emacswiki, returning its last-modified time."
+  (let* ((download-url (format "http://www.emacswiki.org/emacs/download/%s" filename))
+         (wiki-url (format "http://www.emacswiki.org/emacs/%s" filename)))
+    (pb/with-emacswiki-rate-limit
+     (url-copy-file download-url filename t))
+    (with-current-buffer (pb/with-emacswiki-rate-limit
+                          (url-retrieve-synchronously wiki-url))
+      (pb/find-parse-time
+       "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"))))
+
 (defun pb/checkout-wiki (name config dir)
   "Checkout package NAME with config CONFIG from the EmacsWiki into DIR."
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
     (message dir)
     (unless (file-exists-p dir)
       (make-directory dir))
-    (let* ((filename (or (car (plist-get config :files))
-                         (format "%s.el" name)))
-           (default-directory dir)
-           (download-url (format "http://www.emacswiki.org/emacs/download/%s" filename))
-           (wiki-url (format "http://www.emacswiki.org/emacs/%s" filename)))
-      (url-copy-file download-url filename t)
-      (with-current-buffer (url-retrieve-synchronously wiki-url)
-        (pb/find-parse-time
-         "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)")))))
+    (let ((files (or (plist-get config :files)
+                     (list (format "%s.el" name))))
+          (default-directory dir))
+      (car (nreverse (sort (mapcar 'pb/grab-wiki-file files) 'string-lessp))))))
 
 (defun pb/darcs-repo (dir)
   "Get the current darcs repo for DIR."
@@ -334,8 +362,7 @@ If PKG-INFO is nil, an empty one is created."
       (cond
        ((not version)
         (print (format "Unable to check out repository for %s" name)))
-       ((or (eq 'wiki (plist-get cfg :fetcher))
-            (= 1 (length files)))
+       ((< (length files) 2)
         (let* ((pkgsrc (expand-file-name (or (car files)
                                              (concat file-name ".el"))
                                          pkg-cwd))

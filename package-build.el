@@ -362,7 +362,9 @@ If PKG-INFO is nil, an empty one is created."
       (cond
        ((not version)
         (print (format "Unable to check out repository for %s" name)))
-       ((< (length files) 2)
+       ((or (and (eq 'wiki (plist-get cfg :fetcher))
+                 (< (length files) 2))
+          (= 1 (length files)))
         (let* ((pkgsrc (expand-file-name (or (car files)
                                              (concat file-name ".el"))
                                          pkg-cwd))

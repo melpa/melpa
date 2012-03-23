@@ -194,6 +194,10 @@
   :url "git://gist.github.com/1974259.git"
   :fetcher git
   :files ("pastels-on-dark-theme.el"))
+ (popup
+  :url "git://github.com/m2ym/popup-el.git"
+  :fetcher git
+  :files ("popup.el"))
  (pretty-mode
   :url "git://github.com/emacsmirror/pretty-mode.git"
   :fetcher git)

@@ -5,6 +5,9 @@
   :url "git://github.com/m2ym/auto-complete.git"
   :fetcher git
   :files ("*.el" "dict/*"))
+ (bm
+  :url "git://github.com/joodland/bm.git"
+  :fetcher git)
  (browse-kill-ring
   :url "git://github.com/todesschaf/browse-kill-ring.git"
   :fetcher git)

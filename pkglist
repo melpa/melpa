@@ -122,6 +122,9 @@
  (ir_black-theme
   :url "git://gist.github.com/2029034.git"
   :fetcher git)
+ (jaunte
+  :url "git://github.com/kawaguchi/jaunte.el.git"
+  :fetcher git)
  (js2-mode
   :url "git://github.com/mooz/js2-mode.git"
   :fetcher git)

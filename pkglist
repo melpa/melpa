@@ -265,7 +265,8 @@
   :fetcher git)
  (yasnippet
   :url "https://github.com/capitaomorte/yasnippet"
-  :fetcher git)
+  :fetcher git
+  :files ("*.el" "snippets"))
  (zlc
   :url "https://github.com/mooz/emacs-zlc.git"
   :fetcher git)

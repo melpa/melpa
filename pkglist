@@ -145,6 +145,10 @@
   :url "git://gist.github.com/2029034.git"
   :fetcher git
   :files ("ir_black-theme.el"))
+ (jaunte
+  :url "git://github.com/kawaguchi/jaunte.el.git"
+  :fetcher git
+  :files ("jaunte.el"))
  (js2-mode
   :url "git://github.com/mooz/js2-mode.git"
   :fetcher git

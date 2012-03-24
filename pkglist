@@ -194,6 +194,12 @@
   :url "http://repo.or.cz/r/org-fstree.git"
   :fetcher git
   :files ("org-fstree.el"))
+ (org-toodledo
+  :url "git://github.com/christopherjwhite/org-toodledo.git"
+  :fetcher git
+  :files ("http-post-simple.el"
+          "org-toodledo.el"
+          "w3mexcerpt.el"))
  (paredit
   :url "http://mumble.net/~campbell/emacs/paredit"
   :fetcher darcs

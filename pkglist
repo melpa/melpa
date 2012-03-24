@@ -2,38 +2,38 @@
 ((ac-dabbrev
   :fetcher wiki)
  (auto-complete
-  :url "git://github.com/m2ym/auto-complete.git"
+  :url "https://github.com/m2ym/auto-complete.git"
   :fetcher git
   :files ("*.el" "dict/*"))
  (bm
-  :url "git://github.com/joodland/bm.git"
+  :url "https://github.com/joodland/bm.git"
   :fetcher git)
  (browse-kill-ring
-  :url "git://github.com/todesschaf/browse-kill-ring.git"
+  :url "https://github.com/todesschaf/browse-kill-ring.git"
   :fetcher git)
  (clojure-mode
-  :url "git://github.com/technomancy/clojure-mode.git"
+  :url "https://github.com/technomancy/clojure-mode.git"
   :fetcher git
   :files ("clojure-mode.el"))
  (clojure-test-mode
-  :url "git://github.com/technomancy/clojure-mode.git"
+  :url "https://github.com/technomancy/clojure-mode.git"
   :fetcher git
   :files ("clojure-test-mode.el"))
  (clojurescript-mode
-  :url "git://github.com/technomancy/clojure-mode.git"
+  :url "https://github.com/technomancy/clojure-mode.git"
   :fetcher git
   :files ("clojurescript-mode.el"))
  (color-theme-sanityinc-solarized
-  :url "git://github.com/purcell/color-theme-sanityinc-solarized.git"
+  :url "https://github.com/purcell/color-theme-sanityinc-solarized.git"
   :fetcher git)
  (color-theme-sanityinc-tomorrow
-  :url "git://github.com/purcell/color-theme-sanityinc-tomorrow.git"
+  :url "https://github.com/purcell/color-theme-sanityinc-tomorrow.git"
   :fetcher git)
  (cperl-mode
-  :url "git://github.com/jrockway/cperl-mode.git"
+  :url "https://github.com/jrockway/cperl-mode.git"
   :fetcher git)
  (csv-mode
-  :url "git://github.com/emacsmirror/csv-mode.git"
+  :url "https://github.com/emacsmirror/csv-mode.git"
   :fetcher git)
  (darcsum
   :url "http://joyful.com/repos/darcsum"
@@ -42,7 +42,7 @@
    :url "git://jblevins.org/git/deft.git"
    :fetcher git)
  (delim-kill
-  :url "git://github.com/thomas11/delim-kill.git"
+  :url "https://github.com/thomas11/delim-kill.git"
   :fetcher git)
  (dired+
   :fetcher wiki)
@@ -63,7 +63,7 @@
   :url "https://github.com/timcharper/evil-surround.git"
   :fetcher git)
  (find-file-in-project
-  :url "git://github.com/technomancy/find-file-in-project.git"
+  :url "https://github.com/technomancy/find-file-in-project.git"
   :fetcher git)
  (findr
   :url "https://github.com/milkypostman/jump.el.git"
@@ -72,16 +72,16 @@
  (flymake-cursor
   :fetcher wiki)
  (flymake-perlcritic
-  :url "git://github.com/illusori/emacs-flymake-perlcritic.git"
+  :url "https://github.com/illusori/emacs-flymake-perlcritic.git"
   :fetcher git)
  (full-ack
-  :url "git://github.com/nschum/full-ack.git"
+  :url "https://github.com/nschum/full-ack.git"
   :fetcher git)
  (gist
-  :url "git://github.com/defunkt/gist.el.git"
+  :url "https://github.com/defunkt/gist.el.git"
   :fetcher git)
  (git-blame
-  :url "git://github.com/tsgates/git-emacs.git"
+  :url "https://github.com/tsgates/git-emacs.git"
   :fetcher git
   :files ("git-blame.el"))
  (google-maps
@@ -91,7 +91,7 @@
   :url "https://github.com/haskell/haskell-mode.git"
   :fetcher git)
  (hl-sentence
-  :url "git://github.com/milkypostman/hl-sentence.git"
+  :url "https://github.com/milkypostman/hl-sentence.git"
   :fetcher git)
  (icicles
   :fetcher wiki
@@ -110,10 +110,10 @@
           "icicles-var.el"  ;; internal variables
           ))
  (idle-highlight-mode
-  :url "git://github.com/nonsequitur/idle-highlight-mode.git"
+  :url "https://github.com/nonsequitur/idle-highlight-mode.git"
   :fetcher git)
  (ido-ubiquitous
-  :url "git://github.com/DarwinAwardWinner/ido-ubiquitous.git"
+  :url "https://github.com/DarwinAwardWinner/ido-ubiquitous.git"
   :fetcher git)
  (inf-ruby
   :url "https://github.com/nonsequitur/inf-ruby.git"
@@ -126,36 +126,36 @@
   :url "git://gist.github.com/2029034.git"
   :fetcher git)
  (jaunte
-  :url "git://github.com/kawaguchi/jaunte.el.git"
+  :url "https://github.com/kawaguchi/jaunte.el.git"
   :fetcher git)
  (js2-mode
-  :url "git://github.com/mooz/js2-mode.git"
+  :url "https://github.com/mooz/js2-mode.git"
   :fetcher git)
  (js3
-  :url "git://github.com/thomblake/js3-mode.git"
+  :url "https://github.com/thomblake/js3-mode.git"
   :fetcher git)
  (jump
   :url "https://github.com/milkypostman/jump.el.git"
   :fetcher git)
  (magit
-  :url "git://github.com/magit/magit.git"
+  :url "https://github.com/magit/magit.git"
   :fetcher git)
  (magithub
-  :url "git://github.com/nex3/magithub.git"
+  :url "https://github.com/nex3/magithub.git"
   :fetcher git)
  (markdown-mode
-  :url "git://github.com/milkypostman/markdown-mode.git"
+  :url "https://github.com/milkypostman/markdown-mode.git"
   :fetcher git)
  (markdown-mode+
-  :url "git://github.com/milkypostman/markdown-mode-plus.git"
+  :url "https://github.com/milkypostman/markdown-mode-plus.git"
   :fetcher git
   :files ("markdown-mode+.el" "HTML as Markdown in Emacs.applescript"))
  (melpa
-  :url "git://github.com/milkypostman/melpa.git"
+  :url "https://github.com/milkypostman/melpa.git"
   :fetcher git
   :files ("melpa.el"))
  (mmm-mode
-  :url "git://github.com/purcell/mmm-mode.git"
+  :url "https://github.com/purcell/mmm-mode.git"
   :fetcher git)
  (molokai-theme
   :url "git://gist.github.com/2029061.git"
@@ -163,13 +163,13 @@
  (multi-term
   :fetcher wiki)
  (multi-web-mode
-  :url "git://github.com/fgallina/multi-web-mode.git"
+  :url "https://github.com/fgallina/multi-web-mode.git"
   :fetcher git)
  (org-fstree
   :url "http://repo.or.cz/r/org-fstree.git"
   :fetcher git)
  (org-toodledo
-  :url "git://github.com/christopherjwhite/org-toodledo.git"
+  :url "https://github.com/christopherjwhite/org-toodledo.git"
   :fetcher git
   :files ("http-post-simple.el"
           "org-toodledo.el"
@@ -182,20 +182,20 @@
   :url "git://gist.github.com/1974259.git"
   :fetcher git)
  (pkgbuild-mode
-  :url "git://github.com/juergenhoetzel/pkgbuild-mode.git"
+  :url "https://github.com/juergenhoetzel/pkgbuild-mode.git"
   :fetcher git
   :files ("pkgbuild-mode.el"))
  (popup
-  :url "git://github.com/m2ym/popup-el.git"
+  :url "https://github.com/m2ym/popup-el.git"
   :fetcher git
   :files ("popup.el"))
  (pretty-mode
-  :url "git://github.com/emacsmirror/pretty-mode.git"
+  :url "https://github.com/emacsmirror/pretty-mode.git"
   :fetcher git)
  (rainbow-delimiters
   :fetcher wiki)
  (rinari
-  :url "git://github.com/eschulte/rinari.git"
+  :url "https://github.com/eschulte/rinari.git"
   :fetcher git)
  (ruby-compilation
   :url "https://github.com/eschulte/rinari.git"
@@ -217,51 +217,51 @@
   :fetcher git
   :files ("src/main/elisp/slime-ritz.el"))
  (smart-tab
-  :url "git://github.com/genehack/smart-tab.git"
+  :url "https://github.com/genehack/smart-tab.git"
   :fetcher git)
  (smex
-  :url "git://github.com/nonsequitur/smex.git"
+  :url "https://github.com/nonsequitur/smex.git"
   :fetcher git)
  (starter-kit
-  :url "git://github.com/technomancy/emacs-starter-kit.git"
+  :url "https://github.com/technomancy/emacs-starter-kit.git"
   :fetcher git)
  (starter-kit-bindings
-  :url "git://github.com/technomancy/emacs-starter-kit.git"
+  :url "https://github.com/technomancy/emacs-starter-kit.git"
   :fetcher git
   :files ("modules/starter-kit-bindings.el"))
  (starter-kit-eshell
-  :url "git://github.com/technomancy/emacs-starter-kit.git"
+  :url "https://github.com/technomancy/emacs-starter-kit.git"
   :fetcher git
   :files ("modules/starter-kit-eshell.el"))
  (starter-kit-js
-  :url "git://github.com/technomancy/emacs-starter-kit.git"
+  :url "https://github.com/technomancy/emacs-starter-kit.git"
   :fetcher git
   :files ("modules/starter-kit-js.el"))
  (starter-kit-lisp
-  :url "git://github.com/technomancy/emacs-starter-kit.git"
+  :url "https://github.com/technomancy/emacs-starter-kit.git"
   :fetcher git
   :files ("modules/starter-kit-lisp.el"))
  (starter-kit-perl
-  :url "git://github.com/technomancy/emacs-starter-kit.git"
+  :url "https://github.com/technomancy/emacs-starter-kit.git"
   :fetcher git
   :files ("modules/starter-kit-perl.el"))
  (starter-kit-ruby
-  :url "git://github.com/technomancy/emacs-starter-kit.git"
+  :url "https://github.com/technomancy/emacs-starter-kit.git"
   :fetcher git
   :files ("modules/starter-kit-ruby.el"))
  (textile-mode
-  :url "git://github.com/emacsmirror/textile-mode.git"
+  :url "https://github.com/emacsmirror/textile-mode.git"
   :fetcher git)
  (todochiku
   :fetcher wiki)
  (twittering-mode
-  :url "git://github.com/hayamiz/twittering-mode.git"
+  :url "https://github.com/hayamiz/twittering-mode.git"
   :fetcher git)
  (undo-tree
   :url "http://www.dr-qubit.org/git/undo-tree.git"
   :fetcher git)
  (vimgolf
-  :url "git://github.com/timvisher/vimgolf.git"
+  :url "https://github.com/timvisher/vimgolf.git"
   :fetcher git)
  (yasnippet
   :url "https://github.com/capitaomorte/yasnippet"

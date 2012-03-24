@@ -272,7 +272,8 @@
   :fetcher wiki)
  (twittering-mode
   :url "git://github.com/hayamiz/twittering-mode.git"
-  :fetcher git)
+  :fetcher git
+  :files ("twittering-mode.el"))
  (undo-tree
   :url "http://www.dr-qubit.org/git/undo-tree.git"
   :fetcher git

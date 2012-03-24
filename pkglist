@@ -263,6 +263,9 @@
  (yasnippet
   :url "https://github.com/capitaomorte/yasnippet"
   :fetcher git)
+ (zlc
+  :url "https://github.com/mooz/emacs-zlc.git"
+  :fetcher git)
  )
 
 ;; Local Variables:

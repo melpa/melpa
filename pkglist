@@ -208,6 +208,10 @@
   :url "git://gist.github.com/1974259.git"
   :fetcher git
   :files ("pastels-on-dark-theme.el"))
+ (pkgbuild-mode
+  :url "git://github.com/juergenhoetzel/pkgbuild-mode.git"
+  :fetcher git
+  :files ("pkgbuild-mode.el"))
  (popup
   :url "git://github.com/m2ym/popup-el.git"
   :fetcher git

@@ -94,6 +94,14 @@
   :url "git://github.com/tsgates/git-emacs.git"
   :fetcher git
   :files ("git-blame.el"))
+ (google-maps
+  :url "git://git.naquadah.org/google-maps.git"
+  :fetcher git
+  :files ("google-maps-base.el"
+          "google-maps-geocode.el"
+          "google-maps-static.el"
+          "google-maps.el"
+          "org-location-google-maps.el"))
  (haskell-mode
   :url "https://github.com/haskell/haskell-mode.git"
   :fetcher git)

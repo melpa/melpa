@@ -22,7 +22,7 @@ function melpa_generate_html {
     echo "*** Building html"
     cd html || return 1
     erb index.erb > index.md
-    pandoc --template=template.html --css=style.css -s --mathml -t html --smart index.md > index.html
+    pandoc --template=template.html --css=style.css -s --mathml -t html index.md > index.html
     cd ..
     echo
 }

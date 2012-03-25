@@ -127,6 +127,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
          (wiki-url (format "http://www.emacswiki.org/emacs/%s" filename)))
     (pb/with-wiki-rate-limit
      (url-copy-file download-url filename t))
+    (chmod filename #o644)
     (with-current-buffer (pb/with-wiki-rate-limit
                           (url-retrieve-synchronously wiki-url))
       (pb/find-parse-time

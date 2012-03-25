@@ -84,7 +84,7 @@ attempting to install multiple packages at once.
 
 ### Customizations
 
-There is currently no way in `package.el` to exclude or include versions.  So to remedy this I ahve created a package that will allow you to enable only certain packages or exclude certain packages.  You can install the package by pasting this into yoru `*scratch*` buffer and evaluating it.
+There is currently no way in `package.el` to exclude or include versions.  So to remedy this there is a `melpa.el` package--available in MELPA--that will allow you to enable only certain packages or exclude certain packages.  You can install the package manually by pasting this into yoru `*scratch*` buffer and evaluating it.
 
     (progn
       (switch-to-buffer
@@ -95,18 +95,31 @@ There is currently no way in `package.el` to exclude or include versions.  So to
 
 You can then customize two variables:
 
-`melpa-package-enable`
-:   List of MELPA packages to enable.  Empty list enables all packages.
+`package-archive-enable-alist`
+:   Optional Alist of enabled packages used by `package-filter'.
+    The format is (ARCHIVE . PACKAGE ...), where ARCHIVE is a string
+    matching an archive name in `package-archives', PACKAGE is a
+    symbol of a package in ARCHIVE to enable.
+    
+    If no ARCHIVE exists in the alist, all packages are enabled.
 
-`melpa-package-exclude`
-:   List of MELPA package to exclude.  This list trumps those specified in `melpa-package-enable`.
+
+`package-archive-exclude-alist`
+:   Alist of packages excluded by `package-filter'.
+    The format is (ARCHIVE . PACKAGE ...), where ARCHIVE is a string
+    matching an archive name in `package-archives', PACKAGE is a
+    symbol of a package in that archive to exclude.
+    
+    Any specified package is excluded regardless of the value of
+    `package-archive-enable-alist'
+
 
 
 ## Known Issues
 
 Due to the way the HTTP routing works on my provider, the HTTP/1.1
-connection will time out for long package installs -- where the
-package is large and takes a while to compile -- like *magit* or *evil*.
+connection will time out for long package installs--where the
+package is large and takes a while to compile--like *magit* or *evil*.  If you run into problems with complaints about the response from the web server consider adding
 
 <!-- <script src="https://gist.github.com/1679208.js"> </script> -->
 

@@ -357,17 +357,15 @@ If PKG-INFO is nil, an empty one is created."
            (expand-file-name file-name package-build-working-dir))))
 
     (let* ((version (pb/checkout name cfg pkg-cwd))
-           (files (pb/expand-file-list pkg-cwd (plist-get cfg :files)))
+           (files (pb/expand-file-list pkg-cwd
+                                       (or (plist-get cfg :files)
+                                           (list "*.el"))))
            (default-directory package-build-working-dir))
       (cond
        ((not version)
         (print (format "Unable to check out repository for %s" name)))
-       ((or (and (eq 'wiki (plist-get cfg :fetcher))
-                 (< (length files) 2))
-          (= 1 (length files)))
-        (let* ((pkgsrc (expand-file-name (or (car files)
-                                             (concat file-name ".el"))
-                                         pkg-cwd))
+       ((= 1 (length files))
+        (let* ((pkgsrc (expand-file-name (car files) pkg-cwd))
                (pkgdst (expand-file-name
                         (concat file-name "-" version ".el")
                         package-build-archive-dir))

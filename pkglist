@@ -73,7 +73,8 @@
   :fetcher wiki)
  (flymake-perlcritic
   :url "https://github.com/illusori/emacs-flymake-perlcritic.git"
-  :fetcher git)
+  :fetcher git
+  :files ("*.el" "bin/flymake_perlcritic"))
  (full-ack
   :url "https://github.com/nschum/full-ack.git"
   :fetcher git)

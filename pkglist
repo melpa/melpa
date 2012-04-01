@@ -11,7 +11,10 @@
  (browse-kill-ring
   :url "https://github.com/todesschaf/browse-kill-ring.git"
   :fetcher git)
- (clojure-mode
+ (c-eldoc
+  :url "https://github.com/nflath/c-eldoc.git"
+  :fetcher git)
+(clojure-mode
   :url "https://github.com/technomancy/clojure-mode.git"
   :fetcher git
   :files ("clojure-mode.el"))

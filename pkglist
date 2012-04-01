@@ -94,6 +94,9 @@
  (hl-sentence
   :url "https://github.com/milkypostman/hl-sentence.git"
   :fetcher git)
+ (hungry-delete
+  :url "https://github.com/nflath/c-eldoc.git"
+  :fetcher git))
  (icicles
   :fetcher wiki
   :files ("icicles.el"      ;; main library

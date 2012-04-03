@@ -38,6 +38,8 @@
  (csv-mode
   :url "https://github.com/emacsmirror/csv-mode.git"
   :fetcher git)
+ (csv-nav
+  :fetcher wiki)
  (darcsum
   :url "http://joyful.com/repos/darcsum"
   :fetcher darcs)

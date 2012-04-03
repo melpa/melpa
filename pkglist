@@ -8,6 +8,18 @@
  (bm
   :url "https://github.com/joodland/bm.git"
   :fetcher git)
+ (bookmark+
+  :fetcher wiki
+  :files (
+          "bookmark+.el"     ;; main (driver) library
+          "bookmark+-mac.el" ;; Lisp macros
+          "bookmark+-bmu.el" ;; code for the `*Bookmark List*' (‘bookmark-bmenu-mode’)
+          "bookmark+-1.el"   ;; other required code (non-bmenu)
+          "bookmark+-key.el" ;; key and menu bindings (non-bmenu)
+          "bookmark+-lit.el" ;; optional code for highlighting bookmark locations
+          "bookmark+-doc.el" ;; documentation (essentially the same as this wiki page)
+          "bookmark+-chg.el" ;; change log entries
+          ))
  (browse-kill-ring
   :url "https://github.com/todesschaf/browse-kill-ring.git"
   :fetcher git)

@@ -1,0 +1,2 @@
+(smex :url "https://github.com/nonsequitur/smex.git" :fetcher git)
+

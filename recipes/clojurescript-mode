@@ -1,0 +1,3 @@
+(clojurescript-mode :url "https://github.com/technomancy/clojure-mode.git" :fetcher git :files
+                    ("clojurescript-mode.el"))
+

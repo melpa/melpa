@@ -1,0 +1,3 @@
+(pkgbuild-mode :url "https://github.com/juergenhoetzel/pkgbuild-mode.git" :fetcher git :files
+               ("pkgbuild-mode.el"))
+

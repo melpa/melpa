@@ -1,0 +1,3 @@
+(melpa :url "https://github.com/milkypostman/melpa.git" :fetcher git :files
+       ("melpa.el"))
+

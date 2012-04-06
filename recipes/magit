@@ -1,0 +1,2 @@
+(magit :url "https://github.com/magit/magit.git" :fetcher git)
+

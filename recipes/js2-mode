@@ -1,0 +1,2 @@
+(js2-mode :url "https://github.com/mooz/js2-mode.git" :fetcher git)
+

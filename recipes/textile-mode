@@ -1,0 +1,2 @@
+(textile-mode :url "https://github.com/emacsmirror/textile-mode.git" :fetcher git)
+

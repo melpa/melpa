@@ -1,0 +1,2 @@
+(evil-leader :url "https://github.com/cofi/evil-leader.git" :fetcher git)
+

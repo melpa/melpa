@@ -1,0 +1,3 @@
+(clojure-test-mode :url "https://github.com/technomancy/clojure-mode.git" :fetcher git :files
+                   ("clojure-test-mode.el"))
+

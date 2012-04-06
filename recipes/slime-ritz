@@ -1,0 +1,3 @@
+(slime-ritz :url "https://github.com/pallet/ritz.git" :fetcher git :files
+            ("src/main/elisp/slime-ritz.el"))
+

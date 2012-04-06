@@ -1,0 +1,2 @@
+(ido-ubiquitous :url "https://github.com/DarwinAwardWinner/ido-ubiquitous.git" :fetcher git)
+

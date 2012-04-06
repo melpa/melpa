@@ -1,0 +1,2 @@
+(color-theme-sanityinc-tomorrow :url "https://github.com/purcell/color-theme-sanityinc-tomorrow.git" :fetcher git)
+

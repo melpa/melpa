@@ -1,0 +1,2 @@
+(inf-ruby :url "https://github.com/nonsequitur/inf-ruby.git" :fetcher git)
+

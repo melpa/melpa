@@ -1,0 +1,2 @@
+(ansi :url "https://github.com/rejeep/ansi.git" :fetcher git)
+

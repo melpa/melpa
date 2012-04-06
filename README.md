@@ -31,6 +31,10 @@ sync with the site.
     validate
     :   naively validate that the correct number of packages were built.
 
+Note that these scripts require an Emacs with `package.el` installed,
+such as Emacs 24. If you have an older version of Emacs, you can get a
+suitable `package.el` [here](http://bit.ly/pkg-el23).
+
 [melpa]: http://melpa.milkbox.net
 
 

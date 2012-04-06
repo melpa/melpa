@@ -340,6 +340,30 @@
  (zlc
   :url "https://github.com/mooz/emacs-zlc.git"
   :fetcher git)
+ (enclose
+  :url "https://github.com/rejeep/enclose.git"
+  :fetcher git)
+ (ruby-end
+  :url "https://github.com/rejeep/ruby-end.git"
+  :fetcher git)
+ (wrap-region
+  :url "https://github.com/rejeep/wrap-region.git"
+  :fetcher git)
+ (html-script-src
+  :url "https://github.com/rejeep/html-script-src.git"
+  :fetcher git)
+ (citrus-mode
+  :url "https://github.com/rejeep/citrus-mode.git"
+  :fetcher git)
+ (package-spec
+  :url "https://github.com/rejeep/package-spec.git"
+  :fetcher git)
+ (drag-stuff
+  :url "https://github.com/rejeep/drag-stuff.git"
+  :fetcher git)
+ (ansi
+  :url "https://github.com/rejeep/ansi.git"
+  :fetcher git)
  )
 
 ;; Local Variables:

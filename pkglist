@@ -1,6 +1,9 @@
 ;; -*- mode: emacs-lisp -*-
 ((ac-dabbrev
   :fetcher wiki)
+ (ack-and-a-half
+  :url "https://github.com/jhelwig/ack-and-a-half.git"
+  :fetcher git)
  (auto-complete
   :url "https://github.com/m2ym/auto-complete.git"
   :fetcher git
@@ -38,6 +41,9 @@
   :url "https://github.com/technomancy/clojure-mode.git"
   :fetcher git
   :files ("clojurescript-mode.el"))
+ (coffee-mode
+  :url "https://github.com/defunkt/coffee-mode.git"
+  :fetcher git)
  (color-theme-sanityinc-solarized
   :url "https://github.com/purcell/color-theme-sanityinc-solarized.git"
   :fetcher git)
@@ -111,9 +117,19 @@
  (google-maps
   :url "git://git.naquadah.org/google-maps.git"
   :fetcher git)
+ (haml-mode
+  :url "https://github.com/nex3/haml-mode.git"
+  :fetcher git)
  (haskell-mode
   :url "https://github.com/haskell/haskell-mode.git"
   :fetcher git)
+ (helm
+  :url "https://github.com/emacs-helm/helm.git"
+  :fetcher git)
+ (helm-projectile
+  :url "https://github.com/bbatsov/projectile.git"
+  :fetcher git
+  :files ("helm-projectile.el"))
  (hl-sentence
   :url "https://github.com/milkypostman/hl-sentence.git"
   :fetcher git)
@@ -216,6 +232,13 @@
  (pretty-mode
   :url "https://github.com/emacsmirror/pretty-mode.git"
   :fetcher git)
+ (projectile
+  :url "https://github.com/bbatsov/projectile.git"
+  :fetcher git
+  :files ("projectile.el"))
+ (python
+  :url "https://github.com/fgallina/python.el.git"
+  :fetcher git)
  (rainbow-delimiters
   :fetcher wiki)
  (rinari
@@ -232,6 +255,12 @@
  (rvm
   :url "https://github.com/senny/rvm.el.git"
   :fetcher git)
+ (sass-mode
+  :url "https://github.com/nex3/sass-mode.git"
+  :fetcher git)
+ (scss-mode
+  :url "https://github.com/antonj/scss-mode.git"
+  :fetcher git)
  (slime
   :url "https://github.com/nablaone/slime.git"
   :fetcher git
@@ -245,6 +274,9 @@
   :fetcher git)
  (smex
   :url "https://github.com/nonsequitur/smex.git"
+  :fetcher git)
+ (solarized-theme
+  :url "https://github.com/bbatsov/solarized-emacs.git"
   :fetcher git)
  (starter-kit
   :url "https://github.com/technomancy/emacs-starter-kit.git"
@@ -287,10 +319,24 @@
  (vimgolf
   :url "https://github.com/timvisher/vimgolf.git"
   :fetcher git)
+ (volatile-highlights
+  :url "https://github.com/k-talo/volatile-highlights.el.git"
+  :fetcher git)
+ (yaml-mode
+  :url "https://github.com/yoshiki/yaml-mode.git"
+  :fetcher git)
+ (yari
+  :url "https://github.com/hron/yari.el.git"
+  :fetcher git
+  :files ("yari.el"))
  (yasnippet
-  :url "https://github.com/capitaomorte/yasnippet"
+  :url "https://github.com/capitaomorte/yasnippet.git"
   :fetcher git
   :files ("*.el" "snippets"))
+ (zenburn-theme
+  :url "https://github.com/bbatsov/zenburn-emacs.git"
+  :fetcher git
+  :files ("zenburn-theme.el"))
  (zlc
   :url "https://github.com/mooz/emacs-zlc.git"
   :fetcher git)

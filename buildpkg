@@ -4,7 +4,4 @@
 
 (require 'package-build)
 
-(mapc
- (lambda (package)
-   (package-build-archive package))
- argv)
+(mapc 'package-build-archive argv)

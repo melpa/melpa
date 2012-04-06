@@ -4,6 +4,9 @@
  (ack-and-a-half
   :url "https://github.com/jhelwig/ack-and-a-half.git"
   :fetcher git)
+ (ansi
+  :url "https://github.com/rejeep/ansi.git"
+  :fetcher git)
  (auto-complete
   :url "https://github.com/m2ym/auto-complete.git"
   :fetcher git
@@ -28,6 +31,9 @@
   :fetcher git)
  (c-eldoc
   :url "https://github.com/nflath/c-eldoc.git"
+  :fetcher git)
+ (citrus-mode
+  :url "https://github.com/rejeep/citrus-mode.git"
   :fetcher git)
  (clojure-mode
   :url "https://github.com/technomancy/clojure-mode.git"
@@ -69,8 +75,14 @@
   :fetcher git)
  (dired+
   :fetcher wiki)
+ (drag-stuff
+  :url "https://github.com/rejeep/drag-stuff.git"
+  :fetcher git)
  (elisp-slime-nav
   :url "https://github.com/purcell/elisp-slime-nav.git"
+  :fetcher git)
+ (enclose
+  :url "https://github.com/rejeep/enclose.git"
   :fetcher git)
  (ess
   :url "https://github.com/milkypostman/ESS.git"
@@ -132,6 +144,9 @@
   :files ("helm-projectile.el"))
  (hl-sentence
   :url "https://github.com/milkypostman/hl-sentence.git"
+  :fetcher git)
+ (html-script-src
+  :url "https://github.com/rejeep/html-script-src.git"
   :fetcher git)
  (icicles
   :fetcher wiki
@@ -214,6 +229,9 @@
   :files ("http-post-simple.el"
           "org-toodledo.el"
           "w3mexcerpt.el"))
+ (package-spec
+  :url "https://github.com/rejeep/package-spec.git"
+  :fetcher git)
  (paredit
   :url "http://mumble.net/~campbell/emacs/paredit"
   :fetcher darcs
@@ -248,6 +266,9 @@
   :url "https://github.com/eschulte/rinari.git"
   :fetcher git
   :files ("util/ruby-compilation.el"))
+ (ruby-end
+  :url "https://github.com/rejeep/ruby-end.git"
+  :fetcher git)
  (ruby-mode
   :url "http://svn.ruby-lang.org/repos/ruby/trunk/misc"
   :fetcher svn
@@ -322,6 +343,9 @@
  (volatile-highlights
   :url "https://github.com/k-talo/volatile-highlights.el.git"
   :fetcher git)
+ (wrap-region
+  :url "https://github.com/rejeep/wrap-region.git"
+  :fetcher git)
  (yaml-mode
   :url "https://github.com/yoshiki/yaml-mode.git"
   :fetcher git)
@@ -339,30 +363,6 @@
   :files ("zenburn-theme.el"))
  (zlc
   :url "https://github.com/mooz/emacs-zlc.git"
-  :fetcher git)
- (enclose
-  :url "https://github.com/rejeep/enclose.git"
-  :fetcher git)
- (ruby-end
-  :url "https://github.com/rejeep/ruby-end.git"
-  :fetcher git)
- (wrap-region
-  :url "https://github.com/rejeep/wrap-region.git"
-  :fetcher git)
- (html-script-src
-  :url "https://github.com/rejeep/html-script-src.git"
-  :fetcher git)
- (citrus-mode
-  :url "https://github.com/rejeep/citrus-mode.git"
-  :fetcher git)
- (package-spec
-  :url "https://github.com/rejeep/package-spec.git"
-  :fetcher git)
- (drag-stuff
-  :url "https://github.com/rejeep/drag-stuff.git"
-  :fetcher git)
- (ansi
-  :url "https://github.com/rejeep/ansi.git"
   :fetcher git)
  )
 

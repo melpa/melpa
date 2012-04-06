@@ -1,0 +1,2 @@
+(vimgolf :url "https://github.com/timvisher/vimgolf.git" :fetcher git)
+

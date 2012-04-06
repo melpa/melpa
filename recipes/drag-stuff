@@ -1,0 +1,2 @@
+(drag-stuff :url "https://github.com/rejeep/drag-stuff.git" :fetcher git)
+

@@ -1,0 +1,3 @@
+(yasnippet :url "https://github.com/capitaomorte/yasnippet.git" :fetcher git :files
+           ("*.el" "snippets"))
+

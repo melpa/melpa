@@ -1,0 +1,2 @@
+(idle-highlight-mode :url "https://github.com/nonsequitur/idle-highlight-mode.git" :fetcher git)
+

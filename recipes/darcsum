@@ -1,0 +1,2 @@
+(darcsum :url "http://joyful.com/repos/darcsum" :fetcher darcs)
+

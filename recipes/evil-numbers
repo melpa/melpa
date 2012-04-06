@@ -1,0 +1,2 @@
+(evil-numbers :url "https://github.com/cofi/evil-numbers.git" :fetcher git)
+

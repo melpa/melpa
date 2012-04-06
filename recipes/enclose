@@ -1,0 +1,2 @@
+(enclose :url "https://github.com/rejeep/enclose.git" :fetcher git)
+

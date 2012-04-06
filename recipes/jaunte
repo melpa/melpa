@@ -1,0 +1,2 @@
+(jaunte :url "https://github.com/kawaguchi/jaunte.el.git" :fetcher git)
+

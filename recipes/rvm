@@ -1,0 +1,2 @@
+(rvm :url "https://github.com/senny/rvm.el.git" :fetcher git)
+

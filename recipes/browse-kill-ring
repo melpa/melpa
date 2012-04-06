@@ -1,0 +1,2 @@
+(browse-kill-ring :url "https://github.com/todesschaf/browse-kill-ring.git" :fetcher git)
+

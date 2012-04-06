@@ -59,7 +59,7 @@ the repository.
 
 ## Contributing New Packages
 
-Packages are specified in the `pkglist` file alphabetically for convenience and because we need some rules.  You can contribute a new package by adding a new entry to `pkglist` using the following form, 
+Packages are specified by files in the `recipes` directory.  You can contribute a new package by adding a new file under `recipes` using the following form, 
 
     (name :url "<repo url>" 
      :fetcher [git|svn|darcs|wiki] 
@@ -116,7 +116,7 @@ Notice that `:files` is not specified for `starter-kit` since package-build will
 
 ### Submitting the Package
 
-You should first fork the MELPA repository, add your new entry to `pkglist`, and confirm your new package builds properly by running `buildpkg <NAME>`.  You can install the package that you built by running the interactive command `package-install-file` in Emacs, and specifying the newly built package which should be in the `packages/` subdirectory under the melpa directory.
+You should first fork the MELPA repository, add your new file under `recipes`, and confirm your new package builds properly by running `buildpkg <NAME>`.  You can install the package that you built by running the interactive command `package-install-file` in Emacs, and specifying the newly built package which should be in the `packages/` subdirectory under the melpa directory.
 
 After verifying the entry works properly please open a pull request on Github.
 

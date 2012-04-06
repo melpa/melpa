@@ -1,0 +1,3 @@
+(yari :url "https://github.com/hron/yari.el.git" :fetcher git :files
+      ("yari.el"))
+

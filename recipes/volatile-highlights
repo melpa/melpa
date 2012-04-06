@@ -1,0 +1,2 @@
+(volatile-highlights :url "https://github.com/k-talo/volatile-highlights.el.git" :fetcher git)
+

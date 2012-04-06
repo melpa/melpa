@@ -1,0 +1,2 @@
+(scss-mode :url "https://github.com/antonj/scss-mode.git" :fetcher git)
+

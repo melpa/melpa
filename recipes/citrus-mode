@@ -1,0 +1,2 @@
+(citrus-mode :url "https://github.com/rejeep/citrus-mode.git" :fetcher git)
+

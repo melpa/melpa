@@ -1,0 +1,2 @@
+(mmm-mode :url "https://github.com/purcell/mmm-mode.git" :fetcher git)
+

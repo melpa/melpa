@@ -1,0 +1,3 @@
+(helm-projectile :url "https://github.com/bbatsov/projectile.git" :fetcher git :files
+                 ("helm-projectile.el"))
+

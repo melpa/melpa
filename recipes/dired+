@@ -1,0 +1,2 @@
+(dired+ :fetcher wiki)
+

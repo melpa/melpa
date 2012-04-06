@@ -1,0 +1,2 @@
+(sass-mode :url "https://github.com/nex3/sass-mode.git" :fetcher git)
+

@@ -1,0 +1,2 @@
+(hl-sentence :url "https://github.com/milkypostman/hl-sentence.git" :fetcher git)
+

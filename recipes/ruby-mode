@@ -1,0 +1,3 @@
+(ruby-mode :url "http://svn.ruby-lang.org/repos/ruby/trunk/misc" :fetcher svn :files
+           ("ruby-mode.el"))
+

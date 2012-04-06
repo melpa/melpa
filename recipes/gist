@@ -1,0 +1,2 @@
+(gist :url "https://github.com/defunkt/gist.el.git" :fetcher git)
+

@@ -1,0 +1,2 @@
+(google-maps :url "git://git.naquadah.org/google-maps.git" :fetcher git)
+

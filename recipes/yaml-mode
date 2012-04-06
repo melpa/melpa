@@ -1,0 +1,2 @@
+(yaml-mode :url "https://github.com/yoshiki/yaml-mode.git" :fetcher git)
+

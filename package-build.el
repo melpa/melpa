@@ -58,8 +58,8 @@
   :group 'package-build
   :type 'string)
 
-(defcustom package-build-alist-file (expand-file-name "pkglist")
-  "File containing pkg alist."
+(defcustom package-build-recipes-dir (expand-file-name "recipes/")
+  "Directory containing recipe files."
   :group 'package-build
   :type 'string)
 
@@ -342,6 +342,11 @@ If PKG-INFO is nil, an empty one is created."
                         desc
                         type)))))
 
+(defun pb/read-recipes ()
+  "Return a list of data structures for all recipes in `package-build-recipes-dir'."
+  (mapcar 'pb/read-from-file
+          (directory-files package-build-recipes-dir t "^[^.]")))
+
 ;;; Public interface
 
 (defun package-build-archive (file-name)
@@ -431,10 +436,10 @@ If PKG-INFO is nil, an empty one is created."
          (mapcar 'symbol-name (mapcar 'car package-build-alist))))
 
 (defun package-build-initialize ()
-  "Load the pkglist and archive-contents files."
+  "Load the recipe and archive-contents files."
   (interactive)
   (setq
-   package-build-alist (pb/read-from-file package-build-alist-file)
+   package-build-alist (pb/read-recipes)
    package-build-archive-alist (cdr (pb/read-from-file
                                      (expand-file-name "archive-contents"
                                                        package-build-archive-dir)))))

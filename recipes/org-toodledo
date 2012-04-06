@@ -1,0 +1,3 @@
+(org-toodledo :url "https://github.com/christopherjwhite/org-toodledo.git" :fetcher git :files
+              ("http-post-simple.el" "org-toodledo.el" "w3mexcerpt.el"))
+

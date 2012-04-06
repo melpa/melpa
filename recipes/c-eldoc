@@ -1,0 +1,2 @@
+(c-eldoc :url "https://github.com/nflath/c-eldoc.git" :fetcher git)
+

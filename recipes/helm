@@ -1,0 +1,2 @@
+(helm :url "https://github.com/emacs-helm/helm.git" :fetcher git)
+

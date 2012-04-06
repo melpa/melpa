@@ -1,0 +1,2 @@
+(html-script-src :url "https://github.com/rejeep/html-script-src.git" :fetcher git)
+

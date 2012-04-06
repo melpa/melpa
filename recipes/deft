@@ -1,0 +1,2 @@
+(deft :url "git://jblevins.org/git/deft.git" :fetcher git)
+

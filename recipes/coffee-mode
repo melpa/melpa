@@ -1,0 +1,2 @@
+(coffee-mode :url "https://github.com/defunkt/coffee-mode.git" :fetcher git)
+

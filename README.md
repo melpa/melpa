@@ -88,8 +88,8 @@ Packages are specified by files in the `recipes` directory.  You can contribute 
 
 [ido-ubiquitous](https://github.com/DarwinAwardWinner/ido-ubiquitous) is a repository that contains two files:
 
-    * `README.md`
-    * `ido-ubiquitous.el`
+* `README.md`
+* `ido-ubiquitous.el`
     
 Since there is only one `.el` file, this package only needs the `:url` and `:fetcher` specified,
 

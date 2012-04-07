@@ -13,9 +13,10 @@ folder with version corresponding to the newest HEAD revision
 available; given according to the `%Y%m%d` format.
 
 * `melpa` -- All the logic for generating everything in the repository
-based on the recipe files.  By default this will build all packages
-listed under `recipes/`, compile the `index.html` file for the [melpa]
-website front page, and sync with the site.
+based on the recipe files.  By default this will clean the `packages/` directory, 
+build all packages
+listed under `recipes/`, and compile the `index.html` file for the [melpa]
+website front page.
 
     The following arguments are accepted,
 

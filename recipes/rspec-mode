@@ -1,0 +1,2 @@
+(rspec-mode :url "https://github.com/pezra/rspec-mode" :fetcher git)
+

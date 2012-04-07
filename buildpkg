@@ -1,13 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env emacs --script
 
-# (load-file "~/.emacs.d/elisp/package-build.el")
-# (package-build-archive
+(add-to-list 'load-path (file-name-directory load-file-name))
 
-for pkg in $@; do
-	echo "Building package: $pkg"
-	emacs --batch -l package-build.el --eval "(package-build-archive \"$pkg\")"
-	echo
-	echo
-done
+(require 'package-build)
 
-
+(mapc 'package-build-archive argv)

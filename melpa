@@ -32,7 +32,7 @@ function trim {
 }
 
 function melpa_validate {
-    NUMPACKAGES=$(trim `grep fetcher pkglist | wc -l`)
+    NUMPACKAGES=$(trim `ls recipes/* | wc -l`)
     NUMBUILT=$(trim `ls packages/*.{el,tar} | wc -l`)
 
     echo "${NUMBUILT}/${NUMPACKAGES} packages built"

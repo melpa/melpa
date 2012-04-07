@@ -1,2 +1,0 @@
-(js3 :url "https://github.com/thomblake/js3-mode.git" :fetcher git)
-

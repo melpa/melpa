@@ -87,6 +87,7 @@ Packages are specified by files in the `recipes` directory.  You can contribute 
 ### Single File Repository
 
 [ido-ubiquitous](https://github.com/DarwinAwardWinner/ido-ubiquitous) is a repository that contains two files:
+
     * `README.md`
     * `ido-ubiquitous.el`
     

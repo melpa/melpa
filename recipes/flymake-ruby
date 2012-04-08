@@ -1,0 +1,1 @@
+(flymake-ruby :url "https://github.com/purcell/flymake-ruby.git" :fetcher git)

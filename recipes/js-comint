@@ -1,0 +1,3 @@
+(js-comint
+ :url "https://js-comint-el.svn.sourceforge.net/svnroot/js-comint-el/trunk"
+ :fetcher svn)

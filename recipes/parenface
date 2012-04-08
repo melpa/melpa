@@ -1,0 +1,3 @@
+(parenface
+ :url "https://github.com/emacsmirror/parenface.git"
+ :fetcher git)

@@ -1,0 +1,2 @@
+(buffer-move
+ :fetcher wiki)

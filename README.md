@@ -1,9 +1,24 @@
 # MELPA
 
-Repository of code for *MELPA* or *Milkypostman's ELPA* or *Milkypostman's Experimental Lisp Package Repository* if you're not into the whole brevity thing.
+MELPA is a growing collection of `package.el`-compatible elisp
+packages built automatically on our server from the upstream source
+code using simple recipes. (Think of it as a server-side version of
+[el-get](https://github.com/dimitri/el-get), or even
+[homebrew](https://github.com/mxcl/homebrew).)
 
-MELPA is rebuilt at least once a day and on demand when changes are made to the MELPA repository.  All packages are built using the `package-build.el` package.
+Packages are updated when changes are made to the MELPA repository,
+or at least daily.
 
+If you just want to browse and install packages, check out the
+[archive index page](http://melpa.milkbox.net/) for instructions.
+
+Adding packages is as simple as submitting a pull request; read on for
+details.
+
+### About the name
+
+*MELPA* is *Milkypostman's ELPA* or *Milkypostman's Experimental Lisp
+ Package Archive* if you're not into the whole brevity thing.
 
 ## Scripts
 

@@ -1,0 +1,2 @@
+(tabulated-list :url "https://github.com/sigma/tabulated-list.el" :fetcher git)
+

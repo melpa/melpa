@@ -1,0 +1,1 @@
+(vc-darcs :url "http://www.pps.jussieu.fr/~jch/software/repos/vc-darcs/" :fetcher darcs)

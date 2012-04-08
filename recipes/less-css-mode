@@ -1,0 +1,1 @@
+(less-css-mode :url "https://github.com/purcell/less-css-mode.git" :fetcher git)

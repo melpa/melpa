@@ -28,7 +28,7 @@ folder with version corresponding to the newest HEAD revision
 available; given according to the `%Y%m%d` format.
 
 * `melpa` -- All the logic for generating everything in the repository
-based on the recipe files.  By default this will clean the `packages/` directory, 
+based on the recipe files.  By default this will clean the `packages/` directory,
 build all packages
 listed under `recipes/`, and compile the `index.html` file for the [melpa]
 website front page.
@@ -75,21 +75,22 @@ the repository.
 
 ## Contributing New Packages
 
-Packages are specified by files in the `recipes` directory.  You can contribute a new package by adding a new file under `recipes` using the following form, 
+Packages are specified by files in the `recipes` directory.  You can contribute a new package by adding a new file under `recipes` using the following form,
 
-    (name :url "<repo url>"
-     :fetcher [git|github|svn|darcs|wiki] 
+    (name
+     :fetcher [git|github|svn|darcs|wiki]
+     [:url "<repo url>"]
      [:repo "github-user/repo-name"]
      [:files ("<file1>", ...)])
-     
+
 `name`
-:   a lisp symbol that has the same name as the package being specified.  
+:   a lisp symbol that has the same name as the package being specified.
 
 `:url`
-:   specifies the URL of the version control repository. *not required for the `wiki` fetcher*
+:   specifies the URL of the version control repository. *required for the `git`, `svn` and `darcs` fetchers*
 
 `:fetcher`
-:   specifies the type of repository that `:url` points to.  Right now package-build supports [git][git], [github][github], [subversion (svn)][svn], [darcs][darcs], and [Emacs Wiki (wiki)][emacswiki] as possible mechanisms for checking out the repository.  With the exception of the Emacs Wiki fetcher, package-build uses the corresponding application to update files before building the package.  The Emacs Wiki fetcher gets the latest version of the package from `http://www.emacswiki.org/emacs/download/<NAME>.el` where `NAME` is the package name.  Note that the `:url` property is not needed for the `wiki` engine unless the name of the package file on the EmacsWiki differs from the package name being built. In the case of the `github` fetcher, use `repo` instead of `url`; the git URL will then be deduced.
+:   specifies the type of repository that `:url` points to.  Right now package-build supports [git][git], [github][github], [subversion (svn)][svn], [darcs][darcs], and [Emacs Wiki (wiki)][emacswiki] as possible mechanisms for checking out the repository.  With the exception of the Emacs Wiki fetcher, package-build uses the corresponding application to update files before building the package.  The Emacs Wiki fetcher gets the latest version of the package from `http://www.emacswiki.org/emacs/download/<NAME>.el` where `NAME` is the package name.  Note that the `:url` property is not needed for the `wiki` engine unless the name of the package file on the EmacsWiki differs from the package name being built. In the case of the `github` fetcher, use `:repo` instead of `:url`; the git URL will then be deduced.
 
 `:files`
 :   optional property specifying the explicit files used to build the package.  Automatically populated by matching all `.el` files in the root of the repository.  This is necessary when there are multiple `.el` files in the repository but the package should only be built from a subset.
@@ -107,16 +108,16 @@ Packages are specified by files in the `recipes` directory.  You can contribute 
 
 * `README.md`
 * `ido-ubiquitous.el`
-    
+
 Since there is only one `.el` file, this package only needs the `:url` and `:fetcher` specified,
 
     (ido-ubiquitous
      :url "https://github.com/DarwinAwardWinner/ido-ubiquitous.git"
      :fetcher git)
-    
+
 
 ### Multiple Packages in one Repository
-    
+
 The
 [emacs-starter-kit](https://github.com/technomancy/emacs-starter-kit)
 contains the *starter-kit* package along with extra packages in the
@@ -129,7 +130,7 @@ contains the *starter-kit* package along with extra packages in the
      :url "https://github.com/technomancy/emacs-starter-kit.git"
      :fetcher git
      :files ("modules/starter-kit-bindings.el"))
-   
+
 Notice that `:files` is not specified for `starter-kit` since package-build will automatically add all `.el` files in the root directory of the repository.  The `starter-kit-bindings` repository is contained in the `modules/` subdirectory and thus needs the packages files specified explicitly.
 
 
@@ -149,4 +150,3 @@ This can be configured using the `package-build-archive-dir` variable.
 
 Repositories are checked out to the `working/` directory by default.
 This can be configured using the `package-build-working-dir` variable.
-

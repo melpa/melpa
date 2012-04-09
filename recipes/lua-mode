@@ -1,0 +1,3 @@
+(lua-mode
+ :url "git://github.com/immerrr/lua-mode.git"
+  :fetcher git)

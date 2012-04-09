@@ -1,2 +1,2 @@
-(ir_black-theme :url "git://gist.github.com/2029034.git" :fetcher git)
+(ir_black-theme :repo "2029034" :fetcher github)
 

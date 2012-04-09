@@ -1,2 +1,2 @@
-(multi-web-mode :url "https://github.com/fgallina/multi-web-mode.git" :fetcher git)
+(multi-web-mode :repo "fgallina/multi-web-mode" :fetcher github)
 

@@ -1,2 +1,2 @@
-(delim-kill :url "https://github.com/thomas11/delim-kill.git" :fetcher git)
+(delim-kill :repo "thomas11/delim-kill" :fetcher github)
 

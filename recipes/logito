@@ -1,1 +1,1 @@
-(logito :url "https://github.com/sigma/logito.git" :fetcher git)
+(logito :repo "sigma/logito" :fetcher github)

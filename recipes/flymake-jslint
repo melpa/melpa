@@ -1,1 +1,1 @@
-(flymake-jslint :url "https://github.com/purcell/flymake-jslint.git" :fetcher git)
+(flymake-jslint :repo "purcell/flymake-jslint" :fetcher github)

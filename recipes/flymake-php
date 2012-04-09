@@ -1,1 +1,1 @@
-(flymake-php :url "https://github.com/purcell/flymake-php.git" :fetcher git)
+(flymake-php :repo "purcell/flymake-php" :fetcher github)

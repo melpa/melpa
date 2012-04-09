@@ -1,2 +1,2 @@
-(pretty-mode :url "https://github.com/emacsmirror/pretty-mode.git" :fetcher git)
+(pretty-mode :repo "emacsmirror/pretty-mode" :fetcher github)
 

@@ -1,2 +1,2 @@
-(magithub :url "https://github.com/nex3/magithub.git" :fetcher git)
+(magithub :repo "nex3/magithub" :fetcher github)
 

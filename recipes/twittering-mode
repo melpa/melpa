@@ -1,2 +1,2 @@
-(twittering-mode :url "https://github.com/hayamiz/twittering-mode.git" :fetcher git)
+(twittering-mode :repo "hayamiz/twittering-mode" :fetcher github)
 

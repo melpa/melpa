@@ -1,2 +1,2 @@
-(c-eldoc :url "https://github.com/nflath/c-eldoc.git" :fetcher git)
+(c-eldoc :repo "nflath/c-eldoc" :fetcher github)
 

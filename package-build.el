@@ -226,6 +226,11 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
+(defun pb/checkout-github (name config dir)
+  "Check package NAME with config CONFIG out of github into DIR."
+  (let* ((url (format "git://github.com/%s.git" (plist-get config :repo))))
+    (pb/checkout-git name (plist-put (copy-sequence config) :url url) dir)))
+
 (defun pb/dump (data file)
   "Write DATA to FILE as a pretty-printed Lisp sexp."
   (write-region (concat (pp-to-string data) "\n") nil file))

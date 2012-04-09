@@ -1,1 +1,1 @@
-(ac-slime :url "https://github.com/purcell/ac-slime.git" :fetcher git)
+(ac-slime :repo "purcell/ac-slime" :fetcher github)

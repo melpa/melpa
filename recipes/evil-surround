@@ -1,2 +1,2 @@
-(evil-surround :url "https://github.com/timcharper/evil-surround.git" :fetcher git)
+(evil-surround :repo "timcharper/evil-surround" :fetcher github)
 

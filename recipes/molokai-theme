@@ -1,2 +1,2 @@
-(molokai-theme :url "git://gist.github.com/2029061.git" :fetcher git)
+(molokai-theme :repo "2029061" :fetcher github)
 

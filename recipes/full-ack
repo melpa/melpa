@@ -1,2 +1,2 @@
-(full-ack :url "https://github.com/nschum/full-ack.git" :fetcher git)
+(full-ack :repo "nschum/full-ack" :fetcher github)
 

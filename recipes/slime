@@ -1,3 +1,3 @@
-(slime :url "https://github.com/nablaone/slime.git" :fetcher git :files
+(slime :repo "nablaone/slime" :fetcher github :files
        ("slime.el"))
 

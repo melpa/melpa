@@ -1,2 +1,2 @@
-(enclose :url "https://github.com/rejeep/enclose.git" :fetcher git)
+(enclose :repo "rejeep/enclose" :fetcher github)
 

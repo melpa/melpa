@@ -1,2 +1,2 @@
-(zlc :url "https://github.com/mooz/emacs-zlc.git" :fetcher git)
+(zlc :repo "mooz/emacs-zlc" :fetcher github)
 

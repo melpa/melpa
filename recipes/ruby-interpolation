@@ -1,0 +1,3 @@
+(ruby-interpolation
+ :repo "leoc/ruby-interpolation.el"
+  :fetcher github)

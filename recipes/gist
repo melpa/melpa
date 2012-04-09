@@ -1,2 +1,2 @@
-(gist :url "https://github.com/defunkt/gist.el.git" :fetcher git)
+(gist :repo "defunkt/gist.el" :fetcher github)
 

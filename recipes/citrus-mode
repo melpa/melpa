@@ -1,2 +1,2 @@
-(citrus-mode :url "https://github.com/rejeep/citrus-mode.git" :fetcher git)
+(citrus-mode :repo "rejeep/citrus-mode" :fetcher github)
 

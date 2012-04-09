@@ -1,3 +1,3 @@
-(projectile :url "https://github.com/bbatsov/projectile.git" :fetcher git :files
+(projectile :repo "bbatsov/projectile" :fetcher github :files
             ("projectile.el"))
 

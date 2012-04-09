@@ -1,1 +1,1 @@
-(hippie-expand-slime :url "https://github.com/purcell/hippie-expand-slime.git" :fetcher git)
+(hippie-expand-slime :repo "purcell/hippie-expand-slime" :fetcher github)

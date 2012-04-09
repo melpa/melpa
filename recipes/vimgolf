@@ -1,2 +1,2 @@
-(vimgolf :url "https://github.com/timvisher/vimgolf.git" :fetcher git)
+(vimgolf :repo "timvisher/vimgolf" :fetcher github)
 

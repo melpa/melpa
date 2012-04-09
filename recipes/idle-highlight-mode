@@ -1,2 +1,2 @@
-(idle-highlight-mode :url "https://github.com/nonsequitur/idle-highlight-mode.git" :fetcher git)
+(idle-highlight-mode :repo "nonsequitur/idle-highlight-mode" :fetcher github)
 

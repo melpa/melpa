@@ -1,2 +1,2 @@
-(cperl-mode :url "https://github.com/jrockway/cperl-mode.git" :fetcher git)
+(cperl-mode :repo "jrockway/cperl-mode" :fetcher github)
 

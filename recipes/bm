@@ -1,2 +1,2 @@
-(bm :url "https://github.com/joodland/bm.git" :fetcher git)
+(bm :repo "joodland/bm" :fetcher github)
 

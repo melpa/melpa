@@ -1,2 +1,2 @@
-(starter-kit :url "https://github.com/technomancy/emacs-starter-kit.git" :fetcher git)
+(starter-kit :repo "technomancy/emacs-starter-kit" :fetcher github)
 

@@ -1,2 +1,2 @@
-(scss-mode :url "https://github.com/antonj/scss-mode.git" :fetcher git)
+(scss-mode :repo "antonj/scss-mode" :fetcher github)
 

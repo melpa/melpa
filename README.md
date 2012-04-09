@@ -77,8 +77,9 @@ the repository.
 
 Packages are specified by files in the `recipes` directory.  You can contribute a new package by adding a new file under `recipes` using the following form, 
 
-    (name :url "<repo url>" 
-     :fetcher [git|svn|darcs|wiki] 
+    (name :url "<repo url>"
+     :fetcher [git|github|svn|darcs|wiki] 
+     [:repo "github-user/repo-name"]
      [:files ("<file1>", ...)])
      
 `name`
@@ -88,12 +89,13 @@ Packages are specified by files in the `recipes` directory.  You can contribute 
 :   specifies the URL of the version control repository. *not required for the `wiki` fetcher*
 
 `:fetcher`
-:   specifies the type of repository that `:url` points to.  Right now package-build supports [git][git], [subversion (svn)][svn], [darcs][darcs], and [Emacs Wiki (wiki)][emacswiki] as possible mechanisms for checking out the repository.  With the exception of the Emacs Wiki fetcher, package-build uses the corresponding application to update files before building the package.  The Emacs Wiki fetcher gets the latest version of the package from `http://www.emacswiki.org/emacs/download/<NAME>.el` where `NAME` is the package name.  Note that the `:url` property is not needed for the `wiki` engine unless the name of the package file on the EmacsWiki differs from the package name being built.
+:   specifies the type of repository that `:url` points to.  Right now package-build supports [git][git], [github][github], [subversion (svn)][svn], [darcs][darcs], and [Emacs Wiki (wiki)][emacswiki] as possible mechanisms for checking out the repository.  With the exception of the Emacs Wiki fetcher, package-build uses the corresponding application to update files before building the package.  The Emacs Wiki fetcher gets the latest version of the package from `http://www.emacswiki.org/emacs/download/<NAME>.el` where `NAME` is the package name.  Note that the `:url` property is not needed for the `wiki` engine unless the name of the package file on the EmacsWiki differs from the package name being built. In the case of the `github` fetcher, use `repo` instead of `url`; the git URL will then be deduced.
 
 `:files`
 :   optional property specifying the explicit files used to build the package.  Automatically populated by matching all `.el` files in the root of the repository.  This is necessary when there are multiple `.el` files in the repository but the package should only be built from a subset.
 
 [git]: http://git-scm.com/
+[github]: https://github.com/
 [svn]: http://subversion.apache.org/
 [darcs]: http://darcs.net/
 [emacswiki]: http://www.emacswiki.org/

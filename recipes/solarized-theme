@@ -1,2 +1,2 @@
-(solarized-theme :url "https://github.com/bbatsov/solarized-emacs.git" :fetcher git)
+(solarized-theme :repo "bbatsov/solarized-emacs" :fetcher github)
 

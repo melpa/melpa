@@ -1,2 +1,2 @@
-(hl-sentence :url "https://github.com/milkypostman/hl-sentence.git" :fetcher git)
+(hl-sentence :repo "milkypostman/hl-sentence" :fetcher github)
 

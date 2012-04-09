@@ -1,2 +1,2 @@
-(haskell-mode :url "https://github.com/haskell/haskell-mode.git" :fetcher git)
+(haskell-mode :repo "haskell/haskell-mode" :fetcher github)
 

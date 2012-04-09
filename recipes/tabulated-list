@@ -1,2 +1,2 @@
-(tabulated-list :url "https://github.com/sigma/tabulated-list.el" :fetcher git)
+(tabulated-list :url "https://github.com/sigma/tabulated-list.el" :fetcher github)
 

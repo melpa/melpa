@@ -1,2 +1,2 @@
-(ruby-end :url "https://github.com/rejeep/ruby-end.git" :fetcher git)
+(ruby-end :repo "rejeep/ruby-end" :fetcher github)
 

@@ -1,2 +1,2 @@
-(expand-region :url "https://github.com/magnars/expand-region.el.git" :fetcher git)
+(expand-region :repo "magnars/expand-region.el" :fetcher github)
 

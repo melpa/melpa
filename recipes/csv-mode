@@ -1,2 +1,2 @@
-(csv-mode :url "https://github.com/emacsmirror/csv-mode.git" :fetcher git)
+(csv-mode :repo "emacsmirror/csv-mode" :fetcher github)
 

@@ -1,2 +1,2 @@
-(package-spec :url "https://github.com/rejeep/package-spec.git" :fetcher git)
+(package-spec :repo "rejeep/package-spec" :fetcher github)
 

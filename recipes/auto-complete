@@ -1,3 +1,3 @@
-(auto-complete :url "https://github.com/m2ym/auto-complete.git" :fetcher git :files
+(auto-complete :repo "m2ym/auto-complete" :fetcher github :files
                ("*.el" "dict/*"))
 

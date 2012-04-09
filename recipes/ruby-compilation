@@ -1,3 +1,3 @@
-(ruby-compilation :url "https://github.com/eschulte/rinari.git" :fetcher git :files
+(ruby-compilation :repo "eschulte/rinari" :fetcher github :files
                   ("util/ruby-compilation.el"))
 

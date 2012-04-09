@@ -1,3 +1,3 @@
-(flymake-perlcritic :url "https://github.com/illusori/emacs-flymake-perlcritic.git" :fetcher git :files
+(flymake-perlcritic :repo "illusori/emacs-flymake-perlcritic" :fetcher github :files
                     ("*.el" "bin/flymake_perlcritic"))
 

@@ -1,1 +1,1 @@
-(gh :url "https://github.com/sigma/gh.el.git" :fetcher git)
+(gh :repo "sigma/gh.el" :fetcher github)

@@ -1,2 +1,2 @@
-(jump :url "https://github.com/milkypostman/jump.el.git" :fetcher git)
+(jump :repo "milkypostman/jump.el" :fetcher github)
 

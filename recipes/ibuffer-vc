@@ -1,1 +1,1 @@
-(ibuffer-vc :url "https://github.com/purcell/ibuffer-vc.git" :fetcher git)
+(ibuffer-vc :repo "purcell/ibuffer-vc" :fetcher github)

@@ -1,2 +1,2 @@
-(html-script-src :url "https://github.com/rejeep/html-script-src.git" :fetcher git)
+(html-script-src :repo "rejeep/html-script-src" :fetcher github)
 

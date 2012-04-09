@@ -1,3 +1,3 @@
-(popup :url "https://github.com/m2ym/popup-el.git" :fetcher git :files
+(popup :repo "m2ym/popup-el" :fetcher github :files
        ("popup.el"))
 

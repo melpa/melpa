@@ -1,2 +1,2 @@
-(elisp-slime-nav :url "https://github.com/purcell/elisp-slime-nav.git" :fetcher git)
+(elisp-slime-nav :repo "purcell/elisp-slime-nav" :fetcher github)
 

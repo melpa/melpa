@@ -1,2 +1,2 @@
-(evil-leader :url "https://github.com/cofi/evil-leader.git" :fetcher git)
+(evil-leader :repo "cofi/evil-leader" :fetcher github)
 

@@ -1,2 +1,2 @@
-(python :url "https://github.com/fgallina/python.el.git" :fetcher git)
+(python :repo "fgallina/python.el" :fetcher github)
 

@@ -1,0 +1,3 @@
+(ruby-interpolation
+ :url "git://github.com/leoc/ruby-interpolation.el.git"
+  :fetcher git)

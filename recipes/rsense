@@ -1,0 +1,3 @@
+(rsense :repo "m2ym/rsense"
+        :fetcher github
+        :files ("etc/rsense.el"))

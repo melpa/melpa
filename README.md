@@ -35,7 +35,6 @@ website front page.
 
 The following arguments are accepted:
 
-```
 clear
 :   clean out the `packages/` directory
 
@@ -47,7 +46,6 @@ index
 
 validate
 :   naively validate that the correct number of packages were built.
-```
 
 Note that these scripts require an Emacs with `package.el` installed,
 such as Emacs 24. If you have an older version of Emacs, you can get a

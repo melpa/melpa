@@ -145,6 +145,38 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
           (default-directory dir))
       (car (nreverse (sort (mapcar 'pb/grab-wiki-file files) 'string-lessp))))))
 
+(defun pb/grab-raw (filename)
+  "Retrieve FILENAME from filesystem or by http"
+      ;; Read the retrieved buffer to make sure it is valid (e.g. it
+      ;; may fetch a URL redirect page).
+    (unless (file-exists-p dir)
+      (make-directory dir))
+    (package--with-work-buffer (or download-url "/") filename
+      (when (listp (read buffer))
+	(setq buffer-file-name (expand-file-name
+                                (if download-url filename
+                                  (file-name-nondirectory filename))
+                                default-directory))
+	(let ((version-control 'never))
+	  (save-buffer)
+          (condition-case nil
+              (aref (package-buffer-info) 3) ;; package version
+              (error "0"))))))
+
+(defun pb/checkout-raw (name config dir)
+  "Checkout package NAME with config CONFIG by downloading each raw file into DIR"
+  (with-current-buffer (get-buffer-create "*package-build-checkout*")
+    (message dir)
+    (unless (file-exists-p dir)
+      (make-directory dir))
+    (let ((download-url    (plist-get config :url))
+          (files  (plist-get config :files))
+          (default-directory dir))
+      (when (and download-url (not files))
+             (setq files (list (file-name-nondirectory download-url))
+                   download-url (file-name-directory download-url)))
+      (car (nreverse (sort (mapcar 'pb/grab-raw files) 'string-lessp))))))
+
 (defun pb/darcs-repo (dir)
   "Get the current darcs repo for DIR."
   (with-temp-buffer

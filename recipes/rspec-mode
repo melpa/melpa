@@ -1,2 +1,2 @@
-(rspec-mode :url "https://github.com/pezra/rspec-mode" :fetcher github)
+(rspec-mode :repo "pezra/rspec-mode" :fetcher github)
 

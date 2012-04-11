@@ -85,7 +85,7 @@ the following form,
  [:files ("<file1>", ...)])
 ```     
 
-`name`
+name`
 :   a lisp symbol that has the same name as the package being specified.
 
 `:url`
@@ -115,6 +115,9 @@ package.  Automatically populated by matching all `.el` files in the
 root of the repository.  This is necessary when there are multiple
 `.el` files in the repository but the package should only be built
 from a subset.
+
+`:version`
+:   optional property specifying the package version to report as present on this elisp archive. Every fetcher type determines automatically this version number from the date-of-retrieval depending on the method, however in some cases you would like this melpa archive to report it has the always-newest-version of a package, this could be handy when you have a custom melpa archive and want some elisp packages to always install from it, even if other archives have more really-up-to-date versions. A way to acomplish this would be to use a bigger natural-order version on your custom melpa archive, that way that particular package will always be taken from your custom melpa archive.
 
 [git]: http://git-scm.com/
 [github]: https://github.com/

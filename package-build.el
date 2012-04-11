@@ -96,8 +96,10 @@ choose a source-specific fetcher function, which it calls with
 the same arguments."
   (let ((repo-type (plist-get config :fetcher)))
     (print repo-type)
-    (funcall (intern (format "pb/checkout-%s" repo-type))
-             name config cwd)))
+    (let ((checkedout-version 
+           (funcall (intern (format "pb/checkout-%s" repo-type))
+                    name config cwd)))
+      (or (plist-get config :version) checkedout-version))))
 
 (defvar pb/last-wiki-fetch-time 0
   "The time at which an emacswiki URL was last requested.

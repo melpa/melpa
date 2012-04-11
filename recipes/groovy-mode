@@ -1,0 +1,1 @@
+(groovy-mode :url "lp:groovy-emacs-mode" :fetcher bzr :files ("groovy-mode.el"))

@@ -231,6 +231,61 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
   (let* ((url (format "git://github.com/%s.git" (plist-get config :repo))))
     (pb/checkout-git name (plist-put (copy-sequence config) :url url) dir)))
 
+(defun pb/bzr-repo (dir)
+  "Get the current bzr repo for DIR."
+  (with-temp-buffer
+    (pb/run-process dir "bzr" "info")
+    (goto-char (point-min))
+    (re-search-forward "parent branch: \\(.*\\)")
+    (match-string-no-properties 1)))
+
+(defun pb/checkout-bzr (name config dir)
+  "Check package NAME with config CONFIG out of bzr into DIR."
+  (let ((repo (plist-get config :url)))
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (goto-char (point-max))
+      (cond
+       ((and (file-exists-p (expand-file-name ".bzr" dir))
+             (string-equal (pb/bzr-repo dir) repo))
+        (print "checkout directory exists, updating...")
+        (pb/run-process dir "bzr" "merge"))
+       (t
+        (when (file-exists-p dir)
+          (delete-directory dir t nil))
+        (print "cloning repository")
+        (pb/run-process nil "bzr" "branch" repo dir)))
+      (pb/run-process dir "bzr" "info" "-vv")
+      (pb/find-parse-time
+       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
+
+(defun pb/hg-repo (dir)
+  "Get the current hg repo for DIR."
+  (with-temp-buffer
+    (pb/run-process dir "hg" "paths")
+    (goto-char (point-min))
+    (re-search-forward "default = \\(.*\\)")
+    (match-string-no-properties 1)))
+
+(defun pb/checkout-hg (name config dir)
+  "Check package NAME with config CONFIG out of hg into DIR."
+  (let ((repo (plist-get config :url)))
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (goto-char (point-max))
+      (cond
+       ((and (file-exists-p (expand-file-name ".hg" dir))
+             (string-equal (pb/hg-repo dir) repo))
+        (print "checkout directory exists, updating...")
+        (pb/run-process dir "hg" "pull")
+        (pb/run-process dir "hg" "update"))
+       (t
+        (when (file-exists-p dir)
+          (delete-directory dir t nil))
+        (print "cloning repository")
+        (pb/run-process nil "hg" "clone" repo dir)))
+      (pb/run-process dir "hg" "tip" "--style" "compact")
+      (pb/find-parse-time
+       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
+
 (defun pb/dump (data file)
   "Write DATA to FILE as a pretty-printed Lisp sexp."
   (write-region (concat (pp-to-string data) "\n") nil file))
@@ -278,6 +333,8 @@ The file is written to `package-build-working-dir'."
            "--exclude=.svn"
            "--exclude=.git*"
            "--exclude=_darcs"
+           "--exclude=.bzr"
+           "--exclude=.hg"
            (or (mapcar (lambda (fn) (concat dir "/" fn)) files)
                (list dir)))))
 

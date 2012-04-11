@@ -88,14 +88,14 @@ the following form,
 ```     
 
 `name`
-: a lisp symbol that has the same name as the package being specified.
+:   a lisp symbol that has the same name as the package being specified.
 
 `:url`
-: specifies the URL of the version control repository. *required for
+:   specifies the URL of the version control repository. *required for
 the `git`, `bzr`, `hg`, `darcs` and `svn` fetchers*
 
 `:fetcher`
-: specifies the type of repository that `:url` points to.  Right now
+:   specifies the type of repository that `:url` points to.  Right now
 package-build supports [git][git], [github][github],
 [bazaar (bzr)][bzr], [mercurial (hg)][hg],
 [subversion (svn)][svn], [darcs][darcs], and
@@ -112,7 +112,7 @@ fetcher, use `:repo` instead of `:url`; the git URL will then be
 deduced.
 
 `:files`
-: optional property specifying the explicit files used to build the
+:   optional property specifying the explicit files used to build the
 package.  Automatically populated by matching all `.el` files in the
 root of the repository.  This is necessary when there are multiple
 `.el` files in the repository but the package should only be built

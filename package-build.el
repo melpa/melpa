@@ -370,7 +370,7 @@ The file is written to `package-build-working-dir'."
   (let ((default-directory dir))
     (mapcan 'file-expand-wildcards files)))
 
-(defun pb/merge-package-info (config pkg-info name version)
+(defun pb/merge-package-info (pkg-info name version config)
   "Return a version of PKG-INFO updated with NAME and VERSION.
 If PKG-INFO is nil, an empty one is created."
   (let* ((merged (or (copy-seq pkg-info)
@@ -438,10 +438,10 @@ If PKG-INFO is nil, an empty one is created."
                         (concat file-name "-" version ".el")
                         package-build-archive-dir))
                (pkg-info (pb/merge-package-info
-                          cfg
                           (pb/get-package-info pkgsrc)
                           file-name
-                          version)))
+                          version
+                          cfg)))
           (print pkg-info)
           (when (file-exists-p pkgdst)
             (delete-file pkgdst t))
@@ -452,13 +452,14 @@ If PKG-INFO is nil, an empty one is created."
                (pkg-file (concat file-name "-pkg.el"))
                (pkg-info
                 (pb/merge-package-info
-                 cfg
                  (let ((default-directory pkg-cwd))
                    (or (pb/get-pkg-file-info pkg-file)
                        ;; some packages (like magit) provide name-pkg.el.in
                        (pb/get-pkg-file-info (concat pkg-file ".in"))
                        (pb/get-package-info (concat file-name ".el"))))
-                 file-name version)))
+                 file-name
+                 version
+                 cfg)))
 
           (print pkg-info)
           (copy-directory file-name pkg-dir)

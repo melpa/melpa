@@ -1,0 +1,1 @@
+(melpa :repo "bnbeckwith/writegood-mode" :fetcher github)

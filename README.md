@@ -77,7 +77,7 @@ Packages are specified by files in the `recipes` directory.  You can
 contribute a new package by adding a new file under `recipes` using
 the following form,
 
-```elisp
+```lisp
 (name
  :fetcher [git|github|bzr|hg|darcs|svn|wiki|targz|raw]
  [:url "<repo url>"]
@@ -223,7 +223,7 @@ For the `raw` fetcher the `:url` keyword can also be a list of different source 
 
 Since there is only one `.el` file, this package only needs the `:url` and `:fetcher` specified,
 
-```elisp
+```lisp
 (ido-ubiquitous
  :url "https://github.com/DarwinAwardWinner/ido-ubiquitous.git"
  :fetcher git)
@@ -236,7 +236,7 @@ The
 contains the *starter-kit* package along with extra packages in the
 `modules` directory; *starter-kit-bindings*, *starter-kit-lisp*, etc.
 
-```elisp
+```lisp
 (starter-kit
  :url "https://github.com/technomancy/emacs-starter-kit.git"
  :fetcher git)

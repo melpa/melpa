@@ -204,6 +204,17 @@ Or you want to create a package for his OS-X hacks
   :files ("growl.el" "osx-plist.el"))
 ```
 
+Another use case for the `raw` is where you want to create a package from a github hosted file without having to clone the entire repository, take
+for example the [Fancy language](http://github.com/bakkdoor/fancy), the <code>fancy-mode</code> is maintained as part of fancy's repo, but having to
+clone the whole repo just to obtain the elisp would be a bit too much, for this case you can take advantage of the fact that github allows you to retrieve
+a raw file content for any branch, tag or commit and create a package like this to have an always updated-with-master fancy-mode:
+
+```lisp
+(fancy-mode
+  :fetcher raw
+  :url "https://raw.github.com/bakkdoor/fancy/master/tools/fancy-mode.el")
+```
+
 Note that the `:url` keyword can take any kind of URLs that
 can be fetched by emacs, so you can use <code>http://</code>, <code>ftp://</code>, <code>file://</code>, etc.
 For the `raw` fetcher the `:url` keyword can also be a list of different source URLs:

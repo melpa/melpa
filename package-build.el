@@ -365,19 +365,20 @@ The file is written to `package-build-working-dir'."
        (nth 2 pkgfile-info)
        (nth 1 pkgfile-info)))))
 
-
 (defun pb/expand-file-list (dir files)
   "In DIR, expand FILES, some of which may be shell-style wildcards."
   (let ((default-directory dir))
     (mapcan 'file-expand-wildcards files)))
 
-(defun pb/merge-package-info (pkg-info name version)
+(defun pb/merge-package-info (pkg-info name version config)
   "Return a version of PKG-INFO updated with NAME and VERSION.
 If PKG-INFO is nil, an empty one is created."
-  (let ((merged (or (copy-seq pkg-info)
-                    (vector name nil "No description available." version))))
-    (aset merged 3 version)
+  (let* ((merged (or (copy-seq pkg-info)
+                     (vector name nil "No description available." version))))
     (aset merged 0 (downcase name))
+    (aset merged 2 (format "%s [source: %s]"
+                           (aref merged 2) (plist-get config :fetcher)))
+    (aset merged 3 version)
     merged))
 
 (defun pb/dump-archive-contents ()
@@ -439,7 +440,8 @@ If PKG-INFO is nil, an empty one is created."
                (pkg-info (pb/merge-package-info
                           (pb/get-package-info pkgsrc)
                           file-name
-                          version)))
+                          version
+                          cfg)))
           (print pkg-info)
           (when (file-exists-p pkgdst)
             (delete-file pkgdst t))
@@ -455,7 +457,9 @@ If PKG-INFO is nil, an empty one is created."
                        ;; some packages (like magit) provide name-pkg.el.in
                        (pb/get-pkg-file-info (concat pkg-file ".in"))
                        (pb/get-package-info (concat file-name ".el"))))
-                 file-name version)))
+                 file-name
+                 version
+                 cfg)))
 
           (print pkg-info)
           (copy-directory file-name pkg-dir)

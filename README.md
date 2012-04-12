@@ -204,13 +204,14 @@ Or you want to create a package for his OS-X hacks
   :files ("growl.el" "osx-plist.el"))
 ```
 
-Note that if you dont provide a `:url` keyword,
-`:files` are expected to be absolute urls.
+Note that the `:url` keyword can take any kind of URLs that
+can be fetched by emacs, so you can use <code>http://</code>, <code>ftp://</code>, <code>file://</code>, etc.
+For the `raw` fetcher the `:url` keyword can also be a list of different source URLs:
 
 ```lisp
 (my-secrets
   :fetcher raw
-  :files ("file:///my/secrets.el" "ftp://my.corp/dev/env.el"))
+  :url ("file:///my/secrets.el" "ftp://my.corp/dev/env.el"))
 ```
 
 ### Single File Repository

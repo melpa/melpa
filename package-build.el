@@ -95,6 +95,8 @@ In turn, this function uses the :fetcher option in the config to
 choose a source-specific fetcher function, which it calls with
 the same arguments."
   (let ((repo-type (plist-get config :fetcher)))
+    (when (get-buffer "*package-build-checkout*")
+      (kill-buffer "*package-build-checkout*"))
     (print repo-type)
     (funcall (intern (format "pb/checkout-%s" repo-type))
              name config cwd)))
@@ -230,6 +232,87 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
   "Check package NAME with config CONFIG out of github into DIR."
   (let* ((url (format "git://github.com/%s.git" (plist-get config :repo))))
     (pb/checkout-git name (plist-put (copy-sequence config) :url url) dir)))
+
+
+(defun pb/grab-tarball (&optional tarext)
+  "Retrieve and expand a tarball using TAREXT auto-compression.
+   Returns a list of formatted date for each tar entry."
+  (message download-url)
+  (require 'jka-compr)
+  (require 'tar-mode)
+  (with-auto-compression-mode 
+    (let* ((temp-file (jka-compr-make-temp-name))
+           (info (and tarext (jka-compr-get-compression-info tarext)))
+           (compress-program (and info (jka-compr-info-uncompress-program info)))
+           (compress-message (and info (jka-compr-info-uncompress-message info)))
+           (compress-args    (and info (jka-compr-info-uncompress-args    info))))
+
+      (if (not info)
+          (url-retrieve-synchronously download-url)
+        (url-copy-file download-url temp-file t)
+        (jka-compr-call-process compress-program
+                                compress-message
+                                temp-file
+                                (current-buffer)
+                                nil
+                                compress-args)
+        (delete-file temp-file))
+
+      (tar-mode)
+      (pb/untar-buffer (plist-get config :files-under)))))
+
+(defun pb/untar-buffer (&optional files-under)
+  "Extract all archive members in the tar-file into the current directory.
+
+   If the tar seems like a git generated package, only extract the contents
+   of the first folder and take the the git commit as the package version.
+
+   This function derived from tar-untar-buffer from emacs' tar-mode.el
+   and is licenced under GPL"
+  (interactive)
+  ;; FIXME: make it work even if we're not in tar-mode.
+  (let ((descriptors tar-parse-info))
+    ; Read the var in its buffer.
+    (with-current-buffer
+        (if (tar-data-swapped-p) tar-data-buffer (current-buffer))
+      (set-buffer-multibyte nil)          ;Hopefully, a no-op.
+
+      ;; A git package
+      (when (string= "pax_global_header" (tar-header-name (car descriptors)))
+        ;; extract files from the first directory.
+        (setq files-under (tar-header-name (cadr descriptors))))
+
+      (mapcar (lambda (descriptor)
+                (let* ((name (tar-header-name descriptor))
+                       (dir (if (eq (tar-header-link-type descriptor) 5)
+                                name
+                              (file-name-directory name)))
+                       (start (tar-header-data-start descriptor))
+                       (end (+ start (tar-header-size descriptor))))
+                  (when (and (not (file-directory-p name))
+                             (or  (not files-under)
+                                  (and (not (string-equal files-under name))
+                                       (string-prefix-p files-under name)
+                                       (setq name (substring name (length files-under))
+                                             dir (substring dir (length files-under))))))
+                    (message "Extracting %s" name)
+                    (if (and dir (not (file-exists-p dir)))
+                        (make-directory dir t))
+                    (let ((coding-system-for-write 'no-conversion))
+                      (write-region start end name))
+                    (set-file-modes name (tar-header-mode descriptor))))
+                (format-time-string "%Y%m%d" (tar-header-date descriptor)))
+              descriptors))))
+
+(defun pb/checkout-targz (name config dir)
+  "Checkout package NAME with config CONFIG by downloading and extracting a tar.gz url into DIR"
+  (with-current-buffer (get-buffer-create "*package-build-checkout*")
+    (message dir)
+    (unless (file-exists-p dir)
+      (make-directory dir))
+    (let ((download-url  (plist-get config :url))
+          (default-directory dir))
+      (car (nreverse (sort (pb/grab-tarball "tar.gz") 'string-lessp))))))
 
 (defun pb/dump (data file)
   "Write DATA to FILE as a pretty-printed Lisp sexp."

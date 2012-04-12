@@ -79,7 +79,7 @@ the following form,
 
 ```elisp
 (name
- :fetcher [git|github|bzr|hg|darcs|svn|wiki]
+ :fetcher [git|github|bzr|hg|darcs|svn|wiki|targz|raw]
  [:url "<repo url>"]
  [:repo "github-user/repo-name"]
  [:files ("<file1>", ...)])
@@ -108,6 +108,9 @@ the package name.  Note that the `:url` property is not needed for the
 differs from the package name being built. In the case of the `github`
 fetcher, use `:repo` instead of `:url`; the git URL will then be
 deduced.
+The `targz` fetcher can be used to build packages from a 
+downloaded tarball `:url`. 
+The `raw` fetcher expects a `:url` of an emacs lisp file.
 
 `:files`
 :   optional property specifying the explicit files used to build the
@@ -127,6 +130,88 @@ from a subset.
 [darcs]: http://darcs.net/
 [emacswiki]: http://www.emacswiki.org/
 
+### Recipe Examples
+
+#### wiki
+
+To create a package for an elisp maintained on the emacs wiki, for example
+if you wanted to create a recipe for [wn-mode.el](http://www.emacswiki.org/emacs/wn-mode.el) you just need to create a recipe that looks like this:
+
+```lisp
+(wn-mode :fetcher wiki)
+```
+
+Other packages can consist of many files like [Icicles](http://emacswiki.org/emacs/Icicles)
+
+```lisp
+(icicles :fetcher wiki :files
+         ("icicles.el" "icicles-chg.el" "icicles-cmd1.el" "icicles-cmd2.el" "icicles-doc1.el" "icicles-doc2.el" "icicles-face.el" "icicles-fn.el" "icicles-mac.el" "icicles-mcmd.el" "icicles-mode.el" "icicles-opt.el" "icicles-var.el"))
+```
+
+#### git
+
+Most recently many elisp libraries are being developed using git, to create a recipe for one of them, say [Evil](http://emacswiki.org/emacs/Evil) you do:
+
+```lisp
+(evil :url "git://gitorious.org/evil/evil.git" :fetcher git)
+```
+
+An optional `:commit` keyword can be used to specify the commit to checkout.
+
+#### github
+
+This fetcher is a shortcut for packages fetched from github repos.
+
+```lisp
+(helm :repo "emacs-helm/helm" :fetcher github)
+```
+
+#### targz
+
+Retrieving a tarball from a github download or gist tar. 
+The difference between using a `github` or `targz` fetcher
+is that the later just downloads a tarball and doesnt keep a local
+clone of the github repo. The `:url` can point to any
+http-exposed tarball not only github downloads and gist tars.
+Note that because you're using github's tarball urls, you can
+replace `master` with any tag or commit number.
+
+```lisp
+(ido-better-flex
+ :fetcher targz
+ :url "https://github.com/vic/ido-better-flex/tarball/master")
+```
+
+#### raw
+
+The `raw` fetcher can be used to obtain elisp libraries from http-exposed
+plain files.
+
+For example, say you found [Edward O'Connor elisp files](http://edward.oconnor.cx/elisp/) and wanted to create a package for his `color-theme-hober2`
+
+```lisp
+(color-theme-hober2
+  :fetcher raw
+  :url "http://edward.oconnor.cx/elisp/color-theme-hober2.el")
+```
+
+Or you want to create a package for his OS-X hacks
+
+```lisp
+(oconnor-osx-hacks
+  :fetcher raw
+  :url "http://edward.oconnor.cx/elisp"
+  :files ("growl.el" "osx-plist.el"))
+```
+
+Note that if you dont provide a `:url` keyword,
+`:files` are expected to be absolute urls.
+
+```lisp
+(my-secrets
+  :fetcher raw
+  :files ("file:///my/secrets.el" "ftp://my.corp/dev/env.el"))
+```
 
 ### Single File Repository
 

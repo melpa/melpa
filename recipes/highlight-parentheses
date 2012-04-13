@@ -1,0 +1,3 @@
+(highlight-parentheses
+ :repo "shosti/highlight-parentheses"
+ :fetcher github)

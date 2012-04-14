@@ -1,0 +1,4 @@
+(redshank
+ :url "http://www.foldr.org/~michaelw/projects/redshank"
+ :fetcher darcs
+ :files ("*.el" "*.lisp"))

@@ -38,17 +38,23 @@
   end
 
 
-  headers = ["Package", "Version", "Description"]
+  headers = ["Package", "Version", "Description", "Source"]
 
   data = parse(File.open("../packages/archive-contents").read)[1..-1]
 
 
   data.map! do |row|
-    [row[0], row[1][0], row[3..-2].join(" ")]
+    pkgname = row[0]
+    recipe_url = "https://github.com/milkypostman/melpa/blob/master/recipes/#{pkgname}"
+    descr, source = row[3..-2].join(" "), "other"
+    if descr =~ /(.*?)\s*\[source:\s*(\w+)\]\s*/
+      descr, source = $1, $2
+    end
+    [pkgname, row[1][0], descr, "[#{source}](#{recipe_url})"]
   end
   data.sort!
 
-  colwidth = [0,0,0]
+  colwidth = [0,0,0, 9]
 
   data.map do |row|
     row.to_enum(:each_with_index).map do |e,i|

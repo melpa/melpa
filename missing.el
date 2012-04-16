@@ -20,8 +20,8 @@
 
 (mapc 'message
       (difference
-       (print (sort (directory-files "recipes/" nil "[^.].*") 'string<))
-       (print (sort (mapcar 'stripstuff (directory-files "packages/" nil "[^.].*\\\(el$\\\|tar$\\\)")) 'string<))))
+       (sort (directory-files "recipes/" nil "[^.].*") 'string<)
+       (sort (mapcar 'stripstuff (directory-files "packages/" nil "[^.].*\\\(el$\\\|tar$\\\)")) 'string<)))
 
 
 

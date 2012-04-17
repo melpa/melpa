@@ -222,7 +222,10 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (pb/run-process nil "git" "clone" repo dir)))
       (when commit
         (pb/run-process dir "git" "checkout" commit))
-      (pb/run-process dir "git" "show" "-s" "--format='\%ci'" "HEAD")
+      (let ((files (pb/expand-file-list pkg-cwd
+                                        (or (plist-get cfg :files)
+                                            (list "*.el")))))
+        (apply 'pb/run-process dir "git" "log" "-n1" "--pretty=format:'\%ci'" files))
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 

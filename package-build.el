@@ -405,6 +405,29 @@ If PKG-INFO is nil, an empty one is created."
                         desc
                         type)))))
 
+(defun pb/archive-file-name (archive-entry)
+  "Return the path of the file in which the package for ARCHIVE-ENTRY is stored."
+  (expand-file-name (format "%s-%s.%s"
+                            (car archive-entry)
+                            (car (aref (cdr archive-entry) 0))
+                            (if (eq 'single (aref (cdr archive-entry) 3))
+                                "el"
+                              "tar"))
+                    package-build-archive-dir))
+
+(defun pb/remove-archive (archive-entry)
+  "Remove ARCHIVE-ENTRY from archive-contents, and delete associated file.
+Note that the working directory (if present) is not deleted by
+this function, since the archive list may contain another version
+of the same-named package which is to be kept."
+  (message "Removing archive: %s" archive-entry)
+  (let ((archive-file (pb/archive-file-name archive-entry)))
+    (when (file-exists-p archive-file)
+      (delete-file archive-file)))
+  (setq package-build-archive-alist
+        (remove archive-entry package-build-archive-alist))
+  (pb/dump-archive-contents))
+
 (defun pb/read-recipes ()
   "Return a list of data structures for all recipes in `package-build-recipes-dir'."
   (mapcar 'pb/read-from-file
@@ -494,7 +517,18 @@ If PKG-INFO is nil, an empty one is created."
   "Build all packages in the `package-build-alist'."
   (interactive)
   (mapc 'package-build-archive-ignore-errors
-        (mapcar 'symbol-name (mapcar 'car package-build-alist))))
+        (mapcar 'symbol-name (mapcar 'car package-build-alist)))
+  (package-build-cleanup))
+
+(defun package-build-cleanup ()
+  "Remove previously-built packages that no longer have recipes."
+  (interactive)
+  (let* ((known-package-names (mapcar 'car package-build-alist))
+         (stale-archives (loop for built in package-build-archive-alist
+                               when (not (memq (car built) known-package-names))
+                               collect built)))
+    (dolist (stale stale-archives)
+      (pb/remove-archive stale))))
 
 (defun package-build-initialize ()
   "Load the recipe and archive-contents files."

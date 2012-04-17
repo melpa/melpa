@@ -485,21 +485,16 @@ If PKG-INFO is nil, an empty one is created."
           (pb/add-to-archive-contents pkg-info 'tar))))
       (pb/dump-archive-contents))))
 
-(defun package-build-archives (&rest pkgs)
-  "Build archives for packages PKGS."
+(defun package-build-archive-ignore-errors (pkg)
+  "Build archive for package PKG, ignoring any errors."
   (interactive)
-  (mapc 'package-build-archive pkgs))
-
-(defun package-build-archives-ignore-errors (&rest pkgs)
-  "Build archives for packages PKGS.  Ignore errors."
-  (interactive)
-  (mapc (lambda (pkg) (ignore-errors (package-build-archive pkg))) pkgs))
+  (ignore-errors (package-build-archive pkg)))
 
 (defun package-build-all ()
   "Build all packages in the `package-build-alist'."
   (interactive)
-  (apply 'package-build-archives-ignore-errors
-         (mapcar 'symbol-name (mapcar 'car package-build-alist))))
+  (mapc 'package-build-archive-ignore-errors
+        (mapcar 'symbol-name (mapcar 'car package-build-alist))))
 
 (defun package-build-initialize ()
   "Load the recipe and archive-contents files."

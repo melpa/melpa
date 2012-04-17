@@ -177,10 +177,16 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
     (re-search-forward "URL: \\(.*\\)")
     (match-string-no-properties 1)))
 
+(defun pb/trim (str &optional chr)
+  (unless chr (setq chr ? ))
+  (if (equal (elt str (1- (length str))) chr)
+      (substring str 0 (1- (length str)))
+    str))
+
 (defun pb/checkout-svn (name config dir)
   "Check package NAME with config CONFIG out of svn into DIR."
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
-    (let ((repo (plist-get config :url))
+    (let ((repo (pb/trim (plist-get config :url) ?/))
           (bound (goto-char (point-max)))
           timestamps ts)
       (cond

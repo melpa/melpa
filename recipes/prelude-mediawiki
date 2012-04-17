@@ -1,0 +1,1 @@
+(prelude-mediawiki :repo "bbatsov/prelude-modules" :fetcher github :files ("prelude-mediawiki.el"))

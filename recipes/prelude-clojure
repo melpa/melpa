@@ -1,0 +1,1 @@
+(prelude-clojure :repo "bbatsov/prelude-modules" :fetcher github :files ("prelude-clojure.el"))

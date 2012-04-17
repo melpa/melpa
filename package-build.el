@@ -71,12 +71,12 @@
 
 ;;; Internal functions
 
-(defun pb/find-parse-time (regex)
+(defun pb/find-parse-time (regex &optional bound)
   "Find REGEX in current buffer and format as a proper time version."
   (format-time-string
    "%Y%m%d"
    (date-to-time
-    (print (progn (re-search-backward regex)
+    (print (progn (re-search-backward regex bound)
                   (match-string-no-properties 1))))))
 
 (defun pb/run-process (dir prog &rest args)

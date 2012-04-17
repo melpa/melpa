@@ -312,14 +312,6 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
       (goto-char (point-min))
       (read (current-buffer)))))
 
-(defun pb/get-config (pkg-name)
-  "Get the configuration information for the given PKG-NAME."
-  (pb/read-from-file (format "epkgs/%s/.config" pkg-name)))
-
-(defun pb/get-master (pkg-name)
-  "Get the configuration information for the given PKG-NAME."
-  (pb/read-from-file (format "epkgs/%s/master" pkg-name)))
-
 
 (defun pb/create-tar (file dir &optional files)
   "Create a tar FILE containing the contents of DIR, or just FILES if non-nil.

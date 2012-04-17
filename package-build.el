@@ -179,9 +179,10 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
 
 (defun pb/checkout-svn (name config dir)
   "Check package NAME with config CONFIG out of svn into DIR."
-  (let ((repo (plist-get config :url)))
-    (with-current-buffer (get-buffer-create "*package-build-checkout*")
-      (goto-char (point-max))
+  (with-current-buffer (get-buffer-create "*package-build-checkout*")
+    (let ((repo (plist-get config :url))
+          (bound (goto-char (point-max)))
+          timestamps ts)
       (cond
        ((and (file-exists-p (expand-file-name ".svn" dir))
              (string-equal (pb/svn-repo dir) repo))
@@ -192,9 +193,17 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
           (delete-directory dir t nil))
         (print "cloning repository")
         (pb/run-process nil "svn" "checkout" repo dir)))
-      (pb/run-process dir "svn" "info")
-      (pb/find-parse-time
-       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
+      (let ((files (pb/expand-file-list pkg-cwd
+                                        (or (plist-get cfg :files)
+                                            (list "*.el")))))
+        (apply 'pb/run-process dir "svn" "info" files))
+      (while (setq ts (ignore-errors
+                        (pb/find-parse-time
+                         "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)" bound)))
+        (add-to-list 'timestamps ts))
+      (unless timestamps
+        (error "No valid timestamps found!"))
+      (car (reverse (sort timestamps 'string<))))))
 
 (defun pb/git-repo (dir)
   "Get the current git repo for DIR."

@@ -1,0 +1,1 @@
+(prelude-perl :repo "bbatsov/prelude-modules" :fetcher github :files ("prelude-perl.el"))

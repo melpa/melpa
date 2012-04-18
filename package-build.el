@@ -199,8 +199,8 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
           (delete-directory dir t nil))
         (print "cloning repository")
         (pb/run-process nil "svn" "checkout" repo dir)))
-      (let ((files (pb/expand-file-list pkg-cwd
-                                        (or (plist-get cfg :files)
+      (let ((files (pb/expand-file-list dir
+                                        (or (plist-get config :files)
                                             (list "*.el")))))
         (apply 'pb/run-process dir "svn" "info" files))
       (while (setq ts (ignore-errors
@@ -237,8 +237,8 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (pb/run-process nil "git" "clone" repo dir)))
       (when commit
         (pb/run-process dir "git" "checkout" commit))
-      (let ((files (pb/expand-file-list pkg-cwd
-                                        (or (plist-get cfg :files)
+      (let ((files (pb/expand-file-list dir
+                                        (or (plist-get config :files)
                                             (list "*.el")))))
         (apply 'pb/run-process dir "git" "log" "-n1" "--pretty=format:'\%ci'" files))
       (pb/find-parse-time

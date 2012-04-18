@@ -199,10 +199,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
           (delete-directory dir t nil))
         (print "cloning repository")
         (pb/run-process nil "svn" "checkout" repo dir)))
-      (let ((files (pb/expand-file-list dir
-                                        (or (plist-get config :files)
-                                            (list "*.el")))))
-        (apply 'pb/run-process dir "svn" "info" files))
+      (apply 'pb/run-process dir "svn" "info" (pb/expand-file-list dir config))
       (while (setq ts (ignore-errors
                         (pb/find-parse-time
                          "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)" bound)))
@@ -237,10 +234,8 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (pb/run-process nil "git" "clone" repo dir)))
       (when commit
         (pb/run-process dir "git" "checkout" commit))
-      (let ((files (pb/expand-file-list dir
-                                        (or (plist-get config :files)
-                                            (list "*.el")))))
-        (apply 'pb/run-process dir "git" "log" "-n1" "--pretty=format:'\%ci'" files))
+      (apply 'pb/run-process dir "git" "log" "-n1" "--pretty=format:'\%ci'"
+             (pb/expand-file-list dir config))
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
@@ -273,9 +268,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (print "cloning repository")
         (pb/run-process nil "bzr" "branch" repo dir)))
       (apply 'pb/run-process dir "bzr" "log" "-l1"
-             (pb/expand-file-list dir
-                                  (or (plist-get config :files)
-                                      (list "*.el"))))
+             (pb/expand-file-list dir config))
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
@@ -303,10 +296,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
           (delete-directory dir t nil))
         (print "cloning repository")
         (pb/run-process nil "hg" "clone" repo dir)))
-      (apply 'pb/run-process dir "hg" "log" "-l1"
-             (pb/expand-file-list dir
-                                  (or (plist-get config :files)
-                                      (list "*.el"))))
+      (apply 'pb/run-process dir "hg" "log" "-l1" (pb/expand-file-list dir config))
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
@@ -381,10 +371,11 @@ The file is written to `package-build-working-dir'."
        (nth 2 pkgfile-info)
        (nth 1 pkgfile-info)))))
 
-(defun pb/expand-file-list (dir files)
-  "In DIR, expand FILES, some of which may be shell-style wildcards."
+(defun pb/expand-file-list (dir config)
+  "In DIR, expand the :files for CONFIG, some of which may be shell-style wildcards."
   (let ((default-directory dir))
-    (mapcan 'file-expand-wildcards files)))
+    (mapcan 'file-expand-wildcards
+            (or (plist-get config :files) (list "*.el")))))
 
 (defun pb/merge-package-info (pkg-info name version config)
   "Return a version of PKG-INFO updated with NAME and VERSION.
@@ -464,9 +455,7 @@ of the same-named package which is to be kept."
            (expand-file-name file-name package-build-working-dir))))
 
     (let* ((version (pb/checkout name cfg pkg-cwd))
-           (files (pb/expand-file-list pkg-cwd
-                                       (or (plist-get cfg :files)
-                                           (list "*.el"))))
+           (files (pb/expand-file-list pkg-cwd cfg))
            (default-directory package-build-working-dir))
       (cond
        ((not version)

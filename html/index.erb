@@ -45,12 +45,13 @@
 
   data.map! do |row|
     pkgname = row[0]
+    pkgurl = "packages/#{row[0]}-#{row[1]}." + (row[-1] == "single" ? "el" : "tar")
     recipe_url = "https://github.com/milkypostman/melpa/blob/master/recipes/#{pkgname}"
     descr, source = row[3..-2].join(" "), "other"
     if descr =~ /(.*?)\s*\[source:\s*(\w+)\]\s*/
       descr, source = $1, $2
     end
-    [pkgname, row[1][0], descr, "[#{source}](#{recipe_url})"]
+    ["[#{pkgname}](#{pkgurl})", row[1][0], descr, "[#{source}](#{recipe_url})"]
   end
   data.sort!
 

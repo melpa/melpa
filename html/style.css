@@ -53,7 +53,9 @@ pre code {
 pre {
     background: #000;
     color: #fff;
-    padding: 15px;}
+    padding: 15px;
+}
+
 hr {
     border: 0;
     width: 80%;
@@ -76,6 +78,14 @@ table {
 
 td, th {
     padding: 2px 7px 2px 7px;
+}
+
+tr {
+    color: #ddd;
+}
+
+td:first-child a {
+    color: #fff;
 }
 
 tr.header {

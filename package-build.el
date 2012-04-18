@@ -272,7 +272,10 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
           (delete-directory dir t nil))
         (print "cloning repository")
         (pb/run-process nil "bzr" "branch" repo dir)))
-      (pb/run-process dir "bzr" "info" "-vv")
+      (apply 'pb/run-process dir "bzr" "log" "-l1"
+             (pb/expand-file-list dir
+                                  (or (plist-get config :files)
+                                      (list "*.el"))))
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 

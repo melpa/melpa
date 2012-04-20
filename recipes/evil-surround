@@ -1,2 +1,0 @@
-(evil-surround :repo "timcharper/evil-surround" :fetcher github)
-

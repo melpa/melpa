@@ -227,7 +227,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
 (defun pb/git-repo (dir)
   "Get the current git repo for DIR."
   (with-temp-buffer
-    (pb/run-process dir "git" "remote" "show" "origin")
+    (pb/run-process dir "git" "remote" "show" "-n" "origin")
     (goto-char (point-min))
     (re-search-forward "Fetch URL: \\(.*\\)")
     (match-string-no-properties 1)))

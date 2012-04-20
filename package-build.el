@@ -71,13 +71,34 @@
 
 ;;; Internal functions
 
-(defun pb/find-parse-time (regex &optional bound)
-  "Find REGEX in current buffer and format as a proper time version."
+(defun pb/parse-time (str)
+  "Parse STR as a time, and format as a YYYYMMDD string."
   (format-time-string
    "%Y%m%d"
    (date-to-time
-    (print (progn (re-search-backward regex bound)
-                  (match-string-no-properties 1))))))
+    (print (substring-no-properties str)))))
+
+(defun pb/string-match-all (regex str &optional group)
+  "Find every match for `REGEX' within `STR', returning the full match string or group `GROUP'."
+  (let (result
+        (pos 0)
+        (group (or group 0)))
+    (while (string-match regex str pos)
+      (push (match-string group str) result)
+      (setq pos (match-end group)))
+    result))
+
+(defun pb/find-parse-time (regex &optional bound)
+  "Find REGEX in current buffer and format as a proper time version, optionally looking only as far as BOUND."
+  (pb/parse-time (progn (re-search-backward regex bound)
+                        (match-string-no-properties 1))))
+
+(defun pb/find-parse-time-latest (regex &optional bound)
+  "Find the latest timestamp matching REGEX, optionally looking only as far as BOUND."
+  (let* ((text (buffer-substring-no-properties
+                (or bound (point-min)) (point)))
+         (times (mapcar 'pb/parse-time (pb/string-match-all regex text 1))))
+    (car (nreverse (sort times 'string<)))))
 
 (defun pb/run-process (dir prog &rest args)
   "In DIR (or `default-directory' if unset) run command PROG with ARGS.
@@ -188,8 +209,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
   "Check package NAME with config CONFIG out of svn into DIR."
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
     (let ((repo (pb/trim (plist-get config :url) ?/))
-          (bound (goto-char (point-max)))
-          timestamps ts)
+          (bound (goto-char (point-max))))
       (cond
        ((and (file-exists-p (expand-file-name ".svn" dir))
              (string-equal (pb/svn-repo dir) repo))
@@ -201,13 +221,8 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (print "cloning repository")
         (pb/run-process nil "svn" "checkout" repo dir)))
       (apply 'pb/run-process dir "svn" "info" (pb/expand-file-list dir config))
-      (while (setq ts (ignore-errors
-                        (pb/find-parse-time
-                         "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)" bound)))
-        (add-to-list 'timestamps ts))
-      (unless timestamps
-        (error "No valid timestamps found!"))
-      (car (reverse (sort timestamps 'string<))))))
+      (or (pb/find-parse-time-latest "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)" bound)
+          (error "No valid timestamps found!")))))
 
 (defun pb/git-repo (dir)
   "Get the current git repo for DIR."

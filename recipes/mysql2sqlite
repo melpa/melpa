@@ -1,0 +1,1 @@
+(mysql2sqlite :fetcher github :repo "echosa/emacs-mysql2sqlite.git" :files ("*"))

@@ -1,2 +1,1 @@
 (zf-mode :fetcher github :repo "echosa/zf-mode.git" :files ("*"))
-;(zf-mode :fetcher github :repo "echosa/zf-mode.git" :files ("*" "bundled/*.el" "tests/*" "ZFMode/*"))

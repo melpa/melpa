@@ -165,7 +165,8 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
           (delete-directory dir t nil))
         (print "cloning repository")
         (pb/run-process nil "darcs" "get" repo dir)))
-      (pb/run-process dir "darcs" "changes" "--last" "1")
+      (apply 'pb/run-process dir "darcs" "changes" "--max-count" "1"
+             (pb/expand-file-list dir config))
       (pb/find-parse-time
        "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)"))))
 

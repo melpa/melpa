@@ -1,7 +1,0 @@
-#!/usr/bin/emacs --script
-
-(add-to-list 'load-path (file-name-directory load-file-name))
-
-(require 'package-build)
-
-(mapc 'package-build-archive argv)

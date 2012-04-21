@@ -541,7 +541,8 @@ of the same-named package which is to be kept."
 
           (delete-directory pkg-dir t nil)
           (pb/add-to-archive-contents pkg-info 'tar))))
-      (pb/dump-archive-contents))))
+      (pb/dump-archive-contents)
+      file-name)))
 
 (defun package-build-archive-ignore-errors (pkg)
   "Build archive for package PKG, ignoring any errors."
@@ -551,8 +552,14 @@ of the same-named package which is to be kept."
 (defun package-build-all ()
   "Build all packages in the `package-build-alist'."
   (interactive)
-  (mapc 'package-build-archive-ignore-errors
-        (mapcar 'symbol-name (mapcar 'car package-build-alist)))
+  (let ((failed (loop for pkg in (mapcar 'car package-build-alist)
+                      when (not (package-build-archive-ignore-errors
+                                 (symbol-name pkg)))
+                      collect pkg)))
+    (if (zerop (length failed))
+        (princ "\nSuccessfully Compiled All Packages\n")
+      (princ "\nFailed to Build the Following Packages\n")
+      (princ (mapconcat 'symbol-name failed "\n"))))
   (package-build-cleanup))
 
 (defun package-build-cleanup ()

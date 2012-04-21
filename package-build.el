@@ -387,11 +387,15 @@ FILES if non-nil. The file is written to
     (ignore-errors
       (with-temp-buffer
         (insert-file-contents file-path)
-        ;; next two lines are a hack for some packages that aren't
+        ;; next few lines are a hack for some packages that aren't
         ;; commented properly.
+        (goto-char (point-min))
+        (forward-line)
+        (insert ";;; Version: 0")
+        (newline)
         (goto-char (point-max))
-        (insert (concat "\n;;; "
-                        (file-name-nondirectory file-path) " ends here"))
+        (newline)
+        (insert ";;; " (file-name-nondirectory file-path) " ends here")
         (flet ((package-strip-rcs-id (str) "0"))
           (package-buffer-info))))))
 

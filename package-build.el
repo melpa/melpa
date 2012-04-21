@@ -120,8 +120,10 @@ In turn, this function uses the :fetcher option in the config to
 choose a source-specific fetcher function, which it calls with
 the same arguments."
   (let ((repo-type (plist-get config :fetcher)))
-    (princ (format "%s %s" repo-type
-                   (or (plist-get config :repo) (plist-get config :url))))
+    (princ (format "%s " repo-type))
+    (unless (eq 'wiki repo-type)
+      (princ (format "%s\n"
+                     (or (plist-get config :repo) (plist-get config :url)))))
     (funcall (intern (format "pb/checkout-%s" repo-type))
              name config cwd)))
 
@@ -188,12 +190,12 @@ rate limiting."
       (cond
        ((and (file-exists-p (expand-file-name "_darcs" dir))
              (string-equal (pb/darcs-repo dir) repo))
-        (print "checkout directory exists, updating...")
+        (pb/princ-exists dir)
         (pb/run-process dir "darcs" "pull"))
        (t
         (when (file-exists-p dir)
           (delete-directory dir t nil))
-        (print "cloning repository")
+        (pb/princ-checkout repo dir)
         (pb/run-process nil "darcs" "get" repo dir)))
       (apply 'pb/run-process dir "darcs" "changes" "--max-count" "1"
              (pb/expand-file-list dir config))
@@ -214,6 +216,12 @@ rate limiting."
       (substring str 0 (1- (length str)))
     str))
 
+(defun pb/princ-exists (dir)
+  (princ (format "updating %s\n" dir)))
+
+(defun pb/princ-checkout (repo dir)
+  (princ (format "cloning %s to %s\n" repo dir)))
+
 (defun pb/checkout-svn (name config dir)
   "Check package NAME with config CONFIG out of svn into DIR."
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
@@ -222,12 +230,12 @@ rate limiting."
       (cond
        ((and (file-exists-p (expand-file-name ".svn" dir))
              (string-equal (pb/svn-repo dir) repo))
-        (print "checkout directory exists, updating...")
+        (pb/princ-exists dir)
         (pb/run-process dir "svn" "up"))
        (t
         (when (file-exists-p dir)
           (delete-directory dir t nil))
-        (print "cloning repository")
+        (pb/princ-checkout repo dir)
         (pb/run-process nil "svn" "checkout" repo dir)))
       (apply 'pb/run-process dir "svn" "info" (pb/expand-file-list dir config))
       (or (pb/find-parse-time-latest "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)" bound)
@@ -250,12 +258,12 @@ rate limiting."
       (cond
        ((and (file-exists-p (expand-file-name ".git" dir))
              (string-equal (pb/git-repo dir) repo))
-        (print "checkout directory exists, updating...")
+        (pb/princ-exists dir)
         (pb/run-process dir "git" "pull"))
        (t
         (when (file-exists-p dir)
           (delete-directory dir t nil))
-        (print (format "cloning %s to %s" repo dir))
+        (pb/princ-checkout repo dir)
         (pb/run-process nil "git" "clone" repo dir)))
       (when commit
         (pb/run-process dir "git" "checkout" commit))
@@ -286,12 +294,12 @@ rate limiting."
       (cond
        ((and (file-exists-p (expand-file-name ".bzr" dir))
              (string-equal (pb/bzr-repo dir) repo))
-        (print "checkout directory exists, updating...")
+        (pb/princ-exists dir)
         (pb/run-process dir "bzr" "merge"))
        (t
         (when (file-exists-p dir)
           (delete-directory dir t nil))
-        (print "cloning repository")
+        (pb/princ-checkout repo dir)
         (pb/run-process nil "bzr" "branch" repo dir)))
       (apply 'pb/run-process dir "bzr" "log" "-l1"
              (pb/expand-file-list dir config))
@@ -314,13 +322,13 @@ rate limiting."
       (cond
        ((and (file-exists-p (expand-file-name ".hg" dir))
              (string-equal (pb/hg-repo dir) repo))
-        (print "checkout directory exists, updating...")
+        (pb/princ-exists dir)
         (pb/run-process dir "hg" "pull")
         (pb/run-process dir "hg" "update"))
        (t
         (when (file-exists-p dir)
           (delete-directory dir t nil))
-        (print "cloning repository")
+        (pb/princ-checkout repo dir)
         (pb/run-process nil "hg" "clone" repo dir)))
       (apply 'pb/run-process dir "hg" "log" "--style" "compact" "-l1"
              (pb/expand-file-list dir config))
@@ -474,18 +482,18 @@ of the same-named package which is to be kept."
 
 ;;; Public interface
 
-(defun package-build-archive (file-name)
+(defun package-build-archive (name)
   "Build a package archive for package FILE-NAME."
-  (interactive (list (completing-read "Package: "
-                                      (mapc 'car package-build-alist))))
-  (princ (format "\n%s\n" file-name))
-  (let* ((name (intern file-name))
+  (interactive (list (intern (completing-read "Package: "
+                                       package-build-alist))))
+  (let* ((file-name (symbol-name name))
          (cfg (or (cdr (assoc name package-build-alist))
                   (error "Cannot find package %s" file-name)))
          (pkg-cwd
           (file-name-as-directory
            (expand-file-name file-name package-build-working-dir))))
 
+    (princ (format "\n%s\n" file-name))
     (let* ((version (pb/checkout name cfg pkg-cwd))
            (files (pb/expand-file-list pkg-cwd cfg))
            (default-directory package-build-working-dir))
@@ -555,8 +563,7 @@ of the same-named package which is to be kept."
   "Build all packages in the `package-build-alist'."
   (interactive)
   (let ((failed (loop for pkg in (mapcar 'car package-build-alist)
-                      when (not (package-build-archive-ignore-errors
-                                 (symbol-name pkg)))
+                      when (not (package-build-archive-ignore-errors pkg))
                       collect pkg)))
     (if (zerop (length failed))
         (princ "\nSuccessfully Compiled All Packages\n")

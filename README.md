@@ -78,14 +78,14 @@ contribute a new package by adding a new file under `recipes` using
 the following form,
 
 ```elisp
-(name
+(<package-name>
  :fetcher [git|github|bzr|hg|darcs|svn|wiki]
  [:url "<repo url>"]
  [:repo "github-user/repo-name"]
  [:files ("<file1>", ...)])
-```     
+```
 
-`name`
+`package-name`
 :   a lisp symbol that has the same name as the package being specified.
 
 `:url`

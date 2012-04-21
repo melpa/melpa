@@ -48,8 +48,8 @@
     pkgurl = "packages/#{row[0]}-#{row[1]}." + (row[-1] == "single" ? "el" : "tar")
     recipe_url = "https://github.com/milkypostman/melpa/blob/master/recipes/#{pkgname}"
     descr, source = row[3..-2].join(" "), "other"
-    if descr =~ /(.*?)\s*\[source:\s*(\w+)\]\s*/
-      descr, source = $1, $2
+    if descr =~ /(.*?)(\s*-\*-.*?)?\s*\[source:\s*(\w+)\]\s*/
+      descr, source = $1, $3
     end
     ["[#{pkgname}](#{pkgurl})", row[1][0], descr, "[#{source}](#{recipe_url})"]
   end

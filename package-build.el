@@ -576,8 +576,7 @@ of the same-named package which is to be kept."
          (stale-archives (loop for built in package-build-archive-alist
                                when (not (memq (car built) known-package-names))
                                collect built)))
-    (dolist (stale stale-archives)
-      (pb/remove-archive stale))))
+    (mapc 'pb/remove-archive stale-archives)))
 
 (defun package-build-initialize ()
   "Load the recipe and archive-contents files."

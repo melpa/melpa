@@ -73,7 +73,7 @@
 
 (defun pb/parse-time (str)
   "Parse STR as a time, and format as a YYYYMMDD string."
-  (princ (format "%s\n" (substring-no-properties str)))
+  (message (format "%s\n" (substring-no-properties str)))
   (format-time-string
    "%Y%m%d"
    (date-to-time
@@ -120,9 +120,9 @@ In turn, this function uses the :fetcher option in the config to
 choose a source-specific fetcher function, which it calls with
 the same arguments."
   (let ((repo-type (plist-get config :fetcher)))
-    (princ (format "%s " repo-type))
+    (message (format "%s " repo-type))
     (unless (eq 'wiki repo-type)
-      (princ (format "%s\n"
+      (message (format "%s\n"
                      (or (plist-get config :repo) (plist-get config :url)))))
     (funcall (intern (format "pb/checkout-%s" repo-type))
              name config cwd)))
@@ -161,7 +161,7 @@ rate limiting."
      (url-copy-file download-url filename t))
     (with-current-buffer (pb/with-wiki-rate-limit
                           (url-retrieve-synchronously wiki-url))
-      (princ (format "%s\n" download-url))
+      (message (format "%s\n" download-url))
       (pb/find-parse-time
        "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"))))
 
@@ -493,7 +493,7 @@ of the same-named package which is to be kept."
           (file-name-as-directory
            (expand-file-name file-name package-build-working-dir))))
 
-    (princ (format "\n%s\n" file-name))
+    (message (format "\n%s\n" file-name))
     (let* ((version (pb/checkout name cfg pkg-cwd))
            (files (pb/expand-file-list pkg-cwd cfg))
            (default-directory package-build-working-dir))

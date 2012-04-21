@@ -568,11 +568,11 @@ of the same-named package which is to be kept."
 (defun package-build-initialize ()
   "Load the recipe and archive-contents files."
   (interactive)
-  (setq
-   package-build-alist (pb/read-recipes)
-   package-build-archive-alist (cdr (pb/read-from-file
-                                     (expand-file-name "archive-contents"
-                                                       package-build-archive-dir)))))
+  (setq package-build-alist (pb/read-recipes)
+        package-build-archive-alist
+        (cdr (pb/read-from-file
+              (expand-file-name "archive-contents"
+                                package-build-archive-dir)))))
 
 
 (package-build-initialize)

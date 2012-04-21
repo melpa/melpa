@@ -73,10 +73,11 @@
 
 (defun pb/parse-time (str)
   "Parse STR as a time, and format as a YYYYMMDD string."
+  (princ (format "%s\n" (substring-no-properties str)))
   (format-time-string
    "%Y%m%d"
    (date-to-time
-    (print (substring-no-properties str)))))
+    (substring-no-properties str))))
 
 (defun pb/string-match-all (regex str &optional group)
   "Find every match for `REGEX' within `STR', returning the full
@@ -119,7 +120,8 @@ In turn, this function uses the :fetcher option in the config to
 choose a source-specific fetcher function, which it calls with
 the same arguments."
   (let ((repo-type (plist-get config :fetcher)))
-    (print repo-type)
+    (princ (format "%s %s" repo-type
+                   (or (plist-get config :repo) (plist-get config :url))))
     (funcall (intern (format "pb/checkout-%s" repo-type))
              name config cwd)))
 
@@ -157,13 +159,13 @@ rate limiting."
      (url-copy-file download-url filename t))
     (with-current-buffer (pb/with-wiki-rate-limit
                           (url-retrieve-synchronously wiki-url))
+      (princ (format "%s\n" download-url))
       (pb/find-parse-time
        "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"))))
 
 (defun pb/checkout-wiki (name config dir)
   "Checkout package NAME with config CONFIG from the EmacsWiki into DIR."
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
-    (message dir)
     (unless (file-exists-p dir)
       (make-directory dir))
     (let ((files (or (plist-get config :files)
@@ -457,7 +459,7 @@ ARCHIVE-ENTRY is stored."
 Note that the working directory (if present) is not deleted by
 this function, since the archive list may contain another version
 of the same-named package which is to be kept."
-  (message "Removing archive: %s" archive-entry)
+  (print (format "Removing archive: %s" archive-entry))
   (let ((archive-file (pb/archive-file-name archive-entry)))
     (when (file-exists-p archive-file)
       (delete-file archive-file)))
@@ -476,7 +478,7 @@ of the same-named package which is to be kept."
   "Build a package archive for package FILE-NAME."
   (interactive (list (completing-read "Package: "
                                       (mapc 'car package-build-alist))))
-
+  (princ (format "\n%s\n" file-name))
   (let* ((name (intern file-name))
          (cfg (or (cdr (assoc name package-build-alist))
                   (error "Cannot find package %s" file-name)))
@@ -489,7 +491,7 @@ of the same-named package which is to be kept."
            (default-directory package-build-working-dir))
       (cond
        ((not version)
-        (print (format "Unable to check out repository for %s" name)))
+        (message "Unable to check out repository for %s" name))
        ((= 1 (length files))
         (let* ((pkgsrc (expand-file-name (car files) pkg-cwd))
                (pkgdst (expand-file-name
@@ -500,7 +502,7 @@ of the same-named package which is to be kept."
                           file-name
                           version
                           cfg)))
-          (print pkg-info)
+          (message "%S" pkg-info)
           (when (file-exists-p pkgdst)
             (delete-file pkgdst t))
           (copy-file pkgsrc pkgdst)
@@ -519,7 +521,7 @@ of the same-named package which is to be kept."
                  version
                  cfg)))
 
-          (print pkg-info)
+          (message "%S" pkg-info)
           (copy-directory file-name pkg-dir)
 
           (pb/write-pkg-file (expand-file-name

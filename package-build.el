@@ -510,7 +510,6 @@ of the same-named package which is to be kept."
                           file-name
                           version
                           cfg)))
-          (message "%S" pkg-info)
           (when (file-exists-p pkgdst)
             (delete-file pkgdst t))
           (copy-file pkgsrc pkgdst)
@@ -529,7 +528,6 @@ of the same-named package which is to be kept."
                  version
                  cfg)))
 
-          (message "%S" pkg-info)
           (copy-directory file-name pkg-dir)
 
           (pb/write-pkg-file (expand-file-name

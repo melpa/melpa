@@ -217,10 +217,10 @@ rate limiting."
     str))
 
 (defun pb/princ-exists (dir)
-  (princ (format "updating %s\n" dir)))
+  (message (format "updating %s\n" dir)))
 
 (defun pb/princ-checkout (repo dir)
-  (princ (format "cloning %s to %s\n" repo dir)))
+  (message (format "cloning %s to %s\n" repo dir)))
 
 (defun pb/checkout-svn (name config dir)
   "Check package NAME with config CONFIG out of svn into DIR."

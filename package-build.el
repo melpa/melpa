@@ -79,7 +79,8 @@
     (print (substring-no-properties str)))))
 
 (defun pb/string-match-all (regex str &optional group)
-  "Find every match for `REGEX' within `STR', returning the full match string or group `GROUP'."
+  "Find every match for `REGEX' within `STR', returning the full
+match string or group `GROUP'."
   (let (result
         (pos 0)
         (group (or group 0)))
@@ -89,12 +90,14 @@
     result))
 
 (defun pb/find-parse-time (regex &optional bound)
-  "Find REGEX in current buffer and format as a proper time version, optionally looking only as far as BOUND."
+  "Find REGEX in current buffer and format as a proper time
+version, optionally looking only as far as BOUND."
   (pb/parse-time (progn (re-search-backward regex bound)
                         (match-string-no-properties 1))))
 
 (defun pb/find-parse-time-latest (regex &optional bound)
-  "Find the latest timestamp matching REGEX, optionally looking only as far as BOUND."
+  "Find the latest timestamp matching REGEX, optionally looking
+only as far as BOUND."
   (let* ((text (buffer-substring-no-properties
                 (or bound (point-min)) (point)))
          (times (mapcar 'pb/parse-time (pb/string-match-all regex text 1))))
@@ -121,15 +124,17 @@ the same arguments."
              name config cwd)))
 
 (defvar pb/last-wiki-fetch-time 0
-  "The time at which an emacswiki URL was last requested.
-This is used to avoid exceeding the rate limit of 1 request per 2
+  "The time at which an emacswiki URL was last requested. This is
+used to avoid exceeding the rate limit of 1 request per 2
 seconds; the server cuts off after 10 requests in 20 seconds.")
 
 (defvar pb/wiki-min-request-interval 2
-  "The shortest permissible interval between successive requests for Emacswiki URLs.")
+  "The shortest permissible interval between successive requests
+for Emacswiki URLs.")
 
 (defmacro pb/with-wiki-rate-limit (&rest body)
-  "Rate-limit BODY code passed to this macro to match EmacsWiki's rate limiting."
+  "Rate-limit BODY code passed to this macro to match EmacsWiki's
+rate limiting."
   (let ((now (gensym))
         (elapsed (gensym)))
     `(let* ((,now (float-time))
@@ -144,8 +149,10 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
 
 (defun pb/grab-wiki-file (filename)
   "Download FILENAME from emacswiki, returning its last-modified time."
-  (let* ((download-url (format "http://www.emacswiki.org/emacs/download/%s" filename))
-         (wiki-url (format "http://www.emacswiki.org/emacs/%s" filename)))
+  (let* ((download-url
+          (format "http://www.emacswiki.org/emacs/download/%s" filename))
+         (wiki-url
+          (format "http://www.emacswiki.org/emacs/%s" filename)))
     (pb/with-wiki-rate-limit
      (url-copy-file download-url filename t))
     (with-current-buffer (pb/with-wiki-rate-limit
@@ -260,6 +267,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
   (let* ((url (format "git://github.com/%s.git" (plist-get config :repo))))
     (pb/checkout-git name (plist-put (copy-sequence config) :url url) dir)))
 
+
 (defun pb/bzr-repo (dir)
   "Get the current bzr repo for DIR."
   (with-temp-buffer
@@ -312,7 +320,8 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
           (delete-directory dir t nil))
         (print "cloning repository")
         (pb/run-process nil "hg" "clone" repo dir)))
-      (apply 'pb/run-process dir "hg" "log" "--style" "compact" "-l1" (pb/expand-file-list dir config))
+      (apply 'pb/run-process dir "hg" "log" "--style" "compact" "-l1"
+             (pb/expand-file-list dir config))
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
@@ -335,7 +344,8 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
    pkg-file))
 
 (defun pb/read-from-file (file-name)
-  "Read and return the Lisp data stored in FILE-NAME, or nil if no such file exists."
+  "Read and return the Lisp data stored in FILE-NAME,or nil if no
+such file exists."
   (when (file-exists-p file-name)
     (with-temp-buffer
       (insert-file-contents-literally file-name)
@@ -344,8 +354,9 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
 
 
 (defun pb/create-tar (file dir &optional files)
-  "Create a tar FILE containing the contents of DIR, or just FILES if non-nil.
-The file is written to `package-build-working-dir'."
+  "Create a tar FILE containing the contents of DIR, or just
+FILES if non-nil. The file is written to
+`package-build-working-dir'."
   (let* ((default-directory package-build-working-dir))
     (apply 'process-file
            "tar" nil
@@ -388,7 +399,8 @@ The file is written to `package-build-working-dir'."
        (nth 1 pkgfile-info)))))
 
 (defun pb/expand-file-list (dir config)
-  "In DIR, expand the :files for CONFIG, some of which may be shell-style wildcards."
+  "In DIR, expand the :files for CONFIG, some of which may be
+shell-style wildcards."
   (let ((default-directory dir))
     (mapcan 'file-expand-wildcards
             (or (plist-get config :files) (list "*.el")))))
@@ -411,7 +423,8 @@ If PKG-INFO is nil, an empty one is created."
                              package-build-archive-dir)))
 
 (defun pb/add-to-archive-contents (pkg-info type)
-  "Add the built archive with info PKG-INFO and TYPE to `package-build-archive-alist'."
+  "Add the built archive with info PKG-INFO and TYPE to
+`package-build-archive-alist'."
   (let* ((name (intern (aref pkg-info 0)))
          (requires (aref pkg-info 1))
          (desc (or (aref pkg-info 2) "No description available."))
@@ -429,7 +442,8 @@ If PKG-INFO is nil, an empty one is created."
                         type)))))
 
 (defun pb/archive-file-name (archive-entry)
-  "Return the path of the file in which the package for ARCHIVE-ENTRY is stored."
+  "Return the path of the file in which the package for
+ARCHIVE-ENTRY is stored."
   (expand-file-name (format "%s-%s.%s"
                             (car archive-entry)
                             (car (aref (cdr archive-entry) 0))

@@ -385,8 +385,8 @@ FILES if non-nil. The file is written to
   "Get a vector of package info from the docstrings in FILE-PATH."
   (when (file-exists-p file-path)
     (ignore-errors
-      (save-window-excursion
-        (find-file file-path)
+      (with-temp-buffer
+        (insert-file-contents file-path)
         ;; next two lines are a hack for some packages that aren't
         ;; commented properly.
         (goto-char (point-max))

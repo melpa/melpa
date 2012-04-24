@@ -155,6 +155,8 @@ rate limiting."
           (format "http://www.emacswiki.org/emacs/%s" filename)))
     (pb/with-wiki-rate-limit
      (url-copy-file download-url filename t))
+    (when (zerop (nth 7 (file-attributes filename)))
+      (error "Wiki file %s was empty - has it been removed?" filename))
     (with-current-buffer (pb/with-wiki-rate-limit
                           (url-retrieve-synchronously wiki-url))
       (message (format "%s\n" download-url))

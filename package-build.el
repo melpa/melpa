@@ -402,15 +402,18 @@ FILES if non-nil. The file is written to
 (defun pb/get-pkg-file-info (file-path)
   "Get a vector of package info from \"-pkg.el\" file FILE-PATH."
   (when (file-exists-p file-path)
-    (let ((pkgfile-info (cdr (pb/read-from-file file-path))))
-      (vector
-       (nth 0 pkgfile-info)
-       (mapcar
-        (lambda (elt)
-          (list (car elt) (version-to-list (cadr elt))))
-        (eval (nth 3 pkgfile-info)))
-       (nth 2 pkgfile-info)
-       (nth 1 pkgfile-info)))))
+    (let ((package-def (pb/read-from-file file-path)))
+      (if (eq 'define-package (car package-def))
+          (let ((pkgfile-info (cdr package-def)))
+            (vector
+             (nth 0 pkgfile-info)
+             (mapcar
+              (lambda (elt)
+                (list (car elt) (version-to-list (cadr elt))))
+              (eval (nth 3 pkgfile-info)))
+             (nth 2 pkgfile-info)
+             (nth 1 pkgfile-info)))
+        (error "No define-package found in %s" file-path)))))
 
 (defun pb/expand-file-list (dir config)
   "In DIR, expand the :files for CONFIG, some of which may be

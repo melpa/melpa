@@ -1,6 +1,7 @@
 ;;; package-build.el --- Tools for curating the package archive
 
-;; Copyright (C) 2011 Donald Ephraim Curtis <dcurtis@milkbox.net>
+;; Copyright (C) 2011-2012 Donald Ephraim Curtis <dcurtis@milkbox.net>
+;; Copyright (C) 2012 Steve Purcell <steve@sanityinc.com>
 ;; Copyright (C) 2009 Phil Hagelberg <technomancy@gmail.com>
 
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>

@@ -9,11 +9,6 @@
 ;; Version: 0.1
 ;; Keywords: tools
 
-;;
-;; Credits:
-;;   Steve Purcell
-;;
-
 ;; This file is not (yet) part of GNU Emacs.
 ;; However, it is distributed under the same license.
 

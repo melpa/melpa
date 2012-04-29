@@ -1,3 +1,0 @@
-(erlang :repo "erlang/otp"
-             :fetcher github
-             :files ("lib/tools/emacs/*.el"))

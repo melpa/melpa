@@ -481,12 +481,47 @@ of the same-named package which is to be kept."
   (pb/dump-archive-contents))
 
 (defun pb/read-recipes ()
-  "Return a list of data structures for all recipes in `package-build-recipes-dir'."
+  "Return a list of data structures for all recipes in
+`package-build-recipes-dir'."
   (mapcar 'pb/read-from-file
           (directory-files package-build-recipes-dir t "^[^.]")))
 
-;;; Public interface
+(defun pb/copy-file (src dst)
+  "Copy SRC to DST and create parent directories for DST if they
+don't exist."
+  (let ((dstdir (file-name-directory dst)))
+    (unless (file-exists-p dstdir)
+      (make-directory dstdir t)))
+  (cond
+   ((file-regular-p src)
+    (copy-file src dst))
+   ((file-directory-p src)
+    (copy-directory src dst))))
 
+(defun pb/equal (lst)
+  "Test if all elements in the list are equal."
+  (let ((first-element (car lst)))
+    (every (lambda (ele) (equal first-element ele)) lst)))
+
+(defun pb/common-prefix (lsts)
+  "Determine the longest starting prefix for LSTS"
+  (when (pb/equal (mapcar 'car lsts))
+    (cons (car (car lsts)) (pb/common-prefix (mapcar 'cdr lsts)))))
+
+(defun pb/common-path-prefix (files)
+  "Determine the common path prefix for FILES"
+  (mapconcat 'identity
+             (pb/common-prefix
+              (mapcar (lambda (path) (split-string path "/"))
+                      files)) "/"))
+
+(defun pb/remove-prefix (pfx str)
+  "Strip PFX from STR"
+  (if (string-match (concat "^" pfx) str)
+      (setq str (replace-match "" nil nil str))
+    str))
+
+;;; Public interface
 (defun package-build-archive (name)
   "Build a package archive for package FILE-NAME."
   (interactive (list (intern (completing-read "Package: "
@@ -531,12 +566,19 @@ of the same-named package which is to be kept."
                        (pb/get-package-info (concat file-name ".el"))))
                  file-name
                  version
-                 cfg)))
+                 cfg))
+               (pkg-pathpfx
+                (file-name-as-directory (pb/common-path-prefix files))))
 
           (when (file-exists-p pkg-dir)
             (delete-directory pkg-dir t nil))
 
-          (copy-directory file-name pkg-dir)
+          (mapc (lambda (fn)
+                  (pb/copy-file (expand-file-name fn pkg-cwd)
+                                (expand-file-name
+                                 (pb/remove-prefix pkg-pathpfx fn)
+                                 pkg-dir)))
+                files)
 
           (pb/write-pkg-file (expand-file-name
                               pkg-file

@@ -533,6 +533,9 @@ of the same-named package which is to be kept."
                  version
                  cfg)))
 
+          (when (file-exists-p pkg-dir)
+            (delete-directory pkg-dir t nil))
+
           (copy-directory file-name pkg-dir)
 
           (pb/write-pkg-file (expand-file-name

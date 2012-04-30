@@ -273,6 +273,9 @@ rate limiting."
   (let* ((url (format "git://github.com/%s.git" (plist-get config :repo))))
     (pb/checkout-git name (plist-put (copy-sequence config) :url url) dir)))
 
+(defun pb/bzr-expand-repo (repo)
+  "Get REPO expanded name."
+  (pb/run-process-match "branch root: \\(.*\\)" nil "bzr" "info" repo))
 
 (defun pb/bzr-repo (dir)
   "Get the current bzr repo for DIR."
@@ -280,7 +283,7 @@ rate limiting."
 
 (defun pb/checkout-bzr (name config dir)
   "Check package NAME with config CONFIG out of bzr into DIR."
-  (let ((repo (plist-get config :url)))
+  (let ((repo (pb/bzr-expand-repo (plist-get config :url))))
     (with-current-buffer (get-buffer-create "*package-build-checkout*")
       (goto-char (point-max))
       (cond

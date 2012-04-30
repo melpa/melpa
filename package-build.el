@@ -275,7 +275,7 @@ rate limiting."
 
 (defun pb/bzr-expand-repo (repo)
   "Get REPO expanded name."
-  (pb/run-process-match "branch root: \\(.*\\)" nil "bzr" "info" repo))
+  (pb/run-process-match "\\(?:branch root\\|repository branch\\): \\(.*\\)" nil "bzr" "info" repo))
 
 (defun pb/bzr-repo (dir)
   "Get the current bzr repo for DIR."

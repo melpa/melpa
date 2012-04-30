@@ -119,7 +119,7 @@ the same arguments."
     (message (format "%s " repo-type))
     (unless (eq 'wiki repo-type)
       (message (format "%s\n"
-                     (or (plist-get config :repo) (plist-get config :url)))))
+                       (or (plist-get config :repo) (plist-get config :url)))))
     (funcall (intern (format "pb/checkout-%s" repo-type))
              name config cwd)))
 
@@ -201,7 +201,7 @@ rate limiting."
        "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)"))))
 
 (defun pb/svn-repo (dir)
-    "Get the current svn repo for DIR."
+  "Get the current svn repo for DIR."
   (with-temp-buffer
     (pb/run-process dir "svn" "info")
     (goto-char (point-min))
@@ -490,7 +490,7 @@ of the same-named package which is to be kept."
 (defun package-build-archive (name)
   "Build a package archive for package FILE-NAME."
   (interactive (list (intern (completing-read "Package: "
-                                       package-build-alist))))
+                                              package-build-alist))))
   (let* ((file-name (symbol-name name))
          (cfg (or (cdr (assoc name package-build-alist))
                   (error "Cannot find package %s" file-name)))

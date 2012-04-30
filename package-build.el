@@ -519,7 +519,7 @@ of the same-named package which is to be kept."
             (delete-file pkgdst t))
           (copy-file pkgsrc pkgdst)
           (pb/add-to-archive-contents pkg-info 'single)))
-       (t
+       ((< 1 (length  files))
         (let* ((pkg-dir (concat file-name "-" version))
                (pkg-file (concat file-name "-pkg.el"))
                (pkg-info
@@ -553,7 +553,8 @@ of the same-named package which is to be kept."
            files)
 
           (delete-directory pkg-dir t nil)
-          (pb/add-to-archive-contents pkg-info 'tar))))
+          (pb/add-to-archive-contents pkg-info 'tar)))
+       (t (error "Unable to find files matching recipe patterns.")))
       (pb/dump-archive-contents)
       file-name)))
 

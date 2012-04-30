@@ -109,6 +109,15 @@ Output is written to the current buffer."
         (error "Program '%s' with args '%s' exited with non-zero status %d"
                prog args exit-code)))))
 
+(defun pb/run-process-match (regex dir prog &rest args)
+  "In DIR (or `default-directory' if unset) run command PROG with
+  ARGS and find the output that matches REGEX"
+  (with-temp-buffer
+    (apply 'pb/run-process dir prog args)
+    (goto-char (point-min))
+    (re-search-forward regex)
+    (match-string-no-properties 1)))
+
 
 (defun pb/checkout (name config cwd)
   "Check out source for package NAME with CONFIG under working dir CWD.
@@ -175,11 +184,7 @@ rate limiting."
 
 (defun pb/darcs-repo (dir)
   "Get the current darcs repo for DIR."
-  (with-temp-buffer
-    (pb/run-process dir "darcs" "show" "repo")
-    (goto-char (point-min))
-    (re-search-forward "Default Remote: \\(.*\\)")
-    (match-string-no-properties 1)))
+  (pb/run-process-match "Default Remote: \\(.*\\)" dir "darcs" "show" "repo"))
 
 (defun pb/checkout-darcs (name config dir)
   "Check package NAME with config CONFIG out of darcs into DIR."
@@ -202,11 +207,7 @@ rate limiting."
 
 (defun pb/svn-repo (dir)
   "Get the current svn repo for DIR."
-  (with-temp-buffer
-    (pb/run-process dir "svn" "info")
-    (goto-char (point-min))
-    (re-search-forward "URL: \\(.*\\)")
-    (match-string-no-properties 1)))
+  (pb/run-process-match "URL: \\(.*\\)" dir "svn" "info"))
 
 (defun pb/trim (str &optional chr)
   (unless chr (setq chr ? ))
@@ -241,11 +242,8 @@ rate limiting."
 
 (defun pb/git-repo (dir)
   "Get the current git repo for DIR."
-  (with-temp-buffer
-    (pb/run-process dir "git" "remote" "show" "-n" "origin")
-    (goto-char (point-min))
-    (re-search-forward "Fetch URL: \\(.*\\)")
-    (match-string-no-properties 1)))
+  (pb/run-process-match
+   "Fetch URL: \\(.*\\)" dir "git" "remote" "show" "-n" "origin"))
 
 (defun pb/checkout-git (name config dir)
   "Check package NAME with config CONFIG out of git into DIR."
@@ -278,11 +276,7 @@ rate limiting."
 
 (defun pb/bzr-repo (dir)
   "Get the current bzr repo for DIR."
-  (with-temp-buffer
-    (pb/run-process dir "bzr" "info")
-    (goto-char (point-min))
-    (re-search-forward "parent branch: \\(.*\\)")
-    (match-string-no-properties 1)))
+  (pb/run-process-match "parent branch: \\(.*\\)" dir "bzr" "info"))
 
 (defun pb/checkout-bzr (name config dir)
   "Check package NAME with config CONFIG out of bzr into DIR."
@@ -306,11 +300,7 @@ rate limiting."
 
 (defun pb/hg-repo (dir)
   "Get the current hg repo for DIR."
-  (with-temp-buffer
-    (pb/run-process dir "hg" "paths")
-    (goto-char (point-min))
-    (re-search-forward "default = \\(.*\\)")
-    (match-string-no-properties 1)))
+  (pb/run-process-match "default = \\(.*\\)" dir "hg" "paths"))
 
 (defun pb/checkout-hg (name config dir)
   "Check package NAME with config CONFIG out of hg into DIR."

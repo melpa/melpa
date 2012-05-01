@@ -1,0 +1,1 @@
+(jade-mode :repo "brianc/jade-mode" :fetcher github)

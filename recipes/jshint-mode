@@ -1,0 +1,1 @@
+(jshint-mode :repo "daleharvey/jshint-mode" :fetcher github)

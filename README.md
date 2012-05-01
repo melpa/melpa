@@ -234,16 +234,17 @@ All repository code is contained in the `package-build.el`.
 directory specified by `package-build-recipes-dir`.
 
 
-- `(package-build-archive)` : interactive function to build a single
-archive. Packages are staged in the directory specified by
+- `(package-build-archive NAME)` : interactive elisp function to build
+a single archive. NAME is a symbol for the package to be built.
+Packages are staged in the directory specified by
 `package-build-working-dir` and built packages are placed in the
 directory specified by `package-build-archive-dir`. Packages are
 versioned based on the most recent commit date to package files based
 on commits to upstream package repository. For multi-file packages,
 the file `<NAME>-pkg.el` is automatically generated and contains
 *description*, *version*, and *requires* information determined by
-searching `<NAME>-pkg.el`, `<NAME>.el`, and `<NAME>-pkg.el.in`, if they
-exist in the repository.
+searching `<NAME>-pkg.el`, `<NAME>.el`, and `<NAME>-pkg.el.in`, if
+they exist in the repository.
 
 ### Variables
 

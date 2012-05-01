@@ -588,7 +588,7 @@ don't exist."
            (expand-file-name
             (concat file-name "-" version ".tar") package-build-archive-dir)
            pkg-dir
-           files)
+           (mapcar (lambda (fn) (pb/remove-prefix pkg-pathpfx fn)) files))
 
           (delete-directory pkg-dir t nil)
           (pb/add-to-archive-contents pkg-info 'tar)))

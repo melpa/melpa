@@ -549,7 +549,7 @@ of the same-named package which is to be kept."
                  file-name
                  version
                  cfg))
-               (pkg-pathpfx
+               (pkg-path-prefix
                 (file-name-as-directory (pb/common-path-prefix files))))
 
           (when (file-exists-p pkg-dir)
@@ -558,7 +558,7 @@ of the same-named package which is to be kept."
           (mapc (lambda (fn)
                   (pb/copy-file (expand-file-name fn pkg-cwd)
                                 (expand-file-name
-                                 (pb/remove-prefix pkg-pathpfx fn)
+                                 (pb/remove-prefix pkg-path-prefix fn)
                                  pkg-dir)))
                 files)
 
@@ -577,7 +577,7 @@ of the same-named package which is to be kept."
            (expand-file-name
             (concat file-name "-" version ".tar") package-build-archive-dir)
            pkg-dir
-           (mapcar (lambda (fn) (pb/remove-prefix pkg-pathpfx fn)) files))
+           (mapcar (lambda (fn) (pb/remove-prefix pkg-path-prefix fn)) files))
 
           (delete-directory pkg-dir t nil)
           (pb/add-to-archive-contents pkg-info 'tar)))

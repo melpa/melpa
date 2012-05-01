@@ -498,9 +498,9 @@ of the same-named package which is to be kept."
                       files)) "/"))
 
 (defun pb/remove-prefix (prefix string)
-  "Strip PREFIX (a regexp) from STRING."
-  (if (string-match (concat "^" prefix) string)
-      (replace-match "" nil nil string)
+  "Strip PREFIX from STRING."
+  (if (string-prefix-p prefix string)
+      (substring string (length prefix))
     string))
 
 ;;; Public interface

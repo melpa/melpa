@@ -32,7 +32,7 @@
 ;; This file allows a curator to publish an archive of Emacs packages.
 
 ;; The archive is generated from an index, which contains a list of
-;; projects and repositories from which to get them. The term
+;; projects and repositories from which to get them.  The term
 ;; "package" here is used to mean a specific version of a project that
 ;; is prepared for download and installation.
 
@@ -76,8 +76,7 @@
     (substring-no-properties str))))
 
 (defun pb/string-match-all (regex str &optional group)
-  "Find every match for `REGEX' within `STR', returning the full
-match string or group `GROUP'."
+  "Find every match for `REGEX' within `STR', returning the full match string or group `GROUP'."
   (let (result
         (pos 0)
         (group (or group 0)))
@@ -87,14 +86,12 @@ match string or group `GROUP'."
     result))
 
 (defun pb/find-parse-time (regex &optional bound)
-  "Find REGEX in current buffer and format as a proper time
-version, optionally looking only as far as BOUND."
+  "Find REGEX in current buffer and format as a time version, optionally looking only as far as BOUND."
   (pb/parse-time (progn (re-search-backward regex bound)
                         (match-string-no-properties 1))))
 
 (defun pb/find-parse-time-latest (regex &optional bound)
-  "Find the latest timestamp matching REGEX, optionally looking
-only as far as BOUND."
+  "Find the latest timestamp matching REGEX, optionally looking only as far as BOUND."
   (let* ((text (buffer-substring-no-properties
                 (or bound (point-min)) (point)))
          (times (mapcar 'pb/parse-time (pb/string-match-all regex text 1))))
@@ -110,8 +107,7 @@ Output is written to the current buffer."
                prog args exit-code)))))
 
 (defun pb/run-process-match (regex dir prog &rest args)
-  "In DIR (or `default-directory' if unset) run command PROG with
-  ARGS and find the output that matches REGEX"
+  "Find match for REGEX when - in DIR, or `default-directory' if unset - we run PROG with ARGS."
   (with-temp-buffer
     (apply 'pb/run-process dir prog args)
     (goto-char (point-min))
@@ -133,17 +129,15 @@ the same arguments."
              name config cwd)))
 
 (defvar pb/last-wiki-fetch-time 0
-  "The time at which an emacswiki URL was last requested. This is
-used to avoid exceeding the rate limit of 1 request per 2
+  "The time at which an emacswiki URL was last requested.
+This is used to avoid exceeding the rate limit of 1 request per 2
 seconds; the server cuts off after 10 requests in 20 seconds.")
 
 (defvar pb/wiki-min-request-interval 2
-  "The shortest permissible interval between successive requests
-for Emacswiki URLs.")
+  "The shortest permissible interval between successive requests for Emacswiki URLs.")
 
 (defmacro pb/with-wiki-rate-limit (&rest body)
-  "Rate-limit BODY code passed to this macro to match EmacsWiki's
-rate limiting."
+  "Rate-limit BODY code passed to this macro to match EmacsWiki's rate limiting."
   (let ((now (gensym))
         (elapsed (gensym)))
     `(let* ((,now (float-time))
@@ -210,15 +204,17 @@ rate limiting."
   (pb/run-process-match "URL: \\(.*\\)" dir "svn" "info"))
 
 (defun pb/trim (str &optional chr)
-  (unless chr (setq chr ? ))
-  (if (equal (elt str (1- (length str))) chr)
+  "Return a copy of STR without any trailing CHR (or space if unspecified)."
+  (if (equal (elt str (1- (length str))) (or chr ? ))
       (substring str 0 (1- (length str)))
     str))
 
 (defun pb/princ-exists (dir)
+  "Print a message that the contents of DIR will be updated."
   (message (format "updating %s\n" dir)))
 
 (defun pb/princ-checkout (repo dir)
+  "Print a message that REPO will be checked out into DIR."
   (message (format "cloning %s to %s\n" repo dir)))
 
 (defun pb/checkout-svn (name config dir)
@@ -345,8 +341,7 @@ rate limiting."
    pkg-file))
 
 (defun pb/read-from-file (file-name)
-  "Read and return the Lisp data stored in FILE-NAME,or nil if no
-such file exists."
+  "Read and return the Lisp data stored in FILE-NAME,or nil if no such file exists."
   (when (file-exists-p file-name)
     (with-temp-buffer
       (insert-file-contents-literally file-name)
@@ -355,9 +350,8 @@ such file exists."
 
 
 (defun pb/create-tar (file dir &optional files)
-  "Create a tar FILE containing the contents of DIR, or just
-FILES if non-nil. The file is written to
-`package-build-working-dir'."
+  "Create a tar FILE containing the contents of DIR, or just FILES if non-nil.
+The file is written to `package-build-working-dir'."
   (let* ((default-directory package-build-working-dir))
     (apply 'process-file
            "tar" nil
@@ -407,14 +401,13 @@ FILES if non-nil. The file is written to
         (error "No define-package found in %s" file-path)))))
 
 (defun pb/expand-file-list (dir config)
-  "In DIR, expand the :files for CONFIG, some of which may be
-shell-style wildcards."
+  "In DIR, expand the :files for CONFIG, some of which may be shell-style wildcards."
   (let ((default-directory dir))
     (mapcan 'file-expand-wildcards
             (or (plist-get config :files) (list "*.el")))))
 
 (defun pb/merge-package-info (pkg-info name version config)
-  "Return a version of PKG-INFO updated with NAME and VERSION.
+  "Return a version of PKG-INFO updated with NAME, VERSION and info from CONFIG.
 If PKG-INFO is nil, an empty one is created."
   (let* ((merged (or (copy-seq pkg-info)
                      (vector name nil "No description available." version))))
@@ -431,8 +424,7 @@ If PKG-INFO is nil, an empty one is created."
                              package-build-archive-dir)))
 
 (defun pb/add-to-archive-contents (pkg-info type)
-  "Add the built archive with info PKG-INFO and TYPE to
-`package-build-archive-alist'."
+  "Add the built archive with info PKG-INFO and TYPE to `package-build-archive-alist'."
   (let* ((name (intern (aref pkg-info 0)))
          (requires (aref pkg-info 1))
          (desc (or (aref pkg-info 2) "No description available."))
@@ -450,8 +442,7 @@ If PKG-INFO is nil, an empty one is created."
                         type)))))
 
 (defun pb/archive-file-name (archive-entry)
-  "Return the path of the file in which the package for
-ARCHIVE-ENTRY is stored."
+  "Return the path of the file in which the package for ARCHIVE-ENTRY is stored."
   (expand-file-name (format "%s-%s.%s"
                             (car archive-entry)
                             (car (aref (cdr archive-entry) 0))
@@ -474,14 +465,12 @@ of the same-named package which is to be kept."
   (pb/dump-archive-contents))
 
 (defun pb/read-recipes ()
-  "Return a list of data structures for all recipes in
-`package-build-recipes-dir'."
+  "Return a list of data structures for all recipes in `package-build-recipes-dir'."
   (mapcar 'pb/read-from-file
           (directory-files package-build-recipes-dir t "^[^.]")))
 
 (defun pb/copy-file (src dst)
-  "Copy SRC to DST and create parent directories for DST if they
-don't exist."
+  "Copy SRC to DST and create parent directories for DST if they don't exist."
   (let ((dstdir (file-name-directory dst)))
     (unless (file-exists-p dstdir)
       (make-directory dstdir t)))
@@ -492,31 +481,31 @@ don't exist."
     (copy-directory src dst))))
 
 (defun pb/equal (lst)
-  "Test if all elements in the list are equal."
+  "Test if all elements in LST are equal."
   (let ((first-element (car lst)))
     (every (lambda (ele) (equal first-element ele)) lst)))
 
 (defun pb/common-prefix (lsts)
-  "Determine the longest starting prefix for LSTS"
+  "Determine the longest starting prefix for LSTS."
   (when (pb/equal (mapcar 'car lsts))
     (cons (car (car lsts)) (pb/common-prefix (mapcar 'cdr lsts)))))
 
 (defun pb/common-path-prefix (files)
-  "Determine the common path prefix for FILES"
+  "Determine the common path prefix for FILES."
   (mapconcat 'identity
              (pb/common-prefix
               (mapcar (lambda (path) (split-string path "/"))
                       files)) "/"))
 
 (defun pb/remove-prefix (pfx str)
-  "Strip PFX from STR"
+  "Strip PFX from STR."
   (if (string-match (concat "^" pfx) str)
       (setq str (replace-match "" nil nil str))
     str))
 
 ;;; Public interface
 (defun package-build-archive (name)
-  "Build a package archive for package FILE-NAME."
+  "Build a package archive for package NAME."
   (interactive (list (intern (completing-read "Package: "
                                               package-build-alist))))
   (let* ((file-name (symbol-name name))
@@ -592,7 +581,7 @@ don't exist."
 
           (delete-directory pkg-dir t nil)
           (pb/add-to-archive-contents pkg-info 'tar)))
-       (t (error "Unable to find files matching recipe patterns.")))
+       (t (error "Unable to find files matching recipe patterns")))
       (pb/dump-archive-contents)
       file-name)))
 

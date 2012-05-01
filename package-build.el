@@ -497,11 +497,11 @@ of the same-named package which is to be kept."
               (mapcar (lambda (path) (split-string path "/"))
                       files)) "/"))
 
-(defun pb/remove-prefix (pfx str)
-  "Strip PFX from STR."
-  (if (string-match (concat "^" pfx) str)
-      (setq str (replace-match "" nil nil str))
-    str))
+(defun pb/remove-prefix (prefix string)
+  "Strip PREFIX (a regexp) from STRING."
+  (if (string-match (concat "^" prefix) string)
+      (replace-match "" nil nil string)
+    string))
 
 ;;; Public interface
 (defun package-build-archive (name)

@@ -537,30 +537,32 @@ of the same-named package which is to be kept."
           (copy-file pkgsrc pkgdst)
           (pb/add-to-archive-contents pkg-info 'single)))
        ((< 1 (length  files))
-        (let* ((pkg-dir (concat file-name "-" version))
+        (let* ((pkg-path-prefix
+                (file-name-as-directory (pb/common-path-prefix files)))
+               (pkg-files (mapcar
+                           (lambda (fn) (pb/remove-prefix pkg-path-prefix fn))
+                           files))
+               (pkg-dir (concat file-name "-" version))
                (pkg-file (concat file-name "-pkg.el"))
                (pkg-info
                 (pb/merge-package-info
                  (let ((default-directory pkg-cwd))
                    (or (pb/get-pkg-file-info pkg-file)
+                       (pb/get-pkg-file-info (concat pkg-path-prefix pkg-file))
                        ;; some packages (like magit) provide name-pkg.el.in
                        (pb/get-pkg-file-info (concat pkg-file ".in"))
                        (pb/get-package-info (concat file-name ".el"))))
                  file-name
                  version
-                 cfg))
-               (pkg-path-prefix
-                (file-name-as-directory (pb/common-path-prefix files))))
+                 cfg)))
 
           (when (file-exists-p pkg-dir)
             (delete-directory pkg-dir t nil))
 
-          (mapc (lambda (fn)
-                  (pb/copy-file (expand-file-name fn pkg-cwd)
-                                (expand-file-name
-                                 (pb/remove-prefix pkg-path-prefix fn)
-                                 pkg-dir)))
-                files)
+          (loop for src in files
+                for dst in pkg-files
+                do (pb/copy-file (expand-file-name src pkg-cwd)
+                                 (expand-file-name dst pkg-dir)))
 
           (pb/write-pkg-file (expand-file-name
                               pkg-file
@@ -571,13 +573,13 @@ of the same-named package which is to be kept."
                              pkg-info)
 
           (when files
-            (add-to-list 'files pkg-file))
+            (add-to-list 'pkg-files pkg-file))
 
           (pb/create-tar
            (expand-file-name
             (concat file-name "-" version ".tar") package-build-archive-dir)
            pkg-dir
-           (mapcar (lambda (fn) (pb/remove-prefix pkg-path-prefix fn)) files))
+           pkg-files)
 
           (delete-directory pkg-dir t nil)
           (pb/add-to-archive-contents pkg-info 'tar)))

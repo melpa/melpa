@@ -517,8 +517,10 @@ TARGET-SUBDIR is a directory relative to TARGET."
       (make-directory newdir t)))
   (cond
    ((file-regular-p file)
+    (message "%s -> %s" file newname)
     (copy-file file newname))
    ((file-directory-p file)
+    (message "%s => %s" file newname)
     (copy-directory file newname))))
 
 
@@ -582,7 +584,6 @@ TARGET-SUBDIR is a directory relative to TARGET."
                                                  package-build-working-dir)))
                              pkg-info)
 
-          (print pkg-files)
           (add-to-list 'pkg-files pkg-file)
 
           (pb/create-tar

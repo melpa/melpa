@@ -614,7 +614,8 @@ TARGET-SUBDIR is a directory relative to TARGET."
        (message "%s" (error-message-string err))
        (message "%s" (mapconcat
                       'identity
-                      (nthcdr 8 (split-string pb/debugger-return "\n")) "\n"))))))
+                      (nthcdr 8 (split-string pb/debugger-return "\n")) "\n"))
+       nil))))
 
 (defun package-build-all ()
   "Build all packages in the `package-build-alist'."

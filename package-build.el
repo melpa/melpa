@@ -483,7 +483,7 @@ of the same-named package which is to be kept."
 
 (defun pb/expand-config-file-list (dir config)
   "In DIR, expand the :files for CONFIG and flatten the list."
-  (pb/expand-file-list dir (or (plist-get cfg :files) (list "*.el"))))
+  (pb/expand-file-list dir (or (plist-get config :files) (list "*.el"))))
 
 (defun pb/expand-file-list (dir wildcards)
   "In DIR, expand WILDCARDS, some of which may be shell-style wildcards."
@@ -602,12 +602,12 @@ TARGET-SUBDIR is a directory relative to TARGET."
 (defun package-build-archive-ignore-errors (pkg)
   "Build archive for package PKG, ignoring any errors."
   (interactive)
-  (let ((debug-on-error t)
-        (debug-on-signal t)
-        (pb/debugger-return nil)
-        (debugger (lambda (&rest args)
-                    (setq pb/debugger-return (with-output-to-string
-                                               (backtrace))))))
+  (let* ((debug-on-error t)
+         (debug-on-signal t)
+         (pb/debugger-return nil)
+         (debugger (lambda (&rest args)
+                     (setq pb/debugger-return (with-output-to-string
+                                                (backtrace))))))
     (condition-case err
         (package-build-archive pkg)
       ('error

@@ -601,7 +601,19 @@ TARGET-SUBDIR is a directory relative to TARGET."
 (defun package-build-archive-ignore-errors (pkg)
   "Build archive for package PKG, ignoring any errors."
   (interactive)
-  (ignore-errors (package-build-archive pkg)))
+  (let ((debug-on-error t)
+        (debug-on-signal t)
+        (pb/debugger-return nil)
+        (debugger (lambda (&rest args)
+                    (setq pb/debugger-return (with-output-to-string
+                                               (backtrace))))))
+    (condition-case err
+        (package-build-archive pkg)
+      ('error
+       (message "%s" (error-message-string err))
+       (message "%s" (mapconcat
+                      'identity
+                      (nthcdr 8 (split-string pb/debugger-return "\n")) "\n"))))))
 
 (defun package-build-all ()
   "Build all packages in the `package-build-alist'."

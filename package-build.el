@@ -534,7 +534,7 @@ TARGET-SUBDIR is a directory relative to TARGET."
           (file-name-as-directory
            (expand-file-name file-name package-build-working-dir))))
 
-    (message (format "\n%s\n" file-name))
+    (message (format "\n;;; %s\n" file-name))
     (let* ((version (pb/checkout name cfg pkg-cwd))
            (files (pb/expand-config-file-list pkg-cwd cfg))
            (default-directory package-build-working-dir))

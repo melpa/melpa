@@ -623,7 +623,7 @@ TARGET-SUBDIR is a directory relative to TARGET."
   (let ((failed (loop for pkg in (mapcar 'car package-build-alist)
                       when (not (package-build-archive-ignore-errors pkg))
                       collect pkg)))
-    (if (zerop (length failed))
+    (if (not failed)
         (princ "\nSuccessfully Compiled All Packages\n")
       (princ "\nFailed to Build the Following Packages\n")
       (princ (mapconcat 'symbol-name failed "\n"))))

@@ -542,18 +542,18 @@ TARGET-SUBDIR is a directory relative to TARGET."
        ((not version)
         (message "Unable to check out repository for %s" name))
        ((= 1 (length files))
-        (let* ((pkgsrc (expand-file-name (car files) pkg-cwd))
-               (pkgdst (expand-file-name
-                        (concat file-name "-" version ".el")
-                        package-build-archive-dir))
+        (let* ((pkg-source (expand-file-name (car files) pkg-cwd))
+               (pkg-target (expand-file-name
+                            (concat file-name "-" version ".el")
+                            package-build-archive-dir))
                (pkg-info (pb/merge-package-info
-                          (pb/get-package-info pkgsrc)
+                          (pb/get-package-info pkg-source)
                           file-name
                           version
                           cfg)))
-          (when (file-exists-p pkgdst)
-            (delete-file pkgdst t))
-          (copy-file pkgsrc pkgdst)
+          (when (file-exists-p pkg-target)
+            (delete-file pkg-target t))
+          (copy-file pkg-source pkg-target)
           (pb/add-to-archive-contents pkg-info 'single)))
        ((< 1 (length  files))
         (let* ((pkg-files (pb/target-file-list files))
@@ -582,8 +582,8 @@ TARGET-SUBDIR is a directory relative to TARGET."
                                                  package-build-working-dir)))
                              pkg-info)
 
-          (when files
-            (add-to-list 'pkg-files pkg-file))
+          (print pkg-files)
+          (add-to-list 'pkg-files pkg-file)
 
           (pb/create-tar
            (expand-file-name
@@ -593,6 +593,7 @@ TARGET-SUBDIR is a directory relative to TARGET."
 
           (delete-directory pkg-dir t nil)
           (pb/add-to-archive-contents pkg-info 'tar)))
+
        (t (error "Unable to find files matching recipe patterns")))
       (pb/dump-archive-contents)
       file-name)))

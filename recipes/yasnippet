@@ -1,3 +1,4 @@
-(yasnippet :repo "capitaomorte/yasnippet" :fetcher github :files
-           ("*.el" "snippets"))
+(yasnippet :repo "capitaomorte/yasnippet"
+           :fetcher github
+           :files ("*.el" "snippets"))
 

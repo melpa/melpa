@@ -1,3 +1,4 @@
-(starter-kit-lisp :repo "technomancy/emacs-starter-kit" :fetcher github :files
-                  ("modules/starter-kit-lisp.el"))
+(starter-kit-lisp :repo "technomancy/emacs-starter-kit"
+                  :fetcher github
+                  :files ("modules/starter-kit-lisp.el"))
 

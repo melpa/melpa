@@ -1,3 +1,4 @@
-(melpa :repo "milkypostman/melpa" :fetcher github :files
-       ("melpa.el"))
+(melpa :repo "milkypostman/melpa"
+       :fetcher github
+       :files ("melpa.el"))
 

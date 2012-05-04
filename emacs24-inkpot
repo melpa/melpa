@@ -1,0 +1,3 @@
+(emacs24-inkpot 
+:repo "https://github.com/siovan/emacs24-inkpot.git"
+:fetcher github) 

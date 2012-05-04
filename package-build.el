@@ -195,7 +195,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (pb/princ-checkout repo dir)
         (pb/run-process nil "darcs" "get" repo dir)))
       (apply 'pb/run-process dir "darcs" "changes" "--max-count" "1"
-             (pb/expand-file-list dir config))
+             (pb/source-file-list (pb/expand-config-file-list dir config)))
       (pb/find-parse-time
        "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)"))))
 
@@ -232,7 +232,8 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
           (delete-directory dir t nil))
         (pb/princ-checkout repo dir)
         (pb/run-process nil "svn" "checkout" repo dir)))
-      (apply 'pb/run-process dir "svn" "info" (pb/expand-file-list dir config))
+      (apply 'pb/run-process dir "svn" "info"
+             (pb/source-file-list (pb/expand-config-file-list dir config)))
       (or (pb/find-parse-time-latest "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)" bound)
           (error "No valid timestamps found!")))))
 
@@ -260,7 +261,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
       (when commit
         (pb/run-process dir "git" "checkout" commit))
       (apply 'pb/run-process dir "git" "log" "-n1" "--pretty=format:'\%ci'"
-             (pb/expand-file-list dir config))
+             (pb/source-file-list (pb/expand-config-file-list dir config)))
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
@@ -293,7 +294,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (pb/princ-checkout repo dir)
         (pb/run-process nil "bzr" "branch" repo dir)))
       (apply 'pb/run-process dir "bzr" "log" "-l1"
-             (pb/expand-file-list dir config))
+             (pb/source-file-list (pb/expand-config-file-list dir config)))
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
@@ -318,7 +319,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (pb/princ-checkout repo dir)
         (pb/run-process nil "hg" "clone" repo dir)))
       (apply 'pb/run-process dir "hg" "log" "--style" "compact" "-l1"
-             (pb/expand-file-list dir config))
+             (pb/source-file-list (pb/expand-config-file-list dir config)))
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
@@ -400,11 +401,6 @@ The file is written to `package-build-working-dir'."
              (nth 1 pkgfile-info)))
         (error "No define-package found in %s" file-path)))))
 
-(defun pb/expand-file-list (dir config)
-  "In DIR, expand the :files for CONFIG, some of which may be shell-style wildcards."
-  (let ((default-directory dir))
-    (mapcan 'file-expand-wildcards
-            (or (plist-get config :files) (list "*.el")))))
 
 (defun pb/merge-package-info (pkg-info name version config)
   "Return a version of PKG-INFO updated with NAME, VERSION and info from CONFIG.
@@ -469,39 +465,62 @@ of the same-named package which is to be kept."
   (mapcar 'pb/read-from-file
           (directory-files package-build-recipes-dir t "^[^.]")))
 
-(defun pb/copy-file (src dst)
-  "Copy SRC to DST and create parent directories for DST if they don't exist."
-  (let ((dstdir (file-name-directory dst)))
-    (unless (file-exists-p dstdir)
-      (make-directory dstdir t)))
+
+(defun pb/source-file-list (files)
+  "Generate a flat source file listing from FILES."
+  (mapcan (lambda (fn) (if (consp fn)
+                      (pb/source-file-list (cdr fn))
+                    (list fn))) files))
+
+(defun pb/target-file-list (files)
+  "Generate a flat target file listing from FILES."
+  (loop for fn in files
+        nconc (if (consp fn)
+                  (loop for res in (pb/target-file-list (cdr fn))
+                        collect (concat (car fn) "/" res))
+                (list (file-name-nondirectory fn)))))
+
+
+(defun pb/expand-config-file-list (dir config)
+  "In DIR, expand the :files for CONFIG and flatten the list."
+  (pb/expand-file-list dir (or (plist-get cfg :files) (list "*.el"))))
+
+(defun pb/expand-file-list (dir wildcards)
+  "In DIR, expand WILDCARDS, some of which may be shell-style wildcards."
+  (let ((default-directory dir))
+    (mapcan (lambda (wc)
+              (if (consp wc)
+                  (list (cons (car wc) (pb/expand-file-list dir (cdr wc))))
+                (file-expand-wildcards wc)))
+            wildcards)))
+
+
+(defun pb/copy-package-files (files source target)
+  "Copy FILES from the SOURCE directory to TARGET directory.
+FILES is in the form (FILE-OR-CONS ...).
+
+FILE-OR-CONS is either a path relative to SOURCE or
+a cons of the form (TARGET-SUBDIR FILE-OR-CONS).
+
+TARGET-SUBDIR is a directory relative to TARGET."
+  (loop for fn in files
+        if (consp fn) do (pb/copy-package-files (cdr fn)
+                          source (expand-file-name (car fn) target))
+        else do (pb/copy-file
+                 (expand-file-name fn source)
+                 (expand-file-name (file-name-nondirectory fn) target))))
+
+(defun pb/copy-file (file newname)
+  "Copy FILE to NEWNAME and create parent directories for NEWNAME if they don't exist."
+  (let ((newdir (file-name-directory newname)))
+    (unless (file-exists-p newdir)
+      (make-directory newdir t)))
   (cond
-   ((file-regular-p src)
-    (copy-file src dst))
-   ((file-directory-p src)
-    (copy-directory src dst))))
+   ((file-regular-p file)
+    (copy-file file newname))
+   ((file-directory-p file)
+    (copy-directory file newname))))
 
-(defun pb/equal (lst)
-  "Test if all elements in LST are equal."
-  (let ((first-element (car lst)))
-    (every (lambda (ele) (equal first-element ele)) lst)))
-
-(defun pb/common-prefix (lsts)
-  "Determine the longest starting prefix for LSTS."
-  (when (pb/equal (mapcar 'car lsts))
-    (cons (car (car lsts)) (pb/common-prefix (mapcar 'cdr lsts)))))
-
-(defun pb/common-path-prefix (files)
-  "Determine the common path prefix for FILES."
-  (mapconcat 'identity
-             (pb/common-prefix
-              (mapcar (lambda (path) (split-string path "/"))
-                      files)) "/"))
-
-(defun pb/remove-prefix (prefix string)
-  "Strip PREFIX from STRING."
-  (if (string-prefix-p prefix string)
-      (substring string (length prefix))
-    string))
 
 ;;; Public interface
 (defun package-build-archive (name)
@@ -517,7 +536,7 @@ of the same-named package which is to be kept."
 
     (message (format "\n%s\n" file-name))
     (let* ((version (pb/checkout name cfg pkg-cwd))
-           (files (pb/expand-file-list pkg-cwd cfg))
+           (files (pb/expand-config-file-list pkg-cwd cfg))
            (default-directory package-build-working-dir))
       (cond
        ((not version)
@@ -537,18 +556,13 @@ of the same-named package which is to be kept."
           (copy-file pkgsrc pkgdst)
           (pb/add-to-archive-contents pkg-info 'single)))
        ((< 1 (length  files))
-        (let* ((pkg-path-prefix
-                (file-name-as-directory (pb/common-path-prefix files)))
-               (pkg-files (mapcar
-                           (lambda (fn) (pb/remove-prefix pkg-path-prefix fn))
-                           files))
+        (let* ((pkg-files (pb/target-file-list files))
                (pkg-dir (concat file-name "-" version))
                (pkg-file (concat file-name "-pkg.el"))
                (pkg-info
                 (pb/merge-package-info
                  (let ((default-directory pkg-cwd))
                    (or (pb/get-pkg-file-info pkg-file)
-                       (pb/get-pkg-file-info (concat pkg-path-prefix pkg-file))
                        ;; some packages (like magit) provide name-pkg.el.in
                        (pb/get-pkg-file-info (concat pkg-file ".in"))
                        (pb/get-package-info (concat file-name ".el"))))
@@ -559,17 +573,13 @@ of the same-named package which is to be kept."
           (when (file-exists-p pkg-dir)
             (delete-directory pkg-dir t nil))
 
-          (loop for src in files
-                for dst in pkg-files
-                do (pb/copy-file (expand-file-name src pkg-cwd)
-                                 (expand-file-name dst pkg-dir)))
+          (pb/copy-package-files files pkg-cwd pkg-dir)
 
-          (pb/write-pkg-file (expand-file-name
-                              pkg-file
-                              (file-name-as-directory
-                               (expand-file-name
-                                pkg-dir
-                                package-build-working-dir)))
+          (pb/write-pkg-file (expand-file-name pkg-file
+                                               (file-name-as-directory
+                                                (expand-file-name
+                                                 pkg-dir
+                                                 package-build-working-dir)))
                              pkg-info)
 
           (when files

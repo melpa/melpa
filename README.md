@@ -143,7 +143,8 @@ optional property specifying the explicit files used to build the
 package.  Automatically populated by matching all `.el` files in the
 root of the repository.  This is necessary when there are multiple
 `.el` files in the repository but the package should only be built
-from a subset.
+from a subset.  *Any file in any path in the repository is copied to
+the root of the package*
 
 [git]: http://git-scm.com/
 [github]: https://github.com/
@@ -193,6 +194,92 @@ contained in the `modules/` subdirectory and thus needs the packages
 files specified explicitly.
 
 
+### Multiple Files in Multiple Directories
+
+There are special cases when we need 
+There are special cases where creation of the package comes from many
+different sub-directories in the repository and the destination
+sub-directories need to be explicitly set.  
+
+Consider the `flymake-perlcritic` recipe,
+
+```elisp
+(flymake-perlcritic :repo "illusori/emacs-flymake-perlcritic"
+                    :fetcher github
+                    :files ("*.el" ("bin" "bin/flymake_perlcritic")))
+```
+
+which will result in a package structure of,
+
+```
+flymake-perlcritic-YYYMMDD
+|-- bin
+|   `-- flymake_perlcritic
+|-- flymake-perlcritic-pkg.el
+`-- flymake-perlcritic.el
+```
+
+Notice that specifying an entry in `:files` that is a list takes the
+first element to be the destination directory.  These can be embedded
+further, such as the following---hypothetical---entry for `:files`,
+
+```elisp
+("*.el" ("snippets" 
+         ("html-mode" "snippets/html-mode/*")
+         ("python-mode" "snippets/python-mode/*")))
+```
+
+which would result in a package with `*.el` in something like,
+
+```
+package-YYYYMMDD
+|-- snippets
+|   |-- html-mode
+|   |   |-- div
+|   |   `-- html
+|   `-- python-mode
+|       |-- for
+|       `-- main
+`-- package.el
+```
+
+But a better solution, given that we probably want to copy the
+*entire* `snippets` directory to the root of the package, we could
+just specify that directory.  Consider the `pony-mode` recipe,
+
+```elisp
+(pony-mode
+ :repo "davidmiller/pony-mode"
+ :fetcher github
+ :files ("src/*.el" "snippets"))
+```
+
+which generates the package,
+
+```
+pony-mode-YYYYMMDD
+|-- pony-mode-pkg.el
+|-- pony-mode.el
+|-- pony-tpl.el
+`-- snippets
+    |-- html-mode
+    |   |-- bl
+    |   |-- ex
+    |   |-- for
+    |   |-- if
+    |   |-- loa
+    |   |-- sup
+    |   |-- testc
+    |   `-- {{
+    `-- python-mode
+        |-- auth-view
+        |-- bn
+        |-- model
+        |-- modelform
+        |-- render-to
+        |-- testc
+        `-- view
+```
 
 
 ## Build Scripts

@@ -195,7 +195,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (pb/princ-checkout repo dir)
         (pb/run-process nil "darcs" "get" repo dir)))
       (apply 'pb/run-process dir "darcs" "changes" "--max-count" "1"
-             (pb/source-file-list (pb/expand-config-file-list dir config)))
+             (pb/expand-source-file-list dir config))
       (pb/find-parse-time
        "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)"))))
 
@@ -233,7 +233,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (pb/princ-checkout repo dir)
         (pb/run-process nil "svn" "checkout" repo dir)))
       (apply 'pb/run-process dir "svn" "info"
-             (pb/source-file-list (pb/expand-config-file-list dir config)))
+             (pb/expand-source-file-list dir config))
       (or (pb/find-parse-time-latest "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)" bound)
           (error "No valid timestamps found!")))))
 
@@ -261,7 +261,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
       (when commit
         (pb/run-process dir "git" "checkout" commit))
       (apply 'pb/run-process dir "git" "log" "-n1" "--pretty=format:'\%ci'"
-             (pb/source-file-list (pb/expand-config-file-list dir config)))
+             (pb/expand-source-file-list dir config))
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
@@ -294,7 +294,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (pb/princ-checkout repo dir)
         (pb/run-process nil "bzr" "branch" repo dir)))
       (apply 'pb/run-process dir "bzr" "log" "-l1"
-             (pb/source-file-list (pb/expand-config-file-list dir config)))
+             (pb/expand-source-file-list dir config))
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
@@ -319,7 +319,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (pb/princ-checkout repo dir)
         (pb/run-process nil "hg" "clone" repo dir)))
       (apply 'pb/run-process dir "hg" "log" "--style" "compact" "-l1"
-             (pb/source-file-list (pb/expand-config-file-list dir config)))
+             (pb/expand-source-file-list dir config))
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
@@ -494,6 +494,9 @@ of the same-named package which is to be kept."
                 (file-expand-wildcards wc)))
             wildcards)))
 
+(defun pb/expand-source-file-list (dir config)
+  "Shorthand way to expand paths in DIR for files listed in CONFIG."
+  (pb/source-file-list (pb/expand-config-file-list dir config)))
 
 (defun pb/copy-package-files (files source target)
   "Copy FILES from the SOURCE directory to TARGET directory.

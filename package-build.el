@@ -468,31 +468,33 @@ of the same-named package which is to be kept."
 
 (defun pb/source-file-list (files)
   "Generate a flat source file listing from FILES."
-  (mapcan (lambda (fn) (if (consp fn)
-                      (pb/source-file-list (cdr fn))
-                    (list fn))) files))
+  (mapcan (lambda (entry)
+            (if (consp entry)
+                (pb/source-file-list (cdr entry))
+              (list entry)))
+          files))
 
 (defun pb/target-file-list (files)
   "Generate a flat target file listing from FILES."
-  (loop for fn in files
-        nconc (if (consp fn)
-                  (loop for res in (pb/target-file-list (cdr fn))
-                        collect (concat (car fn) "/" res))
-                (list (file-name-nondirectory fn)))))
-
+  (mapcan (lambda (entry)
+            (if (consp entry)
+                (loop for res in (pb/target-file-list (cdr entry))
+                      collect (concat (car entry) "/" res))
+              (list (file-name-nondirectory entry))))
+          files))
 
 (defun pb/expand-config-file-list (dir config)
   "In DIR, expand the :files for CONFIG and flatten the list."
   (pb/expand-file-list dir (or (plist-get config :files) (list "*.el"))))
 
-(defun pb/expand-file-list (dir wildcards)
-  "In DIR, expand WILDCARDS, some of which may be shell-style wildcards."
-  (let ((default-directory dir))
-    (mapcan (lambda (wc)
-              (if (consp wc)
-                  (list (cons (car wc) (pb/expand-file-list dir (cdr wc))))
-                (file-expand-wildcards wc)))
-            wildcards)))
+(defun pb/expand-file-list (dir files)
+  "In DIR, expand FILES, some of which may be shell-style wildcards."
+  (mapcan (lambda (entry)
+            (if (consp entry)
+                (list (cons (car entry) (pb/expand-file-list dir (cdr entry))))
+              (let ((default-directory dir))
+                (file-expand-wildcards entry))))
+          files))
 
 (defun pb/expand-source-file-list (dir config)
   "Shorthand way to expand paths in DIR for files listed in CONFIG."

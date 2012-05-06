@@ -1,4 +1,4 @@
 (autopair
   :fetcher svn
   :url "http://autopair.googlecode.com/svn/trunk/"
-  :files ("autopair-pkg.el" "autopair.el"))
+  :files ("autopair.el"))

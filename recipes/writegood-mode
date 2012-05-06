@@ -1,1 +1,1 @@
-(melpa :repo "bnbeckwith/writegood-mode" :fetcher github)
+(writegood-mode :repo "bnbeckwith/writegood-mode" :fetcher github)

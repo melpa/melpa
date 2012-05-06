@@ -4,4 +4,4 @@
 
 (require 'package-build)
 
-(mapc 'package-build-archive argv)
+(mapc 'package-build-archive (mapcar 'intern argv))

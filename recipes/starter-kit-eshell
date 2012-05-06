@@ -1,3 +1,4 @@
-(starter-kit-eshell :repo "technomancy/emacs-starter-kit" :fetcher github :files
-                    ("modules/starter-kit-eshell.el"))
+(starter-kit-eshell :repo "technomancy/emacs-starter-kit"
+                    :fetcher github
+                    :files ("modules/starter-kit-eshell.el"))
 

@@ -1,0 +1,1 @@
+(smooth-scrolling :repo "jbondeson/smooth-scrolling" :fetcher github)

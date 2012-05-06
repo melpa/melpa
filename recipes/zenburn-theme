@@ -1,3 +1,4 @@
-(zenburn-theme :repo "bbatsov/zenburn-emacs" :fetcher github :files
-               ("zenburn-theme.el"))
+(zenburn-theme :repo "bbatsov/zenburn-emacs"
+               :fetcher github
+               :files ("zenburn-theme.el"))
 

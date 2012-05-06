@@ -1,3 +1,4 @@
-(starter-kit-bindings :repo "technomancy/emacs-starter-kit" :fetcher github :files
-                      ("modules/starter-kit-bindings.el"))
+(starter-kit-bindings :repo "technomancy/emacs-starter-kit"
+                      :fetcher github
+                      :files ("modules/starter-kit-bindings.el"))
 

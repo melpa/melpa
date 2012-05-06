@@ -1,0 +1,3 @@
+(emacs-setup
+ :fetcher github
+ :repo "echosa/emacs-setup")

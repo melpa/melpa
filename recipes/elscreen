@@ -1,3 +1,3 @@
 (elscreen
- :repo shosti/elscreen
+ :repo "shosti/elscreen"
  :fetcher github)

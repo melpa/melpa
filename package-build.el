@@ -607,9 +607,6 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
         (package-build-archive pkg)
       ('error
        (message "%s" (error-message-string err))
-       (message "%s" (mapconcat
-                      'identity
-                      (nthcdr 8 (split-string pb/debugger-return "\n")) "\n"))
        nil))))
 
 (defun package-build-all ()

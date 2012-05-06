@@ -518,11 +518,14 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
     (copy-directory file newname))))
 
 
+(defun pb/package-name-completing-read ()
+  "Prompt for a package name, returning a symbol."
+  (intern (completing-read "Package: " package-build-alist)))
+
 ;;; Public interface
 (defun package-build-archive (name)
   "Build a package archive for package NAME."
-  (interactive (list (intern (completing-read "Package: "
-                                              package-build-alist))))
+  (interactive (list (pb/package-name-completing-read)))
   (let* ((file-name (symbol-name name))
          (cfg (or (cdr (assoc name package-build-alist))
                   (error "Cannot find package %s" file-name)))
@@ -593,7 +596,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 (defun package-build-archive-ignore-errors (pkg)
   "Build archive for package PKG, ignoring any errors."
-  (interactive)
+  (interactive (list (pb/package-name-completing-read)))
   (let* ((debug-on-error t)
          (debug-on-signal t)
          (pb/debugger-return nil)

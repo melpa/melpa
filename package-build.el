@@ -466,54 +466,43 @@ of the same-named package which is to be kept."
           (directory-files package-build-recipes-dir t "^[^.]")))
 
 
-(defun pb/source-file-list (files)
-  "Generate a flat source file listing from FILES."
-  (mapcan (lambda (entry)
-            (if (consp entry)
-                (pb/source-file-list (cdr entry))
-              (list entry)))
-          files))
-
-(defun pb/target-file-list (files)
-  "Generate a flat target file listing from FILES."
-  (mapcan (lambda (entry)
-            (if (consp entry)
-                (loop for res in (pb/target-file-list (cdr entry))
-                      collect (concat (car entry) "/" res))
-              (list (file-name-nondirectory entry))))
-          files))
+(defun pb/expand-file-specs (dir specs &optional subdir)
+  "In DIR, expand SPECS, optionally under SUBDIR.
+The result is a list of (SOURCE . DEST), where SOURCE is a source
+file path and DEST is the relative path to which it should be copied."
+  (let ((default-directory dir)
+        (prefix (if subdir
+                    (format "%s/" subdir)
+                  "")))
+    (mapcan
+     (lambda (entry)
+       (if (consp entry)
+           (pb/expand-file-specs dir
+                                 (cdr entry)
+                                 (concat prefix (car entry)))
+         (mapcar (lambda (f)
+                   (cons f (concat prefix (file-name-nondirectory f))))
+                 (or (file-expand-wildcards entry)
+                     (error "No matching file(s) found in %s: %s"
+                            dir
+                            entry)))))
+     specs)))
 
 (defun pb/expand-config-file-list (dir config)
-  "In DIR, expand the :files for CONFIG and flatten the list."
-  (pb/expand-file-list dir (or (plist-get config :files) (list "*.el"))))
-
-(defun pb/expand-file-list (dir files)
-  "In DIR, expand FILES, some of which may be shell-style wildcards."
-  (mapcan (lambda (entry)
-            (if (consp entry)
-                (list (cons (car entry) (pb/expand-file-list dir (cdr entry))))
-              (let ((default-directory dir))
-                (file-expand-wildcards entry))))
-          files))
+  "In DIR, expand the :files for CONFIG using 'pb/expand-file-specs."
+  (pb/expand-file-specs dir (or (plist-get config :files) (list "*.el"))))
 
 (defun pb/expand-source-file-list (dir config)
-  "Shorthand way to expand paths in DIR for files listed in CONFIG."
-  (pb/source-file-list (pb/expand-config-file-list dir config)))
+  "Shorthand way to expand paths in DIR for source files listed in CONFIG."
+  (mapcar 'car (pb/expand-config-file-list dir config)))
 
-(defun pb/copy-package-files (files source target)
-  "Copy FILES from the SOURCE directory to TARGET directory.
-FILES is in the form (FILE-OR-CONS ...).
-
-FILE-OR-CONS is either a path relative to SOURCE or
-a cons of the form (TARGET-SUBDIR FILE-OR-CONS).
-
-TARGET-SUBDIR is a directory relative to TARGET."
-  (loop for fn in files
-        if (consp fn) do (pb/copy-package-files (cdr fn)
-                          source (expand-file-name (car fn) target))
-        else do (pb/copy-file
-                 (expand-file-name fn source)
-                 (expand-file-name (file-name-nondirectory fn) target))))
+(defun pb/copy-package-files (files source-dir target-dir)
+  "Copy FILES from SOURCE-DIR to TARGET-DIR.
+FILES is a list of (SOURCE . DEST) relative filepath pairs."
+  (loop for (source-file . dest-file) in files
+        do (pb/copy-file
+            (expand-file-name source-file source-dir)
+            (expand-file-name dest-file target-dir))))
 
 (defun pb/copy-file (file newname)
   "Copy FILE to NEWNAME and create parent directories for NEWNAME if they don't exist."
@@ -549,7 +538,7 @@ TARGET-SUBDIR is a directory relative to TARGET."
        ((not version)
         (message "Unable to check out repository for %s" name))
        ((= 1 (length files))
-        (let* ((pkg-source (expand-file-name (car files) pkg-cwd))
+        (let* ((pkg-source (expand-file-name (caar files) pkg-cwd))
                (pkg-target (expand-file-name
                             (concat file-name "-" version ".el")
                             package-build-archive-dir))
@@ -563,8 +552,8 @@ TARGET-SUBDIR is a directory relative to TARGET."
           (copy-file pkg-source pkg-target)
           (pb/add-to-archive-contents pkg-info 'single)))
        ((< 1 (length  files))
-        (let* ((pkg-files (pb/target-file-list files))
-               (pkg-dir (concat file-name "-" version))
+        (let* ((pkg-dir (concat file-name "-" version))
+               ;; TODO: What if the upstream "-pkg.el" file is in a subdir?
                (pkg-file (concat file-name "-pkg.el"))
                (pkg-info
                 (pb/merge-package-info
@@ -589,13 +578,11 @@ TARGET-SUBDIR is a directory relative to TARGET."
                                                  package-build-working-dir)))
                              pkg-info)
 
-          (add-to-list 'pkg-files pkg-file)
-
           (pb/create-tar
            (expand-file-name
             (concat file-name "-" version ".tar") package-build-archive-dir)
            pkg-dir
-           pkg-files)
+           (append (mapcar 'cdr files) (list pkg-file)))
 
           (delete-directory pkg-dir t nil)
           (pb/add-to-archive-contents pkg-info 'tar)))

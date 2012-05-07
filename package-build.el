@@ -643,4 +643,10 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 (package-build-initialize)
 
 (provide 'package-build)
+
+;; Local Variables:
+;; coding: utf-8
+;; eval: (checkdoc-minor-mode 1)
+;; End:
+
 ;;; package-build.el ends here

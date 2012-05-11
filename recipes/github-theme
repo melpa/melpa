@@ -1,0 +1,3 @@
+(github-theme :repo "infosoph/github-theme"
+              :fetcher github
+              :files ("github-theme.el"))

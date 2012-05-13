@@ -1,0 +1,2 @@
+(helm :repo "dholm/tabbar" :fetcher github)
+

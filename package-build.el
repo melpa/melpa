@@ -585,7 +585,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
            (expand-file-name
             (concat file-name "-" version ".tar") package-build-archive-dir)
            pkg-dir
-           (append (mapcar 'cdr files) (list pkg-file)))
+           (delete-dups (append (mapcar 'cdr files) (list pkg-file))))
 
           (delete-directory pkg-dir t nil)
           (pb/add-to-archive-contents pkg-info 'tar)))

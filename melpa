@@ -15,7 +15,6 @@ function melpa_clear_packages {
 function melpa_build_pkglist {
     echo "*** `date` -- Building all packages..."
     emacs --batch -l package-build.el --eval "(package-build-all)"
-    date
     echo
 }
 

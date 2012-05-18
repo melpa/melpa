@@ -1,3 +1,4 @@
 (scala-mode
- :url "http://lampsvn.epfl.ch/svn-repos/scala/scala-tool-support/trunk/src/emacs"
- :fetcher svn)
+ :repo "scala/scala-dist"
+ :fetcher github
+ :files ("tool-support/src/emacs/*.el"))

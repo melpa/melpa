@@ -1,0 +1,3 @@
+(scala-mode
+ :url "http://lampsvn.epfl.ch/svn-repos/scala/scala-tool-support/trunk/src/emacs"
+ :fetcher svn)

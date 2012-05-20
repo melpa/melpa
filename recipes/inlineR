@@ -1,0 +1,3 @@
+(e2wm :repo "myuhe/inlineR.el" 
+      :fetcher github 
+      :files ("inlineR.el"))

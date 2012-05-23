@@ -1,3 +1,4 @@
-(org-toodledo :repo "christopherjwhite/org-toodledo" :fetcher github :files
-              ("http-post-simple.el" "org-toodledo.el" "w3mexcerpt.el"))
+(org-toodledo :repo "christopherjwhite/org-toodledo"
+              :fetcher github
+              :files ("http-post-simple.el" "org-toodledo.el" "w3mexcerpt.el"))
 

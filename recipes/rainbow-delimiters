@@ -1,2 +1,2 @@
-(rainbow-delimiters :fetcher wiki)
+(rainbow-delimiters :fetcher github :repo "jlr/rainbow-delimiters")
 

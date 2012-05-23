@@ -1,0 +1,4 @@
+(deferred
+  :repo "kiwanami/emacs-deferred"
+  :fetcher github
+  :files ("deferred.el"))

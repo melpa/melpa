@@ -1,3 +1,5 @@
-(markdown-mode+ :repo "milkypostman/markdown-mode-plus" :fetcher github :files
-                ("markdown-mode+.el" "HTML as Markdown in Emacs.applescript"))
+(markdown-mode+ :repo "milkypostman/markdown-mode-plus"
+                :fetcher github
+                :files ("markdown-mode+.el"
+                        "HTML as Markdown in Emacs.applescript"))
 

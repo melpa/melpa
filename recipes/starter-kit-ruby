@@ -1,3 +1,4 @@
-(starter-kit-ruby :repo "technomancy/emacs-starter-kit" :fetcher github :files
-                  ("modules/starter-kit-ruby.el"))
+(starter-kit-ruby :repo "technomancy/emacs-starter-kit"
+                  :fetcher github
+                  :files ("modules/starter-kit-ruby.el"))
 

@@ -6,20 +6,20 @@ cd ${BASEDIR} || exit 1
 
 
 function melpa_clear_packages {
-    echo "*** Clearing the packages folder..."
+    date
     rm -rf packages/*
     echo
 }
 
 
 function melpa_build_pkglist {
-    echo "*** Building all packages..."
+    echo "*** `date` -- Building all packages..."
     emacs --batch -l package-build.el --eval "(package-build-all)"
     echo
 }
 
 function melpa_generate_html {
-    echo "*** Building html"
+    echo "*** `date` -- Building html..."
     cd html || return 1
     erb index.erb > index.md
     pandoc --template=template.html --css=style.css -s --mathml -t html --smart index.md > index.html
@@ -31,26 +31,8 @@ function trim {
     echo $1
 }
 
-function melpa_validate {
-    NUMPACKAGES=$(trim `ls recipes/* | wc -l`)
-    NUMBUILT=$(trim `ls packages/*.{el,tar} | wc -l`)
-
-    echo "${NUMBUILT}/${NUMPACKAGES} packages built"
-
-    if [[ $NUMBUILT -ne $NUMPACKAGES ]]; then
-        echo
-        echo "Missing Packages"
-        echo "______________________"
-        emacs --script missing.el
-        exit 1
-    else
-        exit 0
-    fi
-
-}
-
 function print_usage {
-    echo "usage: $0 [-h | -?] [clear | build | html | validate]"
+    echo "usage: $0 [-h | -?] [clear | build | html ]"
 }
 
 args=`getopt h $*`
@@ -77,7 +59,7 @@ done
 
 
 if [[ "$#" == "0" ]]; then
-    set -- build index validate
+    set -- build index
 fi
 
 for i; do
@@ -85,7 +67,6 @@ for i; do
         clear ) melpa_clear_packages ;;
         build ) melpa_build_pkglist ;;
         html | index ) melpa_generate_html ;;
-        validate ) melpa_validate ;;
     esac
     shift
 done

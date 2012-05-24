@@ -10,8 +10,6 @@
 
 **Last Update:** *<%= Time.now.strftime("%Y.%m.%d %H:%M %z") %>*
 
-## Current List of Packages
-
 <%
   def parse str
     # credit to: http://stackoverflow.com/q/3128406/154508
@@ -37,9 +35,7 @@
 
 
   headers = ["Package", "Version", "Description", "Source"]
-
   data = parse(File.open("../packages/archive-contents").read)[1..-1]
-
 
   data.map! do |row|
     pkgname = row[0]
@@ -61,6 +57,7 @@
     end
   end
 %>
+<%= "## Current List of #{data.size} Packages" %>
 <%=
     headers.to_enum(:each_with_index).map{
       |h,i| h + " "*(colwidth[i]-h.length) }.join(" ")

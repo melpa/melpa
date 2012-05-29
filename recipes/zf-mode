@@ -1,4 +1,0 @@
-(zf-mode
- :fetcher github
- :repo "echosa/zf-mode"
- :files ("*.el" "ZFMode"))

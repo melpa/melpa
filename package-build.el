@@ -407,7 +407,7 @@ The file is written to `package-build-working-dir'."
 If PKG-INFO is nil, an empty one is created."
   (let* ((merged (or (copy-seq pkg-info)
                      (vector name nil "No description available." version))))
-    (aset merged 0 (downcase name))
+    (aset merged 0 name)
     (aset merged 2 (format "%s [source: %s]"
                            (aref merged 2) (plist-get config :fetcher)))
     (aset merged 3 version)

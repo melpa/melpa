@@ -1,0 +1,2 @@
+(etags-table
+ :fetcher wiki)

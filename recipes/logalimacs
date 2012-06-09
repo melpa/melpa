@@ -1,0 +1,3 @@
+(logalimacs :repo "logaling/logalimacs"
+            :fetcher github
+            :files ("logalimacs.el"))

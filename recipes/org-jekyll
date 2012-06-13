@@ -1,0 +1,3 @@
+(org-jekyll :repo "juanre/org-jekyll"
+            :fetcher github
+            :files ("org-jekyll.el"))

@@ -1,0 +1,3 @@
+(gosu-mode :repo "bbatsov/gosu-mode"
+           :fetcher github
+           :files ("gosu-mode.el"))

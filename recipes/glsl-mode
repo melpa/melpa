@@ -1,0 +1,3 @@
+(glsl-mode
+ :repo "jimhourihan/glsl-mode"
+ :fetcher github)

@@ -1,0 +1,3 @@
+(auto-complete-clang
+ :repo "brianjcj/auto-complete-clang"
+ :fetcher github)

@@ -1,0 +1,2 @@
+(csharp-mode
+ :fetcher wiki)

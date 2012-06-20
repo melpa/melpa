@@ -1,0 +1,3 @@
+(flex-isearch
+ :fetcher hg
+ :url "https://bitbucket.org/jpkotta/flex-isearch")

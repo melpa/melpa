@@ -1,0 +1,1 @@
+(revive :fetcher github :repo "emacsmirror/revive")

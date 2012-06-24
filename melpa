@@ -6,7 +6,6 @@ cd ${BASEDIR} || exit 1
 
 
 function melpa_clear_packages {
-    echo "*** Clearing the packages folder..."
     date
     rm -rf packages/*
     echo
@@ -14,15 +13,13 @@ function melpa_clear_packages {
 
 
 function melpa_build_pkglist {
-    echo "*** Building all packages..."
-    date
+    echo "*** `date` -- Building all packages..."
     emacs --batch -l package-build.el --eval "(package-build-all)"
     echo
 }
 
 function melpa_generate_html {
-    echo "*** Building html..."
-    date
+    echo "*** `date` -- Building html..."
     cd html || return 1
     erb index.erb > index.md
     pandoc --template=template.html --css=style.css -s --mathml -t html --smart index.md > index.html

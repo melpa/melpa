@@ -407,7 +407,7 @@ The file is written to `package-build-working-dir'."
 If PKG-INFO is nil, an empty one is created."
   (let* ((merged (or (copy-seq pkg-info)
                      (vector name nil "No description available." version))))
-    (aset merged 0 (downcase name))
+    (aset merged 0 name)
     (aset merged 2 (format "%s [source: %s]"
                            (aref merged 2) (plist-get config :fetcher)))
     (aset merged 3 version)
@@ -585,7 +585,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
            (expand-file-name
             (concat file-name "-" version ".tar") package-build-archive-dir)
            pkg-dir
-           (append (mapcar 'cdr files) (list pkg-file)))
+           (delete-dups (append (mapcar 'cdr files) (list pkg-file))))
 
           (delete-directory pkg-dir t nil)
           (pb/add-to-archive-contents pkg-info 'tar)))
@@ -643,4 +643,10 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 (package-build-initialize)
 
 (provide 'package-build)
+
+;; Local Variables:
+;; coding: utf-8
+;; eval: (checkdoc-minor-mode 1)
+;; End:
+
 ;;; package-build.el ends here

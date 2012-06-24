@@ -10,8 +10,6 @@
 
 **Last Update:** *<%= Time.now.strftime("%Y.%m.%d %H:%M %z") %>*
 
-## Current List of Packages
-
 <%
   def parse str
     # credit to: http://stackoverflow.com/q/3128406/154508
@@ -37,9 +35,7 @@
 
 
   headers = ["Package", "Version", "Description", "Source"]
-
   data = parse(File.open("../packages/archive-contents").read)[1..-1]
-
 
   data.map! do |row|
     pkgname = row[0]
@@ -61,6 +57,7 @@
     end
   end
 %>
+<%= "## Current List of #{data.size} Packages" %>
 <%=
     headers.to_enum(:each_with_index).map{
       |h,i| h + " "*(colwidth[i]-h.length) }.join(" ")
@@ -170,7 +167,7 @@ If you are not using Emacs24 from HEAD, you may also need this to initialize pac
 
 ## Updating Packages
 
-`package.el` now includes a mechanism to upgrade packages.  After running `package-list-pacages`, type *u* (mark Upgradable packages) and then *x* (eXecute the installs and deletions).  When it's done installing all the packages it will ask if you want to delete the obsolete packages and so you can hit *y* (Yes).
+`package.el` now includes a mechanism to upgrade packages.  After running `package-list-packages`, type *u* (mark Upgradable packages) and then *x* (eXecute the installs and deletions).  When it's done installing all the packages it will ask if you want to delete the obsolete packages and so you can hit *y* (Yes).
 
 If you run into a problem installing or upgrading, you may need to go into your `~/.emacs.d/elpa/` directory and delete packages that are installed multiple times.  This can happen when the install times out (see [Known Issues](#known-issues)).
 

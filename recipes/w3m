@@ -1,0 +1,2 @@
+(w3m :repo "emacsmirror/w3m"
+     :fetcher github)

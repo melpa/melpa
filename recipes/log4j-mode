@@ -1,0 +1,1 @@
+(log4j-mode :repo "emacsmirror/log4j-mode" :fetcher github)

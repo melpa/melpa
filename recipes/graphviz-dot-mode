@@ -1,1 +1,1 @@
-(graphviz-dot-mode :repo "2938809" :fetcher github)
+(graphviz-dot-mode :repo "ppareit/graphviz-dot-mode" :fetcher github)

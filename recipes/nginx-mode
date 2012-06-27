@@ -1,0 +1,1 @@
+(nginx-mode :fetcher github :repo "ajc/nginx-mode")

@@ -1,0 +1,3 @@
+(highline :fetcher github
+          :repo "milkypostman/highline"
+          :files ("highline.el"))

@@ -1,4 +1,4 @@
-(inflections :repo "milkypostman/jump.el"
+(inflections :repo "purcell/jump.el"
              :fetcher github
              :files ("inflections.el"))
 

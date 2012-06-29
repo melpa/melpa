@@ -1,2 +1,2 @@
-(jump :repo "milkypostman/jump.el" :fetcher github)
+(jump :repo "purcell/jump.el" :fetcher github)
 

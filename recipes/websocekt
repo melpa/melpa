@@ -1,0 +1,2 @@
+(websocket :repo "ahyatt/emacs-websocket" :fetcher github
+           :files ("websocket.el"))

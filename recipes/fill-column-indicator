@@ -1,0 +1,3 @@
+(fill-column-indicator :fetcher github
+                       :repo "alpaker/Fill-Column-Indicator"
+                       :files ("fill-column-indicator.el"))

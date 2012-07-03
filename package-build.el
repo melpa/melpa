@@ -522,6 +522,11 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
   "Prompt for a package name, returning a symbol."
   (intern (completing-read "Package: " package-build-alist)))
 
+(defun pb/find-source-file (target files)
+  "Search for source of TARGET in FILES."
+  (let* ((entry (rassoc target files)))
+    (when entry (car entry))))
+
 ;;; Public interface
 (defun package-build-archive (name)
   "Build a package archive for package NAME."
@@ -556,12 +561,13 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
           (pb/add-to-archive-contents pkg-info 'single)))
        ((< 1 (length  files))
         (let* ((pkg-dir (concat file-name "-" version))
-               ;; TODO: What if the upstream "-pkg.el" file is in a subdir?
                (pkg-file (concat file-name "-pkg.el"))
+               (pkg-file-source (or (pb/find-source-file pkg-file files)
+                                 pkg-file))
                (pkg-info
                 (pb/merge-package-info
                  (let ((default-directory pkg-cwd))
-                   (or (pb/get-pkg-file-info pkg-file)
+                   (or (pb/get-pkg-file-info pkg-file-source)
                        ;; some packages (like magit) provide name-pkg.el.in
                        (pb/get-pkg-file-info (concat pkg-file ".in"))
                        (pb/get-package-info (concat file-name ".el"))))

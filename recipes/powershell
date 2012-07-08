@@ -1,0 +1,1 @@
+(powershell :repo "ralmoritz/powershell.el" :fetcher github)

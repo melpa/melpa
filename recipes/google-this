@@ -1,0 +1,1 @@
+(google-this :repo "Bruce-Connor/emacs-google-this" :fetcher github)

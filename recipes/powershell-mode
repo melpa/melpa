@@ -1,0 +1,4 @@
+(powershell-mode 
+  :fetcher svn 
+  :url "http://svn.fperrin.net/powershell-mode/"
+  :files ("powershell-mode.el"))

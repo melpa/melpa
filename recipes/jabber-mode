@@ -1,3 +1,0 @@
-(jabber-mode
- :url "git://emacs-jabber.git.sourceforge.net/gitroot/emacs-jabber/emacs-jabber"
- :fetcher git)

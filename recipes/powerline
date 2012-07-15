@@ -1,1 +1,2 @@
-(powerline :fetcher wiki)
+(powerline :fetcher github
+           :repo "milkypostman/powerline")

@@ -1,0 +1,4 @@
+(helm-gtags
+ :repo "syohex/emacs-helm-gtags"
+ :fetcher github
+ :files ("helm-gtags.el"))

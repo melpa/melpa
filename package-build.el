@@ -645,8 +645,21 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
               (expand-file-name "archive-contents"
                                 package-build-archive-dir)))))
 
-
 (package-build-initialize)
+
+;; Utility functions
+(autoload 'json-encode "json")
+
+(defun package-build-alist-as-json (fn)
+  (interactive)
+  (with-temp-file fn
+    (insert  (json-encode package-build-alist))))
+
+(defun package-build-archive-alist-as-json (fn)
+  (interactive)
+  (with-temp-file fn
+    (insert  (json-encode  package-build-archive-alist))))
+
 
 (provide 'package-build)
 

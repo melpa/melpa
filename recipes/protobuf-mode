@@ -1,0 +1,3 @@
+(protobuf-mode :fetcher svn
+               :url "http://protobuf.googlecode.com/svn/trunk/editors/"
+               :files ("protobuf-mode.el"))

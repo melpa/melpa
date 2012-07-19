@@ -1,0 +1,1 @@
+(wc-mode :fetcher wiki)

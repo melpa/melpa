@@ -1,0 +1,4 @@
+(actionscript-mode 
+ :fetcher github
+ :repo "austinhaas/actionscript-mode"
+ :files ("actionscript-mode.el"))

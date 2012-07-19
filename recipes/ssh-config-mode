@@ -1,0 +1,1 @@
+(ssh-config-mode :fetcher github :repo "emacsmirror/ssh-config-mode")

@@ -8,3 +8,6 @@
 /epkgs
 **.elc
 .#*
+/archive.json
+/recipes.json
+/recipes/.dirstamp

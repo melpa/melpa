@@ -1,0 +1,3 @@
+(openwith
+ :fetcher hg
+ :url "https://bitbucket.org/jpkotta/openwith")

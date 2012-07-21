@@ -85,7 +85,7 @@ Let `<NAME>` denote the name of the recipe to submit.
 `package-build` was loaded).
 3. Confirm your package build properly by running
 
-        ./buildpkg <NAME>
+        make recipes/<NAME>
        
 4. Install the file you built by running `package-install-file` from
 within Emacs and specifying the newly built package in the directory
@@ -284,32 +284,39 @@ pony-mode-YYYYMMDD
 
 ## Build Scripts
 
-The scripts described here
+Building MELPA is all based around using the `Makefile` included in
+the root repository directory. Described below are the actions that
+accepted by the `Makefile`.
 
-* `buildpkg` -- Create an archive of the package(s) passed as
-arguments to the script. Built packages are put in the `packages/`
-folder with version corresponding to the newest HEAD revision
-available; given according to the `%Y%m%d` format.
+* `all` -- Builds all packages under the `recipes/` directory and compiles the `index.html` file for the [melpa] website.
 
-* `melpa` -- All the logic for generating everything in the repository
-based on the recipe files. By default build all packages listed under
-`recipes/`, and compile the `index.html` file for the [melpa] website.
+* `recipes/<NAME>` -- Build individual recipe `<NAME>`. Built packages
+are put in the `packages/` folder with version corresponding to the
+newest HEAD revision available; given according to the `%Y%m%d`
+format.
 
-    The following arguments are accepted:
+* `json` -- build all JSON files.
+
+* `archive.json` -- construct the `archive.json` file that will contain a JSON object of all compiled packages.
+
+* `recipes.json` -- construct the `recipes.json` file containing a JSON object of all packages available for building.
+
+* `clean` -- clean everything.
+
+* `html` -- build `index.html`.
+
+* `clean-working` -- remove all repositories that have been checked out to the `working/` directory.
+
+* `clean-packages` -- remove all compiled packages from the `packages` directory.
+
+* `clean-json` -- remove all JSON files.
     
-    clear : clean out the `packages/` directory
-    
-    build : build all packages in `pkglist`
-    
-    index : build the `index.html` file
-    
-    validate :naively validate that the correct number of packages were built.
-    
-    Note that these scripts require an Emacs with `package.el` installed,
-    such as Emacs 24. If you have an older version of Emacs, you can get a
-    suitable `package.el` [here](http://bit.ly/pkg-el23).
+ Note that these scripts require an Emacs with `package.el` installed,
+ such as Emacs 24. If you have an older version of Emacs, you can get a
+ suitable `package.el` [here](http://bit.ly/pkg-el23).
     
 [melpa]: http://melpa.milkbox.net
+
 
 ## API
 

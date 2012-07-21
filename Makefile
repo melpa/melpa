@@ -43,4 +43,5 @@ json: archive.json recipes.json
 recipes/%: .FORCE
 	-rm -vf $(PKGDIR)/$(notdir $@)-*
 	@echo
-	./buildpkg $(notdir $@)
+	emacs --batch --no-site-file -l package-build.el --eval \
+  "(package-build-archive '$(notdir $@))"

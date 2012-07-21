@@ -1,8 +1,0 @@
-#!/bin/sh 
-:;exec emacs --script "$0" "$@"
-
-(add-to-list 'load-path (file-name-directory load-file-name))
-
-(require 'package-build)
-
-(mapc 'package-build-archive (mapcar 'intern argv))

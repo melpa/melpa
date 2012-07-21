@@ -1,0 +1,1 @@
+(pomodoro :fetcher github :repo "docgnome/pomodoro.el")

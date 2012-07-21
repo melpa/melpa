@@ -1,47 +1,67 @@
 SHELL   := /bin/bash
 PKGDIR  := ./packages
+RCPDIR  := ./recipes
 HTMLDIR := ./html
 WORKDIR := ./working
 
-.PHONY: clean build index html json
-.FORCE:
+EVAL := emacs --no-site-file --batch -l package-build.el --eval
+
 
 all: build json index
 
-build:
-	emacs --batch -l package-build.el --eval "(package-build-all)"
 
-html:
+## General rules
+build:
+	@echo " • Building $$(ls -1 $(RCPDIR) | wc -l) recipes ..."
+	$(EVAL) "(package-build-all)"
+
+html: index
+index:
+	@echo " • Building html index ..."
 	$(MAKE) -C $(HTMLDIR)
 
-index: html
 
+## Cleanup rules
 clean-working:
+	@echo " • Removing package sources ..."
 	rm -rf $(WORKDIR)/*
 
 clean-packages:
+	@echo " • Removing packages ..."
 	rm -rfv $(PKGDIR)/*
 
 clean-json:
+	@echo " • Removing json files ..."
 	-rm -vf archive.json recipes.json
 
 clean: clean-working clean-packages clean-json
 
+
+## Json rules
 archive.json: packages/archive-contents
-	emacs --batch --no-site-file -l package-build.el --eval \
-		'(package-build-archive-alist-as-json "archive.json")'
+	@echo " • Building $@ ..."
+	$(EVAL) '(package-build-archive-alist-as-json "archive.json")'
 
-recipes.json: recipes/.dirstamp
-	emacs --batch --no-site-file -l package-build.el --eval \
-  '(package-build-alist-as-json "recipes.json")'
-
-recipes/.dirstamp: .FORCE
-	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] && touch $@ || exit 0
+recipes.json: $(RCPDIR)/.dirstamp
+	@echo " • Building $@ ..."
+	$(EVAL) '(package-build-alist-as-json "recipes.json")'
 
 json: archive.json recipes.json
 
-recipes/%: .FORCE
-	-rm -vf $(PKGDIR)/$(notdir $@)-*
+$(RCPDIR)/.dirstamp: .FORCE
+	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] \
+	&& touch $@ || exit 0
+
+
+## Recipe rules
+$(RCPDIR)/%: .FORCE
+	@echo " • Building recipe $(@F) ..."
+	-rm -vf $(PKGDIR)/$(@F)-*
+	$(EVAL) "(package-build-archive '$(@F))"
+
+	@echo " ✓ Wrote $$(ls -lsh $(PKGDIR)/$(@F)-*) "
 	@echo
-	emacs --batch --no-site-file -l package-build.el --eval \
-  "(package-build-archive '$(notdir $@))"
+
+
+.PHONY: clean build index html json
+.FORCE:

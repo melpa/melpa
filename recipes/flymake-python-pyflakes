@@ -1,0 +1,3 @@
+(flymake-python-pyflakes
+ :fetcher github
+ :repo "purcell/flymake-python-pyflakes")

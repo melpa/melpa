@@ -1,6 +1,6 @@
 SHELL  := /bin/bash
 
-.PHONY: all clean
+.PHONY: all clean index.md
 all: index.html
 
 index.md: index.erb

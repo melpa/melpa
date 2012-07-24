@@ -563,7 +563,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
         (let* ((pkg-dir (concat file-name "-" version))
                (pkg-file (concat file-name "-pkg.el"))
                (pkg-file-source (or (pb/find-source-file pkg-file files)
-                                 pkg-file))
+                                    pkg-file))
                (pkg-info
                 (pb/merge-package-info
                  (let ((default-directory pkg-cwd))
@@ -624,7 +624,8 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
     (if (not failed)
         (princ "\nSuccessfully Compiled All Packages\n")
       (princ "\nFailed to Build the Following Packages\n")
-      (princ (mapconcat 'symbol-name failed "\n"))))
+      (princ (mapconcat 'symbol-name failed "\n"))
+      (princ "\n")))
   (package-build-cleanup))
 
 (defun package-build-cleanup ()

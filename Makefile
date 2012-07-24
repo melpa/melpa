@@ -3,8 +3,9 @@ PKGDIR  := ./packages
 RCPDIR  := ./recipes
 HTMLDIR := ./html
 WORKDIR := ./working
+EMACS   := emacs
 
-EVAL := emacs --no-site-file --batch -l package-build.el --eval
+EVAL := $(EMACS) --no-site-file --batch -l package-build.el --eval
 
 
 all: build json index

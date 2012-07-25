@@ -1,0 +1,1 @@
+(rainbow-mode :repo "emacsmirror/rainbow-mode" :fetcher github)

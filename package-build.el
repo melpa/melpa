@@ -650,16 +650,17 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 ;; Utility functions
 (autoload 'json-encode "json")
+(eval-after-load 'json '(load (expand-file-name "json-fix")))
 
 (defun package-build-alist-as-json (fn)
   (interactive)
   (with-temp-file fn
-    (insert  (json-encode package-build-alist))))
+    (insert (json-encode package-build-alist))))
 
 (defun package-build-archive-alist-as-json (fn)
   (interactive)
   (with-temp-file fn
-    (insert  (json-encode  package-build-archive-alist))))
+    (insert (json-encode package-build-archive-alist))))
 
 
 (provide 'package-build)

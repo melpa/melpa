@@ -11,43 +11,22 @@
 **Last Update:** *<%= Time.now.strftime("%Y.%m.%d %H:%M %z") %>*
 
 <%
-  def parse str
-    # credit to: http://stackoverflow.com/q/3128406/154508
-    tokens = str.scan(/#{Regexp.escape("(")}|#{Regexp.escape(")")}|"(?:\\.|[^"])+"|[a-zA-Z0-9\'\-\_\+]+/)
-
-    stack = [[]]
-
-    tokens.each do |tok|
-      case tok
-      when "("
-        stack << []
-      when ")"
-        stack[-2] << stack.pop
-      when /^"(.*)\"$/
-        stack[-1] << $1
-      else
-        stack[-1] << tok
-      end
-    end
-
-    return stack[-1][-1]
-  end
-
+  require 'json'
+  archive_json = JSON.parse(File.open("../archive.json").read)
 
   headers = ["Package", "Version", "Description", "Source"]
-  data = parse(File.open("../packages/archive-contents").read)[1..-1]
 
-  data.map! do |row|
-    pkgname = row[0]
-    pkgurl = "packages/#{row[0]}-#{row[1]}." + (row[-1] == "single" ? "el" : "tar")
+  data = archive_json.keys.sort.map do |pkgname|
+    versions, deps, descr, pkgtype = archive_json[pkgname]
+    version = versions.max.to_s
+    pkgurl = "packages/#{pkgname}-#{version}." + (pkgtype == "single" ? "el" : "tar")
     recipe_url = "https://github.com/milkypostman/melpa/blob/master/recipes/#{pkgname}"
-    descr, source = row[3..-2].join(" "), "other"
+    source = 'unknown'
     if descr =~ /(.*?)(\s*-\*-.*?)?\s*\[source:\s*(\w+)\]\s*/
       descr, source = $1, $3
     end
-    ["[#{pkgname}](#{pkgurl})", row[1][0], descr, "[#{source}](#{recipe_url})"]
+    ["[#{pkgname}](#{pkgurl})", version, descr, "[#{source}](#{recipe_url})"]
   end
-  data.sort!
 
   colwidth = [0,0,0, 9]
 

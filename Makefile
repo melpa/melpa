@@ -17,7 +17,7 @@ build:
 	$(EVAL) "(package-build-all)"
 
 html: index
-index:
+index: archive.json
 	@echo " • Building html index ..."
 	$(MAKE) -C $(HTMLDIR)
 

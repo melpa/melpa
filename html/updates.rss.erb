@@ -23,13 +23,14 @@
         package.version = version
         package.build_time = Time.new(version[0..3].to_i, version[4..5].to_i, version[6..7].to_i)
         package.url = "#{base_url}packages/#{pkgname}-#{version}." + (pkgtype == "single" ? "el" : "tar")
+        package.info_url = "#{base_url}##{pkgname}"
     %>
       <item>
         <title>Package update: <%= package.name %> is now at version <%= package.version %></title>
         <description>The <%= package.name %> package in MELPA has been updated to version <%= package.version %>.</description>
         <pubDate><%= package.build_time.rfc822 %></pubDate>
         <guid isPermaLink="true"><%= package.url %></guid>
-        <link><%= package.url %></link>
+        <link><%= package.info_url %></link>
       </item>
     <% end %>
   </channel>

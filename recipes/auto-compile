@@ -1,0 +1,1 @@
+(auto-compile :repo "tarsius/auto-compile" :fetcher github)

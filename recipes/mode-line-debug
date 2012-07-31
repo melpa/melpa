@@ -1,0 +1,1 @@
+(mode-line-debug :repo "tarsius/mode-line-debug" :fetcher github)

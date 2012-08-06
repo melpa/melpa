@@ -1,0 +1,3 @@
+(slim-mode
+ :repo "minad/emacs-slim"
+ :fetcher github)

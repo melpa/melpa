@@ -1,0 +1,1 @@
+(killer :repo "tarsius/killer" :fetcher github)

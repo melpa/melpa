@@ -1,0 +1,1 @@
+(fwb-cmds :repo "tarsius/fwb-cmds" :fetcher github)

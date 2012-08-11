@@ -1,0 +1,1 @@
+(erc-track-score :fetcher git :url "git://git.naquadah.org/erc-track-score.git")

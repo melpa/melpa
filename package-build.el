@@ -600,6 +600,21 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
       (pb/dump-archive-contents)
       file-name)))
 
+;;;###autoload
+(defun package-build-current-recipe ()
+  "Build archive for the recipe defined in the current buffer."
+  (interactive)
+  (unless (and (buffer-file-name)
+               (string-equal (file-name-directory (buffer-file-name))
+                             package-build-recipes-dir))
+    (error "Buffer is not visiting a recipe"))
+  (when (buffer-modified-p)
+    (if (y-or-n-p (format "Save file %s? " buffer-file-name))
+        (save-buffer)
+      (error "Aborting")))
+  (package-build-initialize)
+  (package-build-archive (intern (file-name-nondirectory (buffer-file-name)))))
+
 (defun package-build-archive-ignore-errors (pkg)
   "Build archive for package PKG, ignoring any errors."
   (interactive (list (pb/package-name-completing-read)))

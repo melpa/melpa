@@ -528,6 +528,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
     (when entry (car entry))))
 
 ;;; Public interface
+;;;###autoload
 (defun package-build-archive (name)
   "Build a package archive for package NAME."
   (interactive (list (pb/package-name-completing-read)))
@@ -630,6 +631,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
        (message "%s" (error-message-string err))
        nil))))
 
+;;;###autoload
 (defun package-build-all ()
   "Build all packages in the `package-build-alist'."
   (interactive)

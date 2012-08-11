@@ -1,0 +1,1 @@
+(ctags :fetcher hg :url "https://bitbucket.org/semente/ctags.el")

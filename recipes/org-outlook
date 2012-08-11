@@ -1,0 +1,1 @@
+(org-outlook :fetcher github :repo "mlf176f2/org-outlook.el" :files ("*.el" "*.vbs"))

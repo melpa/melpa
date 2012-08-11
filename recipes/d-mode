@@ -1,0 +1,1 @@
+(d-mode :fetcher github :repo "emacsmirror/d-mode")

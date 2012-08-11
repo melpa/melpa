@@ -1,0 +1,1 @@
+(ruby-electric :repo "qoobaa/ruby-electric" :fetcher github)

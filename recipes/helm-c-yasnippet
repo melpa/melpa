@@ -1,0 +1,1 @@
+(helm-c-yasnippet :repo "myuhe/helm-c-yasnippet.el" :fetcher github)

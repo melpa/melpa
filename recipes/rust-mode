@@ -1,0 +1,4 @@
+(rust-mode :repo "mozilla/rust"
+           :commit "incoming"
+           :fetcher github
+           :files ("src/etc/emacs/rust-mode.el"))

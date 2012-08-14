@@ -1,0 +1,4 @@
+(cm-mode :repo "mozilla/rust"
+         :commit "incoming"
+         :fetcher github
+         :files ("src/etc/emacs/cm-mode.el"))

@@ -1,3 +1,3 @@
 (o-blog :repo "renard/o-blog" 
         :fetcher github
-         :files ("*.el" "example" "templates" "Font-Awesome" "bootstrqap" "less.js"))
+        :files ("*.el" "example" "templates" "Font-Awesome" "bootstrap" "less.js"))

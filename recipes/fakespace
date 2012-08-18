@@ -1,0 +1,3 @@
+(fakespace :repo "skeeto/elisp-fakespace"
+           :fetcher github
+           :files ("fakespace.el"))

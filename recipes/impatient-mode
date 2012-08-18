@@ -1,0 +1,2 @@
+(impatient-mode :repo "netguy204/imp.el"
+                :fetcher github)

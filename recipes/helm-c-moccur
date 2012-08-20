@@ -1,1 +1,2 @@
-(helm-c-moccur :repo "myuhe/helm-c-moccur.el" :fetcher github)
+(helm-c-moccur :repo "emacs-helm/helm-c-moccur"
+               :fetcher github)

@@ -1,2 +1,3 @@
-(o-blog :repo "renard/o-blog" 
-        :fetcher github)
+(o-blog :repo "renard/o-blog"
+        :fetcher github
+        :files ("o-blog*.el"))

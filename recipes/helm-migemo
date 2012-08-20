@@ -1,0 +1,3 @@
+(helm-migemo :repo "emacs-helm/helm-migemo"
+             :fetcher github
+             :files ("helm-migemo.el"))

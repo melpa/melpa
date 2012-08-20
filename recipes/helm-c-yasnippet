@@ -1,1 +1,2 @@
-(helm-c-yasnippet :repo "myuhe/helm-c-yasnippet.el" :fetcher github)
+(helm-c-yasnippet :repo "emacs-helm/helm-c-yasnippet"
+                  :fetcher github)

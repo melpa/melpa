@@ -1,3 +1,2 @@
 (helm-gist :repo "myuhe/helm-gist.el" 
-           :fetcher github 
-           :files ("helm-gist.el"))
+           :fetcher github)

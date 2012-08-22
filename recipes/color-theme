@@ -1,1 +1,3 @@
-(color-theme :url "http://bzr.savannah.gnu.org/r/color-theme/trunk" :fetcher bzr)
+(color-theme :url "http://bzr.savannah.gnu.org/r/color-theme/trunk"
+             :fetcher bzr
+             :files ("*.el" "themes"))

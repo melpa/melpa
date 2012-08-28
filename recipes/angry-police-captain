@@ -1,0 +1,2 @@
+(angry-police-captain :fetcher github
+                      :repo "rolando2424/angry-police-captain-el")

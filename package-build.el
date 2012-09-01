@@ -72,7 +72,7 @@
   (message (format "%s\n" (substring-no-properties str)))
   ;; We remove zero-padding the HH portion, as it is lost
   ;; when stored in the archive-contents
-  (replace-regexp-in-string "\\.0"
+  (replace-regexp-in-string "\\.0+"
                             "."
                             (format-time-string
                              "%Y%m%d.%H%M"

@@ -68,12 +68,16 @@
 ;;; Internal functions
 
 (defun pb/parse-time (str)
-  "Parse STR as a time, and format as a YYYYMMDD string."
+  "Parse STR as a time, and format as a YYYYMMDD.HHMM string."
   (message (format "%s\n" (substring-no-properties str)))
-  (format-time-string
-   "%Y%m%d.%H%M"
-   (date-to-time
-    (substring-no-properties str))))
+  ;; We remove zero-padding the HH portion, as it is lost
+  ;; when stored in the archive-contents
+  (replace-regexp-in-string "\\.0"
+                            "."
+                            (format-time-string
+                             "%Y%m%d.%H%M"
+                             (date-to-time
+                              (substring-no-properties str)))))
 
 (defun pb/string-match-all (regex str &optional group)
   "Find every match for `REGEX' within `STR', returning the full match string or group `GROUP'."

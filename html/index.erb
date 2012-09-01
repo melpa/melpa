@@ -18,7 +18,7 @@
 
   data = archive_json.keys.sort.map do |pkgname|
     versions, deps, descr, pkgtype = archive_json[pkgname]
-    version = versions.max.to_s
+    version = versions.join('.')
     pkgurl = "packages/#{pkgname}-#{version}." + (pkgtype == "single" ? "el" : "tar")
     recipe_url = "https://github.com/milkypostman/melpa/blob/master/recipes/#{pkgname}"
     source = 'unknown'

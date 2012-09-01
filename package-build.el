@@ -71,7 +71,7 @@
   "Parse STR as a time, and format as a YYYYMMDD string."
   (message (format "%s\n" (substring-no-properties str)))
   (format-time-string
-   "%Y%m%d"
+   "%Y%m%d.%H%M"
    (date-to-time
     (substring-no-properties str))))
 

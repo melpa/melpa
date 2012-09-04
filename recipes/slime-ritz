@@ -1,4 +1,3 @@
 (slime-ritz :repo "pallet/ritz"
             :fetcher github
-            :files ("src/main/elisp/slime-ritz.el"))
-
+            :files ("swank/elisp/slime-ritz.el"))

@@ -1,0 +1,4 @@
+(haxe-mode :repo "photex/haxe-mode"
+           :fetcher github
+           :files ("haxe-mode.el"))
+

@@ -1,2 +1,2 @@
 (path-headerline :fetcher github
-                 :repo "7696122/path-headline-mode")
+                 :repo "7696122/path-headerline-mode")

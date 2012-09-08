@@ -1,0 +1,1 @@
+(hippie-namespace :repo "rolandwalker/hippie-namespace" :fetcher github)

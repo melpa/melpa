@@ -17,11 +17,12 @@
       require 'ostruct'
       JSON.parse(File.open("../archive.json").read).each do |pkgname, info|
         versions, deps, descr, pkgtype = info
-        version = versions.max.to_s
+        version = versions.join('.')
         package = OpenStruct.new
         package.name = pkgname
         package.version = version
-        package.build_time = Time.new(version[0..3].to_i, version[4..5].to_i, version[6..7].to_i)
+        hour_portion = versions[1] ? sprintf("%04d", versions[1]) : "0000"
+        package.build_time = Time.new(version[0..3].to_i, version[4..5].to_i, version[6..7].to_i, hour_portion[0..1].to_i, hour_portion[2..3].to_i)
         package.url = "#{base_url}packages/#{pkgname}-#{version}." + (pkgtype == "single" ? "el" : "tar")
         package.info_url = "#{base_url}##{pkgname}"
     %>

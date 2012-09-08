@@ -1,0 +1,1 @@
+(magnet :repo "tarsius/magnet" :fetcher github)

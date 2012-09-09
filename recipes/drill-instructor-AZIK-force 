@@ -1,0 +1,2 @@
+(drill-instructor-AZIK-force :repo "myuhe/drill-instructor-AZIK-force.el" 
+                             :fetcher github)

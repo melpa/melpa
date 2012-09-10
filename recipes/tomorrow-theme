@@ -1,0 +1,4 @@
+(tomorrow-theme
+ :fetcher github
+ :repo "chriskempson/tomorrow-theme"
+ :files ("GNU Emacs/*theme.el"))

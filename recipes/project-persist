@@ -1,0 +1,3 @@
+(project-persist :fetcher github
+                 :repo "rdallasgray/project-persist"
+                 :files ("project-persist.el"))

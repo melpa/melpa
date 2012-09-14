@@ -1,0 +1,1 @@
+(nrepl-eval-sexp-fu :fetcher github :repo "samaaron/nrepl-eval-sexp-fu")

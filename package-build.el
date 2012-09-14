@@ -238,6 +238,54 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
       (or (pb/find-parse-time-latest "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)" bound)
           (error "No valid timestamps found!")))))
 
+(defun pb/cvs-repo (dir)
+  "Get the current CVS root and repository for DIR.
+
+Return a cons cell whose `car' is the root and whose `cdr' is the repository."
+  (let ((root (with-temp-buffer
+                (insert-file-contents-literally
+                 (concat (directory-file-name dir) "/CVS/Root"))
+                (buffer-substring-no-properties (line-beginning-position)
+                                                (line-end-position))))
+        (repo (with-temp-buffer
+                (insert-file-contents-literally
+                 (concat (directory-file-name dir) "/CVS/Repository"))
+                (buffer-substring-no-properties (line-beginning-position)
+                                                (line-end-position)))))
+    `(,root . ,repo)))
+
+(defun pb/checkout-cvs (name config dir)
+  "Check package NAME with config CONFIG out of csv into DIR."
+  (with-current-buffer (get-buffer-create "*package-build-checkout*")
+    (let ((root (pb/trim (plist-get config :url) ?/))
+          (repo (or (plist-get config :cvs-module) (symbol-name name)))
+          (bound (goto-char (point-max))))
+      (cond
+       ((and (file-exists-p (expand-file-name "CVS" dir))
+             (equal (pb/cvs-repo dir) `(,root . ,repo)))
+        (pb/princ-exists dir)
+        (pb/run-process dir "cvs" "update" "-dP"))
+       (t
+        (when (file-exists-p dir)
+          (delete-directory dir t nil))
+        (pb/princ-checkout (format "%s from %s" repo root) dir)
+        ;; CVS insists on relative paths as target directory for checkout (for
+        ;; whatever reason), and puts "CVS" directories into every subdirectory
+        ;; of the current working directory given in the target path. To get CVS
+        ;; to just write to DIR, we need to execute CVS from the parent
+        ;; directory of DIR, and specific DIR as relative path.  Hence all the
+        ;; following mucking around with paths.  CVS is really horrid.
+        (let* ((dir (directory-file-name dir))
+               (working-dir (file-name-directory dir))
+               (target-dir (file-name-nondirectory dir)))
+          (pb/run-process working-dir "cvs" "-z3" "-d" root "checkout"
+                          "-d" target-dir repo))))
+      (apply 'pb/run-process dir "cvs" "log"
+             (pb/expand-source-file-list dir config))
+      (or (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} \\+[0-9]\\{2\\}[0-9]\\{2\\}\\)")
+          (error "No valid timestamps found!"))
+      )))
+
 (defun pb/git-repo (dir)
   "Get the current git repo for DIR."
   (pb/run-process-match
@@ -361,6 +409,7 @@ The file is written to `package-build-working-dir'."
            nil "-cvf"
            file
            "--exclude=.svn"
+           "--exclude=CVS"
            "--exclude=.git*"
            "--exclude=_darcs"
            "--exclude=.bzr"

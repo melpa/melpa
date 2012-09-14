@@ -108,7 +108,7 @@ the following form,
 
 ```elisp
 (<package-name>
- :fetcher [git|github|bzr|hg|darcs|svn|wiki]
+ :fetcher [git|github|bzr|hg|darcs|svn|cvs|wiki]
  [:url "<repo url>"]
  [:repo "github-user/repo-name"]
  [:files ("<file1>", ...)])
@@ -119,13 +119,13 @@ a lisp symbol that has the same name as the package being specified.
 
 - `:url`
 specifies the URL of the version control repository. *required for
-the `git`, `bzr`, `hg`, `darcs` and `svn` fetchers*
+the `git`, `bzr`, `hg`, `darcs` `svn` and `cvs` fetchers*
 
 - `:fetcher`
 specifies the type of repository that `:url` points to.  Right now
 package-build supports [git][git], [github][github],
 [bazaar (bzr)][bzr], [mercurial (hg)][hg],
-[subversion (svn)][svn], [darcs][darcs], and
+[subversion (svn)][svn], [darcs][darcs], [cvs][cvs] and
 [Emacs Wiki (wiki)][emacswiki] as possible mechanisms for checking out
 the repository.  With the exception of the Emacs Wiki fetcher,
 package-build uses the corresponding application to update files
@@ -151,6 +151,7 @@ the root of the package*
 [bzr]: http://bazaar.canonical.com/en/
 [hg]: http://mercurial.selenic.com/
 [svn]: http://subversion.apache.org/
+[cvs]: http://www.nongnu.org/cvs/
 [darcs]: http://darcs.net/
 [emacswiki]: http://www.emacswiki.org/
 

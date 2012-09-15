@@ -324,6 +324,36 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
+(defun pb/cvs-repo (dir)
+  "Get the current CVS repo for DIR."
+  ;; (pb/run-process-match ":pserver:\\(.*\\)" dir "cat" "CVS/Root")
+  (pb/run-process-match "\\(.*\\)" dir "cat" "CVS/Root"))
+
+(defun pb/checkout-cvs (name config dir)
+  "Check package NAME with config CONFIG out of cvs into DIR."
+  (let ((repo (plist-get config :url)))
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (goto-char (point-max))
+      (cond
+       ((and (file-exists-p (expand-file-name "CVS/" dir))
+             (string-equal (pb/cvs-repo dir) repo))
+        (pb/princ-exists dir)
+        (pb/run-process dir "cvs" "up" "-dP"))
+       (t
+        (when (file-exists-p dir)
+          (delete-directory dir t nil))
+        (let ((parent-dir (file-name-directory (substring dir 0 (- (length dir) 1))))
+              (dir-name (file-name-nondirectory (substring dir 0 (- (length dir) 1)))))
+          (pb/princ-checkout repo dir-name)
+          (pb/run-process parent-dir "cvs" "-z3" "-d" repo "co" dir-name))))
+      ;; Sadly we have to get all the dates, sort them, and then take the latest
+      (apply 'pb/run-process dir "cvs" "log"
+             (pb/expand-source-file-list dir config))
+      (sort-lines nil (point-min) (point-max))
+      (goto-char (point-max))
+      (pb/find-parse-time
+       "date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
+
 (defun pb/dump (data file)
   "Write DATA to FILE as a pretty-printed Lisp sexp."
   (write-region (concat (pp-to-string data) "\n") nil file))
@@ -365,6 +395,7 @@ The file is written to `package-build-working-dir'."
            "--exclude=_darcs"
            "--exclude=.bzr"
            "--exclude=.hg"
+           "--exclude=CVS"
            (or (mapcar (lambda (fn) (concat dir "/" fn)) files)
                (list dir)))))
 

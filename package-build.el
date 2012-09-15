@@ -69,7 +69,6 @@
 
 (defun pb/parse-time (str)
   "Parse STR as a time, and format as a YYYYMMDD.HHMM string."
-  (message (format "%s\n" (substring-no-properties str)))
   ;; We remove zero-padding the HH portion, as it is lost
   ;; when stored in the archive-contents
   (let ((time (date-to-time (substring-no-properties str))))

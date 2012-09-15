@@ -67,6 +67,17 @@
 
 ;;; Internal functions
 
+(defun pb/slurp-file (file-name)
+  "Return the contents of FILE-NAME as a string, or nil if no such file exists."
+  (when (file-exists-p file-name)
+    (with-temp-buffer
+      (insert-file-contents-literally file-name)
+      (buffer-substring-no-properties (point-min) (point-max)))))
+
+(defun pb/string-rtrim (str)
+  "Remove trailing whitespace from `STR'."
+  (replace-regexp-in-string "[ \t\n]*$" "" str))
+
 (defun pb/parse-time (str)
   "Parse STR as a time, and format as a YYYYMMDD.HHMM string."
   ;; We remove zero-padding the HH portion, as it is lost
@@ -241,17 +252,10 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
   "Get the current CVS root and repository for DIR.
 
 Return a cons cell whose `car' is the root and whose `cdr' is the repository."
-  (let ((root (with-temp-buffer
-                (insert-file-contents-literally
-                 (concat (directory-file-name dir) "/CVS/Root"))
-                (buffer-substring-no-properties (line-beginning-position)
-                                                (line-end-position))))
-        (repo (with-temp-buffer
-                (insert-file-contents-literally
-                 (concat (directory-file-name dir) "/CVS/Repository"))
-                (buffer-substring-no-properties (line-beginning-position)
-                                                (line-end-position)))))
-    `(,root . ,repo)))
+  (apply 'cons
+         (mapcar (lambda (file)
+                   (pb/string-rtrim (pb/slurp-file (expand-file-name file dir))))
+                 '("CVS/Root" "CVS/Repository"))))
 
 (defun pb/checkout-cvs (name config dir)
   "Check package NAME with config CONFIG out of csv into DIR."
@@ -261,7 +265,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
           (bound (goto-char (point-max))))
       (cond
        ((and (file-exists-p (expand-file-name "CVS" dir))
-             (equal (pb/cvs-repo dir) `(,root . ,repo)))
+             (equal (pb/cvs-repo dir) (cons root repo)))
         (pb/princ-exists dir)
         (pb/run-process dir "cvs" "update" "-dP"))
        (t
@@ -390,13 +394,9 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
    pkg-file))
 
 (defun pb/read-from-file (file-name)
-  "Read and return the Lisp data stored in FILE-NAME,or nil if no such file exists."
+  "Read and return the Lisp data stored in FILE-NAME, or nil if no such file exists."
   (when (file-exists-p file-name)
-    (with-temp-buffer
-      (insert-file-contents-literally file-name)
-      (goto-char (point-min))
-      (read (current-buffer)))))
-
+    (car (read-from-string (pb/slurp-file file-name)))))
 
 (defun pb/create-tar (file dir &optional files)
   "Create a tar FILE containing the contents of DIR, or just FILES if non-nil.

@@ -304,14 +304,13 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
        ((and (file-exists-p (expand-file-name ".git" dir))
              (string-equal (pb/git-repo dir) repo))
         (pb/princ-exists dir)
-        (pb/run-process dir "git" "pull"))
+        (pb/run-process dir "git" "remote" "update"))
        (t
         (when (file-exists-p dir)
           (delete-directory dir t nil))
         (pb/princ-checkout repo dir)
         (pb/run-process nil "git" "clone" repo dir)))
-      (when commit
-        (pb/run-process dir "git" "checkout" commit))
+      (pb/run-process dir "git" "reset" "--hard" (or commit "origin/master"))
       (apply 'pb/run-process dir "git" "log" "-n1" "--pretty=format:'\%ci'"
              (pb/expand-source-file-list dir config))
       (pb/find-parse-time

@@ -111,6 +111,7 @@ the following form,
  :fetcher [git|github|bzr|hg|darcs|svn|cvs|wiki]
  [:url "<repo url>"]
  [:repo "github-user/repo-name"]
+ [:module "cvs-module"]
  [:files ("<file1>", ...)])
 ```
 
@@ -121,7 +122,7 @@ a lisp symbol that has the same name as the package being specified.
 specifies the URL of the version control repository. *required for
 the `git`, `bzr`, `hg`, `darcs`, `svn` and `cvs` fetchers*
 
-- `:cvs-module`
+- `:module`
 specifies the module of a CVS repository to check out.  Defaults to to
 `package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
 

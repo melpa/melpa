@@ -258,7 +258,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
   "Check package NAME with config CONFIG out of csv into DIR."
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
     (let ((root (pb/trim (plist-get config :url) ?/))
-          (repo (or (plist-get config :cvs-module) (symbol-name name)))
+          (repo (or (plist-get config :module) (symbol-name name)))
           (bound (goto-char (point-max))))
       (cond
        ((and (file-exists-p (expand-file-name "CVS" dir))

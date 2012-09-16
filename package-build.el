@@ -294,6 +294,11 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
   (pb/run-process-match
    "Fetch URL: \\(.*\\)" dir "git" "remote" "show" "-n" "origin"))
 
+(defun pb/git-head-branch (dir)
+  "Get the current git repo for DIR."
+  (pb/run-process-match
+   "HEAD branch: \\(.*\\)" dir "git" "remote" "show" "origin"))
+
 (defun pb/checkout-git (name config dir)
   "Check package NAME with config CONFIG out of git into DIR."
   (let ((repo (plist-get config :url))
@@ -310,7 +315,8 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
           (delete-directory dir t nil))
         (pb/princ-checkout repo dir)
         (pb/run-process nil "git" "clone" repo dir)))
-      (pb/run-process dir "git" "reset" "--hard" (or commit "origin/master"))
+      (pb/run-process dir "git" "reset" "--hard"
+                      (or commit (concat "origin/" (pb/git-head-branch dir))))
       (apply 'pb/run-process dir "git" "log" "-n1" "--pretty=format:'\%ci'"
              (pb/expand-source-file-list dir config))
       (pb/find-parse-time

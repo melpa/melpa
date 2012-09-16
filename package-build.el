@@ -155,7 +155,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
             (,elapsed (- ,now pb/last-wiki-fetch-time)))
        (when (< ,elapsed pb/wiki-min-request-interval)
          (let ((wait (- pb/wiki-min-request-interval ,elapsed)))
-           (message "Waiting %s secs before hitting Emacswiki again" wait)
+           (message "Waiting %.2f secs before hitting Emacswiki again" wait)
            (sleep-for wait)))
        (unwind-protect
            (progn ,@body)

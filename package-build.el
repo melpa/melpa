@@ -296,8 +296,10 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
 
 (defun pb/git-head-branch (dir)
   "Get the current git repo for DIR."
-  (pb/run-process-match
-   "HEAD branch: \\(.*\\)" dir "git" "remote" "show" "origin"))
+  (or (ignore-errors
+        (pb/run-process-match
+         "HEAD branch: \\(.*\\)" dir "git" "remote" "show" "origin"))
+      "master"))
 
 (defun pb/checkout-git (name config dir)
   "Check package NAME with config CONFIG out of git into DIR."

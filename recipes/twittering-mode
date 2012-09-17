@@ -1,2 +1,2 @@
-(twittering-mode :repo "hayamiz/twittering-mode" :fetcher github)
+(twittering-mode :repo "hayamiz/twittering-mode" :fetcher github :files ("twittering-mode.el"))
 

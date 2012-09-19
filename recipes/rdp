@@ -1,0 +1,1 @@
+(rdp :repo "skeeto/rdp" :fetcher github)

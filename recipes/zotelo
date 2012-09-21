@@ -1,0 +1,1 @@
+(zotelo :repo "vitoshka/zotelo" :fetcher github)

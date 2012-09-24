@@ -1,3 +1,0 @@
-(emacs-w3m
- :fetcher cvs
- :url ":pserver:anonymous@cvs.namazu.org:/storage/cvsroot")

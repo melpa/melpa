@@ -1,3 +1,4 @@
 (dic-lookup-w3m
  :url "http://svn.sourceforge.jp/svnroot/dic-lookup-w3m/"
+ :files ("*.el" "README")
  :fetcher svn)

@@ -1,0 +1,1 @@
+(s :repo "magnars/s.el" :fetcher github :files ("s.el"))

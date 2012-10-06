@@ -1,0 +1,3 @@
+(keydef
+ :repo "emacsmirror/keydef"
+ :fetcher github)

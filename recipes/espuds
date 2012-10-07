@@ -1,0 +1,1 @@
+(espuds :repo "rejeep/espuds" :fetcher github)

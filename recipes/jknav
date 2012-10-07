@@ -1,0 +1,3 @@
+(jknav
+ :repo "aculich/jknav.el"
+ :fetcher github)

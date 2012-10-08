@@ -1,0 +1,3 @@
+(gitignore-mode :repo "lunaryorn/git-modes"
+                :fetcher github
+                :files ("gitignore-mode.el"))

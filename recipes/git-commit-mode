@@ -1,1 +1,3 @@
-(git-commit-mode :repo "lunaryorn/git-commit-mode" :fetcher github)
+(git-commit-mode :repo "lunaryorn/git-commit-mode"
+                 :fetcher github
+                 :files ("git-commit-mode.el"))

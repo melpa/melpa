@@ -1,2 +1,2 @@
-(jump :repo "eschulte/jump.el" :fetcher github)
+(jump :repo "eschulte/jump.el" :fetcher github :files ("jump.el" "which-func.el"))
 

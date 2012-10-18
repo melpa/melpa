@@ -1,0 +1,1 @@
+(buffer-utils :repo "eschulte/rhtml" :fetcher github)

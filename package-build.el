@@ -281,7 +281,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (let* ((dir (directory-file-name dir))
                (working-dir (file-name-directory dir))
                (target-dir (file-name-nondirectory dir)))
-          (pb/run-process working-dir "cvs" "-z3" "-d" root "checkout"
+          (pb/run-process working-dir "env" "TZ=UTC" "cvs" "-z3" "-d" root "checkout"
                           "-d" target-dir repo))))
       (apply 'pb/run-process dir "cvs" "log"
              (pb/expand-source-file-list dir config))

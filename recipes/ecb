@@ -1,4 +1,3 @@
 (ecb :repo "alexott/ecb"
-     :commit "origin/new-cedet"
      :fetcher github
      :files ("*.el" "ecb-images" "ecb2"))

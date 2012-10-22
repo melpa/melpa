@@ -1,0 +1,3 @@
+(gnuplot-mode
+ :repo "mkmcc/gnuplot-mode"
+ :fetcher github)

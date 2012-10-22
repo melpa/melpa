@@ -1,0 +1,3 @@
+(crappy-jsp-mode
+ :repo "magnars/crappy-jsp-mode"
+ :fetcher github)

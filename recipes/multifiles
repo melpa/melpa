@@ -1,0 +1,3 @@
+(multifiles
+ :repo "magnars/multifiles.el"
+ :fetcher github)

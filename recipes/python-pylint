@@ -1,0 +1,3 @@
+(python-pylint
+ :url "git://gist.github.com/302848.git"
+ :fetcher git)

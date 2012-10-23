@@ -1,1 +1,0 @@
-(bang :fetcher github :repo "magnars/bang.el" :files ("bang.el"))

@@ -1,0 +1,1 @@
+(golden-ratio :repo "roman/golden-ratio.el" :fetcher github)

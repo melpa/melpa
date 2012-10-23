@@ -1,0 +1,1 @@
+(shell-command :fetcher wiki)

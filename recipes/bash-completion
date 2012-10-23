@@ -1,0 +1,3 @@
+(bash-completion
+ :repo "szermatt/emacs-bash-completion"
+ :fetcher github)

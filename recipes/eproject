@@ -1,0 +1,3 @@
+(eproject
+ :repo "jrockway/eproject"
+ :fetcher github)

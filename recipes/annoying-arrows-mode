@@ -1,0 +1,3 @@
+(annoying-arrows-mode
+ :repo "magnars/annoying-arrows-mode.el"
+ :fetcher github)

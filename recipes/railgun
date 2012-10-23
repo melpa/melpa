@@ -1,0 +1,3 @@
+(railgun
+  :repo "mbriggs/railgun.el"
+  :fetcher github)

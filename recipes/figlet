@@ -1,0 +1,3 @@
+(figlet
+ :fetcher hg
+ :url "https://bitbucket.org/jpkotta/figlet")

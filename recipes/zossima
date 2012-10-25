@@ -1,1 +1,1 @@
-(zossima :repo "technomancy/zossima" :fetcher github)
+(zossima :repo "technomancy/zossima" :fetcher github :files ("*.el" "*.rb"))

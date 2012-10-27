@@ -1,2 +1,2 @@
-(rinari :repo "eschulte/rinari" :fetcher github)
+(rinari :repo "eschulte/rinari" :fetcher github :files ("rinari.el"))
 

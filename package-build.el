@@ -430,6 +430,46 @@ The file is written to `package-build-working-dir'."
            (or (mapcar (lambda (fn) (concat dir "/" fn)) files)
                (list dir)))))
 
+(defun pb/write-readme-file (commentary package-name &optional raw)
+  "Write the *-readme.txt file for the package PACKAGE-NAME.
+Writes the processed value of COMMENTARY.  If it's empty, does nothing.
+When RAW, COMMENTARY is used as is."
+  (when commentary
+    (with-temp-buffer
+      (insert commentary)
+      ;; Adapted from `describe-package-1'.
+      (goto-char (point-min))
+      (unless raw
+        (save-excursion
+          (when (re-search-forward "^;;; Commentary:\n" nil t)
+            (replace-match ""))
+          (while (re-search-forward "^\\(;+ ?\\)" nil t)
+            (replace-match ""))))
+      (when (re-search-forward "[^ \t\n]" nil t)
+        (delete-trailing-whitespace)
+        (write-region nil nil
+                      (expand-file-name (concat package-name "-readme.txt")
+                                        package-build-archive-dir))))))
+
+(defun pb/write-pkg-readme (commentary pkg-cwd package-name)
+  "Write the package commentary to the *-readme.txt file.
+If COMMENTARY is nil, read it from a README[.*] file, or from the
+file named PACKAGE-NAME.el inside the package directory."
+  (let (raw)
+    (pb/write-readme-file
+     (or commentary
+         (let ((files (directory-files pkg-cwd t "README\\(\\..*\\)?")))
+           (when files
+             (setq raw t)
+             (pb/slurp-file (car files))))
+         (let ((file-path (concat pkg-cwd package-name ".el")))
+           (when (file-exists-p file-path)
+             (with-temp-buffer
+               (insert-file-contents file-path)
+               (lm-commentary)))))
+     package-name
+     raw)))
+
 (defun pb/get-package-info (file-path)
   "Get a vector of package info from the docstrings in FILE-PATH."
   (when (file-exists-p file-path)
@@ -463,7 +503,6 @@ The file is written to `package-build-working-dir'."
              (nth 2 pkgfile-info)
              (nth 1 pkgfile-info)))
         (error "No define-package found in %s" file-path)))))
-
 
 (defun pb/merge-package-info (pkg-info name version config)
   "Return a version of PKG-INFO updated with NAME, VERSION and info from CONFIG.
@@ -622,6 +661,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
           (when (file-exists-p pkg-target)
             (delete-file pkg-target t))
           (copy-file pkg-source pkg-target)
+          (pb/write-readme-file (aref pkg-info 4) file-name)
           (pb/add-to-archive-contents pkg-info 'single)))
        ((< 1 (length  files))
         (let* ((pkg-dir (concat file-name "-" version))
@@ -638,6 +678,9 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
                  file-name
                  version
                  cfg)))
+
+          (let ((commentary (and (> (length pkg-info) 4) (aref pkg-info 4))))
+            (pb/write-pkg-readme commentary pkg-cwd file-name))
 
           (when (file-exists-p pkg-dir)
             (delete-directory pkg-dir t nil))

@@ -71,7 +71,7 @@
   "Return the contents of FILE-NAME as a string, or nil if no such file exists."
   (when (file-exists-p file-name)
     (with-temp-buffer
-      (insert-file-contents-literally file-name)
+      (insert-file-contents file-name)
       (buffer-substring-no-properties (point-min) (point-max)))))
 
 (defun pb/string-rtrim (str)

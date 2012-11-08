@@ -100,26 +100,11 @@ You can then customize two variables:
 
 ## Known Issues
 
-Due to the way the HTTP routing works on my provider, the HTTP/1.1
-connection will time out for long package installs--where the
-package is large and takes a while to compile--like *magit* or *evil*.  If you run into problems with complaints about the response from the web server consider adding
+**Note:** *This fix are included in the `melpa.el` package.*
 
-<!-- <script src="https://gist.github.com/1679208.js"> </script> -->
-
-    (setq url-http-attempt-keepalives nil)
-
-This makes things a tad more slow but means that the install completes
-correctly. Otherwise the connection times out and the install goes haywire.
-
-### Fixes for `package.el`
-
-**Note:** *These fixes are included in the `melpa.el` package.*
-
-There are a number of small bugs in Emacs24's `package.el`. First,
-when installing dependencies, the packages were not getting
-initialized.  Second, the order for dependencies was coming out
-backwards for what I needed.  Both problems are
- easily patched by some *advice*.  
+There is a small bug in Emacs24's `package.el` the order for
+dependencies comes out backwards for what I needed. the problem is
+patched by some *advice*.
  
 <!-- <script src="https://gist.github.com/1679232.js"> </script> -->
 
@@ -131,17 +116,6 @@ backwards for what I needed.  Both problems are
       (setq requirements (reverse requirements))
       (print requirements))
     
-If you are not using Emacs24 from HEAD, you may also need this to initialize packages after they are downloaded and installed.
-
-    (defadvice package-download-tar
-      (after package-download-tar-initialize activate compile)
-      "initialize the package after compilation"
-      (package-initialize))
-    
-    (defadvice package-download-single
-      (after package-download-single-initialize activate compile)
-      "initialize the package after compilation"
-      (package-initialize))
     
 
 ## Updating Packages

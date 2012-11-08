@@ -430,6 +430,33 @@ The file is written to `package-build-working-dir'."
            (or (mapcar (lambda (fn) (concat dir "/" fn)) files)
                (list dir)))))
 
+
+(defun pb/find-package-commentary (file-path)
+  "Get commentary section from FILE-PATH."
+  (when (file-exists-p file-path)
+    (require 'lisp-mnt)
+    (with-temp-buffer
+      (insert-file-contents file-path)
+      (lm-commentary))))
+
+(defun pb/write-pkg-readme (commentary file-name)
+  "Write COMMENTARY to the FILE-NAME-readme.txt file."
+  (when commentary
+    (with-temp-buffer
+      (insert commentary)
+      ;; Adapted from `describe-package-1'.
+      (goto-char (point-min))
+      (save-excursion
+        (when (re-search-forward "^;;; Commentary:\n" nil t)
+          (replace-match ""))
+        (while (re-search-forward "^\\(;+ ?\\)" nil t)
+          (replace-match "")))
+      (delete-trailing-whitespace)
+      (let ((coding-system-for-write buffer-file-coding-system))
+        (write-region nil nil
+                      (expand-file-name (concat file-name "-readme.txt")
+                                        package-build-archive-dir))))))
+
 (defun pb/get-package-info (file-path)
   "Get a vector of package info from the docstrings in FILE-PATH."
   (when (file-exists-p file-path)
@@ -463,7 +490,6 @@ The file is written to `package-build-working-dir'."
              (nth 2 pkgfile-info)
              (nth 1 pkgfile-info)))
         (error "No define-package found in %s" file-path)))))
-
 
 (defun pb/merge-package-info (pkg-info name version config)
   "Return a version of PKG-INFO updated with NAME, VERSION and info from CONFIG.
@@ -622,22 +648,33 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
           (when (file-exists-p pkg-target)
             (delete-file pkg-target t))
           (copy-file pkg-source pkg-target)
+
+          (pb/write-pkg-readme (and (> (length pkg-info) 4) (aref pkg-info 4))
+                               file-name)
+
           (pb/add-to-archive-contents pkg-info 'single)))
        ((< 1 (length  files))
         (let* ((pkg-dir (concat file-name "-" version))
                (pkg-file (concat file-name "-pkg.el"))
                (pkg-file-source (or (pb/find-source-file pkg-file files)
                                     pkg-file))
+               (file-source (concat file-name ".el"))
+               (pkg-source (or (pb/find-source-file file-source files)
+                               file-source))
                (pkg-info
                 (pb/merge-package-info
                  (let ((default-directory pkg-cwd))
                    (or (pb/get-pkg-file-info pkg-file-source)
                        ;; some packages (like magit) provide name-pkg.el.in
                        (pb/get-pkg-file-info (concat pkg-file ".in"))
-                       (pb/get-package-info (concat file-name ".el"))))
+                       (pb/get-package-info pkg-source)))
                  file-name
                  version
                  cfg)))
+
+          (let ((default-directory pkg-cwd))
+            (pb/write-pkg-readme (pb/find-package-commentary pkg-source)
+                                 file-name))
 
           (when (file-exists-p pkg-dir)
             (delete-directory pkg-dir t nil))

@@ -1,0 +1,3 @@
+(flymake-flake8
+ :fetcher github
+ :repo "kwbeam/flymake-flake8")

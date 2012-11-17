@@ -1,0 +1,4 @@
+(stan-mode 
+ :fetcher github
+ :repo "jrnold/stan-mode"
+ :files ("*.el" "snippets"))

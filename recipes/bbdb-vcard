@@ -1,0 +1,3 @@
+(bbdb-vcard :repo "trebb/bbdb-vcard"
+            :fetcher github
+            :files ("vcard*.el"))

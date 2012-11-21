@@ -1,3 +1,0 @@
-(elnode
- :repo "nicferrier/elnode"
- :fetcher github)

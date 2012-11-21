@@ -1,3 +1,0 @@
-(skinny
- :repo "nicferrier/skinny"
- :fetcher github)

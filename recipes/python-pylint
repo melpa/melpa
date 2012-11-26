@@ -1,3 +1,4 @@
 (python-pylint
- :url "git://gist.github.com/302848.git"
- :fetcher git)
+ :url "http://hg.logilab.org/pylint"
+ :fetcher hg
+ :files ("elisp/pylint.el"))

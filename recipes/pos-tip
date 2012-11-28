@@ -1,0 +1,4 @@
+(pos-tip
+ :repo "syohex/pos-tip"
+ :fetcher github
+ :files ("pos-tip.el"))

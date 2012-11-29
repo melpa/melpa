@@ -447,7 +447,7 @@ The file is written to `package-build-working-dir'."
       ;; Adapted from `describe-package-1'.
       (goto-char (point-min))
       (save-excursion
-        (when (re-search-forward "^;;; Commentary:\n" nil t)
+        (when (re-search-forward "^;;; Commentary:\n+" nil t)
           (replace-match ""))
         (while (re-search-forward "^\\(;+ ?\\)" nil t)
           (replace-match "")))

@@ -1,0 +1,4 @@
+(vcl-mode
+ :fetcher github
+ :repo "ssm/elisp"
+ :files ("vcl-mode.el"))

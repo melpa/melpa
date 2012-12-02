@@ -1,4 +1,4 @@
-(wgrep
+(wgrep-helm
  :fetcher github
  :repo "mhayashi1120/Emacs-wgrep"
- :files ("wgrep.el"))
+ :files ("wgrep-helm.el"))

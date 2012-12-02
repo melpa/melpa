@@ -1,4 +1,4 @@
-(wgrep
+(wgrep-ack
  :fetcher github
  :repo "mhayashi1120/Emacs-wgrep"
- :files ("wgrep.el"))
+ :files ("wgrep-ack.el"))

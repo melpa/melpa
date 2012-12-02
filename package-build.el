@@ -90,7 +90,7 @@
                   ;; which break date-to-time
                   (date-to-time (replace-regexp-in-string "/" "-" s))))))
     (concat (format-time-string "%Y%m%d." time)
-            (format "%d" (or (parse-integer (format-time-string "%H%M" time)) 0)))))
+            (format "%d" (or (string-to-number (format-time-string "%H%M" time)) 0)))))
 
 (defun pb/string-match-all (regex str &optional group)
   "Find every match for `REGEX' within `STR', returning the full match string or group `GROUP'."

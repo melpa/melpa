@@ -787,6 +787,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 ;; Local Variables:
 ;; coding: utf-8
+;; byte-compile-warnings: (not cl-functions)
 ;; eval: (checkdoc-minor-mode 1)
 ;; End:
 

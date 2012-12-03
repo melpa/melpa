@@ -1,1 +1,2 @@
-(ergoemacs-keybindings :url "http://ergoemacs.googlecode.com/svn/trunk/ergoemacs/ergoemacs-keybindings" :fetcher svn)
+(ergoemacs-keybindings :url "https://code.google.com/p/ergoemacs/" :files ("ergoemacs/ergoemacs-keybindings") 
+:fetcher git)

@@ -43,6 +43,7 @@
 (require 'cl)
 
 (require 'package)
+(require 'lisp-mnt)
 
 (defcustom package-build-working-dir (expand-file-name "working/")
   "Directory in which to keep checkouts."
@@ -434,7 +435,6 @@ The file is written to `package-build-working-dir'."
 (defun pb/find-package-commentary (file-path)
   "Get commentary section from FILE-PATH."
   (when (file-exists-p file-path)
-    (require 'lisp-mnt)
     (with-temp-buffer
       (insert-file-contents file-path)
       (lm-commentary))))

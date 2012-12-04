@@ -1,4 +1,8 @@
 (ergoemacs-mode
  :url "https://code.google.com/p/ergoemacs/"
- :files ("ergoemacs/ergoemacs-keybindings/*.el")
+ :files ("ergoemacs/ergoemacs-keybindings/*.el"
+         "ergoemacs/ergoemacs-keybindings/*.svg"
+         "ergoemacs/ergoemacs-keybindings/*.ahk"
+         "ergoemacs/ergoemacs-keybindings/bash-us.txt"
+         "ergoemacs/ergoemacs-keybindings/os_x_qwerty.dict.txt")
  :fetcher git)

@@ -178,11 +178,28 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
      (url-copy-file download-url filename t))
     (when (zerop (nth 7 (file-attributes filename)))
       (error "Wiki file %s was empty - has it been removed?" filename))
-    (with-current-buffer (pb/with-wiki-rate-limit
-                          (url-retrieve-synchronously wiki-url))
-      (message (format "%s\n" download-url))
-      (pb/find-parse-time
-       "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"))))
+    ;; The Last-Modified response header for the download is actually
+    ;; correct for the file, but we have no access to that
+    ;; header. Instead, we must query the non-raw emacswiki page for
+    ;; the file.
+    ;; Since those Emacswiki lookups are time-consuming, we maintain a
+    ;; foo.el.stamp file containing ("SHA1" . "PARSED_TIME")
+    (let* ((new-content-hash (secure-hash 'sha1 (pb/slurp-file filename)))
+           (stamp-file (concat filename ".stamp"))
+           (stamp-info (pb/read-from-file stamp-file)))
+      (if (eq new-content-hash (car stamp-info))
+          ;; File has not changed, so return old timestamp
+          (progn
+            (message "%s is unchanged" filename)
+            (cdr stamp-info))
+        (message "%s has changed - checking mod time" filename)
+        (let ((new-timestamp
+               (with-current-buffer (pb/with-wiki-rate-limit
+                                     (url-retrieve-synchronously wiki-url))
+                 (pb/find-parse-time
+                  "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"))))
+          (pb/dump (cons new-content-hash new-timestamp) stamp-file)
+          new-timestamp)))))
 
 (defun pb/checkout-wiki (name config dir)
   "Checkout package NAME with config CONFIG from the EmacsWiki into DIR."

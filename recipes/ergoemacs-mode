@@ -1,0 +1,4 @@
+(ergoemacs-mode
+ :url "https://code.google.com/p/ergoemacs/"
+ :files ("ergoemacs/ergoemacs-keybindings/*.el")
+ :fetcher git)

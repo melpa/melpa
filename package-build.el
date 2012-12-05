@@ -139,10 +139,9 @@ In turn, this function uses the :fetcher option in the config to
 choose a source-specific fetcher function, which it calls with
 the same arguments."
   (let ((repo-type (plist-get config :fetcher)))
-    (message (format "%s " repo-type))
+    (message "Fetcher: %s" repo-type)
     (unless (eq 'wiki repo-type)
-      (message (format "%s\n"
-                       (or (plist-get config :repo) (plist-get config :url)))))
+      (message "Source: %s\n" (or (plist-get config :repo) (plist-get config :url))))
     (funcall (intern (format "pb/checkout-%s" repo-type))
              name config cwd)))
 
@@ -246,11 +245,11 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
 
 (defun pb/princ-exists (dir)
   "Print a message that the contents of DIR will be updated."
-  (message (format "updating %s\n" dir)))
+  (message "Updating %s" dir))
 
 (defun pb/princ-checkout (repo dir)
   "Print a message that REPO will be checked out into DIR."
-  (message (format "cloning %s to %s\n" repo dir)))
+  (message "Cloning %s to %s" repo dir))
 
 (defun pb/checkout-svn (name config dir)
   "Check package NAME with config CONFIG out of svn into DIR."
@@ -648,10 +647,11 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
           (file-name-as-directory
            (expand-file-name file-name package-build-working-dir))))
 
-    (message (format "\n;;; %s\n" file-name))
+    (message "\n;;; %s\n" file-name)
     (let* ((version (pb/checkout name cfg pkg-cwd))
            (files (pb/expand-config-file-list pkg-cwd cfg))
-           (default-directory package-build-working-dir))
+           (default-directory package-build-working-dir)
+           (start-time (current-time)))
       (cond
        ((not version)
         (message "Unable to check out repository for %s" name))
@@ -719,6 +719,9 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
        (t (error "Unable to find files matching recipe patterns")))
       (pb/dump-archive-contents)
+      (message "Built in %.3fs, finished at %s"
+               (time-to-seconds (time-since start-time))
+               (current-time-string))
       file-name)))
 
 ;;;###autoload

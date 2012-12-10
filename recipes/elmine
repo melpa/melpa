@@ -1,0 +1,4 @@
+(elmine
+  :repo "leoc/elmine"
+  :fetcher github
+  :files ("elmine.el"))

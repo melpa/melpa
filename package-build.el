@@ -185,8 +185,10 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
     ;; foo.el.stamp file containing ("SHA1" . "PARSED_TIME")
     (let* ((new-content-hash (secure-hash 'sha1 (pb/slurp-file filename)))
            (stamp-file (concat filename ".stamp"))
-           (stamp-info (pb/read-from-file stamp-file)))
-      (if (eq new-content-hash (car stamp-info))
+           (stamp-info (pb/read-from-file stamp-file))
+           (prev-content-hash (car stamp-info)))
+      (if (and prev-content-hash
+               (string-equal new-content-hash prev-content-hash))
           ;; File has not changed, so return old timestamp
           (progn
             (message "%s is unchanged" filename)

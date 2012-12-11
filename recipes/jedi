@@ -1,0 +1,3 @@
+(jedi :fetcher github
+      :repo "tkf/emacs-jedi"
+      :files ("jedi*"))

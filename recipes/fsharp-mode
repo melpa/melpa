@@ -1,4 +1,4 @@
 (fsharp-mode
  :fetcher github
  :repo "fsharp/fsharpbinding"
- :files ("emacs/fsharp.el" "emacs/fsharp-font.el" "emacs/fsharp-indent.el" "emacs/inf-fsharp.el" "emacs/fsharp-mode-pkg.el"))
+ :files ("emacs/fsharp-mode.el" "emacs/fsharp-mode-font.el" "emacs/fsharp-mode-indent.el" "emacs/inf-fsharp-mode.el" "emacs/fsharp-mode-pkg.el"))

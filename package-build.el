@@ -576,10 +576,29 @@ of the same-named package which is to be kept."
         (remove archive-entry package-build-archive-alist))
   (pb/dump-archive-contents))
 
+
+(defun pb/read-recipe (file-name)
+  (let ((pkg-info (pb/read-from-file file-name)))
+    (if (string= (symbol-name (car pkg-info))
+                 (file-name-nondirectory file-name))
+        pkg-info
+      (error "Recipe '%s' contains mismatched package name '%s'"
+             (file-name-nondirectory file-name)
+             (car pkg-info)))))
+
 (defun pb/read-recipes ()
   "Return a list of data structures for all recipes in `package-build-recipes-dir'."
-  (mapcar 'pb/read-from-file
-          (directory-files package-build-recipes-dir t "^[^.]")))
+  (loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
+        collect (pb/read-recipe file-name)))
+
+(defun pb/read-recipes-ignore-errors ()
+  "Return a list of data structures for all recipes in `package-build-recipes-dir'."
+  (loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
+        for pkg-info = (condition-case err (pb/read-recipe file-name)
+                         ('error (message (error-message-string err))
+                                 nil))
+        when pkg-info
+        collect pkg-info))
 
 
 (defun pb/expand-file-specs (dir specs &optional subdir)

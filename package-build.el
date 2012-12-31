@@ -811,7 +811,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 (defun package-build-reinitialize ()
   (interactive)
   (setq package-build-initialized nil)
-  (package-build-initialized))
+  (package-build-initialize))
 
 (defun package-build-initialize ()
   "Load the recipe and archive-contents files."

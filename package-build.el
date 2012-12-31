@@ -66,6 +66,9 @@
 (defvar package-build-archive-alist nil
   "List of already-built packages, in the standard package.el format.")
 
+(defvar package-build-initialized nil
+  "Determines if package-build has been initialized.")
+
 ;;; Internal functions
 
 (defun pb/slurp-file (file-name)
@@ -525,12 +528,14 @@ If PKG-INFO is nil, an empty one is created."
 
 (defun pb/dump-archive-contents ()
   "Dump the list of built packages back to the archive-contents file."
+  (package-build-initialize)
   (pb/dump (cons 1 package-build-archive-alist)
            (expand-file-name "archive-contents"
                              package-build-archive-dir)))
 
 (defun pb/add-to-archive-contents (pkg-info type)
   "Add the built archive with info PKG-INFO and TYPE to `package-build-archive-alist'."
+  (package-build-archive-dir)
   (let* ((name (intern (aref pkg-info 0)))
          (requires (aref pkg-info 1))
          (desc (or (aref pkg-info 2) "No description available."))
@@ -562,6 +567,7 @@ If PKG-INFO is nil, an empty one is created."
 Note that the working directory (if present) is not deleted by
 this function, since the archive list may contain another version
 of the same-named package which is to be kept."
+  (package-build-initialize)
   (print (format "Removing archive: %s" archive-entry))
   (let ((archive-file (pb/archive-file-name archive-entry)))
     (when (file-exists-p archive-file)
@@ -630,6 +636,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 (defun pb/package-name-completing-read ()
   "Prompt for a package name, returning a symbol."
+  (package-initialize)
   (intern (completing-read "Package: " package-build-alist)))
 
 (defun pb/find-source-file (target files)
@@ -642,6 +649,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 (defun package-build-archive (name)
   "Build a package archive for package NAME."
   (interactive (list (pb/package-name-completing-read)))
+  (package-initialize)
   (let* ((file-name (symbol-name name))
          (cfg (or (cdr (assoc name package-build-alist))
                   (error "Cannot find package %s" file-name)))
@@ -738,7 +746,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
     (if (y-or-n-p (format "Save file %s? " buffer-file-name))
         (save-buffer)
       (error "Aborting")))
-  (package-build-initialize)
+  (package-build-reinitialize)
   (package-build-archive (intern (file-name-nondirectory (buffer-file-name)))))
 
 (defun package-build-archive-ignore-errors (pkg)
@@ -760,6 +768,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 (defun package-build-all ()
   "Build all packages in the `package-build-alist'."
   (interactive)
+  (package-build-initialize)
   (let ((failed (loop for pkg in (mapcar 'car package-build-alist)
                       when (not (package-build-archive-ignore-errors pkg))
                       collect pkg)))
@@ -773,22 +782,28 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 (defun package-build-cleanup ()
   "Remove previously-built packages that no longer have recipes."
   (interactive)
+  (package-build-intitialize)
   (let* ((known-package-names (mapcar 'car package-build-alist))
          (stale-archives (loop for built in package-build-archive-alist
                                when (not (memq (car built) known-package-names))
                                collect built)))
     (mapc 'pb/remove-archive stale-archives)))
 
+(defun package-build-reinitialize ()
+  (interactive)
+  (setq package-build-initialized nil)
+  (package-build-initialized))
+
 (defun package-build-initialize ()
   "Load the recipe and archive-contents files."
   (interactive)
-  (setq package-build-alist (pb/read-recipes)
-        package-build-archive-alist
-        (cdr (pb/read-from-file
-              (expand-file-name "archive-contents"
-                                package-build-archive-dir)))))
-
-(package-build-initialize)
+  (unless package-build-initialized
+    (setq package-build-initialized t
+          package-build-alist (pb/read-recipes-ignore-errors)
+          package-build-archive-alist
+          (cdr (pb/read-from-file
+                (expand-file-name "archive-contents"
+                                  package-build-archive-dir))))))
 
 ;; Utility functions
 (autoload 'json-encode "json")
@@ -801,6 +816,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 (defun package-build-archive-alist-as-json (fn)
   (interactive)
+  (package-build-initialize)
   (with-temp-file fn
     (insert (json-encode package-build-archive-alist))))
 

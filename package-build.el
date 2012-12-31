@@ -535,7 +535,7 @@ If PKG-INFO is nil, an empty one is created."
 
 (defun pb/add-to-archive-contents (pkg-info type)
   "Add the built archive with info PKG-INFO and TYPE to `package-build-archive-alist'."
-  (package-build-archive-dir)
+  (package-build-initialize)
   (let* ((name (intern (aref pkg-info 0)))
          (requires (aref pkg-info 1))
          (desc (or (aref pkg-info 2) "No description available."))

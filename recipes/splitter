@@ -1,0 +1,1 @@
+(splitter :repo "chumpage/chumpy-windows" :fetcher github :files ("splitter.el"))

@@ -801,7 +801,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 (defun package-build-cleanup ()
   "Remove previously-built packages that no longer have recipes."
   (interactive)
-  (package-build-intitialize)
+  (package-build-initialize)
   (let* ((known-package-names (mapcar 'car package-build-alist))
          (stale-archives (loop for built in package-build-archive-alist
                                when (not (memq (car built) known-package-names))

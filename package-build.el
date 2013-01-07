@@ -830,6 +830,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 (defun package-build-alist-as-json (fn)
   (interactive)
+  (package-build-initialize)
   (with-temp-file fn
     (insert (json-encode package-build-alist))))
 

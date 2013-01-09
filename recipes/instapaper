@@ -1,0 +1,3 @@
+(instapaper
+ :fetcher hg
+ :url "https://bitbucket.org/jfm/emacs-instapaper")

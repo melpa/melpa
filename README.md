@@ -21,7 +21,7 @@ details.
 * [Usage](#usage)
 * [Contributing](#contributing-new-packages)
 * [Package Format](#package-format)
-* [Server Scripts](#server-scripts)
+* [Build Scripts](#build-scripts)
 * [API](#api)
 * [MELPA Package](#melpa-package)
 * [About](#about)

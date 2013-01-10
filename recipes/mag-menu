@@ -1,0 +1,1 @@
+(mag-menu :repo "chumpage/mag-menu" :fetcher github)

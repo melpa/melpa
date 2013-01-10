@@ -1,1 +1,1 @@
-(header-button :repo "tarsius/header-button" :fetcher github)
+(header-button :repo "emacsattic/header-button" :fetcher github)

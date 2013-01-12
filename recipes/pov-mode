@@ -1,0 +1,1 @@
+(pov-mode :fetcher git :url "git://gitorious.org/pov-mode/pov-mode.git")

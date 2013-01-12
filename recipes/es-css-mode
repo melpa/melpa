@@ -1,0 +1,4 @@
+(es-css-mode
+ :repo "sabof/es-css-mode"
+ :fetcher github
+ :files ("*.el"))

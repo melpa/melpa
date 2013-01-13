@@ -1,0 +1,3 @@
+(enotify :repo "laynor/enotify"
+         :fetcher github
+         :files ("*.el"))

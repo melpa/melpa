@@ -1,0 +1,1 @@
+(circe :fetcher github :repo "jorgenschaefer/circe" :files ("lisp/*.el"))

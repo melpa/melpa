@@ -1,0 +1,3 @@
+(evil-paredit :repo "roman/evil-paredit"
+              :fetcher github
+              :files ("evil-paredit.el"))

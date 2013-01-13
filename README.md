@@ -1,4 +1,6 @@
-# MELPA
+# MELPA 
+
+[![Build Status](https://travis-ci.org/milkypostman/melpa.png?branch=master)](https://travis-ci.org/milkypostman/melpa)
 
 MELPA is a growing collection of `package.el`-compatible Emacs Lisp
 packages built automatically on our server from the upstream source
@@ -19,7 +21,7 @@ details.
 * [Usage](#usage)
 * [Contributing](#contributing-new-packages)
 * [Package Format](#package-format)
-* [Server Scripts](#server-scripts)
+* [Build Scripts](#build-scripts)
 * [API](#api)
 * [MELPA Package](#melpa-package)
 * [About](#about)
@@ -32,7 +34,7 @@ call to `package-initialize` in your `init.el` file.
 
     (add-to-list 'package-archives
                  '("melpa" . "http://melpa.milkbox.net/packages/") t)
-    
+
 Since `package.el` doesn't allow locking packages to certain version,
 we also provide a package `melpa.el` which contains code to allow
 restricting packages to specific repositories.  This allows someone to
@@ -52,11 +54,7 @@ guidelines,
 * Upstream source must be stored in an authoritative
   [SCM](http://en.wikipedia.org/wiki/Software_configuration_management)
   repository or on the Emacswiki.
-  
-<!-- * Package must be actively developed and not otherwise included in a -->
-<!--   different ELPA archive. Packages that are better suited for -->
-<!--   [marmalade](http://marmalade-repo.org/) -->
-  
+
 * Submit one pull request per recipe.  You can create multiple
   branches and create a pull request for each branch.
 
@@ -64,16 +62,16 @@ guidelines,
   specifying only files relevant to the package. See the
   [Package Format](#package-format) section for more information on
   specifying package files.
-  
+
 * The package name should match the name of the feature provided.  See
   the `package` function for more information.
-  
+
 * Packages should adhere to the `package.el` format as specified by
   `(info "(elisp) Packaging")`. More information on this format is
   provided by the
   [marmalade package manual](http://marmalade-repo.org/doc-files/package.5.html).
-  
-  
+
+
 
 ### Testing
 
@@ -86,7 +84,7 @@ Let `<NAME>` denote the name of the recipe to submit.
 3. Confirm your package build properly by running
 
         make recipes/<NAME>
-       
+
 4. Install the file you built by running `package-install-file` from
 within Emacs and specifying the newly built package in the directory
 specified by `package-build-archive-dir` (default: `packages/`
@@ -104,7 +102,7 @@ helps simplify this process.
 
 Packages are specified by files in the `recipes` directory.  You can
 contribute a new package by adding a new file under `recipes` using
-the following form,
+the following form (`[...]` denotes optional or conditional values),
 
 ```elisp
 (<package-name>
@@ -112,22 +110,14 @@ the following form,
  [:url "<repo url>"]
  [:repo "github-user/repo-name"]
  [:module "cvs-module"]
- [:files ("<file1>", ...)])
+ [:files ("<file1>" ...)])
 ```
 
 - `package-name`
 a lisp symbol that has the same name as the package being specified.
 
-- `:url`
-specifies the URL of the version control repository. *required for
-the `git`, `bzr`, `hg`, `darcs`, `svn` and `cvs` fetchers*
-
-- `:module`
-specifies the module of a CVS repository to check out.  Defaults to to
-`package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
-
 - `:fetcher`
-specifies the type of repository that `:url` points to.  Right now
+(one of `git, github, bzr, hg, darcs, svn, cvs, wiki`) specifies the type of repository that `:url` points to.  Right now
 package-build supports [git][git], [github][github],
 [bazaar (bzr)][bzr], [mercurial (hg)][hg],
 [subversion (svn)][svn], [cvs][cvs] [darcs][darcs], and
@@ -143,13 +133,27 @@ differs from the package name being built. In the case of the `github`
 fetcher, use `:repo` instead of `:url`; the git URL will then be
 deduced.
 
+- `:url`
+specifies the URL of the version control repository. *required for
+the `git`, `bzr`, `hg`, `darcs`, `svn` and `cvs` fetchers.*
+
+- `:repo`
+specifies the github repository and is of the form `github-user/repo-name`. *required for the `github` fetcher*.
+
+- `:module`
+specifies the module of a CVS repository to check out.  Defaults to to
+`package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
+
 - `:files`
 optional property specifying the explicit files used to build the
-package.  Automatically populated by matching all `.el` files in the
-root of the repository.  This is necessary when there are multiple
+package. Automatically populated by matching all `.el` files in the
+root of the repository. This is necessary when there are multiple
 `.el` files in the repository but the package should only be built
-from a subset.  *Any file in any path in the repository is copied to
-the root of the package*
+from a subset. *Any file specifed at any path in the repository is
+copied to the root of the package.* More complex options are
+available, submit an
+[Issue](https://github.com/milkypostman/melpa/issues) if the specified
+package requires more complex file specification.
 
 [git]: http://git-scm.com/
 [github]: https://github.com/
@@ -174,7 +178,7 @@ Since there is only one `.el` file, this package only needs the `:url` and `:fet
 (ido-ubiquitous
  :url "https://github.com/DarwinAwardWinner/ido-ubiquitous.git"
  :fetcher git)
-``` 
+```
 
 ### Multiple Packages in one Repository
 
@@ -191,7 +195,7 @@ contains the *starter-kit* package along with extra packages in the
  :url "https://github.com/technomancy/emacs-starter-kit.git"
  :fetcher git
  :files ("modules/starter-kit-bindings.el"))
-``` 
+```
 
 Notice that `:files` is not specified for `starter-kit` since
 package-build will automatically add all `.el` files in the root
@@ -202,10 +206,10 @@ files specified explicitly.
 
 ### Multiple Files in Multiple Directories
 
-There are special cases when we need 
+There are special cases when we need
 There are special cases where creation of the package comes from many
 different sub-directories in the repository and the destination
-sub-directories need to be explicitly set.  
+sub-directories need to be explicitly set.
 
 Consider the `flymake-perlcritic` recipe,
 
@@ -230,7 +234,7 @@ first element to be the destination directory.  These can be embedded
 further, such as the following---hypothetical---entry for `:files`,
 
 ```elisp
-("*.el" ("snippets" 
+("*.el" ("snippets"
          ("html-mode" "snippets/html-mode/*")
          ("python-mode" "snippets/python-mode/*")))
 ```
@@ -316,17 +320,17 @@ format.
 * `clean-packages` -- remove all compiled packages from the `packages` directory.
 
 * `clean-json` -- remove all JSON files.
-    
+
  Note that these scripts require an Emacs with `package.el` installed,
  such as Emacs 24. If you have an older version of Emacs, you can get a
  suitable `package.el` [here](http://bit.ly/pkg-el23).
-    
+
 [melpa]: http://melpa.milkbox.net
 
 
 ## API
 
-All repository code is contained in the `package-build.el`. 
+All repository code is contained in the `package-build.el`.
 
 ### Functions
 
@@ -397,7 +401,7 @@ which packages will be enabled (whitelist packages only) or excluded
     `package-archives`, PACKAGE is a symbol of a package in that
     archive to exclude. Any specified package is excluded regardless
     of the value of `package-archive-enable-alist`
-    
+
 
     If a particular ARCHIVE has an entry in
 `package-archive-enable-alist` then only packages
@@ -422,4 +426,3 @@ You can install the package manually by pasting this into yoru `*scratch*` buffe
 
 *MELPA* is *Milkypostman's ELPA* or *Milkypostman's Experimental Lisp
  Package Archive* if you're not into the whole brevity thing.
-

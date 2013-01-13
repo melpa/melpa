@@ -1,0 +1,1 @@
+(rnc-mode :fetcher github :repo "TreeRex/rnc-mode")

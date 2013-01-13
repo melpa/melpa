@@ -1,0 +1,4 @@
+(extend-dnd
+ :fetcher github
+ :repo "mlf176f2/extend-dnd"
+ :files ("extend-dnd.el" "dir" "extend-dnd.info"))

@@ -1,0 +1,1 @@
+(otter-mode :fetcher github :repo "scvalex/script-fu" :files ("otter-mode.el"))

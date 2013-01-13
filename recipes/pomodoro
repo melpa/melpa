@@ -1,1 +1,1 @@
-(pomodoro :fetcher github :repo "docgnome/pomodoro.el")
+(pomodoro :fetcher github :repo "baudtack/pomodoro.el")

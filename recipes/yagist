@@ -1,0 +1,1 @@
+(yagist :repo "mhayashi1120/yagist.el" :fetcher github)

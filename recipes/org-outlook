@@ -1,0 +1,4 @@
+(org-outlook
+ :repo "mlf176f2/org-outlook.el"
+ :fetcher github
+ :files ("org-outlook.el" "dir" "org-outlook.info"))

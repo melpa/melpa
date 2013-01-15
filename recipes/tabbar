@@ -1,0 +1,4 @@
+(tabbar
+ :fetcher github
+ :repo "dholm/tabbar"
+ :files ("tabbar.el" "*.png"))

@@ -1,0 +1,3 @@
+(gitconfig-mode :repo "lunaryorn/git-modes"
+                :fetcher github
+                :files ("gitconfig-mode.el"))

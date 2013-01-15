@@ -1,4 +1,5 @@
-#!/usr/bin/env emacs --script
+#!/bin/sh 
+:;exec emacs --script "$0" "$@"
 
 (defun difference (left right)
   "compare two lists"

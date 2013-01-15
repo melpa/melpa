@@ -1,0 +1,2 @@
+(smartrep :repo "myuhe/smartrep.el" 
+               :fetcher github)

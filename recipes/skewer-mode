@@ -1,0 +1,3 @@
+(skewer-mode :repo "skeeto/skewer-mode"
+             :fetcher github
+             :files ("*.html" "*.js" "*.el"))

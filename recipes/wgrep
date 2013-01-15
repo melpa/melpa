@@ -1,0 +1,4 @@
+(wgrep
+ :fetcher github
+ :repo "mhayashi1120/Emacs-wgrep"
+ :files ("wgrep.el"))

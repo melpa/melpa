@@ -1,0 +1,1 @@
+(yard-mode :fetcher github :repo "pd/yard-mode.el")

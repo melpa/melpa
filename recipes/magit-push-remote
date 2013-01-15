@@ -1,0 +1,1 @@
+(magit-push-remote :repo "tarsius/magit-push-remote" :fetcher github)

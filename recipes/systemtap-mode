@@ -1,0 +1,1 @@
+(systemtap-mode :fetcher github :repo "ruediger/systemtap-mode")

@@ -1,0 +1,4 @@
+(ctable
+  :repo "kiwanami/emacs-ctable"
+  :fetcher github
+  :files ("ctable.el"))

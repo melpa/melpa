@@ -1,0 +1,1 @@
+(oauth :fetcher github :repo "psanford/emacs-oauth")

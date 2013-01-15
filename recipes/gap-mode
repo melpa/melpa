@@ -1,0 +1,4 @@
+(gap-mode
+ :fetcher hg
+ :url "https://bitbucket.org/gvol/gap-mode"
+ :files ("*.el" "emacs.gaprc"))

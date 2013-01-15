@@ -1,0 +1,1 @@
+(mote-mode :fetcher github :repo "inkel/mote-mode")

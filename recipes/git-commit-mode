@@ -1,0 +1,3 @@
+(git-commit-mode :repo "lunaryorn/git-modes"
+                 :fetcher github
+                 :files ("git-commit-mode.el"))

@@ -1,0 +1,1 @@
+(initsplit :fetcher github :repo "dabrahams/initsplit" :files ("initsplit.el"))

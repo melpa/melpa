@@ -1,0 +1,4 @@
+(namespaces
+ :fetcher github
+ :repo "chrisbarrett/elisp-namespaces"
+ :files ("namespaces.el"))

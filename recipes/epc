@@ -1,0 +1,4 @@
+(epc
+  :repo "kiwanami/emacs-epc"
+  :fetcher github
+  :files ("epc.el" "epcs.el"))

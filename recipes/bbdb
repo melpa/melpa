@@ -1,0 +1,4 @@
+(bbdb
+ :url "git://git.savannah.nongnu.org/bbdb.git"
+ :fetcher git
+ :files ("lisp/*.el"))

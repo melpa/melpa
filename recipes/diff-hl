@@ -1,0 +1,1 @@
+(diff-hl :fetcher github :repo "dgutov/diff-hl")

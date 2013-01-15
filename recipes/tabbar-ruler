@@ -1,0 +1,4 @@
+(tabbar-ruler
+ :fetcher github
+ :repo "mlf176f2/tabbar-ruler.el"
+ :files ("tabbar-ruler.el" "dir" "tabbar-ruler.info"))

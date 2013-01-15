@@ -1,0 +1,1 @@
+(furl :fetcher hg :url "https://code.google.com/p/furl-el/")

@@ -1,0 +1,1 @@
+(kite :fetcher github :repo "jscheid/kite")

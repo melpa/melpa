@@ -1,0 +1,1 @@
+(google-translate :fetcher github :repo "manzyuk/google-translate")

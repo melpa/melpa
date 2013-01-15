@@ -1,0 +1,2 @@
+(stem :repo "yuutayamada/stem"
+      :fetcher github)

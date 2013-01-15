@@ -1,0 +1,3 @@
+(nrepl-ritz :repo "pallet/ritz"
+            :fetcher github
+            :files ("nrepl/elisp/nrepl-ritz.el"))

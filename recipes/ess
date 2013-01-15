@@ -1,4 +1,4 @@
-(ess :repo "milkypostman/ESS" :fetcher github :files
+(ess :repo "emacs-ess/ESS" :fetcher github :files
      ("*.el" ("lisp" "lisp/*.el") ("etc" "etc/*")))
 
 

@@ -14,9 +14,7 @@ body {
 
 h1 {
     font-size: 3.8em;
-    color: #00ad00;
     color: #ff6622;
-    /* color: #6dd86c; */
     margin-bottom: 3px;
 }
 
@@ -29,20 +27,15 @@ h1 a {
 
 h2 {
     font-size: 1.5em;
-    color: #00ad00;
     color: #6dd86c;
 }
 
 h3 {
-    /* text-align: center; */
-    color: #00ad00;
     color: #6dd86c;
 }
 
 a {
-    color: #8f3591;
-    color: #ee3333;
-    /* color: #6dd86c; */
+    color: #ff6622;
     text-decoration: none;
 }
 

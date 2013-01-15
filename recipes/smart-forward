@@ -1,0 +1,1 @@
+(smart-forward :repo "magnars/smart-forward.el" :fetcher github :files ("smart-forward.el"))

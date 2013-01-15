@@ -1,0 +1,3 @@
+(birds-of-paradise-plus-theme
+ :repo "jimeh/birds-of-paradise-plus-theme.el"
+ :fetcher github)

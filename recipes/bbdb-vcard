@@ -1,0 +1,3 @@
+(bbdb-vcard :repo "tohojo/bbdb-vcard"
+            :fetcher github
+            :files ("bbdb-vcard.el" "vcard.el"))

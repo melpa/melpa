@@ -1,0 +1,1 @@
+(chicken-scheme :fetcher github :repo "dleslie/chicken-scheme.el")

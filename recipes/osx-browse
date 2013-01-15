@@ -1,0 +1,1 @@
+(osx-browse :repo "rolandwalker/osx-browse" :fetcher github)

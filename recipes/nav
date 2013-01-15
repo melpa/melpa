@@ -1,1 +1,1 @@
-(nav :url "https://code.google.com/p/emacs-nav/" :fetcher hg)
+(nav :url "https://code.google.com/p/emacs-nav/" :fetcher hg :files ("ack*" "nav.el"))

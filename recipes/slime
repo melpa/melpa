@@ -1,4 +1,3 @@
-(slime :repo "nablaone/slime"
+(slime :repo "antifuchs/slime"
        :fetcher github
-       :files ("slime.el"))
-
+       :files ("*.el" "*.lisp" "*.asd" "contrib"))

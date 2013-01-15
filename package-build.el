@@ -43,6 +43,7 @@
 (require 'cl)
 
 (require 'package)
+(require 'lisp-mnt)
 
 (defcustom package-build-working-dir (expand-file-name "working/")
   "Directory in which to keep checkouts."
@@ -65,15 +66,35 @@
 (defvar package-build-archive-alist nil
   "List of already-built packages, in the standard package.el format.")
 
+(defvar package-build-initialized nil
+  "Determines if package-build has been initialized.")
+
 ;;; Internal functions
 
+(defun pb/slurp-file (file-name)
+  "Return the contents of FILE-NAME as a string, or nil if no such file exists."
+  (when (file-exists-p file-name)
+    (with-temp-buffer
+      (insert-file-contents-literally file-name)
+      (buffer-substring-no-properties (point-min) (point-max)))))
+
+(defun pb/string-rtrim (str)
+  "Remove trailing whitespace from `STR'."
+  (replace-regexp-in-string "[ \t\n]*$" "" str))
+
 (defun pb/parse-time (str)
-  "Parse STR as a time, and format as a YYYYMMDD string."
-  (message (format "%s\n" (substring-no-properties str)))
-  (format-time-string
-   "%Y%m%d"
-   (date-to-time
-    (substring-no-properties str))))
+  "Parse STR as a time, and format as a YYYYMMDD.HHMM string."
+  ;; We remove zero-padding the HH portion, as it is lost
+  ;; when stored in the archive-contents
+  (let* ((s (substring-no-properties str))
+         (time (condition-case nil
+                   (date-to-time s)
+                 ('error
+                  ;; Handle newer CVS formats like "2001/08/26 22:16:22"
+                  ;; which break date-to-time
+                  (date-to-time (replace-regexp-in-string "/" "-" s))))))
+    (concat (format-time-string "%Y%m%d." time)
+            (format "%d" (or (string-to-number (format-time-string "%H%M" time)) 0)))))
 
 (defun pb/string-match-all (regex str &optional group)
   "Find every match for `REGEX' within `STR', returning the full match string or group `GROUP'."
@@ -121,10 +142,9 @@ In turn, this function uses the :fetcher option in the config to
 choose a source-specific fetcher function, which it calls with
 the same arguments."
   (let ((repo-type (plist-get config :fetcher)))
-    (message (format "%s " repo-type))
+    (message "Fetcher: %s" repo-type)
     (unless (eq 'wiki repo-type)
-      (message (format "%s\n"
-                       (or (plist-get config :repo) (plist-get config :url)))))
+      (message "Source: %s\n" (or (plist-get config :repo) (plist-get config :url))))
     (funcall (intern (format "pb/checkout-%s" repo-type))
              name config cwd)))
 
@@ -144,7 +164,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
             (,elapsed (- ,now pb/last-wiki-fetch-time)))
        (when (< ,elapsed pb/wiki-min-request-interval)
          (let ((wait (- pb/wiki-min-request-interval ,elapsed)))
-           (message "Waiting %s secs before hitting Emacswiki again" wait)
+           (message "Waiting %.2f secs before hitting Emacswiki again" wait)
            (sleep-for wait)))
        (unwind-protect
            (progn ,@body)
@@ -160,11 +180,30 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
      (url-copy-file download-url filename t))
     (when (zerop (nth 7 (file-attributes filename)))
       (error "Wiki file %s was empty - has it been removed?" filename))
-    (with-current-buffer (pb/with-wiki-rate-limit
-                          (url-retrieve-synchronously wiki-url))
-      (message (format "%s\n" download-url))
-      (pb/find-parse-time
-       "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"))))
+    ;; The Last-Modified response header for the download is actually
+    ;; correct for the file, but we have no access to that
+    ;; header. Instead, we must query the non-raw emacswiki page for
+    ;; the file.
+    ;; Since those Emacswiki lookups are time-consuming, we maintain a
+    ;; foo.el.stamp file containing ("SHA1" . "PARSED_TIME")
+    (let* ((new-content-hash (secure-hash 'sha1 (pb/slurp-file filename)))
+           (stamp-file (concat filename ".stamp"))
+           (stamp-info (pb/read-from-file stamp-file))
+           (prev-content-hash (car stamp-info)))
+      (if (and prev-content-hash
+               (string-equal new-content-hash prev-content-hash))
+          ;; File has not changed, so return old timestamp
+          (progn
+            (message "%s is unchanged" filename)
+            (cdr stamp-info))
+        (message "%s has changed - checking mod time" filename)
+        (let ((new-timestamp
+               (with-current-buffer (pb/with-wiki-rate-limit
+                                     (url-retrieve-synchronously wiki-url))
+                 (pb/find-parse-time
+                  "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"))))
+          (pb/dump (cons new-content-hash new-timestamp) stamp-file)
+          new-timestamp)))))
 
 (defun pb/checkout-wiki (name config dir)
   "Checkout package NAME with config CONFIG from the EmacsWiki into DIR."
@@ -211,11 +250,11 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
 
 (defun pb/princ-exists (dir)
   "Print a message that the contents of DIR will be updated."
-  (message (format "updating %s\n" dir)))
+  (message "Updating %s" dir))
 
 (defun pb/princ-checkout (repo dir)
   "Print a message that REPO will be checked out into DIR."
-  (message (format "cloning %s to %s\n" repo dir)))
+  (message "Cloning %s to %s" repo dir))
 
 (defun pb/checkout-svn (name config dir)
   "Check package NAME with config CONFIG out of svn into DIR."
@@ -237,10 +276,59 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
       (or (pb/find-parse-time-latest "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)" bound)
           (error "No valid timestamps found!")))))
 
+(defun pb/cvs-repo (dir)
+  "Get the current CVS root and repository for DIR.
+
+Return a cons cell whose `car' is the root and whose `cdr' is the repository."
+  (apply 'cons
+         (mapcar (lambda (file)
+                   (pb/string-rtrim (pb/slurp-file (expand-file-name file dir))))
+                 '("CVS/Root" "CVS/Repository"))))
+
+(defun pb/checkout-cvs (name config dir)
+  "Check package NAME with config CONFIG out of csv into DIR."
+  (with-current-buffer (get-buffer-create "*package-build-checkout*")
+    (let ((root (pb/trim (plist-get config :url) ?/))
+          (repo (or (plist-get config :module) (symbol-name name)))
+          (bound (goto-char (point-max))))
+      (cond
+       ((and (file-exists-p (expand-file-name "CVS" dir))
+             (equal (pb/cvs-repo dir) (cons root repo)))
+        (pb/princ-exists dir)
+        (pb/run-process dir "cvs" "update" "-dP"))
+       (t
+        (when (file-exists-p dir)
+          (delete-directory dir t nil))
+        (pb/princ-checkout (format "%s from %s" repo root) dir)
+        ;; CVS insists on relative paths as target directory for checkout (for
+        ;; whatever reason), and puts "CVS" directories into every subdirectory
+        ;; of the current working directory given in the target path. To get CVS
+        ;; to just write to DIR, we need to execute CVS from the parent
+        ;; directory of DIR, and specific DIR as relative path.  Hence all the
+        ;; following mucking around with paths.  CVS is really horrid.
+        (let* ((dir (directory-file-name dir))
+               (working-dir (file-name-directory dir))
+               (target-dir (file-name-nondirectory dir)))
+          (pb/run-process working-dir "env" "TZ=UTC" "cvs" "-z3" "-d" root "checkout"
+                          "-d" target-dir repo))))
+      (apply 'pb/run-process dir "cvs" "log"
+             (pb/expand-source-file-list dir config))
+      (or (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} \\+[0-9]\\{2\\}[0-9]\\{2\\}\\)")
+          (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}/[0-9]\\{2\\}/[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\);")
+          (error "No valid timestamps found!"))
+      )))
+
 (defun pb/git-repo (dir)
   "Get the current git repo for DIR."
   (pb/run-process-match
    "Fetch URL: \\(.*\\)" dir "git" "remote" "show" "-n" "origin"))
+
+(defun pb/git-head-branch (dir)
+  "Get the current git repo for DIR."
+  (or (ignore-errors
+        (pb/run-process-match
+         "HEAD branch: \\(.*\\)" dir "git" "remote" "show" "origin"))
+      "master"))
 
 (defun pb/checkout-git (name config dir)
   "Check package NAME with config CONFIG out of git into DIR."
@@ -252,14 +340,14 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
        ((and (file-exists-p (expand-file-name ".git" dir))
              (string-equal (pb/git-repo dir) repo))
         (pb/princ-exists dir)
-        (pb/run-process dir "git" "pull"))
+        (pb/run-process dir "git" "remote" "update"))
        (t
         (when (file-exists-p dir)
           (delete-directory dir t nil))
         (pb/princ-checkout repo dir)
         (pb/run-process nil "git" "clone" repo dir)))
-      (when commit
-        (pb/run-process dir "git" "checkout" commit))
+      (pb/run-process dir "git" "reset" "--hard"
+                      (or commit (concat "origin/" (pb/git-head-branch dir))))
       (apply 'pb/run-process dir "git" "log" "-n1" "--pretty=format:'\%ci'"
              (pb/expand-source-file-list dir config))
       (pb/find-parse-time
@@ -342,13 +430,9 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
    pkg-file))
 
 (defun pb/read-from-file (file-name)
-  "Read and return the Lisp data stored in FILE-NAME,or nil if no such file exists."
+  "Read and return the Lisp data stored in FILE-NAME, or nil if no such file exists."
   (when (file-exists-p file-name)
-    (with-temp-buffer
-      (insert-file-contents-literally file-name)
-      (goto-char (point-min))
-      (read (current-buffer)))))
-
+    (car (read-from-string (pb/slurp-file file-name)))))
 
 (defun pb/create-tar (file dir &optional files)
   "Create a tar FILE containing the contents of DIR, or just FILES if non-nil.
@@ -360,12 +444,42 @@ The file is written to `package-build-working-dir'."
            nil "-cvf"
            file
            "--exclude=.svn"
+           "--exclude=CVS"
            "--exclude=.git*"
            "--exclude=_darcs"
            "--exclude=.bzr"
            "--exclude=.hg"
            (or (mapcar (lambda (fn) (concat dir "/" fn)) files)
                (list dir)))))
+
+
+(defun pb/find-package-commentary (file-path)
+  "Get commentary section from FILE-PATH."
+  (when (file-exists-p file-path)
+    (with-temp-buffer
+      (insert-file-contents file-path)
+      (lm-commentary))))
+
+(defun pb/write-pkg-readme (commentary file-name)
+  "Write COMMENTARY to the FILE-NAME-readme.txt file."
+  (when commentary
+    (with-temp-buffer
+      (insert commentary)
+      ;; Adapted from `describe-package-1'.
+      (goto-char (point-min))
+      (save-excursion
+        (when (re-search-forward "^;;; Commentary:\n" nil t)
+          (replace-match ""))
+        (while (re-search-forward "^\\(;+ ?\\)" nil t)
+          (replace-match ""))
+        (goto-char (point-min))
+        (when (re-search-forward "\\`\\( *\n\\)+" nil t)
+          (replace-match "")))
+      (delete-trailing-whitespace)
+      (let ((coding-system-for-write buffer-file-coding-system))
+        (write-region nil nil
+                      (expand-file-name (concat file-name "-readme.txt")
+                                        package-build-archive-dir))))))
 
 (defun pb/get-package-info (file-path)
   "Get a vector of package info from the docstrings in FILE-PATH."
@@ -401,13 +515,12 @@ The file is written to `package-build-working-dir'."
              (nth 1 pkgfile-info)))
         (error "No define-package found in %s" file-path)))))
 
-
 (defun pb/merge-package-info (pkg-info name version config)
   "Return a version of PKG-INFO updated with NAME, VERSION and info from CONFIG.
 If PKG-INFO is nil, an empty one is created."
   (let* ((merged (or (copy-seq pkg-info)
                      (vector name nil "No description available." version))))
-    (aset merged 0 (downcase name))
+    (aset merged 0 name)
     (aset merged 2 (format "%s [source: %s]"
                            (aref merged 2) (plist-get config :fetcher)))
     (aset merged 3 version)
@@ -415,12 +528,14 @@ If PKG-INFO is nil, an empty one is created."
 
 (defun pb/dump-archive-contents ()
   "Dump the list of built packages back to the archive-contents file."
+  (package-build-initialize)
   (pb/dump (cons 1 package-build-archive-alist)
            (expand-file-name "archive-contents"
                              package-build-archive-dir)))
 
 (defun pb/add-to-archive-contents (pkg-info type)
   "Add the built archive with info PKG-INFO and TYPE to `package-build-archive-alist'."
+  (package-build-initialize)
   (let* ((name (intern (aref pkg-info 0)))
          (requires (aref pkg-info 1))
          (desc (or (aref pkg-info 2) "No description available."))
@@ -452,6 +567,7 @@ If PKG-INFO is nil, an empty one is created."
 Note that the working directory (if present) is not deleted by
 this function, since the archive list may contain another version
 of the same-named package which is to be kept."
+  (package-build-initialize)
   (print (format "Removing archive: %s" archive-entry))
   (let ((archive-file (pb/archive-file-name archive-entry)))
     (when (file-exists-p archive-file)
@@ -460,10 +576,29 @@ of the same-named package which is to be kept."
         (remove archive-entry package-build-archive-alist))
   (pb/dump-archive-contents))
 
+
+(defun pb/read-recipe (file-name)
+  (let ((pkg-info (pb/read-from-file file-name)))
+    (if (string= (symbol-name (car pkg-info))
+                 (file-name-nondirectory file-name))
+        pkg-info
+      (error "Recipe '%s' contains mismatched package name '%s'"
+             (file-name-nondirectory file-name)
+             (car pkg-info)))))
+
 (defun pb/read-recipes ()
   "Return a list of data structures for all recipes in `package-build-recipes-dir'."
-  (mapcar 'pb/read-from-file
-          (directory-files package-build-recipes-dir t "^[^.]")))
+  (loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
+        collect (pb/read-recipe file-name)))
+
+(defun pb/read-recipes-ignore-errors ()
+  "Return a list of data structures for all recipes in `package-build-recipes-dir'."
+  (loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
+        for pkg-info = (condition-case err (pb/read-recipe file-name)
+                         ('error (message (error-message-string err))
+                                 nil))
+        when pkg-info
+        collect pkg-info))
 
 
 (defun pb/expand-file-specs (dir specs &optional subdir)
@@ -520,12 +655,20 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 (defun pb/package-name-completing-read ()
   "Prompt for a package name, returning a symbol."
+  (package-build-initialize)
   (intern (completing-read "Package: " package-build-alist)))
 
+(defun pb/find-source-file (target files)
+  "Search for source of TARGET in FILES."
+  (let* ((entry (rassoc target files)))
+    (when entry (car entry))))
+
 ;;; Public interface
+;;;###autoload
 (defun package-build-archive (name)
   "Build a package archive for package NAME."
   (interactive (list (pb/package-name-completing-read)))
+  (package-build-initialize)
   (let* ((file-name (symbol-name name))
          (cfg (or (cdr (assoc name package-build-alist))
                   (error "Cannot find package %s" file-name)))
@@ -533,10 +676,11 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
           (file-name-as-directory
            (expand-file-name file-name package-build-working-dir))))
 
-    (message (format "\n;;; %s\n" file-name))
+    (message "\n;;; %s\n" file-name)
     (let* ((version (pb/checkout name cfg pkg-cwd))
            (files (pb/expand-config-file-list pkg-cwd cfg))
-           (default-directory package-build-working-dir))
+           (default-directory package-build-working-dir)
+           (start-time (current-time)))
       (cond
        ((not version)
         (message "Unable to check out repository for %s" name))
@@ -553,21 +697,33 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
           (when (file-exists-p pkg-target)
             (delete-file pkg-target t))
           (copy-file pkg-source pkg-target)
+
+          (pb/write-pkg-readme (and (> (length pkg-info) 4) (aref pkg-info 4))
+                               file-name)
+
           (pb/add-to-archive-contents pkg-info 'single)))
        ((< 1 (length  files))
         (let* ((pkg-dir (concat file-name "-" version))
-               ;; TODO: What if the upstream "-pkg.el" file is in a subdir?
                (pkg-file (concat file-name "-pkg.el"))
+               (pkg-file-source (or (pb/find-source-file pkg-file files)
+                                    pkg-file))
+               (file-source (concat file-name ".el"))
+               (pkg-source (or (pb/find-source-file file-source files)
+                               file-source))
                (pkg-info
                 (pb/merge-package-info
                  (let ((default-directory pkg-cwd))
-                   (or (pb/get-pkg-file-info pkg-file)
+                   (or (pb/get-pkg-file-info pkg-file-source)
                        ;; some packages (like magit) provide name-pkg.el.in
                        (pb/get-pkg-file-info (concat pkg-file ".in"))
-                       (pb/get-package-info (concat file-name ".el"))))
+                       (pb/get-package-info pkg-source)))
                  file-name
                  version
                  cfg)))
+
+          (let ((default-directory pkg-cwd))
+            (pb/write-pkg-readme (pb/find-package-commentary pkg-source)
+                                 file-name))
 
           (when (file-exists-p pkg-dir)
             (delete-directory pkg-dir t nil))
@@ -592,7 +748,25 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
        (t (error "Unable to find files matching recipe patterns")))
       (pb/dump-archive-contents)
+      (message "Built in %.3fs, finished at %s"
+               (time-to-seconds (time-since start-time))
+               (current-time-string))
       file-name)))
+
+;;;###autoload
+(defun package-build-current-recipe ()
+  "Build archive for the recipe defined in the current buffer."
+  (interactive)
+  (unless (and (buffer-file-name)
+               (string-equal (file-name-directory (buffer-file-name))
+                             package-build-recipes-dir))
+    (error "Buffer is not visiting a recipe"))
+  (when (buffer-modified-p)
+    (if (y-or-n-p (format "Save file %s? " buffer-file-name))
+        (save-buffer)
+      (error "Aborting")))
+  (package-build-reinitialize)
+  (package-build-archive (intern (file-name-nondirectory (buffer-file-name)))))
 
 (defun package-build-archive-ignore-errors (pkg)
   "Build archive for package PKG, ignoring any errors."
@@ -609,43 +783,69 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
        (message "%s" (error-message-string err))
        nil))))
 
+;;;###autoload
 (defun package-build-all ()
   "Build all packages in the `package-build-alist'."
   (interactive)
+  (package-build-initialize)
   (let ((failed (loop for pkg in (mapcar 'car package-build-alist)
                       when (not (package-build-archive-ignore-errors pkg))
                       collect pkg)))
     (if (not failed)
         (princ "\nSuccessfully Compiled All Packages\n")
       (princ "\nFailed to Build the Following Packages\n")
-      (princ (mapconcat 'symbol-name failed "\n"))))
+      (princ (mapconcat 'symbol-name failed "\n"))
+      (princ "\n")))
   (package-build-cleanup))
 
 (defun package-build-cleanup ()
   "Remove previously-built packages that no longer have recipes."
   (interactive)
+  (package-build-initialize)
   (let* ((known-package-names (mapcar 'car package-build-alist))
          (stale-archives (loop for built in package-build-archive-alist
                                when (not (memq (car built) known-package-names))
                                collect built)))
     (mapc 'pb/remove-archive stale-archives)))
 
+(defun package-build-reinitialize ()
+  (interactive)
+  (setq package-build-initialized nil)
+  (package-build-initialize))
+
 (defun package-build-initialize ()
   "Load the recipe and archive-contents files."
   (interactive)
-  (setq package-build-alist (pb/read-recipes)
-        package-build-archive-alist
-        (cdr (pb/read-from-file
-              (expand-file-name "archive-contents"
-                                package-build-archive-dir)))))
+  (unless package-build-initialized
+    (setq package-build-initialized t
+          package-build-alist (pb/read-recipes-ignore-errors)
+          package-build-archive-alist
+          (cdr (pb/read-from-file
+                (expand-file-name "archive-contents"
+                                  package-build-archive-dir))))))
 
+;; Utility functions
+(autoload 'json-encode "json")
+(eval-after-load 'json '(load (expand-file-name "json-fix")))
 
-(package-build-initialize)
+(defun package-build-alist-as-json (fn)
+  (interactive)
+  (package-build-initialize)
+  (with-temp-file fn
+    (insert (json-encode package-build-alist))))
+
+(defun package-build-archive-alist-as-json (fn)
+  (interactive)
+  (package-build-initialize)
+  (with-temp-file fn
+    (insert (json-encode package-build-archive-alist))))
+
 
 (provide 'package-build)
 
 ;; Local Variables:
 ;; coding: utf-8
+;; byte-compile-warnings: (not cl-functions)
 ;; eval: (checkdoc-minor-mode 1)
 ;; End:
 

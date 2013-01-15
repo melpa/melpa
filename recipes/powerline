@@ -1,0 +1,2 @@
+(powerline :fetcher github
+           :repo "milkypostman/powerline")

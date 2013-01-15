@@ -1,0 +1,1 @@
+(fold-dwim-org :fetcher github :repo "mlf176f2/fold-dwim-org")

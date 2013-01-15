@@ -1,0 +1,3 @@
+(save-visited-files
+ :fetcher github
+ :repo "nflath/save-visited-files")

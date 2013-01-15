@@ -1,0 +1,1 @@
+(tuareg :fetcher svn :url "svn://svn.forge.ocamlcore.org/svn/tuareg/trunk")

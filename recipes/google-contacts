@@ -1,0 +1,1 @@
+(google-contacts :fetcher git :url "git://git.naquadah.org/google-contacts.el.git")

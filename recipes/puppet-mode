@@ -1,0 +1,1 @@
+(puppet-mode :fetcher github :repo "puppetlabs/puppet-syntax-emacs")

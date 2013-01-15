@@ -1,2 +1,2 @@
-(browse-kill-ring :repo "todesschaf/browse-kill-ring" :fetcher github)
+(browse-kill-ring :repo "browse-kill-ring/browse-kill-ring" :fetcher github)
 

@@ -21,13 +21,14 @@
         package = OpenStruct.new
         package.name = pkgname
         package.version = version
+        package.description = descr.gsub(/ \[source:.*$/, '')
         hour_portion = versions[1] ? sprintf("%04d", versions[1]) : "0000"
         package.build_time = Time.new(version[0..3].to_i, version[4..5].to_i, version[6..7].to_i, hour_portion[0..1].to_i, hour_portion[2..3].to_i)
         package.url = "#{base_url}packages/#{pkgname}-#{version}." + (pkgtype == "single" ? "el" : "tar")
         package.info_url = "#{base_url}##{pkgname}"
     %>
       <item>
-        <title>Package update: <%= package.name %> is now at version <%= package.version %></title>
+        <title><%= package.name %> (<%= package.version %>) --- <%= package.description %></title>
         <description>The <%= package.name %> package in MELPA has been updated to version <%= package.version %>.</description>
         <pubDate><%= package.build_time.rfc822 %></pubDate>
         <guid isPermaLink="true"><%= package.url %></guid>

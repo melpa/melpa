@@ -1,4 +1,3 @@
 (ncl-mode
  :repo "yyr/ncl-mode"
- :fetcher github
- :files ("*.el"))
+ :fetcher github)

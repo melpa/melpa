@@ -1,4 +1,3 @@
 (php+-mode
  :fetcher github
- :repo "echosa/phpplus-mode"
- :files ("*.el"))
+ :repo "echosa/phpplus-mode")

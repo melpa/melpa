@@ -1,3 +1,2 @@
 (es-lib :repo "sabof/es-lib"
-        :fetcher github
-        :files ("*.el"))
+        :fetcher github)

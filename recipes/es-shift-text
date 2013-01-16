@@ -1,4 +1,3 @@
 (es-shift-text
  :repo "sabof/es-shift-text"
- :fetcher github
- :files ("*.el"))
+ :fetcher github)

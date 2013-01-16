@@ -1,0 +1,4 @@
+(color-theme-approximate
+ :repo "tungd/color-theme-approximate"
+ :fetcher github
+ :files ("*.el"))

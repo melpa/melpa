@@ -1,0 +1,3 @@
+(enotify :repo "lewang/helm-cmd-t"
+         :fetcher github
+         :files ("*.el"))

@@ -1,0 +1,3 @@
+(bbcode-mode
+ :fetcher "github"
+ :repo "ejmr/bbcode-mode")

@@ -1,2 +1,2 @@
-(enotify :repo "lewang/helm-cmd-t"
-         :fetcher github)
+(helm-cmd-t :repo "lewang/helm-cmd-t"
+            :fetcher github)

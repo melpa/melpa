@@ -1,0 +1,3 @@
+(projmake-mode
+ :repo "ericbmerritt/projmake-mode"
+ :fetcher github)

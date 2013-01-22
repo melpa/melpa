@@ -1,0 +1,1 @@
+(spotify :fetcher github :repo "remvee/spotify-el")

@@ -1,1 +1,1 @@
-(smartparens :fetcher github :repo "Fuco1/smartparens" :files ("smartparens.el"))
+(smartparens :fetcher github :repo "Fuco1/smartparens")

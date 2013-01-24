@@ -1,0 +1,4 @@
+(yascroll
+ :repo "m2ym/yascroll-el"
+ :fetcher github
+ :files ("yascroll.el"))

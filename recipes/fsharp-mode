@@ -1,7 +1,6 @@
 (fsharp-mode
  :fetcher github
- :repo "rneatherway/fsharpbinding"
- :commit "origin/packaging"
+ :repo "fsharp/fsharpbinding"
  :files ("emacs/fsharp-mode*.el"
          "emacs/inf-fsharp-mode.el"
          ("bin"

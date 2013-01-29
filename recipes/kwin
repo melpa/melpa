@@ -1,0 +1,1 @@
+(kwin :fetcher github :repo "Tass/kwin-minor-mode")

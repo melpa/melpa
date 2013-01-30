@@ -1,0 +1,1 @@
+(replace-from-region :fetcher wiki)

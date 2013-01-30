@@ -1,0 +1,1 @@
+(pgdevenv :repo "dimitri/pgdevenv-el" :fetcher github)

@@ -1,0 +1,3 @@
+(php-eldoc
+ :repo "sabof/php-eldoc"
+ :fetcher github)

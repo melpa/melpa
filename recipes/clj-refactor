@@ -1,0 +1,1 @@
+(clj-refactor :fetcher github :repo "magnars/clj-refactor.el")

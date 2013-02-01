@@ -1,0 +1,1 @@
+(vlf :repo "m00natic/vlf" :fetcher github)

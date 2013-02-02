@@ -1,0 +1,1 @@
+(win-switch :fetcher github :repo "genovese/win-switch" :files ("win-switch.el"))

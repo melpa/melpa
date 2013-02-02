@@ -1,0 +1,4 @@
+(phoenix-dark-mono-theme
+ :repo "j0ni/phoenix-dark-mono"
+ :fetcher github
+ :files ("phoenix-dark-mono-theme.el"))

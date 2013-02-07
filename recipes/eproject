@@ -1,3 +1,4 @@
 (eproject
  :repo "jrockway/eproject"
- :fetcher github)
+ :fetcher github
+ :files ("*.el" "contrib/*.el"))

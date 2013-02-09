@@ -1,0 +1,1 @@
+(nimrod-mode :fetcher github :repo "eegg/nimrod-mode")

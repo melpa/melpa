@@ -1,1 +1,0 @@
-(prelude-coffee :repo "bbatsov/prelude-modules" :fetcher github :files ("prelude-coffee.el"))

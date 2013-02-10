@@ -1,1 +1,0 @@
-(prelude-haskell :repo "bbatsov/prelude-modules" :fetcher github :files ("prelude-haskell.el"))

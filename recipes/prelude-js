@@ -1,1 +1,0 @@
-(prelude-js :repo "bbatsov/prelude-modules" :fetcher github :files ("prelude-js.el"))

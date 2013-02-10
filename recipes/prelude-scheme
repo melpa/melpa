@@ -1,1 +1,0 @@
-(prelude-scheme :repo "bbatsov/prelude-modules" :fetcher github :files ("prelude-scheme.el"))

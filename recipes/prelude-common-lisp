@@ -1,1 +1,0 @@
-(prelude-common-lisp :repo "bbatsov/prelude-modules" :fetcher github :files ("prelude-common-lisp.el"))

@@ -1,0 +1,3 @@
+(scheme-complete
+ :fetcher hg
+ :url "http://code.google.com/p/scheme-complete/")

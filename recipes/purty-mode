@@ -1,0 +1,1 @@
+(purty-mode :fetcher github :repo "hackscience/purty-mode")

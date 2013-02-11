@@ -1,0 +1,1 @@
+(snippet :repo "emacsmirror/snippet" :fetcher github)

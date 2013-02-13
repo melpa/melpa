@@ -1,0 +1,6 @@
+(kibit-mode :repo "aredington/kibit-mode"
+            :fetcher github
+            :files ("kibit-mode.el"
+                    "project.clj"
+                    ("bin" "bin/kibit-flymake.sh")
+                    ("src/kibit_mode" "src/kibit_mode/*.clj")))

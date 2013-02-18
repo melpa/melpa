@@ -44,6 +44,7 @@
 
 (require 'package)
 (require 'lisp-mnt)
+(require 'url-parse)
 
 (defcustom package-build-working-dir (expand-file-name "working/")
   "Directory in which to keep checkouts."
@@ -143,7 +144,7 @@ choose a source-specific fetcher function, which it calls with
 the same arguments."
   (let ((repo-type (plist-get config :fetcher)))
     (message "Fetcher: %s" repo-type)
-    (unless (eq 'wiki repo-type)
+    (unless (or (eq 'wiki repo-type) (eq 'url repo-type))
       (message "Source: %s\n" (or (plist-get config :repo) (plist-get config :url))))
     (funcall (intern (format "pb/checkout-%s" repo-type))
              name config cwd)))
@@ -214,6 +215,24 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
                      (list (format "%s.el" name))))
           (default-directory dir))
       (car (nreverse (sort (mapcar 'pb/grab-wiki-file files) 'string-lessp))))))
+
+(defun pb/grab-url-file (url dir)
+  "Download file and save as filename from a given URL and DIR."
+  (let* ((filename (car (reverse (split-string (url-filename (url-generic-parse-url url)) "/"))))
+         (working-file (expand-file-name filename dir)))
+    (url-copy-file url filename t)
+    ;; use date version
+    ;;(pb/parse-time (pb/slurp-file (expand-file-name filename dir)))
+    (pb/parse-time (pb/slurp-file working-file))  ))
+
+(defun pb/checkout-url (name config dir)
+  "Checkout package NAME with config CONFIG from the EmacsWiki into DIR."
+  (with-current-buffer (get-buffer-create "*package-build-checkout*")
+    (unless (file-exists-p dir)
+      (make-directory dir))
+    (let ((fetch-url (plist-get config :url))
+          (default-directory dir))
+      (pb/grab-url-file fetch-url dir))))
 
 (defun pb/darcs-repo (dir)
   "Get the current darcs repo for DIR."

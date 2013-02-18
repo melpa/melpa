@@ -1,0 +1,4 @@
+(init-loader
+ :repo "emacs-jp/init-loader"
+ :fetcher github
+ :files ("init-loader.el"))

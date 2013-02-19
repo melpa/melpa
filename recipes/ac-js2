@@ -1,0 +1,3 @@
+(ac-js2 :fetcher github
+        :repo "ScottyB/ac-js2"
+        :files ("*.js" "*.el"))

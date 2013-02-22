@@ -1,0 +1,4 @@
+(init-loader
+ :repo "emacs-jp/migemo"
+ :fetcher github
+ :files ("migemo.el"))

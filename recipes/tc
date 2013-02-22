@@ -1,0 +1,2 @@
+(tc :repo "kozo2/tc" :fetcher github :files
+               ("*.el" "tcode")) 

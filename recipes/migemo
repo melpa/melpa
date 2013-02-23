@@ -1,0 +1,3 @@
+(migemo
+ :repo "emacs-jp/migemo"
+ :fetcher github)

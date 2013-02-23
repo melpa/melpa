@@ -30,7 +30,7 @@
 
     source_url =
       case source
-      when 'github' then "https://github.com/#{recipe['repo']}"
+      when 'github' then recipe['repo'].include?('/') ? "https://github.com/#{recipe['repo']}" : "https://gist.github.com/#{recipe['repo']}"
       when 'wiki'   then recipe.key?('files') ? nil : "http://www.emacswiki.org/emacs/#{pkgname}.el"
       end
 

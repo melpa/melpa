@@ -1,0 +1,1 @@
+(erc-image :repo "kidd/erc-image.el" :fetcher github)

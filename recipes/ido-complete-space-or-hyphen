@@ -1,0 +1,1 @@
+(ido-complete-space-or-hyphen :repo "doitian/ido-complete-space-or-hyphen" :fetcher github)

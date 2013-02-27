@@ -1,0 +1,3 @@
+(pallet :fetcher github
+        :repo "rdallasgray/pallet"
+        :files ("pallet.el" "pallet-pkg.el"))

@@ -1,0 +1,1 @@
+(toml-mode :fetcher github :remp "dryman/toml-mode.el")

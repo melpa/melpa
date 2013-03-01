@@ -1,0 +1,1 @@
+(imenu-anywhere :repo "vitoshka/imenu-anywhere" :fetcher github)

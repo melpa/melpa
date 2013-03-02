@@ -1,0 +1,2 @@
+(e2wm-svg-clock :repo "myuhe/e2wm-svg-clock.el"
+                :fetcher github)

@@ -1,0 +1,2 @@
+(e2wm-R :repo "myuhe/e2wm-R.el" 
+        :fetcher github)

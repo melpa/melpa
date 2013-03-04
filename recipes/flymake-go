@@ -1,0 +1,3 @@
+(flymake-go
+ :fetcher github
+ :repo "robert-zaremba/flymake-go")

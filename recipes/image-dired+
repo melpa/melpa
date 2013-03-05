@@ -1,0 +1,2 @@
+(image-dired+ :repo "mhayashi1120/Emacs-image-diredx"
+              :fetcher github)

@@ -1,0 +1,3 @@
+(tex-smart-umlauts
+ :fetcher darcs
+ :url "http://hub.darcs.net/lyro/tex-smart-umlauts")

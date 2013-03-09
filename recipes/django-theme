@@ -1,0 +1,3 @@
+(django-theme :repo "andrzejsliwa/django-theme.el"
+               :fetcher github
+               :files ("django-theme.el"))

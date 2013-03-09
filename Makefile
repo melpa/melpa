@@ -45,7 +45,7 @@ archive.json: packages/archive-contents
 
 recipes.json: $(RCPDIR)/.dirstamp
 	@echo " • Building $@ ..."
-	$(EVAL) '(package-build-alist-as-json "recipes.json")'
+	$(EVAL) '(package-build-recipe-alist-as-json "recipes.json")'
 
 json: archive.json recipes.json
 

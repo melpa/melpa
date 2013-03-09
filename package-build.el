@@ -60,16 +60,21 @@
   :group 'package-build
   :type 'string)
 
-(defvar package-build-alist nil
-  "List of package build specs.")
 
-(defvar package-build-archive-alist nil
-  "List of already-built packages, in the standard package.el format.")
+;;; Internal Variables
 
-(defvar package-build-initialized nil
-  "Determines if package-build has been initialized.")
+(defvar pb/recipe-alist nil
+  "Internal list of package build specs.
 
-;;; Internal functions
+Do not use this directly. Use `package-build-recipe-alist'
+function.")
+
+(defvar pb/archive-alist nil
+  "Internal list of already-built packages, in the standard package.el format.
+
+Do not use this directly. Use `package-build-archive-alist'
+function for access to this function")
+
 
 (defun pb/slurp-file (file-name)
   "Return the contents of FILE-NAME as a string, or nil if no such file exists."
@@ -528,29 +533,25 @@ If PKG-INFO is nil, an empty one is created."
 
 (defun pb/dump-archive-contents ()
   "Dump the list of built packages back to the archive-contents file."
-  (package-build-initialize)
-  (pb/dump (cons 1 package-build-archive-alist)
+  (pb/dump (cons 1 (package-build-archive-alist))
            (expand-file-name "archive-contents"
                              package-build-archive-dir)))
 
 (defun pb/add-to-archive-contents (pkg-info type)
   "Add the built archive with info PKG-INFO and TYPE to `package-build-archive-alist'."
-  (package-build-initialize)
   (let* ((name (intern (aref pkg-info 0)))
          (requires (aref pkg-info 1))
          (desc (or (aref pkg-info 2) "No description available."))
          (version (aref pkg-info 3))
-         (existing (assq name package-build-archive-alist)))
-    (when existing
-      (setq package-build-archive-alist
-            (delq existing package-build-archive-alist)))
-    (add-to-list 'package-build-archive-alist
-                 (cons name
-                       (vector
-                        (version-to-list version)
-                        requires
-                        desc
-                        type)))))
+         (existing (assq name (package-build-archive-alist))))
+
+    (when existing (package-build-archive-alist-remove existing))
+    (package-build-archive-alist-add
+     (cons name
+           (vector (version-to-list version)
+                   requires
+                   desc
+                   type)))))
 
 (defun pb/archive-file-name (archive-entry)
   "Return the path of the file in which the package for ARCHIVE-ENTRY is stored."
@@ -567,13 +568,11 @@ If PKG-INFO is nil, an empty one is created."
 Note that the working directory (if present) is not deleted by
 this function, since the archive list may contain another version
 of the same-named package which is to be kept."
-  (package-build-initialize)
   (print (format "Removing archive: %s" archive-entry))
   (let ((archive-file (pb/archive-file-name archive-entry)))
     (when (file-exists-p archive-file)
       (delete-file archive-file)))
-  (setq package-build-archive-alist
-        (remove archive-entry package-build-archive-alist))
+  (package-build-archive-alist-remove archive-entry)
   (pb/dump-archive-contents))
 
 
@@ -655,8 +654,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 (defun pb/package-name-completing-read ()
   "Prompt for a package name, returning a symbol."
-  (package-build-initialize)
-  (intern (completing-read "Package: " package-build-alist)))
+  (intern (completing-read "Package: " (package-build-recipe-alist))))
 
 (defun pb/find-source-file (target files)
   "Search for source of TARGET in FILES."
@@ -668,9 +666,8 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 (defun package-build-archive (name)
   "Build a package archive for package NAME."
   (interactive (list (pb/package-name-completing-read)))
-  (package-build-initialize)
   (let* ((file-name (symbol-name name))
-         (cfg (or (cdr (assoc name package-build-alist))
+         (cfg (or (cdr (assoc name (package-build-recipe-alist)))
                   (error "Cannot find package %s" file-name)))
          (pkg-cwd
           (file-name-as-directory
@@ -785,10 +782,9 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 ;;;###autoload
 (defun package-build-all ()
-  "Build all packages in the `package-build-alist'."
+  "Build all packages in the `package-build-recipe-alist'."
   (interactive)
-  (package-build-initialize)
-  (let ((failed (loop for pkg in (mapcar 'car package-build-alist)
+  (let ((failed (loop for pkg in (mapcar 'car (package-build-recipe-alist))
                       when (not (package-build-archive-ignore-errors pkg))
                       collect pkg)))
     (if (not failed)
@@ -801,44 +797,52 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 (defun package-build-cleanup ()
   "Remove previously-built packages that no longer have recipes."
   (interactive)
-  (package-build-initialize)
-  (let* ((known-package-names (mapcar 'car package-build-alist))
-         (stale-archives (loop for built in package-build-archive-alist
+  (let* ((known-package-names (mapcar 'car (package-build-recipe-alist)))
+         (stale-archives (loop for built in (package-build-archive-alist)
                                when (not (memq (car built) known-package-names))
                                collect built)))
     (mapc 'pb/remove-archive stale-archives)))
 
+(defun package-build-recipe-alist ()
+  "Retun the list of avalailable packages."
+  (or pb/recipe-alist
+      (setq pb/recipe-alist (pb/read-recipes-ignore-errors))))
+
+(defun package-build-archive-alist-remove (elt)
+  "Remove ELT from the archive list using `remove' and return the new value."
+  (setq pb/archive-alist (remove elt pb/archive-alist)))
+
+(defun package-build-archive-alist-add (elt)
+  "Add ELT to the archive list if it isn't there yet and return the new value."
+  (add-to-list 'pb/archive-alist elt))
+
+(defun package-build-archive-alist ()
+  "Return the archive list."
+  (or pb/archive-alist
+      (setq pb/archive-alist
+            (cdr (pb/read-from-file
+                  (expand-file-name "archive-contents"
+                                    package-build-archive-dir))))))
+
 (defun package-build-reinitialize ()
   (interactive)
-  (setq package-build-initialized nil)
-  (package-build-initialize))
+  (setq pb/recipe-alist nil
+        pb/archive-alist nil))
 
-(defun package-build-initialize ()
-  "Load the recipe and archive-contents files."
-  (interactive)
-  (unless package-build-initialized
-    (setq package-build-initialized t
-          package-build-alist (pb/read-recipes-ignore-errors)
-          package-build-archive-alist
-          (cdr (pb/read-from-file
-                (expand-file-name "archive-contents"
-                                  package-build-archive-dir))))))
 
 ;; Utility functions
 (autoload 'json-encode "json")
 (eval-after-load 'json '(load (expand-file-name "json-fix")))
 
-(defun package-build-alist-as-json (fn)
+(defun package-build-recipe-alist-as-json (fn)
   (interactive)
-  (package-build-initialize)
   (with-temp-file fn
-    (insert (json-encode package-build-alist))))
+    (insert (json-encode (package-build-recipe-alist)))))
 
 (defun package-build-archive-alist-as-json (fn)
   (interactive)
-  (package-build-initialize)
   (with-temp-file fn
-    (insert (json-encode package-build-archive-alist))))
+    (insert (json-encode (package-build-archive-alist)))))
 
 
 (provide 'package-build)

@@ -1,0 +1,1 @@
+(ghci-completion :fetcher github :repo "manzyuk/ghci-completion")

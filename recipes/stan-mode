@@ -1,9 +1,5 @@
 (stan-mode 
- :fetcher git
- :url "https://code.google.com/p/stan/"
- :files ("src/StanMode/*.el"))
-;; (stan-mode 
-;;  :fetcher github
-;;  :repo "jrnold/stan-mode"
-;;  :files ("*.el" "snippets"))
+ :fetcher github
+ :repo "stan-dev/stan-mode"
+ :files ("*.el" "snippets"))
 

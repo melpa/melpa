@@ -1,0 +1,5 @@
+(stan-mode 
+ :fetcher github
+ :repo "stan-dev/stan-mode"
+ :files ("*.el" "snippets"))
+

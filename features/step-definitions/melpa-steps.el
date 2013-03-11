@@ -11,12 +11,39 @@
          (message "****** %s" varby)
          (collect-messages-to varby)))
 
-(Given "^package initialization$"
-       (lambda ()
-         (package-initialize)))
+(Given "^set \\(.+\\) to archive alist$"
+       (lambda (var)
+         (set (intern var) (package-build-archive-alist))))
 
 (Then "^\\(.+\\) should be empty"
       (lambda (var)
-        (message "//////// %s" (eval (intern var)))
         (let ((varsym (intern var)))
-          (assert (not (eval varsym)) nil "Variable %s is not empty." var))))
+          (assert (not (eval varsym)) nil "Variable %s is not empty: %s" var (eval varsym)))))
+
+(Given "add \"\\(.+\\)\" to archive alist"
+       (lambda (var)
+         (let ((varval (car (read-from-string var))))
+           (package-build-archive-alist-add var))))
+
+(Given "remove \"\\(.+\\)\" from archive alist"
+       (lambda (var)
+         (let ((varval (car (read-from-string var))))
+           (package-build-archive-alist-remove var))))
+
+(Then "archive alist should be \\(.+\\)$"
+      (lambda (var)
+        (let ((varval (car (read-from-string var))))
+          (assert (equal varval (package-build-archive-alist))
+                  nil "package-build-archive-alist = %s is not equal to %s."
+                  (package-build-archive-alist) varval))))
+
+(Given "archive alist set to \\(.+\\)$"
+       (lambda (var)
+         (package-build-archive-alist (car (read-from-string var)))))
+
+(Then "archive alist should be \\(.+\\)$"
+      (lambda (var)
+        (let ((varval (car (read-from-string var))))
+          (assert (equal varval (package-build-archive-alist))
+                  nil "package-build-archive-alist = %s is not equal to %s."
+                  (package-build-archive-alist) varval))))

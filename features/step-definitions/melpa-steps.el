@@ -1,7 +1,3 @@
-(Given "^initialization$"
-       (lambda ()
-         (package-build-initialize)))
-
 (Given "^read recipes$"
        (lambda ()
          (pb/read-recipes)))
@@ -36,10 +32,6 @@
           (assert (equal varval (package-build-archive-alist))
                   nil "package-build-archive-alist = %s is not equal to %s."
                   (package-build-archive-alist) varval))))
-
-(Given "archive alist set to \\(.+\\)$"
-       (lambda (var)
-         (package-build-archive-alist (car (read-from-string var)))))
 
 (Then "archive alist should be \\(.+\\)$"
       (lambda (var)

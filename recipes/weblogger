@@ -1,0 +1,1 @@
+(weblogger :fetcher bzr :url "lp:weblogger-el")

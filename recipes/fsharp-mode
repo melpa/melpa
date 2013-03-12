@@ -2,6 +2,7 @@
  :fetcher github
  :repo "fsharp/fsharpbinding"
  :files ("emacs/fsharp-mode*.el"
+         "emacs/fsharp-doc.el"
          "emacs/inf-fsharp-mode.el"
          ("bin"
           "lib/fsautocomplete/fsautocomplete.exe"

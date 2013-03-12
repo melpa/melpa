@@ -1,0 +1,1 @@
+(lexbind-mode :fetcher github :repo "spacebat/lexbind-mode")

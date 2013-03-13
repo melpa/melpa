@@ -1,4 +1,2 @@
 (sicp :repo "webframp/sicp-info"
-      :fetcher github
-      :files ("sicp.info"
-              "dir"))
+      :fetcher github)

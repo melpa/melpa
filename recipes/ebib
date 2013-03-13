@@ -1,4 +1,3 @@
 (ebib
  :fetcher github
- :repo "joostkremers/ebib"
- :files ("ebib.el" "ebib.info" "dir"))
+ :repo "joostkremers/ebib")

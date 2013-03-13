@@ -145,11 +145,12 @@ specifies the module of a CVS repository to check out.  Defaults to to
 `package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
 
 - `:files`
-optional property specifying the explicit files used to build the
-package. Automatically populated by matching all `.el` files in the
-root of the repository. This is necessary when there are multiple
+optional property specifying the elisp and info files used to build the
+package. Automatically populated by matching all `.el`, `.info` and `dir` files in the
+root of the repository. This option necessary when there are multiple
 `.el` files in the repository but the package should only be built
-from a subset. *Any file specifed at any path in the repository is
+from a subset. For example, elisp test files should not normally be packaged.
+*Any file specifed at any path in the repository is
 copied to the root of the package.* More complex options are
 available, submit an
 [Issue](https://github.com/milkypostman/melpa/issues) if the specified

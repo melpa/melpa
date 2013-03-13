@@ -1,4 +1,3 @@
 (writeroom-mode
  :fetcher github
- :repo "joostkremers/writeroom-mode"
- :files ("writeroom-mode.el" "writeroom-mode.info" "dir"))
+ :repo "joostkremers/writeroom-mode")

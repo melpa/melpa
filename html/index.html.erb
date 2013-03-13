@@ -78,20 +78,26 @@
   <div class="container">
     <section class="page-header">
       <h1>MELPA <small>(Milkypostman’s Emacs Lisp Package Repository)</small></h1>
-      <p>
-        <strong>Last Update:</strong> <em><%= Time.now.strftime("%Y.%m.%d %H:%M %z") %></em>
-        – follow <a href="https://twitter.com/melpa_emacs">@melpa_emacs on Twitter</a> for updates
-      </p>
     </section>
-    <section class="hero-unit">
-      <ul>
-        <li><strong>100s of elisp packages built directly from developers' repositories</strong></li>
-        <li><strong>Install packages in any recent Emacs using "package.el"</strong> - no need to install svn/cvs/hg/bzr/git/darcs etc.</li>
-        <li><strong>Curated</strong> - no obsolete, renamed or randomly hacked packages
-        <li><strong>Automatic updates</strong> - from commit to package without intervention
-        <li><strong>Extensible</strong> - contribute recipes via github, and we'll build the packages
-      </ul>
-    </section>
+    <div class="row">
+      <div class="span8">
+        <section class="hero-unit">
+          <ul>
+            <li><strong>100s of elisp packages built directly from developers' repositories</strong></li>
+            <li><strong>Install packages in any recent Emacs using "package.el"</strong> - no need to install svn/cvs/hg/bzr/git/darcs etc.</li>
+            <li><strong>Curated</strong> - no obsolete, renamed or randomly hacked packages
+              <li><strong>Automatic updates</strong> - from commit to package without intervention
+                <li><strong>Extensible</strong> - contribute recipes via github, and we'll build the packages
+          </ul>
+        </section>
+      </div>
+      <div class="span4">
+        <div class="alert alert-success">
+          <strong>Latest build:</strong> <em><%= Time.now.strftime("%Y.%m.%d %H:%M %z") %></em>
+        </div>
+        <a class="twitter-timeline" data-dnt="true" data-related="milkypostman,sanityinc" href="https://twitter.com/melpa_emacs" data-widget-id="311867756586864640">Tweets by @melpa_emacs</a>
+      </div>
+    </div>
     <section>
       <h2 id="packages">Current List of <%=h packages.size %> Packages</h2>
       <table class="table table-bordered table-hover">
@@ -224,6 +230,7 @@
       </p>
     </section>
   </div>
+  <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js" type="text/javascript"></script>
   <script language="javascript">

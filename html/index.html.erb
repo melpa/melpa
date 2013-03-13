@@ -1,0 +1,235 @@
+<%
+  require 'json'
+  require 'ostruct'
+  include ERB::Util
+  archive_json = JSON.parse(File.open("../archive.json").read)
+  recipe_json  = JSON.parse(File.open("../recipes.json").read)
+
+  packages = archive_json.keys.sort.map do |pkgname|
+    package = OpenStruct.new
+    package.name = pkgname
+    versions, deps, package.descr, package.pkgtype = archive_json[package.name]
+    recipe = recipe_json[package.name]
+    package.version = versions.join('.')
+    package.url = "packages/#{package.name}-#{package.version}." + (package.pkgtype == "single" ? "el" : "tar")
+    package.recipe_url = "https://github.com/milkypostman/melpa/blob/master/recipes/#{package.name}"
+    package.source = 'unknown'
+    if package.descr =~ /(.*?)(\s*-\*-.*?)?\s*\[source:\s*(\w+)\]\s*/
+      package.descr, package.source = $1, $3
+    end
+
+    package.source_url =
+      case package.source
+      when 'github' then recipe['repo'].include?('/') ? "https://github.com/#{recipe['repo']}" : "https://gist.github.com/#{recipe['repo']}"
+      when 'wiki'   then recipe.key?('files') ? nil : "http://www.emacswiki.org/emacs/#{package.name}.el"
+      end
+    package
+  end
+%>
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>MELPA</title>
+
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/default.css" type="text/css" />
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+    }
+    h1 {
+      color: #922793;
+    }
+    .dataTables_empty {
+      background-color: #FCF8E3;
+      color: #C09853;
+    }
+    pre code { /* Match highlight.js styles to bootstrap */
+      padding: 0;
+      background: transparent;
+    }
+    .navbar, .navbar .brand, .navbar a, .navbar .nav>li>a {
+      color: #922793;
+    }
+  </style>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+
+  <script src="highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a href="/" class="brand">MELPA</a>
+        <ul class="nav">
+          <li><a href="#packages">Packages</a></li>
+          <li><a href="#installing">Installing</a></li>
+          <li><a href="#known-issues">Known issues</a></li>
+          <li><a href="#updating">Updating</a></li>
+          <li><a href="#development">Development</a></li>
+          <li><a href="https://github.com/milkypostman/melpa">Github</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <section class="page-header">
+      <h1>MELPA <small>(Milkypostman’s Experimental Lisp Package Repository)</small></h1>
+      <p>
+        <strong>Last Update:</strong> <em><%= Time.now.strftime("%Y.%m.%d %H:%M %z") %></em>
+        – follow <a href="https://twitter.com/melpa_emacs">@melpa_emacs on Twitter</a> for updates
+      </p>
+    </section>
+    <section class="hero-unit">
+      <ul>
+        <li><strong>100s of elisp packages built directly from developers' repositories</strong></li>
+        <li><strong>Install packages in any recent Emacs using "package.el"</strong> - no need to install svn/cvs/hg/bzr/git/darcs etc.</li>
+        <li><strong>Curated</strong> - no obsolete, renamed or randomly hacked packages
+        <li><strong>Automatic updates</strong> - from commit to package without intervention
+        <li><strong>Extensible</strong> - contribute recipes via github, and we'll build the packages
+      </ul>
+    </section>
+    <section>
+      <h2 id="packages">Current List of <%=h packages.size %> Packages</h2>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr class="header">
+            <th align="left">Package</th>
+            <th align="left">Version</th>
+            <th align="left">Description</th>
+            <th align="left">Recipe</th>
+            <th align="left">Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% packages.each do |package| %>
+            <tr>
+              <td><a name="<%=h package.name %>"></a><a href="<%=h package.url %>"><%=h package.name %></a></td>
+              <td><%=h package.version %></td>
+              <td><%=h package.descr %></td>
+              <td><a href="<%=h package.recipe_url %>">recipe</a></td>
+              <td><% if package.source_url %>
+                     <a href="<%=h package.source_url %>"><%=h package.source %></a>
+                  <% else %>
+                     <%=h package.source %>
+                  <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2 id="installing">Installing</h2>
+      <p>To add the repository put this before the call to <code>package-initialize</code> in your <code>init.el</code> file.</p>
+      <!-- <script src="https://gist.github.com/1679158.js"> </script> -->
+
+      <pre><code>(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)</code></pre>
+      <p>
+        Please read about <a href="#known-issues">known issues</a>
+        below before attempting to install multiple packages at once.
+      </p>
+      <h3 id="customizations">Customizations</h3>
+      <p>
+        There is currently no way in <code>package.el</code> to
+        exclude or include versions. So to remedy this there is
+        a <code>melpa.el</code> package (available in MELPA) that will
+        allow you to enable only certain packages or exclude certain
+        packages. You can install the package manually by pasting this
+        into your <code>*scratch*</code> buffer and evaluating it.
+      </p>
+      <pre><code>(progn
+  (switch-to-buffer
+    (url-retrieve-synchronously
+      "https://raw.github.com/milkypostman/melpa/master/melpa.el"))
+  (package-install-from-buffer  (package-buffer-info) 'single))</code></pre>
+      <p>You can then customize two variables:</p>
+      <dl>
+        <dt><code>package-archive-enable-alist</code></dt>
+        <dd>
+          <p>
+            Optional Alist of enabled packages used
+            by <code>package-filter</code>. The format
+            is <code>(ARCHIVE . PACKAGE ...)</code>,
+            where <code>ARCHIVE</code> is a string matching an archive
+            name in<code>package-archives</code>, <code>PACKAGE</code>
+            is a symbol of a package in <code>ARCHIVE</code> to
+            enable.
+          </p>
+          <p>
+            If no <code>ARCHIVE</code> exists in the alist, all
+            packages are enabled.
+          </p>
+        </dd>
+        <dt><code>package-archive-exclude-alist</code></dt>
+        <dd>
+          <p>
+            Alist of packages excluded by <code> package-filter
+            </code>. The format is <code>(ARCHIVE . PACKAGE
+            ...)</code>, where <code>ARCHIVE</code> is a string
+            matching an archive name
+            in</code>package-archives</code>, <code>PACKAGE</code> is
+            a symbol of a package in that archive to exclude.</p>
+          <p>
+            Any specified package is excluded regardless of the value
+            of <code>package-archive-enable-alist</code>
+          </p>
+        </dd>
+      </dl>
+    </section>
+    <section>
+      <h2 id="known-issues">Known Issues</h2>
+      <p>
+        <strong>Note:</strong> <em>These fixes are included in
+        the <code>melpa.el</code> package.</em>
+      </p>
+      <p>
+        There is a small bug in Emacs24’s <code>package.el</code> such
+        that the dependency order comes out backwards. The problem is
+        patched by some <em>advice</em>.
+      </p>
+
+      <pre><code> (defadvice package-compute-transaction
+  (before package-compute-transaction-reverse (package-list requirements) activate compile)
+    "reverse the requirements"
+    (setq requirements (reverse requirements))
+    (print requirements))</code></pre>
+    </section>
+    <section>
+      <h2 id="updating">Updating Packages</h2>
+      <p>
+        <code>package.el</code> now includes a mechanism to upgrade
+        packages. After running <code>package-list-packages</code>,
+        type <em>U</em> (mark Upgradable packages) and then <em>x</em>
+        (eXecute the installs and deletions). When it’s done
+        installing all the packages it will ask if you want to delete
+        the obsolete packages and so you can hit <em>y</em> (Yes).
+      </p>
+      <p>
+        If you run into a problem installing or upgrading, you may
+        need to go into your <code>~/.emacs.d/elpa/</code> directory
+        and delete packages that are installed multiple times. This
+        can happen when the install times out
+        (see <a href="#known-issues">Known Issues</a>).
+      </p>
+      <h2 id="development">Development</h2>
+      <p><a href="https://github.com/milkypostman/melpa">https://github.com/milkypostman/melpa</a></p>
+      <p>
+        Contributions are welcome. Currently, the builder supports
+        packages using git, subversion, mercurial, bzr, cvs, darcs and
+        emacswiki.
+      </p>
+    </section>
+  </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js" type="text/javascript"></script>
+  <script language="javascript">
+      $("table").dataTable({bPaginate: false, bLengthChange: false});
+      $('div.dataTables_filter input').focus().attr("placeholder", "Enter filter terms");
+  </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+(ag :repo "hoffstaetter/find-file-in-repository" :fetcher github)

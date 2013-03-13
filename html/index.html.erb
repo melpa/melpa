@@ -93,7 +93,7 @@
       </div>
       <div class="span4">
         <div class="alert alert-success">
-          <strong>Latest build:</strong> <em><%= Time.now.strftime("%Y.%m.%d %H:%M %z") %></em>
+          <strong>Latest build:</strong> <em><script language="javascript">document.write(new Date(<%= Time.now.to_i * 1000 %>).toLocaleString());</script></em>
         </div>
         <a class="twitter-timeline" data-dnt="true" data-related="milkypostman,sanityinc" href="https://twitter.com/melpa_emacs" data-widget-id="311867756586864640">Tweets by @melpa_emacs</a>
       </div>

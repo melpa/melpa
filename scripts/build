@@ -33,7 +33,7 @@ function melpa {
     make 1>> ${MELPASTDOUT} 2>> ${STDERR}
 
     ## sync to the web directory
-    rsync -avz --delete ${MELPADIR}/packages ${MELPADIR}/html/{index.html,updates.rss,highlight.pack.js,style.css,styles,languages} ${WEBROOT}/ 1>> ${STDOUT} 2>> ${STDERR}
+    rsync -avz --delete ${MELPADIR}/packages ${MELPADIR}/html/* ${WEBROOT}/ 1>> ${STDOUT} 2>> ${STDERR}
 
     chmod -R go+r ${WEBROOT}/packages/*
     chmod -R go-x ${WEBROOT}/packages/*

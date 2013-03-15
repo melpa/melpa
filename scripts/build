@@ -52,9 +52,8 @@ function melpa {
 }
 
 if [[ `cat $HOME/www/updatemelpa.txt` == 1 ]] ; then
-	echo "Running MELPA"
-	echo "2" > $HOME/www/updatemelpa.txt
-	melpa
-	echo "0" > $HOME/www/updatemelpa.txt
+        echo "Running MELPA"
+        echo "2" > $HOME/www/updatemelpa.txt
+        melpa
+        echo "0" > $HOME/www/updatemelpa.txt
 fi
-

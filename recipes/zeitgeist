@@ -1,0 +1,1 @@
+(zeitgeist :url "https://code.launchpad.net/~zeitgeist-dataproviders/zeitgeist-datasources/trunk" :fetcher bzr :files ("emacs/*.el" "emacs/README"))

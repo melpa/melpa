@@ -1,4 +1,3 @@
 (pandoc-mode
  :fetcher github
- :repo "joostkremers/pandoc-mode"
- :files ("pandoc-mode.el" "pandoc-mode.info" "dir"))
+ :repo "joostkremers/pandoc-mode")

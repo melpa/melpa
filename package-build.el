@@ -616,15 +616,15 @@ file path and DEST is the relative path to which it should be copied."
                                  (concat prefix (car entry)))
          (mapcar (lambda (f)
                    (cons f (concat prefix (file-name-nondirectory f))))
-                 (or (file-expand-wildcards entry)
-                     (error "No matching file(s) found in %s: %s"
-                            dir
-                            entry)))))
+                 (file-expand-wildcards entry))))
      specs)))
 
 (defun pb/expand-config-file-list (dir config)
   "In DIR, expand the :files for CONFIG using 'pb/expand-file-specs."
-  (pb/expand-file-specs dir (or (plist-get config :files) (list "*.el"))))
+  (let* ((patterns (or (plist-get config :files) '("*.el" "dir" "*.info")))
+         (files (pb/expand-file-specs dir patterns)))
+    (or files
+        (error "No matching file(s) found in %s: %s" dir patterns))))
 
 (defun pb/expand-source-file-list (dir config)
   "Shorthand way to expand paths in DIR for source files listed in CONFIG."

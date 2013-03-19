@@ -1,6 +1,6 @@
 SHELL  := /bin/bash
 
-.PHONY: all clean updates.rss
+.PHONY: all clean updates.rss index.html
 all: index.html updates.rss
 
 index.html: index.html.erb

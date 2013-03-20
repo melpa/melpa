@@ -1,3 +1,2 @@
 (gruber-darker-theme :repo "rexim/gruber-darker-theme"
-                     :fetcher github
-                     :files ("gruber-darker-theme.el"))
+                     :fetcher github)

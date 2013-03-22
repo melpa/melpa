@@ -1,1 +1,4 @@
-(erc-hl-nicks :fetcher github :repo "leathekd/erc-hl-nicks")
+(erc-hl-nicks
+ :fetcher github
+ :repo "leathekd/erc-hl-nicks"
+ :commit "origin/stable")

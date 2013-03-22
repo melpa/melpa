@@ -1,1 +1,49 @@
-(sunrise-commander :fetcher github :repo "escherdragon/sunrise-commander")
+(sunrise-commander
+ :fetcher github
+ :repo "escherdragon/sunrise-commander"
+ :files "sunrise-comander.el")
+
+(sunrise-x-buttons 
+ :fetcher github
+ :repo "escherdragon/sunrise-commander"
+ :files "sunrise-x-buttons.el")
+
+(sunrise-x-checkpoints
+ :fetcher github
+ :repo "escherdragon/sunrise-commander"
+ :files "sunrise-x-checkpoints.el")
+
+(sunrise-x-loop
+ :fetcher github
+ :repo "escherdragon/sunrise-commander"
+ :files "sunrise-x-loop.el")
+
+(sunrise-x-mirror 
+ :fetcher github
+ :repo "escherdragon/sunrise-commander"
+ :files "sunrise-x-mirror.el")
+
+(sunrise-x-modeline
+ :fetcher github
+ :repo "escherdragon/sunrise-commander"
+ :files "sunrise-x-modeline.el")
+
+(sunrise-x-popviewer
+ :fetcher github
+ :repo "escherdragon/sunrise-commander"
+ :files "sunrise-x-popviewer.el")
+
+(sunrise-x-tabs
+ :fetcher github
+ :repo "escherdragon/sunrise-commander"
+ :files "sunrise-x-tabs.el")
+
+(sunrise-x-tree
+ :fetcher github
+ :repo "escherdragon/sunrise-commander"
+ :files "sunrise-x-tree.el")
+
+(sunrise-x-w32-addons
+ :fetcher github
+ :repo "escherdragon/sunrise-commander"
+ :files "sunrise-x-w32-addons.el")

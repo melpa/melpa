@@ -1,0 +1,1 @@
+(drupal-spell :fetcher github :repo "arnested/drupal-spell" :files ("*.el" "dict"))

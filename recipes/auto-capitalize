@@ -1,1 +1,1 @@
-(auto-capitalize :repo "emacsmirror/auto-capitalize" :fetcher github)
+(auto-capitalize :fetcher wiki)

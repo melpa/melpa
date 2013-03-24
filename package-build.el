@@ -45,17 +45,19 @@
 (require 'package)
 (require 'lisp-mnt)
 
-(defcustom package-build-working-dir (expand-file-name "working/")
+(defconst pb/this-dir (file-name-directory (or load-file-name (buffer-file-name))))
+
+(defcustom package-build-working-dir (expand-file-name "working/" pb/this-dir)
   "Directory in which to keep checkouts."
   :group 'package-build
   :type 'string)
 
-(defcustom package-build-archive-dir (expand-file-name "packages/")
+(defcustom package-build-archive-dir (expand-file-name "packages/" pb/this-dir)
   "Directory in which to keep compiled archives."
   :group 'package-build
   :type 'string)
 
-(defcustom package-build-recipes-dir (expand-file-name "recipes/")
+(defcustom package-build-recipes-dir (expand-file-name "recipes/" pb/this-dir)
   "Directory containing recipe files."
   :group 'package-build
   :type 'string)
@@ -750,6 +752,47 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
                (current-time-string))
       file-name)))
 
+
+;;; Helpers for recipe authors
+
+(defvar package-build-minor-mode-map
+  (let ((m (make-sparse-keymap)))
+    (define-key m (kbd "C-c C-c") 'package-build-current-recipe)
+    m)
+  "Keymap for `package-build-minor-mode'.")
+
+(define-minor-mode package-build-minor-mode
+  "Helpful functionality for building packages."
+  nil
+  " PBuild"
+  package-build-minor-mode-map)
+
+;;;###autoload
+(defun package-build-create-recipe (name fetcher)
+  "Create a new recipe for package NAME using FETCHER."
+  (interactive
+   (list (intern (read-string "Package name: "))
+         (intern
+          (let ((fetcher-types (mapcar #'symbol-name '(github git wiki bzr hg cvs svn))))
+            (completing-read
+             "Fetcher: "
+             fetcher-types
+             nil t nil nil (car fetcher-types))))))
+  (let ((recipe-file (expand-file-name (symbol-name name) package-build-recipes-dir)))
+    (when (file-exists-p recipe-file)
+      (error "Recipe already exists"))
+    (find-file recipe-file)
+    (let* ((extra-params
+            (cond
+             ((eq 'github fetcher) '(:repo "USER/REPO"))
+             ((eq 'wiki fetcher) '())
+             (t '(:url "SCM_URL_HERE"))))
+           (template `(,name :fetcher ,fetcher ,@extra-params)))
+      (insert (pp-to-string template))
+      (emacs-lisp-mode)
+      (package-build-minor-mode)
+      (beginning-of-buffer))))
+
 ;;;###autoload
 (defun package-build-current-recipe ()
   "Build archive for the recipe defined in the current buffer."
@@ -783,6 +826,8 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
       ('error
        (message "%s" (error-message-string err))
        nil))))
+
+
 
 ;;;###autoload
 (defun package-build-all ()
@@ -835,8 +880,8 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 
 ;; Utility functions
-(autoload 'json-encode "json")
-(eval-after-load 'json '(load (expand-file-name "json-fix")))
+(require 'json)
+(load (expand-file-name "json-fix" pb/this-dir))
 
 (defun package-build-recipe-alist-as-json (fn)
   (interactive)

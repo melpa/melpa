@@ -75,6 +75,9 @@ function.")
 Do not use this directly. Use `package-build-archive-alist'
 function for access to this function")
 
+(defconst pb/default-files-spec '("*.el" "dir" "*.info")
+  "Default value for :files attribute in recipes.")
+
 
 (defun pb/slurp-file (file-name)
   "Return the contents of FILE-NAME as a string, or nil if no such file exists."
@@ -621,7 +624,7 @@ file path and DEST is the relative path to which it should be copied."
 
 (defun pb/expand-config-file-list (dir config)
   "In DIR, expand the :files for CONFIG using 'pb/expand-file-specs."
-  (let* ((patterns (or (plist-get config :files) '("*.el" "dir" "*.info")))
+  (let* ((patterns (or (plist-get config :files) pb/default-files-spec))
          (files (pb/expand-file-specs dir patterns)))
     (or files
         (error "No matching file(s) found in %s: %s" dir patterns))))

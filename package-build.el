@@ -489,6 +489,15 @@ The file is written to `package-build-working-dir'."
                       (expand-file-name (concat file-name "-readme.txt")
                                         package-build-archive-dir))))))
 
+(defun pb/update-or-insert-version (version)
+  "Ensure current buffer has a \"Version: VERSION\" header."
+  (goto-char (point-min))
+  (if (re-search-forward "^;;;* *Version: *" nil t)
+      (kill-whole-line)
+    (forward-line))
+  (insert (format ";;; Version: %s" version))
+  (newline))
+
 (defun pb/get-package-info (file-path)
   "Get a vector of package info from the docstrings in FILE-PATH."
   (when (file-exists-p file-path)
@@ -497,10 +506,7 @@ The file is written to `package-build-working-dir'."
         (insert-file-contents file-path)
         ;; next few lines are a hack for some packages that aren't
         ;; commented properly.
-        (goto-char (point-min))
-        (forward-line)
-        (insert ";;; Version: 0")
-        (newline)
+        (pb/update-or-insert-version "0")
         (goto-char (point-max))
         (newline)
         (insert ";;; " (file-name-nondirectory file-path) " ends here")

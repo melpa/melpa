@@ -1,0 +1,1 @@
+(grapnel :fetcher github :repo "leathekd/grapnel" :files ("grapnel.el"))

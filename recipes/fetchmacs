@@ -1,0 +1,1 @@
+(fetchmacs :fetcher github :repo "gempesaw/fetchmacs")

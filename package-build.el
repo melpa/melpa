@@ -763,7 +763,11 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
         (save-buffer)
       (error "Aborting")))
   (package-build-reinitialize)
-  (package-build-archive (intern (file-name-nondirectory (buffer-file-name)))))
+  (package-build-archive (intern (file-name-nondirectory (buffer-file-name))))
+  (save-current-buffer
+    (find-file-other-window
+     (expand-file-name "archive-contents" package-build-archive-dir))
+    (revert-buffer t t)))
 
 (defun package-build-archive-ignore-errors (pkg)
   "Build archive for package PKG, ignoring any errors."

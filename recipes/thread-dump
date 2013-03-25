@@ -1,0 +1,1 @@
+(thread-dump :fetcher github :repo "nd/thread-dump.el" :files ("thread-dump.el"))

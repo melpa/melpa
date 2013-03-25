@@ -5,7 +5,7 @@
   archive_json = JSON.parse(File.open("../archive.json").read)
   recipe_json  = JSON.parse(File.open("../recipes.json").read)
 
-  packages = archive_json.keys.sort.map do |pkgname|
+  packages = archive_json.keys.select { |k| recipe_json.has_key?(k) }.sort.map do |pkgname|
     package = OpenStruct.new
     package.name = pkgname
     versions, deps, package.descr, package.pkgtype = archive_json[package.name]

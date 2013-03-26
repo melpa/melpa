@@ -497,7 +497,7 @@ The file is written to `package-build-working-dir'."
   (if (re-search-forward "^;;;* *Version: *" nil t)
       (kill-whole-line)
     (forward-line))
-  (insert (format ";;; Version: %s" version))
+  (insert (format ";; Version: %s" version))
   (newline))
 
 (defun pb/get-package-info (file-path)
@@ -704,7 +704,10 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
                           cfg)))
           (when (file-exists-p pkg-target)
             (delete-file pkg-target t))
-          (copy-file pkg-source pkg-target)
+          (with-temp-buffer
+            (insert-file-contents-literally pkg-source)
+            (pb/update-or-insert-version version)
+            (write-file pkg-target))
 
           (pb/write-pkg-readme (and (> (length pkg-info) 4) (aref pkg-info 4))
                                file-name)

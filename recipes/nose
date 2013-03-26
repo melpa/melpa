@@ -1,0 +1,1 @@
+(nose :fetcher hg :url "https://bitbucket.org/durin42/nosemacs")

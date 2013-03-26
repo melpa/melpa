@@ -1,4 +1,4 @@
-(sunrise-commander
+(sunrise-x-tree
  :fetcher github
  :repo "escherdragon/sunrise-commander"
- :files ("sunrise-commander.el"))
+ :files ("sunrise-x-tree.el"))

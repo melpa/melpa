@@ -1,0 +1,4 @@
+(sunrise-x-checkpoints
+ :fetcher github
+ :repo "escherdragon/sunrise-commander"
+ :files ("sunrise-x-checkpoints.el"))

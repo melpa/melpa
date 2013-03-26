@@ -1,0 +1,4 @@
+(sunrise-x-w32-addons
+ :fetcher github
+ :repo "escherdragon/sunrise-commander"
+ :files ("sunrise-x-w32-addons.el"))

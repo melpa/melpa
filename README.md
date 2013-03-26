@@ -29,11 +29,20 @@ details.
 
 ## Usage
 
-To use the MELPA repository, add it to `package-archives` before the
-call to `package-initialize` in your `init.el` file.
+To use the MELPA repository, add it to `package-archives` after
+`(require 'package)` and before the call to `package-initialize` in
+your `init.el` file.
 
     (add-to-list 'package-archives
                  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+A complete minimal example for MELPA,
+
+    (require 'package)
+    (add-to-list 'package-archives
+                 '("melpa" . "http://melpa.milkbox.net/packages/") t)
+    (package-initialize)
+
 
 Since `package.el` doesn't allow locking packages to certain version,
 we also provide a package `melpa.el` which contains code to allow

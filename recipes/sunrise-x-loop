@@ -1,4 +1,4 @@
-(sunrise-commander
+(sunrise-x-loop
  :fetcher github
  :repo "escherdragon/sunrise-commander"
- :files ("sunrise-commander.el"))
+ :files ("sunrise-x-loop.el"))

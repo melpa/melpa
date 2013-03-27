@@ -1,0 +1,2 @@
+(lusty-explorer :repo "sjbach/lusty-emacs" :fetcher github :files
+     ("lusty-explorer.el"))

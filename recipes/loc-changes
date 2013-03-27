@@ -1,0 +1,1 @@
+(loc-changes :fetcher github :repo "rocky/emacs-loc-changes" :files ("loc-changes.el"))

@@ -715,7 +715,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
           (when (file-exists-p pkg-target)
             (delete-file pkg-target t))
           (with-temp-buffer
-            (insert-file-contents-literally pkg-source)
+            (insert-file-contents pkg-source)
             (pb/update-or-insert-version version)
             (write-file pkg-target))
 

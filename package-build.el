@@ -714,10 +714,11 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
                           cfg)))
           (when (file-exists-p pkg-target)
             (delete-file pkg-target t))
-          (with-temp-buffer
-            (insert-file-contents pkg-source)
+          (copy-file pkg-source pkg-target)
+          (with-current-buffer (find-file pkg-target)
             (pb/update-or-insert-version version)
-            (write-file pkg-target))
+            (write-file pkg-target nil)
+            (kill-buffer))
 
           (pb/write-pkg-readme (and (> (length pkg-info) 4) (aref pkg-info 4))
                                file-name)

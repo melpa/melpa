@@ -1,0 +1,1 @@
+(shell-pop :repo "kyagi/shell-pop-el" :fetcher github)

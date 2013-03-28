@@ -718,11 +718,14 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
           (with-current-buffer (find-file pkg-target)
             (pb/update-or-insert-version version)
             (write-file pkg-target nil)
-            (condition-case err
-                (package-buffer-info)
-              ('error
-               (message "Warning: package is uninstallable - package-buffer-info reports:\n%S" err)))
-            (kill-buffer))
+            (let ((valid-package))
+              (unwind-protect
+                  (progn
+                    (package-buffer-info)
+                    (setq valid-package t))
+                (kill-buffer)
+                (unless valid-package
+                  (delete-file pkg-target)))))
 
           (pb/write-pkg-readme (and (> (length pkg-info) 4) (aref pkg-info 4))
                                file-name)

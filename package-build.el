@@ -494,8 +494,12 @@ The file is written to `package-build-working-dir'."
       (delete-trailing-whitespace)
       (let ((coding-system-for-write buffer-file-coding-system))
         (write-region nil nil
-                      (expand-file-name (concat file-name "-readme.txt")
-                                        package-build-archive-dir))))))
+                      (pb/readme-file-name file-name))))))
+
+(defun pb/readme-file-name (file-name)
+  "Name of the readme file for the package FILE-NAME."
+  (expand-file-name (concat file-name "-readme.txt")
+                    package-build-archive-dir))
 
 (defun pb/update-or-insert-version (version)
   "Ensure current buffer has a \"Version: VERSION\" header."
@@ -596,11 +600,13 @@ Note that the working directory (if present) is not deleted by
 this function, since the archive list may contain another version
 of the same-named package which is to be kept."
   (print (format "Removing archive: %s" archive-entry))
-  (let ((archive-file (pb/archive-file-name archive-entry)))
+  (let ((archive-file (pb/archive-file-name archive-entry))
+        (readme-file (pb/readme-file-name (symbol-name (car archive-entry)))))
     (when (file-exists-p archive-file)
-      (delete-file archive-file)))
-  (package-build-archive-alist-remove archive-entry)
-  (pb/dump-archive-contents))
+      (delete-file archive-file))
+    (when (file-exists-p readme-file)
+      (delete-file readme-file)))
+  (package-build-archive-alist-remove archive-entry))
 
 
 (defun pb/read-recipe (file-name)
@@ -894,7 +900,8 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
          (stale-archives (loop for built in (package-build-archive-alist)
                                when (not (memq (car built) known-package-names))
                                collect built)))
-    (mapc 'pb/remove-archive stale-archives)))
+    (mapc 'pb/remove-archive stale-archives)
+    (pb/dump-archive-contents)))
 
 (defun package-build-recipe-alist ()
   "Retun the list of avalailable packages."

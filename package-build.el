@@ -582,13 +582,13 @@ If PKG-INFO is nil, an empty one is created."
 
 (defun pb/archive-file-name (archive-entry)
   "Return the path of the file in which the package for ARCHIVE-ENTRY is stored."
-  (expand-file-name (format "%s-%s.%s"
-                            (car archive-entry)
-                            (car (aref (cdr archive-entry) 0))
-                            (if (eq 'single (aref (cdr archive-entry) 3))
-                                "el"
-                              "tar"))
-                    package-build-archive-dir))
+  (let* ((name (car archive-entry))
+         (pkg-info (cdr archive-entry))
+         (version (package-version-join (aref pkg-info 0)))
+         (flavour (aref pkg-info 3)))
+    (expand-file-name
+     (format "%s-%s.%s" name version (if (eq flavour 'single) "el" "tar"))
+     package-build-archive-dir)))
 
 (defun pb/remove-archive (archive-entry)
   "Remove ARCHIVE-ENTRY from archive-contents, and delete associated file.
@@ -690,12 +690,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 (defun pb/find-package-file (name)
   "Return the filename of the most recently built package of NAME."
-  (let* ((pkg-info (cdr (assoc name (package-build-archive-alist))))
-         (version (package-version-join (aref pkg-info 0)))
-         (flavour (aref pkg-info 3)))
-    (expand-file-name
-     (format "%s-%s.%s" name version (if (eq flavour 'single) "el" "tar"))
-     package-build-archive-dir)))
+  (pb/archive-file-name (assoc name (package-build-archive-alist))))
 
 
 ;;; Public interface

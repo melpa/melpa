@@ -711,6 +711,10 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
           (file-name-as-directory
            (expand-file-name file-name package-build-working-dir))))
 
+
+    (let ((archive-entry (assq name (package-build-archive-alist))))
+      (when archive-entry (pb/remove-archive archive-entry)))
+
     (message "\n;;; %s\n" file-name)
     (let* ((version (pb/checkout name cfg pkg-cwd))
            (files (pb/expand-config-file-list pkg-cwd cfg))

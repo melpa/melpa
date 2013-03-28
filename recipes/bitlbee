@@ -1,4 +1,4 @@
 (bitlbee
- :url "git://pmade.com/elisp.git"
- :fetcher git
+ :repo "pjones/elisp"
+ :fetcher github
  :files ("lisp/bitlbee.el"))

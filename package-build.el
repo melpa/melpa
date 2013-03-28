@@ -71,11 +71,17 @@
 Do not use this directly. Use `package-build-recipe-alist'
 function.")
 
+(defvar pb/recipe-alist-initialized nil
+  "Determines if `pb/recipe-alist` has been initialized.")
+
 (defvar pb/archive-alist nil
   "Internal list of already-built packages, in the standard package.el format.
 
 Do not use this directly. Use `package-build-archive-alist'
 function for access to this function")
+
+(defvar pb/archive-alist-initialized nil
+  "Determines if pb/archive-alist has been initialized.")
 
 (defconst pb/default-files-spec '("*.el" "dir" "*.info")
   "Default value for :files attribute in recipes.")
@@ -897,8 +903,10 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 (defun package-build-recipe-alist ()
   "Retun the list of avalailable packages."
-  (or pb/recipe-alist
-      (setq pb/recipe-alist (pb/read-recipes-ignore-errors))))
+  (unless pb/recipe-alist-initialized
+    (setq pb/recipe-alist (pb/read-recipes-ignore-errors)
+          pb/recipe-alist-initialized t))
+  pb/recipe-alist)
 
 (defun package-build-archive-alist-remove (elt)
   "Remove ELT from the archive list using `remove' and return the new value."
@@ -910,16 +918,18 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 (defun package-build-archive-alist ()
   "Return the archive list."
-  (or pb/archive-alist
-      (setq pb/archive-alist
-            (cdr (pb/read-from-file
-                  (expand-file-name "archive-contents"
-                                    package-build-archive-dir))))))
+  (unless pb/archive-alist-initialized
+    (setq pb/archive-alist
+          (cdr (pb/read-from-file
+                (expand-file-name "archive-contents"
+                                  package-build-archive-dir)))
+          pb/archive-alist-initialized t))
+  pb/archive-alist)
 
 (defun package-build-reinitialize ()
   (interactive)
-  (setq pb/recipe-alist nil
-        pb/archive-alist nil))
+  (setq pb/recipe-alist-initialized nil
+        pb/archive-alist-initialized nil))
 
 
 ;; Utility functions

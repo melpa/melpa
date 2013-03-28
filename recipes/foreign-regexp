@@ -1,0 +1,2 @@
+(foreign-regexp :repo "k-talo/foreign-regexp.el" :fetcher github
+                :files ("*.el" ("bin" "bin/*.pl" "bin/*.rb")))

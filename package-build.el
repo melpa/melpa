@@ -731,14 +731,11 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
               (pb/update-or-insert-version version)
               (pb/ensure-ends-here-line pkg-source)
               (write-file pkg-target nil)
-              (let ((valid-package))
-                (unwind-protect
-                    (progn
-                      (package-buffer-info)
-                      (setq valid-package t))
-                  (kill-buffer)
-                  (unless valid-package
-                    (delete-file pkg-target))))))
+              (condition-case err
+                  (package-buffer-info)
+                ('error
+                 (message "Warning: %S" err)))
+              (kill-buffer)))
 
           (pb/write-pkg-readme (and (> (length pkg-info) 4) (aref pkg-info 4))
                                file-name)

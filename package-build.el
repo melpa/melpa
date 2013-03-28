@@ -500,6 +500,18 @@ The file is written to `package-build-working-dir'."
   (insert (format ";; Version: %s" version))
   (newline))
 
+(defun pb/ensure-ends-here-line (file-path)
+  "Add a 'FILE-PATH ends here' trailing line if missing."
+  (save-excursion
+    (goto-char (point-min))
+    (let* ((fname (file-name-nondirectory file-path))
+           (trailer (concat ";;; " fname " ends here")))
+      (unless (search-forward trailer nil t)
+        (goto-char (point-max))
+        (newline)
+        (insert trailer)
+        (newline)))))
+
 (defun pb/get-package-info (file-path)
   "Get a vector of package info from the docstrings in FILE-PATH."
   (when (file-exists-p file-path)
@@ -509,9 +521,7 @@ The file is written to `package-build-working-dir'."
         ;; next few lines are a hack for some packages that aren't
         ;; commented properly.
         (pb/update-or-insert-version "0")
-        (goto-char (point-max))
-        (newline)
-        (insert ";;; " (file-name-nondirectory file-path) " ends here")
+        (pb/ensure-ends-here-line file-path)
         (flet ((package-strip-rcs-id (str) "0"))
           (package-buffer-info))))))
 
@@ -718,6 +728,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
           (let ((enable-local-variables :safe))
             (with-current-buffer (find-file pkg-target)
               (pb/update-or-insert-version version)
+              (pb/ensure-ends-here-line pkg-source)
               (write-file pkg-target nil)
               (let ((valid-package))
                 (unwind-protect

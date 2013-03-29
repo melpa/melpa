@@ -1,0 +1,1 @@
+(go-play :fetcher github :repo "dominikh/go-play.el")

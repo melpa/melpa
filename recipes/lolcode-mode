@@ -1,0 +1,1 @@
+(lolcode-mode :fetcher github :repo "bodil/lolcode-mode")

@@ -1,0 +1,1 @@
+(ac-helm :repo "yasuyk/ac-helm" :fetcher github)

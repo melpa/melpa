@@ -1,0 +1,1 @@
+(fastnav :fetcher github :repo "gleber/fastnav.el")

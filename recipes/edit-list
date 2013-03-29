@@ -1,0 +1,1 @@
+(edit-list :fetcher github :repo "emacsmirror/edit-list")

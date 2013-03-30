@@ -1,0 +1,1 @@
+(latest-clojars :fetcher github :repo "AdamClements/latest-clojure-libraries")

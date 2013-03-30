@@ -105,7 +105,7 @@ function for access to this function")
   (let* ((s (substring-no-properties str))
          (time (condition-case nil
                    (date-to-time s)
-                 ('error
+                 (error
                   ;; Handle newer CVS formats like "2001/08/26 22:16:22"
                   ;; which break date-to-time
                   (date-to-time (replace-regexp-in-string "/" "-" s))))))
@@ -627,8 +627,8 @@ of the same-named package which is to be kept."
   "Return a list of data structures for all recipes in `package-build-recipes-dir'."
   (loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
         for pkg-info = (condition-case err (pb/read-recipe file-name)
-                         ('error (message (error-message-string err))
-                                 nil))
+                         (error (message (error-message-string err))
+                                nil))
         when pkg-info
         collect pkg-info))
 
@@ -744,7 +744,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
               (write-file pkg-target nil)
               (condition-case err
                   (package-buffer-info)
-                ('error
+                (error
                  (message "Warning: %S" err)))
               (kill-buffer)))
 
@@ -877,7 +877,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
                                                 (backtrace))))))
     (condition-case err
         (package-build-archive pkg)
-      ('error
+      (error
        (message "%s" (error-message-string err))
        nil))))
 

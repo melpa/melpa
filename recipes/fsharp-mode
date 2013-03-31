@@ -5,4 +5,5 @@
          ("bin"
           "lib/fsautocomplete/fsautocomplete.exe"
           "lib/fsautocomplete/FSharp.CompilerBinding.dll"
-          "lib/ndesk-options/NDesk.Options.dll")))
+          "lib/ndesk-options/NDesk.Options.dll"
+          "lib/newtonsoft.json/Newtonsoft.Json.dll")))

@@ -1,2 +1,3 @@
 (graphene :fetcher github
-          :repo "rdallasgray/graphene")
+          :repo "rdallasgray/graphene"
+          :files ("lib/*"))

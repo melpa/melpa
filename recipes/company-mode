@@ -1,0 +1,2 @@
+(company-mode :repo "company-mode/company-mode" :fetcher github)
+

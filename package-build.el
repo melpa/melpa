@@ -599,7 +599,7 @@ If PKG-INFO is nil, an empty one is created."
 Note that the working directory (if present) is not deleted by
 this function, since the archive list may contain another version
 of the same-named package which is to be kept."
-  (print (format "Removing archive: %s" archive-entry))
+  (message "Removing archive: %s" archive-entry)
   (let ((archive-file (pb/archive-file-name archive-entry))
         (readme-file (pb/readme-file-name (symbol-name (car archive-entry)))))
     (when (file-exists-p archive-file)

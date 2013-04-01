@@ -1,0 +1,4 @@
+(tangotango-theme
+ :repo "juba/color-theme-tangotango"
+ :files ("tangotango-theme.el")
+ :fetcher github)

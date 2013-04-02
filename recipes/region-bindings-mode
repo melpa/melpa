@@ -1,0 +1,3 @@
+(region-bindings-mode
+ :fetcher github
+ :repo "jcriner/region-bindings-mode")

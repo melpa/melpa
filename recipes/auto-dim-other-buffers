@@ -1,0 +1,1 @@
+(auto-dim-other-buffers :fetcher "github" :repo "sdegutis/auto-dim-other-buffers.el")

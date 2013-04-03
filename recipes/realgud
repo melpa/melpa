@@ -8,7 +8,7 @@
             ("realgud/debugger/pdb" "realgud/debugger/pdb/*.el")
             ("realgud/debugger/perldb" "realgud/debugger/perldb/*.el")
             ("realgud/debugger/pydb" "realgud/debugger/pydb/*.el")
-            ("realgud/debugger/pydbgr" "realgud/debugger/pyrealgud/*.el")
+            ("realgud/debugger/pydbgr" "realgud/debugger/pydbgr/*.el")
             ("realgud/debugger/rdebug" "realgud/debugger/rdebug/*.el")
             ("realgud/debugger/remake" "realgud/debugger/remake/*.el")
             ("realgud/debugger/trepan" "realgud/debugger/trepan/*.el")

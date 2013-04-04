@@ -1,3 +1,1 @@
-(keyfreq :fetcher svn
-         :url "http://ergoemacs.googlecode.com/svn/trunk/packages/"
-         :files ("keyfreq.el"))
+(keyfreq :fetcher github :repo "dacap/keyfreq")

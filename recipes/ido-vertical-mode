@@ -1,0 +1,1 @@
+(ido-vertical-mode :fetcher "github" :repo "sdegutis/ido-vertical-mode.el")

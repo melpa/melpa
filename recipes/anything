@@ -1,1 +1,2 @@
-(anything :fetcher wiki)
+(anything :url "http://repo.or.cz/r/anything-config.git" :fetcher git
+          :files ("*.el" "contrib/*.el" "contrib/make-filelist.rb" "extensions/*.el" "doc/*"))

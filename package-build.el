@@ -507,8 +507,8 @@ The file is written to `package-build-working-dir'."
   (if (re-search-forward "^;;;* *Version: *" nil t)
       (progn
         (move-beginning-of-line nil)
-        (search-forward "Version" nil t)
-        (backward-word)
+        (search-forward "V" nil t)
+        (backward-char)
         (insert "X-Original-")
         (move-beginning-of-line nil))
     (forward-line))

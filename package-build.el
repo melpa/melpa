@@ -505,7 +505,12 @@ The file is written to `package-build-working-dir'."
   "Ensure current buffer has a \"Version: VERSION\" header."
   (goto-char (point-min))
   (if (re-search-forward "^;;;* *Version: *" nil t)
-      (kill-whole-line)
+      (progn
+        (move-beginning-of-line nil)
+        (search-forward "Version" nil t)
+        (backward-word)
+        (insert "X-Original-")
+        (move-beginning-of-line nil))
     (forward-line))
   (insert (format ";; Version: %s" version))
   (newline))

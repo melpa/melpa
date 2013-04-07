@@ -1,4 +1,3 @@
-(paredit :url "http://mumble.net/~campbell/emacs/paredit"
-         :fetcher darcs
+(paredit :url "http://mumble.net/~campbell/git/paredit.git"
+         :fetcher git
          :files ("paredit.el"))
-

@@ -1,0 +1,3 @@
+(visual-regexp :repo "benma/visual-regexp.el"
+	       :fetcher github
+	       :files ("visual-regexp.el"))

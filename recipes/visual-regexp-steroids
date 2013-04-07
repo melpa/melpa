@@ -1,0 +1,3 @@
+(visual-regexp-steroids :repo "benma/visual-regexp-steroids.el"
+	  :fetcher github
+	  :files ("visual-regexp-steroids.el" "regexp.py"))

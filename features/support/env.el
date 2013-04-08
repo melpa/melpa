@@ -14,6 +14,8 @@
 (add-to-list 'load-path melpa-root-path)
 (add-to-list 'load-path (expand-file-name "espuds" melpa-util-path))
 
+(require 'package)
+(package-initialize)
 (require 'package-build)
 (require 'ert)
 (require 'espuds)
@@ -40,4 +42,3 @@
 (Teardown
  ;; After when everything has been run
  )
-

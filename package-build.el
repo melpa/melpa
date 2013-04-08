@@ -717,14 +717,16 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
            (expand-file-name file-name package-build-working-dir))))
 
 
-    (let ((archive-entry (assq name (package-build-archive-alist))))
-      (when archive-entry (pb/remove-archive archive-entry)))
-
     (message "\n;;; %s\n" file-name)
     (let* ((version (pb/checkout name cfg pkg-cwd))
            (files (pb/expand-config-file-list pkg-cwd cfg))
            (default-directory package-build-working-dir)
-           (start-time (current-time)))
+           (start-time (current-time))
+           (old-archive-entry (assq name (package-build-archive-alist))))
+
+      ;; right before we create a new package, clean out the old one
+      (when old-archive-entry (pb/remove-archive old-archive-entry))
+
       (cond
        ((not version)
         (message "Unable to check out repository for %s" name))

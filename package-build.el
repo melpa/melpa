@@ -8,6 +8,7 @@
 ;; Created: 2011-09-30
 ;; Version: 0.1
 ;; Keywords: tools
+;; Package-Requires: ((cl-lib "0.2"))
 
 ;; This file is not (yet) part of GNU Emacs.
 ;; However, it is distributed under the same license.
@@ -40,7 +41,7 @@
 
 ;; Since this library is not meant to be loaded by users
 ;; at runtime, use of cl functions should not be a problem.
-(require 'cl)
+(require 'cl-lib)
 
 (require 'package)
 (require 'lisp-mnt)
@@ -174,8 +175,8 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
 
 (defmacro pb/with-wiki-rate-limit (&rest body)
   "Rate-limit BODY code passed to this macro to match EmacsWiki's rate limiting."
-  (let ((now (gensym))
-        (elapsed (gensym)))
+  (let ((now (cl-gensym))
+        (elapsed (cl-gensym)))
     `(let* ((,now (float-time))
             (,elapsed (- ,now pb/last-wiki-fetch-time)))
        (when (< ,elapsed pb/wiki-min-request-interval)
@@ -537,7 +538,7 @@ The file is written to `package-build-working-dir'."
         ;; commented properly.
         (pb/update-or-insert-version "0")
         (pb/ensure-ends-here-line file-path)
-        (flet ((package-strip-rcs-id (str) "0"))
+        (cl-flet ((package-strip-rcs-id (str) "0"))
           (package-buffer-info))))))
 
 (defun pb/get-pkg-file-info (file-path)
@@ -559,7 +560,7 @@ The file is written to `package-build-working-dir'."
 (defun pb/merge-package-info (pkg-info name version config)
   "Return a version of PKG-INFO updated with NAME, VERSION and info from CONFIG.
 If PKG-INFO is nil, an empty one is created."
-  (let* ((merged (or (copy-seq pkg-info)
+  (let* ((merged (or (copy-sequence pkg-info)
                      (vector name nil "No description available." version))))
     (aset merged 0 name)
     (aset merged 2 (format "%s [source: %s]"
@@ -625,17 +626,17 @@ of the same-named package which is to be kept."
 
 (defun pb/read-recipes ()
   "Return a list of data structures for all recipes in `package-build-recipes-dir'."
-  (loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
-        collect (pb/read-recipe file-name)))
+  (cl-loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
+           collect (pb/read-recipe file-name)))
 
 (defun pb/read-recipes-ignore-errors ()
   "Return a list of data structures for all recipes in `package-build-recipes-dir'."
-  (loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
-        for pkg-info = (condition-case err (pb/read-recipe file-name)
-                         (error (message (error-message-string err))
-                                nil))
-        when pkg-info
-        collect pkg-info))
+  (cl-loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
+           for pkg-info = (condition-case err (pb/read-recipe file-name)
+                            (error (message (error-message-string err))
+                                   nil))
+           when pkg-info
+           collect pkg-info))
 
 
 (defun pb/expand-file-specs (dir specs &optional subdir)
@@ -646,7 +647,7 @@ file path and DEST is the relative path to which it should be copied."
         (prefix (if subdir
                     (format "%s/" subdir)
                   "")))
-    (mapcan
+    (cl-mapcan
      (lambda (entry)
        (if (consp entry)
            (pb/expand-file-specs dir
@@ -671,10 +672,10 @@ file path and DEST is the relative path to which it should be copied."
 (defun pb/copy-package-files (files source-dir target-dir)
   "Copy FILES from SOURCE-DIR to TARGET-DIR.
 FILES is a list of (SOURCE . DEST) relative filepath pairs."
-  (loop for (source-file . dest-file) in files
-        do (pb/copy-file
-            (expand-file-name source-file source-dir)
-            (expand-file-name dest-file target-dir))))
+  (cl-loop for (source-file . dest-file) in files
+           do (pb/copy-file
+               (expand-file-name source-file source-dir)
+               (expand-file-name dest-file target-dir))))
 
 (defun pb/copy-file (file newname)
   "Copy FILE to NEWNAME and create parent directories for NEWNAME if they don't exist."
@@ -894,9 +895,9 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 (defun package-build-all ()
   "Build all packages in the `package-build-recipe-alist'."
   (interactive)
-  (let ((failed (loop for pkg in (mapcar 'car (package-build-recipe-alist))
-                      when (not (package-build-archive-ignore-errors pkg))
-                      collect pkg)))
+  (let ((failed (cl-loop for pkg in (mapcar 'car (package-build-recipe-alist))
+                         when (not (package-build-archive-ignore-errors pkg))
+                         collect pkg)))
     (if (not failed)
         (princ "\nSuccessfully Compiled All Packages\n")
       (princ "\nFailed to Build the Following Packages\n")
@@ -908,9 +909,9 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
   "Remove previously-built packages that no longer have recipes."
   (interactive)
   (let* ((known-package-names (mapcar 'car (package-build-recipe-alist)))
-         (stale-archives (loop for built in (package-build-archive-alist)
-                               when (not (memq (car built) known-package-names))
-                               collect built)))
+         (stale-archives (cl-loop for built in (package-build-archive-alist)
+                                  when (not (memq (car built) known-package-names))
+                                  collect built)))
     (mapc 'pb/remove-archive stale-archives)
     (pb/dump-archive-contents)))
 
@@ -964,7 +965,6 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 ;; Local Variables:
 ;; coding: utf-8
-;; byte-compile-warnings: (not cl-functions)
 ;; eval: (checkdoc-minor-mode 1)
 ;; End:
 

@@ -1,0 +1,1 @@
+(scf-mode :repo "lewang/scf-mode" :fetcher github)

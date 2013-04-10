@@ -1,0 +1,1 @@
+(rhtml-mode :repo "eschulte/rhtml" :fetcher github)

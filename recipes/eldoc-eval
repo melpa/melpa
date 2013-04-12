@@ -1,0 +1,1 @@
+(eldoc-eval :fetcher github :repo "thierryvolpiatto/eldoc-eval")

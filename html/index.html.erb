@@ -22,6 +22,10 @@
       case package.source
       when 'github' then recipe['repo'].include?('/') ? "https://github.com/#{recipe['repo']}" : "https://gist.github.com/#{recipe['repo']}"
       when 'wiki'   then recipe.key?('files') ? nil : "http://www.emacswiki.org/emacs/#{package.name}.el"
+      when 'hg' then
+        if recipe['url'] =~ /(bitbucket\.org\/[^\/]+\/[^\/\?]+)/
+          "https://" + $1
+        end
       end
     package
   end

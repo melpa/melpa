@@ -1,0 +1,5 @@
+(elnode
+ :fetcher github
+ :repo "nicferrier/elnode"
+ :commit "origin/melpa"
+ :files ("*"))

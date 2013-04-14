@@ -1,3 +1,2 @@
-(rubocop :repo "bbatsov/rubocop-emacs" 
-         :fetcher github
-         :files ("rubocop.el"))    
+(rubocop :repo "bbatsov/rubocop-emacs"
+         :fetcher github)

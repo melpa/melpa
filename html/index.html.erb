@@ -22,6 +22,10 @@
       case package.source
       when 'github' then recipe['repo'].include?('/') ? "https://github.com/#{recipe['repo']}" : "https://gist.github.com/#{recipe['repo']}"
       when 'wiki'   then recipe.key?('files') ? nil : "http://www.emacswiki.org/emacs/#{package.name}.el"
+      when 'hg' then
+        if recipe['url'] =~ /(bitbucket\.org\/[^\/]+\/[^\/\?]+)/
+          "https://" + $1
+        end
       end
     package
   end
@@ -91,6 +95,7 @@
             <li><strong>Up-to-date packages built on our servers from upstream source</strong></li>
             <li><strong>Installable in any recent Emacs using "package.el"</strong> - no need to install svn/cvs/hg/bzr/git/darcs etc.</li>
             <li><strong>Curated</strong> - no obsolete, renamed, forked or randomly hacked packages</li>
+            <li><strong>Comprehensive</strong> - more packages than any other archive</li>
             <li><strong>Automatic updates</strong> - new commits result in new packages</li>
             <li><strong>Extensible</strong> - contribute recipes via github, and we'll build the packages</li>
           </ul>

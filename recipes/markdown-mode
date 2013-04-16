@@ -1,2 +1,1 @@
-(markdown-mode :repo "milkypostman/markdown-mode" :fetcher github)
-
+(markdown-mode :url "git://jblevins.org/git/markdown-mode.git" :fetcher git)

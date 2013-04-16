@@ -1,6 +1,7 @@
 ;;; Fixes for json.el such that integer plist / alist keys are rendered as strings, in order to comply with the json spec
 
 (require 'json)
+(require 'cl-lib)
 
 (defun json-encode-key-value-pair (pair)
   "Encode a (key . value) PAIR as JSON, ensuring that key is encoded into a string."
@@ -26,9 +27,9 @@
 (defun json-encode-plist (plist)
   "Return a JSON representation of PLIST."
   (json-encode-alist
-   (loop while plist
-         collect (cons (car plist) (cadr plist))
-         do (setf plist (cddr plist)))))
+   (cl-loop while plist
+            collect (cons (car plist) (cadr plist))
+            do (setf plist (cddr plist)))))
 
 
 (provide 'json-fix)

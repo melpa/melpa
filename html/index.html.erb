@@ -124,8 +124,8 @@
         <tbody>
           <% packages.each do |package| %>
             <tr>
-              <td><a name="<%=h package.name %>"></a><a href="<%=h package.url %>"><%=h package.name %></a></td>
-              <td><%=h package.version %></td>
+              <td><a name="<%=h package.name %>"></a><%=h package.name %></td>
+              <td><a href="<%=h package.url %>"><%=h package.version %></a></td>
               <td><%=h package.descr %></td>
               <td><a href="<%=h package.recipe_url %>">recipe</a></td>
               <td><% if package.source_url %>

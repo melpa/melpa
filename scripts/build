@@ -1,10 +1,13 @@
 #!/bin/bash
 
+function timestamp {
+    date "+%Y%m%d %H:%M %Z"
+}
+
 function melpa {
+    timestamp
 
-    date "+%Y%m%d %H:%M"
-
-    date "+%Y%m%d %H:%M" > $HOME/www/status.txt
+    timestamp > $HOME/www/status.txt
     echo "building..." >> $HOME/www/status.txt
 
     MELPADIR=${MELPADIR:-$HOME/melpa}
@@ -41,13 +44,13 @@ function melpa {
     /usr/sbin/logrotate -s $HOME/log/logrotate.state $HOME/log/melpa.logrotate 1>> ${STDOUT} 2>> ${STDERR}
 
     EMAIL=`mktemp`
-    echo "Subject: Melpa status `date '+%Y-%m-%d %H:%M:%S'`" > ${EMAIL}
+    echo "Subject: Melpa status `timestamp`" > ${EMAIL}
     cat ${MELPASTDOUT} ${STDOUT} ${ENVLOG} ${STDERR} >> ${EMAIL}
 
     /usr/sbin/sendmail dcurtis@milkbox.net < ${EMAIL}
     cat ${ENVLOG} ${STDERR} ${STDOUT} | tee $WEBROOT/lastrun.txt
 
-    date "+%Y%m%d %H:%M" > $HOME/www/status.txt
+    timestamp > $HOME/www/status.txt
     echo "completed" >> $HOME/www/status.txt
 }
 

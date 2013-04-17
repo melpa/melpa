@@ -28,7 +28,7 @@
         when /(gitorious\.org\/[^\/]+\/[^.]+)/ then "https://" + $1
         when /\A(https?:\/\/code\.google\.com\/p\/[^\/]+\/)/ then $1
         when /\A(https?:\/\/[^.]+\.googlecode\.com\/)/ then $1
-        when /\Alp:(.*)/)/ then "https://launchpad.net/" + $1
+        when /\Alp:(.*)/ then "https://launchpad.net/" + $1
         end
       end
     package

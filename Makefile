@@ -66,7 +66,6 @@ $(RCPDIR)/.dirstamp: .FORCE
 $(RCPDIR)/%: .FORCE
 	@echo " • Building recipe $(@F) ..."
 
-	@echo "---$(TEST)"
 	-rm -vf $(PKGDIR)/$(@F)-*
 	$(EVAL) "(package-build-archive '$(@F))"
 

@@ -5,7 +5,15 @@ HTMLDIR := ./html
 WORKDIR := ./working
 EMACS   := emacs
 
-EVAL := $(EMACS) --no-site-file --batch -l package-build.el --eval
+EVAL := $(EMACS)
+
+## Check for needing to initialize CL-LIB from ELPA
+NEED_CL-LIB := $(shell $(EMACS) --no-site-file --batch --eval '(prin1 (version< emacs-version "24.3"))')
+ifeq ($(NEED_CL-LIB), t)
+	EVAL := $(EVAL) --eval "(package-initialize)"
+endif
+
+EVAL := $(EVAL) --no-site-file --batch -l package-build.el --eval
 
 
 all: build json index
@@ -57,6 +65,8 @@ $(RCPDIR)/.dirstamp: .FORCE
 ## Recipe rules
 $(RCPDIR)/%: .FORCE
 	@echo " • Building recipe $(@F) ..."
+
+	@echo "---$(TEST)"
 	-rm -vf $(PKGDIR)/$(@F)-*
 	$(EVAL) "(package-build-archive '$(@F))"
 

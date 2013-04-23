@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function timestamp {
-    date "+%Y%m%d %H:%M %Z"
+    date "+%Y%m%d %H:%M %z"
 }
 
 function melpa {

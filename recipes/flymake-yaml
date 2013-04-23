@@ -1,0 +1,2 @@
+(flymake-yaml :fetcher github :repo "yasuyk/flymake-yaml"
+              :files ("flymake-yaml.el" "emacs-yaml-syntax-check"))

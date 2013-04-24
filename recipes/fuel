@@ -1,0 +1,4 @@
+(fuel
+ :fetcher github
+ :repo "mcandre/fuel"
+ :files ("fuel-1.0/fu.el"))

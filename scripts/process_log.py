@@ -11,8 +11,9 @@ import sys
 import time
 
 LOGFILE = "/var/log/nginx/melpa/melpa.access.log"
-LOGREGEX = r'(?P<ip>[\d.]+) [ -]+ \[(?P<date>[\w/: -]+)\] \
-"GET /packages/(?P<package>[^ ]+)-[0-9.]+.(?:el|tar) HTTP/\d.\d" 200'
+LOGREGEX = r'(?P<ip>[\d.]+) [ -]+ \[(?P<date>[\w/: -]+)\] ' \
+           r'"GET /packages/(?P<package>[^ ]+)-[0-9.]+.(?:el|tar) ' \
+           r'HTTP/\d.\d" 200'
 
 
 def json_handler(obj):

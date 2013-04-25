@@ -4,10 +4,12 @@
   include ERB::Util
   archive_json = JSON.parse(File.open("../archive.json").read)
   recipe_json  = JSON.parse(File.open("../recipes.json").read)
+  downloads_json = JSON.parse(File.open("../download_counts.json").read)
 
   packages = (archive_json.keys & recipe_json.keys).sort.map do |pkgname|
     package = OpenStruct.new
     package.name = pkgname
+    package.downloads = downloads_json[package.name]
     versions, deps, package.descr, package.pkgtype = archive_json[package.name]
     recipe = recipe_json[package.name]
     package.version = versions.join('.')
@@ -51,6 +53,9 @@
     .dataTables_empty {
       background-color: #FCF8E3;
       color: #C09853;
+    }
+    .table .text-right {
+      text-align: right !important;
     }
     pre code { /* Match highlight.js styles to bootstrap */
       padding: 0;
@@ -123,6 +128,7 @@
             <th align="left">Description</th>
             <th align="left">Recipe</th>
             <th align="left">Source</th>
+            <th class="text-right" align="right"># DLs</th>
           </tr>
         </thead>
         <tbody>
@@ -138,6 +144,7 @@
                      <%=h package.source %>
                   <% end %>
               </td>
+              <td class="text-right"><%=h package.downloads %></td>
             </tr>
           <% end %>
         </tbody>

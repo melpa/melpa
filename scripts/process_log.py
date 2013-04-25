@@ -92,8 +92,8 @@ def main():
     args = parser.parse_args()
 
     # load old data file
-    if os.path.exists("melpa_log_data.json.gz"):
-        pkg_ip_time = json_load(gzip.open("melpa_log_data.json.gz"))
+    if os.path.exists("download_log.json.gz"):
+        pkg_ip_time = json_load(gzip.open("download_log.json.gz"))
     else:
         pkg_ip_time = {}
 
@@ -106,12 +106,12 @@ def main():
         sys.stdout.write("{0}\n".format(count))
 
     # dump new data file
-    json_dump(pkg_ip_time, gzip.open("melpa_log_data.json.gz", 'w'))
+    json_dump(pkg_ip_time, gzip.open("download_log.json.gz", 'w'))
 
     # calculate current package totals
     pkgcount = {p: len(i) for p, i in pkg_ip_time.iteritems()}
 
-    json_dump(pkgcount, open("melpa_download_counts.json", 'w'), indent=1)
+    json_dump(pkgcount, open("download_counts.json", 'w'), indent=1)
 
 
 if __name__ == '__main__':

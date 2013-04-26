@@ -4,7 +4,7 @@
   include ERB::Util
   archive_json = JSON.parse(File.open("../archive.json").read)
   recipe_json  = JSON.parse(File.open("../recipes.json").read)
-  downloads_json = JSON.parse(File.open("../download_counts.json").read)
+  downloads_json = JSON.parse(File.open("../download_counts.json").read) rescue {}
 
   packages = (archive_json.keys & recipe_json.keys).sort.map do |pkgname|
     package = OpenStruct.new

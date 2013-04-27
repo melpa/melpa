@@ -1,0 +1,4 @@
+(open-github
+ :repo "syohex/emacs-open-github"
+ :fetcher github
+ :files ("open-github.el"))

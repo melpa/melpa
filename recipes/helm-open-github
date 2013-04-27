@@ -1,4 +1,4 @@
-(open-github
- :repo "syohex/emacs-open-github"
+(helm-open-github
+ :repo "syohex/emacs-helm-open-github"
  :fetcher github
- :files ("open-github.el"))
+ :files ("helm-open-github.el"))

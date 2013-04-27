@@ -1,2 +1,5 @@
-(haskell-mode :repo "haskell/haskell-mode" :fetcher github)
-
+(haskell-mode
+ :repo "haskell/haskell-mode"
+ :fetcher github
+ :files ("*.el"
+         "logo.svg"))

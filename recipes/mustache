@@ -1,0 +1,5 @@
+(mustache
+ :repo "Wilfred/mustache.el"
+ :files ("mustache.el"
+         "mustache-lex.el" "mustache-render.el" "mustache-parse.el" )
+ :fetcher github)

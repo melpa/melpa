@@ -1,0 +1,2 @@
+(text-translator :fetcher bzr :url "lp:~khiker/+junk/text-translator"
+                 :files ("*.el"))

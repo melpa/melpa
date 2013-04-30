@@ -1,0 +1,3 @@
+(hy-mode :repo "hylang/hy-mode" :fetcher github :files
+         ("hy-mode.el"))
+

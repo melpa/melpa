@@ -150,8 +150,11 @@ the `git`, `bzr`, `hg`, `darcs`, `svn` and `cvs` fetchers.*
 specifies the github repository and is of the form `github-user/repo-name`. *required for the `github` fetcher*.
 
 - `:commit`
-specifies the commit (<sha>) or branch (origin/<branch-name>) of the
-git repo to checkout. Only used by the `git` and `github` fetchers.
+specifies the commit or branch of the git repo to checkout. The value
+will be passed to `git reset` in a repo where `upstream` is the
+original repository. Can therefore be either a sha, if pointing at a
+specific commit, or a branch (prefixed with "origin/"). Only used by
+the `git` and `github` fetchers.
 
 - `:module`
 specifies the module of a CVS repository to check out.  Defaults to to

@@ -1,2 +1,2 @@
-(naquadah-theme :fetcher github
+(zephyros-theme :fetcher github
                 :repo "milkypostman/zephyros-theme.el")

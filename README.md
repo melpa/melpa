@@ -149,6 +149,10 @@ the `git`, `bzr`, `hg`, `darcs`, `svn` and `cvs` fetchers.*
 - `:repo`
 specifies the github repository and is of the form `github-user/repo-name`. *required for the `github` fetcher*.
 
+- `:commit`
+specifies the commit (<sha>) or branch (origin/<branch-name>) of the
+git repo to checkout. Only used by the `git` and `github` fetchers.
+
 - `:module`
 specifies the module of a CVS repository to check out.  Defaults to to
 `package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.

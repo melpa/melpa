@@ -1,0 +1,1 @@
+(tracking :repo "jorgenschaefer/circe" :fetcher github :files ("lisp/tracking.el"))

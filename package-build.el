@@ -773,7 +773,9 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
                  (let ((default-directory pkg-cwd))
                    (or (pb/get-pkg-file-info pkg-file-source)
                        ;; some packages (like magit) provide name-pkg.el.in
-                       (pb/get-pkg-file-info (concat pkg-file ".in"))
+                       (pb/get-pkg-file-info
+                        (expand-file-name (concat pkg-file ".in")
+                                          (file-name-directory pkg-source)))
                        (pb/get-package-info pkg-source)))
                  file-name
                  version

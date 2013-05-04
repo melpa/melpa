@@ -1,3 +1,4 @@
+<%#-*- coding: utf-8 -*-%>
 <%
   require 'json'
   require 'ostruct'
@@ -136,7 +137,7 @@
             <tr>
               <td><a name="<%=h package.name %>"></a><%=h package.name %></td>
               <td><a href="<%=h package.url %>"><%=h package.version %></a></td>
-              <td><%=h package.descr.force_encoding('ASCII-8BIT') %></td>
+              <td><%=h package.descr %></td>
               <td><a href="<%=h package.recipe_url %>">recipe</a></td>
               <td><% if package.source_url %>
                      <a href="<%=h package.source_url %>"><%=h package.source %></a>

@@ -1,4 +1,1 @@
-(fuel
- :fetcher github
- :repo "mcandre/fuel"
- :files ("fuel-1.0/fu.el"))
+(fuel :fetcher git :url "git://factorcode.org/git/factor.git" :files ("misc/fuel/*.el"))

@@ -1,7 +1,7 @@
 ;;; package-build.el --- Tools for curating the package archive
 
-;; Copyright (C) 2011-2012 Donald Ephraim Curtis <dcurtis@milkbox.net>
-;; Copyright (C) 2012 Steve Purcell <steve@sanityinc.com>
+;; Copyright (C) 2011-2013 Donald Ephraim Curtis <dcurtis@milkbox.net>
+;; Copyright (C) 2012-2013 Steve Purcell <steve@sanityinc.com>
 ;; Copyright (C) 2009 Phil Hagelberg <technomancy@gmail.com>
 
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
@@ -773,7 +773,9 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
                  (let ((default-directory pkg-cwd))
                    (or (pb/get-pkg-file-info pkg-file-source)
                        ;; some packages (like magit) provide name-pkg.el.in
-                       (pb/get-pkg-file-info (concat pkg-file ".in"))
+                       (pb/get-pkg-file-info
+                        (expand-file-name (concat pkg-file ".in")
+                                          (file-name-directory pkg-source)))
                        (pb/get-package-info pkg-source)))
                  file-name
                  version

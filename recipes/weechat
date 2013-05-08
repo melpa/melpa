@@ -1,3 +1,2 @@
 (weechat :fetcher github
-         :repo "the-kenny/weechat.el"
-         :files ("*.el"))
+         :repo "the-kenny/weechat.el")

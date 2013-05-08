@@ -1,0 +1,3 @@
+(org-reveal :repo "yjwen/org-reveal"
+            :fetcher github
+            :files ("ox-reveal.el"))

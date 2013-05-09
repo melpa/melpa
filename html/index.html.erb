@@ -17,7 +17,7 @@
     package.url = "packages/#{package.name}-#{package.version}." + (package.pkgtype == "single" ? "el" : "tar")
     package.recipe_url = "https://github.com/milkypostman/melpa/blob/master/recipes/#{package.name}"
     package.source = recipe["fetcher"]
-    if package.descr =~ /(.*?)(\s*-\*-.*?)?\s*\[source:\s*(\w+)\]\s*/
+    if package.descr =~ /(.*?)(\s*-\*-.*?)?\s*\[(\w+)\]\s*/
       package.descr = $1
     end
 

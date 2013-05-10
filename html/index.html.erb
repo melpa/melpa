@@ -62,6 +62,9 @@
       padding: 0;
       background: transparent;
     }
+    #package-list th {
+      text-wrap: nobreak;
+    }
     .navbar, .navbar .brand, .navbar a, .navbar .nav>li>a {
       color: #922793;
     }
@@ -121,7 +124,7 @@
     <section>
       <a name="packages"></a>
       <h2>Current List of <%=h packages.size %> Packages</h2>
-      <table class="table table-bordered table-hover">
+      <table id="package-list" class="table table-bordered table-hover">
         <thead>
           <tr class="header">
             <th>Package</th>
@@ -266,7 +269,14 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js" type="text/javascript"></script>
   <script language="javascript">
-      $("table").dataTable({bPaginate: false, bLengthChange: false});
+      function updateSortIndicators() {
+        $("#package-list th.sorting .sort-ind").html('<i class="icon-chevron-down icon-white"></i>');
+        $("#package-list th.sorting_asc .sort-ind").html('<i class="icon-chevron-down"></i>');
+        $("#package-list th.sorting_desc .sort-ind").html('<i class="icon-chevron-up"></i>');
+      }
+      var table = $("#package-list");
+      table.find("th").append('&nbsp;<span class="sort-ind"></span>');
+      table .dataTable({bPaginate: false, bLengthChange: false, fnDrawCallback: updateSortIndicators});
       $('div.dataTables_filter input').focus().attr("placeholder", "Enter filter terms");
   </script>
   <script type="text/javascript">

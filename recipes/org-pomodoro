@@ -1,5 +1,4 @@
 (org-pomodoro
  :fetcher github
  :repo "leoc/org-pomodoro"
- :module "cvs-module"
  :files ("org-pomodoro.el" "resources/*.wav"))

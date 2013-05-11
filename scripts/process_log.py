@@ -9,6 +9,7 @@ import os
 import re
 import sys
 import time
+import tempfile
 
 LOGFILE = "/var/log/nginx/melpa/melpa.access.log"
 LOGREGEX = r'(?P<ip>[\d.]+) [ -]+ \[(?P<date>[\w/: -]+)\] ' \
@@ -91,6 +92,22 @@ def main():
                         help="Log files to parse.", default=[LOGFILE])
     args = parser.parse_args()
 
+    pid = str(os.getpid())
+    pidfile = os.path.join(os.path.join(tempfile.gettempdir(), "process_log.pid"))
+
+    if os.access(pidfile, os.F_OK):
+        running_pid = open(pidfile, "r").readline()
+
+        try:
+            os.kill(int(running_pid), 0)
+            print "Process {0} currently running.".format(running_pid)
+            return 1
+        except OSError:
+            print "Stale lockfile."
+            os.unlink(pidfile)
+
+    file(pidfile, 'w').write(pid)
+
     # load old data file
     if os.path.exists("download_log.json.gz"):
         pkg_ip_time = json_load(gzip.open("download_log.json.gz"))
@@ -113,6 +130,9 @@ def main():
 
     json_dump(pkgcount, open("download_counts.json", 'w'), indent=1)
 
+    os.unlink(pidfile)
+    return 0
+
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())

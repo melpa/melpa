@@ -1,0 +1,1 @@
+(dired-dups :fetcher github :repo "vapniks/dired-dups")

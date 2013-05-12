@@ -1,0 +1,3 @@
+(motion-mode :repo "ainame/motion-mode" :fetcher github
+	     :files ("*.el" ("bin" "bin/code_converter.rb" "bin/make_dict.rb")
+		     ("lib/motion" "lib/motion/code_converter.rb")))

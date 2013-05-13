@@ -1,0 +1,3 @@
+(package-build :repo "milkypostman/melpa"
+               :fetcher github
+               :files ("package-build.el"))

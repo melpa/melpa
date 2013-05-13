@@ -1,4 +1,5 @@
 (org-pomodoro
  :fetcher github
  :repo "leoc/org-pomodoro"
- :files ("org-pomodoro.el" "resources/*.wav"))
+ :files ("org-pomodoro.el"
+         ("resources" "resources/*.wav")))

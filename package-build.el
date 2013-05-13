@@ -750,7 +750,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
           (when (file-exists-p pkg-target)
             (delete-file pkg-target t))
           (copy-file pkg-source pkg-target)
-          (let ((enable-local-variables :safe)
+          (let ((enable-local-variables nil)
                 (make-backup-files nil))
             (with-current-buffer (find-file pkg-target)
               (pb/update-or-insert-version version)

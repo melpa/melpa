@@ -1,0 +1,4 @@
+(org-pomodoro
+ :fetcher github
+ :repo "leoc/org-pomodoro"
+ :files ("*.el" "resources"))

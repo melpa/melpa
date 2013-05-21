@@ -1,4 +1,0 @@
-(es-edit-color-stamp
- :repo "sabof/es-edit-color-stamp"
- :fetcher github
- :files ("*.el" ("qt_color_picker" "qt_color_picker/*.pro" "qt_color_picker/*.cpp")))

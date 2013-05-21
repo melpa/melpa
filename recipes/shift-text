@@ -1,0 +1,3 @@
+(shift-text
+ :repo "sabof/shift-text"
+ :fetcher github)

@@ -1,3 +1,0 @@
-(es-shift-text
- :repo "sabof/es-shift-text"
- :fetcher github)

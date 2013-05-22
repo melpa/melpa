@@ -84,7 +84,7 @@ function for access to this function")
 (defvar pb/archive-alist-initialized nil
   "Determines if pb/archive-alist has been initialized.")
 
-(defconst pb/default-files-spec '("*.el" "dir" "*.info")
+(defconst pb/default-files-spec '("*.el" "dir" "*.info" "*.texi" "doc/*.info" "doc/*.texi")
   "Default value for :files attribute in recipes.")
 
 
@@ -675,6 +675,32 @@ file path and DEST is the relative path to which it should be copied."
   "Shorthand way to expand paths in DIR for source files listed in CONFIG."
   (mapcar 'car (pb/expand-config-file-list dir config)))
 
+(defun pb/generate-info-files (files source-dir target-dir)
+  "Create .info files from any .texi files listed in FILES in SOURCE-DIR in TARGET-DIR."
+  (cl-loop for (source-file . dest-file) in files
+           if (string-match ".texi$" source-file)
+           do (pb/run-process
+               nil
+               "makeinfo"
+               (expand-file-name source-file source-dir)
+               "-o"
+               (expand-file-name (concat (file-name-sans-extension dest-file)
+                                         ".info")
+                                 target-dir))))
+
+(defun pb/generate-dir-file (files target-dir)
+  "Create dir file from any .info files listed in FILES in TARGET-DIR."
+  (cl-loop for (source-file . dest-file) in files
+           if (or (string-match ".info$" source-file)
+                  (string-match ".texi$" source-file))
+           do (pb/run-process
+               nil
+               "install-info"
+               (concat "--dir=" (expand-file-name "dir" target-dir))
+               (expand-file-name (concat (file-name-sans-extension dest-file)
+                                         ".info")
+                                 target-dir))))
+
 (defun pb/copy-package-files (files source-dir target-dir)
   "Copy FILES from SOURCE-DIR to TARGET-DIR.
 FILES is a list of (SOURCE . DEST) relative filepath pairs."
@@ -787,9 +813,6 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
                  version
                  cfg)))
 
-          (let ((default-directory pkg-cwd))
-            (pb/write-pkg-readme (pb/find-package-commentary pkg-source)
-                                 file-name))
 
           (when (file-exists-p pkg-dir)
             (delete-directory pkg-dir t nil))
@@ -803,11 +826,16 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
                                                  package-build-working-dir)))
                              pkg-info)
 
-          (pb/create-tar
-           (expand-file-name
-            (concat file-name "-" version ".tar") package-build-archive-dir)
-           pkg-dir
-           (delete-dups (append (mapcar 'cdr files) (list pkg-file))))
+          (pb/generate-info-files files pkg-cwd pkg-dir)
+          (pb/generate-dir-file files pkg-dir)
+
+          (pb/create-tar (expand-file-name (concat file-name "-" version ".tar")
+                                           package-build-archive-dir)
+                         pkg-dir)
+
+          (let ((default-directory pkg-cwd))
+            (pb/write-pkg-readme (pb/find-package-commentary pkg-source)
+                                 file-name))
 
           (delete-directory pkg-dir t nil)
           (pb/add-to-archive-contents pkg-info 'tar)))

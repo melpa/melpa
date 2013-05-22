@@ -1,0 +1,4 @@
+(emamux
+ :repo "syohex/emacs-emamux"
+ :fetcher github
+ :files ("emamux.el"))

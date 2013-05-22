@@ -1,0 +1,1 @@
+(orglink :repo "tarsius/orglink" :fetcher github)

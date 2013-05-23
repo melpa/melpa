@@ -1,0 +1,3 @@
+(emamux
+ :repo "syohex/emacs-emamux"
+ :fetcher github)

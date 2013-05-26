@@ -84,7 +84,9 @@ function for access to this function")
 (defvar pb/archive-alist-initialized nil
   "Determines if pb/archive-alist has been initialized.")
 
-(defconst pb/default-files-spec '("*.el" "dir" "*.info" "*.texi" "doc/*.info" "doc/*.texi")
+(defconst pb/default-files-spec '("*.el" "dir"
+                                  "*.info" "*.texi" "*.texinfo"
+                                  "doc/*.info" "doc/*.texi" "doc/*.texinfo")
   "Default value for :files attribute in recipes.")
 
 

@@ -678,28 +678,33 @@ file path and DEST is the relative path to which it should be copied."
 (defun pb/generate-info-files (files source-dir target-dir)
   "Create .info files from any .texi files listed in FILES in SOURCE-DIR in TARGET-DIR."
   (cl-loop for (source-file . dest-file) in files
-           if (string-match ".texi$" source-file)
-           do (pb/run-process
-               nil
-               "makeinfo"
-               (expand-file-name source-file source-dir)
-               "-o"
-               (expand-file-name (concat (file-name-sans-extension dest-file)
-                                         ".info")
-                                 target-dir))))
+           for target-file = (concat (file-name-sans-extension dest-file)
+                                     ".info")
+           if (and (string-match ".texi\\(nfo\\)?$" source-file)
+                   (not (file-exists-p target-file)))
+           do (ignore-errors
+                (pb/run-process
+                 nil
+                 "makeinfo"
+                 (expand-file-name source-file source-dir)
+                 "--force"
+                 "-o"
+                 (expand-file-name target-file
+                                   target-dir)))))
 
 (defun pb/generate-dir-file (files target-dir)
   "Create dir file from any .info files listed in FILES in TARGET-DIR."
   (cl-loop for (source-file . dest-file) in files
            if (or (string-match ".info$" source-file)
-                  (string-match ".texi$" source-file))
-           do (pb/run-process
-               nil
-               "install-info"
-               (concat "--dir=" (expand-file-name "dir" target-dir))
-               (expand-file-name (concat (file-name-sans-extension dest-file)
-                                         ".info")
-                                 target-dir))))
+                  (string-match ".texi\\(nfo\\)?$" source-file))
+           do (ignore-errors
+                (pb/run-process
+                 nil
+                 "install-info"
+                 (concat "--dir=" (expand-file-name "dir" target-dir))
+                 (expand-file-name (concat (file-name-sans-extension dest-file)
+                                           ".info")
+                                   target-dir)))))
 
 (defun pb/copy-package-files (files source-dir target-dir)
   "Copy FILES from SOURCE-DIR to TARGET-DIR.

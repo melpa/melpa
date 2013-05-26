@@ -84,7 +84,7 @@ function for access to this function")
 (defvar pb/archive-alist-initialized nil
   "Determines if pb/archive-alist has been initialized.")
 
-(defconst pb/default-files-spec '("*.el" "dir" "*.info")
+(defconst pb/default-files-spec '("*.el" "dir" "*.info" "*.texi")
   "Default value for :files attribute in recipes.")
 
 
@@ -675,6 +675,26 @@ file path and DEST is the relative path to which it should be copied."
   "Shorthand way to expand paths in DIR for source files listed in CONFIG."
   (mapcar 'car (pb/expand-config-file-list dir config)))
 
+(defun pb/generate-info-files (paths)
+  "Create .info files from any .texi files listed in PATHS."
+  (cl-loop for (source-file . dest-file) in paths
+           if (string-match ".texi$" source-file)
+           do (pb/run-process
+               nil
+               "makeinfo"
+               source-file)))
+
+(defun pb/generate-dir-file (paths)
+  "Create a dir files from any .info files listed in PATHS."
+  (cl-loop for (source-file . dest-file) in paths
+           if (string-match ".texi$" source-file)
+           do (pb/run-process
+               nil
+               "install-info"
+               "--dir=dir"
+               source-file)
+           (cl-return)))
+
 (defun pb/copy-package-files (files source-dir target-dir)
   "Copy FILES from SOURCE-DIR to TARGET-DIR.
 FILES is a list of (SOURCE . DEST) relative filepath pairs."
@@ -788,6 +808,12 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
                  cfg)))
 
           (let ((default-directory pkg-cwd))
+            (pb/generate-info-files files)
+            (pb/generate-dir-file files)
+
+            ;; we may have added more files, so update the files list
+            (setq files (pb/expand-config-file-list pkg-cwd cfg))
+
             (pb/write-pkg-readme (pb/find-package-commentary pkg-source)
                                  file-name))
 

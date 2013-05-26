@@ -1,0 +1,4 @@
+(git-gutter-fringe+
+ :repo "nonsequitur/git-gutter-fringe-plus"
+ :fetcher github
+ :files ("git-gutter-fringe+.el"))

@@ -683,7 +683,7 @@ file path and DEST is the relative path to which it should be copied."
   (cl-loop for (source-file . dest-file) in files
            for target-file = (concat (file-name-sans-extension dest-file)
                                      ".info")
-           if (and (string-match ".texi\\(nfo\\)?$" source-file)
+           if (and (string-match ".texi\\(nfo\\)?$" dest-file)
                    (not (file-exists-p target-file)))
            do (ignore-errors
                 (pb/run-process
@@ -693,7 +693,8 @@ file path and DEST is the relative path to which it should be copied."
                  "--force"
                  "-o"
                  (expand-file-name target-file
-                                   target-dir)))))
+                                   target-dir)))
+           and do (delete-file (message (expand-file-name dest-file target-dir)))))
 
 (defun pb/generate-dir-file (files target-dir)
   "Create dir file from any .info files listed in FILES in TARGET-DIR."

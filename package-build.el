@@ -86,7 +86,8 @@ function for access to this function")
 
 (defconst pb/default-files-spec '("*.el" "dir"
                                   "*.info" "*.texi" "*.texinfo"
-                                  "doc/*.info" "doc/*.texi" "doc/*.texinfo")
+                                  "doc/*.info" "doc/*.texi" "doc/*.texinfo"
+                                  (:exclude "*-test.el" "*-tests.el"))
   "Default value for :files attribute in recipes.")
 
 

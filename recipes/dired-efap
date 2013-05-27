@@ -1,1 +1,1 @@
-(dired-efap :fetcher wiki)
+(dired-efap :fetcher github :repo "juan-leon/dired-efap")

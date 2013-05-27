@@ -1,0 +1,2 @@
+(apel :repo "wanderlust/apel"
+     :fetcher github)

@@ -679,18 +679,19 @@ file path and DEST is the relative path to which it should be copied."
   (mapcar 'car (pb/expand-config-file-list dir config)))
 
 (defun pb/generate-info-files (files source-dir target-dir)
-  "Create .info files from any .texi files listed in FILES in SOURCE-DIR in TARGET-DIR."
+  "Create .info files from any .texi files listed in FILES in SOURCE-DIR in TARGET-DIR.
+
+Deletes the .texi(nfo) files if they exist."
   (cl-loop for (source-file . dest-file) in files
            for target-file = (concat (file-name-sans-extension dest-file)
                                      ".info")
-           if (and (string-match ".texi\\(nfo\\)?$" dest-file)
+           if (and (string-match ".texi\\(nfo\\)?$" source-file)
                    (not (file-exists-p target-file)))
            do (ignore-errors
                 (pb/run-process
                  nil
                  "makeinfo"
                  (expand-file-name source-file source-dir)
-                 "--force"
                  "-o"
                  (expand-file-name target-file
                                    target-dir)))

@@ -682,34 +682,42 @@ file path and DEST is the relative path to which it should be copied."
   "Create .info files from any .texi files listed in FILES in SOURCE-DIR in TARGET-DIR.
 
 Deletes the .texi(nfo) files if they exist."
-  (cl-loop for (source-file . dest-file) in files
-           for target-file = (concat (file-name-sans-extension dest-file)
-                                     ".info")
-           if (and (string-match ".texi\\(nfo\\)?$" source-file)
-                   (not (file-exists-p target-file)))
-           do (ignore-errors
-                (pb/run-process
-                 nil
-                 "makeinfo"
-                 (expand-file-name source-file source-dir)
-                 "-o"
-                 (expand-file-name target-file
-                                   target-dir)))
-           and do (delete-file (message (expand-file-name dest-file target-dir)))))
+  (dolist (spec files)
+    (let* ((source-file (car spec))
+           (dest-file (cdr spec))
+           (info-path (expand-file-name
+                       (concat (file-name-sans-extension dest-file) ".info")
+                       target-dir)))
+      (when (string-match ".texi\\(nfo\\)?$" source-file)
+        (when (not (file-exists-p info-path))
+          (ignore-errors
+            (pb/run-process
+             nil
+             "makeinfo"
+             (expand-file-name source-file source-dir)
+             "-o"
+             info-path)
+            (message "Created %s" info-path)))
+        (message "Removing %s" (expand-file-name dest-file target-dir))
+        (delete-file (expand-file-name dest-file target-dir))))))
 
 (defun pb/generate-dir-file (files target-dir)
   "Create dir file from any .info files listed in FILES in TARGET-DIR."
-  (cl-loop for (source-file . dest-file) in files
-           if (or (string-match ".info$" source-file)
-                  (string-match ".texi\\(nfo\\)?$" source-file))
-           do (ignore-errors
-                (pb/run-process
-                 nil
-                 "install-info"
-                 (concat "--dir=" (expand-file-name "dir" target-dir))
-                 (expand-file-name (concat (file-name-sans-extension dest-file)
-                                           ".info")
-                                   target-dir)))))
+  (dolist (spec files)
+    (let* ((source-file (car spec))
+           (dest-file (cdr spec))
+           (info-path (expand-file-name
+                       (concat (file-name-sans-extension dest-file) ".info")
+                       target-dir)))
+      (when (and (or (string-match ".info$" source-file)
+                     (string-match ".texi\\(nfo\\)?$" source-file))
+                 (file-exists-p info-path))
+        (ignore-errors
+          (pb/run-process
+           nil
+           "install-info"
+           (concat "--dir=" (expand-file-name "dir" target-dir))
+           info-path))))))
 
 (defun pb/copy-package-files (files source-dir target-dir)
   "Copy FILES from SOURCE-DIR to TARGET-DIR.

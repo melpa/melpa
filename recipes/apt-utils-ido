@@ -1,0 +1,1 @@
+(apt-utils-ido :fetcher github :repo "vapniks/apt-utils-ido")

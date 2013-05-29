@@ -1,0 +1,3 @@
+(popup-switcher :repo "kostafey/popup-switcher"
+                :fetcher github
+                :files ("popup-switcher.el"))

@@ -690,14 +690,15 @@ Deletes the .texi(nfo) files if they exist."
                        target-dir)))
       (when (string-match ".texi\\(nfo\\)?$" source-file)
         (when (not (file-exists-p info-path))
-          (ignore-errors
-            (pb/run-process
-             nil
-             "makeinfo"
-             (expand-file-name source-file source-dir)
-             "-o"
-             info-path)
-            (message "Created %s" info-path)))
+          (with-current-buffer (get-buffer-create "*package-build-info*")
+              (ignore-errors
+                (pb/run-process
+                 nil
+                 "makeinfo"
+                 (expand-file-name source-file source-dir)
+                 "-o"
+                 info-path)
+                (message "Created %s" info-path))))
         (message "Removing %s" (expand-file-name dest-file target-dir))
         (delete-file (expand-file-name dest-file target-dir))))))
 
@@ -712,12 +713,13 @@ Deletes the .texi(nfo) files if they exist."
       (when (and (or (string-match ".info$" source-file)
                      (string-match ".texi\\(nfo\\)?$" source-file))
                  (file-exists-p info-path))
-        (ignore-errors
-          (pb/run-process
-           nil
-           "install-info"
-           (concat "--dir=" (expand-file-name "dir" target-dir))
-           info-path))))))
+        (with-current-buffer (get-buffer-create "*package-build-info*")
+          (ignore-errors
+            (pb/run-process
+             nil
+             "install-info"
+             (concat "--dir=" (expand-file-name "dir" target-dir))
+             info-path)))))))
 
 (defun pb/copy-package-files (files source-dir target-dir)
   "Copy FILES from SOURCE-DIR to TARGET-DIR.

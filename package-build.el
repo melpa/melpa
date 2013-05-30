@@ -155,6 +155,13 @@ Output is written to the current buffer."
     (re-search-forward regex)
     (match-string-no-properties 1)))
 
+(defun pb/revision (name config cwd &optional file)
+  "Return revision for package NAME with CONFIG under working dir CWD
+and optional FILE. Returns nil if unknown or error."
+  (message "pb/r %S %s CWD=%s FILE=%S" name config cwd file)
+  (let ((repo-type (plist-get config :fetcher)))
+    (funcall (intern (format "pb/%s-revision" repo-type))
+             cwd file)))
 
 (defun pb/checkout (name config cwd)
   "Check out source for package NAME with CONFIG under working dir CWD.
@@ -225,6 +232,10 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
           (pb/dump (cons new-content-hash new-timestamp) stamp-file)
           new-timestamp)))))
 
+(defun pb/wiki-revision (dir &optional file)
+  "Get the current wiki revision for DIR and optional FILE."
+  nil) ;; Not supported
+
 (defun pb/checkout-wiki (name config dir)
   "Checkout package NAME with config CONFIG from the EmacsWiki into DIR."
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
@@ -238,6 +249,10 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
 (defun pb/darcs-repo (dir)
   "Get the current darcs repo for DIR."
   (pb/run-process-match "Default Remote: \\(.*\\)" dir "darcs" "show" "repo"))
+
+(defun pb/darcs-revision (dir &optional file)
+  "Get the current darcs revision for DIR and optional FILE."
+  nil) ;; Not supported
 
 (defun pb/checkout-darcs (name config dir)
   "Check package NAME with config CONFIG out of darcs into DIR."
@@ -261,6 +276,10 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
 (defun pb/svn-repo (dir)
   "Get the current svn repo for DIR."
   (pb/run-process-match "URL: \\(.*\\)" dir "svn" "info"))
+
+(defun pb/svn-revision (dir &optional file)
+  "Get the current svn revision for DIR and optional FILE."
+  (pb/run-process-match "Last Changed Rev: \\(.*\\)" dir "svn" "info" (or file ".")))
 
 (defun pb/trim (str &optional chr)
   "Return a copy of STR without any trailing CHR (or space if unspecified)."
@@ -304,6 +323,10 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
          (mapcar (lambda (file)
                    (pb/string-rtrim (pb/slurp-file (expand-file-name file dir))))
                  '("CVS/Root" "CVS/Repository"))))
+
+(defun pb/cvs-revision (dir &optional file)
+  "Get the current CVS revision for DIR and optional FILE."
+  nil) ;; Not supported
 
 (defun pb/checkout-cvs (name config dir)
   "Check package NAME with config CONFIG out of csv into DIR."
@@ -350,6 +373,12 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
          "HEAD branch: \\(.*\\)" dir "git" "remote" "show" "origin"))
       "master"))
 
+(defun pb/git-revision (dir &optional file)
+  "Get the current git revision for DIR and optional FILE."
+  (ignore-errors
+    (pb/run-process-match
+     "'\\(.*\\)'" dir "git" "log" "--pretty=format:'%h'" "-1" (or file "."))))
+
 (defun pb/checkout-git (name config dir)
   "Check package NAME with config CONFIG out of git into DIR."
   (let ((repo (plist-get config :url))
@@ -373,6 +402,10 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
+(defun pb/github-revision (dir &optional file)
+  "Get the current github revision for DIR and optional FILE."
+  (pb/git-revision dir file))
+
 (defun pb/checkout-github (name config dir)
   "Check package NAME with config CONFIG out of github into DIR."
   (let* ((url (format "git://github.com/%s.git" (plist-get config :repo))))
@@ -385,6 +418,10 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
 (defun pb/bzr-repo (dir)
   "Get the current bzr repo for DIR."
   (pb/run-process-match "parent branch: \\(.*\\)" dir "bzr" "info"))
+
+(defun pb/bzr-revision (dir &optional file)
+  "Get the current bzr revision for DIR and optional FILE."
+  (pb/run-process-match "revno: \\(.*\\)" dir "bzr" "log" "-l" "1" (or file ".")))
 
 (defun pb/checkout-bzr (name config dir)
   "Check package NAME with config CONFIG out of bzr into DIR."
@@ -409,6 +446,10 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
 (defun pb/hg-repo (dir)
   "Get the current hg repo for DIR."
   (pb/run-process-match "default = \\(.*\\)" dir "hg" "paths"))
+
+(defun pb/hg-revision (dir &optional file)
+  "Get the current hg revision for DIR and optional FILE."
+  (pb/run-process-match "changeset: *\\(.*\\)" dir "hg" "log" "-l" "1" (or file ".")))
 
 (defun pb/checkout-hg (name config dir)
   "Check package NAME with config CONFIG out of hg into DIR."
@@ -518,6 +559,27 @@ The file is written to `package-build-working-dir'."
     (forward-line))
   (insert (format ";; Version: %s" version))
   (newline))
+
+(defun pb/update-replacements (pkg-name pkg-config pkg-cwd pkg-version)
+  "Update :replace-ments, given package PKG-NAME, PKG-CONFIG, PKG-CWD, and PKG-VERSION."
+  ;; Note the pkg- on above arguments corresponds to parameter names we advertise in the docs
+  (let* ((replaces (plist-get pkg-config :replace))
+	 (files (plist-get pkg-config :files))
+	 (pkg-revision (or (pb/revision pkg-name pkg-config pkg-cwd)
+			   "UnknownRev")))
+    (while replaces
+      (let* ((from-re (nth 0 (car replaces)))
+	     (func-or-to (nth 1 (car replaces)))
+	     (to (cond ((stringp func-or-to) func-or-to)
+		       ((and (listp func-or-to) (symbolp (nth 1 func-or-to)))
+			(symbol-value (nth 1 func-or-to)))
+		       (t (error "Recipe '%s' contains unknown replacement '%Sp'"
+				 pkg-name func-or-to)))))
+	(message "Replace '%s' with '%s'" from-re to)
+	(goto-char (point-min))
+        (while (re-search-forward from-re nil t)
+          (replace-match to t))
+	(setq replaces (cdr replaces))))))
 
 (defun pb/ensure-ends-here-line (file-path)
   "Add a 'FILE-PATH ends here' trailing line if missing."
@@ -800,6 +862,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
                 (make-backup-files nil))
             (with-current-buffer (find-file pkg-target)
               (pb/update-or-insert-version version)
+              (pb/update-replacements name cfg pkg-cwd version)
               (pb/ensure-ends-here-line pkg-source)
               (write-file pkg-target nil)
               (condition-case err

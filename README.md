@@ -160,6 +160,13 @@ the `git` and `github` fetchers.
 specifies the module of a CVS repository to check out.  Defaults to to
 `package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
 
+- ':replace'
+specifies a list of search regular expression and replacement pairs to be
+performed on the packaged files.  The replacement can be either a string or
+a quoted symbol.  The allowed symbols are 'pkg-version for the version
+number that will be used to build the package; 'pkg-name for the package's
+name, or 'pkg-revision for the revision control system's present version.
+
 - `:files`
 optional property specifying the elisp and info files used to build the
 package. Automatically populated by matching all `.el`, `.info` and `dir` files in the

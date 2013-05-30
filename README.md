@@ -166,7 +166,7 @@ package. Automatically populated by matching all `.el`, `.info` and `dir` files 
 root of the repository. This option necessary when there are multiple
 `.el` files in the repository but the package should only be built
 from a subset. For example, elisp test files should not normally be packaged.
-*Any file specifed at any path in the repository is
+*Any file specified at any path in the repository is
 copied to the root of the package.* More complex options are
 available, submit an
 [Issue](https://github.com/milkypostman/melpa/issues) if the specified
@@ -427,7 +427,7 @@ which packages will be enabled (whitelist packages only) or excluded
 
 ### Manual Installation
 
-You can install the package manually by pasting this into yoru `*scratch*` buffer and evaluating it.
+You can install the package manually by pasting this into your `*scratch*` buffer and evaluating it.
 
     (progn
       (switch-to-buffer

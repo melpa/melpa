@@ -1,0 +1,5 @@
+(verilog-mode :fetcher github :repo "veripool/verilog-mode"
+	      :files ("verilog-mode.el")
+	      :replace (("__VMVERSION__" 'pkg-version)
+			("__VMREVISION__" 'pkg-revision)
+			("__VMPACKAGER__" "melpa")))

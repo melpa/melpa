@@ -1,0 +1,1 @@
+(stumpwm-mode :repo "re5et/stumpwm-mode" :fetcher github)

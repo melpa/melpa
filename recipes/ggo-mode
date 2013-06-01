@@ -1,2 +1,2 @@
-(ggo-mode :fetcher github :repo "5619356")
+(ggo-mode :fetcher github :repo "mkjunker/ggo-mode")
 

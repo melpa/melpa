@@ -1,2 +1,2 @@
-(ggo-mode :url "https://gist.github.com/5619356.git" :fetcher git)
+(ggo-mode :fetcher github :repo "5619356")
 

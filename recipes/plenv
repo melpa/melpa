@@ -1,1 +1,1 @@
-(plenv :fetcher github :repo "karupanerura/plenv.el" :files ("plenv.el"))
+(plenv :fetcher github :repo "karupanerura/plenv.el")

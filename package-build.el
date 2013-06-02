@@ -924,8 +924,9 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
   (let ((pkg-name (intern (file-name-nondirectory (buffer-file-name)))))
     (package-build-archive pkg-name)
     (save-current-buffer
-      (find-file-other-window
-       (expand-file-name "archive-contents" package-build-archive-dir))
+      (switch-to-buffer-other-window
+       (find-file-noselect
+        (expand-file-name "archive-contents" package-build-archive-dir) t))
       (revert-buffer t t))
     (when (yes-or-no-p "Install new package? ")
       (package-install-file (pb/find-package-file pkg-name)))))

@@ -1,0 +1,2 @@
+(melpa-upstream-visit :repo "laynor/melpa-upstream-visit" :fetcher github)
+

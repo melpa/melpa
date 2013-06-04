@@ -129,7 +129,7 @@ a lisp symbol that has the same name as the package being specified.
 (one of `git, github, bzr, hg, darcs, svn, cvs, wiki`) specifies the type of repository that `:url` points to.  Right now
 package-build supports [git][git], [github][github],
 [bazaar (bzr)][bzr], [mercurial (hg)][hg],
-[subversion (svn)][svn], [cvs][cvs] [darcs][darcs], and
+[subversion (svn)][svn], [cvs][cvs], [darcs][darcs], and
 [Emacs Wiki (wiki)][emacswiki] as possible mechanisms for checking out
 the repository.  With the exception of the Emacs Wiki fetcher,
 package-build uses the corresponding application to update files

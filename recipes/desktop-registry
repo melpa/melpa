@@ -1,0 +1,1 @@
+(desktop-registry :fetcher git :url "git://ryuslash.org/desktop-registry.git")

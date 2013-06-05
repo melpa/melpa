@@ -1,0 +1,2 @@
+(swbuff :fetcher cvs :url ":pserver:anonymous@emhacks.cvs.sourceforge.net:/cvsroot/emhacks"
+        :module "emhacks/swbuff.el")

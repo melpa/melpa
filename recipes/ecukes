@@ -1,2 +1,2 @@
 (ecukes :repo "rejeep/ecukes" :fetcher github
-        :files ("ecukes*" ("templates" "templates/*.tpl")))
+        :files ("ecukes*" "templates" "bin"))

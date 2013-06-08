@@ -1,0 +1,1 @@
+(handlebars-sgml-mode :fetcher github :repo "jacott/handlebars-sgml-mode")

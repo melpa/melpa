@@ -1,0 +1,1 @@
+(anything-git-grep :fetcher github :repo "mechairoi/anything-git-grep")

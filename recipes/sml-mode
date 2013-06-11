@@ -1,0 +1,1 @@
+(sml-mode :fetcher github :repo "emacsmirror/sml-mode" :files ("*.el" "*.texi" "mltags"))

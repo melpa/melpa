@@ -123,7 +123,9 @@
     </div>
     <section>
       <a name="packages"></a>
-      <h2>Current List of <%=h packages.size %> Packages</h2>
+      <h2>Current List of <%=h packages.size %> Packages
+        <small>(<%= packages.map(&:downloads).compact.inject(0) { |a,b| a+b } %> downloads to date)</small>
+      </h2>
       <table id="package-list" class="table table-bordered table-hover">
         <thead>
           <tr class="header">

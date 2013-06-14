@@ -1,9 +1,3 @@
 [submodule "epkgs"]
 	path = epkgs
 	url = https://github.com/milkypostman/epkgs.git
-[submodule "util/ecukes"]
-	path = util/ecukes
-	url = https://github.com/rejeep/ecukes.git
-[submodule "util/espuds"]
-	path = util/espuds
-	url = https://github.com/rejeep/espuds.git

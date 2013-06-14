@@ -1,3 +1,5 @@
+(require 'cl)
+
 (Given "^read recipes$"
        (lambda ()
          (pb/read-recipes)))

@@ -1,0 +1,2 @@
+(nclip :fetcher github :repo "maio/nclip.el"
+       :files ("nclip.el" "nclip.rb" "nclip.py"))

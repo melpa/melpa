@@ -1,0 +1,6 @@
+(grizzl :repo    "d11wtq/grizzl"
+        :fetcher github
+        :files   '("grizzl-pkg.el"
+                   "grizzl.el"
+                   "grizzl-core.el"
+                   "grizzl-read.el"))

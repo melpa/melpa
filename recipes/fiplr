@@ -1,1 +1,3 @@
-(fiplr :fetcher github :repo "d11wtq/fiplr")
+(fiplr :fetcher github
+       :repo    "d11wtq/fiplr"
+       :files   '("fiplr-pkg.el" "fiplr.el"))

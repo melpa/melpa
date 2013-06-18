@@ -1,0 +1,3 @@
+(emamux
+ :repo "syohex/emamux-ruby-test"
+ :fetcher github)

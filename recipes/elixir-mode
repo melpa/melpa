@@ -1,4 +1,3 @@
 (elixir-mode
  :fetcher github
- :repo "secondplanet/elixir-mode"
- :files ("elixir-mode.el"))
+ :repo "elixir-lang/emacs-elixir")

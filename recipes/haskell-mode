@@ -2,4 +2,5 @@
  :repo "haskell/haskell-mode"
  :fetcher github
  :files ("*.el"
+         "haskell-mode.texi"
          "logo.svg"))

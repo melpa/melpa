@@ -1,0 +1,2 @@
+(datomic-snippets :fetcher github :repo "magnars/datomic-snippets"
+                  :files ("*.el" "snippets" "*.md"))

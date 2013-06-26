@@ -3,4 +3,5 @@
  :fetcher github
  :files ("*.el"
          "haskell-mode.texi"
+         "NEWS"
          "logo.svg"))

@@ -118,11 +118,14 @@ function for access to this function")
 (defun pb/string-match-all (regex str &optional group)
   "Find every match for `REGEX' within `STR', returning the full match string or group `GROUP'."
   (let (result
+        (str-length (length str))
         (pos 0)
         (group (or group 0)))
-    (while (string-match regex str pos)
-      (push (match-string group str) result)
-      (setq pos (match-end group)))
+    (while (and (< pos str-length) (string-match regex str pos))
+      (if (eq pos (match-end group))
+          (setq pos (1+ pos))
+        (push (match-string group str) result)
+        (setq pos (match-end group))))
     result))
 
 (defun pb/find-parse-time (regex &optional bound)

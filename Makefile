@@ -7,6 +7,13 @@ EMACS   := emacs
 
 EVAL := $(EMACS)
 
+ifdef STABLE
+STABLE := t
+PKGDIR := ./packages-stable
+else
+STABLE := nil
+endif
+
 ## Check for needing to initialize CL-LIB from ELPA
 NEED_CL-LIB := $(shell $(EMACS) --no-site-file --batch --eval '(prin1 (version< emacs-version "24.3"))')
 ifeq ($(NEED_CL-LIB), t)
@@ -22,7 +29,7 @@ all: build json index
 ## General rules
 build:
 	@echo " • Building $$(ls -1 $(RCPDIR) | wc -l) recipes ..."
-	$(EVAL) "(package-build-all)"
+	$(EVAL) "(let ((package-build-stable $(STABLE))) (package-build-all))"
 
 html: index
 index: archive.json recipes.json
@@ -49,11 +56,11 @@ clean: clean-working clean-packages clean-json
 ## Json rules
 archive.json: packages/archive-contents
 	@echo " • Building $@ ..."
-	$(EVAL) '(package-build-archive-alist-as-json "archive.json")'
+	$(EVAL) "(let ((package-build-stable $(STABLE))) (package-build-archive-alist-as-json \"archive.json\"))"
 
 recipes.json: $(RCPDIR)/.dirstamp
 	@echo " • Building $@ ..."
-	$(EVAL) '(package-build-recipe-alist-as-json "recipes.json")'
+	$(EVAL) "(let ((package-build-stable $(STABLE))) (package-build-recipe-alist-as-json \"recipes.json\"))"
 
 json: archive.json recipes.json
 
@@ -67,7 +74,7 @@ $(RCPDIR)/%: .FORCE
 	@echo " • Building recipe $(@F) ..."
 
 	-rm -vf $(PKGDIR)/$(@F)-*
-	$(EVAL) "(package-build-archive '$(@F))"
+	$(EVAL) "(let ((package-build-stable $(STABLE))) (package-build-archive '$(@F)))"
 
 	@echo " ✓ Wrote $$(ls -lsh $(PKGDIR)/$(@F)-*) "
 	@echo

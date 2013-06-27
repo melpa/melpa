@@ -1,5 +1,6 @@
 /sync
 /packages/*
+/packages-stable/*
 /working/*
 /html/index.html
 /epkgs

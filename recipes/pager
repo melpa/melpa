@@ -1,0 +1,1 @@
+(pager :fetcher github :repo "emacsmirror/pager")

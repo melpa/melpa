@@ -1,0 +1,4 @@
+(leuven-theme
+ :fetcher github
+ :repo "fniessen/emacs-leuven-theme"
+ :files ("leuven-theme.el"))

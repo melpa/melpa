@@ -1,0 +1,1 @@
+(uncrustify-mode :repo "koko1000ban/emacs-uncrustify-mode" :fetcher github)

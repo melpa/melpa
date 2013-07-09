@@ -333,7 +333,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
                           "-d" target-dir repo))))
       (apply 'pb/run-process dir "cvs" "log"
              (pb/expand-source-file-list dir config))
-      (or (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} \\+[0-9]\\{2\\}[0-9]\\{2\\}\\)")
+      (or (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [+-][0-9]\\{2\\}[0-9]\\{2\\}\\)")
           (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}/[0-9]\\{2\\}/[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\);")
           (error "No valid timestamps found!"))
       )))

@@ -306,7 +306,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
                  '("CVS/Root" "CVS/Repository"))))
 
 (defun pb/checkout-cvs (name config dir)
-  "Check package NAME with config CONFIG out of csv into DIR."
+  "Check package NAME with config CONFIG out of cvs into DIR."
   (with-current-buffer (get-buffer-create "*package-build-checkout*")
     (let ((root (pb/trim (plist-get config :url) ?/))
           (repo (or (plist-get config :module) (symbol-name name)))
@@ -691,14 +691,14 @@ Deletes the .texi(nfo) files if they exist."
       (when (string-match ".texi\\(nfo\\)?$" source-file)
         (when (not (file-exists-p info-path))
           (with-current-buffer (get-buffer-create "*package-build-info*")
-              (ignore-errors
-                (pb/run-process
-                 nil
-                 "makeinfo"
-                 (expand-file-name source-file source-dir)
-                 "-o"
-                 info-path)
-                (message "Created %s" info-path))))
+            (ignore-errors
+              (pb/run-process
+               nil
+               "makeinfo"
+               (expand-file-name source-file source-dir)
+               "-o"
+               info-path)
+              (message "Created %s" info-path))))
         (message "Removing %s" (expand-file-name dest-file target-dir))
         (delete-file (expand-file-name dest-file target-dir))))))
 

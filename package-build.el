@@ -107,12 +107,11 @@ function for access to this function")
   ;; We remove zero-padding the HH portion, as it is lost
   ;; when stored in the archive-contents
   (let* ((s (substring-no-properties str))
-         (time (condition-case nil
-                   (date-to-time s)
-                 (error
-                  ;; Handle newer CVS formats like "2001/08/26 22:16:22"
-                  ;; which break date-to-time
-                  (date-to-time (replace-regexp-in-string "/" "-" s))))))
+         (time (date-to-time
+                (if (string-match "^\\([0-9]\\{4\\}\\)/\\([0-9]\\{2\\}\\)/\\([0-9]\\{2\\}\\) \\([0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)$" str)
+                    (concat (match-string 1 str) "-" (match-string 2 str) "-"
+                            (match-string 3 str) " " (match-string 4 str))
+                  str))))
     (concat (format-time-string "%Y%m%d." time)
             (format "%d" (or (string-to-number (format-time-string "%H%M" time)) 0)))))
 
@@ -333,8 +332,8 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
                           "-d" target-dir repo))))
       (apply 'pb/run-process dir "cvs" "log"
              (pb/expand-source-file-list dir config))
-      (or (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [+-][0-9]\\{2\\}[0-9]\\{2\\}\\)")
-          (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}/[0-9]\\{2\\}/[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\);")
+      (or (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [+-][0-9]\\{2\\}[0-9]\\{2\\}\\)" bound)
+          (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}/[0-9]\\{2\\}/[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\);" bound)
           (error "No valid timestamps found!"))
       )))
 

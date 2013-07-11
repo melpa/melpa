@@ -1,0 +1,4 @@
+(org-trunk
+ :fetcher git
+ :url "git://orgmode.org/org-mode.git"
+ :files ("lisp/*.el"))

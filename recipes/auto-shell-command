@@ -1,1 +1,4 @@
-(auto-shell-command :repo "ongaeshi/auto-shell-command" :fetcher github)
+(auto-shell-command
+ :repo "ongaeshi/auto-shell-command"
+ :fetcher github
+ :files ("*.el"))

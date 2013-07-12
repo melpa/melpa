@@ -1,0 +1,4 @@
+(magit-inotify
+ :repo "magit/magit"
+ :fetcher github
+ :files ("contrib/magit-inotify.el"))

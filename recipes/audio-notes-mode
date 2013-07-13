@@ -1,0 +1,1 @@
+(audio-notes-mode :repo "Bruce-Connor/audio-notes-mode" :fetcher github)

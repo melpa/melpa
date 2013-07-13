@@ -1,0 +1,2 @@
+(ert-runner :repo "rejeep/ert-runner.el" :fetcher github
+        :files ("ert-runner.el*" "bin"))

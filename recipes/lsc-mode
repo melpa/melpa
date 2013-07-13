@@ -1,0 +1,1 @@
+(lsc-mode :fetcher github :repo "drozzy/lsc-mode")

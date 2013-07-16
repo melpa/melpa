@@ -1,1 +1,3 @@
-(flx :fetcher github :repo "lewang/flx")
+(flx :repo "lewang/flx"
+     :fetcher github
+     :files ("flx.el"))

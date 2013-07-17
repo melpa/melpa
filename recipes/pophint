@@ -1,2 +1,2 @@
-(pophint :repo "aki2o/emacspophint"
+(pophint :repo "aki2o/emacs-pophint"
          :fetcher github)

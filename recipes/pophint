@@ -1,0 +1,2 @@
+(pophint :repo "aki2o/emacspophint"
+         :fetcher github)

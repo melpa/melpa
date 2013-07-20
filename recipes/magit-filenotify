@@ -1,0 +1,1 @@
+(magit-filenotify "magit/magit-filenotify" :fetcher github)

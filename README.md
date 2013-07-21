@@ -19,7 +19,7 @@ details.
 ## Table of Contents
 
 * [Usage](#usage)
-* [Contributing](#contributing-new-packages)
+* [Contributing](#contributing-new-recipes)
 * [Package Format](#package-format)
 * [Build Scripts](#build-scripts)
 * [API](#api)
@@ -55,22 +55,21 @@ See the [MELPA Package](#melpa-package) section below or
 MELPA homepage.
 
 
-## Contributing New Packages
 
-For submitting new packages we ask you following the following
-guidelines,
+## Contributing New Recipes
+
+New recipe submissions should adhere to the following guidelines,
+
+* One pull request per recipe. You can create multiple branches and
+  create a pull request for each branch.
 
 * Upstream source must be stored in an authoritative
   [SCM](http://en.wikipedia.org/wiki/Software_configuration_management)
-  repository or on the Emacswiki.
+  repository. Emacswiki recipes are discouraged but can be accepted.
 
-* Submit one pull request per recipe.  You can create multiple
-  branches and create a pull request for each branch.
-
-* Recipes should try to minimize the size of the resulting package by
-  specifying only files relevant to the package. See the
-  [Package Format](#package-format) section for more information on
-  specifying package files.
+* Packages should be built from the *official* package repository.
+  Forks of the official repository will not be accepted except in
+  *extreme* circumstances.
 
 * The package name should match the name of the feature provided.  See
   the `package` function for more information.
@@ -79,6 +78,35 @@ guidelines,
   `(info "(elisp) Packaging")`. More information on this format is
   provided by the
   [marmalade package manual](http://marmalade-repo.org/doc-files/package.5.html).
+
+* Recipes should try to minimize the size of the resulting package by
+  specifying only files relevant to the package. See the
+  [Package Format](#package-format) section for more information on
+  specifying package files.
+
+
+
+### Expediting Recipe Reviews
+
+Because we care about the quality of packages that are part of MELPA
+we review all submissions. The following steps can help us with this
+process and expedite the recipe review process,
+
+* Include the following information in the pull request:
+
+    * A brief summary of what the package does.
+
+    * Your association with the package (e.g., are you the maintainer?
+      have you contributed? do you just like the package a lot?).
+
+    * A direct link to the package repository.
+
+    * Relevant communications with the package maintainer (e.g.,
+      `package.el` compatibility changes that you have submitted).
+
+* Test that the package builds properly via `make recipes/<recipe>`.
+
+* Test that the package installs properly via `package-install-file`.
 
 
 
@@ -125,29 +153,31 @@ the following form (`[...]` denotes optional or conditional values),
 - `package-name`
 a lisp symbol that has the same name as the package being specified.
 
-- `:fetcher`
-(one of `git, github, bzr, hg, darcs, svn, cvs, wiki`) specifies the type of repository that `:url` points to.  Right now
+- `:fetcher` (one of `git, github, bzr, hg, darcs, svn, cvs, wiki`)
+specifies the type of repository that `:url` points to. Right now
 package-build supports [git][git], [github][github],
-[bazaar (bzr)][bzr], [mercurial (hg)][hg],
-[subversion (svn)][svn], [cvs][cvs], [darcs][darcs], and
-[Emacs Wiki (wiki)][emacswiki] as possible mechanisms for checking out
-the repository.  With the exception of the Emacs Wiki fetcher,
-package-build uses the corresponding application to update files
-before building the package.  The Emacs Wiki fetcher gets the latest
-version of the package from
-`http://www.emacswiki.org/emacs/download/<NAME>.el` where `NAME` is
-the package name.  Note that the `:url` property is not needed for the
-`wiki` engine unless the name of the package file on the EmacsWiki
-differs from the package name being built. In the case of the `github`
+[bazaar (bzr)][bzr], [mercurial (hg)][hg], [subversion (svn)][svn],
+[cvs][cvs], [darcs][darcs], and [Emacs Wiki (wiki)][emacswiki] as
+possible mechanisms for checking out the repository.
+
+    *package-build* uses
+the corresponding application to update files before building the
+package. In the case of the `github`
 fetcher, use `:repo` instead of `:url`; the git URL will then be
 deduced.
+
+    The Emacs Wiki fetcher gets the latest version of the package
+from `http://www.emacswiki.org/emacs/download/<NAME>.el` where `NAME`
+is the package name. Note that the `:url` property is not needed for
+the `wiki` engine unless the name of the package file on the EmacsWiki
+differs from the package name being built.
 
 - `:url`
 specifies the URL of the version control repository. *required for
 the `git`, `bzr`, `hg`, `darcs`, `svn` and `cvs` fetchers.*
 
-- `:repo`
-specifies the github repository and is of the form `github-user/repo-name`. *required for the `github` fetcher*.
+- `:repo` specifies the github repository and is of the form
+`github-user/repo-name`. *required for the `github` fetcher*.
 
 - `:commit`
 specifies the commit or branch of the git repo to checkout. The value
@@ -160,17 +190,18 @@ the `git` and `github` fetchers.
 specifies the module of a CVS repository to check out.  Defaults to to
 `package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
 
-- `:files`
+- `:files` [default: `(*.el *.info dir)`]
 optional property specifying the elisp and info files used to build the
 package. Automatically populated by matching all `.el`, `.info` and `dir` files in the
-root of the repository. This option necessary when there are multiple
-`.el` files in the repository but the package should only be built
-from a subset. For example, elisp test files should not normally be packaged.
-*Any file specified at any path in the repository is
-copied to the root of the package.* More complex options are
-available, submit an
-[Issue](https://github.com/milkypostman/melpa/issues) if the specified
-package requires more complex file specification.
+root of the repository.
+
+    This option is necessary when there are multiple packages in the
+repository and thus the package should only be built from a subset of
+`.el` files. For example, elisp test files should not normally be
+packaged. *Any file specified at any path in the repository is copied
+to the root of the package.* More complex options are available,
+submit an [Issue](https://github.com/milkypostman/melpa/issues) if the
+specified package requires more complex file specification.
 
 [git]: http://git-scm.com/
 [github]: https://github.com/

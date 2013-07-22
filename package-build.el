@@ -84,7 +84,7 @@ function for access to this function")
 (defvar pb/archive-alist-initialized nil
   "Determines if pb/archive-alist has been initialized.")
 
-(defconst pb/default-files-spec '("*.el" "dir"
+(defconst pb/default-files-spec '("*.el" "*.el.in" "dir"
                                   "*.info" "*.texi" "*.texinfo"
                                   "doc/*.info" "doc/*.texi" "doc/*.texinfo"
                                   (:exclude "*-test.el" "*-tests.el"))
@@ -662,7 +662,13 @@ file path and DEST is the relative path to which it should be copied."
                                                (concat prefix (car entry)))))
               (nconc
                lst (mapcar (lambda (f)
-                             (cons f (concat prefix (file-name-nondirectory f))))
+                             (let ((destname)))
+                             (cons f
+                                   (concat prefix
+                                           (replace-regexp-in-string
+                                            "\\.in\\'"
+                                            ""
+                                            (file-name-nondirectory f)))))
                            (file-expand-wildcards entry))))))))
 
 

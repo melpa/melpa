@@ -20,7 +20,7 @@ details.
 
 * [Usage](#usage)
 * [Contributing](#contributing-new-recipes)
-* [Package Format](#package-format)
+* [Recipe Format](#recipe-format)
 * [Build Scripts](#build-scripts)
 * [API](#api)
 * [MELPA Package](#melpa-package)
@@ -81,7 +81,7 @@ New recipe submissions should adhere to the following guidelines,
 
 * Recipes should try to minimize the size of the resulting package by
   specifying only files relevant to the package. See the
-  [Package Format](#package-format) section for more information on
+  [Recipe Format](#recipe-format) section for more information on
   specifying package files.
 
 
@@ -135,7 +135,7 @@ command-line utility by [defunkt](http://chriswanstrath.com/) which
 helps simplify this process.
 
 
-## Package Format
+## Recipe Format
 
 Packages are specified by files in the `recipes` directory.  You can
 contribute a new package by adding a new file under `recipes` using
@@ -407,7 +407,7 @@ repositories and package directories being built.
 any built packages.
 
 - `package-build-recipes-dir` : Directory containing MELPA compatible
-recipes.  See [Package Format](#package-format) section for more details.
+recipes.  See [Recipe Format](#recipe-format) section for more details.
 
 
 ## Configuration

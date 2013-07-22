@@ -1,1 +1,1 @@
-(popup-kill-ring :fetcher wiki)
+(ace-jump-buffer :repo "waymondo/popup-kill-ring" :fetcher github)

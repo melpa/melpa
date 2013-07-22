@@ -541,7 +541,7 @@ The file is written to `package-build-working-dir'."
         (pb/update-or-insert-version "0")
         (pb/ensure-ends-here-line file-path)
         (cl-flet ((package-strip-rcs-id (str) "0"))
-          (package-buffer-info))))))
+          (pb/package-buffer-info-vec))))))
 
 (defun pb/get-pkg-file-info (file-path)
   "Get a vector of package info from \"-pkg.el\" file FILE-PATH."
@@ -755,6 +755,17 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
   "Return the filename of the most recently built package of NAME."
   (pb/archive-file-name (assoc name (package-build-archive-alist))))
 
+(defun pb/package-buffer-info-vec ()
+  "Return a vector of package info.
+`package-buffer-info' returns a vector in older Emacs versions,
+and a cl struct in Emacs HEAD.  This wrapper normalises the results."
+  (let ((desc (package-buffer-info)))
+    (if (fboundp 'package-desc-create)
+        (vector (package-desc-name desc)
+                (package-desc-reqs desc)
+                (package-desc-summary desc)
+                (package-desc-version desc))
+      desc)))
 
 ;;; Public interface
 ;;;###autoload
@@ -802,7 +813,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
               (pb/ensure-ends-here-line pkg-source)
               (write-file pkg-target nil)
               (condition-case err
-                  (package-buffer-info)
+                  (pb/package-buffer-info-vec)
                 (error
                  (message "Warning: %S" err)))
               (kill-buffer)))

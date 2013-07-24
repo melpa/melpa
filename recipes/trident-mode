@@ -1,0 +1,2 @@
+(trident-mode :fetcher github :repo "johnmastro/trident-mode.el"
+ :files ("trident-mode.el"))

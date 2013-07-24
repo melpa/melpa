@@ -137,14 +137,18 @@ function for access to this function")
          (times (mapcar 'pb/parse-time (pb/string-match-all regex text 1))))
     (car (nreverse (sort times 'string<)))))
 
-(defun pb/run-process (dir prog &rest args)
-  "In DIR (or `default-directory' if unset) run command PROG with ARGS.
+(defun pb/run-process (dir command &rest args)
+  "In DIR (or `default-directory' if unset) run COMMAND with ARGS.
 Output is written to the current buffer."
-  (let ((default-directory (or dir default-directory)))
-    (let ((exit-code (apply 'process-file prog nil (current-buffer) t args)))
+  (let* ((default-directory (or dir default-directory))
+         (have-timeout (executable-find "timeout"))
+         (argv (if have-timeout
+                   (append (list "timeout" "-k" "30" "1800" command) args)
+                 (cons command args))))
+    (let ((exit-code (apply 'process-file (car argv) nil (current-buffer) t (cdr argv))))
       (unless (zerop exit-code)
-        (error "Program '%s' with args '%s' exited with non-zero status %d"
-               prog args exit-code)))))
+        (error "Command '%s' exited with non-zero status %d"
+               argv exit-code)))))
 
 (defun pb/run-process-match (regex dir prog &rest args)
   "Find match for REGEX when - in DIR, or `default-directory' if unset - we run PROG with ARGS."

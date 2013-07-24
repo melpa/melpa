@@ -1,1 +1,1 @@
-(ac-nrepl :fetcher github :repo "purcell/ac-nrepl")
+(ac-nrepl :fetcher github :repo "clojure-emacs/ac-nrepl")

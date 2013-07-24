@@ -1,1 +1,1 @@
-(nrepl :fetcher github :repo "kingtim/nrepl.el")
+(nrepl :fetcher github :repo "clojure-emacs/nrepl.el")

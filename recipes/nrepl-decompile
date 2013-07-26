@@ -1,0 +1,2 @@
+(nrepl-decompile :repo "clojure-emacs/nrepl-decompile"
+                 :fetcher github)

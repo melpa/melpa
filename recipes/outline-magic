@@ -1,1 +1,1 @@
-(outline-magic :fetcher wiki)
+(outline-magic :repo "tj64/outline-magic" :fetcher github)

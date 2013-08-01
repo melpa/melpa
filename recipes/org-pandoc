@@ -1,0 +1,2 @@
+(org-pandoc :repo "robtillotson/org-pandoc"
+            :fetcher github)

@@ -1,4 +1,0 @@
-(org
- :fetcher git
- :url "git://orgmode.org/org-mode.git"
- :files ("lisp/*.el" "doc/dir" "doc/*.texi"))

@@ -1,0 +1,3 @@
+(virtualenvwrapper
+  :repo "porterjamesj/virtualenvwrapper.el"
+  :fetcher "github")

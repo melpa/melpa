@@ -940,6 +940,7 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
     (if (y-or-n-p (format "Save file %s? " buffer-file-name))
         (save-buffer)
       (error "Aborting")))
+  (check-parens)
   (package-build-reinitialize)
   (let ((pkg-name (intern (file-name-nondirectory (buffer-file-name)))))
     (package-build-archive pkg-name)

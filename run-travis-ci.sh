@@ -11,4 +11,4 @@ echo
 
 "$ECUKES_EMACS" --batch --eval "(unless (ignore-errors (require 'cl-lib)) (package-refresh-contents) (package-install 'cl-lib))"
 
-cask exec $(find elpa/ecukes-*/ecukes | tail -1)
+cask exec ecukes

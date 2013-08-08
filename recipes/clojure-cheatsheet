@@ -1,0 +1,1 @@
+(clojure-cheatsheet :fetcher github :repo "krisajenkins/clojure-cheatsheet")

@@ -1,0 +1,1 @@
+(php-auto-yasnippets :fetcher github :repo "ejmr/php-auto-yasnippets" :files ("*.el" "*.php"))

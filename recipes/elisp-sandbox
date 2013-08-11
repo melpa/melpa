@@ -1,0 +1,8 @@
+;; -*- mode: emacs-lisp -*-
+
+(elisp-sandbox
+ :fetcher github
+ :repo "joelmccracken/elisp-sandbox"
+ :commit "master"
+ :files ("elisp-sandbox.el"))
+

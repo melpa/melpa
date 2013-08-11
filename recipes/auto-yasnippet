@@ -1,0 +1,3 @@
+(auto-yasnippet :repo "abo-abo/auto-yasnippet" 
+                :fetcher github 
+                :files ("auto-yasnippet.el"))

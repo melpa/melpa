@@ -1,0 +1,1 @@
+(helm-recoll :fetcher github :repo "vapniks/helm" :files ("helm-recoll.el"))

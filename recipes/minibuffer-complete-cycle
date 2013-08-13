@@ -1,0 +1,1 @@
+(minibuffer-complete-cycle :repo "knu/minibuffer-complete-cycle" :fetcher github)

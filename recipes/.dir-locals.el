@@ -2,6 +2,8 @@
                           (file-regular-p (buffer-file-name))
                           (string-match-p "^[^.]" (buffer-file-name)))
                  (emacs-lisp-mode)
+                 (when (fboundp 'flycheck-mode)
+                   (flycheck-mode -1))
                  (unless (featurep 'package-build)
                    (let ((load-path (cons ".." load-path)))
                      (require 'package-build)))

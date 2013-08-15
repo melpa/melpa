@@ -1,0 +1,3 @@
+(omnisharp :repo "sp3ctum/omnisharp-emacs"
+           :fetcher github
+           :files ("omnisharp.el"))

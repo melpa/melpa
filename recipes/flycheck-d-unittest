@@ -1,0 +1,1 @@
+(flycheck-d-unittest :repo "tom-tan/flycheck-d-unittest" :fetcher github)

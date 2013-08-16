@@ -1,3 +1,1 @@
-(ido-at-point :repo "katspaugh/ido-at-point"
-              :fetcher github     
-              :files ("ido-at-point.el"))
+(ido-at-point :repo "katspaugh/ido-at-point" :fetcher github)

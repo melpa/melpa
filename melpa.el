@@ -70,8 +70,7 @@ ARCHIVE is the string name of the package archive."
    package-compute-transaction-reverse (package-list requirements)
    activate compile)
   "reverse the requirements"
-  (setq requirements (reverse requirements))
-  (print requirements))
+  (setq requirements (reverse requirements)))
 
 
 ;;;###autoload

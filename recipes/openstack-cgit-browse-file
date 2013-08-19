@@ -1,0 +1,1 @@
+(openstack-cgit-browse-file :fetcher github :repo "chmouel/openstack-cgit-browse-file")

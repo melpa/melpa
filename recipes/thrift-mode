@@ -1,0 +1,3 @@
+(thrift-mode :fetcher git
+               :url "git://git.apache.org/thrift.git"
+               :files ("contrib/thrift.el"))

@@ -8,10 +8,10 @@ code using simple recipes. (Think of it as a server-side version of
 [el-get](https://github.com/dimitri/el-get), or even
 [homebrew](https://github.com/mxcl/homebrew).)
 
-Packages are updated hourly.
+Packages are updated at intervals throughout the day.
 
-If you just want to browse and install packages, check out the
-[archive index page](http://melpa.milkbox.net/) for instructions.
+To browse available packages, check out the
+[archive index page](http://melpa.milkbox.net/).
 
 Adding packages is as simple as submitting a pull request; read on for
 details.
@@ -33,27 +33,39 @@ To use the MELPA repository, add it to `package-archives` after
 `(require 'package)` and before the call to `package-initialize` in
 your `init.el` file.
 
-    (add-to-list 'package-archives
-                 '("melpa" . "http://melpa.milkbox.net/packages/") t)
+```lisp
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+```
+
+In Emacs < 24, you'll also need to explicitly include the GNU ELPA
+archive, which provides important compatibility libraries like
+`cl-lib`:
+
+```lisp
+(when (< emacs-major-version 24)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+```
 
 A complete minimal example for MELPA,
 
-    (require 'package)
-    (add-to-list 'package-archives
-                 '("melpa" . "http://melpa.milkbox.net/packages/") t)
-    (package-initialize)
+```lisp
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(when (< emacs-major-version 24)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize)
+```
 
-
-Since `package.el` doesn't allow locking packages to certain version,
+Since `package.el` doesn't allow locking packages to certain version, MELPA packages
+will override those available from any other package source, so
 we also provide a package `melpa.el` which contains code to allow
 restricting packages to specific repositories.  This allows someone to
 blacklist packages that come from a specific repository, or blacklist
 all packages from a repository and only whitelist certain packages.
 
-See the [MELPA Package](#melpa-package) section below or
-[Installing](http://melpa.milkbox.net/#installing) section on the
-MELPA homepage.
-
+See the [MELPA Package](#melpa-package) section below if you think you might want that.
 
 
 ## Contributing New Recipes
@@ -118,7 +130,7 @@ Let `<NAME>` denote the name of the recipe to submit.
 2. Add your new file under the directory specified by
 `package-build-recipes-dir` (default: `recipes/` directory where
 `package-build` was loaded).
-3. Confirm your package build properly by running
+3. Confirm your package built properly by running
 
         make recipes/<NAME>
 
@@ -213,7 +225,7 @@ specified package requires more complex file specification.
 [emacswiki]: http://www.emacswiki.org/
 
 
-### Single File Repository
+### Example: Single File Repository
 
 [ido-ubiquitous](https://github.com/DarwinAwardWinner/ido-ubiquitous) is a repository that contains two files:
 
@@ -228,7 +240,7 @@ Since there is only one `.el` file, this package only needs the `:url` and `:fet
  :fetcher git)
 ```
 
-### Multiple Packages in one Repository
+### Example: Multiple Packages in one Repository
 
 The
 [emacs-starter-kit](https://github.com/technomancy/emacs-starter-kit)
@@ -252,7 +264,7 @@ contained in the `modules/` subdirectory and thus needs the packages
 files specified explicitly.
 
 
-### Multiple Files in Multiple Directories
+### Example: Multiple Files in Multiple Directories
 
 There are special cases when we need
 There are special cases where creation of the package comes from many

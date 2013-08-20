@@ -153,7 +153,7 @@ Packages are specified by files in the `recipes` directory.  You can
 contribute a new package by adding a new file under `recipes` using
 the following form (`[...]` denotes optional or conditional values),
 
-```elisp
+```lisp
 (<package-name>
  :fetcher [git|github|bzr|hg|darcs|svn|cvs|wiki]
  [:url "<repo url>"]
@@ -234,7 +234,7 @@ specified package requires more complex file specification.
 
 Since there is only one `.el` file, this package only needs the `:url` and `:fetcher` specified,
 
-```elisp
+```lisp
 (ido-ubiquitous
  :url "https://github.com/DarwinAwardWinner/ido-ubiquitous.git"
  :fetcher git)
@@ -247,7 +247,7 @@ The
 contains the *starter-kit* package along with extra packages in the
 `modules` directory; *starter-kit-bindings*, *starter-kit-lisp*, etc.
 
-```elisp
+```lisp
 (starter-kit
  :url "https://github.com/technomancy/emacs-starter-kit.git"
  :fetcher git)
@@ -273,7 +273,7 @@ sub-directories need to be explicitly set.
 
 Consider the `flymake-perlcritic` recipe,
 
-```elisp
+```lisp
 (flymake-perlcritic :repo "illusori/emacs-flymake-perlcritic"
                     :fetcher github
                     :files ("*.el" ("bin" "bin/flymake_perlcritic")))
@@ -293,7 +293,7 @@ Notice that specifying an entry in `:files` that is a list takes the
 first element to be the destination directory.  These can be embedded
 further, such as the following---hypothetical---entry for `:files`,
 
-```elisp
+```lisp
 ("*.el" ("snippets"
          ("html-mode" "snippets/html-mode/*")
          ("python-mode" "snippets/python-mode/*")))
@@ -317,7 +317,7 @@ But a better solution, given that we probably want to copy the
 *entire* `snippets` directory to the root of the package, we could
 just specify that directory.  Consider the `pony-mode` recipe,
 
-```elisp
+```lisp
 (pony-mode
  :repo "davidmiller/pony-mode"
  :fetcher github

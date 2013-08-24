@@ -1,0 +1,45 @@
+body {
+  padding-top: 60px;
+}
+h1 {
+  color: #922793;
+}
+.table .text-right {
+  text-align: right;
+}
+header.navbar {
+  background-color: #fafafa;
+}
+pre code { /* Match highlight.js styles to bootstrap */
+  padding: 0;
+  background: transparent;
+}
+.table-sort * {
+  float: left;
+}
+.table-sort-indicator {
+  display: block;
+  margin-left: 1em;
+  float: right;
+}
+#package-list th, #package-list td.version, #package-list td.recipe {
+  white-space: nowrap;
+}
+#package-list td a:link {
+  display: block;
+}
+.jumbotron {
+  font-size: 18px;
+  line-height: 30px;
+}
+.navbar, .navbar .brand, .navbar a, .navbar .nav>li>a {
+  color: #922793;
+}
+a[name] { /* Stop navbar from hiding anchors */
+  padding-top: 60px;
+  margin-top: -60px;
+  display: inline-block; /* required for webkit browsers */
+}
+.muted {
+  color: #999;
+}

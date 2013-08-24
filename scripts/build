@@ -5,6 +5,9 @@ export LANG=en_US.UTF-8
 function timestamp {
     date "+%Y%m%d %H:%M %z"
 }
+function unix_timestamp {
+    date "+%s"
+}
 
 function melpa {
     timestamp
@@ -54,6 +57,7 @@ function melpa {
 
     timestamp > $HOME/www/status.txt
     echo "completed" >> $HOME/www/status.txt
+    echo '{"completed":' `unix_timestamp` '}' > $HOME/www/build-status.json
 }
 
 if [[ `cat $HOME/www/updatemelpa.txt` == 1 ]] ; then

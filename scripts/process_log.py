@@ -128,7 +128,7 @@ def main():
     # calculate current package totals
     pkgcount = {p: len(i) for p, i in pkg_ip_time.iteritems()}
 
-    json_dump(pkgcount, open("download_counts.json", 'w'), indent=1)
+    json_dump(pkgcount, open("html/download_counts.json", 'w'), indent=1)
 
     os.unlink(pidfile)
     return 0

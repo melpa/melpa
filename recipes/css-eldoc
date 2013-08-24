@@ -1,0 +1,3 @@
+(css-eldoc :fetcher github
+        :repo "zenozeng/css-eldoc"
+        :files ("css-ac-dict" "*.el"))

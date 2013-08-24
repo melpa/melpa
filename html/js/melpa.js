@@ -154,7 +154,7 @@
   app.directive("viewOrError", function($rootScope) {
     return {
       template: '<div>' +
-        '<div class="alert alert-danger" ng-show="routeError"><strong>Error: </strong>{{routeError}}</div>' +
+        '<div class="alert alert-danger" ng-if="routeError"><strong>Error: </strong>{{routeError}}</div>' +
         '<div ng-if="!routeError" ng-view><ng-transclude></ng-transclude></div>'+'</div>',
       transclude: true,
       link: function(scope) {

@@ -25,8 +25,8 @@
         <td class="version"><a href="{{package.packageURL}}">{{package.version}} <span class="glyphicon glyphicon-download"></span></a></td>
         <td class="recipe"><a href="{{package.recipeURL}}"><span class="glyphicon glyphicon-cutlery"></span></a></td>
         <td class="source">
-          <a ng-show="package.sourceURL" href="{{package.sourceURL}}">{{package.source}}</a>
-          <span ng-show="!package.sourceURL">{{package.source}}</span>
+          <a ng-if="package.sourceURL" href="{{package.sourceURL}}">{{package.source}}</a>
+          <span ng-if="!package.sourceURL">{{package.source}}</span>
         </td>
         <td>{{package.downloads}}</td>
       </tr>

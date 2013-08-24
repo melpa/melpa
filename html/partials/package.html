@@ -6,7 +6,7 @@
 <p>
   <a href="{{pkg.recipeURL}}" class="btn btn-default"><span class="glyphicon glyphicon-cutlery"> Recipe</a>
   <a href="{{pkg.packageURL}}" class="btn btn-default"><span class="glyphicon glyphicon-download"> Download</a>
-  <a ng-show="pkg.sourceURL" href="{{pkg.sourceURL}}" class="btn btn-default"><span class="glyphicon glyphicon-home"> Homepage</a>
+  <a ng-if="pkg.sourceURL" href="{{pkg.sourceURL}}" class="btn btn-default"><span class="glyphicon glyphicon-home"> Homepage</a>
 </p>
 <section>
   <div class="well">
@@ -15,21 +15,21 @@
       <dd>{{pkg.downloads}} <span class="muted">(all versions)</span></dd>
       <dt>Source</dt>
       <dd>
-        <a ng-show="pkg.sourceURL" href="{{pkg.sourceURL}}">{{pkg.source}}</a>
-        <span ng-show="!pkg.sourceURL">{{pkg.source}}</span>
+        <a ng-if="pkg.sourceURL" href="{{pkg.sourceURL}}">{{pkg.source}}</a>
+        <span ng-if="!pkg.sourceURL">{{pkg.source}}</span>
       </dd>
       <dt>Dependencies</dt>
-      <dd><span ng-show="pkg.dependencies.length > 0" ng-repeat="dep in pkg.dependencies">
+      <dd><span ng-if="pkg.dependencies.length" ng-repeat="dep in pkg.dependencies">
           <a ng-if="havePackage(dep.name)" href="#/{{dep.name}}">{{dep.name}} {{dep.version}}</a>
           <span ng-if="!havePackage(dep.name)">{{dep.name}} {{dep.version}}</span>
           &nbsp;</span>
-        <span class="muted" ng-show="pkg.dependencies.length == 0">-</span>
+        <span class="muted" ng-if="!pkg.dependencies.length">-</span>
       </dd>
       <dt>Needed by</dt>
-      <dd><span ng-show="reverseDependencies.length > 0" ng-repeat="dep in reverseDependencies | orderBy:'name'">
+      <dd><span ng-if="reverseDependencies.length" ng-repeat="dep in reverseDependencies | orderBy:'name'">
           <a href="#/{{dep.name}}">{{dep.name}}</a>
         &nbsp;</span>
-        <span class="muted" ng-show="reverseDependencies.length == 0">-</span>
+        <span class="muted" ng-if="reverseDependencies.length == 0">-</span>
       </dd>
     </dl>
   </div>

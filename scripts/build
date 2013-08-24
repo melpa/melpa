@@ -43,8 +43,7 @@ function melpa {
     ## sync to the web directory
     rsync -avz --delete ${MELPADIR}/packages ${MELPADIR}/html/* ${WEBROOT}/ 1>> ${STDOUT} 2>> ${STDERR}
 
-    chmod -R go+r ${WEBROOT}/packages/*
-    chmod -R go-x ${WEBROOT}/packages/*
+    chmod -R go+rx ${WEBROOT}/packages/*
 
     /usr/sbin/logrotate -s $HOME/log/logrotate.state $HOME/log/melpa.logrotate 1>> ${STDOUT} 2>> ${STDERR}
 

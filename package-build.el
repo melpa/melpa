@@ -445,11 +445,12 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
       ,(aref pkg-info 0)
       ,(aref pkg-info 3)
       ,(aref pkg-info 2)
-      ',(mapcar
-         (lambda (elt)
-           (list (car elt)
-                 (package-version-join (cadr elt))))
-         (aref pkg-info 1)))
+      ',(if (sequencep (aref pkg-info 1))
+            (mapcar
+             (lambda (elt)
+               (list (car elt)
+                     (package-version-join (cadr elt))))
+             (aref pkg-info 1))))
    pkg-file))
 
 (defun pb/read-from-file (file-name)

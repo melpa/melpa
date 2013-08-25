@@ -137,7 +137,9 @@
   };
 
   app.controller('BuildStatusCtrl', function($scope, packageService) {
-    $scope.buildStatus = packageService.buildStatus();
+    packageService.buildStatus().then(function(status) {
+      $scope.completionTime = new Date(status.completed * 1000);
+    });
   });
 
   app.controller('AppCtrl', function($scope, $rootScope, $route) {
@@ -220,7 +222,7 @@
   //////////////////////////////////////////////////////////////////////////////
   app.filter('relativeTime', function() {
     return function(val) {
-      return val && moment(new Date(val)).fromNow();
+      return val && moment(val).fromNow();
     };
   });
 

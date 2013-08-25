@@ -193,7 +193,7 @@
         sortField: "@"
       },
       transclude: true,
-      template: '<div class="table-sort"><span sort-indicator="{{order}}"></span><div ng-transclude></div></div>',
+      template: '<div class="table-sort"></span><span ng-transclude></span><span sort-indicator="{{order}}"></div>',
       link: function(scope, element) {
         var sortingAsc = function() {
           return _([scope.sortField, "+" + scope.sortField]).contains(scope.tableSort);

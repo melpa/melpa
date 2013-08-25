@@ -15,12 +15,9 @@ pre code { /* Match highlight.js styles to bootstrap */
   background: transparent;
 }
 .table-sort * {
-  float: left;
 }
 .table-sort-indicator {
-  display: block;
-  margin-left: 1em;
-  float: right;
+  padding-left: 1em;
 }
 #package-list th, #package-list td.version, #package-list td.recipe {
   white-space: nowrap;

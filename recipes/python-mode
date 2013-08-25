@@ -1,0 +1,1 @@
+(python-mode :fetcher github :repo "fgallina/python.el")

@@ -1,0 +1,2 @@
+(elixir-yasnippets :fetcher github :repo "hisea/elixir-yasnippets"
+                  :files ("*.el" "*.info" "dir" "elixir-mode"))

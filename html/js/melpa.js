@@ -6,6 +6,7 @@
   // TODO Show compatible emacs versions for any package
   // TODO Google Analytics http://stackoverflow.com/questions/10713708/tracking-google-analytics-page-views-with-angular-js
   // TODO D3 visualisation for deps
+  // TODO Fix json encoding of versions
 
   var app = angular.module('melpa', []);
 
@@ -143,9 +144,9 @@
   });
 
   app.controller('AppCtrl', function($scope, $rootScope, $route) {
-    $scope.showSplash = true;
+    $scope.hideSplash = false;
     $rootScope.$on("$routeChangeSuccess", function() {
-      $scope.showSplash = ($route.current.controller == 'PackageListCtrl');
+      $scope.hideSplash = ($route.current.controller != 'PackageListCtrl');
     });
   });
 

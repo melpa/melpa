@@ -7,10 +7,6 @@
   <link href="/updates.rss" rel="alternate" title="MELPA updates" type="application/rss+xml" />
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/melpa.css" type="text/css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"></script>
-  <script src="js/melpa.js"></script>
 </head>
 <body>
   <header class="navbar navbar-fixed-top">
@@ -29,7 +25,7 @@
     </div>
   </header>
   <main class="container">
-    <div ng-show="showSplash">
+    <div ng-show="!hideSplash">
       <!-- This content is handled separately from the main view for the benefit of bots and initial page load -->
       <section class="page-header">
         <h1>MELPA <small>(Milkypostman’s Emacs Lisp Package Archive)</small></h1>
@@ -49,7 +45,7 @@
         </div>
         <div class="col-md-4">
           <div class="alert alert-success">
-            <strong>Latest build:</strong> <span ng-controller="BuildStatusCtrl">{{completionTime | relativeTime}}</span>
+            <strong>Latest build:</strong> <span ng-controller="BuildStatusCtrl" ng-bind="completionTime | relativeTime"></span>
           </div>
           <a class="twitter-timeline" data-dnt="true" data-related="milkypostman,sanityinc" href="https://twitter.com/melpa_emacs" data-widget-id="311867756586864640">Tweets by @melpa_emacs</a>
         </div>
@@ -57,7 +53,11 @@
     </div>
     <div view-or-error></div>
   </main>
-  <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"></script>
+  <script src="js/melpa.js"></script>
+  <script src="http://platform.twitter.com/widgets.js" type="text/javascript" async="async"></script>
   <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-39278673-1']);

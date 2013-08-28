@@ -1,1 +1,1 @@
-(busybee-theme :repo "mswift42/busybee-theme" :fetcher github :files ("busybee-theme.el")
+(busybee-theme :repo "mswift42/busybee-theme" :fetcher github :files ("busybee-theme.el"))

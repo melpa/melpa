@@ -1,7 +1,7 @@
 <section>
   <a name="packages"></a>
   <h2>Current List of <span ng-bind="packages.length"></span> Packages
-    <small>(<span ng-bind="totalDownloads"></span> downloads to date)</small>
+    <small ng-show="totalDownloads">(<span ng-bind="totalDownloads"></span> downloads to date)</small>
   </h2>
   <p>
     <input type="text" ng-model="searchTerms" placeholder="Enter filter terms" autofocus>

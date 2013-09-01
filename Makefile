@@ -3,7 +3,7 @@ PKGDIR  := ./packages
 RCPDIR  := ./recipes
 HTMLDIR := ./html
 WORKDIR := ./working
-EMACS   := emacs
+EMACS   ?= emacs
 
 EVAL := $(EMACS)
 

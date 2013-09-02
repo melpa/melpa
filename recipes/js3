@@ -1,0 +1,1 @@
+(js3 :repo "thomblake/js3-mode" :fetcher github :files ("js3.el"))

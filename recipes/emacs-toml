@@ -1,0 +1,1 @@
+(emacs-toml :fetcher github :repo "gongo/emacs-toml" :files ("toml.el"))

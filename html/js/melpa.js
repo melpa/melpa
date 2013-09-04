@@ -40,14 +40,14 @@
               return null;
             };
 
-            var listed = _.intersection(_(info.archive.data).keys(), _(info.recipes.data).keys());
+            var listed = _.intersection(_.keys(info.archive.data), _.keys(info.recipes.data));
             return _(listed).reduce(function(pkgs, name) {
               var built = info.archive.data[name];
               var recipe = info.recipes.data[name];
               var descr = built[2].replace(/\s*\[((?:source: )?\w+)\]$/, "");
               var version = built[0].join(".");
               // Fix up hokey deps, which look like {"clojure-mode":{"2":[0,0]}} for 2.0.0
-              var deps = _(built[1] || {}).map(function (val, name) {
+              var deps = _.map(built[1] || {}, function (val, name) {
                 var v1 = _.keys(val)[0];
                 return {name: name, version: [v1].concat(val[v1] || []).join('.')};
               });
@@ -75,8 +75,8 @@
 
       dependenciesOn: function(name) {
         return packages.then(function(pkgs) {
-          return _(pkgs).values().filter(function(p) {
-            return _(p.dependencies).findWhere({name: name});
+          return _.values(pkgs).filter(function(p) {
+            return _.findWhere(p.dependencies, {name: name});
           });
         });
       },
@@ -96,8 +96,8 @@
     $scope.orderBy = "name";
     $scope.searchTerms = $routeParams.q;
     packageService.getPackages().then(function(pkgs){
-      $scope.packages = _(pkgs).values();
-      $scope.totalDownloads = _.reduce(_($scope.packages).pluck("downloads"), function (a, b) { return b === undefined ? a : a + b; }, 0);
+      $scope.packages = _.values(pkgs);
+      $scope.totalDownloads = _.reduce(_.pluck($scope.packages, "downloads"), function (a, b) { return b === undefined ? a : a + b; }, 0);
     });
     $scope.packageMatcher = function(term) {
       var t = term && term.toLowerCase();

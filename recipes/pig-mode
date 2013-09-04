@@ -1,2 +1,3 @@
-(pig-mode :repo "motus/pig-mode" :fetcher github)
-
+(pig-mode :repo "motus/pig-mode" 
+	  :fetcher github 
+	  :files ("*.el" "snippets"))

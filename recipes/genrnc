@@ -1,0 +1,2 @@
+(genrnc :repo "aki2o/emacs-genrnc"
+        :fetcher github)

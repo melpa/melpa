@@ -1,0 +1,2 @@
+(plsense :repo "aki2o/emacs-plsense"
+         :fetcher github)

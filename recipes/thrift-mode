@@ -1,1 +1,0 @@
-(thrift-mode :fetcher github :repo "apache/thrift" :files ("contrib/thrift.el"))

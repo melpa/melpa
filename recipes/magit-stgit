@@ -1,0 +1,3 @@
+(magit-stgit :fetcher github
+	     :repo "magit/magit"
+	     :files ("magit-stgit.el"))

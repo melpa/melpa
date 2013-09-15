@@ -3,6 +3,7 @@ PKGDIR  := ./packages
 RCPDIR  := ./recipes
 HTMLDIR := ./html
 WORKDIR := ./working
+WEBROOT := $$HOME/www
 EMACS   ?= emacs
 
 EVAL := $(EMACS)
@@ -16,14 +17,9 @@ endif
 EVAL := $(EVAL) --no-site-file --batch -l package-build.el --eval
 
 
-all: build json index
-
+all: packages packages/archive-contents json index
 
 ## General rules
-build:
-	@echo " • Building $$(ls -1 $(RCPDIR) | wc -l) recipes ..."
-	$(EVAL) "(package-build-all)"
-
 html: index
 index: json
 	@echo " • Building html index ..."
@@ -43,8 +39,20 @@ clean-json:
 	@echo " • Removing json files ..."
 	-rm -vf html/archive.json html/recipes.json
 
+sync:
+	rsync -avz --delete $(PKGDIR) $(HTMLDIR)/* $(WEBROOT)/
+	chmod -R go+rx $(WEBROOT)/packages/*
+
+
 clean: clean-working clean-packages clean-json
 
+packages: $(RCPDIR)/*
+
+packages/archive-contents: packages/*.entry
+	@echo " • Updating $@ ..."
+
+cleanup:
+	$(EVAL) '(package-build-cleanup)'
 
 ## Json rules
 html/archive.json: packages/archive-contents
@@ -66,7 +74,7 @@ $(RCPDIR)/.dirstamp: .FORCE
 $(RCPDIR)/%: .FORCE
 	@echo " • Building recipe $(@F) ..."
 
-	$(EVAL) "(package-build-archive '$(@F))"
+	- timeout -k 60 600 $(EVAL) "(package-build-archive '$(@F))"
 
 	@echo " ✓ Wrote $$(ls -lsh $(PKGDIR)/$(@F)-*) "
 	@echo

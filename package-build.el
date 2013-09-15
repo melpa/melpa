@@ -143,7 +143,7 @@ Output is written to the current buffer."
   (let* ((default-directory (or dir default-directory))
          (have-timeout (executable-find "timeout"))
          (argv (if have-timeout
-                   (append (list "timeout" "-k" "30" "1800" command) args)
+                   (append (list "timeout" "-k" "60" "600" command) args)
                  (cons command args))))
     (let ((exit-code (apply 'process-file (car argv) nil (current-buffer) t (cdr argv))))
       (unless (zerop exit-code)
@@ -176,7 +176,7 @@ the same arguments."
 This is used to avoid exceeding the rate limit of 1 request per 2
 seconds; the server cuts off after 10 requests in 20 seconds.")
 
-(defvar pb/wiki-min-request-interval 2
+(defvar pb/wiki-min-request-interval 3
   "The shortest permissible interval between successive requests for Emacswiki URLs.")
 
 (defmacro pb/with-wiki-rate-limit (&rest body)
@@ -468,22 +468,19 @@ Optionally PRETTY-PRINT the data."
     (car (read-from-string (pb/slurp-file file-name)))))
 
 (defun pb/create-tar (file dir &optional files)
-  "Create a tar FILE containing the contents of DIR, or just FILES if non-nil.
-The file is written to `package-build-working-dir'."
-  (let* ((default-directory package-build-working-dir))
-    (apply 'process-file
-           "tar" nil
-           (get-buffer-create "*package-build-checkout*")
-           nil "-cvf"
-           file
-           "--exclude=.svn"
-           "--exclude=CVS"
-           "--exclude=.git*"
-           "--exclude=_darcs"
-           "--exclude=.bzr"
-           "--exclude=.hg"
-           (or (mapcar (lambda (fn) (concat dir "/" fn)) files)
-               (list dir)))))
+  "Create a tar FILE containing the contents of DIR, or just FILES if non-nil."
+  (apply 'process-file
+         "tar" nil
+         (get-buffer-create "*package-build-checkout*")
+         nil "-cvf"
+         file
+         "--exclude=.svn"
+         "--exclude=CVS"
+         "--exclude=.git*"
+         "--exclude=_darcs"
+         "--exclude=.bzr"
+         "--exclude=.hg"
+         (or (mapcar (lambda (fn) (concat dir "/" fn)) files) (list dir))))
 
 
 (defun pb/find-package-commentary (file-path)
@@ -573,38 +570,26 @@ The file is written to `package-build-working-dir'."
              (nth 1 pkgfile-info)))
         (error "No define-package found in %s" file-path)))))
 
-(defun pb/merge-package-info (pkg-info name version config)
+(defun pb/merge-package-info (pkg-info name version)
   "Return a version of PKG-INFO updated with NAME, VERSION and info from CONFIG.
 If PKG-INFO is nil, an empty one is created."
   (let* ((merged (or (copy-sequence pkg-info)
                      (vector name nil "No description available." version))))
     (aset merged 0 name)
-    (aset merged 2 (format "%s [%s]"
-                           (aref merged 2) (plist-get config :fetcher)))
     (aset merged 3 version)
     merged))
 
-(defun pb/dump-archive-contents ()
-  "Dump the list of built packages back to the archive-contents file."
-  (pb/dump (cons 1 (package-build-archive-alist))
-           (expand-file-name "archive-contents"
-                             package-build-archive-dir)))
-
-(defun pb/add-to-archive-contents (pkg-info type)
-  "Add the built archive with info PKG-INFO and TYPE to `package-build-archive-alist'."
+(defun pb/archive-entry (pkg-info type)
+  "Return the `cons' for the given package."
   (let* ((name (intern (aref pkg-info 0)))
          (requires (aref pkg-info 1))
          (desc (or (aref pkg-info 2) "No description available."))
-         (version (aref pkg-info 3))
-         (existing (assq name (package-build-archive-alist))))
-
-    (when existing (package-build-archive-alist-remove existing))
-    (package-build-archive-alist-add
-     (cons name
-           (vector (version-to-list version)
-                   requires
-                   desc
-                   type)))))
+         (version (aref pkg-info 3)))
+    (cons name
+          (vector (version-to-list version)
+                  requires
+                  desc
+                  type))))
 
 (defun pb/archive-file-name (archive-entry)
   "Return the path of the file in which the package for ARCHIVE-ENTRY is stored."
@@ -616,20 +601,29 @@ If PKG-INFO is nil, an empty one is created."
      (format "%s-%s.%s" name version (if (eq flavour 'single) "el" "tar"))
      package-build-archive-dir)))
 
-(defun pb/remove-archive (archive-entry)
+(defun pb/entry-file-name (archive-entry)
+  "Return the path of the file in which the package for ARCHIVE-ENTRY is stored."
+  (let* ((name (car archive-entry))
+         (pkg-info (cdr archive-entry))
+         (version (package-version-join (aref pkg-info 0))))
+    (expand-file-name
+     (format "%s-%s.entry" name version)
+     package-build-archive-dir)))
+
+(defun pb/delete-file-if-exists (file)
+  "Delete FILE if it exists."
+  (when (file-exists-p file)
+    (delete-file file)))
+
+(defun pb/remove-archive-files (archive-entry)
   "Remove ARCHIVE-ENTRY from archive-contents, and delete associated file.
 Note that the working directory (if present) is not deleted by
 this function, since the archive list may contain another version
 of the same-named package which is to be kept."
   (message "Removing archive: %s" archive-entry)
-  (let ((archive-file (pb/archive-file-name archive-entry))
-        (readme-file (pb/readme-file-name (symbol-name (car archive-entry)))))
-    (when (file-exists-p archive-file)
-      (delete-file archive-file))
-    (when (file-exists-p readme-file)
-      (delete-file readme-file)))
-  (package-build-archive-alist-remove archive-entry))
-
+  (mapcar 'pb/delete-file-if-exists
+          (list  (pb/archive-file-name archive-entry)
+                 (pb/entry-file-name archive-entry))))
 
 (defun pb/read-recipe (file-name)
   (let ((pkg-info (pb/read-from-file file-name)))
@@ -787,119 +781,122 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
                 (package-desc-version desc))
       desc)))
 
+
 ;;; Public interface
 ;;;###autoload
 (defun package-build-archive (name)
   "Build a package archive for package NAME."
   (interactive (list (pb/package-name-completing-read)))
   (let* ((file-name (symbol-name name))
-         (cfg (or (cdr (assoc name (package-build-recipe-alist)))
+         (rcp (or (cdr (assoc name (package-build-recipe-alist)))
                   (error "Cannot find package %s" file-name)))
-         (pkg-cwd
+         (pkg-working-dir
           (file-name-as-directory
            (expand-file-name file-name package-build-working-dir))))
 
 
     (message "\n;;; %s\n" file-name)
-    (let* ((version (pb/checkout name cfg pkg-cwd))
-           (files (pb/expand-config-file-list pkg-cwd cfg))
+    (let* ((version (pb/checkout name rcp pkg-working-dir))
+           (files (pb/expand-config-file-list pkg-working-dir rcp))
            (default-directory package-build-working-dir)
            (start-time (current-time))
-           (old-archive-entry (assq name (package-build-archive-alist))))
+           archive-entry)
+      (setq archive-entry
+            (package-build-package version files
+                                   pkg-working-dir
+                                   package-build-archive-dir))
 
-      ;; right before we create a new package, clean out the old one
-      (when old-archive-entry (pb/remove-archive old-archive-entry))
-
-      (cond
-       ((not version)
-        (message "Unable to check out repository for %s" name))
-       ((= 1 (length files))
-        (let* ((pkg-source (expand-file-name (caar files) pkg-cwd))
-               (pkg-target (expand-file-name
-                            (concat file-name "-" version ".el")
-                            package-build-archive-dir))
-               (pkg-info (pb/merge-package-info
-                          (pb/get-package-info pkg-source)
-                          file-name
-                          version
-                          cfg)))
-          (unless (string-equal (downcase (concat file-name ".el"))
-                                (downcase (file-name-nondirectory pkg-source)))
-            (error "Single file %s does not match package name %s"
-                   (file-name-nondirectory pkg-source) file-name))
-          (when (file-exists-p pkg-target)
-            (delete-file pkg-target t))
-          (copy-file pkg-source pkg-target)
-          (let ((enable-local-variables nil)
-                (make-backup-files nil))
-            (with-current-buffer (find-file pkg-target)
-              (pb/update-or-insert-version version)
-              (pb/ensure-ends-here-line pkg-source)
-              (write-file pkg-target nil)
-              (condition-case err
-                  (pb/package-buffer-info-vec)
-                (error
-                 (message "Warning: %S" err)))
-              (kill-buffer)))
-
-          (pb/write-pkg-readme (and (> (length pkg-info) 4) (aref pkg-info 4))
-                               file-name)
-
-          (pb/add-to-archive-contents pkg-info 'single)))
-       ((< 1 (length  files))
-        (let* ((pkg-dir (concat file-name "-" version))
-               (pkg-file (concat file-name "-pkg.el"))
-               (pkg-file-source (or (pb/find-source-file pkg-file files)
-                                    pkg-file))
-               (file-source (concat file-name ".el"))
-               (pkg-source (or (pb/find-source-file file-source files)
-                               file-source))
-               (pkg-info
-                (pb/merge-package-info
-                 (let ((default-directory pkg-cwd))
-                   (or (pb/get-pkg-file-info pkg-file-source)
-                       ;; some packages (like magit) provide name-pkg.el.in
-                       (pb/get-pkg-file-info
-                        (expand-file-name (concat pkg-file ".in")
-                                          (file-name-directory pkg-source)))
-                       (pb/get-package-info pkg-source)))
-                 file-name
-                 version
-                 cfg)))
-
-
-          (when (file-exists-p pkg-dir)
-            (delete-directory pkg-dir t nil))
-
-          (pb/copy-package-files files pkg-cwd pkg-dir)
-
-          (pb/write-pkg-file (expand-file-name pkg-file
-                                               (file-name-as-directory
-                                                (expand-file-name
-                                                 pkg-dir
-                                                 package-build-working-dir)))
-                             pkg-info)
-
-          (pb/generate-info-files files pkg-cwd pkg-dir)
-          (pb/generate-dir-file files pkg-dir)
-
-          (pb/create-tar (expand-file-name (concat file-name "-" version ".tar")
-                                           package-build-archive-dir)
-                         pkg-dir)
-
-          (let ((default-directory pkg-cwd))
-            (pb/write-pkg-readme (pb/find-package-commentary pkg-source)
-                                 file-name))
-
-          (delete-directory pkg-dir t nil)
-          (pb/add-to-archive-contents pkg-info 'tar)))
-
-       (t (error "Unable to find files matching recipe patterns")))
-      (pb/dump-archive-contents)
+      (pb/dump archive-entry
+               (expand-file-name (concat file-name "-" version ".entry")
+                                 package-build-archive-dir))
       (message "Built in %.3fs, finished at %s"
                (time-to-seconds (time-since start-time))
                (current-time-string))
       file-name)))
+
+;;;###autload
+(defun package-build-package (version files source-dir target-dir)
+  "Create VERSION of archive containing FILES from SOURCE-DIR and store in the TARGET_DIR.
+
+Returns the archive entry for the package."
+  (cond
+   ((not version)
+    (error "Unable to check out repository for %s" name))
+   ((= 1 (length files))
+    (let* ((pkg-source (expand-file-name (caar files) source-dir))
+           (pkg-target (expand-file-name
+                        (concat file-name "-" version ".el")
+                        target-dir))
+           (pkg-info (pb/merge-package-info
+                      (pb/get-package-info pkg-source)
+                      file-name
+                      version)))
+      (unless (string-equal (downcase (concat file-name ".el"))
+                            (downcase (file-name-nondirectory pkg-source)))
+        (error "Single file %s does not match package name %s"
+               (file-name-nondirectory pkg-source) file-name))
+      (when (file-exists-p pkg-target)
+        (delete-file pkg-target t))
+      (copy-file pkg-source pkg-target)
+      (let ((enable-local-variables nil)
+            (make-backup-files nil))
+        (with-current-buffer (find-file pkg-target)
+          (pb/update-or-insert-version version)
+          (pb/ensure-ends-here-line pkg-source)
+          (write-file pkg-target nil)
+          (condition-case err
+              (pb/package-buffer-info-vec)
+            (error
+             (message "Warning: %S" err)))
+          (kill-buffer)))
+
+      (pb/write-pkg-readme (and (> (length pkg-info) 4) (aref pkg-info 4))
+                           file-name)
+      (pb/archive-entry pkg-info 'single)))
+   ((< 1 (length  files))
+    (let* ((tmp-dir (file-name-as-directory (make-temp-file file-name t)))
+           (pkg-dir-name (concat file-name "-" version))
+           (pkg-tmp-dir (expand-file-name pkg-dir-name tmp-dir))
+           (pkg-file (concat file-name "-pkg.el"))
+           (pkg-file-source (or (pb/find-source-file pkg-file files)
+                                pkg-file))
+           (file-source (concat file-name ".el"))
+           (pkg-source (or (pb/find-source-file file-source files)
+                           file-source))
+           (pkg-info (pb/merge-package-info
+                      (let ((default-directory source-dir))
+                        (or (pb/get-pkg-file-info pkg-file-source)
+                            ;; some packages (like magit) provide name-pkg.el.in
+                            (pb/get-pkg-file-info
+                             (expand-file-name (concat pkg-file ".in")
+                                               (file-name-directory pkg-source)))
+                            (pb/get-package-info pkg-source)))
+                      file-name
+                      version)))
+
+
+      (pb/copy-package-files files source-dir pkg-tmp-dir)
+      (pb/write-pkg-file (expand-file-name pkg-file
+                                           (file-name-as-directory pkg-tmp-dir))
+                         pkg-info)
+
+      (pb/generate-info-files files source-dir pkg-tmp-dir)
+      (pb/generate-dir-file files pkg-tmp-dir)
+
+      (let ((default-directory tmp-dir))
+        (pb/create-tar (expand-file-name (concat file-name "-" version ".tar")
+                                         target-dir)
+                       pkg-dir-name))
+
+      (let ((default-directory source-dir))
+        (pb/write-pkg-readme (pb/find-package-commentary pkg-source)
+                             file-name))
+
+      (delete-directory pkg-tmp-dir t nil)
+      (pb/archive-entry pkg-info 'tar)))
+
+   (t (error "Unable to find files matching recipe patterns"))))
+
 
 
 ;;; Helpers for recipe authors
@@ -958,8 +955,12 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
   (package-build-reinitialize)
   (let ((pkg-name (intern (file-name-nondirectory (buffer-file-name)))))
     (package-build-archive pkg-name)
-    (with-output-to-temp-buffer "*package-build-result*"
-      (pp (assoc pkg-name (package-build-archive-alist))))
+    (package-build-dump-archive-contents)
+    (save-current-buffer
+      (switch-to-buffer-other-window
+       (find-file-noselect
+        (expand-file-name "archive-contents" package-build-archive-dir) t))
+      (revert-buffer t t))
     (when (yes-or-no-p "Install new package? ")
       (package-install-file (pb/find-package-file pkg-name)))))
 
@@ -998,11 +999,11 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
   "Remove previously-built packages that no longer have recipes."
   (interactive)
   (let* ((known-package-names (mapcar 'car (package-build-recipe-alist)))
-         (stale-archives (cl-loop for built in (package-build-archive-alist)
+         (stale-archives (cl-loop for built in (pb/archive-entries)
                                   when (not (memq (car built) known-package-names))
                                   collect built)))
-    (mapc 'pb/remove-archive stale-archives)
-    (pb/dump-archive-contents)))
+    (mapc 'pb/remove-archive-files stale-archives)
+    (package-build-dump-archive-contents)))
 
 (defun package-build-recipe-alist ()
   "Retun the list of avalailable packages."
@@ -1011,28 +1012,38 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
           pb/recipe-alist-initialized t))
   pb/recipe-alist)
 
-(defun package-build-archive-alist-remove (elt)
-  "Remove ELT from the archive list using `remove' and return the new value."
-  (setq pb/archive-alist (remove elt pb/archive-alist)))
-
-(defun package-build-archive-alist-add (elt)
-  "Add ELT to the archive list if it isn't there yet and return the new value."
-  (add-to-list 'pb/archive-alist elt))
-
 (defun package-build-archive-alist ()
   "Return the archive list."
-  (unless pb/archive-alist-initialized
-    (setq pb/archive-alist
-          (cdr (pb/read-from-file
-                (expand-file-name "archive-contents"
-                                  package-build-archive-dir)))
-          pb/archive-alist-initialized t))
-  pb/archive-alist)
+  (cdr (pb/read-from-file
+        (expand-file-name "archive-contents"
+                          package-build-archive-dir))))
 
 (defun package-build-reinitialize ()
   (interactive)
-  (setq pb/recipe-alist-initialized nil
-        pb/archive-alist-initialized nil))
+  (setq pb/recipe-alist-initialized nil))
+
+(defun package-build-dump-archive-contents (&optional fn)
+  "Dump the list of built packages back to the archive-contents file."
+  (unless fn
+    (setq fn (expand-file-name "archive-contents" package-build-archive-dir)))
+  (pb/dump (cons 1 (pb/archive-entries)) fn))
+
+(defun pb/archive-entries ()
+  "Read all .entry files from the archive directory and return a list of all entries."
+  (let ((entries '()))
+    (dolist (new (mapcar 'pb/read-from-file
+                         (directory-files package-build-archive-dir t
+                                          ".*\.entry$"))
+                 entries)
+      (let ((old (assq (car new) entries)))
+        (when old
+          (when (version-list-< (package-desc-vers (cdr new))
+                                (package-desc-vers (cdr old)))
+            ;; swap old and new
+            (cl-rotatef old new))
+          (pb/remove-archive-files old)
+          (setq entries (remove old entries)))
+        (add-to-list 'entries new)))))
 
 
 ;; Utility functions

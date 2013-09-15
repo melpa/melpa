@@ -1,0 +1,28 @@
+#!/bin/bash -e
+
+export LANG=en_US.UTF-8
+source $(dirname ${0})/env
+
+function unix_timestamp {
+    date "+%s"
+}
+
+function kill_all_jobs { jobs -p | xargs kill; }
+trap kill_all_jobs SIGINT SIGTERM
+
+
+function build_all {
+    PATH=$HOME/.cabal/bin:$HOME/usr/bin:$HOME/bin:$PATH
+
+    ## run the script
+    cd ${MELPA_HOME}
+    # grep --files-with-match wiki recipes/* | xargs make -j1 &
+    make -j1 $(grep --files-with-match wiki recipes/*) &
+    # grep --files-without-match wiki recipes/* | xargs make -j4 &
+    make -j4 $(grep --files-without-match wiki recipes/*) &
+    wait
+
+    echo '{"completed":' `unix_timestamp` '}' > ${MELPA_WWW}/build-status.json
+}
+
+build_all

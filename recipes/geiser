@@ -1,0 +1,9 @@
+(geiser
+  :fetcher github
+  :repo "jaor/geiser"
+  :files ("elisp/*.el"
+          "elisp/geiser-version.el.in"
+          "doc/*.texi"
+          ("bin" "bin/geiser-racket.sh")
+          ("scheme" ("racket" "scheme/racket/*")
+                    ("guile" "scheme/guile/*"))))

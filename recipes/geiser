@@ -1,7 +1,8 @@
 (geiser
  :fetcher github
  :repo "jaor/geiser"
- :files ("elisp/*" (:exclude "elisp/Makefile.am")
+ :files ("elisp/*.el"
+         "elisp/geiser-version.el.in"
          "doc/*.texi"
          ("bin" "bin/*") (:exclude "bin/Makefile.am")
          ("scheme" "scheme/*") (:exclude "scheme/Makefile.am")))

@@ -1,0 +1,7 @@
+(geiser
+ :fetcher github
+ :repo "jaor/geiser"
+ :files ("elisp/*" (:exclude "elisp/Makefile.am")
+         "doc/*.texi"
+         ("bin" "bin/*") (:exclude "bin/Makefile.am")
+         ("scheme" "scheme/*") (:exclude "scheme/Makefile.am")))

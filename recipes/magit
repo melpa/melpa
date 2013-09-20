@@ -7,8 +7,7 @@
 	       "magit-compat.el"
 	       "magit-key-mode.el"
 	       "magit-wip.el"
-	       "magit.info"
-	       "dir"
+	       "magit.texi"
 	       "AUTHORS.md"
 	       "README.md"))
 

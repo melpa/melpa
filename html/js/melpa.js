@@ -143,10 +143,18 @@
     });
   });
 
-  app.controller('AppCtrl', function($scope, $rootScope, $route) {
+  app.controller('AppCtrl', function($scope, $rootScope, $route, $window) {
     $scope.hideSplash = false;
     $rootScope.$on("$routeChangeSuccess", function() {
       $scope.hideSplash = ($route.current.controller != 'PackageListCtrl');
+    });
+    $rootScope.$on("$locationChangeSuccess", function(e, newURL, oldURL) {
+      if (newURL && (newURL.$$route||newURL).redirectTo) return;
+      if ($window._gaq && newURL != (oldURL + "#/")) {
+        var l = $window.location;
+        var path = l.pathname + l.hash + l.search;
+        $window._gaq.push (["_trackPageview", path ]);
+      }
     });
   });
 

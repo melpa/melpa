@@ -12,7 +12,7 @@
   <div class="well">
     <dl class="dl-horizontal">
       <dt>Downloads</dt>
-      <dd>{{pkg.downloads}} <span class="muted">(all versions)</span></dd>
+      <dd>{{pkg.downloads}} <span class="muted">(all versions)</span>, percentile: {{downloadsPercentile | number:2}}</dd>
       <dt>Source</dt>
       <dd>
         <a ng-show="pkg.sourceURL" href="{{pkg.sourceURL}}">{{pkg.source}}</a>

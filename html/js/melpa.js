@@ -117,6 +117,8 @@
       $scope.allPackages = pkgs;
       $scope.pkg = pkgs[packageName];
       $scope.reverseDependencies = packageService.dependenciesOn(packageName);
+      var downloadCounts = _.pluck(pkgs, 'downloads');
+      $scope.downloadsPercentile = _.filter(downloadCounts, function(d) { return d < $scope.pkg.downloads; }).length * 100.0 / downloadCounts.length;
     });
     $scope.readme = $http.get("/packages/" + packageName + "-readme.txt").then(function(r) { return r.data; });
     $scope.havePackage = function(pkgName) {

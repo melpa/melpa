@@ -1,3 +1,2 @@
 (japanese-holidays :repo "emacs-jp/japanese-holidays"
-                   :fetcher github
-                   :files ("japanese-holidays.el"))
+                   :fetcher github)

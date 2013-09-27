@@ -21,7 +21,7 @@
                           })
           .then(function (info) {
 
-            var calculateSourceURL = function(name, recipe)  {
+            var calculateSourceURL = function(name, recipe) {
               if (recipe.fetcher == "github") {
                 return (/\//.test(recipe.repo) ? "https://github.com/" : "https://gist.github.com/") + recipe.repo;
               } else if (recipe.fetcher == "wiki" && !recipe.files) {
@@ -101,12 +101,16 @@
     });
     $scope.packageMatcher = function(term) {
       var t = term && term.toLowerCase();
-      var matchp = function(v) {
-        return v && v.toLowerCase().indexOf(t) != -1;
+      var searchTextCache = {};
+      var searchText = function(pkg) {
+        var v = searchTextCache[pkg.name];
+        if (!v)
+          v = searchTextCache[pkg.name] = _([pkg.name, pkg.description, pkg.source, pkg.version, pkg.sourceURL]).compact().invoke('toLowerCase').valueOf().join(' ');
+        return v;
       };
       return function(pkg) {
         if (!term || !term.match(/\S/)) return true;
-        return matchp(pkg.name) || matchp(pkg.description) || matchp(pkg.source) || matchp(pkg.version) || matchp(pkg.sourceURL);
+        return searchText(pkg).indexOf(t) != -1;
       };
     };
   });

@@ -155,6 +155,7 @@
       $scope.hideSplash = ($route.current.controller != 'PackageListCtrl');
     });
     $rootScope.$on("$locationChangeSuccess", function(e, newURL, oldURL) {
+      //jshint unused: false
       if (newURL && (newURL.$$route||newURL).redirectTo) return;
       if ($window._gaq && newURL != (oldURL + "#/")) {
         var l = $window.location;
@@ -176,6 +177,7 @@
       transclude: true,
       link: function(scope) {
         $rootScope.$on("$routeChangeError", function (event, current, previous, rejection) {
+          //jshint unused: false
           scope.routeError = rejection;
         });
         $rootScope.$on("$routeChangeSuccess", function () {

@@ -8,7 +8,7 @@
   // TODO D3 visualisation for deps
   // TODO Fix json encoding of versions
 
-  var app = angular.module('melpa', []);
+  var app = angular.module('melpa', ["ngRoute"]);
 
   //////////////////////////////////////////////////////////////////////////////
   // SERVICES
@@ -172,7 +172,7 @@
     return {
       template: '<div>' +
         '<div class="alert alert-danger" ng-if="routeError"><strong>Error: </strong>{{routeError}}</div>' +
-        '<div ng-if="!routeError" ng-view><ng-transclude></ng-transclude></div>'+'</div>',
+        '<div ng-if="!routeError"><div ng-view><ng-transclude></ng-transclude></div></div>'+'</div>',
       transclude: true,
       link: function(scope) {
         $rootScope.$on("$routeChangeError", function (event, current, previous, rejection) {

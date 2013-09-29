@@ -165,6 +165,30 @@
   // Directives
   //////////////////////////////////////////////////////////////////////////////
 
+  app.directive("debounceModel", ["$timeout", function($timeout) {
+    return {
+      restrict: "A",
+      require: "ngModel",
+      scope: {
+        "ngModel": "=",
+        "debounceModel": "="
+      },
+      link: function (scope, element, attrs, ngModel) {
+        //jshint unused: false
+        var delay = 250;
+        var copyValue;
+        scope.$watch(function() {
+          return ngModel.$modelValue;
+        }, function (value) {
+          $timeout.cancel(copyValue);
+          copyValue = $timeout(function() {
+            scope.debounceModel = value;
+          }, delay);
+        });
+      }
+    };
+  }]);
+
   app.directive("viewOrError", function($rootScope) {
     return {
       template: '<div>' +

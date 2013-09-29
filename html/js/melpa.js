@@ -101,13 +101,9 @@
     });
     $scope.packageMatcher = function(term) {
       var t = term && term.toLowerCase();
-      var searchTextCache = {};
-      var searchText = function(pkg) {
-        var v = searchTextCache[pkg.name];
-        if (!v)
-          v = searchTextCache[pkg.name] = _([pkg.name, pkg.description, pkg.source, pkg.version, pkg.sourceURL]).compact().invoke('toLowerCase').valueOf().join(' ');
-        return v;
-      };
+      var searchText = _.memoize(function(pkg) {
+        return _([pkg.name, pkg.description, pkg.source, pkg.version, pkg.sourceURL]).compact().invoke('toLowerCase').valueOf().join(' ');
+      }, function(pkg) { return pkg.name; });
       return function(pkg) {
         if (!term || !term.match(/\S/)) return true;
         return searchText(pkg).indexOf(t) != -1;

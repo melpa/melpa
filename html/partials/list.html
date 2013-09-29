@@ -4,7 +4,7 @@
     <small ng-show="totalDownloads">(<span ng-bind="totalDownloads"></span> downloads to date)</small>
   </h2>
   <p>
-    <input type="text" ng-model="enteredSearchTerms" debounce-model="searchTerms" placeholder="Enter filter terms" autofocus>
+    <input type="text" ng-model="enteredSearchTerms" debounce-model="searchTerms" debounce-delay="250" placeholder="Enter filter terms" autofocus>
     <span class="muted">&nbsp;<ng-pluralize when="{1: '1 match', 'other': '{} matches'}" count="(packages | filter:packageMatcher(searchTerms)).length"/></span>
   </p>
   <table id="package-list" class="table table-bordered table-responsive table-hover">

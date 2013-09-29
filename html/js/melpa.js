@@ -171,11 +171,12 @@
       require: "ngModel",
       scope: {
         "ngModel": "=",
-        "debounceModel": "="
+        "debounceModel": "=",
+        "debounceDelay": "@"
       },
       link: function (scope, element, attrs, ngModel) {
         //jshint unused: false
-        var delay = 250;
+        var delay = parseInt(scope.debounceDelay, 10) || 250;
         var copyValue;
         scope.$watch(function() {
           return ngModel.$modelValue;

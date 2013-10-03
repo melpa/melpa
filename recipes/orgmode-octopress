@@ -1,0 +1,1 @@
+(orgmode-octopress :repo "craftkiller/orgmode-octopress"  :fetcher github)

@@ -1,1 +1,1 @@
-(scheme-here :fetcher wiki)
+(scheme-here :fetcher github :url "https://github.com/judevc/scheme-here.git")

@@ -1,0 +1,3 @@
+(bpe :repo "yuutayamada/bpe"
+     :fetcher github
+     :files ("bpe.el"))

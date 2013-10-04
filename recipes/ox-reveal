@@ -1,1 +1,2 @@
-(ox-reveal :repo "yjwen/org-reveal" :fetcher github)
+(ox-reveal :repo "yjwen/org-reveal" :fetcher github
+           :old-names (org-reveal))

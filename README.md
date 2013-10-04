@@ -134,6 +134,9 @@ Let `<NAME>` denote the name of the recipe to submit.
 
         make recipes/<NAME>
 
+  (Be sure that the `emacs` on your path is at least version 23, or
+  set `$EMACS` to the location of a suitable binary.)
+
 4. Install the file you built by running `package-install-file` from
 within Emacs and specifying the newly built package in the directory
 specified by `package-build-archive-dir` (default: `packages/`

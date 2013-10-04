@@ -7,6 +7,7 @@
   // TODO Google Analytics http://stackoverflow.com/questions/10713708/tracking-google-analytics-page-views-with-angular-js
   // TODO D3 visualisation for deps
   // TODO Fix json encoding of versions
+  // TODO Handle :old-names in recipes
 
   var app = angular.module('melpa', ["ngRoute"]);
 

@@ -1,0 +1,5 @@
+(dkmisc
+ :fetcher github
+ :repo "davidkeegan/dkmisc",
+ :files ("*.el" "*.texi" "dir" "LICENCE.*"))
+

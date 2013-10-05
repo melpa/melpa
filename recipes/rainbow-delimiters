@@ -1,2 +1,2 @@
-(rainbow-delimiters :fetcher github :repo "jlr/rainbow-delimiters")
+(rainbow-delimiters :fetcher github :repo "Fanael/rainbow-delimiters")
 

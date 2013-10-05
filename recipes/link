@@ -1,0 +1,3 @@
+(link :repo "myrkr/dictionary-el"
+      :fetcher github
+      :files ("link.el"))

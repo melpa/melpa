@@ -3,8 +3,6 @@
        :files ("magit.el"
 	       "magit-bisect.el"
 	       "magit-blame.el"
-	       "magit-cherry.el"
-	       "magit-compat.el"
 	       "magit-key-mode.el"
 	       "magit-wip.el"
 	       "magit.texi"

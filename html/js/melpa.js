@@ -8,6 +8,8 @@
   // TODO D3 visualisation for deps
   // TODO Fix json encoding of versions
   // TODO Handle :old-names in recipes
+  // TODO Show recent github events on package pages where applicable
+  // TODO Voting / starring
 
   var app = angular.module('melpa', ["ngRoute"]);
 

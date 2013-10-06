@@ -1,0 +1,3 @@
+(jumblr :repo "mkmcc/jumblr"
+        :fetcher github
+        :files ("jumblr.el" "dict"))

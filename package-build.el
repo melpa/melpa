@@ -253,8 +253,10 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
       (make-directory dir))
     (let ((files (or (plist-get config :files)
                      (list (format "%s.el" name))))
-          (default-directory dir))
-      (unless package-build-stable
+          (default-directory dir)
+          (is-unstable (eq (plist-get config :stability) 'unstable)))
+      ;; We build when `package-build-stable' is the oposite of `is-unstable':
+      (when (eq (null package-build-stable) is-unstable)  ;XOR
         (car (nreverse (sort (mapcar 'pb/grab-wiki-file files) 'string-lessp)))))))
 
 (defun pb/darcs-repo (dir)

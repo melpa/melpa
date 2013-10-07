@@ -391,11 +391,16 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (pb/princ-checkout repo dir)
         (pb/run-process nil "git" "clone" repo dir)))
       (if package-build-stable
-          (let ((bound (goto-char (point-max))))
+          (let ((bound (goto-char (point-max)))
+                version-tag)
             (pb/run-process dir "git" "tag")
-            ;;;; TODO: needs to actually checkout the largest version tag???
-            (or (pb/find-parse-version-newest "^\\([^ \t\n]+\\)$" bound)
-                (error "No valid stable versions found for %s" name)))
+            (setq version-tag
+                  (or (pb/find-parse-version-newest "^\\([^ \t\n]+\\)$" bound)
+                      (error "No valid stable versions found for %s" name)))
+            ;; Using reset --hard here to comply with what's used for
+            ;; unstable, but maybe this should be a checkout?
+            (pb/run-process "git" "reset" "--hard" (concat "tags/" version-tag))
+            version-tag) ;; Return the version-tag
         (pb/run-process dir "git" "reset" "--hard"
                         (or commit (concat "origin/" (pb/git-head-branch dir))))
         (apply 'pb/run-process dir "git" "log" "-n1" "--pretty=format:'\%ci'"

@@ -1,0 +1,9 @@
+(ruby-additional
+ :fetcher svn
+ :url "http://svn.ruby-lang.org/repos/ruby/trunk/misc/"
+ :files ("rdoc-mode.el"
+         "ruby-additional.el"
+         "ruby-electric.el"
+         "ruby-style.el"
+         "rubydb2x.el"
+         "rubydb3x.el"))

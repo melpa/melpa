@@ -1,1 +1,1 @@
-(fasm-mode :fetcher hg :url "https://bitbucket.org/Fanael/fasm-mode")
+(fasm-mode :fetcher github :repo "Fanael/fasm-mode")

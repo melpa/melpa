@@ -1,1 +1,1 @@
-(colorsarenice-theme :fetcher hg :url "https://bitbucket.org/Fanael/colorsarenice-theme")
+(colorsarenice-theme :fetcher github :repo "Fanael/colorsarenice-theme")

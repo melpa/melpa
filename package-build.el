@@ -238,13 +238,34 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
             (message "%s is unchanged" filename)
             (cdr stamp-info))
         (message "%s has changed - checking mod time" filename)
+        ;; We get timestamp even for stable packages, because timestamp
+        ;; might get used and because stamp-file is useful anyway.
         (let ((new-timestamp
                (with-current-buffer (pb/with-wiki-rate-limit
                                      (url-retrieve-synchronously wiki-url))
                  (pb/find-parse-time
                   "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"))))
           (pb/dump (cons new-content-hash new-timestamp) stamp-file)
-          new-timestamp)))))
+          ;; If package is stable, try to find its version number
+          (if (null package-build-stable)
+              new-timestamp
+            (let ((stable-version-number
+                   (progn
+                     (with-temp-buffer ;; If this turns out to be slow, grep could be used instead.
+                       (insert-file-contents-literally filename)
+                       (goto-char (point-min))
+                       (if (search-forward-regexp "^;;+ +Version: +\\([^ \n\t]+\\) *$" nil t)
+                           (setq stable-version-number (match-string-no-properties 1)))))))
+              ;; If we found a valid number, return it. Otherwise, just use good'ol timestamp.
+              (if (and (stringp stable-version-number)
+                       (ignore-errors (version-to-list stable-version-number)))
+                  ;; If package is multi-file, chances are only 1 of
+                  ;; them will have a version number. So we need this
+                  ;; minor hack. We prepend Z to the version string to
+                  ;; make sure it's sorted before timestamps (in the
+                  ;; checkout-wiki function).
+                  (concat "Z" stable-version-number)
+                new-timestamp))))))))
 
 (defun pb/checkout-wiki (name config dir)
   "Checkout package NAME with config CONFIG from the EmacsWiki into DIR."
@@ -253,9 +274,19 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
       (make-directory dir))
     (let ((files (or (plist-get config :files)
                      (list (format "%s.el" name))))
-          (default-directory dir))
-      (unless package-build-stable
-        (car (nreverse (sort (mapcar 'pb/grab-wiki-file files) 'string-lessp)))))))
+          (default-directory dir)
+          (is-unstable (eq (plist-get config :stability) 'unstable)))
+      ;; We build when `package-build-stable' is the oposite of `is-unstable':
+      (when (eq (null package-build-stable) is-unstable)  ;XOR
+        (let ((version-string
+               (car (nreverse (sort (mapcar 'pb/grab-wiki-file files) 'string-lessp)))))
+          ;; If any of the files contained a version number (and we're
+          ;; building stable) we prepended a Z to each of them (so
+          ;; they wouldn't be overriden by the timestamp of the files
+          ;; without version numbers. Here, we remove this Z.
+          (if (string-match "\\`Z" version-string)
+              (substring version-string 1)
+            version-string))))))
 
 (defun pb/darcs-repo (dir)
   "Get the current darcs repo for DIR."
@@ -391,11 +422,16 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (pb/princ-checkout repo dir)
         (pb/run-process nil "git" "clone" repo dir)))
       (if package-build-stable
-          (let ((bound (goto-char (point-max))))
+          (let ((bound (goto-char (point-max)))
+                version-tag)
             (pb/run-process dir "git" "tag")
-            ;;;; TODO: needs to actually checkout the largest version tag???
-            (or (pb/find-parse-version-newest "^\\([^ \t\n]+\\)$" bound)
-                (error "No valid stable versions found for %s" name)))
+            (setq version-tag
+                  (or (pb/find-parse-version-newest "^\\([^ \t\n]+\\)$" bound)
+                      (error "No valid stable versions found for %s" name)))
+            ;; Using reset --hard here to comply with what's used for
+            ;; unstable, but maybe this should be a checkout?
+            (pb/run-process "git" "reset" "--hard" (concat "tags/" version-tag))
+            version-tag) ;; Return the version-tag
         (pb/run-process dir "git" "reset" "--hard"
                         (or commit (concat "origin/" (pb/git-head-branch dir))))
         (apply 'pb/run-process dir "git" "log" "-n1" "--pretty=format:'\%ci'"

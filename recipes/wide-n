@@ -1,0 +1,1 @@
+(wide-n :fetcher wiki) ; Cycle among buffer restrictions (narrowings)

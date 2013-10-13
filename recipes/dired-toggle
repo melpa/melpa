@@ -1,0 +1,3 @@
+(dired-toggle
+ :repo "fasheng/dired-toggle"
+ :fetcher github)

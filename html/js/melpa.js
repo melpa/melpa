@@ -95,9 +95,19 @@
   // Controllers
   //////////////////////////////////////////////////////////////////////////////
 
-  app.controller('PackageListCtrl', function ($scope, $routeParams, packageService) {
+  app.controller('PackageListCtrl', function ($scope, $timeout, packageService) {
     $scope.orderBy = "name";
-    $scope.searchTerms = $routeParams.q;
+    $scope.$on('$routeChangeSuccess', function (ev, current) {
+      $scope.enteredSearchTerms = $scope.searchTerms = current.params.q;
+    });
+    var copyValue;
+    $scope.$watch('enteredSearchTerms', function(value) {
+      $timeout.cancel(copyValue);
+      copyValue = $timeout(function() {
+        $scope.searchTerms = value;
+      }, 250);
+    });
+
     packageService.getPackages().then(function(pkgs){
       $scope.packages = _.values(pkgs);
       $scope.totalDownloads = _.reduce(_.pluck($scope.packages, "downloads"), function (a, b) { return b === undefined ? a : a + b; }, 0);
@@ -167,31 +177,6 @@
   //////////////////////////////////////////////////////////////////////////////
   // Directives
   //////////////////////////////////////////////////////////////////////////////
-
-  app.directive("debounceModel", ["$timeout", function($timeout) {
-    return {
-      restrict: "A",
-      require: "ngModel",
-      scope: {
-        "ngModel": "=",
-        "debounceModel": "=",
-        "debounceDelay": "@"
-      },
-      link: function (scope, element, attrs, ngModel) {
-        //jshint unused: false
-        var delay = parseInt(scope.debounceDelay, 10) || 250;
-        var copyValue;
-        scope.$watch(function() {
-          return ngModel.$modelValue;
-        }, function (value) {
-          $timeout.cancel(copyValue);
-          copyValue = $timeout(function() {
-            scope.debounceModel = value;
-          }, delay);
-        });
-      }
-    };
-  }]);
 
   app.directive("viewOrError", function($rootScope) {
     return {

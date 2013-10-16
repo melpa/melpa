@@ -1,3 +1,2 @@
 (cucumber-goto-step :repo "gstamp/cucumber-goto-step"
-              :fetcher github
-              :files ("cucumber-goto-step.el"))
+              :fetcher github)

@@ -1,1 +1,0 @@
-(abl :fetcher github :repo "afroisalreadyinu/abl-mode" :files ("abl*.el"))

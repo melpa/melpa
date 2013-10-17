@@ -7,7 +7,6 @@
   // TODO Google Analytics http://stackoverflow.com/questions/10713708/tracking-google-analytics-page-views-with-angular-js
   // TODO D3 visualisation for deps
   // TODO Fix json encoding of versions
-  // TODO Handle :old-names in recipes
   // TODO Show recent github events on package pages where applicable
   // TODO Voting / starring
 

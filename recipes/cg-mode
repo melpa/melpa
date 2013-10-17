@@ -1,4 +1,0 @@
-(cg-mode 
-  :fetcher svn
-  :url "http://beta.visl.sdu.dk/svn/visl/tools/vislcg3/trunk/emacs"
-  :files ("cg.el"))

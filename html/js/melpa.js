@@ -125,12 +125,13 @@
     };
   });
 
-  var detailsCtrl = app.controller('PackageDetailsCtrl', function ($scope, $routeParams, $http, packageService) {
+  var detailsCtrl = app.controller('PackageDetailsCtrl', function ($scope, $q, $routeParams, $http, packageService) {
     var packageName =  $routeParams.packageName;
     packageService.getPackages().then(function(pkgs) {
       $scope.allPackages = pkgs;
       $scope.pkg = pkgs[packageName];
       $scope.reverseDependencies = packageService.dependenciesOn(packageName);
+      $scope.reverseDependenciesOldNames = $q.all(_.map($scope.pkg.oldNames, packageService.dependenciesOn)).then(_.flatten);
       var downloadCounts = _.pluck(pkgs, 'downloads');
       $scope.downloadsPercentile = _.filter(downloadCounts, function(d) { return d < $scope.pkg.downloads; }).length * 100.0 / downloadCounts.length;
     });

@@ -54,17 +54,19 @@
                 var v1 = _.keys(val)[0];
                 return {name: name, version: [v1].concat(val[v1] || []).join('.')};
               });
+              var oldNames = recipe['old-names'] || [];
               pkgs[name] = {
                 name: name,
                 version: version,
                 dependencies: deps,
                 description: descr,
                 source: recipe.fetcher,
-                downloads: info.downloads.data[name] || 0,
+                downloads: _.reduce(oldNames.concat(name), function(sum, n) { return sum + (info.downloads.data[n] || 0); }, 0),
                 fetcher: recipe.fetcher,
                 recipeURL: "https://github.com/milkypostman/melpa/blob/master/recipes/" + name,
                 packageURL: "packages/" + name + "-" + version + "." + (built[3] == "single" ? "el" : "tar"),
-                sourceURL: calculateSourceURL(name, recipe)
+                sourceURL: calculateSourceURL(name, recipe),
+                oldNames: oldNames
               };
               return pkgs;
             }, {});

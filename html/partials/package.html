@@ -31,6 +31,8 @@
           <span class="muted" ng-if="!$last">/</span></span>
         <span class="muted" ng-show="reverseDependencies.length == 0">-</span>
       </dd>
+      <dt>Renamed from:<dt>
+      <dd><span ng-repeat="oldName in pkg.oldNames"><span class="muted" ng-if="!$first">,</span> {{oldName}}</span></dd>
     </dl>
   </div>
 </section>

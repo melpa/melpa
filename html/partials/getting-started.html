@@ -3,9 +3,9 @@
       <a name="installing"></a>
       <h2>Installing</h2>
       <p>To add the repository put this before the call to <code>package-initialize</code> in your <code>init.el</code> file.</p>
-      <!-- <script src="https://gist.github.com/1679158.js"> </script> -->
 
-      <pre><code>(add-to-list 'package-archives
+      <pre><code>(require 'package)
+(add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/") t)</code></pre>
 
       <p>In Emacs &lt; 24, you'll also need to explicitly include the GNU

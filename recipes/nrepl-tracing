@@ -1,2 +1,0 @@
-(nrepl-tracing :repo "clojure-emacs/nrepl-tracing"
-                 :fetcher github)

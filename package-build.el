@@ -224,7 +224,8 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
                (with-current-buffer (pb/with-wiki-rate-limit
                                      (url-retrieve-synchronously wiki-url))
                  (pb/find-parse-time
-                  "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"))))
+                  "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"
+                  url-http-end-of-headers))))
           (pb/dump (cons new-content-hash new-timestamp) stamp-file)
           new-timestamp)))))
 

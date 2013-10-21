@@ -1,0 +1,4 @@
+(flycheck-tip
+ :repo "yuutayamada/flycheck-tip"
+ :fetcher github
+ :files ("flycheck-tip.el"))

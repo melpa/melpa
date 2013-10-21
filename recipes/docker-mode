@@ -1,0 +1,1 @@
+(docker-mode :fetcher github :repo "justinabrahms/docker-mode")

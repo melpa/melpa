@@ -1,0 +1,3 @@
+(pier-mode
+ :repo "DamienCassou/pier-cl"
+ :fetcher github)

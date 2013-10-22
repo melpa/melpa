@@ -1,1 +1,0 @@
-(vlfi :repo "m00natic/vlfi" :fetcher github :files ("vlfi.el"))

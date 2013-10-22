@@ -1,0 +1,1 @@
+(proxy-mode :fetcher github :url "https://github.com/psachin/proxy-mode" :repo "psachin/proxy-mode")

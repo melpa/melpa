@@ -1,2 +1,11 @@
-(magit :repo "magit/magit" :fetcher github)
+(magit :fetcher github
+       :repo "magit/magit"
+       :files ("magit.el"
+	       "magit-bisect.el"
+	       "magit-blame.el"
+	       "magit-key-mode.el"
+	       "magit-wip.el"
+	       "magit.texi"
+	       "AUTHORS.md"
+	       "README.md"))
 

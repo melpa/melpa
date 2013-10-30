@@ -1,0 +1,1 @@
+(pretty-symbols :repo "drothlis/pretty-symbols" :fetcher github)

@@ -3,7 +3,7 @@ PKGDIR  := ./packages
 RCPDIR  := ./recipes
 HTMLDIR := ./html
 WORKDIR := ./working
-EMACS   := emacs
+EMACS   ?= emacs
 
 EVAL := $(EMACS)
 
@@ -25,7 +25,7 @@ build:
 	$(EVAL) "(package-build-all)"
 
 html: index
-index: archive.json recipes.json
+index: json
 	@echo " • Building html index ..."
 	$(MAKE) -C $(HTMLDIR)
 
@@ -41,21 +41,21 @@ clean-packages:
 
 clean-json:
 	@echo " • Removing json files ..."
-	-rm -vf archive.json recipes.json
+	-rm -vf html/archive.json html/recipes.json
 
 clean: clean-working clean-packages clean-json
 
 
 ## Json rules
-archive.json: packages/archive-contents
+html/archive.json: packages/archive-contents
 	@echo " • Building $@ ..."
-	$(EVAL) '(package-build-archive-alist-as-json "archive.json")'
+	$(EVAL) '(package-build-archive-alist-as-json "html/archive.json")'
 
-recipes.json: $(RCPDIR)/.dirstamp
+html/recipes.json: $(RCPDIR)/.dirstamp
 	@echo " • Building $@ ..."
-	$(EVAL) '(package-build-recipe-alist-as-json "recipes.json")'
+	$(EVAL) '(package-build-recipe-alist-as-json "html/recipes.json")'
 
-json: archive.json recipes.json
+json: html/archive.json html/recipes.json
 
 $(RCPDIR)/.dirstamp: .FORCE
 	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] \
@@ -66,7 +66,6 @@ $(RCPDIR)/.dirstamp: .FORCE
 $(RCPDIR)/%: .FORCE
 	@echo " • Building recipe $(@F) ..."
 
-	-rm -vf $(PKGDIR)/$(@F)-*
 	$(EVAL) "(package-build-archive '$(@F))"
 
 	@echo " ✓ Wrote $$(ls -lsh $(PKGDIR)/$(@F)-*) "

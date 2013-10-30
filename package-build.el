@@ -87,7 +87,7 @@ function for access to this function")
 (defconst pb/default-files-spec '("*.el" "*.el.in" "dir"
                                   "*.info" "*.texi" "*.texinfo"
                                   "doc/*.info" "doc/*.texi" "doc/*.texinfo"
-                                  (:exclude "*-test.el" "*-tests.el"))
+                                  (:exclude "tests.el" "*-test.el" "*-tests.el"))
   "Default value for :files attribute in recipes.")
 
 
@@ -224,7 +224,8 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
                (with-current-buffer (pb/with-wiki-rate-limit
                                      (url-retrieve-synchronously wiki-url))
                  (pb/find-parse-time
-                  "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"))))
+                  "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"
+                  url-http-end-of-headers))))
           (pb/dump (cons new-content-hash new-timestamp) stamp-file)
           new-timestamp)))))
 
@@ -813,6 +814,10 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
                           file-name
                           version
                           cfg)))
+          (unless (string-equal (concat file-name ".el")
+                                (file-name-nondirectory pkg-source))
+            (error "Single file %s does not match package name %s"
+                   (file-name-nondirectory pkg-source) file-name))
           (when (file-exists-p pkg-target)
             (delete-file pkg-target t))
           (copy-file pkg-source pkg-target)

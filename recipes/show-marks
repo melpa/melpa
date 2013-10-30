@@ -1,1 +1,1 @@
-(show-marks :fetcher github :repo "vapniks/show-marks")
+(show-marks :fetcher github :repo "vapniks/show-marks" :old-name (mark))

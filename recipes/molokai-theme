@@ -1,2 +1,3 @@
-(molokai-theme :repo "2029061" :fetcher github)
-
+(molokai-theme :repo "alloy-d/color-theme-molokai"
+               :fetcher github
+               :files ("molokai-theme.el"))

@@ -1,20 +1,23 @@
 #!/bin/bash
 
 export LANG=en_US.UTF-8
+WEBROOT=${WEBROOT:-$HOME/www}
 
 function timestamp {
     date "+%Y%m%d %H:%M %z"
+}
+function unix_timestamp {
+    date "+%s"
 }
 
 function melpa {
     timestamp
 
-    timestamp > $HOME/www/status.txt
-    echo "building..." >> $HOME/www/status.txt
+    timestamp > $WEBROOT/status.txt
+    echo "building..." >> $WEBROOT/status.txt
 
     MELPADIR=${MELPADIR:-$HOME/melpa}
     MELPABRANCH=${MELPABRANCH:-master}
-    WEBROOT=${WEBROOT:-$HOME/www}
 
     PATH=$HOME/.cabal/bin:$HOME/usr/bin:$HOME/bin:$PATH
 
@@ -38,10 +41,9 @@ function melpa {
     make 1>> ${MELPASTDOUT} 2>> ${STDERR}
 
     ## sync to the web directory
-    rsync -avz --delete ${MELPADIR}/packages ${MELPADIR}/html/* ${WEBROOT}/ 1>> ${STDOUT} 2>> ${STDERR}
+    rsync -avz --delete ${MELPADIR}/packages ${MELPADIR}/html/. ${WEBROOT}/ 1>> ${STDOUT} 2>> ${STDERR}
 
-    chmod -R go+r ${WEBROOT}/packages/*
-    chmod -R go-x ${WEBROOT}/packages/*
+    chmod -R go+rx ${WEBROOT}/packages/*
 
     /usr/sbin/logrotate -s $HOME/log/logrotate.state $HOME/log/melpa.logrotate 1>> ${STDOUT} 2>> ${STDERR}
 
@@ -52,13 +54,14 @@ function melpa {
     /usr/sbin/sendmail dcurtis@milkbox.net < ${EMAIL}
     cat ${ENVLOG} ${STDERR} ${STDOUT} | tee $WEBROOT/lastrun.txt
 
-    timestamp > $HOME/www/status.txt
-    echo "completed" >> $HOME/www/status.txt
+    timestamp > $WEBROOT/status.txt
+    echo "completed" >> $WEBROOT/status.txt
+    echo '{"completed":' `unix_timestamp` '}' > $WEBROOT/build-status.json
 }
 
-if [[ `cat $HOME/www/updatemelpa.txt` == 1 ]] ; then
+if [[ `cat $WEBROOT/updatemelpa.txt` == 1 ]] ; then
         echo "Running MELPA"
-        echo "2" > $HOME/www/updatemelpa.txt
+        echo "2" > $WEBROOT/updatemelpa.txt
         melpa
-        echo "0" > $HOME/www/updatemelpa.txt
+        echo "0" > $WEBROOT/updatemelpa.txt
 fi

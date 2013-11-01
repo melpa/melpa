@@ -1,0 +1,1 @@
+(smartscan :fetcher github :repo "mickeynp/smart-scan")

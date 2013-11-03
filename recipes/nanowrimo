@@ -1,0 +1,1 @@
+(nanowrimo :fetcher hg :url "https://bitbucket.org/gvol/nanowrimo.el")

@@ -223,6 +223,9 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (let ((new-timestamp
                (with-current-buffer (pb/with-wiki-rate-limit
                                      (url-retrieve-synchronously wiki-url))
+                 (unless (= 200 url-http-response-status)
+                   (error "HTTP error %s fetching %s" url-http-response-status wiki-url))
+                 (goto-char (point-max))
                  (pb/find-parse-time
                   "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"
                   url-http-end-of-headers))))

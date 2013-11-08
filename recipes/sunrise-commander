@@ -1,0 +1,4 @@
+(sunrise-commander
+ :repo "escherdragon/sunrise-commander"
+ :fetcher github
+ :files ("sunrise-commander.el"))

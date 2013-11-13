@@ -438,9 +438,14 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
-(defun pb/dump (data file)
-  "Write DATA to FILE as a pretty-printed Lisp sexp."
-  (write-region (concat (pp-to-string data) "\n") nil file))
+(defun pb/dump (data file &optional pretty-print)
+  "Write DATA to FILE as a Lisp sexp.
+Optionally PRETTY-PRINT the data."
+  (with-temp-file file
+    (message "File: %s" file)
+    (if pretty-print
+        (pp data (current-buffer))
+      (print data (current-buffer)))))
 
 (defun pb/write-pkg-file (pkg-file pkg-info)
   "Write PKG-FILE containing PKG-INFO."
@@ -454,7 +459,8 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
            (list (car elt)
                  (package-version-join (cadr elt))))
          (aref pkg-info 1)))
-   pkg-file))
+   pkg-file
+   t))
 
 (defun pb/read-from-file (file-name)
   "Read and return the Lisp data stored in FILE-NAME, or nil if no such file exists."

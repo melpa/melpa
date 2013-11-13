@@ -817,8 +817,8 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
                           file-name
                           version
                           cfg)))
-          (unless (string-equal (concat file-name ".el")
-                                (file-name-nondirectory pkg-source))
+          (unless (string-equal (downcase (concat file-name ".el"))
+                                (downcase (file-name-nondirectory pkg-source)))
             (error "Single file %s does not match package name %s"
                    (file-name-nondirectory pkg-source) file-name))
           (when (file-exists-p pkg-target)

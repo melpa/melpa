@@ -958,11 +958,8 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
   (package-build-reinitialize)
   (let ((pkg-name (intern (file-name-nondirectory (buffer-file-name)))))
     (package-build-archive pkg-name)
-    (save-current-buffer
-      (switch-to-buffer-other-window
-       (find-file-noselect
-        (expand-file-name "archive-contents" package-build-archive-dir) t))
-      (revert-buffer t t))
+    (with-output-to-temp-buffer "*package-build-result*"
+      (pp (assoc pkg-name (package-build-archive-alist))))
     (when (yes-or-no-p "Install new package? ")
       (package-install-file (pb/find-package-file pkg-name)))))
 

@@ -1,0 +1,5 @@
+(haskdogs-emacs
+ :repo "ifigueroap/haskdogs-emacs"
+ :fetcher github
+ :files ("haskdogs-emacs.el"
+         "generate-haskdogs.sh"))

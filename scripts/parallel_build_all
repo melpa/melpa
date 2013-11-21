@@ -17,7 +17,7 @@ function build_all {
     ## run the script
     cd ${MELPA_HOME}
     # grep --files-with-match wiki recipes/* | xargs make -j1 &
-    make -j1 $(grep --files-with-match wiki recipes/*) &
+    make SLEEP=2 -j1 $(grep --files-with-match wiki recipes/*) &
     # grep --files-without-match wiki recipes/* | xargs make -j4 &
     make -j4 $(grep --files-without-match wiki recipes/*) &
     wait

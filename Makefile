@@ -5,6 +5,7 @@ HTMLDIR := ./html
 WORKDIR := ./working
 WEBROOT := $$HOME/www
 EMACS   ?= emacs
+SLEEP   ?= 0
 
 EVAL := $(EMACS)
 
@@ -77,6 +78,8 @@ $(RCPDIR)/%: .FORCE
 	- timeout -k 60 600 $(EVAL) "(package-build-archive '$(@F))"
 
 	@echo " ✓ Wrote $$(ls -lsh $(PKGDIR)/$(@F)-*) "
+	@echo " Sleeping for $(SLEEP) ..."
+	sleep $(SLEEP)
 	@echo
 
 

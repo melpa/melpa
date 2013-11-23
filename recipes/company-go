@@ -1,0 +1,2 @@
+(company-go :repo "nsf/gocode" :fetcher github
+            :files ("emacs-company/company-go.el"))

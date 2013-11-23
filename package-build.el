@@ -223,6 +223,9 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (let ((new-timestamp
                (with-current-buffer (pb/with-wiki-rate-limit
                                      (url-retrieve-synchronously wiki-url))
+                 (unless (= 200 url-http-response-status)
+                   (error "HTTP error %s fetching %s" url-http-response-status wiki-url))
+                 (goto-char (point-max))
                  (pb/find-parse-time
                   "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"
                   url-http-end-of-headers))))
@@ -435,9 +438,14 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
 
-(defun pb/dump (data file)
-  "Write DATA to FILE as a pretty-printed Lisp sexp."
-  (write-region (concat (pp-to-string data) "\n") nil file))
+(defun pb/dump (data file &optional pretty-print)
+  "Write DATA to FILE as a Lisp sexp.
+Optionally PRETTY-PRINT the data."
+  (with-temp-file file
+    (message "File: %s" file)
+    (if pretty-print
+        (pp data (current-buffer))
+      (print data (current-buffer)))))
 
 (defun pb/write-pkg-file (pkg-file pkg-info)
   "Write PKG-FILE containing PKG-INFO."
@@ -451,7 +459,8 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
            (list (car elt)
                  (package-version-join (cadr elt))))
          (aref pkg-info 1)))
-   pkg-file))
+   pkg-file
+   t))
 
 (defun pb/read-from-file (file-name)
   "Read and return the Lisp data stored in FILE-NAME, or nil if no such file exists."
@@ -814,8 +823,8 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
                           file-name
                           version
                           cfg)))
-          (unless (string-equal (concat file-name ".el")
-                                (file-name-nondirectory pkg-source))
+          (unless (string-equal (downcase (concat file-name ".el"))
+                                (downcase (file-name-nondirectory pkg-source)))
             (error "Single file %s does not match package name %s"
                    (file-name-nondirectory pkg-source) file-name))
           (when (file-exists-p pkg-target)
@@ -949,11 +958,8 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
   (package-build-reinitialize)
   (let ((pkg-name (intern (file-name-nondirectory (buffer-file-name)))))
     (package-build-archive pkg-name)
-    (save-current-buffer
-      (switch-to-buffer-other-window
-       (find-file-noselect
-        (expand-file-name "archive-contents" package-build-archive-dir) t))
-      (revert-buffer t t))
+    (with-output-to-temp-buffer "*package-build-result*"
+      (pp (assoc pkg-name (package-build-archive-alist))))
     (when (yes-or-no-p "Install new package? ")
       (package-install-file (pb/find-package-file pkg-name)))))
 

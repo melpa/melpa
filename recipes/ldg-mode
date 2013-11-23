@@ -1,1 +1,0 @@
-(ldg-mode :fetcher github :repo "ledger/ledger" :files ("lisp/*.el"))

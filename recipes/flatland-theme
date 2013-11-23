@@ -1,0 +1,4 @@
+(flatland-theme :repo "gregchapple/flatland-emacs"
+               :fetcher github
+               :files ("flatland-theme.el"))
+

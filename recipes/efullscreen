@@ -1,0 +1,1 @@
+(efullscreen :repo "tomterl/efullscreen" :fetcher github)

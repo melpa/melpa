@@ -1,0 +1,1 @@
+(vim-region :repo "ongaeshi/emacs-vim-region" :fetcher github)

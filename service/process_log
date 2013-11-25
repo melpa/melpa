@@ -1,0 +1,8 @@
+#!/bin/bash -e
+
+cd /home/melpa/melpa
+/usr/bin/python /home/melpa/melpa/scripts/process_log.py
+
+/usr/sbin/logrotate -s /home/melpa/var/lib/logrotate/status /home/melpa/etc/logrotate
+
+sleep 6h

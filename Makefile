@@ -17,6 +17,7 @@ endif
 
 EVAL := $(EVAL) --no-site-file --batch -l package-build.el --eval
 
+TIMEOUT := $(shell which timeout && echo "timeout -k 60 600")
 
 all: packages packages/archive-contents json index
 
@@ -75,7 +76,7 @@ $(RCPDIR)/.dirstamp: .FORCE
 $(RCPDIR)/%: .FORCE
 	@echo " • Building recipe $(@F) ..."
 
-	- timeout -k 60 600 $(EVAL) "(package-build-archive '$(@F))"
+	- $(TIMEOUT) $(EVAL) "(package-build-archive '$(@F))"
 
 	@echo " ✓ Wrote $$(ls -lsh $(PKGDIR)/$(@F)-*) "
 	@echo " Sleeping for $(SLEEP) ..."

@@ -17,7 +17,7 @@ endif
 
 EVAL := $(EVAL) --no-site-file --batch -l package-build.el --eval
 
-TIMEOUT := $(shell which timeout && echo "timeout -k 60 600")
+TIMEOUT := $(shell which timeout && echo "-k 60 600")
 
 all: packages packages/archive-contents json index
 

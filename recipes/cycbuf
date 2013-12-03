@@ -1,0 +1,1 @@
+(cycbuf :repo "martinp26/cycbuf" :fetcher github)

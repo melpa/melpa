@@ -360,7 +360,8 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
 (defun pb/checkout-git (name config dir)
   "Check package NAME with config CONFIG out of git into DIR."
   (let ((repo (plist-get config :url))
-        (commit (plist-get config :commit)))
+        (commit (plist-get config :commit))
+	(bound (goto-char (point-max))))
     (with-current-buffer (get-buffer-create "*package-build-checkout*")
       (goto-char (point-max))
       (cond
@@ -376,10 +377,11 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
       (pb/run-process dir "git" "reset" "--hard"
                       (or commit (concat "origin/" (pb/git-head-branch dir))))
       (pb/run-process dir "git" "submodule" "update" "--init" "--recursive")
+      (pb/run-process dir "git" "log" "-n1" "--merges" "--pretty=format:'\%ci'")
       (apply 'pb/run-process dir "git" "log" "-n1" "--pretty=format:'\%ci'"
              (pb/expand-source-file-list dir config))
-      (pb/find-parse-time
-       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
+      (pb/find-parse-time-latest
+       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)" bound))))
 
 (defun pb/checkout-github (name config dir)
   "Check package NAME with config CONFIG out of github into DIR."

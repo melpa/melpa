@@ -1,0 +1,3 @@
+(j-cheatsheet :repo "abo-abo/j-cheatsheet"
+              :fetcher github
+              :files ("j-cheatsheet.el"))

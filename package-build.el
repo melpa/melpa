@@ -376,7 +376,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
       (pb/run-process dir "git" "reset" "--hard"
                       (or commit (concat "origin/" (pb/git-head-branch dir))))
       (pb/run-process dir "git" "submodule" "update" "--init" "--recursive")
-      (apply 'pb/run-process dir "git" "log" "-n1" "--pretty=format:'\%ci'"
+      (apply 'pb/run-process dir "git" "log" "--first-parent" "-n1" "--pretty=format:'\%ci'"
              (pb/expand-source-file-list dir config))
       (pb/find-parse-time
        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))

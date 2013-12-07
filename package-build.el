@@ -300,7 +300,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (pb/run-process nil "svn" "checkout" repo dir)))
       (apply 'pb/run-process dir "svn" "info"
              (pb/expand-source-file-list dir config))
-      (or (pb/find-parse-time-latest "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)" bound)
+      (or (pb/find-parse-time-latest "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)" bound)
           (error "No valid timestamps found!")))))
 
 (defun pb/cvs-repo (dir)
@@ -340,7 +340,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
                           "-d" target-dir repo))))
       (apply 'pb/run-process dir "cvs" "log"
              (pb/expand-source-file-list dir config))
-      (or (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [+-][0-9]\\{2\\}[0-9]\\{2\\}\\)" bound)
+      (or (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)" bound)
           (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}/[0-9]\\{2\\}/[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\);" bound)
           (error "No valid timestamps found!"))
       )))
@@ -412,7 +412,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
       (apply 'pb/run-process dir "bzr" "log" "-l1"
              (pb/expand-source-file-list dir config))
       (pb/find-parse-time
-       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
+       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)"))))
 
 (defun pb/hg-repo (dir)
   "Get the current hg repo for DIR."
@@ -437,7 +437,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
       (apply 'pb/run-process dir "hg" "log" "--style" "compact" "-l1"
              (pb/expand-source-file-list dir config))
       (pb/find-parse-time
-       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
+       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)"))))
 
 (defun pb/dump (data file &optional pretty-print)
   "Write DATA to FILE as a Lisp sexp.

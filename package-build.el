@@ -379,7 +379,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
       (apply 'pb/run-process dir "git" "log" "--first-parent" "-n1" "--pretty=format:'\%ci'"
              (pb/expand-source-file-list dir config))
       (pb/find-parse-time
-       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)"))))
+       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)"))))
 
 (defun pb/checkout-github (name config dir)
   "Check package NAME with config CONFIG out of github into DIR."

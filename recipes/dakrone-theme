@@ -1,0 +1,3 @@
+(dakrone-theme
+ :fetcher github
+ :repo "dakrone/dakrone-theme")

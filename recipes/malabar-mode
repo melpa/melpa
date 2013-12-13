@@ -1,6 +1,10 @@
 (malabar-mode 
 	:repo "m0smith/malabar-mode" 
 	:fetcher github 
-	:files ("." "src/main/lisp/*"))
+	:commit "origin/RELEASE-1.5.1"
+	:files (
+		("." "dist/malabar-1.5.1/lisp/*")
+		("lib" "dist/malabar-1.5.1/lib/*")
+		))
 		
 

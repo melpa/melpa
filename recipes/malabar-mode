@@ -1,0 +1,6 @@
+(malabar-mode 
+	:repo "m0smith/malabar-mode" 
+	:fetcher github 
+	:files ("." "src/main/lisp/*"))
+		
+

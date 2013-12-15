@@ -3,7 +3,7 @@
 	:fetcher git
 	:files (
 		("." "src/main/lisp/*")
-		"pom.xml"
+		("pom" "src/main/pom/*")
 		))
 		
 

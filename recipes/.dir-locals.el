@@ -1,4 +1,4 @@
-((emacs-lisp-mode . ((flycheck-checkers nil)))
+((emacs-lisp-mode . ((flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc))))
  (nil . ((eval . (when (and (buffer-file-name)
                             (file-regular-p (buffer-file-name))
                             (string-match-p "^[^.]" (buffer-file-name)))

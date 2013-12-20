@@ -1,3 +1,2 @@
 (tiny :repo "abo-abo/tiny"
-      :fetcher github
-      :files ("tiny.el"))
+      :fetcher github)

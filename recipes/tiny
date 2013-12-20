@@ -1,0 +1,2 @@
+(tiny :repo "abo-abo/tiny"
+      :fetcher github)

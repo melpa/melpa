@@ -1,6 +1,7 @@
 (malabar-mode 
 	:url "https://github.com/m0smith/malabar-mode.git" 
 	:fetcher git
+	:commit "origin/develop"
 	:files (
 		("." "src/main/lisp/*")
 		("pom" "src/main/pom/*")

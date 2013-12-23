@@ -1,0 +1,3 @@
+(jquery-doc :repo "ananthakumaran/jquery-doc.el"
+            :fetcher github
+            :files ("jquery-doc.el" "jquery-doc-data.el"))

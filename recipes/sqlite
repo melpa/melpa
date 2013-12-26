@@ -1,0 +1,1 @@
+(sqlite :repo "kidd/sqlite.el" :fetcher github)

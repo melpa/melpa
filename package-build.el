@@ -1046,7 +1046,7 @@ Returns the archive entry for the package."
 
 ;; Utility functions
 (require 'json)
-(load (expand-file-name "json-fix" pb/this-dir))
+(load (expand-file-name "json-fix" pb/this-dir) nil 'nomessage)
 
 (defun package-build-recipe-alist-as-json (fn)
   (interactive)

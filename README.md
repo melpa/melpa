@@ -269,7 +269,6 @@ files specified explicitly.
 
 ### Example: Multiple Files in Multiple Directories
 
-There are special cases when we need
 There are special cases where creation of the package comes from many
 different sub-directories in the repository and the destination
 sub-directories need to be explicitly set.

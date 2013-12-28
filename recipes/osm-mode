@@ -1,0 +1,1 @@
+(osm-mode :fetcher github :repo "ruediger/osm-mode")

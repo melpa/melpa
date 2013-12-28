@@ -63,6 +63,9 @@
   :group 'package-build
   :type 'string)
 
+(defvar package-build-verbose t
+  "When non-nil, `package-build' feels free to print information about
+its progress.")
 
 ;;; Internal Variables
 
@@ -91,6 +94,10 @@ function for access to this function")
     (:exclude "tests.el" "*-test.el" "*-tests.el"))
   "Default value for :files attribute in recipes.")
 
+(defun pb/message (format-string &rest args)
+  "Log a message using FORMAT-STRING and ARGS as per `message'."
+  (when package-build-verbose
+    (apply 'message format-string args)))
 
 (defun pb/slurp-file (file-name)
   "Return the contents of FILE-NAME as a string, or nil if no such file exists."
@@ -168,9 +175,9 @@ the same arguments.
 Returns a last-modification timestamp for the :files listed in
 CONFIG, if any, or `package-build-default-files-spec' otherwise."
   (let ((repo-type (plist-get config :fetcher)))
-    (message "Fetcher: %s" repo-type)
+    (pb/message "Fetcher: %s" repo-type)
     (unless (eq 'wiki repo-type)
-      (message "Source: %s\n" (or (plist-get config :repo) (plist-get config :url))))
+      (pb/message "Source: %s\n" (or (plist-get config :repo) (plist-get config :url))))
     (funcall (intern (format "pb/checkout-%s" repo-type))
              package-name config working-dir)))
 
@@ -190,7 +197,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
             (,elapsed (- ,now pb/last-wiki-fetch-time)))
        (when (< ,elapsed pb/wiki-min-request-interval)
          (let ((wait (- pb/wiki-min-request-interval ,elapsed)))
-           (message "Waiting %.2f secs before hitting Emacswiki again" wait)
+           (pb/message "Waiting %.2f secs before hitting Emacswiki again" wait)
            (sleep-for wait)))
        (unwind-protect
            (progn ,@body)
@@ -220,9 +227,9 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
                (string-equal new-content-hash prev-content-hash))
           ;; File has not changed, so return old timestamp
           (progn
-            (message "%s is unchanged" filename)
+            (pb/message "%s is unchanged" filename)
             (cdr stamp-info))
-        (message "%s has changed - checking mod time" filename)
+        (pb/message "%s has changed - checking mod time" filename)
         (let ((new-timestamp
                (with-current-buffer (pb/with-wiki-rate-limit
                                      (url-retrieve-synchronously wiki-url))
@@ -280,11 +287,11 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
 
 (defun pb/princ-exists (dir)
   "Print a message that the contents of DIR will be updated."
-  (message "Updating %s" dir))
+  (pb/message "Updating %s" dir))
 
 (defun pb/princ-checkout (repo dir)
   "Print a message that REPO will be checked out into DIR."
-  (message "Cloning %s to %s" repo dir))
+  (pb/message "Cloning %s to %s" repo dir))
 
 (defun pb/checkout-svn (name config dir)
   "Check package NAME with config CONFIG out of svn into DIR."
@@ -446,7 +453,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
   "Write DATA to FILE as a Lisp sexp.
 Optionally PRETTY-PRINT the data."
   (with-temp-file file
-    (message "File: %s" file)
+    (pb/message "File: %s" file)
     (if pretty-print
         (pp data (current-buffer))
       (print data (current-buffer)))))
@@ -624,7 +631,7 @@ If PKG-INFO is nil, an empty one is created."
 Note that the working directory (if present) is not deleted by
 this function, since the archive list may contain another version
 of the same-named package which is to be kept."
-  (message "Removing archive: %s" archive-entry)
+  (pb/message "Removing archive: %s" archive-entry)
   (mapcar 'pb/delete-file-if-exists
           (list  (pb/archive-file-name archive-entry)
                  (pb/entry-file-name archive-entry))))
@@ -647,7 +654,7 @@ of the same-named package which is to be kept."
   "Return a list of data structures for all recipes in `package-build-recipes-dir'."
   (cl-loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
            for pkg-info = (condition-case err (pb/read-recipe file-name)
-                            (error (message (error-message-string err))
+                            (error (pb/message (error-message-string err))
                                    nil))
            when pkg-info
            collect pkg-info))
@@ -715,8 +722,8 @@ Deletes the .texi(nfo) files if they exist."
                (expand-file-name source-file source-dir)
                "-o"
                info-path)
-              (message "Created %s" info-path))))
-        (message "Removing %s" (expand-file-name dest-file target-dir))
+              (pb/message "Created %s" info-path))))
+        (pb/message "Removing %s" (expand-file-name dest-file target-dir))
         (delete-file (expand-file-name dest-file target-dir))))))
 
 (defun pb/generate-dir-file (files target-dir)
@@ -753,10 +760,10 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
       (make-directory newdir t)))
   (cond
    ((file-regular-p file)
-    (message "%s -> %s" file newname)
+    (pb/message "%s -> %s" file newname)
     (copy-file file newname))
    ((file-directory-p file)
-    (message "%s => %s" file newname)
+    (pb/message "%s => %s" file newname)
     (copy-directory file newname))))
 
 
@@ -799,7 +806,7 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
            (expand-file-name file-name package-build-working-dir))))
 
 
-    (message "\n;;; %s\n" file-name)
+    (pb/message "\n;;; %s\n" file-name)
     (let* ((version (package-build-checkout name rcp pkg-working-dir))
            (files (pb/expand-config-file-list pkg-working-dir rcp))
            (default-directory package-build-working-dir)
@@ -813,9 +820,9 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
       (pb/dump archive-entry
                (expand-file-name (concat file-name "-" version ".entry")
                                  package-build-archive-dir))
-      (message "Built in %.3fs, finished at %s"
-               (time-to-seconds (time-since start-time))
-               (current-time-string))
+      (pb/message "Built in %.3fs, finished at %s"
+                  (time-to-seconds (time-since start-time))
+                  (current-time-string))
       file-name)))
 
 ;;;###autload
@@ -851,7 +858,7 @@ Returns the archive entry for the package."
           (condition-case err
               (pb/package-buffer-info-vec)
             (error
-             (message "Warning: %S" err)))
+             (pb/message "Warning: %S" err)))
           (kill-buffer)))
 
       (pb/write-pkg-readme (and (> (length pkg-info) 4) (aref pkg-info 4))
@@ -977,7 +984,7 @@ Returns the archive entry for the package."
     (condition-case err
         (package-build-archive pkg)
       (error
-       (message "%s" (error-message-string err))
+       (pb/message "%s" (error-message-string err))
        nil))))
 
 

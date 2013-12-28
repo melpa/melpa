@@ -84,10 +84,11 @@ function for access to this function")
 (defvar pb/archive-alist-initialized nil
   "Determines if pb/archive-alist has been initialized.")
 
-(defconst pb/default-files-spec '("*.el" "*.el.in" "dir"
-                                  "*.info" "*.texi" "*.texinfo"
-                                  "doc/*.info" "doc/*.texi" "doc/*.texinfo"
-                                  (:exclude "tests.el" "*-test.el" "*-tests.el"))
+(defconst package-build-default-files-spec
+  '("*.el" "*.el.in" "dir"
+    "*.info" "*.texi" "*.texinfo"
+    "doc/*.info" "doc/*.texi" "doc/*.texinfo"
+    (:exclude "tests.el" "*-test.el" "*-tests.el"))
   "Default value for :files attribute in recipes.")
 
 
@@ -158,18 +159,20 @@ Output is written to the current buffer."
     (re-search-forward regex)
     (match-string-no-properties 1)))
 
-
-(defun pb/checkout (name config cwd)
-  "Check out source for package NAME with CONFIG under working dir CWD.
-In turn, this function uses the :fetcher option in the config to
+(defun package-build-checkout (package-name config working-dir)
+  "Check out source for PACKAGE-NAME with CONFIG under WORKING-DIR.
+In turn, this function uses the :fetcher option in the CONFIG to
 choose a source-specific fetcher function, which it calls with
-the same arguments."
+the same arguments.
+
+Returns a last-modification timestamp for the :files listed in
+CONFIG, if any, or `package-build-default-files-spec' otherwise."
   (let ((repo-type (plist-get config :fetcher)))
     (message "Fetcher: %s" repo-type)
     (unless (eq 'wiki repo-type)
       (message "Source: %s\n" (or (plist-get config :repo) (plist-get config :url))))
     (funcall (intern (format "pb/checkout-%s" repo-type))
-             name config cwd)))
+             package-name config working-dir)))
 
 (defvar pb/last-wiki-fetch-time 0
   "The time at which an emacswiki URL was last requested.
@@ -683,7 +686,7 @@ file path and DEST is the relative path to which it should be copied."
 
 (defun pb/expand-config-file-list (dir config)
   "In DIR, expand the :files for CONFIG using 'pb/expand-file-specs."
-  (let* ((patterns (or (plist-get config :files) pb/default-files-spec))
+  (let* ((patterns (or (plist-get config :files) package-build-default-files-spec))
          (files (pb/expand-file-specs dir patterns)))
     (or files
         (error "No matching file(s) found in %s: %s" dir patterns))))
@@ -797,7 +800,7 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
 
 
     (message "\n;;; %s\n" file-name)
-    (let* ((version (pb/checkout name rcp pkg-working-dir))
+    (let* ((version (package-build-checkout name rcp pkg-working-dir))
            (files (pb/expand-config-file-list pkg-working-dir rcp))
            (default-directory package-build-working-dir)
            (start-time (current-time))

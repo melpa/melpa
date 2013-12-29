@@ -1,4 +1,0 @@
-(pyregexp :repo "benma/pyregexp" 
-	  :fetcher github 
-	  :files ("pyregexp.el" "pyregexp.py"))
-

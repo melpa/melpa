@@ -1,1 +1,0 @@
-(emacs-web-server :fetcher github :repo "eschulte/emacs-web-server")

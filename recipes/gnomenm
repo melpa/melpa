@@ -1,1 +1,1 @@
-(gnomenm :fetcher github :repo "nicferrier/gnomenm")
+(gnomenm :fetcher github :repo "nicferrier/emacs-nm")

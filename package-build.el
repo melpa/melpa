@@ -660,7 +660,7 @@ of the same-named package which is to be kept."
            collect pkg-info))
 
 
-(defun pb/expand-file-specs (dir specs &optional subdir allow-empty)
+(defun package-build-expand-file-specs (dir specs &optional subdir allow-empty)
   "In DIR, expand SPECS, optionally under SUBDIR.
 The result is a list of (SOURCE . DEST), where SOURCE is a source
 file path and DEST is the relative path to which it should be copied.
@@ -675,11 +675,11 @@ for ALLOW-EMPTY to prevent this error."
             (if (consp entry)
                 (if (eq :exclude (car entry))
                     (cl-nset-difference lst
-                                        (pb/expand-file-specs dir (cdr entry) nil t)
+                                        (package-build-expand-file-specs dir (cdr entry) nil t)
                                         :key 'car
                                         :test 'equal)
                   (nconc lst
-                         (pb/expand-file-specs
+                         (package-build-expand-file-specs
                           dir
                           (cdr entry)
                           (concat prefix (car entry))
@@ -705,7 +705,7 @@ for ALLOW-EMPTY to prevent this error."
 
 (defun pb/expand-source-file-list (dir config)
   "Shorthand way to expand paths in DIR for source files listed in CONFIG."
-  (mapcar 'car (pb/expand-file-specs dir (pb/config-file-list config))))
+  (mapcar 'car (package-build-expand-file-specs dir (pb/config-file-list config))))
 
 (defun pb/generate-info-files (files source-dir target-dir)
   "Create .info files from any .texi files listed in FILES in SOURCE-DIR in TARGET-DIR.
@@ -842,7 +842,7 @@ syntax is currently only documented in the MELPA README.  You can
 simply pass `package-build-default-files-spec' in most cases.
 
 Returns the archive entry for the package."
-  (let ((files (pb/expand-file-specs source-dir file-specs)))
+  (let ((files (package-build-expand-file-specs source-dir file-specs)))
    (cond
     ((not version)
      (error "Unable to check out repository for %s" package-name))

@@ -660,7 +660,7 @@ of the same-named package which is to be kept."
            collect pkg-info))
 
 
-(defun pb/expand-file-specs (dir specs &optional subdir)
+(defun package-build-expand-file-specs (dir specs &optional subdir)
   "In DIR, expand SPECS, optionally under SUBDIR.
 The result is a list of (SOURCE . DEST), where SOURCE is a source
 file path and DEST is the relative path to which it should be copied."
@@ -672,13 +672,14 @@ file path and DEST is the relative path to which it should be copied."
             (if (consp entry)
                 (if (eq :exclude (car entry))
                     (cl-nset-difference lst
-                                        (pb/expand-file-specs dir (cdr entry))
+                                        (package-build-expand-file-specs dir (cdr entry))
                                         :key 'car
                                         :test 'equal)
                   (nconc lst
-                         (pb/expand-file-specs dir
-                                               (cdr entry)
-                                               (concat prefix (car entry)))))
+                         (package-build-expand-file-specs
+                          dir
+                          (cdr entry)
+                          (concat prefix (car entry)))))
               (nconc
                lst (mapcar (lambda (f)
                              (let ((destname)))
@@ -692,9 +693,9 @@ file path and DEST is the relative path to which it should be copied."
 
 
 (defun pb/expand-config-file-list (dir config)
-  "In DIR, expand the :files for CONFIG using 'pb/expand-file-specs."
+  "In DIR, expand the :files for CONFIG using 'package-build-expand-file-specs."
   (let* ((patterns (or (plist-get config :files) package-build-default-files-spec))
-         (files (pb/expand-file-specs dir patterns)))
+         (files (package-build-expand-file-specs dir patterns)))
     (or files
         (error "No matching file(s) found in %s: %s" dir patterns))))
 
@@ -811,12 +812,10 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
            (files (pb/expand-config-file-list pkg-working-dir rcp))
            (default-directory package-build-working-dir)
            (start-time (current-time))
-           archive-entry)
-      (setq archive-entry
-            (package-build-package version files
-                                   pkg-working-dir
-                                   package-build-archive-dir))
-
+           (archive-entry (package-build-package (symbol-name name)
+                                                 version files
+                                                 pkg-working-dir
+                                                 package-build-archive-dir)))
       (pb/dump archive-entry
                (expand-file-name (concat file-name "-" version ".entry")
                                  package-build-archive-dir))
@@ -826,26 +825,29 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
       file-name)))
 
 ;;;###autoload
-(defun package-build-package (version files source-dir target-dir)
-  "Create VERSION of archive containing FILES from SOURCE-DIR and store in the TARGET_DIR.
+(defun package-build-package (package-name version files source-dir target-dir)
+  "Create PACKAGE-NAME with VERSION containing FILES from SOURCE-DIR, and store in TARGET-DIR.
+
+Argument FILES is an list of (SRC . DEST) relative path pairs, as
+returned by `package-build-expand-file-specs'.
 
 Returns the archive entry for the package."
   (cond
    ((not version)
-    (error "Unable to check out repository for %s" name))
+    (error "Unable to check out repository for %s" package-name))
    ((= 1 (length files))
     (let* ((pkg-source (expand-file-name (caar files) source-dir))
            (pkg-target (expand-file-name
-                        (concat file-name "-" version ".el")
+                        (concat package-name "-" version ".el")
                         target-dir))
            (pkg-info (pb/merge-package-info
                       (pb/get-package-info pkg-source)
-                      file-name
+                      package-name
                       version)))
-      (unless (string-equal (downcase (concat file-name ".el"))
+      (unless (string-equal (downcase (concat package-name ".el"))
                             (downcase (file-name-nondirectory pkg-source)))
         (error "Single file %s does not match package name %s"
-               (file-name-nondirectory pkg-source) file-name))
+               (file-name-nondirectory pkg-source) package-name))
       (when (file-exists-p pkg-target)
         (delete-file pkg-target t))
       (copy-file pkg-source pkg-target)
@@ -862,16 +864,16 @@ Returns the archive entry for the package."
           (kill-buffer)))
 
       (pb/write-pkg-readme (and (> (length pkg-info) 4) (aref pkg-info 4))
-                           file-name)
+                           package-name)
       (pb/archive-entry pkg-info 'single)))
    ((< 1 (length  files))
-    (let* ((tmp-dir (file-name-as-directory (make-temp-file file-name t)))
-           (pkg-dir-name (concat file-name "-" version))
+    (let* ((tmp-dir (file-name-as-directory (make-temp-file package-name t)))
+           (pkg-dir-name (concat package-name "-" version))
            (pkg-tmp-dir (expand-file-name pkg-dir-name tmp-dir))
-           (pkg-file (concat file-name "-pkg.el"))
+           (pkg-file (concat package-name "-pkg.el"))
            (pkg-file-source (or (pb/find-source-file pkg-file files)
                                 pkg-file))
-           (file-source (concat file-name ".el"))
+           (file-source (concat package-name ".el"))
            (pkg-source (or (pb/find-source-file file-source files)
                            file-source))
            (pkg-info (pb/merge-package-info
@@ -882,7 +884,7 @@ Returns the archive entry for the package."
                              (expand-file-name (concat pkg-file ".in")
                                                (file-name-directory pkg-source)))
                             (pb/get-package-info pkg-source)))
-                      file-name
+                      package-name
                       version)))
 
 
@@ -895,13 +897,13 @@ Returns the archive entry for the package."
       (pb/generate-dir-file files pkg-tmp-dir)
 
       (let ((default-directory tmp-dir))
-        (pb/create-tar (expand-file-name (concat file-name "-" version ".tar")
+        (pb/create-tar (expand-file-name (concat package-name "-" version ".tar")
                                          target-dir)
                        pkg-dir-name))
 
       (let ((default-directory source-dir))
         (pb/write-pkg-readme (pb/find-package-commentary pkg-source)
-                             file-name))
+                             package-name))
 
       (delete-directory pkg-tmp-dir t nil)
       (pb/archive-entry pkg-info 'tar)))

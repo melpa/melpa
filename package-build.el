@@ -825,7 +825,7 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
                   (current-time-string))
       file-name)))
 
-;;;###autload
+;;;###autoload
 (defun package-build-package (version files source-dir target-dir)
   "Create VERSION of archive containing FILES from SOURCE-DIR and store in the TARGET_DIR.
 

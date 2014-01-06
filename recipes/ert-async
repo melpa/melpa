@@ -1,0 +1,1 @@
+(ert-async :fetcher github :repo "rejeep/ert-async.el")

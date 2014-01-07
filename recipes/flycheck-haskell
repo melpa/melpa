@@ -1,1 +1,2 @@
-(flycheck-haskell :fetcher github :repo "flycheck/flycheck-haskell")
+(flycheck-haskell :fetcher github :repo "flycheck/flycheck-haskell"
+                  :files ("*.el" ("helpers" "helpers/*")))

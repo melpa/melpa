@@ -1,0 +1,3 @@
+(lfe :repo "rvirding/lfe"
+             :fetcher github
+             :files ("emacs/*.el"))

@@ -1,0 +1,3 @@
+(helm-c-moccur :repo "myuhe/helm-c-moccur.el"
+               :fetcher github
+               :files ("helm-c-moccur.el"))

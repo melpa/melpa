@@ -824,9 +824,7 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
                                                  (pb/config-file-list rcp)
                                                  pkg-working-dir
                                                  package-build-archive-dir)))
-      (pb/dump archive-entry
-               (expand-file-name (concat file-name "-" version ".entry")
-                                 package-build-archive-dir))
+      (pb/dump archive-entry (pb/entry-file-name archive-entry))
       (pb/message "Built in %.3fs, finished at %s"
                   (time-to-seconds (time-since start-time))
                   (current-time-string))

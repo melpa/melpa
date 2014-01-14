@@ -469,7 +469,8 @@ Optionally PRETTY-PRINT the data."
          (lambda (elt)
            (list (car elt)
                  (package-version-join (cadr elt))))
-         (aref pkg-info 1)))
+         (aref pkg-info 1))
+      ,(and (>= (length pkg-info) 5) (aref pkg-info 4)))
    pkg-file
    t))
 
@@ -595,12 +596,14 @@ If PKG-INFO is nil, an empty one is created."
   (let* ((name (intern (aref pkg-info 0)))
          (requires (aref pkg-info 1))
          (desc (or (aref pkg-info 2) "No description available."))
-         (version (aref pkg-info 3)))
+         (version (aref pkg-info 3))
+         (extras (and (>= (length pkg-info) 5) (aref pkg-info 4))))
     (cons name
           (vector (version-to-list version)
                   requires
                   desc
-                  type))))
+                  type
+                  extras))))
 
 (defun pb/archive-file-name (archive-entry)
   "Return the path of the file in which the package for ARCHIVE-ENTRY is stored."
@@ -794,7 +797,8 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
         (vector (package-desc-name desc)
                 (package-desc-reqs desc)
                 (package-desc-summary desc)
-                (package-desc-version desc))
+                (package-desc-version desc)
+                (package-desc-extras desc))
       desc)))
 
 

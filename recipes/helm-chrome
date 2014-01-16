@@ -1,0 +1,1 @@
+(helm-chrome :fetcher github :repo "kawabata/helm-chrome")

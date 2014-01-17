@@ -1,0 +1,2 @@
+(magit-annex :fetcher github
+             :repo "kyleam/magit-annex")

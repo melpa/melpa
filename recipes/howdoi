@@ -1,2 +1,2 @@
-(minitest :repo "arthurnn/howdoi-emacs"
-          :fetcher github)
+(howdoi :repo "arthurnn/howdoi-emacs"
+        :fetcher github)

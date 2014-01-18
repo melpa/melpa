@@ -1,0 +1,2 @@
+(minitest :repo "arthurnn/howdoi-emacs"
+          :fetcher github)

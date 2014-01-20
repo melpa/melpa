@@ -1,2 +1,2 @@
-(howdoi :repo "arthurnn/howdoi-emacs"
+(howdoi :repo "atykhonov/emacs-howdoi"
         :fetcher github)

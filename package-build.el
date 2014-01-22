@@ -63,6 +63,10 @@
   :group 'package-build
   :type 'string)
 
+(defcustom package-build-stable-archive-dir (expand-file-name "packages-stable/" pb/this-dir)
+  "Directory in which to keep compiled archives of stable packages."
+  :group 'package-build
+  :type 'string)
 
 (defcustom package-build-recipes-dir (expand-file-name "recipes/" pb/this-dir)
   "Directory containing recipe files."
@@ -854,6 +858,10 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
     (pb/message "\n;;; %s\n" file-name)
     (let* ((version (package-build-checkout name rcp pkg-working-dir))
            (default-directory package-build-working-dir)
+           (package-build-archive-dir
+            (if package-build-stable
+                package-build-stable-archive-dir
+              package-build-archive-dir))
            (start-time (current-time))
            (archive-entry (package-build-package (symbol-name name)
                                                  version

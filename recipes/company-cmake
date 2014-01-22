@@ -1,1 +1,0 @@
-(company-cmake :fetcher github :repo "company-mode/company-cmake")

@@ -1,0 +1,1 @@
+(helm-github-stars :fetcher github :repo "Sliim/helm-github-stars")

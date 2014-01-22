@@ -1,1 +1,1 @@
-(puppet-mode :fetcher github :repo "puppetlabs/puppet-syntax-emacs")
+(puppet-mode :fetcher github :repo "lunaryorn/puppet-mode")

@@ -1,1 +1,0 @@
-(helm-mercurial-queue :repo "emacs-helm/helm-mercurial-queue" :fetcher github)

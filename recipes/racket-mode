@@ -1,0 +1,2 @@
+(racket-mode :repo "greghendershott/racket-mode" :fetcher github
+             :files ("*.el" "*.rkt"))

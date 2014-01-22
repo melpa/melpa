@@ -1,0 +1,1 @@
+(wonderland :fetcher github :repo "kurisuwhyte/emacs-wonderland" :files ("source/*.el"))

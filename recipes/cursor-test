@@ -1,0 +1,3 @@
+(cursor-test :repo "ainame/cursor-test.el"
+             :fetcher github
+             :files ("cursor-test.el"))

@@ -1,1 +1,0 @@
-(showcss-mode :repo "smmcg/showcss-mode" :fetcher github)

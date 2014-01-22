@@ -1,0 +1,1 @@
+(elm-mode :fetcher github :repo "jcollard/elm-mode")

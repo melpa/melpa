@@ -1,0 +1,1 @@
+(helm-company :repo "yasuyk/helm-company" :fetcher github)

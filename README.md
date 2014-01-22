@@ -8,10 +8,10 @@ code using simple recipes. (Think of it as a server-side version of
 [el-get](https://github.com/dimitri/el-get), or even
 [homebrew](https://github.com/mxcl/homebrew).)
 
-Packages are updated hourly.
+Packages are updated at intervals throughout the day.
 
-If you just want to browse and install packages, check out the
-[archive index page](http://melpa.milkbox.net/) for instructions.
+To browse available packages, check out the
+[archive index page](http://melpa.milkbox.net/).
 
 Adding packages is as simple as submitting a pull request; read on for
 details.
@@ -20,10 +20,9 @@ details.
 
 * [Usage](#usage)
 * [Contributing](#contributing-new-recipes)
-* [Package Format](#package-format)
+* [Recipe Format](#recipe-format)
 * [Build Scripts](#build-scripts)
 * [API](#api)
-* [MELPA Package](#melpa-package)
 * [About](#about)
 
 
@@ -33,27 +32,39 @@ To use the MELPA repository, add it to `package-archives` after
 `(require 'package)` and before the call to `package-initialize` in
 your `init.el` file.
 
-    (add-to-list 'package-archives
-                 '("melpa" . "http://melpa.milkbox.net/packages/") t)
+```lisp
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+```
+
+In Emacs < 24, you'll also need to explicitly include the GNU ELPA
+archive, which provides important compatibility libraries like
+`cl-lib`:
+
+```lisp
+(when (< emacs-major-version 24)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+```
 
 A complete minimal example for MELPA,
 
-    (require 'package)
-    (add-to-list 'package-archives
-                 '("melpa" . "http://melpa.milkbox.net/packages/") t)
-    (package-initialize)
+```lisp
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(when (< emacs-major-version 24)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize)
+```
 
-
-Since `package.el` doesn't allow locking packages to certain version,
+Since `package.el` doesn't allow locking packages to certain version, MELPA packages
+will override those available from any other package source, so
 we also provide a package `melpa.el` which contains code to allow
 restricting packages to specific repositories.  This allows someone to
 blacklist packages that come from a specific repository, or blacklist
 all packages from a repository and only whitelist certain packages.
 
-See the [MELPA Package](#melpa-package) section below or
-[Installing](http://melpa.milkbox.net/#installing) section on the
-MELPA homepage.
-
+See the [MELPA Package](#melpa-package) section below if you think you might want that.
 
 
 ## Contributing New Recipes
@@ -81,7 +92,7 @@ New recipe submissions should adhere to the following guidelines,
 
 * Recipes should try to minimize the size of the resulting package by
   specifying only files relevant to the package. See the
-  [Package Format](#package-format) section for more information on
+  [Recipe Format](#recipe-format) section for more information on
   specifying package files.
 
 
@@ -118,9 +129,12 @@ Let `<NAME>` denote the name of the recipe to submit.
 2. Add your new file under the directory specified by
 `package-build-recipes-dir` (default: `recipes/` directory where
 `package-build` was loaded).
-3. Confirm your package build properly by running
+3. Confirm your package built properly by running
 
         make recipes/<NAME>
+
+  (Be sure that the `emacs` on your path is at least version 23, or
+  set `$EMACS` to the location of a suitable binary.)
 
 4. Install the file you built by running `package-install-file` from
 within Emacs and specifying the newly built package in the directory
@@ -135,13 +149,13 @@ command-line utility by [defunkt](http://chriswanstrath.com/) which
 helps simplify this process.
 
 
-## Package Format
+## Recipe Format
 
 Packages are specified by files in the `recipes` directory.  You can
 contribute a new package by adding a new file under `recipes` using
 the following form (`[...]` denotes optional or conditional values),
 
-```elisp
+```lisp
 (<package-name>
  :fetcher [git|github|bzr|hg|darcs|svn|cvs|wiki]
  [:url "<repo url>"]
@@ -213,7 +227,7 @@ specified package requires more complex file specification.
 [emacswiki]: http://www.emacswiki.org/
 
 
-### Single File Repository
+### Example: Single File Repository
 
 [ido-ubiquitous](https://github.com/DarwinAwardWinner/ido-ubiquitous) is a repository that contains two files:
 
@@ -222,20 +236,20 @@ specified package requires more complex file specification.
 
 Since there is only one `.el` file, this package only needs the `:url` and `:fetcher` specified,
 
-```elisp
+```lisp
 (ido-ubiquitous
  :url "https://github.com/DarwinAwardWinner/ido-ubiquitous.git"
  :fetcher git)
 ```
 
-### Multiple Packages in one Repository
+### Example: Multiple Packages in one Repository
 
 The
 [emacs-starter-kit](https://github.com/technomancy/emacs-starter-kit)
 contains the *starter-kit* package along with extra packages in the
 `modules` directory; *starter-kit-bindings*, *starter-kit-lisp*, etc.
 
-```elisp
+```lisp
 (starter-kit
  :url "https://github.com/technomancy/emacs-starter-kit.git"
  :fetcher git)
@@ -252,16 +266,15 @@ contained in the `modules/` subdirectory and thus needs the packages
 files specified explicitly.
 
 
-### Multiple Files in Multiple Directories
+### Example: Multiple Files in Multiple Directories
 
-There are special cases when we need
 There are special cases where creation of the package comes from many
 different sub-directories in the repository and the destination
 sub-directories need to be explicitly set.
 
 Consider the `flymake-perlcritic` recipe,
 
-```elisp
+```lisp
 (flymake-perlcritic :repo "illusori/emacs-flymake-perlcritic"
                     :fetcher github
                     :files ("*.el" ("bin" "bin/flymake_perlcritic")))
@@ -281,7 +294,7 @@ Notice that specifying an entry in `:files` that is a list takes the
 first element to be the destination directory.  These can be embedded
 further, such as the following---hypothetical---entry for `:files`,
 
-```elisp
+```lisp
 ("*.el" ("snippets"
          ("html-mode" "snippets/html-mode/*")
          ("python-mode" "snippets/python-mode/*")))
@@ -305,7 +318,7 @@ But a better solution, given that we probably want to copy the
 *entire* `snippets` directory to the root of the package, we could
 just specify that directory.  Consider the `pony-mode` recipe,
 
-```elisp
+```lisp
 (pony-mode
  :repo "davidmiller/pony-mode"
  :fetcher github
@@ -407,7 +420,7 @@ repositories and package directories being built.
 any built packages.
 
 - `package-build-recipes-dir` : Directory containing MELPA compatible
-recipes.  See [Package Format](#package-format) section for more details.
+recipes.  See [Recipe Format](#recipe-format) section for more details.
 
 
 ## Configuration
@@ -417,58 +430,6 @@ This can be configured using the `package-build-archive-dir` variable.
 
 Repositories are checked out to the `working/` directory by default.
 This can be configured using the `package-build-working-dir` variable.
-
-## MELPA Package
-
-The `melpa.el` package---available in MELPA--allows creating a
-whitelist or blacklist of packages for a specific repository.  This
-allows for disabling all packages from a specific repository and only
-enabling certain packages, or simply blacklist a certain subset of packages.
-
-### Configuring
-
-By default there are two variables that can be customized to specify
-which packages will be enabled (whitelist packages only) or excluded
-(blacklist of packages)
-
-
-- `package-archive-enable-alist` : Optional Alist of enabled packages
-    used by `package-filter`. The format is (ARCHIVE . PACKAGE ...),
-    where ARCHIVE is a string matching an archive name in
-    `package-archives`, PACKAGE is a symbol of a package in ARCHIVE to
-    enable. If no ARCHIVE exists in the alist, all packages are
-    enabled.
-
-    If no ARCHIVE exists in the alist, all packages are enabled.
-
-<!-- extra padding??? -->
-
-- `package-archive-exclude-alist` : Alist of packages excluded by
-    `package-filter`. The format is (ARCHIVE . PACKAGE ...), where
-    ARCHIVE is a string matching an archive name in
-    `package-archives`, PACKAGE is a symbol of a package in that
-    archive to exclude. Any specified package is excluded regardless
-    of the value of `package-archive-enable-alist`
-
-
-    If a particular ARCHIVE has an entry in
-`package-archive-enable-alist` then only packages
-
-
-
-### Manual Installation
-
-You can install the package manually by pasting this into your `*scratch*` buffer and evaluating it.
-
-    (progn
-      (switch-to-buffer
-       (url-retrieve-synchronously
-        "https://raw.github.com/milkypostman/melpa/master/melpa.el"))
-      (package-install-from-buffer  (package-buffer-info) 'single))
-
-
-
-
 
 ## About
 

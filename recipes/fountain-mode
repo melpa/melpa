@@ -1,0 +1,2 @@
+(fountain-mode :fetcher github
+               :repo rnkn/fountain-mode)

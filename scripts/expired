@@ -1,0 +1,35 @@
+#!/bin/sh
+:;exec emacs --script "$0" "$@"
+
+(defun missing-packages (recipes packages)
+  "Show elements of RECIPES that are no in PACKAGES."
+  (let (missing)
+    (while recipes
+      (let ((recipe (car recipes))
+            (package (car packages)))
+        (cond
+         ((or (not package) (string< recipe package))
+          (setq missing (cons recipe missing)))
+         ((string< package recipe)
+          (error "Package has no recipe: %s" package))
+         (t (setq packages (cdr packages)))))
+      (setq recipes (cdr recipes)))
+    (reverse missing)))
+
+(defun stripstuff (fn)
+  "Strip the date and extension from FN."
+  (string-match "\\(.*\\)-[0-9]+\\.[0-9]+\\.\\(el$\\|tar$\\)" fn)
+  (match-string 1 fn))
+
+
+(add-to-list 'load-path (expand-file-name ".." (file-name-directory load-file-name)))
+(require 'package-build)
+
+(dolist (entry-file (directory-files package-build-archive-dir t ".*\.entry$"))
+  (when (> (time-to-seconds
+	    (time-subtract (current-time)
+			   (nth 5 (file-attributes entry-file))))
+	   (* 23 60 60))
+    (princ (symbol-name (car (pb/read-from-file entry-file))))
+    (princ "\n")))
+

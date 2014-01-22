@@ -1,0 +1,1 @@
+(py-import-check :fetcher github :repo "psibi/emacs-py-import-check")

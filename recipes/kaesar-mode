@@ -1,0 +1,1 @@
+(kaesar-mode :fetcher github :repo "mhayashi1120/Emacs-kaesar" :files ("kaesar-mode.el"))

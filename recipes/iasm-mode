@@ -1,0 +1,1 @@
+(iasm-mode :fetcher github :repo "RAttab/iasm-mode")

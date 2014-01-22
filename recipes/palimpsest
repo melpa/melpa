@@ -1,0 +1,3 @@
+(palimpsest 
+ :fetcher github
+ :repo "danielsz/Palimpsest")  

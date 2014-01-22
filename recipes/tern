@@ -1,0 +1,1 @@
+(tern :fetcher github :repo "marijnh/tern" :files ("emacs/tern.el"))

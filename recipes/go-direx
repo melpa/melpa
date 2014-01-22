@@ -1,0 +1,1 @@
+(go-direx :repo "syohex/emacs-go-direx" :fetcher github)

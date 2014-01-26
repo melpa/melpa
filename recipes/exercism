@@ -1,0 +1,1 @@
+(exercism :repo "prathamesh-sonpatki/exercism-mode" :fetcher github)

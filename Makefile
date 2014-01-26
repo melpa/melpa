@@ -7,6 +7,12 @@ WEBROOT := $$HOME/www
 EMACS   ?= emacs
 SLEEP   ?= 0
 SANDBOX := ./sandbox
+ifdef STABLE
+PKGDIR := ./packages-stable
+endif
+STABLE ?= nil
+
+EVAL := $(EMACS)
 
 ## Check for needing to initialize CL-LIB from ELPA
 NEED_CL-LIB := $(shell $(EMACS) --no-site-file --batch --eval '(prin1 (version< emacs-version "24.3"))')
@@ -48,7 +54,8 @@ clean-sandbox:
 	fi
 
 sync:
-	rsync -avz --delete $(PKGDIR) $(HTMLDIR)/* $(WEBROOT)/
+	rsync -avz --delete $(PKGDIR)/ $(WEBROOT)/packages
+	rsync -avz --safe-links --delete $(HTMLDIR)/* $(WEBROOT)/
 	chmod -R go+rx $(WEBROOT)/packages/*
 
 
@@ -56,21 +63,21 @@ clean: clean-working clean-packages clean-json clean-sandbox
 
 packages: $(RCPDIR)/*
 
-packages/archive-contents: packages/*.entry
+packages/archive-contents: $(PKGDIR)/*.entry
 	@echo " • Updating $@ ..."
 	$(EVAL) '(package-build-dump-archive-contents)'
 
 cleanup:
-	$(EVAL) '(package-build-cleanup)'
+	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" pb/this-dir))) (package-build-cleanup))'
 
 ## Json rules
-html/archive.json: packages/archive-contents
+html/archive.json: $(PKGDIR)/archive-contents
 	@echo " • Building $@ ..."
-	$(EVAL) '(package-build-archive-alist-as-json "html/archive.json")'
+	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" pb/this-dir))) (package-build-archive-alist-as-json "html/archive.json"))'
 
 html/recipes.json: $(RCPDIR)/.dirstamp
 	@echo " • Building $@ ..."
-	$(EVAL) '(package-build-recipe-alist-as-json "html/recipes.json")'
+	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" pb/this-dir))) (package-build-recipe-alist-as-json "html/recipes.json"))'
 
 json: html/archive.json html/recipes.json
 
@@ -83,7 +90,7 @@ $(RCPDIR)/.dirstamp: .FORCE
 $(RCPDIR)/%: .FORCE
 	@echo " • Building recipe $(@F) ..."
 
-	- $(TIMEOUT) $(EVAL) "(package-build-archive '$(@F))"
+	- $(TIMEOUT) $(EVAL) "(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name \"$(PKGDIR)\" pb/this-dir))) (package-build-archive '$(@F)))"
 
 	@echo " ✓ Wrote $$(ls -lsh $(PKGDIR)/$(@F)-*) "
 	@echo " Sleeping for $(SLEEP) ..."

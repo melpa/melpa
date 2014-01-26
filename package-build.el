@@ -820,6 +820,9 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
           (file-name-as-directory
            (expand-file-name file-name package-build-working-dir))))
 
+    (unless (file-exists-p package-build-archive-dir)
+      (pb/message "Creating directory %s" package-build-archive-dir)
+      (make-directory package-build-archive-dir))
 
     (pb/message "\n;;; %s\n" file-name)
     (let* ((version (package-build-checkout name rcp pkg-working-dir))

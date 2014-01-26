@@ -9,6 +9,13 @@ SLEEP   ?= 0
 
 EVAL := $(EMACS)
 
+ifdef STABLE
+STABLE := t
+PKGDIR := ./packages-stable
+else
+STABLE := nil
+endif
+
 ## Check for needing to initialize CL-LIB from ELPA
 NEED_CL-LIB := $(shell $(EMACS) --no-site-file --batch --eval '(prin1 (version< emacs-version "24.3"))')
 ifeq ($(NEED_CL-LIB), t)
@@ -59,11 +66,11 @@ cleanup:
 ## Json rules
 html/archive.json: packages/archive-contents
 	@echo " • Building $@ ..."
-	$(EVAL) '(package-build-archive-alist-as-json "html/archive.json")'
+	$(EVAL) '(let ((package-build-stable $(STABLE))) (package-build-archive-alist-as-json "html/archive.json"))'
 
 html/recipes.json: $(RCPDIR)/.dirstamp
 	@echo " • Building $@ ..."
-	$(EVAL) '(package-build-recipe-alist-as-json "html/recipes.json")'
+	$(EVAL) '(let ((package-build-stable $(STABLE))) (package-build-recipe-alist-as-json "html/recipes.json"))'
 
 json: html/archive.json html/recipes.json
 
@@ -76,7 +83,7 @@ $(RCPDIR)/.dirstamp: .FORCE
 $(RCPDIR)/%: .FORCE
 	@echo " • Building recipe $(@F) ..."
 
-	- $(TIMEOUT) $(EVAL) "(package-build-archive '$(@F))"
+	- $(TIMEOUT) $(EVAL) "(let ((package-build-stable $(STABLE))) (package-build-archive '$(@F)))"
 
 	@echo " ✓ Wrote $$(ls -lsh $(PKGDIR)/$(@F)-*) "
 	@echo " Sleeping for $(SLEEP) ..."

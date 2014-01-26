@@ -1,5 +1,6 @@
 /sync
 /packages/*
+/packages-stable/*
 /working/*
 /epkgs
 **.elc

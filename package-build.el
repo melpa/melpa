@@ -137,6 +137,18 @@ function for access to this function")
   (pb/parse-time (progn (re-search-backward regex bound)
                         (match-string-no-properties 1))))
 
+(defun pb/valid-version-string (str)
+  "Returns true if STR is a valid version, otherwise return nil."
+  (ignore-errors (version-to-list str)))
+
+(defun pb/find-parse-version-newest (regex &optional bound)
+  "Find the newest version matching REGEX, optionally looking only as far as BOUND."
+  (let* ((text (buffer-substring-no-properties
+                (or bound (point-min)) (point)))
+         (times (cl-remove-if-not 'pb/valid-version-string
+                                  (pb/string-match-all regex text 1))))
+    (car (nreverse (sort times 'version<)))))
+
 (defun pb/find-parse-time-latest (regex &optional bound)
   "Find the latest timestamp matching REGEX, optionally looking only as far as BOUND."
   (let* ((text (buffer-substring-no-properties
@@ -245,13 +257,14 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
 
 (defun pb/checkout-wiki (name config dir)
   "Checkout package NAME with config CONFIG from the EmacsWiki into DIR."
-  (with-current-buffer (get-buffer-create "*package-build-checkout*")
-    (unless (file-exists-p dir)
-      (make-directory dir))
-    (let ((files (or (plist-get config :files)
-                     (list (format "%s.el" name))))
-          (default-directory dir))
-      (car (nreverse (sort (mapcar 'pb/grab-wiki-file files) 'string-lessp))))))
+  (unless package-build-stable
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (unless (file-exists-p dir)
+        (make-directory dir))
+      (let ((files (or (plist-get config :files)
+                       (list (format "%s.el" name))))
+            (default-directory dir))
+        (car (nreverse (sort (mapcar 'pb/grab-wiki-file files) 'string-lessp)))))))
 
 (defun pb/darcs-repo (dir)
   "Get the current darcs repo for DIR."
@@ -259,22 +272,23 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
 
 (defun pb/checkout-darcs (name config dir)
   "Check package NAME with config CONFIG out of darcs into DIR."
-  (let ((repo (plist-get config :url)))
-    (with-current-buffer (get-buffer-create "*package-build-checkout*")
-      (cond
-       ((and (file-exists-p (expand-file-name "_darcs" dir))
-             (string-equal (pb/darcs-repo dir) repo))
-        (pb/princ-exists dir)
-        (pb/run-process dir "darcs" "pull"))
-       (t
-        (when (file-exists-p dir)
-          (delete-directory dir t))
-        (pb/princ-checkout repo dir)
-        (pb/run-process nil "darcs" "get" repo dir)))
-      (apply 'pb/run-process dir "darcs" "changes" "--max-count" "1"
-             (pb/expand-source-file-list dir config))
-      (pb/find-parse-time
-       "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)"))))
+  (unless package-build-stable
+    (let ((repo (plist-get config :url)))
+      (with-current-buffer (get-buffer-create "*package-build-checkout*")
+        (cond
+         ((and (file-exists-p (expand-file-name "_darcs" dir))
+               (string-equal (pb/darcs-repo dir) repo))
+          (pb/princ-exists dir)
+          (pb/run-process dir "darcs" "pull"))
+         (t
+          (when (file-exists-p dir)
+            (delete-directory dir t))
+          (pb/princ-checkout repo dir)
+          (pb/run-process nil "darcs" "get" repo dir)))
+        (apply 'pb/run-process dir "darcs" "changes" "--max-count" "1"
+               (pb/expand-source-file-list dir config))
+        (pb/find-parse-time
+         "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)")))))
 
 (defun pb/svn-repo (dir)
   "Get the current svn repo for DIR."
@@ -296,23 +310,25 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
 
 (defun pb/checkout-svn (name config dir)
   "Check package NAME with config CONFIG out of svn into DIR."
-  (with-current-buffer (get-buffer-create "*package-build-checkout*")
-    (let ((repo (pb/trim (plist-get config :url) ?/))
-          (bound (goto-char (point-max))))
-      (cond
-       ((and (file-exists-p (expand-file-name ".svn" dir))
-             (string-equal (pb/svn-repo dir) repo))
-        (pb/princ-exists dir)
-        (pb/run-process dir "svn" "up"))
-       (t
-        (when (file-exists-p dir)
-          (delete-directory dir t))
-        (pb/princ-checkout repo dir)
-        (pb/run-process nil "svn" "checkout" repo dir)))
-      (apply 'pb/run-process dir "svn" "info"
-             (pb/expand-source-file-list dir config))
-      (or (pb/find-parse-time-latest "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)" bound)
-          (error "No valid timestamps found!")))))
+  (unless package-build-stable
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (let ((repo (pb/trim (plist-get config :url) ?/))
+            (bound (goto-char (point-max))))
+        (cond
+         ((and (file-exists-p (expand-file-name ".svn" dir))
+               (string-equal (pb/svn-repo dir) repo))
+          (pb/princ-exists dir)
+          (pb/run-process dir "svn" "up"))
+         (t
+          (when (file-exists-p dir)
+            (delete-directory dir t))
+          (pb/princ-checkout repo dir)
+          (pb/run-process nil "svn" "checkout" repo dir)))
+        (apply 'pb/run-process dir "svn" "info"
+               (pb/expand-source-file-list dir config))
+        (or (pb/find-parse-time-latest "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)" bound)
+            (error "No valid timestamps found!"))))))
+
 
 (defun pb/cvs-repo (dir)
   "Get the current CVS root and repository for DIR.
@@ -325,36 +341,38 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
 
 (defun pb/checkout-cvs (name config dir)
   "Check package NAME with config CONFIG out of cvs into DIR."
-  (with-current-buffer (get-buffer-create "*package-build-checkout*")
-    (let ((root (pb/trim (plist-get config :url) ?/))
-          (repo (or (plist-get config :module) (symbol-name name)))
-          (bound (goto-char (point-max))))
-      (cond
-       ((and (file-exists-p (expand-file-name "CVS" dir))
-             (equal (pb/cvs-repo dir) (cons root repo)))
-        (pb/princ-exists dir)
-        (pb/run-process dir "cvs" "update" "-dP"))
-       (t
-        (when (file-exists-p dir)
-          (delete-directory dir t))
-        (pb/princ-checkout (format "%s from %s" repo root) dir)
-        ;; CVS insists on relative paths as target directory for checkout (for
-        ;; whatever reason), and puts "CVS" directories into every subdirectory
-        ;; of the current working directory given in the target path. To get CVS
-        ;; to just write to DIR, we need to execute CVS from the parent
-        ;; directory of DIR, and specific DIR as relative path.  Hence all the
-        ;; following mucking around with paths.  CVS is really horrid.
-        (let* ((dir (directory-file-name dir))
-               (working-dir (file-name-directory dir))
-               (target-dir (file-name-nondirectory dir)))
-          (pb/run-process working-dir "env" "TZ=UTC" "cvs" "-z3" "-d" root "checkout"
-                          "-d" target-dir repo))))
-      (apply 'pb/run-process dir "cvs" "log"
-             (pb/expand-source-file-list dir config))
-      (or (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)" bound)
-          (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}/[0-9]\\{2\\}/[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\);" bound)
-          (error "No valid timestamps found!"))
-      )))
+  (unless package-build-stable
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (let ((root (pb/trim (plist-get config :url) ?/))
+            (repo (or (plist-get config :module) (symbol-name name)))
+            (bound (goto-char (point-max))))
+        (cond
+         ((and (file-exists-p (expand-file-name "CVS" dir))
+               (equal (pb/cvs-repo dir) (cons root repo)))
+          (pb/princ-exists dir)
+          (pb/run-process dir "cvs" "update" "-dP"))
+         (t
+          (when (file-exists-p dir)
+            (delete-directory dir t))
+          (pb/princ-checkout (format "%s from %s" repo root) dir)
+          ;; CVS insists on relative paths as target directory for checkout (for
+          ;; whatever reason), and puts "CVS" directories into every subdirectory
+          ;; of the current working directory given in the target path. To get CVS
+          ;; to just write to DIR, we need to execute CVS from the parent
+          ;; directory of DIR, and specific DIR as relative path.  Hence all the
+          ;; following mucking around with paths.  CVS is really horrid.
+          (let* ((dir (directory-file-name dir))
+                 (working-dir (file-name-directory dir))
+                 (target-dir (file-name-nondirectory dir)))
+            (pb/run-process working-dir "env" "TZ=UTC" "cvs" "-z3" "-d" root "checkout"
+                            "-d" target-dir repo))))
+        (apply 'pb/run-process dir "cvs" "log"
+               (pb/expand-source-file-list dir config))
+        (or (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)" bound)
+            (pb/find-parse-time-latest "date: \\([0-9]\\{4\\}/[0-9]\\{2\\}/[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\);" bound)
+            (error "No valid timestamps found!"))
+        ))))
+
 
 (defun pb/git-repo (dir)
   "Get the current git repo for DIR."
@@ -387,13 +405,25 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
           (delete-directory dir t))
         (pb/princ-checkout repo dir)
         (pb/run-process nil "git" "clone" repo dir)))
-      (pb/run-process dir "git" "reset" "--hard"
-                      (or commit (concat "origin/" (pb/git-head-branch dir))))
-      (pb/run-process dir "git" "submodule" "update" "--init" "--recursive")
-      (apply 'pb/run-process dir "git" "log" "--first-parent" "-n1" "--pretty=format:'\%ci'"
-             (pb/expand-source-file-list dir config))
-      (pb/find-parse-time
-       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)"))))
+      (if package-build-stable
+          (let ((bound (goto-char (point-max)))
+                version-tag)
+            (pb/run-process dir "git" "tag")
+            (setq version-tag
+                  (or (pb/find-parse-version-newest "^\\([^ \t\n]+\\)$" bound)
+                      (error "No valid stable versions found for %s" name)))
+            ;; Using reset --hard here to comply with what's used for
+            ;; unstable, but maybe this should be a checkout?
+            (pb/run-process dir "git" "reset" "--hard" (concat "tags/" version-tag))
+            (pb/run-process dir "git" "submodule" "update" "--init" "--recursive")
+            version-tag)
+        (pb/run-process dir "git" "reset" "--hard"
+                        (or commit (concat "origin/" (pb/git-head-branch dir))))
+        (pb/run-process dir "git" "submodule" "update" "--init" "--recursive")
+        (apply 'pb/run-process dir "git" "log" "--first-parent" "-n1" "--pretty=format:'\%ci'"
+               (pb/expand-source-file-list dir config))
+        (pb/find-parse-time
+         "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)")))))
 
 (defun pb/checkout-github (name config dir)
   "Check package NAME with config CONFIG out of github into DIR."
@@ -410,23 +440,24 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
 
 (defun pb/checkout-bzr (name config dir)
   "Check package NAME with config CONFIG out of bzr into DIR."
-  (let ((repo (pb/bzr-expand-repo (plist-get config :url))))
-    (with-current-buffer (get-buffer-create "*package-build-checkout*")
-      (goto-char (point-max))
-      (cond
-       ((and (file-exists-p (expand-file-name ".bzr" dir))
-             (string-equal (pb/bzr-repo dir) repo))
-        (pb/princ-exists dir)
-        (pb/run-process dir "bzr" "merge"))
-       (t
-        (when (file-exists-p dir)
-          (delete-directory dir t))
-        (pb/princ-checkout repo dir)
-        (pb/run-process nil "bzr" "branch" repo dir)))
-      (apply 'pb/run-process dir "bzr" "log" "-l1"
-             (pb/expand-source-file-list dir config))
-      (pb/find-parse-time
-       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)"))))
+  (unless package-build-stable
+    (let ((repo (pb/bzr-expand-repo (plist-get config :url))))
+      (with-current-buffer (get-buffer-create "*package-build-checkout*")
+        (goto-char (point-max))
+        (cond
+         ((and (file-exists-p (expand-file-name ".bzr" dir))
+               (string-equal (pb/bzr-repo dir) repo))
+          (pb/princ-exists dir)
+          (pb/run-process dir "bzr" "merge"))
+         (t
+          (when (file-exists-p dir)
+            (delete-directory dir t))
+          (pb/princ-checkout repo dir)
+          (pb/run-process nil "bzr" "branch" repo dir)))
+        (apply 'pb/run-process dir "bzr" "log" "-l1"
+               (pb/expand-source-file-list dir config))
+        (pb/find-parse-time
+         "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)")))))
 
 (defun pb/hg-repo (dir)
   "Get the current hg repo for DIR."
@@ -434,24 +465,25 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
 
 (defun pb/checkout-hg (name config dir)
   "Check package NAME with config CONFIG out of hg into DIR."
-  (let ((repo (plist-get config :url)))
-    (with-current-buffer (get-buffer-create "*package-build-checkout*")
-      (goto-char (point-max))
-      (cond
-       ((and (file-exists-p (expand-file-name ".hg" dir))
-             (string-equal (pb/hg-repo dir) repo))
-        (pb/princ-exists dir)
-        (pb/run-process dir "hg" "pull")
-        (pb/run-process dir "hg" "update"))
-       (t
-        (when (file-exists-p dir)
-          (delete-directory dir t))
-        (pb/princ-checkout repo dir)
-        (pb/run-process nil "hg" "clone" repo dir)))
-      (apply 'pb/run-process dir "hg" "log" "--style" "compact" "-l1"
-             (pb/expand-source-file-list dir config))
-      (pb/find-parse-time
-       "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)"))))
+  (unless package-build-stable
+    (let ((repo (plist-get config :url)))
+      (with-current-buffer (get-buffer-create "*package-build-checkout*")
+        (goto-char (point-max))
+        (cond
+         ((and (file-exists-p (expand-file-name ".hg" dir))
+               (string-equal (pb/hg-repo dir) repo))
+          (pb/princ-exists dir)
+          (pb/run-process dir "hg" "pull")
+          (pb/run-process dir "hg" "update"))
+         (t
+          (when (file-exists-p dir)
+            (delete-directory dir t))
+          (pb/princ-checkout repo dir)
+          (pb/run-process nil "hg" "clone" repo dir)))
+        (apply 'pb/run-process dir "hg" "log" "--style" "compact" "-l1"
+               (pb/expand-source-file-list dir config))
+        (pb/find-parse-time
+         "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)")))))
 
 (defun pb/dump (data file &optional pretty-print)
   "Write DATA to FILE as a Lisp sexp.
@@ -825,7 +857,8 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
       (make-directory package-build-archive-dir))
 
     (pb/message "\n;;; %s\n" file-name)
-    (let* ((version (package-build-checkout name rcp pkg-working-dir))
+    (let* ((version (or (package-build-checkout name rcp pkg-working-dir)
+                        (error "No valid package version found!")))
            (default-directory package-build-working-dir)
            (start-time (current-time))
            (archive-entry (package-build-package (symbol-name name)
@@ -864,84 +897,84 @@ Returns the archive entry for the package."
                           source-dir package-build-default-files-spec nil t))
         (pb/message "Note: this :files spec is equivalent to the default.")))
     (cond
-    ((not version)
-     (error "Unable to check out repository for %s" package-name))
-    ((= 1 (length files))
-     (let* ((pkg-source (expand-file-name (caar files) source-dir))
-            (pkg-target (expand-file-name
-                         (concat package-name "-" version ".el")
-                         target-dir))
-            (pkg-info (pb/merge-package-info
-                       (pb/get-package-info pkg-source)
-                       package-name
-                       version)))
-       (unless (string-equal (downcase (concat package-name ".el"))
-                             (downcase (file-name-nondirectory pkg-source)))
-         (error "Single file %s does not match package name %s"
-                (file-name-nondirectory pkg-source) package-name))
-       (when (file-exists-p pkg-target)
-         (delete-file pkg-target t))
-       (copy-file pkg-source pkg-target)
-       (let ((enable-local-variables nil)
-             (make-backup-files nil))
-         (with-current-buffer (find-file pkg-target)
-           (pb/update-or-insert-version version)
-           (pb/ensure-ends-here-line pkg-source)
-           (write-file pkg-target nil)
-           (condition-case err
-               (pb/package-buffer-info-vec)
-             (error
-              (pb/message "Warning: %S" err)))
-           (kill-buffer)))
+     ((not version)
+      (error "Unable to check out repository for %s" package-name))
+     ((= 1 (length files))
+      (let* ((pkg-source (expand-file-name (caar files) source-dir))
+             (pkg-target (expand-file-name
+                          (concat package-name "-" version ".el")
+                          target-dir))
+             (pkg-info (pb/merge-package-info
+                        (pb/get-package-info pkg-source)
+                        package-name
+                        version)))
+        (unless (string-equal (downcase (concat package-name ".el"))
+                              (downcase (file-name-nondirectory pkg-source)))
+          (error "Single file %s does not match package name %s"
+                 (file-name-nondirectory pkg-source) package-name))
+        (when (file-exists-p pkg-target)
+          (delete-file pkg-target t))
+        (copy-file pkg-source pkg-target)
+        (let ((enable-local-variables nil)
+              (make-backup-files nil))
+          (with-current-buffer (find-file pkg-target)
+            (pb/update-or-insert-version version)
+            (pb/ensure-ends-here-line pkg-source)
+            (write-file pkg-target nil)
+            (condition-case err
+                (pb/package-buffer-info-vec)
+              (error
+               (pb/message "Warning: %S" err)))
+            (kill-buffer)))
 
-       (pb/write-pkg-readme target-dir
-                            (and (> (length pkg-info) 4) (aref pkg-info 4))
-                            package-name)
-       (pb/archive-entry pkg-info 'single)))
-    ((< 1 (length  files))
-     (let* ((tmp-dir (file-name-as-directory (make-temp-file package-name t)))
-            (pkg-dir-name (concat package-name "-" version))
-            (pkg-tmp-dir (expand-file-name pkg-dir-name tmp-dir))
-            (pkg-file (concat package-name "-pkg.el"))
-            (pkg-file-source (or (pb/find-source-file pkg-file files)
-                                 pkg-file))
-            (file-source (concat package-name ".el"))
-            (pkg-source (or (pb/find-source-file file-source files)
-                            file-source))
-            (pkg-info (pb/merge-package-info
-                       (let ((default-directory source-dir))
-                         (or (pb/get-pkg-file-info pkg-file-source)
-                             ;; some packages (like magit) provide name-pkg.el.in
-                             (pb/get-pkg-file-info
-                              (expand-file-name (concat pkg-file ".in")
-                                                (file-name-directory pkg-source)))
-                             (pb/get-package-info pkg-source)))
-                       package-name
-                       version)))
+        (pb/write-pkg-readme target-dir
+                             (and (> (length pkg-info) 4) (aref pkg-info 4))
+                             package-name)
+        (pb/archive-entry pkg-info 'single)))
+     ((< 1 (length  files))
+      (let* ((tmp-dir (file-name-as-directory (make-temp-file package-name t)))
+             (pkg-dir-name (concat package-name "-" version))
+             (pkg-tmp-dir (expand-file-name pkg-dir-name tmp-dir))
+             (pkg-file (concat package-name "-pkg.el"))
+             (pkg-file-source (or (pb/find-source-file pkg-file files)
+                                  pkg-file))
+             (file-source (concat package-name ".el"))
+             (pkg-source (or (pb/find-source-file file-source files)
+                             file-source))
+             (pkg-info (pb/merge-package-info
+                        (let ((default-directory source-dir))
+                          (or (pb/get-pkg-file-info pkg-file-source)
+                              ;; some packages (like magit) provide name-pkg.el.in
+                              (pb/get-pkg-file-info
+                               (expand-file-name (concat pkg-file ".in")
+                                                 (file-name-directory pkg-source)))
+                              (pb/get-package-info pkg-source)))
+                        package-name
+                        version)))
 
 
-       (pb/copy-package-files files source-dir pkg-tmp-dir)
-       (pb/write-pkg-file (expand-file-name pkg-file
-                                            (file-name-as-directory pkg-tmp-dir))
-                          pkg-info)
+        (pb/copy-package-files files source-dir pkg-tmp-dir)
+        (pb/write-pkg-file target-dir
+                           (expand-file-name pkg-file
+                                             (file-name-as-directory pkg-tmp-dir))
+                           pkg-info)
 
-       (pb/generate-info-files files source-dir pkg-tmp-dir)
-       (pb/generate-dir-file files pkg-tmp-dir)
+        (pb/generate-info-files files source-dir pkg-tmp-dir)
+        (pb/generate-dir-file files pkg-tmp-dir)
 
-       (let ((default-directory tmp-dir))
-         (pb/create-tar (expand-file-name (concat package-name "-" version ".tar")
-                                          target-dir)
-                        pkg-dir-name))
+        (let ((default-directory tmp-dir))
+          (pb/create-tar (expand-file-name (concat package-name "-" version ".tar")
+                                           target-dir)
+                         pkg-dir-name))
 
-       (let ((default-directory source-dir))
-         (pb/write-pkg-readme target-dir
-                              (pb/find-package-commentary pkg-source)
-                              package-name))
+        (let ((default-directory source-dir))
+          (pb/write-pkg-readme (pb/find-package-commentary pkg-source)
+                               package-name))
 
-       (delete-directory pkg-tmp-dir t)
-       (pb/archive-entry pkg-info 'tar)))
+        (delete-directory pkg-tmp-dir t nil)
+        (pb/archive-entry pkg-info 'tar)))
 
-    (t (error "Unable to find files matching recipe patterns")))))
+     (t (error "Unable to find files matching recipe patterns")))))
 
 
 

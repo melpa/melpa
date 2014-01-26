@@ -1,0 +1,3 @@
+(color-identifiers-mode
+ :fetcher github
+ :repo "ankurdave/color-identifiers-mode")

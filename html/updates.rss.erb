@@ -22,8 +22,12 @@
         package.name = pkgname
         package.version = version
         package.description = descr.gsub(/ \[source:.*$/, '')
+        begin
         hour_portion = versions[1] ? sprintf("%04d", versions[1]) : "0000"
         package.build_time = Time.new(version[0..3].to_i, version[4..5].to_i, version[6..7].to_i, hour_portion[0..1].to_i, hour_portion[2..3].to_i)
+        rescue ArgumentError
+        package.build_time = Time.now()
+        end
         package.url = "#{base_url}packages/#{pkgname}-#{version}." + (pkgtype == "single" ? "el" : "tar")
         package.info_url = "#{base_url}##{pkgname}"
         package

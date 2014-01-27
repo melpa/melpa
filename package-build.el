@@ -90,7 +90,7 @@ function for access to this function")
 (defconst package-build-default-files-spec
   '("*.el" "*.el.in" "dir"
     "*.info" "*.texi" "*.texinfo"
-    "doc/*.info" "doc/*.texi" "doc/*.texinfo"
+    "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
     (:exclude "tests.el" "*-test.el" "*-tests.el"))
   "Default value for :files attribute in recipes.")
 

@@ -178,8 +178,9 @@ CONFIG, if any, or `package-build-default-files-spec' otherwise."
     (pb/message "Fetcher: %s" repo-type)
     (unless (eq 'wiki repo-type)
       (pb/message "Source: %s\n" (or (plist-get config :repo) (plist-get config :url))))
-    (funcall (intern (format "pb/checkout-%s" repo-type))
-             package-name config working-dir)))
+    (let ((default-directory working-dir))
+      (funcall (intern (format "pb/checkout-%s" repo-type))
+               package-name config working-dir))))
 
 (defvar pb/last-wiki-fetch-time 0
   "The time at which an emacswiki URL was last requested.

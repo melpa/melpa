@@ -155,8 +155,8 @@ Output is written to the current buffer."
                  (cons command args))))
     (let ((exit-code (apply 'process-file (car argv) nil (current-buffer) t (cdr argv))))
       (unless (zerop exit-code)
-        (error "Command '%s' exited with non-zero status %d"
-               argv exit-code)))))
+        (error "Command '%s' exited with non-zero status %d: %s"
+               argv exit-code (buffer-string))))))
 
 (defun pb/run-process-match (regex dir prog &rest args)
   "Find match for REGEX when - in DIR, or `default-directory' if unset - we run PROG with ARGS."

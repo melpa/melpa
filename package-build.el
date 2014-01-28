@@ -149,14 +149,18 @@ function for access to this function")
   "In DIR (or `default-directory' if unset) run COMMAND with ARGS.
 Output is written to the current buffer."
   (let* ((default-directory (or dir default-directory))
+         (default-directory
+           (if (file-directory-p default-directory)
+               (concat (directory-file-name default-directory) "/")
+             default-directory))
          (have-timeout (executable-find "timeout"))
          (argv (if have-timeout
                    (append (list "timeout" "-k" "60" "600" command) args)
                  (cons command args))))
     (let ((exit-code (apply 'process-file (car argv) nil (current-buffer) t (cdr argv))))
       (unless (zerop exit-code)
-        (error "Command '%s' exited with non-zero status %d"
-               argv exit-code)))))
+        (error "Command '%s' exited with non-zero status %d: %s"
+               argv exit-code (buffer-string))))))
 
 (defun pb/run-process-match (regex dir prog &rest args)
   "Find match for REGEX when - in DIR, or `default-directory' if unset - we run PROG with ARGS."
@@ -841,6 +845,8 @@ syntax is currently only documented in the MELPA README.  You can
 simply pass `package-build-default-files-spec' in most cases.
 
 Returns the archive entry for the package."
+  (when (symbolp package-name)
+    (setq package-name (symbol-name package-name)))
   (let ((files (package-build-expand-file-specs source-dir file-specs)))
    (cond
     ((not version)

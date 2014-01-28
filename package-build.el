@@ -841,6 +841,8 @@ syntax is currently only documented in the MELPA README.  You can
 simply pass `package-build-default-files-spec' in most cases.
 
 Returns the archive entry for the package."
+  (when (symbolp package-name)
+    (setq package-name (symbol-name package-name)))
   (let ((files (package-build-expand-file-specs source-dir file-specs)))
    (cond
     ((not version)

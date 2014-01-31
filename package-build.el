@@ -148,7 +148,7 @@ function for access to this function")
 (defun pb/run-process (dir command &rest args)
   "In DIR (or `default-directory' if unset) run COMMAND with ARGS.
 Output is written to the current buffer."
-  (let* ((default-directory (or dir default-directory))
+  (let* ((default-directory (or (file-name-as-directory dir) default-directory))
          (have-timeout (executable-find "timeout"))
          (argv (if have-timeout
                    (append (list "timeout" "-k" "60" "600" command) args)
@@ -179,7 +179,7 @@ CONFIG, if any, or `package-build-default-files-spec' otherwise."
     (unless (eq 'wiki repo-type)
       (pb/message "Source: %s\n" (or (plist-get config :repo) (plist-get config :url))))
     (funcall (intern (format "pb/checkout-%s" repo-type))
-             package-name config working-dir)))
+             package-name config (file-name-as-directory working-dir))))
 
 (defvar pb/last-wiki-fetch-time 0
   "The time at which an emacswiki URL was last requested.

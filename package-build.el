@@ -153,6 +153,8 @@ Output is written to the current buffer."
          (argv (if have-timeout
                    (append (list "timeout" "-k" "60" "600" command) args)
                  (cons command args))))
+    (unless (file-directory-p default-directory)
+      (error "Can't run process in non-existent directory: %s" default-directory))
     (let ((exit-code (apply 'process-file (car argv) nil (current-buffer) t (cdr argv))))
       (unless (zerop exit-code)
         (error "Command '%s' exited with non-zero status %d: %s"

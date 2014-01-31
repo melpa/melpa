@@ -148,7 +148,7 @@ function for access to this function")
 (defun pb/run-process (dir command &rest args)
   "In DIR (or `default-directory' if unset) run COMMAND with ARGS.
 Output is written to the current buffer."
-  (let* ((default-directory (or (file-name-as-directory dir) default-directory))
+  (let* ((default-directory (file-name-as-directory (or dir default-directory)))
          (have-timeout (executable-find "timeout"))
          (argv (if have-timeout
                    (append (list "timeout" "-k" "60" "600" command) args)

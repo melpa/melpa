@@ -1,0 +1,1 @@
+(mu4e :fetcher github :repo "djcb/mu" :files ("mu4e/*.el" "mu4e/*.el.in"))

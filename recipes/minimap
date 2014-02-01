@@ -1,0 +1,1 @@
+(minimap :fetcher github :repo "dustinlacewell/emacs-minimap")

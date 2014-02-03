@@ -1,0 +1,1 @@
+(portage-navi :fetcher github :repo "kiwanami/emacs-portage-navi")

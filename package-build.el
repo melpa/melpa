@@ -503,8 +503,8 @@ Optionally PRETTY-PRINT the data."
       (insert-file-contents file-path)
       (lm-commentary))))
 
-(defun pb/write-pkg-readme (commentary file-name)
-  "Write COMMENTARY to the FILE-NAME-readme.txt file."
+(defun pb/write-pkg-readme (target-dir commentary file-name)
+  "Write COMMENTARY to the FILE-NAME-readme.txt file in TARGET-DIR."
   (when commentary
     (with-temp-buffer
       (insert commentary)
@@ -521,12 +521,12 @@ Optionally PRETTY-PRINT the data."
       (delete-trailing-whitespace)
       (let ((coding-system-for-write buffer-file-coding-system))
         (write-region nil nil
-                      (pb/readme-file-name file-name))))))
+                      (pb/readme-file-name target-dir file-name))))))
 
-(defun pb/readme-file-name (file-name)
-  "Name of the readme file for the package FILE-NAME."
+(defun pb/readme-file-name (target-dir file-name)
+  "Name of the readme file in TARGET-DIR for the package FILE-NAME."
   (expand-file-name (concat file-name "-readme.txt")
-                    package-build-archive-dir))
+                    target-dir))
 
 (defun pb/update-or-insert-version (version)
   "Ensure current buffer has a \"Version: VERSION\" header."
@@ -876,7 +876,8 @@ Returns the archive entry for the package."
               (pb/message "Warning: %S" err)))
            (kill-buffer)))
 
-       (pb/write-pkg-readme (and (> (length pkg-info) 4) (aref pkg-info 4))
+       (pb/write-pkg-readme target-dir
+                            (and (> (length pkg-info) 4) (aref pkg-info 4))
                             package-name)
        (pb/archive-entry pkg-info 'single)))
     ((< 1 (length  files))
@@ -915,7 +916,8 @@ Returns the archive entry for the package."
                         pkg-dir-name))
 
        (let ((default-directory source-dir))
-         (pb/write-pkg-readme (pb/find-package-commentary pkg-source)
+         (pb/write-pkg-readme target-dir
+                              (pb/find-package-commentary pkg-source)
                               package-name))
 
        (delete-directory pkg-tmp-dir t nil)

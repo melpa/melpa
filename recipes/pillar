@@ -1,3 +1,2 @@
 (pillar :fetcher github
-        :repo "DamienCassou/pillar-mode"
-        :files ("pillar.el" "README.md"))
+        :repo "DamienCassou/pillar-mode")

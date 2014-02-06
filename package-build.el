@@ -372,7 +372,10 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
 (defun pb/checkout-git (name config dir)
   "Check package NAME with config CONFIG out of git into DIR."
   (let ((repo (plist-get config :url))
-        (commit (plist-get config :commit)))
+        (commit (or (plist-get config :commit)
+                    (let ((branch (plist-get config :branch)))
+                      (when branch
+                        (concat "origin/" branch))))))
     (with-current-buffer (get-buffer-create "*package-build-checkout*")
       (goto-char (point-max))
       (cond

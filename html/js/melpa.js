@@ -11,7 +11,7 @@
   // TODO Show recent github events on package pages where applicable
   // TODO Voting / starring
 
-  var app = angular.module('melpa', ["ngRoute"]);
+  var app = angular.module('melpa', ['ngRoute', 'ngGrid']);
 
   //////////////////////////////////////////////////////////////////////////////
   // SERVICES
@@ -98,31 +98,32 @@
   //////////////////////////////////////////////////////////////////////////////
 
   app.controller('PackageListCtrl', function ($scope, $timeout, packageService) {
-    $scope.orderBy = "name";
     $scope.$on('$routeChangeSuccess', function (ev, current) {
-      $scope.enteredSearchTerms = $scope.searchTerms = current.params.q;
-    });
-    var copyValue;
-    $scope.$watch('enteredSearchTerms', function(value) {
-      $timeout.cancel(copyValue);
-      copyValue = $timeout(function() {
-        $scope.searchTerms = value;
-      }, 250);
+      $scope.gridOptions.filterOptions.filterText = current.params.q;
     });
 
     packageService.getPackages().then(function(pkgs){
       $scope.packages = _.values(pkgs);
       $scope.totalDownloads = _.reduce(_.pluck($scope.packages, "downloads"), function (a, b) { return b === undefined ? a : a + b; }, 0);
     });
-    $scope.packageMatcher = function(term) {
-      var t = term && term.toLowerCase();
-      var searchText = _.memoize(function(pkg) {
-        return _([pkg.name, pkg.description, pkg.source, pkg.version, pkg.sourceURL]).compact().invoke('toLowerCase').valueOf().join(' ');
-      }, function(pkg) { return pkg.name; });
-      return function(pkg) {
-        if (!term || !term.match(/\S/)) return true;
-        return searchText(pkg).indexOf(t) != -1;
-      };
+
+    $scope.gridOptions = {
+      data : 'packages',
+      columnDefs : [
+        { field : 'name', displayName : 'Package', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a href="#/{{row.getProperty(col.field)}}">{{row.getProperty(col.field)}}</a></div>', width : '10%' },
+        { field : 'description', displayName : 'Description', cellTemplate : '<div class="ngCellText" ng-class="col.colIndex()"><a href="#/{{row.entity.name}}">{{row.getProperty(col.field)}}</a></div>', width : '40%' },
+        { field : 'version', displayName : 'Version', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a href="{{row.entity.packageURL}}">{{row.getProperty(col.field)}}</a></div>', width : '15%' },
+        { field : 'recipeURL', displayName : 'Recipe', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a href="{{row.entity.recipeURL}}"><span class="glyphicon glyphicon-cutlery"></a></div>', width : '80px'},
+        { field : 'source', displayName : 'Source', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a ng-show="row.entity.sourceURL" href="{{row.entity.sourceURL}}">{{row.getProperty(col.field)}}</a><span ng-show="!row.entity.sourceURL">{{row.getProperty(col.field)}}</span></div>' },
+        { field : 'downloads', displayName : 'DLs', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()">{{row.getProperty(col.field)}}</div>', width : '80px' }
+      ],
+      rowHeight : 40,
+      headerRowHeight : 40,
+      enableRowSelection : false,
+      filterOptions : {
+        filterText : ''
+      },
+      sortInfo : { fields : ['name'], directions : ['asc'] }
     };
   });
 

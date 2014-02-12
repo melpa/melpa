@@ -1,0 +1,2 @@
+(helm-make :repo "abo-abo/helm-make"
+           :fetcher github)

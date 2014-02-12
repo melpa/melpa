@@ -5,6 +5,7 @@
          ("bin"
           "fsautocomplete.exe"
           "FSharp.CompilerBinding.dll"
-          "FSharp.Compiler.Editor.dll"
+          "FSharp.Compiler.Service.dll"
+          "Mono.Cecil.dll"
           "NDesk.Options.dll"
           "Newtonsoft.Json.dll")))

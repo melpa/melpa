@@ -1,0 +1,1 @@
+(helm-git-files :fetcher github :repo "kenbeese/helm-git-files")

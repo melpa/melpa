@@ -6,16 +6,15 @@ WORKDIR := ./working
 WEBROOT := $$HOME/www
 EMACS   ?= emacs
 SLEEP   ?= 0
-
-EVAL := $(EMACS)
+SANDBOX := ./sandbox
 
 ## Check for needing to initialize CL-LIB from ELPA
 NEED_CL-LIB := $(shell $(EMACS) --no-site-file --batch --eval '(prin1 (version< emacs-version "24.3"))')
 ifeq ($(NEED_CL-LIB), t)
-	EVAL := $(EVAL) --eval "(package-initialize)"
+	EMACS := $(EMACS) --eval "(package-initialize)"
 endif
 
-EVAL := $(EVAL) --no-site-file --batch -l package-build.el --eval
+EVAL := $(EMACS) --no-site-file --batch -l package-build.el --eval
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
 
@@ -41,17 +40,25 @@ clean-json:
 	@echo " • Removing json files ..."
 	-rm -vf html/archive.json html/recipes.json
 
+clean-sandbox:
+	@echo " • Removing sandbox files ..."
+	if [ -d '$(SANDBOX)' ]; then \
+		rm -rfv '$(SANDBOX)/elpa'; \
+		rmdir '$(SANDBOX)'; \
+	fi
+
 sync:
 	rsync -avz --delete $(PKGDIR) $(HTMLDIR)/* $(WEBROOT)/
 	chmod -R go+rx $(WEBROOT)/packages/*
 
 
-clean: clean-working clean-packages clean-json
+clean: clean-working clean-packages clean-json clean-sandbox
 
 packages: $(RCPDIR)/*
 
 packages/archive-contents: packages/*.entry
 	@echo " • Updating $@ ..."
+	$(EVAL) '(package-build-dump-archive-contents)'
 
 cleanup:
 	$(EVAL) '(package-build-cleanup)'
@@ -84,5 +91,15 @@ $(RCPDIR)/%: .FORCE
 	@echo
 
 
-.PHONY: clean build index html json
+## Sandbox
+sandbox:
+	@echo " • Building sandbox ..."
+	mkdir -p $(SANDBOX)
+	$(EMACS) -Q \
+		--eval '(setq user-emacs-directory "$(SANDBOX)")' \
+		-l package \
+		--eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.milkbox.net/packages/\") t)" \
+		--eval "(add-to-list 'package-archives '(\"sandbox\" . \"$(shell pwd)/$(PKGDIR)/\") t)"
+
+.PHONY: clean build index html json sandbox
 .FORCE:

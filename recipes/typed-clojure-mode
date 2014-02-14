@@ -1,4 +1,4 @@
 (typed-clojure-mode
  :fetcher git
  :url "https://github.com/typedclojure/typed-clojure-mode"
- :files ("typed-clojure.el"))
+ :files ("typed-clojure-mode.el"))

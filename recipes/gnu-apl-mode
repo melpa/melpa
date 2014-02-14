@@ -1,4 +1,2 @@
 (gnu-apl-mode :fetcher github
-              :repo "lokedhs/gnu-apl-mode"
-              :files ("*.el"
-                      "README.md"))
+              :repo "lokedhs/gnu-apl-mode")

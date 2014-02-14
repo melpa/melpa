@@ -1,0 +1,1 @@
+(term+key-intercept :repo "tarao/term-plus-ki-el" :fetcher github)

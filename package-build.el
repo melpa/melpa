@@ -269,7 +269,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (pb/run-process dir "darcs" "pull"))
        (t
         (when (file-exists-p dir)
-          (delete-directory dir t nil))
+          (delete-directory dir t))
         (pb/princ-checkout repo dir)
         (pb/run-process nil "darcs" "get" repo dir)))
       (apply 'pb/run-process dir "darcs" "changes" "--max-count" "1"
@@ -307,7 +307,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (pb/run-process dir "svn" "up"))
        (t
         (when (file-exists-p dir)
-          (delete-directory dir t nil))
+          (delete-directory dir t))
         (pb/princ-checkout repo dir)
         (pb/run-process nil "svn" "checkout" repo dir)))
       (apply 'pb/run-process dir "svn" "info"
@@ -337,7 +337,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (pb/run-process dir "cvs" "update" "-dP"))
        (t
         (when (file-exists-p dir)
-          (delete-directory dir t nil))
+          (delete-directory dir t))
         (pb/princ-checkout (format "%s from %s" repo root) dir)
         ;; CVS insists on relative paths as target directory for checkout (for
         ;; whatever reason), and puts "CVS" directories into every subdirectory
@@ -385,7 +385,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (pb/run-process dir "git" "remote" "update"))
        (t
         (when (file-exists-p dir)
-          (delete-directory dir t nil))
+          (delete-directory dir t))
         (pb/princ-checkout repo dir)
         (pb/run-process nil "git" "clone" repo dir)))
       (pb/run-process dir "git" "reset" "--hard"
@@ -421,7 +421,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (pb/run-process dir "bzr" "merge"))
        (t
         (when (file-exists-p dir)
-          (delete-directory dir t nil))
+          (delete-directory dir t))
         (pb/princ-checkout repo dir)
         (pb/run-process nil "bzr" "branch" repo dir)))
       (apply 'pb/run-process dir "bzr" "log" "-l1"
@@ -446,7 +446,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (pb/run-process dir "hg" "update"))
        (t
         (when (file-exists-p dir)
-          (delete-directory dir t nil))
+          (delete-directory dir t))
         (pb/princ-checkout repo dir)
         (pb/run-process nil "hg" "clone" repo dir)))
       (apply 'pb/run-process dir "hg" "log" "--style" "compact" "-l1"
@@ -924,7 +924,7 @@ Returns the archive entry for the package."
                               (pb/find-package-commentary pkg-source)
                               package-name))
 
-       (delete-directory pkg-tmp-dir t nil)
+       (delete-directory pkg-tmp-dir t)
        (pb/archive-entry pkg-info 'tar)))
 
     (t (error "Unable to find files matching recipe patterns")))))

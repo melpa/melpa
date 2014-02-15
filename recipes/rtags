@@ -1,0 +1,1 @@
+(rtags :fetcher github :repo "Andersbakken/rtags" :files ("src/*.el"))

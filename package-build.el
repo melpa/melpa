@@ -718,6 +718,7 @@ for ALLOW-EMPTY to prevent this error."
 Deletes the .texi(nfo) files if they exist."
   (dolist (spec files)
     (let* ((source-file (car spec))
+           (source-path (expand-file-name source-file source-dir))
            (dest-file (cdr spec))
            (info-path (expand-file-name
                        (concat (file-name-sans-extension dest-file) ".info")
@@ -727,9 +728,9 @@ Deletes the .texi(nfo) files if they exist."
           (with-current-buffer (get-buffer-create "*package-build-info*")
             (ignore-errors
               (pb/run-process
-               nil
+               (file-name-directory source-path)
                "makeinfo"
-               (expand-file-name source-file source-dir)
+               source-path
                "-o"
                info-path)
               (pb/message "Created %s" info-path))))

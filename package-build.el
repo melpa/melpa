@@ -64,15 +64,14 @@
   :type 'string)
 
 (defvar package-build-verbose t
-  "When non-nil, `package-build' feels free to print information about
-its progress.")
+  "When non-nil, `package-build' feels free to print information about its progress.")
 
 ;;; Internal Variables
 
 (defvar pb/recipe-alist nil
   "Internal list of package build specs.
 
-Do not use this directly. Use `package-build-recipe-alist'
+Do not use this directly.  Use `package-build-recipe-alist'
 function.")
 
 (defvar pb/recipe-alist-initialized nil
@@ -81,7 +80,7 @@ function.")
 (defvar pb/archive-alist nil
   "Internal list of already-built packages, in the standard package.el format.
 
-Do not use this directly. Use `package-build-archive-alist'
+Do not use this directly.  Use `package-build-archive-alist'
 function for access to this function")
 
 (defvar pb/archive-alist-initialized nil
@@ -507,7 +506,7 @@ Optionally PRETTY-PRINT the data."
       (lm-commentary))))
 
 (defun pb/write-pkg-readme (target-dir commentary file-name)
-  "Write COMMENTARY to the FILE-NAME-readme.txt file in TARGET-DIR."
+  "In TARGET-DIR, write COMMENTARY to a -readme.txt file prefixed with FILE-NAME."
   (when commentary
     (with-temp-buffer
       (insert commentary)
@@ -596,7 +595,7 @@ If PKG-INFO is nil, an empty one is created."
     merged))
 
 (defun pb/archive-entry (pkg-info type)
-  "Return the `cons' for the given package."
+  "Return the archive-contents cons cell for PKG-INFO and TYPE."
   (let* ((name (intern (aref pkg-info 0)))
          (requires (aref pkg-info 1))
          (desc (or (aref pkg-info 2) "No description available."))
@@ -642,6 +641,7 @@ of the same-named package which is to be kept."
                  (pb/entry-file-name archive-entry))))
 
 (defun pb/read-recipe (file-name)
+  "Return the plist of recipe info for the package called FILE-NAME."
   (let ((pkg-info (pb/read-from-file file-name)))
     (if (string= (symbol-name (car pkg-info))
                  (file-name-nondirectory file-name))
@@ -713,9 +713,13 @@ for ALLOW-EMPTY to prevent this error."
   (mapcar 'car (package-build-expand-file-specs dir (pb/config-file-list config))))
 
 (defun pb/generate-info-files (files source-dir target-dir)
-  "Create .info files from any .texi files listed in FILES in SOURCE-DIR in TARGET-DIR.
+  "Create .info files from any .texi files listed in FILES.
 
-Deletes the .texi(nfo) files if they exist."
+The source and destination file paths are expanded in SOURCE-DIR
+and TARGET-DIR respectively.
+
+Any of the original .texi(nfo) files found in TARGET-DIR are
+deleted."
   (dolist (spec files)
     (let* ((source-file (car spec))
            (source-path (expand-file-name source-file source-dir))
@@ -834,7 +838,10 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
 
 ;;;###autoload
 (defun package-build-package (package-name version file-specs source-dir target-dir)
-  "Create PACKAGE-NAME with VERSION using FILE-SPECS to gather files from SOURCE-DIR.
+  "Create PACKAGE-NAME with VERSION.
+
+The information in FILE-SPECS is used to gather files from
+SOURCE-DIR.
 
 The resulting package will be stored as a .el or .tar file in
 TARGET-DIR, depending on whether there are multiple files.
@@ -969,7 +976,7 @@ Returns the archive entry for the package."
       (insert (pp-to-string template))
       (emacs-lisp-mode)
       (package-build-minor-mode)
-      (beginning-of-buffer))))
+      (goto-char (point-min)))))
 
 ;;;###autoload
 (defun package-build-current-recipe ()
@@ -1048,14 +1055,17 @@ Returns the archive entry for the package."
                           package-build-archive-dir))))
 
 (defun package-build-reinitialize ()
+  "Forget any information about packages which have already been built."
   (interactive)
   (setq pb/recipe-alist-initialized nil))
 
-(defun package-build-dump-archive-contents (&optional fn)
-  "Dump the list of built packages back to the archive-contents file."
-  (unless fn
-    (setq fn (expand-file-name "archive-contents" package-build-archive-dir)))
-  (pb/dump (cons 1 (pb/archive-entries)) fn))
+(defun package-build-dump-archive-contents (&optional file-name)
+  "Dump the list of built packages to FILE-NAME.
+
+If FILE-NAME is not specified, the default archive-contents file is used."
+  (pb/dump (cons 1 (pb/archive-entries))
+           (or file-name
+               (expand-file-name "archive-contents" package-build-archive-dir))))
 
 (defun pb/archive-entries ()
   "Read all .entry files from the archive directory and return a list of all entries."
@@ -1079,14 +1089,16 @@ Returns the archive entry for the package."
 (require 'json)
 (load (expand-file-name "json-fix" pb/this-dir) nil 'nomessage)
 
-(defun package-build-recipe-alist-as-json (fn)
+(defun package-build-recipe-alist-as-json (file-name)
+  "Dump the recipe list to FILE-NAME as json."
   (interactive)
-  (with-temp-file fn
+  (with-temp-file file-name
     (insert (json-encode (package-build-recipe-alist)))))
 
-(defun package-build-archive-alist-as-json (fn)
+(defun package-build-archive-alist-as-json (file-name)
+  "Dump the build packages list to FILE-NAME as json."
   (interactive)
-  (with-temp-file fn
+  (with-temp-file file-name
     (insert (json-encode (package-build-archive-alist)))))
 
 

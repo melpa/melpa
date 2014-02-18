@@ -1,4 +1,4 @@
 (decl
-  :url "preetpalS/decl.el"
+  :repo "preetpalS/decl.el"
   :fetcher github
   :files ("decl.el"))

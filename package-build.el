@@ -1,7 +1,7 @@
 ;;; package-build.el --- Tools for assembling a package archive
 
 ;; Copyright (C) 2011-2013 Donald Ephraim Curtis <dcurtis@milkbox.net>
-;; Copyright (C) 2012-2013 Steve Purcell <steve@sanityinc.com>
+;; Copyright (C) 2012-2014 Steve Purcell <steve@sanityinc.com>
 ;; Copyright (C) 2009 Phil Hagelberg <technomancy@gmail.com>
 
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>

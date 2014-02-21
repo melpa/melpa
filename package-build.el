@@ -856,7 +856,11 @@ Returns the archive entry for the package."
   (when (symbolp package-name)
     (setq package-name (symbol-name package-name)))
   (let ((files (package-build-expand-file-specs source-dir file-specs)))
-   (cond
+    (unless (equal file-specs package-build-default-files-spec)
+      (when (equal files (package-build-expand-file-specs
+                          source-dir package-build-default-files-spec nil t))
+        (pb/message "Note: this :files spec is equivalent to the default.")))
+    (cond
     ((not version)
      (error "Unable to check out repository for %s" package-name))
     ((= 1 (length files))

@@ -1,3 +1,2 @@
 (darkburn-theme :repo "gorauskas/darkburn-theme"
-                :fetcher github
-                :files ("darkburn-theme.el"))
+                :fetcher github)

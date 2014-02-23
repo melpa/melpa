@@ -1,0 +1,1 @@
+(omniref :fetcher github :repo "dotemacs/omniref.el")

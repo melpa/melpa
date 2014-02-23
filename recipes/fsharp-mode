@@ -4,8 +4,4 @@
  :files ("*.el"
          ("bin"
           "fsautocomplete.exe"
-          "FSharp.CompilerBinding.dll"
-          "FSharp.Compiler.Service.dll"
-          "Mono.Cecil.dll"
-          "NDesk.Options.dll"
-          "Newtonsoft.Json.dll")))
+          "*.dll")))

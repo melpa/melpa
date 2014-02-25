@@ -1,9 +1,7 @@
 (fsharp-mode
  :fetcher github
- :repo "fsharp/fsharpbinding"
- :files ("emacs/*.el"
+ :repo "rneatherway/emacs-fsharp-mode-bin"
+ :files ("*.el"
          ("bin"
-          "lib/fsautocomplete/fsautocomplete.exe"
-          "lib/fsautocomplete/FSharp.CompilerBinding.dll"
-          "lib/ndesk-options/NDesk.Options.dll"
-          "lib/newtonsoft.json/Newtonsoft.Json.dll")))
+          "fsautocomplete.exe"
+          "*.dll")))

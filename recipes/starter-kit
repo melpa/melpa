@@ -1,2 +1,2 @@
 (starter-kit :repo "technomancy/emacs-starter-kit" :fetcher github
-             :commit "origin/v2")
+             :branch "v2")

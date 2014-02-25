@@ -23,7 +23,6 @@ details.
 * [Recipe Format](#recipe-format)
 * [Build Scripts](#build-scripts)
 * [API](#api)
-* [MELPA Package](#melpa-package)
 * [About](#about)
 
 
@@ -195,11 +194,15 @@ the `git`, `bzr`, `hg`, `darcs`, `svn` and `cvs` fetchers.*
 `github-user/repo-name`. *required for the `github` fetcher*.
 
 - `:commit`
-specifies the commit or branch of the git repo to checkout. The value
+specifies the commit of the git repo to checkout. The value
 will be passed to `git reset` in a repo where `upstream` is the
 original repository. Can therefore be either a sha, if pointing at a
-specific commit, or a branch (prefixed with "origin/"). Only used by
+specific commit, or a full ref prefixed with "origin/". Only used by
 the `git` and `github` fetchers.
+
+- `:branch`
+specifies the branch of the git repo to use. This is like `:commit`, but
+it adds the "origin/" prefix automatically.
 
 - `:module`
 specifies the module of a CVS repository to check out.  Defaults to to
@@ -269,7 +272,6 @@ files specified explicitly.
 
 ### Example: Multiple Files in Multiple Directories
 
-There are special cases when we need
 There are special cases where creation of the package comes from many
 different sub-directories in the repository and the destination
 sub-directories need to be explicitly set.
@@ -432,58 +434,6 @@ This can be configured using the `package-build-archive-dir` variable.
 
 Repositories are checked out to the `working/` directory by default.
 This can be configured using the `package-build-working-dir` variable.
-
-## MELPA Package
-
-The `melpa.el` package---available in MELPA--allows creating a
-whitelist or blacklist of packages for a specific repository.  This
-allows for disabling all packages from a specific repository and only
-enabling certain packages, or simply blacklist a certain subset of packages.
-
-### Configuring
-
-By default there are two variables that can be customized to specify
-which packages will be enabled (whitelist packages only) or excluded
-(blacklist of packages)
-
-
-- `package-archive-enable-alist` : Optional Alist of enabled packages
-    used by `package-filter`. The format is (ARCHIVE . PACKAGE ...),
-    where ARCHIVE is a string matching an archive name in
-    `package-archives`, PACKAGE is a symbol of a package in ARCHIVE to
-    enable. If no ARCHIVE exists in the alist, all packages are
-    enabled.
-
-    If no ARCHIVE exists in the alist, all packages are enabled.
-
-<!-- extra padding??? -->
-
-- `package-archive-exclude-alist` : Alist of packages excluded by
-    `package-filter`. The format is (ARCHIVE . PACKAGE ...), where
-    ARCHIVE is a string matching an archive name in
-    `package-archives`, PACKAGE is a symbol of a package in that
-    archive to exclude. Any specified package is excluded regardless
-    of the value of `package-archive-enable-alist`
-
-
-    If a particular ARCHIVE has an entry in
-`package-archive-enable-alist` then only packages
-
-
-
-### Manual Installation
-
-You can install the package manually by pasting this into your `*scratch*` buffer and evaluating it.
-
-    (progn
-      (switch-to-buffer
-       (url-retrieve-synchronously
-        "https://raw.github.com/milkypostman/melpa/master/melpa.el"))
-      (package-install-from-buffer  (package-buffer-info) 'single))
-
-
-
-
 
 ## About
 

@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+export HOME=/home/melpa
+cd ${HOME}/melpa
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+make cleanup
+make json
+make html
+make sync
+
+# Sync every 5 minutes.
+sleep 5m

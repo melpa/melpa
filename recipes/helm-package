@@ -1,0 +1,1 @@
+(helm-package :fetcher github :repo "syohex/emacs-helm-package")

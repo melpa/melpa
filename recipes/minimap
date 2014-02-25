@@ -1,1 +1,1 @@
-(minimap :url "git://randomsample.de/minimap.git" :fetcher git)
+(minimap :fetcher github :repo "dustinlacewell/emacs-minimap")

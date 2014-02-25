@@ -1,0 +1,4 @@
+(latex-preview-pane
+ :fetcher github
+ :repo "jsinglet/latex-preview-pane"
+ :files ("*.el" "*.txt"))

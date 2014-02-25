@@ -1,0 +1,1 @@
+(simple-rtm :fetcher github :repo "mbunkus/simple-rtm" :files ("lisp/*.el"))

@@ -1,0 +1,1 @@
+(discover :fetcher github :repo "mickeynp/discover.el")

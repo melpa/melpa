@@ -1,0 +1,1 @@
+(helm-c-moccur :fetcher github :repo "myuhe/helm-c-moccur.el")

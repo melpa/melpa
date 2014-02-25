@@ -1,0 +1,4 @@
+(esqlite-helm
+ :fetcher github
+ :repo "mhayashi1120/Emacs-esqlite"
+ :files ("esqlite-helm.el"))

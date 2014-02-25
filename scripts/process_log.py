@@ -10,9 +10,10 @@ import re
 import sys
 import time
 import tempfile
+from operator import or_
 
-LOGFILE = "/var/log/nginx/melpa/melpa.access.log"
-LOGREGEX = r'(?P<ip>[\d.]+) [ -]+ \[(?P<date>[\w/: -]+)\] ' \
+LOGFILE = "/home/melpa/log/melpa.access.log"
+LOGREGEX = r'(?P<ip>[\d.]+) [ -]+ \[(?P<date>[\w/: +-]+)\] ' \
            r'"GET /packages/(?P<package>[^ ]+)-[0-9.]+.(?:el|tar) ' \
            r'HTTP/\d.\d" 200'
 
@@ -31,7 +32,7 @@ def json_dump(data, jsonfile, indent=None):
     """
     jsonfiy `data`
     """
-    return json.dump(data, jsonfile, default=json_handler, indent=indent)
+    return json.dump(data, jsonfile, default=json_handler, indent=indent, encoding='utf-8')
 
 
 def datetime_parser(dct):
@@ -52,6 +53,10 @@ def parse_val(val):
         return val
 
 
+def ip_to_number(ip):
+    return reduce(or_, ((int(n) << (i*8)) for i, n in enumerate(
+        reversed(ip.split('.')))), 0)
+
 def parse_logfile(logfilename, pkg_ip_time):
     """
     """
@@ -65,12 +70,12 @@ def parse_logfile(logfilename, pkg_ip_time):
     count = 0
 
     for line in logfile:
-
         match = logre.match(line)
 
         if match is None:
             continue
 
+        # Convert ips to four character strings.
         ip = match.group('ip')
         dtstamp = int(time.mktime(
             datetime.strptime(match.group('date').split()[0],

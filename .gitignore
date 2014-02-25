@@ -4,6 +4,7 @@
 /epkgs
 **.elc
 .#*
+/.cask
 /html/archive.json
 /html/recipes.json
 /html/download_counts.json
@@ -11,3 +12,5 @@
 /html/updates.rss
 /elpa
 /html/build-status.json
+/download_log.json.gz
+/.ecukes-failing-scenarios

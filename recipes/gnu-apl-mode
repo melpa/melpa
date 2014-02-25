@@ -1,0 +1,2 @@
+(gnu-apl-mode :fetcher github
+              :repo "lokedhs/gnu-apl-mode")

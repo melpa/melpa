@@ -1,0 +1,1 @@
+(helm-perldoc :fetcher "github" :repo "syohex/emacs-helm-perldoc")

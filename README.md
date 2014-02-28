@@ -59,12 +59,12 @@ A complete minimal example for MELPA,
 
 Since `package.el` doesn't allow locking packages to certain version, MELPA packages
 will override those available from any other package source, so
-we also provide a package `melpa.el` which contains code to allow
+we also provide a separate package, `package-filter.el` which contains code to allow
 restricting packages to specific repositories.  This allows someone to
 blacklist packages that come from a specific repository, or blacklist
 all packages from a repository and only whitelist certain packages.
 
-See the [MELPA Package](#melpa-package) section below if you think you might want that.
+See the [package-filter.el](https://github.com/milkypostman/package-filter) page if you think you might want that.
 
 
 ## Contributing New Recipes

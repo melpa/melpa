@@ -208,10 +208,15 @@ it adds the "origin/" prefix automatically.
 specifies the module of a CVS repository to check out.  Defaults to to
 `package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
 
-- `:files` [default: `(*.el *.info dir)`]
-optional property specifying the elisp and info files used to build the
+- `:files` optional property specifying the elisp and info files used to build the
 package. Automatically populated by matching all `.el`, `.info` and `dir` files in the
-root of the repository.
+root of the repository and the `doc` directory. Excludes all files in the root directory 
+ending in `test.el` or `tests.el`. See the default value below,
+
+        ("*.el" "*.el.in" "dir"
+         "*.info" "*.texi" "*.texinfo"
+         "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
+         (:exclude ".dir-locals.el" "tests.el" "*-test.el" "*-tests.el"))
 
     This option is necessary when there are multiple packages in the
 repository and thus the package should only be built from a subset of

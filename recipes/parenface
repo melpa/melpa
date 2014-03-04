@@ -1,1 +1,1 @@
-(parenface :fetcher github :repo "grettke/parenface")
+(parenface :fetcher github :repo "grettke/parenface" :files ("parenface*.el"))

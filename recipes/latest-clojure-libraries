@@ -1,3 +1,4 @@
 (latest-clojure-libraries
  :fetcher github
- :repo "AdamClements/latest-clojure-libraries")
+ :repo "AdamClements/latest-clojure-libraries"
+ :branch "release")

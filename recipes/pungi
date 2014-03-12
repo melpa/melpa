@@ -1,4 +1,1 @@
-(pungi
- :fetcher github
- :repo mgrbyte/pungi
- :files ("*.el" "README" "CHANGES" "Makefile"))
+(pungi :fetcher github :repo "mgrbyte/pungi")

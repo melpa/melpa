@@ -1,0 +1,3 @@
+(company-inf-python
+ :fetcher "github"
+ :repo "proofit404/company-inf-python")

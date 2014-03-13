@@ -1,0 +1,1 @@
+(btc-ticker :fetcher github :repo "niedbalski/emacs-btc-ticker" :old-names (mtgox))

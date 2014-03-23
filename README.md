@@ -24,6 +24,7 @@ details.
 * [Build Scripts](#build-scripts)
 * [API](#api)
 * [About](#about)
+* [Stable Packages](#stable-packages)
 
 
 ## Usage
@@ -444,3 +445,43 @@ This can be configured using the `package-build-working-dir` variable.
 
 *MELPA* is *Milkypostman's ELPA* or *Milkypostman's Experimental Lisp
  Package Archive* if you're not into the whole brevity thing.
+
+## Stable Packages
+
+MELPA now includes a mechanism to build *stable* versions of packages
+given that the repositories meet the following criteria,
+
+1. Hosted using *git*.
+2. Tag names are version strings compatible parseable by the `version-to-list` function.
+
+To use the stable versions of packages you should use the stable sever
+in your `package-archives` list.
+
+```lisp
+(add-to-list 'package-archives
+             '("melpa-stable" . "http://hiddencameras.milkbox.net/packages/") t)
+```
+
+### Stable Version Generation
+
+To have a stable version generated for your package simply tag the
+repository using a naming compatible with `version-to-list`. The repo
+state of this tag will be used to generate the stable package.
+
+### Notes
+
+*Versions for packages on the original MELPA server are based on the date of the last commit and will likely be higher than any version on the stable server.* Keep the following things in mind,
+
+* If you leave the original MELPA server in your `package-archives`
+  then by default you will get the *development* versions of packages
+  and not the stable ones.
+
+* You will probably want to remove all packages and then reinstall
+  them. Any packages you already have installed from MELPA will never
+  get "updated" to the stable version because of the way version
+  numbering is handled.
+
+
+
+  
+

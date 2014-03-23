@@ -462,6 +462,9 @@ in your `package-archives` list.
              '("melpa-stable" . "http://hiddencameras.milkbox.net/packages/") t)
 ```
 
+An online list of available packages can be found at 
+[http://hiddencameras.milkbox.net](http://hiddencameras.milkbox.net).
+
 ### Stable Version Generation
 
 To have a stable version generated for your package simply tag the

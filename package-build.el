@@ -967,7 +967,8 @@ Returns the archive entry for the package."
                          pkg-dir-name))
 
         (let ((default-directory source-dir))
-          (pb/write-pkg-readme (pb/find-package-commentary pkg-source)
+          (pb/write-pkg-readme target-dir
+                               (pb/find-package-commentary pkg-source)
                                package-name))
 
         (delete-directory pkg-tmp-dir t nil)

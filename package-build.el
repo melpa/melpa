@@ -954,8 +954,7 @@ Returns the archive entry for the package."
 
 
         (pb/copy-package-files files source-dir pkg-tmp-dir)
-        (pb/write-pkg-file target-dir
-                           (expand-file-name pkg-file
+        (pb/write-pkg-file (expand-file-name pkg-file
                                              (file-name-as-directory pkg-tmp-dir))
                            pkg-info)
 

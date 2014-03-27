@@ -66,6 +66,9 @@
 (defvar package-build-verbose t
   "When non-nil, `package-build' feels free to print information about its progress.")
 
+(defvar package-build-stable nil
+  "When non-nil, `package-build' tries to build packages from versions-tagged code.")
+
 ;;; Internal Variables
 
 (defvar pb/recipe-alist nil

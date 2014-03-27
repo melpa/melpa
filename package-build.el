@@ -1119,8 +1119,8 @@ If FILE-NAME is not specified, the default archive-contents file is used."
                  entries)
       (let ((old (assq (car new) entries)))
         (when old
-          (when (version-list-< (package-desc-vers (cdr new))
-                                (package-desc-vers (cdr old)))
+          (when (version-list-< (elt (cdr new) 0)
+                                (elt (cdr old) 0))
             ;; swap old and new
             (cl-rotatef old new))
           (pb/remove-archive-files old)

@@ -6,6 +6,7 @@
             ("realgud/debugger/gdb"       "realgud/debugger/gdb/*.el")
             ("realgud/debugger/gub"       "realgud/debugger/gub/*.el")
             ("realgud/debugger/kshdb"     "realgud/debugger/kshdb/*.el")
+            ("realgud/debugger/nodejs"    "realgud/debugger/nodejs/*.el")
             ("realgud/debugger/pdb"       "realgud/debugger/pdb/*.el")
             ("realgud/debugger/perldb"    "realgud/debugger/perldb/*.el")
             ("realgud/debugger/pydb"      "realgud/debugger/pydb/*.el")

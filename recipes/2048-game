@@ -1,0 +1,1 @@
+(2048-game :fetcher hg :url "https://bitbucket.org/zck/2048.el")

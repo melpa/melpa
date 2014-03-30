@@ -1,0 +1,4 @@
+(helm-google
+ :repo "steckerhalter/helm-google"
+ :fetcher github
+ :files ("helm-google.com" "google.el"))

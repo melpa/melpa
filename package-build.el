@@ -694,7 +694,9 @@ of the same-named package which is to be kept."
   "Return a list of data structures for all recipes in `package-build-recipes-dir'."
   (cl-loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
            for pkg-info = (condition-case err (pb/read-recipe file-name)
-                            (error (pb/message (error-message-string err))
+                            (error (pb/message "Error reading recipe %s: %s"
+                                               file-name
+                                               (error-message-string err))
                                    nil))
            when pkg-info
            collect pkg-info))

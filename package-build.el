@@ -1028,7 +1028,7 @@ Returns the archive entry for the package."
   "Build archive for the recipe defined in the current buffer."
   (interactive)
   (unless (and (buffer-file-name)
-               (string-equal (file-name-directory (buffer-file-name))
+               (file-equal-p (file-name-directory (buffer-file-name))
                              package-build-recipes-dir))
     (error "Buffer is not visiting a recipe"))
   (when (buffer-modified-p)

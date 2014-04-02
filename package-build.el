@@ -508,7 +508,18 @@ Optionally PRETTY-PRINT the data."
          (lambda (elt)
            (list (car elt)
                  (package-version-join (cadr elt))))
-         (aref pkg-info 1)))
+         (aref pkg-info 1))
+      ;; Append our extra information
+      ,@(apply #'append (mapcar (lambda (entry)
+                                  (let ((value (cdr entry)))
+                                    (when (or (symbolp value) (listp value))
+                                      ;; We must quote lists and symbols,
+                                      ;; because Emacs 24.3 and earlier evaluate
+                                      ;; the package information, which would
+                                      ;; break for unquoted symbols or lists
+                                      (setq value (list 'quote value)))
+                                    (list (car entry) value)))
+                                (aref pkg-info 4))))
    pkg-file
    t))
 

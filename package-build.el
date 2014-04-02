@@ -953,7 +953,7 @@ Returns the archive entry for the package."
             (kill-buffer)))
 
         (pb/write-pkg-readme target-dir
-                             (and (> (length pkg-info) 4) (aref pkg-info 4))
+                             (pb/find-package-commentary pkg-source)
                              package-name)
         (pb/archive-entry pkg-info 'single)))
      ((< 1 (length  files))

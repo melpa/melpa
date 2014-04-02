@@ -634,12 +634,14 @@ If PKG-INFO is nil, an empty one is created."
   (let* ((name (intern (aref pkg-info 0)))
          (requires (aref pkg-info 1))
          (desc (or (aref pkg-info 2) "No description available."))
-         (version (aref pkg-info 3)))
+         (version (aref pkg-info 3))
+         (extras (aref pkg-info 4)))
     (cons name
           (vector (version-to-list version)
                   requires
                   desc
-                  type))))
+                  type
+                  extras))))
 
 (defun pb/archive-file-name (archive-entry)
   "Return the path of the file in which the package for ARCHIVE-ENTRY is stored."

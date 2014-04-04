@@ -519,7 +519,8 @@ Optionally PRETTY-PRINT the data."
                                       ;; break for unquoted symbols or lists
                                       (setq value (list 'quote value)))
                                     (list (car entry) value)))
-                                (aref pkg-info 4))))
+                                (when (> (length pkg-info) 4)
+                                  (aref pkg-info 4)))))
    pkg-file
    t))
 
@@ -646,7 +647,8 @@ If PKG-INFO is nil, an empty one is created."
          (requires (aref pkg-info 1))
          (desc (or (aref pkg-info 2) "No description available."))
          (version (aref pkg-info 3))
-         (extras (aref pkg-info 4)))
+         (extras (when (> (length pkg-info) 4)
+                   (aref pkg-info 4))))
     (cons name
           (vector (version-to-list version)
                   requires

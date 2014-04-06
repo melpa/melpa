@@ -29,39 +29,32 @@ details.
 
 ## Usage
 
-To use the MELPA repository, add it to `package-archives` after
-`(require 'package)` and before the call to `package-initialize` in
-your `init.el` file.
+To use the MELPA repository, you'll need an Emacs with
+`package.el`. Emacs 24 has `package.el` bundled with it, and there's
+also a
+[version you can use with Emacs 23](http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el).
 
-```lisp
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-```
-
-In Emacs < 24, you'll also need to explicitly include the GNU ELPA
-archive, which provides important compatibility libraries like
-`cl-lib`:
-
-```lisp
-(when (< emacs-major-version 24)
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-```
-
-A complete minimal example for MELPA,
+Enable installation of packages from MELPA by adding an entry to
+`package-archives` after `(require 'package)` and before the call to
+`package-initialize` in your `init.el` file:
 
 ```lisp
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 ```
 
-MELPA packages will always have higher versions than those from other
-archives like Marmalade, so if you decide you need non-MELPA versions
-of specific packages for some reason, extra configuration will be
-required:
+Then just use `M-x package-list-packages` to browse and install
+packages from MELPA and elsewhere.
+
+Note that MELPA packages will always have higher versions than those
+from other archives like Marmalade, so if you decide you need
+non-MELPA versions of specific packages for some reason, extra
+configuration will be required:
 
 If your Emacs has the variable `package-pinned-packages`, you can
 customize or modify that variable as needed. Otherwise, use the

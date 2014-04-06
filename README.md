@@ -36,7 +36,7 @@ also a
 
 Enable installation of packages from MELPA by adding an entry to
 `package-archives` after `(require 'package)` and before the call to
-`package-initialize` in your `init.el` file:
+`package-initialize` in your `init.el` or `.emacs` file:
 
 ```lisp
 (require 'package)

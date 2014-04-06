@@ -58,14 +58,16 @@ A complete minimal example for MELPA,
 (package-initialize)
 ```
 
-Since `package.el` doesn't allow locking packages to certain version, MELPA packages
-will override those available from any other package source, so
-we also provide a separate package, `package-filter.el` which contains code to allow
-restricting packages to specific repositories.  This allows someone to
-blacklist packages that come from a specific repository, or blacklist
-all packages from a repository and only whitelist certain packages.
+MELPA packages will always have higher versions than those from other
+archives like Marmalade, so if you decide you need non-MELPA versions
+of specific packages for some reason, extra configuration will be
+required:
 
-See the [package-filter.el](https://github.com/milkypostman/package-filter) page if you think you might want that.
+If your Emacs has the variable `package-pinned-packages`, you can
+customize or modify that variable as needed. Otherwise, use the
+separate
+[package-filter.el](https://github.com/milkypostman/package-filter)
+package which we provide.
 
 
 ## Contributing New Recipes

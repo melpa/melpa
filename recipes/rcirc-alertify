@@ -1,0 +1,1 @@
+(rcirc-alertify :fetcher github :repo "fgallina/rcirc-alertify")

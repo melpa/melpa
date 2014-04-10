@@ -1,0 +1,3 @@
+(firebelly-theme :repo "startling/firebelly"
+                 :fetcher github
+                 :files ("firebelly-theme.el"))

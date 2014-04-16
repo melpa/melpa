@@ -1,5 +1,4 @@
 (stan-mode
  :fetcher github
- :repo "stan-mode/stan-mode"
+ :repo "stan-dev/stan-mode"
  :files ("stan-mode.el" "stan-keywords-lists.el" "ac-dict"))
-

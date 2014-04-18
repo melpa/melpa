@@ -1,0 +1,3 @@
+(clang-format
+ :repo "kljohann/clang-format.el"
+ :fetcher github)

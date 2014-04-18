@@ -1,1 +1,3 @@
-(visible-mark :fetcher wiki)
+(visible-mark
+ :url "https://gitlab.com/iankelling/visible-mark.git"
+ :fetcher git)

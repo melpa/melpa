@@ -1,0 +1,3 @@
+(timesheet :fetcher github
+           :repo "tmarble/timesheet.el"
+           :files ("*.el" "bin" "share"))

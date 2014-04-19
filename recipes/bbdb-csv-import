@@ -1,0 +1,3 @@
+(bbdb-csv-import
+ :url "https://gitlab.com/iankelling/bbdb-csv-import.git"
+ :fetcher git)

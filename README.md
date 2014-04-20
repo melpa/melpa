@@ -146,6 +146,15 @@ within Emacs and specifying the newly built package in the directory
 specified by `package-build-archive-dir` (default: `packages/`
 directory where `package-build` was loaded).
 
+You can optionally run a sandboxed Emacs in which locally-built
+packages will be available for installation along with those already
+in MELPA:
+
+```
+EMACS=/path/to/emacs make sandbox
+```
+then `M-x package-list-packages`, install and test as appropriate.
+
 ### Submitting
 
 After verifying the entry works properly please open a pull request on

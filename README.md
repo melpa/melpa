@@ -153,7 +153,9 @@ in MELPA:
 ```
 EMACS=/path/to/emacs make sandbox
 ```
-then `M-x package-list-packages`, install and test as appropriate.
+
+then `M-x package-list-packages`, install and test as
+appropriate. This is a useful way to discover missing dependencies!
 
 ### Submitting
 

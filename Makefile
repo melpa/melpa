@@ -99,7 +99,7 @@ $(RCPDIR)/%: .FORCE
 
 
 ## Sandbox
-sandbox:
+sandbox: packages/archive-contents
 	@echo " • Building sandbox ..."
 	mkdir -p $(SANDBOX)
 	$(EMACS) -Q \

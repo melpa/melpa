@@ -103,18 +103,20 @@ process and expedite the recipe review process,
 
     * A brief summary of what the package does.
 
+    * A direct link to the package repository.
+
     * Your association with the package (e.g., are you the maintainer?
       have you contributed? do you just like the package a lot?).
 
-    * A direct link to the package repository.
-
-    * Relevant communications with the package maintainer (e.g.,
+    * Relevant communications with the upstream package maintainer (e.g.,
       `package.el` compatibility changes that you have submitted).
 
-* Test that the package builds properly via `make recipes/<recipe>`.
+* Test that the package builds properly via `make recipes/<recipe>`,
+  or pressing `C-c C-c` in the recipe buffer.
 
-* Test that the package installs properly via `package-install-file`.
-
+* Test that the package installs properly via `package-install-file`,
+  or entering "yes" when prompted after pressing `C-c C-c` in the
+  recipe buffer.
 
 
 ### Testing
@@ -124,13 +126,20 @@ Let `<NAME>` denote the name of the recipe to submit.
 1. Fork the MELPA repository.
 2. Add your new file under the directory specified by
 `package-build-recipes-dir` (default: `recipes/` directory where
-`package-build` was loaded).
-3. Confirm your package built properly by running
+`package-build` was loaded). If you prefer, the interactive command
+`package-build-create-recipe` in `package-build.el` will guide you
+through this process.
+
+3. Confirm your package builds properly by running
 
         make recipes/<NAME>
 
   (Be sure that the `emacs` on your path is at least version 23, or
   set `$EMACS` to the location of a suitable binary.)
+
+  Alternatively, open the recipe in Emacs and press `C-c C-c` in the
+  recipe buffer: this will also prompt you to install the
+  freshly-built package.
 
 4. Install the file you built by running `package-install-file` from
 within Emacs and specifying the newly built package in the directory

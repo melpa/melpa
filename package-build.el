@@ -951,7 +951,7 @@ Returns the archive entry for the package."
           (error "Single file %s does not match package name %s"
                  (file-name-nondirectory pkg-source) package-name))
         (when (file-exists-p pkg-target)
-          (delete-file pkg-target t))
+          (delete-file pkg-target))
         (copy-file pkg-source pkg-target)
         (let ((enable-local-variables nil)
               (make-backup-files nil))

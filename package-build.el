@@ -126,12 +126,13 @@ function for access to this function")
             (format "%d" (or (string-to-number (format-time-string "%H%M" time)) 0)))))
 
 (defun pb/string-match-all (regex str &optional group)
-  "Find every match for `REGEX' within `STR', returning the full match string or group `GROUP'."
+  "Find every match for `REGEX' within `STR', returning a list containing the full match string and match for group `GROUP'.
+The return list is of the form ((FULL GROUP) ...) where FULL is the complete regexp match and GROUP is the regex group specified by the `GROUP' argument. If `GROUP' is nil then FULL and GROUP will be identical."
   (let (result
         (pos 0)
         (group (or group 0)))
     (while (string-match regex str pos)
-      (push (match-string group str) result)
+      (push (list (match-string 0 str) (match-string group str)) result)
       (setq pos (match-end group)))
     result))
 
@@ -144,19 +145,23 @@ function for access to this function")
   "Returns true if STR is a valid version, otherwise return nil."
   (ignore-errors (version-to-list str)))
 
-(defun pb/find-parse-version-newest (regex &optional bound)
+(defun pb/find-tag-version-newest (regex &optional bound)
   "Find the newest version matching REGEX, optionally looking only as far as BOUND."
   (let* ((text (buffer-substring-no-properties
                 (or bound (point-min)) (point)))
-         (times (cl-remove-if-not 'pb/valid-version-string
-                                  (pb/string-match-all regex text 1))))
-    (car (nreverse (sort times 'version<)))))
+         (tags (cl-remove-if-not
+                (lambda (tag-version)
+                  (pb/valid-version-string (cadr tag-version)))
+                (pb/string-match-all regex text 1))))
+    (car (nreverse (sort tags (lambda (v1 v2)
+                                (version< (cadr v1) (cadr v2))))))))
 
 (defun pb/find-parse-time-latest (regex &optional bound)
   "Find the latest timestamp matching REGEX, optionally looking only as far as BOUND."
   (let* ((text (buffer-substring-no-properties
                 (or bound (point-min)) (point)))
-         (times (mapcar 'pb/parse-time (pb/string-match-all regex text 1))))
+         (times (mapcar 'pb/parse-time
+                        (mapcar 'cadr (pb/string-match-all regex text 1)))))
     (car (nreverse (sort times 'string<)))))
 
 (defun pb/run-process (dir command &rest args)
@@ -170,9 +175,9 @@ Output is written to the current buffer."
     (unless (file-directory-p default-directory)
       (error "Can't run process in non-existent directory: %s" default-directory))
     (let ((exit-code (apply 'process-file (car argv) nil (current-buffer) t (cdr argv))))
-      (unless (zerop exit-code)
-        (error "Command '%s' exited with non-zero status %d: %s"
-               argv exit-code (buffer-string))))))
+      (or (zerop exit-code)
+          (error "Command '%s' exited with non-zero status %d: %s"
+                 argv exit-code (buffer-string))))))
 
 (defun pb/run-process-match (regex dir prog &rest args)
   "Find match for REGEX when - in DIR, or `default-directory' if unset - we run PROG with ARGS."
@@ -409,17 +414,18 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (pb/princ-checkout repo dir)
         (pb/run-process nil "git" "clone" repo dir)))
       (if package-build-stable
-          (let ((bound (goto-char (point-max)))
-                version-tag)
-            (pb/run-process dir "git" "tag")
-            (setq version-tag
-                  (or (pb/find-parse-version-newest "^\\([^ \t\n]+\\)$" bound)
-                      (error "No valid stable versions found for %s" name)))
+          (let* ((bound (goto-char (point-max)))
+                 (tag-version (and (pb/run-process dir "git" "tag")
+                                   (or (pb/find-tag-version-newest
+                                        "^v?\\([^ \t\n]+\\)$" bound)
+                                       (error
+                                        "No valid stable versions found for %s"
+                                        name)))))
             ;; Using reset --hard here to comply with what's used for
             ;; unstable, but maybe this should be a checkout?
-            (pb/run-process dir "git" "reset" "--hard" (concat "tags/" version-tag))
+            (pb/run-process dir "git" "reset" "--hard" (concat "tags/" (car tag-version)))
             (pb/run-process dir "git" "submodule" "update" "--init" "--recursive")
-            version-tag)
+            (cadr tag-version))
         (pb/run-process dir "git" "reset" "--hard"
                         (or commit (concat "origin/" (pb/git-head-branch dir))))
         (pb/run-process dir "git" "submodule" "update" "--init" "--recursive")

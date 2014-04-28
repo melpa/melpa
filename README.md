@@ -469,7 +469,7 @@ given that the repositories meet the following criteria,
 1. Hosted using *git*.
 2. Tag names are version strings compatible parseable by the `version-to-list` function.
 
-To use the stable versions of packages you should use the stable sever
+To use the stable versions of packages you should use the stable server
 in your `package-archives` list.
 
 ```lisp

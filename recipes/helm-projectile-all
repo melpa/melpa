@@ -1,0 +1,2 @@
+(helm-projectile-all :repo "spatz/helm-projectile-all"
+                     :fetcher github)

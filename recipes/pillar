@@ -1,2 +1,2 @@
 (pillar :fetcher github
-        :repo "DamienCassou/pillar-mode")
+        :repo "pillar-markup/pillar-mode")

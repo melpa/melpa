@@ -1,1 +1,1 @@
-(magit-tramp :fetcher github :repo "sigma/magit-tramp")
+(magit-tramp :fetcher github :repo "magit/magit-tramp")

@@ -1,0 +1,1 @@
+(draft-mode :fetcher github :repo "gaudecker/draft-mode")

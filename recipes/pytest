@@ -1,0 +1,1 @@
+(pytest :fetcher hg :url "https://bitbucket.org/elarson/pytest.el")

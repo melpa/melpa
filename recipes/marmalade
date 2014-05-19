@@ -1,0 +1,1 @@
+(marmalade :fetcher github :repo "nex3/marmalade" :files ("elisp/marmalade.el"))

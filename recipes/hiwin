@@ -1,1 +1,1 @@
-(hiwin :fetcher github :repo "tomoya/hiwin-mode")
+(hiwin :fetcher github :repo "yoshida-mediba/hiwin-mode")

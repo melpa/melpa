@@ -1,2 +1,0 @@
-(emacs-creds :fetcher github
-             :repo "ardumont/emacs-creds")

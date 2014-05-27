@@ -14,9 +14,7 @@ pre code { /* Match highlight.js styles to bootstrap */
   padding: 0;
   background: transparent;
 }
-.table-sort * {
-}
-.table-sort-indicator {
+#package-list th .glyphicon {
   padding-left: 1em;
 }
 #package-list th, #package-list td.version, #package-list td.recipe {

@@ -420,10 +420,8 @@
   m.route.mode = "hash";
   m.route(document.getElementById("content"), "/", {
     "/": melpa.frontpage,
-    "!/": melpa.frontpage, // Synonym for backward-compatibility
     "/getting-started": melpa.gettingstarted,
-    "/:package": melpa.packagedetails,
-    "!/:package": melpa.packagedetails // Synonym for backward-compatibility
+    "/:package": melpa.packagedetails
   });
 
 

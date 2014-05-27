@@ -431,7 +431,7 @@
   // Lazily initialise twitter widgets as they appear
   //////////////////////////////////////////////////////////////////////////////
   window.setInterval(function() {
-    if (window.twttr) window.twttr.widgets.load();
+    if (window.twttr && window.twttr.widgets) window.twttr.widgets.load();
   }, 100);
 
 })(window.m, window.document, window._, window.moment);

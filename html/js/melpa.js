@@ -92,8 +92,12 @@
       }
       var sortKey = sortBy + "-" + sortAscending;
       if (packages.sortKey === sortKey) return packages;
-      var matched = _.sortBy(packages, function(p) { return p[sortBy](); });
-      packages = savedSearches[t] = sortAscending ? matched : matched.reverse();
+      if (packages.sortKey === sortBy + "-" + !sortAscending) {
+        packages = packages.reverse();
+      } else {
+        var matched = _.sortBy(packages, function(p) { return p[sortBy](); });
+        packages = savedSearches[t] = sortAscending ? matched : matched.reverse();
+      }
       packages.sortKey = sortKey;
       return packages;
     };

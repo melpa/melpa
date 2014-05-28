@@ -16,10 +16,9 @@
     var method = "resolve"
     function synchronizer(pos, resolved) {
       return function(value) {
-        --outstanding
         results[pos] = value
         if (!resolved) method = "reject"
-        if (outstanding == 0) {
+        if (--outstanding == 0) {
           deferred.promise(results)
           deferred[method](results)
         }
@@ -31,7 +30,7 @@
     var outstanding = args.length
     var results = new Array(outstanding)
     for (var i = 0; i < args.length; i++) {
-      args[i].then(synchronizer(i, true), synchronizer(false))
+      args[i].then(synchronizer(i, true), synchronizer(i, false))
     }
     return deferred.promise
   }

@@ -11,31 +11,6 @@
   // TODO Show recent github events on package pages where applicable
   // TODO Voting / starring
 
-  // Temporary fix pending https://github.com/lhorie/mithril.js/issues/101 upstream
-  m.sync = function(args) {
-    var method = "resolve"
-    function synchronizer(pos, resolved) {
-      return function(value) {
-        results[pos] = value
-        if (!resolved) method = "reject"
-        if (--outstanding == 0) {
-          deferred.promise(results)
-          deferred[method](results)
-        }
-        return value
-      }
-    }
-
-    var deferred = m.deferred()
-    var outstanding = args.length
-    var results = new Array(outstanding)
-    for (var i = 0; i < args.length; i++) {
-      args[i].then(synchronizer(i, true), synchronizer(i, false))
-    }
-    return deferred.promise
-  }
-
-
   //////////////////////////////////////////////////////////////////////////////
   // Helpers
   //////////////////////////////////////////////////////////////////////////////

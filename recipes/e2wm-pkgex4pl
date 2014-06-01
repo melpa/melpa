@@ -1,2 +1,2 @@
-(e2wm-pkgex4pl "aki2o/e2wm-pkgex4pl"
-               :fetcher github)
+(e2wm-pkgex4pl :fetcher github
+               :repo "aki2o/e2wm-pkgex4pl")

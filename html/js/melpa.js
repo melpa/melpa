@@ -127,16 +127,10 @@
     var listed = _.intersection(_.keys(archive), _.keys(recipes));
     return new melpa.PackageList(_(listed).reduce(function(pkgs, name) {
       var built = archive[name];
-      if (!built || !built[0]) {
-        return pkgs;
-      }
       var recipe = recipes[name];
-      var descr = built[2].replace(/\s*\[((?:source: )?\w+)\]$/, "");
-      var version = built[0].join(".");
-      // Fix up hokey deps, which look like {"clojure-mode":{"2":[0,0]}} for 2.0.0
-      var deps = _.map(built[1] || {}, function (val, name) {
-        var v1 = _.keys(val)[0];
-        return {name: name, version: [v1].concat(val[v1] || []).join('.')};
+      var version = built.ver.join(".");
+      var deps = _.map(built.deps || [], function (ver, name) {
+        return {name: name, version: ver.join('.')};
       });
       var oldNames = recipe['old-names'] || [];
 
@@ -144,12 +138,12 @@
         name: name,
         version: version,
         dependencies: deps,
-        description: descr,
+        description: built.desc.replace(/\s*\[((?:source: )?\w+)\]$/, ""),
         source: recipe.fetcher,
         downloads: _.reduce(oldNames.concat(name), function(sum, n) { return sum + (downloads[n] || 0); }, 0),
         fetcher: recipe.fetcher,
         recipeURL: "https://github.com/milkypostman/melpa/blob/master/recipes/" + name,
-        packageURL: "packages/" + name + "-" + version + "." + (built[3] == "single" ? "el" : "tar"),
+        packageURL: "packages/" + name + "-" + version + "." + (built.type == "single" ? "el" : "tar"),
         sourceURL: calculateSourceURL(name, recipe),
         oldNames: oldNames
       }));

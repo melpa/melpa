@@ -45,6 +45,7 @@
 
 (require 'package)
 (require 'lisp-mnt)
+(require 'json)
 
 (defconst pb/this-dir (file-name-directory (or load-file-name (buffer-file-name))))
 
@@ -1168,10 +1169,9 @@ If FILE-NAME is not specified, the default archive-contents file is used."
           (setq entries (remove old entries)))
         (add-to-list 'entries new)))))
 
+
 
-;; Utility functions
-(require 'json)
-(load (expand-file-name "json-fix" pb/this-dir) nil 'nomessage)
+;;; Exporting data as json
 
 (defun package-build-recipe-alist-as-json (file-name)
   "Dump the recipe list to FILE-NAME as json."
@@ -1179,11 +1179,40 @@ If FILE-NAME is not specified, the default archive-contents file is used."
   (with-temp-file file-name
     (insert (json-encode (package-build-recipe-alist)))))
 
+(defun pb/sym-to-keyword (s)
+  "Return a version of symbol S as a :keyword."
+  (intern (concat ":" (symbol-name s))))
+
+(defun pb/pkg-info-for-json (info)
+  "Convert INFO into a data structure which will serialize to JSON in the desired shape."
+  (let* ((ver (elt info 0))
+         (deps (elt info 1))
+         (desc (elt info 2))
+         (type (elt info 3))
+         (props (when (> (length info) 4) (elt info 4))))
+    (list :ver ver
+          :deps (apply 'append
+                       (mapcar (lambda (dep)
+                                 (list (pb/sym-to-keyword (car dep))
+                                       (cadr dep)))
+                               deps))
+          :desc desc
+          :type type
+          :props props)))
+
+(defun pb/archive-alist-for-json ()
+  "Return the archive alist in a form suitable for JSON encoding."
+  (apply 'append
+         (mapcar (lambda (entry)
+                   (list (pb/sym-to-keyword (car entry))
+                         (pb/pkg-info-for-json (cdr entry))))
+                 (package-build-archive-alist))))
+
 (defun package-build-archive-alist-as-json (file-name)
   "Dump the build packages list to FILE-NAME as json."
   (interactive)
   (with-temp-file file-name
-    (insert (json-encode (package-build-archive-alist)))))
+    (insert (json-encode (pb/archive-alist-for-json)))))
 
 
 (provide 'package-build)

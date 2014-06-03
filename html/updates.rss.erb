@@ -16,7 +16,10 @@
       require 'time'
       require 'ostruct'
       packages = JSON.parse(File.open("archive.json").read).map do |pkgname, info|
-        versions, deps, descr, pkgtype = info
+        versions = info["ver"]
+        deps = info["deps"]
+        descr = info["desc"]
+        pkgtype = info["type"]
         version = versions.join('.')
         package = OpenStruct.new
         package.name = pkgname

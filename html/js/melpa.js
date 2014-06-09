@@ -208,12 +208,12 @@
       m("table#package-list.table.table-bordered.table-responsive.table-hover", [
         m("thead", [
           m("tr", [
-            m("th", {onclick: sortToggler("name")}, ["Package", sortIndicator("name")]),
-            m("th", {onclick: sortToggler("description")}, ["Description", sortIndicator("description")]),
-            m("th", {onclick: sortToggler("version")}, ["Version", sortIndicator("version")]),
+            m("th.sortable", {onclick: sortToggler("name")}, ["Package", sortIndicator("name")]),
+            m("th.sortable", {onclick: sortToggler("description")}, ["Description", sortIndicator("description")]),
+            m("th.sortable", {onclick: sortToggler("version")}, ["Version", sortIndicator("version")]),
             m("th", "Recipe"),
-            m("th", {onclick: sortToggler("fetcher")}, ["Source", sortIndicator("fetcher")]),
-            m("th", {onclick: sortToggler("downloads")}, ["DLs", sortIndicator("downloads")]),
+            m("th.sortable", {onclick: sortToggler("fetcher")}, ["Source", sortIndicator("fetcher")]),
+            m("th.sortable", {onclick: sortToggler("downloads")}, ["DLs", sortIndicator("downloads")]),
           ])
         ]),
         m("tbody",

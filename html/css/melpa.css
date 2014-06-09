@@ -38,3 +38,6 @@ a[name] { /* Stop navbar from hiding anchors */
 .muted {
   color: #999;
 }
+.sortable {
+  cursor: pointer;
+}

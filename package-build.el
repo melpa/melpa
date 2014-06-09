@@ -70,6 +70,14 @@
 (defvar package-build-stable nil
   "When non-nil, `package-build' tries to build packages from versions-tagged code.")
 
+(defvar package-build-timeout-executable
+  (let ((prog (or (executable-find "timeout")
+                  (executable-find "gtimeout"))))
+    (when (and prog
+               (string-match-p "^ *-k" (shell-command-to-string (concat prog " --help"))))
+      prog))
+  "Path to a GNU coreutils \"timeout\" command if available.")
+
 ;;; Internal Variables
 
 (defvar pb/recipe-alist nil
@@ -169,9 +177,8 @@ The return list is of the form ((FULL GROUP) ...) where FULL is the complete reg
   "In DIR (or `default-directory' if unset) run COMMAND with ARGS.
 Output is written to the current buffer."
   (let* ((default-directory (file-name-as-directory (or dir default-directory)))
-         (have-timeout (executable-find "timeout"))
-         (argv (if have-timeout
-                   (append (list "timeout" "-k" "60" "600" command) args)
+         (argv (if package-build-timeout-executable
+                   (append (list package-build-timeout-executable "-k" "60" "600" command) args)
                  (cons command args))))
     (unless (file-directory-p default-directory)
       (error "Can't run process in non-existent directory: %s" default-directory))

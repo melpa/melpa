@@ -39,8 +39,6 @@
 
 ;;; Code:
 
-;; Since this library is not meant to be loaded by users
-;; at runtime, use of cl functions should not be a problem.
 (require 'cl-lib)
 
 (require 'package)

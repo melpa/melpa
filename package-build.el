@@ -49,6 +49,10 @@
 
 (defconst pb/this-dir (file-name-directory (or load-file-name (buffer-file-name))))
 
+(defgroup package-build nil
+  "Facilities for building package.el-compliant packages from upstream source code."
+  :group 'development)
+
 (defcustom package-build-working-dir (expand-file-name "working/" pb/this-dir)
   "Directory in which to keep checkouts."
   :group 'package-build
@@ -64,19 +68,26 @@
   :group 'package-build
   :type 'string)
 
-(defvar package-build-verbose t
-  "When non-nil, `package-build' feels free to print information about its progress.")
+(defcustom package-build-verbose t
+  "When non-nil, `package-build' feels free to print information about its progress."
+  :group 'package-build
+  :type 'boolean)
 
-(defvar package-build-stable nil
-  "When non-nil, `package-build' tries to build packages from versions-tagged code.")
+(defcustom package-build-stable nil
+  "When non-nil, `package-build' tries to build packages from versions-tagged code."
+  :group 'package-build
+  :type 'boolean)
 
-(defvar package-build-timeout-executable
+(defcustom package-build-timeout-executable
   (let ((prog (or (executable-find "timeout")
                   (executable-find "gtimeout"))))
     (when (and prog
                (string-match-p "^ *-k" (shell-command-to-string (concat prog " --help"))))
       prog))
-  "Path to a GNU coreutils \"timeout\" command if available.")
+  "Path to a GNU coreutils \"timeout\" command if available.
+This must be a version which supports the \"-k\" option."
+  :group 'package-build
+  :type '(file :must-match t))
 
 ;;; Internal Variables
 

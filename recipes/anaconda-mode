@@ -1,4 +1,8 @@
 (anaconda-mode
  :fetcher github
  :repo "anaconda-mode/anaconda-mode"
- :files ("*.el" "*.py" "vendor"))
+ :files ("*.el"
+         "*.py"
+         ("vendor/jedi/jedi" "vendor/jedi/jedi")
+         ("vendor/click/click" "vendor/click/click")
+         ("vendor/jsonrpc/jsonrpc" "vendor/jsonrpc/jsonrpc")))

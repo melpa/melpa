@@ -12,7 +12,7 @@ before_install:
       sudo apt-get install -qq
           emacs24 emacs24-el emacs24-common-non-dfsg;
     fi
-  - curl -fsSkL https://raw.github.com/rejeep/cask.el/master/go | sh
+  - curl -fsSkL https://raw.github.com/rejeep/cask.el/master/go | python
   - export PATH="/home/travis/.cask/bin:$PATH"
   - cask
 env:

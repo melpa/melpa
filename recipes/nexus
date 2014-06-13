@@ -1,0 +1,1 @@
+(nexus :fetcher github :repo "juergenhoetzel/emacs-nexus")

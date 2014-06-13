@@ -22,7 +22,7 @@
         Only in the very latest Emacs snapshots is there a way to
         exclude or include versions according to their source
         (see <code>package-pinned-packages</code>). For all other
-        users, we provide a <code>melpa.el</code> package (available
+        users, we provide a <code>package-filter.el</code> package (available
         in MELPA) that will allow you to enable only certain packages
         or exclude certain packages.
         You can install the package
@@ -32,7 +32,7 @@
       <pre><code>(progn
   (switch-to-buffer
     (url-retrieve-synchronously
-      "https://raw.github.com/milkypostman/melpa/master/melpa.el"))
+      "https://raw.github.com/milkypostman/package-filter/master/package-filter.el"))
   (package-install-from-buffer  (package-buffer-info) 'single))</code></pre>
 
       <p>You can then customize two variables:</p>
@@ -74,7 +74,7 @@
       <h2>Known Issues</h2>
       <p>
         <strong>Note:</strong> <em>These fixes are included in
-        the <code>melpa.el</code> package.</em>
+        the <code>package-filter.el</code> package.</em>
       </p>
       <p>
         There is a small bug in Emacs24’s <code>package.el</code> such

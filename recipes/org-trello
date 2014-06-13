@@ -1,3 +1,3 @@
 (org-trello :fetcher github
-            :repo "ardumont/org-trello"
-            :files ("org-trello.el" "org-trello-pkg.el"))
+            :repo "org-trello/org-trello"
+            :files ("org-trello*.el"))

@@ -1,3 +1,2 @@
-(grass-mode
- :url "https://tws@bitbucket.org/tws/grass-mode.el"
- :fetcher hg)
+(grass-mode :fetcher hg :url "https://bitbucket.org/tws/grass-mode.el")
+

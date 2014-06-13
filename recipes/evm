@@ -1,1 +1,1 @@
-(evm :repo "rejeep/evm" :fetcher github)
+(evm :repo "rejeep/evm.el" :fetcher github)

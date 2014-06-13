@@ -1,0 +1,3 @@
+(py-autopep8
+ :repo "paetzke/py-autopep8.el"
+ :fetcher github)

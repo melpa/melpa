@@ -1,0 +1,1 @@
+(slime-annot :fetcher github :repo "arielnetworks/cl-annot" :files ("misc/*.el"))

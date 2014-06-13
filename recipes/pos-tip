@@ -1,4 +1,3 @@
 (pos-tip
- :repo "syohex/pos-tip"
- :fetcher github
- :files ("pos-tip.el"))
+ :repo "pitkali/pos-tip"
+ :fetcher github)

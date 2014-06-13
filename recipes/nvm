@@ -1,0 +1,1 @@
+(nvm :repo "rejeep/nvm.el" :fetcher github)

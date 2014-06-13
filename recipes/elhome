@@ -1,5 +1,5 @@
 (elhome
  :fetcher github
- :repo "dabrahams/elhome"
+ :repo "demyanrogozhin/elhome"
  :files ("elhome.el"
          "startup"))

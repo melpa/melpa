@@ -1,0 +1,1 @@
+(rcirc-controls :fetcher github :repo "kensanata/elisp" :files ("rcirc-controls.el"))

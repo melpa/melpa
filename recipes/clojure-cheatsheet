@@ -1,1 +1,1 @@
-(clojure-cheatsheet :fetcher github :repo "krisajenkins/clojure-cheatsheet")
+(clojure-cheatsheet :fetcher github :repo "clojure-emacs/clojure-cheatsheet")

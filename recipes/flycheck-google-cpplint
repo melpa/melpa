@@ -1,0 +1,1 @@
+(flycheck-google-cpplint :repo "flycheck/flycheck-google-cpplint" :fetcher github)

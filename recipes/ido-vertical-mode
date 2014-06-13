@@ -1,1 +1,1 @@
-(ido-vertical-mode :fetcher "github" :repo "rson/ido-vertical-mode.el")
+(ido-vertical-mode :fetcher "github" :repo "gempesaw/ido-vertical-mode.el")

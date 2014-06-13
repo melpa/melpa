@@ -1,0 +1,2 @@
+(ctxmenu :repo "aki2o/emacs-ctxmenu"
+         :fetcher github)

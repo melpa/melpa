@@ -1,0 +1,1 @@
+(parse-csv :fetcher github :repo "mrc/el-csv" :files ("parse-csv.el"))

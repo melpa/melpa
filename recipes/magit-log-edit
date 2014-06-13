@@ -1,0 +1,1 @@
+(magit-log-edit :fetcher github :repo "magit/magit-log-edit")

@@ -1,0 +1,4 @@
+(ess-smart-underscore
+ :repo "mlf176f2/ess-smart-underscore.el"
+ :fetcher github
+ :files ("ess-smart-underscore.el" "dir" "ess-smart-underscore.info"))

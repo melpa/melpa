@@ -1,0 +1,2 @@
+(howdoi :repo "atykhonov/emacs-howdoi"
+        :fetcher github)

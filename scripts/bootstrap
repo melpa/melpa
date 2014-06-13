@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# \curl -L https://raw.github.com/milkypostman/melpa/fasterbuild/scripts/bootstrap | bash
+
+SUDOENV='DEBIAN_FRONTEND=noninteractive'
+
+cd ${HOME}
+sudo ${SUDOENV} add-apt-repository -y ppa:cassou/emacs
+sudo ${SUDOENV} apt-get update
+sudo ${SUDOENV} apt-get -y upgrade
+sudo ${SUDOENV} apt-get -y \
+    install \
+    subversion git cvs darcs curl bzr mercurial \
+    emacs24 emacs24-el emacs24-common-non-dfsg \
+    tmux make
+
+# build the log stuff
+mkdir -p log
+cat > log/melpa.logrotate <<EOT
+${HOME}/log/melpa.log {
+    rotate 10
+    weekly
+    compress
+    dateext
+}
+EOT
+
+mkdir -p www
+
+# ruby is used for templating
+\curl -L https://get.rvm.io | bash -s stable
+PATH=$PATH:$HOME/.rvm/bin
+source "$HOME/.rvm/scripts/rvm"
+rvm requirements
+rvm install ruby-1.9.3
+rvm use ruby-1.9.3 --default
+echo "source ~/.profile" >> .bash_profile
+
+git clone http://github.com/milkypostman/melpa
+
+sudo reboot

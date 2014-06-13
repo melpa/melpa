@@ -4,6 +4,7 @@
 	       "magit-bisect.el"
 	       "magit-blame.el"
 	       "magit-key-mode.el"
+	       "magit-popup.el"
 	       "magit-wip.el"
 	       "magit.texi"
 	       "AUTHORS.md"

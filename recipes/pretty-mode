@@ -1,1 +1,1 @@
-(pretty-mode :fetcher wiki)
+(pretty-mode :fetcher github :repo "akatov/pretty-mode")

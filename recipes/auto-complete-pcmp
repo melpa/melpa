@@ -1,0 +1,2 @@
+(auto-complete-pcmp :repo "aki2o/auto-complete-pcmp"
+                    :fetcher github)

@@ -1,1 +1,1 @@
-(find-things-fast :fetcher github :repo "mamciek/find-things-fast")
+(find-things-fast :fetcher github :repo "eglaysher/find-things-fast")

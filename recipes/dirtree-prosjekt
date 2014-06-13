@@ -1,0 +1,2 @@
+(dirtree-prosjekt :fetcher github :repo "abingham/prosjekt"
+                  :files ("prosjekt/ext/dirtree/dirtree-prosjekt.el"))

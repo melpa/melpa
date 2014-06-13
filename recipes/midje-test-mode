@@ -1,0 +1,1 @@
+(midje-test-mode :fetcher github :repo "bpoweski/midje-test-mode")

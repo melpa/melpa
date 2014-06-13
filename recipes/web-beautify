@@ -1,0 +1,1 @@
+(web-beautify :repo "yasuyk/web-beautify" :fetcher github)

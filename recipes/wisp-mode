@@ -1,1 +1,1 @@
-(wisp-mode :fetcher github :repo "krisajenkins/wisp-mode")
+(wisp-mode :fetcher hg :url "https://bitbucket.org/ArneBab/wisp" :files ("*.el"))

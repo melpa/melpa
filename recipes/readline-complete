@@ -1,0 +1,1 @@
+(readline-complete :fetcher github :repo "monsanto/readline-complete.el")

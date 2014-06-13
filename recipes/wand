@@ -1,0 +1,1 @@
+(wand :fetcher github :repo "cmpitg/wand")

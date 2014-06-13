@@ -1,0 +1,1 @@
+(toggle-test :fetcher github :repo "rags/toggle-test" :files ("toggle-test.el"))

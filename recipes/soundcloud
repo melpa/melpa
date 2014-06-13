@@ -1,0 +1,1 @@
+(soundcloud :fetcher github :repo "tthieman/soundcloud.el")

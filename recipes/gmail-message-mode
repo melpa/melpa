@@ -1,0 +1,1 @@
+(gmail-message-mode :repo "Bruce-Connor/gmail-mode" :fetcher github)

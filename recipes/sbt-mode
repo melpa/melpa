@@ -1,0 +1,3 @@
+(sbt-mode
+ :repo "hvesalai/sbt-mode"
+ :fetcher github)

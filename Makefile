@@ -3,27 +3,30 @@ PKGDIR  := ./packages
 RCPDIR  := ./recipes
 HTMLDIR := ./html
 WORKDIR := ./working
+WEBROOT := $$HOME/www
 EMACS   ?= emacs
+SLEEP   ?= 0
+SANDBOX := ./sandbox
+ifdef STABLE
+PKGDIR := ./packages-stable
+endif
+STABLE ?= nil
 
 EVAL := $(EMACS)
 
 ## Check for needing to initialize CL-LIB from ELPA
 NEED_CL-LIB := $(shell $(EMACS) --no-site-file --batch --eval '(prin1 (version< emacs-version "24.3"))')
 ifeq ($(NEED_CL-LIB), t)
-	EVAL := $(EVAL) --eval "(package-initialize)"
+	EMACS := $(EMACS) --eval "(package-initialize)"
 endif
 
-EVAL := $(EVAL) --no-site-file --batch -l package-build.el --eval
+EVAL := $(EMACS) --no-site-file --batch -l package-build.el --eval
 
+TIMEOUT := $(shell which timeout && echo "-k 60 600")
 
-all: build json index
-
+all: packages packages/archive-contents json index
 
 ## General rules
-build:
-	@echo " • Building $$(ls -1 $(RCPDIR) | wc -l) recipes ..."
-	$(EVAL) "(package-build-all)"
-
 html: index
 index: json
 	@echo " • Building html index ..."
@@ -43,17 +46,38 @@ clean-json:
 	@echo " • Removing json files ..."
 	-rm -vf html/archive.json html/recipes.json
 
-clean: clean-working clean-packages clean-json
+clean-sandbox:
+	@echo " • Removing sandbox files ..."
+	if [ -d '$(SANDBOX)' ]; then \
+		rm -rfv '$(SANDBOX)/elpa'; \
+		rmdir '$(SANDBOX)'; \
+	fi
 
+sync:
+	rsync -avz --delete $(PKGDIR)/ $(WEBROOT)/packages
+	rsync -avz --safe-links --delete $(HTMLDIR)/* $(WEBROOT)/
+	chmod -R go+rx $(WEBROOT)/packages/*
+
+
+clean: clean-working clean-packages clean-json clean-sandbox
+
+packages: $(RCPDIR)/*
+
+packages/archive-contents: $(PKGDIR)/*.entry
+	@echo " • Updating $@ ..."
+	$(EVAL) '(package-build-dump-archive-contents)'
+
+cleanup:
+	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" pb/this-dir))) (package-build-cleanup))'
 
 ## Json rules
-html/archive.json: packages/archive-contents
+html/archive.json: $(PKGDIR)/archive-contents
 	@echo " • Building $@ ..."
-	$(EVAL) '(package-build-archive-alist-as-json "html/archive.json")'
+	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" pb/this-dir))) (package-build-archive-alist-as-json "html/archive.json"))'
 
 html/recipes.json: $(RCPDIR)/.dirstamp
 	@echo " • Building $@ ..."
-	$(EVAL) '(package-build-recipe-alist-as-json "html/recipes.json")'
+	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" pb/this-dir))) (package-build-recipe-alist-as-json "html/recipes.json"))'
 
 json: html/archive.json html/recipes.json
 
@@ -66,11 +90,24 @@ $(RCPDIR)/.dirstamp: .FORCE
 $(RCPDIR)/%: .FORCE
 	@echo " • Building recipe $(@F) ..."
 
-	$(EVAL) "(package-build-archive '$(@F))"
+	- $(TIMEOUT) $(EVAL) "(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name \"$(PKGDIR)\" pb/this-dir))) (package-build-archive '$(@F)))"
 
 	@echo " ✓ Wrote $$(ls -lsh $(PKGDIR)/$(@F)-*) "
+	@echo " Sleeping for $(SLEEP) ..."
+	sleep $(SLEEP)
 	@echo
 
 
-.PHONY: clean build index html json
+## Sandbox
+sandbox: packages/archive-contents
+	@echo " • Building sandbox ..."
+	mkdir -p $(SANDBOX)
+	$(EMACS) -Q \
+		--eval '(setq user-emacs-directory "$(SANDBOX)")' \
+		-l package \
+		--eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.milkbox.net/packages/\") t)" \
+		--eval "(add-to-list 'package-archives '(\"sandbox\" . \"$(shell pwd)/$(PKGDIR)/\") t)" \
+		--eval "(package-initialize)"
+
+.PHONY: clean build index html json sandbox
 .FORCE:

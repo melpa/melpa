@@ -1,0 +1,1 @@
+(org-grep :fetcher github :repo "pinard/org-grep")

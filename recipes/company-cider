@@ -1,0 +1,1 @@
+(company-cider :fetcher github :repo "clojure-emacs/company-cider")

@@ -1,0 +1,1 @@
+(ham-mode :repo "Bruce-Connor/ham-mode" :fetcher github)

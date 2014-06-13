@@ -1,0 +1,3 @@
+(zonokai-theme
+ :repo "ZehCnaS34/zonokai-emacs"
+ :fetcher github)

@@ -1,0 +1,4 @@
+(irony :fetcher github
+       :repo "Sarcasm/irony-mode"
+       :files ("*.el" "README.md" "server"
+               (:exclude ".dir-locals.el")))

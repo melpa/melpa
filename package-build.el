@@ -433,16 +433,33 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
       (if package-build-stable
           (let* ((bound (goto-char (point-max)))
                  (tag-version (and (pb/run-process dir "git" "tag")
-                                   (or (pb/find-tag-version-newest
-                                        "^v?\\([^ \t\n]+\\)$" bound)
-                                       (error
-                                        "No valid stable versions found for %s"
-                                        name)))))
-            ;; Using reset --hard here to comply with what's used for
-            ;; unstable, but maybe this should be a checkout?
-            (pb/run-process dir "git" "reset" "--hard" (concat "tags/" (car tag-version)))
-            (pb/run-process dir "git" "submodule" "update" "--init" "--recursive")
-            (cadr tag-version))
+                                   (pb/find-tag-version-newest
+                                    "^v?\\([^ \t\n]+\\)$" bound))))
+            (if tag-version
+                (progn
+                  ;; Using reset --hard here to comply with what's used for
+                  ;; unstable, but maybe this should be a checkout?
+                  (pb/run-process dir "git" "reset" "--hard"
+                                  (concat "tags/" (car tag-version)))
+                  (pb/run-process dir "git" "submodule" "update" "--init"
+                                  "--recursive")
+                  (cadr tag-version))
+              ;; No tag found, try to guess a sane version.
+              (pb/run-process dir "git" "reset" "--hard"
+                              (or commit (concat "origin/"
+                                                 (pb/git-head-branch dir))))
+              (pb/run-process dir "git" "submodule" "update" "--init"
+                              "--recursive")
+              (apply 'pb/run-process dir "git" "log" "--first-parent" "-n1"
+                     "--pretty=format:'\%ci'"
+                     (pb/expand-source-file-list dir config))
+              (let ((version (pb/find-version name dir))
+                    (time (pb/find-parse-time
+                           "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)")))
+                (if version
+                    (format "%s.%s" version time)
+                  (error"No valid stable versions found for %s"
+                        name)))))
         (pb/run-process dir "git" "reset" "--hard"
                         (or commit (concat "origin/" (pb/git-head-branch dir))))
         (pb/run-process dir "git" "submodule" "update" "--init" "--recursive")
@@ -450,6 +467,27 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
                (pb/expand-source-file-list dir config))
         (pb/find-parse-time
          "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)")))))
+
+(defun pb/find-version (name dir)
+  (cond
+   ((file-exists-p (format "%s/%s-pkg.el" dir name))
+    (with-temp-buffer
+      (insert-file-contents (format "%s/%s-pkg.el" dir name))
+      (goto-char (point-min))
+      (let* ((define-package (read (current-buffer)))
+             (version (nth define-package 2)))
+        (when (pb/valid-version-string version)
+          version))))
+   ((file-exists-p (format "%s/%s.el" dir name))
+    (with-temp-buffer
+      (insert-file-contents (format "%s/%s.el" dir name))
+      (goto-char (point-min))
+      (when (re-search-forward "^;;;* *Version: *\\([0-9.]+\\)" nil t)
+        (let ((version (match-string 1)))
+          (when (pb/valid-version-string version)
+            version)))))
+   (t
+    nil)))
 
 (defun pb/checkout-github (name config dir)
   "Check package NAME with config CONFIG out of github into DIR."

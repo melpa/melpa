@@ -15,7 +15,7 @@
       require 'json'
       require 'time'
       require 'ostruct'
-      packages = JSON.parse(File.open("archive.json").read).map do |pkgname, info|
+      packages = JSON.parse(File.read("archive.json")).map do |pkgname, info|
         versions = info["ver"]
         deps = info["deps"]
         descr = info["desc"]

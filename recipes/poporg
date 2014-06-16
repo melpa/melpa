@@ -1,0 +1,3 @@
+(poporg
+ :repo "QBobWatson/poporg"
+ :fetcher github)

@@ -32,7 +32,7 @@
         package.build_time = Time.now()
         end
         package.url = "#{base_url}packages/#{pkgname}-#{version}." + (pkgtype == "single" ? "el" : "tar")
-        package.info_url = "#{base_url}##{pkgname}"
+        package.info_url = "#{base_url}#/#{pkgname}"
         package
       end
       packages.sort_by { |p| p.version }.reverse[0..200].each do |package|

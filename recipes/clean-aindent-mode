@@ -1,0 +1,1 @@
+(clean-aindent-mode :fetcher github :repo "pmarinov/clean-aindent-mode")

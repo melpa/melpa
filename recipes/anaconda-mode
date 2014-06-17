@@ -5,4 +5,4 @@
          "*.py"
          "vendor/jedi/jedi"
          "vendor/click/click"
-         "vendor/jsonrpc/jsonrpc"))
+         ("jsonrpc" "vendor/jsonrpc/jsonrpc/*.py")))

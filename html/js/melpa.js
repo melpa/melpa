@@ -1,5 +1,5 @@
 /* global window */
-(function(m, document, _, moment){
+(function(m, document, _, moment, jQuery){
   "use strict";
 
   // TODO Disqus
@@ -355,6 +355,32 @@
 
 
   //////////////////////////////////////////////////////////////////////////////
+  // Changing the appearance of the MELPA Stable page
+  //////////////////////////////////////////////////////////////////////////////
+
+  melpa.stable = m.prop(window.location.host === 'melpa-stable.milkbox.net');
+  melpa.archivename = {};
+  melpa.archivename.controller = function() {
+    this.archiveName = function() {
+      return melpa.stable() ? "MELPA Stable" : "MELPA";
+    };
+  };
+  melpa.archivename.view = function(ctrl) {
+    return m("span", ctrl.archiveName());
+  };
+
+  jQuery(function($) {
+    document.title = (new melpa.archivename.controller()).archiveName();
+    $(".archive-name").each(function(i, e) {
+      $(e).empty();
+      m.module(e, melpa.archivename);
+    });
+    if (melpa.stable()) {
+      $("html").addClass("stable");
+    }
+  });
+
+  //////////////////////////////////////////////////////////////////////////////
   // Static pages
   //////////////////////////////////////////////////////////////////////////////
 
@@ -379,12 +405,13 @@
   melpa.frontpage.controller = function() {
     this.packagelist = new melpa.packagelist.controller();
     this.buildstatus = new melpa.buildstatus.controller();
+    this.archivename = new melpa.archivename.controller();
   };
   melpa.frontpage.view = function(ctrl) {
     return m("div", [
       m("section.page-header", [
         m("h1", [
-          "MELPA",
+          melpa.archivename.view(ctrl.archivename),
           m("small", " (Milkypostman’s Emacs Lisp Package Archive)")
         ])
       ]),
@@ -431,4 +458,4 @@
     if (window.twttr && window.twttr.widgets) window.twttr.widgets.load();
   }, 100);
 
-})(window.m, window.document, window._, window.moment);
+})(window.m, window.document, window._, window.moment, window.jQuery);

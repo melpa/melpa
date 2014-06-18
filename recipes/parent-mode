@@ -1,0 +1,1 @@
+(parent-mode :fetcher github :repo "Fanael/parent-mode")

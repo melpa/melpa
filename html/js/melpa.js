@@ -33,11 +33,11 @@
   melpa.Package = function(data) {
     ["name", "description", "version", "dependencies", "source",
      "downloads", "fetcher", "recipeURL", "packageURL", "sourceURL", "oldNames"].map(function(p) {
-      this[p] = m.prop(data[p]);
+      this[p] = data[p];
     }.bind(this));
     this._searchText = _([data.name, data.description, data.source, data.sourceURL])
       .compact().valueOf().join(' ').toLowerCase();
-    this.readmeURL = m.prop("/packages/" + data.name + "-readme.txt");
+    this.readmeURL = "/packages/" + data.name + "-readme.txt";
     this.matchesTerm = function(term) {
       return this._searchText.indexOf(term) != -1;
     };
@@ -45,7 +45,7 @@
 
   melpa.PackageList = function(packages) {
     this.packages = packages;
-    this.totalDownloads = m.prop(_.reduce(_.map(packages, function(p) { return p.downloads() || 0; }),
+    this.totalDownloads = m.prop(_.reduce(_.map(packages, function(p) { return p.downloads || 0; }),
                                           function (a, b) { return b === undefined ? a : a + b; }, 0));
     this.totalPackages = m.prop(packages.length);
     var savedSearches = {};
@@ -69,26 +69,26 @@
       if (packages.sortKey === sortBy + "-" + !sortAscending) {
         packages = packages.reverse();
       } else {
-        var matched = _.sortBy(packages, function(p) { return p[sortBy](); });
+        var matched = _.sortBy(packages, function(p) { return p[sortBy]; });
         packages = savedSearches[t] = sortAscending ? matched : matched.reverse();
       }
       packages.sortKey = sortKey;
       return packages;
     };
     var packagesByName = {};
-    _.each(packages, function(p) { packagesByName[p.name()] = p; });
+    _.each(packages, function(p) { packagesByName[p.name] = p; });
     this.packageWithName = function(name) {
       return packagesByName[name];
     };
 
-    var downloadCounts = _.invoke(packages, 'downloads');
+    var downloadCounts = _.pluck(packages, 'downloads');
     this.downloadsPercentileForPackage = function(p) {
-      return _.filter(downloadCounts, function(d) { return d < p.downloads(); }).length * 100.0 / downloadCounts.length;
+      return _.filter(downloadCounts, function(d) { return d < p.downloads; }).length * 100.0 / downloadCounts.length;
     };
 
     this.dependenciesOnPackageName = function(packageName) {
       return (_.filter(packages, function(p) {
-        return _.findWhere(p.dependencies(), {name: packageName});
+        return _.findWhere(p.dependencies, {name: packageName});
       }));
     };
   };
@@ -220,31 +220,31 @@
           ctrl.filteredPackages().map(function(p) {
             return m("tr", [
               m("td", [
-                m("a", {href: "/" + p.name(), config: m.route}, [
-                  p.name()
+                m("a", {href: "/" + p.name, config: m.route}, [
+                  p.name
                 ])
               ]),
               m("td", [
-                m("a", {href: "/" + p.name(), config: m.route}, [
-                  p.description()
+                m("a", {href: "/" + p.name, config: m.route}, [
+                  p.description
                 ])
               ]),
               m("td.version", [
-                m("a", {href: p.packageURL()}, [
-                  p.version(),
+                m("a", {href: p.package}, [
+                  p.version,
                   " ",
                   glyphicon('download')
                 ])
               ]),
               m("td.recipe", [
-                m("a", {href: p.recipeURL()}, [
+                m("a", {href: p.recipeURL}, [
                   glyphicon('cutlery')
                 ])
               ]),
               m("td.source", [
-                p.sourceURL() ? m("a", {href: p.sourceURL()}, [p.source()]) : p.source()
+                p.sourceURL ? m("a", {href: p.sourceURL}, [p.source]) : p.source
               ]),
-              m("td", [p.downloads()])
+              m("td", [p.downloads])
             ]);
           }))
       ])
@@ -271,7 +271,7 @@
       this.neededBy(packageList.dependenciesOnPackageName(packageName));
       this.packageWithName = packageList.packageWithName;
       m.request({method: "GET",
-                 url: p.readmeURL(),
+                 url: p.readmeURL,
                  deserialize: function(v){return v;}
                 }).then(this.readme);
     }.bind(this));
@@ -286,41 +286,41 @@
       return depPkg ? m("a", {href: "/" + dep.name, config: m.route}, label) : label;
     };
     this.packageLink = function(pkg) {
-      return m("a", {href: "/" + pkg.name(), config: m.route}, pkg.name());
+      return m("a", {href: "/" + pkg.name, config: m.route}, pkg.name);
     };
     return m("section", [
       m("h1", [
-        pkg.name(),
+        pkg.name,
         " ",
-        m("small", pkg.version())
+        m("small", pkg.version)
       ]),
-      m("p.lead", pkg.description()),
+      m("p.lead", pkg.description),
       m("p", [
-        m("a.btn.btn-default", {href: pkg.recipeURL()}, [glyphicon('cutlery'), " Recipe"]), ' ',
-        m("a.btn.btn-default", {href: pkg.packageURL()}, [glyphicon('download'), " Download"]), ' ',
-        (pkg.sourceURL() ? m("a.btn.btn-default", {href: pkg.sourceURL()}, [glyphicon('home'), " Homepage"]) : '')
+        m("a.btn.btn-default", {href: pkg.recipeURL}, [glyphicon('cutlery'), " Recipe"]), ' ',
+        m("a.btn.btn-default", {href: pkg.packageURL}, [glyphicon('download'), " Download"]), ' ',
+        (pkg.sourceURL ? m("a.btn.btn-default", {href: pkg.sourceURL}, [glyphicon('home'), " Homepage"]) : '')
       ]),
       m("section", [
         m(".well", [
           m("dl.dl-horizontal", _.flatten([
             m("dt", "Downloads"),
             m("dd", [
-              pkg.downloads(),
+              pkg.downloads,
               m("span.muted", " (all versions)"),
               ", percentile: ",
               ctrl.downloadsPercentile().toFixed(2)
             ]),
             m("dt", "Source"),
             m("dd", [
-              pkg.sourceURL() ? m("a", {href: pkg.sourceURL()}, pkg.source()) : m("span", pkg.source())
+              pkg.sourceURL ? m("a", {href: pkg.sourceURL}, pkg.source) : m("span", pkg.source)
             ]),
             m("dt", "Dependencies"),
-            m("dd", intersperse(pkg.dependencies().map(this.depLink), " / ")),
+            m("dd", intersperse(pkg.dependencies.map(this.depLink), " / ")),
             m("dt", "Needed by"),
             m("dd", intersperse(ctrl.neededBy().map(this.packageLink), " / ")),
-            pkg.oldNames().length > 0 ? _.flatten([
+            pkg.oldNames.length > 0 ? _.flatten([
               m("dt", "Renamed from:"),
-              pkg.oldNames()
+              pkg.oldNames
               // m("dt", "Old name needed by:"),
               // m("dd", "TODO")
             ]) : []

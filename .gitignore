@@ -4,7 +4,6 @@
 /working/*
 /epkgs
 **.elc
-*~
 .#*
 /.cask
 /html/archive.json

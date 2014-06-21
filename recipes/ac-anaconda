@@ -1,0 +1,3 @@
+(ac-anaconda
+ :fetcher github
+ :repo "anaconda-mode/ac-anaconda")

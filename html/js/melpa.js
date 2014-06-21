@@ -369,14 +369,13 @@
     return m("span", ctrl.archiveName());
   };
 
-  jQuery(function($) {
+  jQuery(window).load(function() {
     document.title = (new melpa.archivename.controller()).archiveName();
-    $(".archive-name").each(function(i, e) {
-      $(e).empty();
+    jQuery(".archive-name").empty().each(function(i, e) {
       m.module(e, melpa.archivename);
     });
     if (melpa.stable()) {
-      $("html").addClass("stable");
+      jQuery("html").addClass("stable");
     }
   });
 

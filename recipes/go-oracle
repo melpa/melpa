@@ -1,0 +1,4 @@
+(go-oracle
+ :url "https://code.google.com/p/go.tools/"
+ :fetcher hg
+ :files ("cmd/oracle/*.el"))

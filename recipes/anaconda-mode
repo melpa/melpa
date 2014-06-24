@@ -1,6 +1,6 @@
 (anaconda-mode
  :fetcher github
- :repo "anaconda-mode/anaconda-mode"
+ :repo "proofit404/anaconda-mode"
  :files ("*.el"
          "*.py"
          "vendor/jedi/jedi"

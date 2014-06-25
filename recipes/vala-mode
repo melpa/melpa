@@ -1,0 +1,4 @@
+(vala-mode
+	:repo "iamtommo/vala-mode"
+	:fetcher github
+	:files ("vala-mode.el"))

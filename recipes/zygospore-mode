@@ -1,0 +1,3 @@
+ (zygospore-mode :repo "louiskottmann/zygospore-mode"
+                 :fetcher github
+                 :files ("zygospore-mode.el"))

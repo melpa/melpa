@@ -1,0 +1,9 @@
+(eval-in-repl :repo "kaz-yos/eval-in-repl"
+              :fetcher github
+              :files ("eval-in-repl.el"
+                      "eval-in-repl-cider.el"
+                      "eval-in-repl-ielm.el"
+                      "eval-in-repl-python.el"
+                      "eval-in-repl-scheme.el"
+                      "eval-in-repl-shell.el"
+                      "eval-in-repl-slime.el"))

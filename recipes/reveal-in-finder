@@ -1,4 +1,4 @@
 ;;; https://github.com/milkypostman/melpa#recipe-format
 (reveal-in-finder :fetcher github
-		  :repo    "kaz-yos/elisp"
-		  :files   ("reveal-in-finder.el"))
+                  :repo    "kaz-yos/elisp"
+                  :files   ("reveal-in-finder.el"))

@@ -2,4 +2,4 @@
 (eval-in-repl :fetcher github
               :repo    "kaz-yos/eval-in-repl"
               :files   ("*.el"
-			(:exclude "tests.el")))
+                        (:exclude "README.md")))

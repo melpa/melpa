@@ -1,0 +1,6 @@
+;;; https://github.com/milkypostman/melpa#recipe-format
+(eval-in-repl :fetcher github
+              :repo    "kaz-yos/eval-in-repl"
+              :commit  "origin/master"
+              :files   ("*.el"
+                        (:exclude "*.md" "*.png")))

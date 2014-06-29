@@ -1,2 +1,2 @@
-(ensime :fetcher github :repo "ensime/ensime"
-        :files("*.el" "bin" "lib"))
+(ensime :fetcher github
+	:repo "ensime/ensime-emacs")

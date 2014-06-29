@@ -84,7 +84,7 @@ New recipe submissions should adhere to the following guidelines,
 * Packages should adhere to the `package.el` format as specified by
   `(info "(elisp) Packaging")`. More information on this format is
   provided by the
-  [marmalade package manual](http://marmalade-repo.org/doc-files/package.5.html).
+  [marmalade package manual](https://web.archive.org/web/20111120220609/http://marmalade-repo.org/doc-files/package.5.html).
 
 * Recipes should try to minimize the size of the resulting package by
   specifying only files relevant to the package. See the

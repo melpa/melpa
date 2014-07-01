@@ -230,7 +230,7 @@
                 ])
               ]),
               m("td.version", [
-                m("a", {href: p.package}, [
+                m("a", {href: p.packageURL}, [
                   p.version,
                   " ",
                   glyphicon('download')

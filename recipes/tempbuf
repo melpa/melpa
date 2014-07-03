@@ -1,0 +1,1 @@
+(tempbuf :fetcher git :url "git://gitorious.org/tempbuf-mode/tempbuf-mode.git")

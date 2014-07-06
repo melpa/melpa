@@ -87,6 +87,14 @@ This must be a version which supports the \"-k\" option."
   :group 'package-build
   :type '(file :must-match t))
 
+(defcustom package-build-tar-executable
+  (or (executable-find "gtar")
+      (executable-find "tar"))
+  "Path to a (preferably GNU) tar command.
+Certain package names (e.g. \"@\") may not work properly with a BSD tar."
+  :group 'package-build
+  :type '(file :must-match t))
+
 ;;; Internal Variables
 
 (defvar pb/recipe-alist nil
@@ -555,7 +563,7 @@ Optionally PRETTY-PRINT the data."
 (defun pb/create-tar (file dir &optional files)
   "Create a tar FILE containing the contents of DIR, or just FILES if non-nil."
   (apply 'process-file
-         "tar" nil
+         package-build-tar-executable nil
          (get-buffer-create "*package-build-checkout*")
          nil "-cvf"
          file

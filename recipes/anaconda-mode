@@ -4,5 +4,4 @@
  :files ("*.el"
          "*.py"
          "vendor/jedi/jedi"
-         "vendor/click/click"
          ("jsonrpc" "vendor/jsonrpc/jsonrpc/*.py")))

@@ -173,7 +173,7 @@ the following form (`[...]` denotes optional or conditional values),
 
 ```lisp
 (<package-name>
- :fetcher [git|github|bzr|hg|darcs|svn|cvs|wiki]
+ :fetcher [git|github|bzr|hg|darcs|fossil|svn|cvs|wiki]
  [:url "<repo url>"]
  [:repo "github-user/repo-name"]
  [:module "cvs-module"]
@@ -183,11 +183,11 @@ the following form (`[...]` denotes optional or conditional values),
 - `package-name`
 a lisp symbol that has the same name as the package being specified.
 
-- `:fetcher` (one of `git, github, bzr, hg, darcs, svn, cvs, wiki`)
+- `:fetcher` (one of `git, github, bzr, hg, darcs, fossil, svn, cvs, wiki`)
 specifies the type of repository that `:url` points to. Right now
 package-build supports [git][git], [github][github],
 [bazaar (bzr)][bzr], [mercurial (hg)][hg], [subversion (svn)][svn],
-[cvs][cvs], [darcs][darcs], and [Emacs Wiki (wiki)][emacswiki] as
+[cvs][cvs], [darcs][darcs], [fossil][fossil], and [Emacs Wiki (wiki)][emacswiki] as
 possible mechanisms for checking out the repository.
 
     *package-build* uses
@@ -204,7 +204,7 @@ differs from the package name being built.
 
 - `:url`
 specifies the URL of the version control repository. *required for
-the `git`, `bzr`, `hg`, `darcs`, `svn` and `cvs` fetchers.*
+the `git`, `bzr`, `hg`, `darcs`, `fossil`, `svn` and `cvs` fetchers.*
 
 - `:repo` specifies the github repository and is of the form
 `github-user/repo-name`. *required for the `github` fetcher*.
@@ -249,6 +249,7 @@ specified package requires more complex file specification.
 [svn]: http://subversion.apache.org/
 [cvs]: http://www.nongnu.org/cvs/
 [darcs]: http://darcs.net/
+[fossil]: http://www.fossil-scm.org/
 [emacswiki]: http://www.emacswiki.org/
 
 

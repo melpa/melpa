@@ -323,6 +323,32 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
         (pb/find-parse-time
          "\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} [A-Za-z]\\{3\\} [0-9]\\{4\\}\\)")))))
 
+(defun pb/fossil-repo (dir)
+  "Get the current fossil repo for DIR."
+  (pb/run-process-match "\\(.*\\)" dir "fossil" "remote-url"))
+
+(defun pb/checkout-fossil (name config dir)
+  "Check package NAME with config CONFIG out of fossil into DIR."
+  (unless package-build-stable
+    (let ((repo (plist-get config :url)))
+      (with-current-buffer (get-buffer-create "*package-build-checkout*")
+        (cond
+         ((and (file-exists-p (expand-file-name ".fslckout" dir))
+               (string-equal (pb/fossil-repo dir) repo))
+          (pb/princ-exists dir)
+          (pb/run-process dir "fossil" "pull"))
+         (t
+          (when (file-exists-p dir)
+            (delete-directory dir t))
+          (pb/princ-checkout repo dir)
+          (make-directory dir)
+          (pb/run-process dir "fossil" "clone" repo "repo.fossil")
+          (pb/run-process dir "fossil" "open" "repo.fossil")))
+        (pb/run-process dir "fossil" "timeline" "--limit" "1" "--type" "ci" "--width" "0")
+        (or (pb/find-parse-time
+             "=== \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} ===\n[0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\) ")
+            (error "No valid timestamps found!"))))))
+
 (defun pb/svn-repo (dir)
   "Get the current svn repo for DIR."
   (pb/run-process-match "URL: \\(.*\\)" dir "svn" "info"))
@@ -571,6 +597,7 @@ Optionally PRETTY-PRINT the data."
          "--exclude=CVS"
          "--exclude=.git*"
          "--exclude=_darcs"
+         "--exclude=.fslckout"
          "--exclude=.bzr"
          "--exclude=.hg"
          (or (mapcar (lambda (fn) (concat dir "/" fn)) files) (list dir))))

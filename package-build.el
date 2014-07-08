@@ -151,15 +151,19 @@ function for access to this function")
     (concat (format-time-string "%Y%m%d." time)
             (format "%d" (or (string-to-number (format-time-string "%H%M" time)) 0)))))
 
-(defun pb/string-match-all (regex str &optional group)
-  "Find every match for `REGEX' within `STR', returning a list containing the full match string and match for group `GROUP'.
-The return list is of the form ((FULL GROUP) ...) where FULL is the complete regexp match and GROUP is the regex group specified by the `GROUP' argument. If `GROUP' is nil then FULL and GROUP will be identical."
+(defun pb/string-match-all (regex str &rest groups)
+  "Find every match for `REGEX' within `STR', returning a list containing the full match string and match for groups `GROUPS'.
+The return list is of the form ((FULL GROUP1 GROUP2 ...) ...) where FULL is the complete regexp match and GROUP1, GROUP2, ... are the regex groups specified by the `GROUPS' argument. If `GROUPS' is nil then FULL and GROUP1 will be identical."
   (let (result
         (pos 0)
-        (group (or group 0)))
+        (groups (or groups '(0))))
     (while (string-match regex str pos)
-      (push (list (match-string 0 str) (match-string group str)) result)
-      (setq pos (match-end group)))
+      (push (cons (match-string 0 str) (mapcar
+                                        (lambda (group)
+                                          (match-string group str))
+                                        groups))
+            result)
+      (setq pos (match-end 0)))
     result))
 
 (defun pb/find-parse-time (regex &optional bound)
@@ -171,14 +175,14 @@ The return list is of the form ((FULL GROUP) ...) where FULL is the complete reg
   "Returns true if STR is a valid version, otherwise return nil."
   (ignore-errors (version-to-list str)))
 
-(defun pb/find-tag-version-newest (regex &optional bound)
+(defun pb/find-tag-version-newest (regex &optional bound &rest additional-groups)
   "Find the newest version matching REGEX, optionally looking only as far as BOUND."
   (let* ((text (buffer-substring-no-properties
                 (or bound (point-min)) (point)))
          (tags (cl-remove-if-not
                 (lambda (tag-version)
                   (pb/valid-version-string (cadr tag-version)))
-                (pb/string-match-all regex text 1))))
+                (apply 'pb/string-match-all regex text 1 additional-groups))))
     (car (nreverse (sort tags (lambda (v1 v2)
                                 (version< (cadr v1) (cadr v2))))))))
 
@@ -499,21 +503,32 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
 
 (defun pb/checkout-hg (name config dir)
   "Check package NAME with config CONFIG out of hg into DIR."
-  (unless package-build-stable
-    (let ((repo (plist-get config :url)))
-      (with-current-buffer (get-buffer-create "*package-build-checkout*")
-        (goto-char (point-max))
-        (cond
-         ((and (file-exists-p (expand-file-name ".hg" dir))
-               (string-equal (pb/hg-repo dir) repo))
-          (pb/princ-exists dir)
-          (pb/run-process dir "hg" "pull")
-          (pb/run-process dir "hg" "update"))
-         (t
-          (when (file-exists-p dir)
-            (delete-directory dir t))
-          (pb/princ-checkout repo dir)
-          (pb/run-process nil "hg" "clone" repo dir)))
+  (let ((repo (plist-get config :url)))
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (goto-char (point-max))
+      (cond
+       ((and (file-exists-p (expand-file-name ".hg" dir))
+             (string-equal (pb/hg-repo dir) repo))
+        (pb/princ-exists dir)
+        (pb/run-process dir "hg" "pull")
+        (pb/run-process dir "hg" "update"))
+       (t
+        (when (file-exists-p dir)
+          (delete-directory dir t))
+        (pb/princ-checkout repo dir)
+        (pb/run-process nil "hg" "clone" repo dir)))
+      (if package-build-stable
+          (let* ((bound (goto-char (point-max)))
+                 (tag-version (and (pb/run-process dir "hg" "tags")
+                                   (or (pb/find-tag-version-newest
+                                        "^\\(?:v[.-]?\\)?\\([0-9]+[^ \t\n]*\\)[ \t]*[0-9]+:\\([[:xdigit:]]+\\)$"
+                                        bound
+                                        2)
+                                       (error
+                                        "No valid stable versions found for %s"
+                                        name)))))
+            (pb/run-process dir "hg" "update" (nth 2 tag-version))
+            (cadr tag-version))
         (apply 'pb/run-process dir "hg" "log" "--style" "compact" "-l1"
                (pb/expand-source-file-list dir config))
         (pb/find-parse-time

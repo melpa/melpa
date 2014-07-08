@@ -10,7 +10,7 @@ sudo ${SUDOENV} apt-get update
 sudo ${SUDOENV} apt-get -y upgrade
 sudo ${SUDOENV} apt-get -y \
     install \
-    subversion git cvs darcs curl bzr mercurial \
+    subversion git cvs darcs fossil curl bzr mercurial \
     emacs24 emacs24-el emacs24-common-non-dfsg \
     tmux make
 

@@ -419,7 +419,7 @@
           m("section.jumbotron", [
             m("ul", [
               m("li", m.trust("<strong>Up-to-date packages built on our servers from upstream source</strong>")),
-              m("li", m.trust("<strong>Installable in any recent Emacs using 'package.el'</strong> - no need to install svn/cvs/hg/bzr/git/darcs etc.")),
+              m("li", m.trust("<strong>Installable in any recent Emacs using 'package.el'</strong> - no need to install svn/cvs/hg/bzr/git/darcs/fossil etc.")),
               m("li", m.trust("<strong>Curated</strong> - no obsolete, renamed, forked or randomly hacked packages")),
               m("li", m.trust("<strong>Comprehensive</strong> - more packages than any other archive")),
               m("li", m.trust("<strong>Automatic updates</strong> - new commits result in new packages")),

@@ -336,7 +336,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
          ((and (file-exists-p (expand-file-name ".fslckout" dir))
                (string-equal (pb/fossil-repo dir) repo))
           (pb/princ-exists dir)
-          (pb/run-process dir "fossil" "pull"))
+          (pb/run-process dir "fossil" "update"))
          (t
           (when (file-exists-p dir)
             (delete-directory dir t))

@@ -1,1 +1,3 @@
-(project-root :fetcher hg :url "https://bitbucket.org/piranha/project-root")
+(project-root :fetcher hg
+              :url "https://bitbucket.org/piranha/project-root"
+              :files ("*.el" (:exclude "find-cmd.el")))

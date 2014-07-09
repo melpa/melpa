@@ -344,7 +344,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
           (make-directory dir)
           (pb/run-process dir "fossil" "clone" repo "repo.fossil")
           (pb/run-process dir "fossil" "open" "repo.fossil")))
-        (pb/run-process dir "fossil" "timeline" "--limit" "1" "--type" "ci" "--width" "0")
+        (pb/run-process dir "fossil" "timeline" "-n" "1" "-t" "ci")
         (or (pb/find-parse-time
              "=== \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} ===\n[0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\) ")
             (error "No valid timestamps found!"))))))

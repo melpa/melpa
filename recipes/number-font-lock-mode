@@ -1,1 +1,0 @@
-(number-font-lock-mode :fetcher "github" :repo "Fanael/number-font-lock-mode")

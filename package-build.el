@@ -333,7 +333,8 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
     (let ((repo (plist-get config :url)))
       (with-current-buffer (get-buffer-create "*package-build-checkout*")
         (cond
-         ((and (file-exists-p (expand-file-name ".fslckout" dir))
+         ((and (or (file-exists-p (expand-file-name ".fslckout" dir))
+                   (file-exists-p (expand-file-name "_FOSSIL_" dir)))
                (string-equal (pb/fossil-repo dir) repo))
           (pb/princ-exists dir)
           (pb/run-process dir "fossil" "update"))
@@ -598,6 +599,7 @@ Optionally PRETTY-PRINT the data."
          "--exclude=.git*"
          "--exclude=_darcs"
          "--exclude=.fslckout"
+         "--exclude=_FOSSIL_"
          "--exclude=.bzr"
          "--exclude=.hg"
          (or (mapcar (lambda (fn) (concat dir "/" fn)) files) (list dir))))

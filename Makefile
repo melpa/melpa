@@ -107,6 +107,7 @@ sandbox: packages/archive-contents
 		-l package \
 		--eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.milkbox.net/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"sandbox\" . \"$(shell pwd)/$(PKGDIR)/\") t)" \
+		--eval "(package-refresh-contents)"
 		--eval "(package-initialize)"
 
 .PHONY: clean build index html json sandbox

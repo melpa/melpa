@@ -105,6 +105,7 @@ sandbox: packages/archive-contents
 	$(EMACS) -Q \
 		--eval '(setq user-emacs-directory "$(SANDBOX)")' \
 		-l package \
+		--eval "(add-to-list 'package-archives '(\"gnu\" . \"http://elpa.gnu.org/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.milkbox.net/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"sandbox\" . \"$(shell pwd)/$(PKGDIR)/\") t)" \
 		--eval "(package-refresh-contents)"

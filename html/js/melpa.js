@@ -76,7 +76,12 @@
       return packages;
     };
     var packagesByName = {};
-    _.each(packages, function(p) { packagesByName[p.name] = p; });
+    _.each(packages, function(p) {
+      packagesByName[p.name] = p;
+      if(p.oldNames) {
+        _.each(p.oldNames, function(n) { packagesByName[n] = p; });
+      }
+    });
     this.packageWithName = function(name) {
       return packagesByName[name];
     };

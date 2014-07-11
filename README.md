@@ -135,7 +135,7 @@ through this process.
         make recipes/<NAME>
 
   (Be sure that the `emacs` on your path is at least version 23, or
-  set `$EMACS` to the location of a suitable binary.)
+  set `$EMACS_COMMAND` to the location of a suitable binary.)
 
   Alternatively, open the recipe in Emacs and press `C-c C-c` in the
   recipe buffer: this will also prompt you to install the

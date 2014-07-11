@@ -467,8 +467,9 @@ This can be configured using the `package-build-working-dir` variable.
 MELPA now includes a mechanism to build *stable* versions of packages
 given that the repositories meet the following criteria,
 
-1. Hosted using *git*.
-2. Tag names are version strings compatible parseable by the `version-to-list` function.
+1. Hosted using *git* or *hg*.
+2. Tag names are version strings compatible parseable by the `version-to-list`
+   function, optionally prefixed with `v`, `v.` or `v-`.
 
 To use the stable versions of packages you should use the stable server
 in your `package-archives` list.
@@ -483,9 +484,10 @@ An online list of available packages can be found at
 
 ### Stable Version Generation
 
-To have a stable version generated for your package simply tag the
-repository using a naming compatible with `version-to-list`. The repo
-state of this tag will be used to generate the stable package.
+To have a stable version generated for your package simply tag the repository
+using a naming compatible with `version-to-list`, optionally prefixed with `v`,
+`v.` or `v-`. The repo state of this tag will be used to generate the stable
+package.
 
 ### Notes
 

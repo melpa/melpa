@@ -476,11 +476,11 @@ in your `package-archives` list.
 
 ```lisp
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://hiddencameras.milkbox.net/packages/") t)
+             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
 ```
 
 An online list of available packages can be found at 
-[http://hiddencameras.milkbox.net](http://hiddencameras.milkbox.net).
+[http://melpa-stable.milkbox.net](http://melpa-stable.milkbox.net).
 
 ### Stable Version Generation
 

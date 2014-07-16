@@ -135,7 +135,7 @@ through this process.
         make recipes/<NAME>
 
   (Be sure that the `emacs` on your path is at least version 23, or
-  set `$EMACS` to the location of a suitable binary.)
+  set `$EMACS_COMMAND` to the location of a suitable binary.)
 
   Alternatively, open the recipe in Emacs and press `C-c C-c` in the
   recipe buffer: this will also prompt you to install the
@@ -173,7 +173,7 @@ the following form (`[...]` denotes optional or conditional values),
 
 ```lisp
 (<package-name>
- :fetcher [git|github|bzr|hg|darcs|svn|cvs|wiki]
+ :fetcher [git|github|bzr|hg|darcs|fossil|svn|cvs|wiki]
  [:url "<repo url>"]
  [:repo "github-user/repo-name"]
  [:module "cvs-module"]
@@ -183,11 +183,11 @@ the following form (`[...]` denotes optional or conditional values),
 - `package-name`
 a lisp symbol that has the same name as the package being specified.
 
-- `:fetcher` (one of `git, github, bzr, hg, darcs, svn, cvs, wiki`)
+- `:fetcher` (one of `git, github, bzr, hg, darcs, fossil, svn, cvs, wiki`)
 specifies the type of repository that `:url` points to. Right now
 package-build supports [git][git], [github][github],
 [bazaar (bzr)][bzr], [mercurial (hg)][hg], [subversion (svn)][svn],
-[cvs][cvs], [darcs][darcs], and [Emacs Wiki (wiki)][emacswiki] as
+[cvs][cvs], [darcs][darcs], [fossil][fossil], and [Emacs Wiki (wiki)][emacswiki] as
 possible mechanisms for checking out the repository.
 
     *package-build* uses
@@ -204,7 +204,7 @@ differs from the package name being built.
 
 - `:url`
 specifies the URL of the version control repository. *required for
-the `git`, `bzr`, `hg`, `darcs`, `svn` and `cvs` fetchers.*
+the `git`, `bzr`, `hg`, `darcs`, `fossil`, `svn` and `cvs` fetchers.*
 
 - `:repo` specifies the github repository and is of the form
 `github-user/repo-name`. *required for the `github` fetcher*.
@@ -249,6 +249,7 @@ specified package requires more complex file specification.
 [svn]: http://subversion.apache.org/
 [cvs]: http://www.nongnu.org/cvs/
 [darcs]: http://darcs.net/
+[fossil]: http://www.fossil-scm.org/
 [emacswiki]: http://www.emacswiki.org/
 
 
@@ -466,25 +467,27 @@ This can be configured using the `package-build-working-dir` variable.
 MELPA now includes a mechanism to build *stable* versions of packages
 given that the repositories meet the following criteria,
 
-1. Hosted using *git*.
-2. Tag names are version strings compatible parseable by the `version-to-list` function.
+1. Hosted using *git* or *hg*.
+2. Tag names are version strings compatible parseable by the `version-to-list`
+   function, optionally prefixed with `v`, `v.` or `v-`.
 
 To use the stable versions of packages you should use the stable server
 in your `package-archives` list.
 
 ```lisp
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://hiddencameras.milkbox.net/packages/") t)
+             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
 ```
 
 An online list of available packages can be found at 
-[http://hiddencameras.milkbox.net](http://hiddencameras.milkbox.net).
+[http://melpa-stable.milkbox.net](http://melpa-stable.milkbox.net).
 
 ### Stable Version Generation
 
-To have a stable version generated for your package simply tag the
-repository using a naming compatible with `version-to-list`. The repo
-state of this tag will be used to generate the stable package.
+To have a stable version generated for your package simply tag the repository
+using a naming compatible with `version-to-list`, optionally prefixed with `v`,
+`v.` or `v-`. The repo state of this tag will be used to generate the stable
+package.
 
 ### Notes
 

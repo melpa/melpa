@@ -1,0 +1,1 @@
+(ido-speed-hack :repo "danskarda/ido-speed-hack" :fetcher github)

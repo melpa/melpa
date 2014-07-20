@@ -1,0 +1,2 @@
+(codesearch :fetcher github
+            :repo "abingham/codesearch.el")

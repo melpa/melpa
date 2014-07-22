@@ -1,0 +1,1 @@
+(table-mode :fetcher github :repo "byplayer/table-mode.el")

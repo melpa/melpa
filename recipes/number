@@ -1,0 +1,1 @@
+(number :fetcher github :repo "chrisdone/chrisdone-emacs" :files ("packages/number/number.el"))

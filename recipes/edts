@@ -1,7 +1,7 @@
 (edts
  :fetcher github
  :repo   "tjarvstrand/edts"
- :branch "melpa-package"
+ :branch "master"
  :files  ("*.el"
           "COPYING"
           "COPYING.LESSER"

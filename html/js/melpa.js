@@ -307,7 +307,7 @@
       ]),
       m("section", [
         m(".well", [
-          m("dl.dl-horizontal", _.flatten([
+          m("dl.dl-horizontal", [
             m("dt", "Downloads"),
             m("dd", [
               pkg.downloads,
@@ -323,13 +323,13 @@
             m("dd", intersperse(pkg.dependencies.map(this.depLink), " / ")),
             m("dt", "Needed by"),
             m("dd", intersperse(ctrl.neededBy().map(this.packageLink), " / ")),
-            pkg.oldNames.length > 0 ? _.flatten([
+            pkg.oldNames.length > 0 ? [
               m("dt", "Renamed from:"),
               pkg.oldNames
               // m("dt", "Old name needed by:"),
               // m("dd", "TODO")
-            ]) : []
-          ]))
+            ] : []
+          ])
         ])
       ]),
       m("section", [

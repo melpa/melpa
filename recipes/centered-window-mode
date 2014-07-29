@@ -1,0 +1,1 @@
+(centered-window-mode :repo "ikame/centered-window-mode" :fetcher github)

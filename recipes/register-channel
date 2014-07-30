@@ -1,2 +1,1 @@
-(register-channel :fetcher github :repo "YangZhao11/register-channel"
-                  :files ("*.el"))
+(register-channel :fetcher github :repo "YangZhao11/register-channel")

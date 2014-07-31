@@ -1,0 +1,1 @@
+(demo-it :fetcher git :url "https://github.com/howardabrams/demo-it/demo-it.el")

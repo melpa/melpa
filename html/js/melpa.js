@@ -35,7 +35,7 @@
      "downloads", "fetcher", "recipeURL", "packageURL", "sourceURL", "oldNames"].map(function(p) {
       this[p] = data[p];
     }.bind(this));
-    this._searchText = _([data.name, data.description, data.source, data.sourceURL])
+    this._searchText = _([data.name, data.description, data.version])
       .compact().valueOf().join(' ').toLowerCase();
     this.readmeURL = "/packages/" + data.name + "-readme.txt";
     this.matchesTerm = function(term) {

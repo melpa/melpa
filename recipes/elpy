@@ -5,4 +5,5 @@
  :files ("elpy.el"
          "elpy-refactor.el"
          "elpy-pkg.el.in"
-         "snippets"))
+         "snippets"
+         "elpy"))

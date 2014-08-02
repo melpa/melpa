@@ -60,8 +60,8 @@
       var packages = savedSearches[t];
       if (!packages) {
         var preFiltered = preFilteredPackages(t);
-        packages = _.filter(preFiltered || this.packages,
-                            function(p) { return p.matchesTerm(t); });
+        packages = preFiltered || this.packages;
+        _.each(packages, function(p) { p.visible = p.matchesTerm(t); });
         if (preFiltered) packages.sortKey = preFiltered.sortKey;
       }
       var sortKey = sortBy + "-" + sortAscending;
@@ -208,7 +208,7 @@
         m("input.form-control", {type: "search", placeholder: "Enter filter terms", autofocus: true,
                                  value: ctrl.filterTerms(), onkeyup: m.withAttr("value", ctrl.filterTerms)}),
         " ",
-        m("span.help-block", ["Showing ", ctrl.filteredPackages().length, " matching package(s)"])
+        m("span.help-block", ["Showing ", _.filter(ctrl.filteredPackages(), 'visible').length, " matching package(s)"])
       ]),
       m("table#package-list.table.table-bordered.table-responsive.table-hover", [
         m("thead", [
@@ -223,7 +223,7 @@
         ]),
         m("tbody",
           ctrl.filteredPackages().map(function(p) {
-            return m("tr", [
+            return m("tr", {class: p.visible ? '' : 'filtered'}, [
               m("td", [
                 m("a", {href: "/" + p.name, config: m.route}, [
                   p.name

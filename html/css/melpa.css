@@ -23,6 +23,9 @@ pre code { /* Match highlight.js styles to bootstrap */
 #package-list th, #package-list td.version, #package-list td.recipe {
   white-space: nowrap;
 }
+#package-list tr.filtered {
+  display: none;
+}
 #package-list td a:link {
   display: block;
 }

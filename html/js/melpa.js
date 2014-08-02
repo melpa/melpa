@@ -60,7 +60,7 @@
       var packages = savedSearches[t];
       if (!packages) {
         var preFiltered = preFilteredPackages(t);
-        packages = _.filter(preFilteredPackages(t) || this.packages,
+        packages = _.filter(preFiltered || this.packages,
                             function(p) { return p.matchesTerm(t); });
         if (preFiltered) packages.sortKey = preFiltered.sortKey;
       }

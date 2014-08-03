@@ -1,1 +1,5 @@
-(org-vcard :fetcher github :repo "flexibeast/org-vcard")
+(org-vcard
+ :fetcher github
+ :repo "flexibeast/org-vcard"
+ :files ("*.el"
+         "mappings"))

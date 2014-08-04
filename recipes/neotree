@@ -1,1 +1,5 @@
-(neotree :fetcher github :repo "jaypei/emacs-neotree")
+(neotree :fetcher github :repo "jaypei/emacs-neotree"
+:files ("*.el" "*.el.in" "dir"
+ "*.info" "*.texi" "*.texinfo"
+ "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
+ (:exclude ".dir-locals.el" "tests.el" "*-test.el" "*-tests.el" "*-autoloads.el" "test/*.el")))

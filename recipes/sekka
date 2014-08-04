@@ -1,5 +1,0 @@
-(sekka :repo "kiyoka/sekka"
-       :fetcher github
-       :files ("emacs/sekka.el"
-	       "emacs/http-cookies.el"
-	       "emacs/http-get.el"))

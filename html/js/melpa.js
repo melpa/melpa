@@ -53,27 +53,30 @@
       var prefixes = _.sortBy(_.filter(_.keys(savedSearches),
                                        function(k) { return term.indexOf(k) === 0; }),
                               'length').reverse();
-      return prefixes.length > 0 ? savedSearches[prefixes[0]] : null;
+      return prefixes.length > 0 ? savedSearches[prefixes[0]] : packages;
     }
-    this.filteredPackages = function(terms, sortBy, sortAscending) {
-      var t = terms.trim().toLowerCase();
-      var packages = savedSearches[t];
-      if (!packages) {
-        var preFiltered = preFilteredPackages(t);
-        packages = preFiltered || this.packages;
-        _.each(packages, function(p) { p.visible = p.matchesTerm(t); });
-        if (preFiltered) packages.sortKey = preFiltered.sortKey;
-      }
+    this.sortedPackages = function(sortBy, sortAscending) {
       var sortKey = sortBy + "-" + sortAscending;
-      if (packages.sortKey === sortKey) return packages;
-      if (packages.sortKey === sortBy + "-" + !sortAscending) {
-        packages = packages.reverse();
+      if (this.packages.sortKey === sortKey) return this.packages;
+      if (this.packages.sortKey === sortBy + "-" + !sortAscending) {
+        this.packages = this.packages.reverse();
       } else {
-        var matched = _.sortBy(packages, function(p) { return p[sortBy]; });
-        packages = savedSearches[t] = sortAscending ? matched : matched.reverse();
+        var sorted = _.sortBy(this.packages, function(p) { return p[sortBy]; });
+        this.packages = sortAscending ? sorted : sorted.reverse();
       }
-      packages.sortKey = sortKey;
-      return packages;
+      this.packages.sortKey = sortKey;
+      return this.packages;
+    };
+    this.matchingPackages = function(terms) {
+      var t = terms.trim().toLowerCase();
+      var matching = savedSearches[t];
+      if (!matching) {
+        matching = savedSearches[t] = _.filter(preFilteredPackages(t),
+                                                 function(p) { return p.matchesTerm(t); });
+      }
+      var visible = {};
+      _.each(matching, function(p){ visible[p.name] = true; });
+      return visible;
     };
     var packagesByName = {};
     _.each(packages, function(p) {
@@ -174,8 +177,11 @@
     this.sortAscending = m.prop(true);
     this.packageList = m.prop();
     melpa.packageList.then(this.packageList);
-    this.filteredPackages = function() {
-      return this.packageList().filteredPackages(this.filterTerms(), this.sortBy(), this.sortAscending());
+    this.matchingPackages = function() {
+      return this.packageList().matchingPackages(this.filterTerms());
+    };
+    this.sortedPackages = function() {
+      return this.packageList().sortedPackages(this.sortBy(), this.sortAscending());
     };
     this.toggleSort = function(field) {
       if (this.sortBy() == field) {
@@ -188,6 +194,7 @@
   };
 
   melpa.packagelist.view = function(ctrl) {
+    var visible = ctrl.matchingPackages();
     var sortToggler = function(field) {
       return function() { return ctrl.toggleSort(field); };
     };
@@ -208,7 +215,7 @@
         m("input.form-control", {type: "search", placeholder: "Enter filter terms", autofocus: true,
                                  value: ctrl.filterTerms(), onkeyup: m.withAttr("value", ctrl.filterTerms)}),
         " ",
-        m("span.help-block", ["Showing ", _.filter(ctrl.filteredPackages(), 'visible').length, " matching package(s)"])
+        m("span.help-block", ["Showing ", _.keys(visible).length, " matching package(s)"])
       ]),
       m("table#package-list.table.table-bordered.table-responsive.table-hover", [
         m("thead", [
@@ -222,8 +229,9 @@
           ])
         ]),
         m("tbody",
-          ctrl.filteredPackages().map(function(p) {
-            return m("tr", {class: p.visible ? '' : 'filtered'}, [
+          ctrl.sortedPackages().map(function(p) {
+            return m("tr", {class: visible[p.name] ? '' : 'filtered'},
+                     [
               m("td", [
                 m("a", {href: "/" + p.name, config: m.route}, [
                   p.name

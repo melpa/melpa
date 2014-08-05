@@ -1,0 +1,1 @@
+(vs-emulation-mode :fetcher "github" :repo "Fanael/vs-emulation-mode")

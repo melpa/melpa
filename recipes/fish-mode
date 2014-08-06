@@ -1,0 +1,1 @@
+(fish-mode :fetcher git :url "git@github.com:wwwjfy/emacs-fish.git")

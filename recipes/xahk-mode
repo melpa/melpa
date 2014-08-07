@@ -1,0 +1,1 @@
+(xahk-mode :fetcher git :url "https://code.google.com/p/ergoemacs/" :files ("packages/xahk-mode.el"))

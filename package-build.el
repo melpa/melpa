@@ -1148,8 +1148,15 @@ Returns the archive entry for the package."
   (let ((pkg-name (intern (file-name-nondirectory (buffer-file-name)))))
     (package-build-archive pkg-name)
     (package-build-dump-archive-contents)
-    (with-output-to-temp-buffer "*package-build-result*"
-      (pp (assoc pkg-name (package-build-archive-alist))))
+    (let ((output-buffer-name "*package-build-result*"))
+      (with-output-to-temp-buffer output-buffer-name
+        (princ ";; Please check the following package descriptor.\n")
+        (princ ";; If the correct package description or dependencies are missing,\n")
+        (princ ";; then the source .el file is likely malformed, and should be fixed.\n")
+        (pp (assoc pkg-name (package-build-archive-alist))))
+      (with-current-buffer output-buffer-name
+        (emacs-lisp-mode)
+        (view-mode)))
     (when (yes-or-no-p "Install new package? ")
       (package-install-file (pb/find-package-file pkg-name)))))
 

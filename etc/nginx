@@ -21,7 +21,6 @@ http {
 	server_tokens off;
 
 	# server_names_hash_bucket_size 64;
-	server_name_in_redirect off;
 
 	charset utf-8;
 	
@@ -41,15 +40,14 @@ http {
 	# Gzip Settings
 	##
 
-	gzip on;
+	gzip off;
 	gzip_disable "msie6";
-
 	gzip_vary on;
-	gzip_proxied any;
+	#gzip_proxied any;
 	gzip_comp_level 6;
 	gzip_buffers 16 8k;
 	gzip_http_version 1.1;
-	gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+        gzip_types text/plain text/xhtml text/css text/js text/csv application/javascript application/x-javascript application/json application/xml text/xml application/atom+xml application/rss+xml;
 
 	##
 	# nginx-naxsi config

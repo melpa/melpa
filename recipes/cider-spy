@@ -1,0 +1,1 @@
+(cider-spy :fetcher github :repo "jonpither/cider-spy")

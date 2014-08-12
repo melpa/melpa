@@ -212,7 +212,7 @@
         ])
       ]),
       m("p", [
-        m("input.form-control", {type: "search", placeholder: "Enter filter terms", autofocus: true,
+        m("input.form-control[type=search]", {placeholder: "Enter filter terms", autofocus: true,
                                  value: ctrl.filterTerms(), onkeyup: m.withAttr("value", ctrl.filterTerms)}),
         " ",
         m("span.help-block", ["Showing ", _.keys(visible).length, " matching package(s)"])
@@ -230,7 +230,7 @@
         ]),
         m("tbody",
           ctrl.sortedPackages().map(function(p) {
-            return m("tr", {class: visible[p.name] ? '' : 'filtered'},
+            return m("tr", { "class": visible[p.name] ? '' : 'filtered'},
                      [
               m("td", [
                 m("a", {href: "/" + p.name, config: m.route}, [

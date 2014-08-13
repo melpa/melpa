@@ -1,0 +1,3 @@
+(edbi-sqlite3
+ :fetcher "github"
+ :repo "proofit404/edbi-sqlite3")

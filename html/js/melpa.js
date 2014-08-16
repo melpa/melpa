@@ -271,18 +271,18 @@
 
   melpa.packagedetails = {};
   melpa.packagedetails.controller = function() {
-    var packageName = m.route.param("package");
+    this.packageName = m.route.param("package");
     this.package = m.prop();
     this.readme = m.prop('No description available.');
     this.neededBy = m.prop([]);
     this.downloadsPercentile = m.prop(0);
 
     melpa.packageList.then(function(packageList) {
-      var p = packageList.packageWithName(packageName);
+      var p = packageList.packageWithName(this.packageName);
       if (!p) return;
       this.package(p);
       this.downloadsPercentile(packageList.downloadsPercentileForPackage(p));
-      this.neededBy(packageList.dependenciesOnPackageName(packageName));
+      this.neededBy(packageList.dependenciesOnPackageName(this.packageName));
       this.packageWithName = packageList.packageWithName;
       m.request({method: "GET",
                  url: p.readmeURL,
@@ -293,7 +293,7 @@
 
   melpa.packagedetails.view = function(ctrl) {
     var pkg = ctrl.package();
-    if (!pkg) return m("h1", "Package not found");
+    if (!pkg) return m("h1", ["Package not found: ", ctrl.packageName]);
     this.depLink = function(dep) {
       var depPkg = ctrl.packageWithName(dep.name);
       var label = dep.name + " " + dep.version;

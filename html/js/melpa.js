@@ -166,6 +166,11 @@
     return m("span.glyphicon.glyphicon-" + name);
   }
 
+  function packageLink(pkg, contents) {
+    return m("a", {href: "/ " + encodeURIComponent(pkg.name), config: m.route},
+             contents || pkg.name);
+  }
+
   //////////////////////////////////////////////////////////////////////////////
   // Package list
   //////////////////////////////////////////////////////////////////////////////
@@ -232,18 +237,14 @@
           ctrl.sortedPackages().map(function(p) {
             return m("tr", { "class": visible[p.name] ? '' : 'filtered'},
                      [
-              m("td", [
-                m("a", {href: "/" + p.name, config: m.route}, [
-                  p.name
-                ])
-              ]),
+              m("td", packageLink(p)),
               m("td", [
                 m("a", {href: "/" + p.name, config: m.route}, [
                   p.description
                 ])
               ]),
               m("td.version", [
-                m("a", {href: p.packageURL}, [
+                packageLink(p, [
                   p.version,
                   " ",
                   glyphicon('download')
@@ -296,10 +297,7 @@
     this.depLink = function(dep) {
       var depPkg = ctrl.packageWithName(dep.name);
       var label = dep.name + " " + dep.version;
-      return depPkg ? m("a", {href: "/" + dep.name, config: m.route}, label) : label;
-    };
-    this.packageLink = function(pkg) {
-      return m("a", {href: "/" + pkg.name, config: m.route}, pkg.name);
+      return depPkg ? packageLink(dep, label) : label;
     };
     return m("section", [
       m("h1", [
@@ -330,7 +328,7 @@
             m("dt", "Dependencies"),
             m("dd", intersperse(pkg.dependencies.map(this.depLink), " / ")),
             m("dt", "Needed by"),
-            m("dd", intersperse(ctrl.neededBy().map(this.packageLink), " / ")),
+            m("dd", intersperse(ctrl.neededBy().map(packageLink), " / ")),
             pkg.oldNames.length > 0 ? [
               m("dt", "Renamed from:"),
               pkg.oldNames

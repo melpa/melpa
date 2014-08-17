@@ -1,0 +1,4 @@
+(seti-theme    :repo "caisah/seti-theme"
+               :fetcher github
+               :files ("seti-theme.el"))
+

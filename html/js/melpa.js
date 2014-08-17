@@ -238,18 +238,8 @@
             return m("tr", { "class": visible[p.name] ? '' : 'filtered'},
                      [
               m("td", packageLink(p)),
-              m("td", [
-                m("a", {href: "/" + p.name, config: m.route}, [
-                  p.description
-                ])
-              ]),
-              m("td.version", [
-                packageLink(p, [
-                  p.version,
-                  " ",
-                  glyphicon('download')
-                ])
-              ]),
+              m("td", packageLink(p, p.description)),
+              m("td.version", packageLink(p, [p.version, " ", glyphicon('download')])),
               m("td.recipe", [
                 m("a", {href: p.recipeURL}, [
                   glyphicon('cutlery')

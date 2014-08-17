@@ -167,7 +167,7 @@
   }
 
   function packageLink(pkg, contents) {
-    return m("a", {href: "/ " + encodeURIComponent(pkg.name), config: m.route},
+    return m("a", {href: "/" + encodeURIComponent(pkg.name), config: m.route},
              contents || pkg.name);
   }
 

@@ -272,7 +272,7 @@
       if (!p) return;
       this.package(p);
       this.downloadsPercentile(packageList.downloadsPercentileForPackage(p));
-      this.neededBy(packageList.dependenciesOnPackageName(this.packageName));
+      this.neededBy(_.sortBy(packageList.dependenciesOnPackageName(this.packageName), 'name'));
       this.packageWithName = packageList.packageWithName;
       m.request({method: "GET",
                  url: p.readmeURL,
@@ -320,7 +320,7 @@
               pkg.sourceURL ? m("a", {href: pkg.sourceURL}, pkg.source) : m("span", pkg.source)
             ]),
             m("dt", "Dependencies"),
-            m("dd", intersperse(pkg.dependencies.map(this.depLink), " / ")),
+            m("dd", intersperse(_.sortBy(pkg.dependencies, 'name').map(this.depLink), " / ")),
             m("dt", "Needed by"),
             m("dd", intersperse(ctrl.neededBy().map(this.reverseDepLink), " / ")),
             pkg.oldNames.length > 0 ? [

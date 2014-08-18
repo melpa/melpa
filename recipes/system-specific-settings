@@ -1,0 +1,1 @@
+(system-specific-settings :repo "DarwinAwardWinner/emacs-system-specific-settings" :fetcher github)

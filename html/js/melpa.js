@@ -287,7 +287,11 @@
     this.depLink = function(dep) {
       var depPkg = ctrl.packageWithName(dep.name);
       var label = dep.name + " " + dep.version;
-      return depPkg ? packageLink(dep, label) : label;
+      return depPkg ? packageLink(depPkg, label) : label;
+    };
+    this.reverseDepLink = function(dep) {
+      var depPkg = ctrl.packageWithName(dep.name);
+      return depPkg ? packageLink(depPkg, dep.name) : dep.name;
     };
     return m("section", [
       m("h1", [
@@ -318,7 +322,7 @@
             m("dt", "Dependencies"),
             m("dd", intersperse(pkg.dependencies.map(this.depLink), " / ")),
             m("dt", "Needed by"),
-            m("dd", intersperse(ctrl.neededBy().map(packageLink), " / ")),
+            m("dd", intersperse(ctrl.neededBy().map(this.reverseDepLink), " / ")),
             pkg.oldNames.length > 0 ? [
               m("dt", "Renamed from:"),
               pkg.oldNames

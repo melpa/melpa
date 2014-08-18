@@ -1,0 +1,2 @@
+(chumpy-windows :fetcher github :repo "chumpage/chumpy-windows"
+                  :files ("*.el"))

@@ -1,3 +1,0 @@
-(virtualenv-mode
- :fetcher "github"
- :repo "proofit404/virtualenv-mode")

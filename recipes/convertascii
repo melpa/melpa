@@ -1,0 +1,1 @@
+(convertascii :repo "shigemk2/convertascii" :fetcher github)

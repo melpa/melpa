@@ -1,1 +1,3 @@
-(neotree :fetcher github :repo "jaypei/emacs-neotree")
+(neotree :fetcher github
+         :repo "jaypei/emacs-neotree"
+         :branch "master")

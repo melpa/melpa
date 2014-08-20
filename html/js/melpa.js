@@ -234,9 +234,8 @@
           ])
         ]),
         m("tbody",
-          ctrl.sortedPackages().map(function(p) {
-            return m("tr", { "class": visible[p.name] ? '' : 'filtered'},
-                     [
+          ctrl.sortedPackages().filter(function(p) { return visible[p.name]; }).map(function(p) {
+            return m("tr", { key: p.name }, [
               m("td", packageLink(p)),
               m("td", packageLink(p, p.description)),
               m("td.version", packageLink(p, [p.version, " ", glyphicon('download')])),

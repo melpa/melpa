@@ -209,10 +209,10 @@
     return m("section#packages", [
       m("h2", [
         "Current List of ",
-        ctrl.packageList().totalPackages(),
+        ctrl.packageList().totalPackages().toLocaleString(),
         " Packages ",
         m("small", [
-          ctrl.packageList().totalDownloads(),
+          ctrl.packageList().totalDownloads().toLocaleString(),
           " downloads to date"
         ])
       ]),
@@ -247,7 +247,7 @@
               m("td.source", [
                 p.sourceURL ? m("a", {href: p.sourceURL}, [p.source]) : p.source
               ]),
-              m("td", [p.downloads])
+              m("td", [p.downloads.toLocaleString()])
             ]);
           }))
       ])
@@ -309,7 +309,7 @@
           m("dl.dl-horizontal", [
             m("dt", "Downloads"),
             m("dd", [
-              pkg.downloads,
+              pkg.downloads.toLocaleString(),
               m("span.muted", " (all versions)"),
               ", percentile: ",
               ctrl.downloadsPercentile().toFixed(2)

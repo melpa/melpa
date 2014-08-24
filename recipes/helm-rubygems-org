@@ -1,0 +1,4 @@
+(helm-rubygems-org
+ :repo "neomantic/helm-rubygems-org"
+ :commit "origin/master"
+ :fetcher github)

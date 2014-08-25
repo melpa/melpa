@@ -1,4 +1,4 @@
 (nu-mode
  :fetcher github
  :repo "pyluyten/emacs-nu"
- :files ("nu-mode/*.el" "doc/nu-mode.texi" "doc/nu-mode.info"))
+ :files ("nu-mode/*.el" "doc/nu-mode.info"))

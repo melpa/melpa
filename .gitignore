@@ -16,3 +16,4 @@
 /download_log.json.gz
 /.ecukes-failing-scenarios
 /sandbox
+*~

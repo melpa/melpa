@@ -1,0 +1,3 @@
+(ert-junit :fetcher git
+		   :url "https://bitbucket.org/olanilsson/ert-junit"
+		   :files ("ert-junit.el"))

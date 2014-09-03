@@ -10,5 +10,5 @@
                        (require 'package-build)))
                    (package-build-minor-mode)
                    (set (make-local-variable 'package-build-working-dir) (expand-file-name "../working/"))
-                   (set (make-local-variable 'package-build-archive-dir)) (expand-file-name "../packages/")
-                   (set (make-local-variable 'package-build-recipes-dir)) default-directory)))))
+                   (set (make-local-variable 'package-build-archive-dir) (expand-file-name "../packages/"))
+                   (set (make-local-variable 'package-build-recipes-dir) default-directory))))))

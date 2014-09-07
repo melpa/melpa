@@ -1,0 +1,3 @@
+(git-emacs
+ :repo "tsgates/git-emacs"
+ :fetcher github)

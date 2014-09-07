@@ -1,0 +1,1 @@
+(perl-find-library :fetcher wiki)

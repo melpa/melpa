@@ -1,0 +1,1 @@
+(evil-org :fetcher github :repo "edwtjo/evil-org-mode")

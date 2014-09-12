@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# \curl -L https://raw.github.com/milkypostman/melpa/fasterbuild/scripts/bootstrap | bash
+# \curl -L https://raw.github.com/milkypostman/melpa/master/scripts/bootstrap | bash
 
 SUDOENV='DEBIAN_FRONTEND=noninteractive'
 

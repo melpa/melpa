@@ -5,7 +5,7 @@
 SUDOENV='DEBIAN_FRONTEND=noninteractive'
 
 cd ${HOME}
-sudo ${SUDOENV} add-apt-repository -y ppa:cassou/emacs
+#sudo ${SUDOENV} add-apt-repository -y ppa:cassou/emacs
 sudo ${SUDOENV} apt-get update
 sudo ${SUDOENV} apt-get -y upgrade
 sudo ${SUDOENV} apt-get -y \

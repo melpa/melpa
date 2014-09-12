@@ -970,8 +970,10 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
       (make-directory package-build-archive-dir))
 
     (pb/message "\n;;; %s\n" file-name)
-    (let* ((version (or (package-build-checkout name rcp pkg-working-dir)
-                        (error "No valid package version found!")))
+    (let* ((version (package-version-join
+                     (version-to-list
+                      (or (package-build-checkout name rcp pkg-working-dir)
+                          (error "No valid package version found!")))))
            (default-directory package-build-working-dir)
            (start-time (current-time))
            (archive-entry (package-build-package (symbol-name name)

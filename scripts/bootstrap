@@ -6,7 +6,7 @@ SUDOENV='DEBIAN_FRONTEND=noninteractive'
 
 cd ${HOME}
 #sudo ${SUDOENV} add-apt-repository -y ppa:cassou/emacs
-sudo ${SUDOENV} apt-get update
+sudo ${SUDOENV} apt-get -y update
 sudo ${SUDOENV} apt-get -y upgrade
 sudo ${SUDOENV} apt-get -y \
     install \
@@ -15,16 +15,9 @@ sudo ${SUDOENV} apt-get -y \
     tmux make
 
 # build the log stuff
-mkdir -p log
-cat > log/melpa.logrotate <<EOT
-${HOME}/log/melpa.log {
-    rotate 10
-    weekly
-    compress
-    dateext
-}
-EOT
-
+mkdir -p ~/log
+mkdir -p ~/var/run
+mkdir -p var/lib/logrotate
 mkdir -p www
 
 # ruby is used for templating

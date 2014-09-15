@@ -1,2 +1,0 @@
-(cider-browse-ns :fetcher github
-                 :repo "jxa/cider-browse-ns")

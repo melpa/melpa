@@ -1,12 +1,13 @@
 (sly :repo "capitaomorte/sly"
      :fetcher github
      :files ("*.el"
-             ("lib" "lib/*.el")
-             ("lib/lisp" "lib/lisp/*.lisp")
-             ("lib/lisp/backend" "lib/lisp/backend/*.lisp")
-             "*.lisp"
-             "slynk.asd"
-             ("contrib" "contrib/*" (:exclude "contrib/test"))
+             ("lib" "lib/*")
+             ("slynk/backend" "slynk/backend/*") 
+             ("slynk" "slynk/*")
+             ("contrib" "contrib/*")
              "doc/*.texi"
              "doc/*.info"
-             "doc/dir"))
+             "doc/dir"
+             "README.md"
+             "NEWS.md"
+             ))

@@ -1,0 +1,3 @@
+(search-highlight-persist-mode
+  :fetcher github
+  :repo "juanjux/search-highlight-persist-mode")

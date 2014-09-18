@@ -7,7 +7,4 @@
              ("contrib" "contrib/*")
              "doc/*.texi"
              "doc/*.info"
-             "doc/dir"
-             "README.md"
-             "NEWS.md"
-             ))
+             "doc/dir"))

@@ -1,0 +1,3 @@
+(faceup :repo "Lindydancer/faceup"
+        :fetcher github
+        :files ("faceup.el"))

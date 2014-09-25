@@ -2,6 +2,7 @@
        :fetcher github
        :files ("*.el"
                ("lib" "lib/hyperspec.el")
+               ("swank" "swank/*")
                "*.lisp"
                "*.asd"
                ("contrib" "contrib/*" (:exclude "contrib/test"))

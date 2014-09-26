@@ -1,0 +1,3 @@
+(px
+ :url "https://github.com/aaptel/preview-latex.git"
+ :fetcher git)

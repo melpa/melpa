@@ -238,7 +238,7 @@
             return m("tr", { key: p.name }, [
               m("td", packageLink(p)),
               m("td", packageLink(p, p.description)),
-              m("td.version", packageLink(p, [p.version, " ", glyphicon('download')])),
+              m("td.version", m("a", {href: p.packageURL}, [p.version, " ", glyphicon('download')])),
               m("td.recipe", [
                 m("a", {href: p.recipeURL}, [
                   glyphicon('cutlery')

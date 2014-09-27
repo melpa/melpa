@@ -12,13 +12,14 @@ sudo ${SUDOENV} apt-get -y \
     install \
     subversion git cvs darcs fossil curl bzr mercurial \
     emacs24 emacs24-el emacs24-common-non-dfsg \
-    tmux make
+    tmux make runit nginx
 
 # build the log stuff
 mkdir -p ~/log
 mkdir -p ~/var/run
-mkdir -p var/lib/logrotate
-mkdir -p www
+mkdir -p ~/var/lib/logrotate
+mkdir -p ~/www
+mkdir -p ~/etc
 
 # ruby is used for templating
 \curl -L https://get.rvm.io | bash -s stable

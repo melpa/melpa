@@ -572,30 +572,31 @@ Optionally PRETTY-PRINT the data."
 
 (defun pb/write-pkg-file (pkg-file pkg-info)
   "Write PKG-FILE containing PKG-INFO."
-  (pb/dump
-   `(define-package
-      ,(aref pkg-info 0)
-      ,(aref pkg-info 3)
-      ,(aref pkg-info 2)
-      ',(mapcar
-         (lambda (elt)
-           (list (car elt)
-                 (package-version-join (cadr elt))))
-         (aref pkg-info 1))
-      ;; Append our extra information
-      ,@(apply #'append (mapcar (lambda (entry)
-                                  (let ((value (cdr entry)))
-                                    (when (or (symbolp value) (listp value))
-                                      ;; We must quote lists and symbols,
-                                      ;; because Emacs 24.3 and earlier evaluate
-                                      ;; the package information, which would
-                                      ;; break for unquoted symbols or lists
-                                      (setq value (list 'quote value)))
-                                    (list (car entry) value)))
-                                (when (> (length pkg-info) 4)
-                                  (aref pkg-info 4)))))
-   pkg-file
-   t))
+  (with-temp-file pkg-file
+    (pp
+     `(define-package
+        ,(aref pkg-info 0)
+        ,(aref pkg-info 3)
+        ,(aref pkg-info 2)
+        ',(mapcar
+           (lambda (elt)
+             (list (car elt)
+                   (package-version-join (cadr elt))))
+           (aref pkg-info 1))
+        ;; Append our extra information
+        ,@(apply #'append (mapcar (lambda (entry)
+                                    (let ((value (cdr entry)))
+                                      (when (or (symbolp value) (listp value))
+                                        ;; We must quote lists and symbols,
+                                        ;; because Emacs 24.3 and earlier evaluate
+                                        ;; the package information, which would
+                                        ;; break for unquoted symbols or lists
+                                        (setq value (list 'quote value)))
+                                      (list (car entry) value)))
+                                  (when (> (length pkg-info) 4)
+                                    (aref pkg-info 4)))))
+     (current-buffer))
+    (princ ";; Local Variables:\n;; no-byte-compile: t\n;; End:\n" (current-buffer))))
 
 (defun pb/read-from-file (file-name)
   "Read and return the Lisp data stored in FILE-NAME, or nil if no such file exists."

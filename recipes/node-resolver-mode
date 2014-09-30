@@ -1,0 +1,1 @@
+(node-resolver-mode :fetcher github :repo "meandavejustice/node-resolver-mode.el")

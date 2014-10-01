@@ -1,1 +1,1 @@
-(elfeed-org :repo "remyhonig/rmh-elfeed-org" :fetcher github)
+(elfeed-org :repo "remyhonig/elfeed-org" :fetcher github)

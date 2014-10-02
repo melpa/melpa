@@ -1,1 +1,1 @@
-(ac-sly :fetcher github :repo "qoocku/ac-sly")
+(ac-sly :fetcher git :repo "https://github.com/qoocku/ac-sly")

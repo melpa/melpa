@@ -1,8 +1,6 @@
 (magma-mode
  :fetcher github
  :repo "ThibautVerron/magma-mode"
- :files ("magma-mode.el" "magma-completion.el" "magma-font-lock.el"
-         "magma-smie.el" "magma-interactive.el" "magma-scan.el"
-         "magma-snippets.el"
+ :files ("*.el"
          "snippets"
          ("bin" "bin/build_completion_table.sh")))

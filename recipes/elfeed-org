@@ -1,0 +1,1 @@
+(elfeed-org :repo "remyhonig/elfeed-org" :fetcher github)

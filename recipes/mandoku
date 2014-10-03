@@ -1,0 +1,2 @@
+(mandoku :fetcher github :repo "cwittern/mandoku" :files ("*.org"  "lisp/*.el" "lisp/*.org"))
+

@@ -108,8 +108,17 @@ sandbox: packages/archive-contents
 		--eval "(add-to-list 'package-archives '(\"gnu\" . \"http://elpa.gnu.org/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.milkbox.net/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"sandbox\" . \"$(shell pwd)/$(PKGDIR)/\") t)" \
-		--eval "(package-refresh-contents)"
+		--eval "(add-to-list 'package-archives '(\"org\" . \"http://orgmode.org/elpa/\") t)" \
+		--eval "(package-refresh-contents)" \
+		--eval "(setq debug-on-error t)" \
 		--eval "(package-initialize)"
+
+## dev
+dev: packages/archive-contents
+	@echo " • Building sandbox ..."
+	mkdir -p $(SANDBOX)
+	@echo " • Loading startup  ..."
+	$(EMACS_COMMAND) -Q -l init.el
 
 .PHONY: clean build index html json sandbox
 .FORCE:

@@ -124,9 +124,9 @@
         };
         return (urlMatch(/(bitbucket\.org\/[^\/]+\/[^\/\?]+)/, "https://") ||
                 urlMatch(/(gitorious\.org\/[^\/]+\/[^.]+)/, "https://") ||
-                urlMatch(/\Alp:(.*)/, "https://launchpad.net/") ||
-                urlMatch(/\A(https?:\/\/code\.google\.com\/p\/[^\/]+\/)/) ||
-                urlMatch(/\A(https?:\/\/[^.]+\.googlecode\.com\/)/));
+                urlMatch(/^lp:(.*)/, "https://launchpad.net/") ||
+                urlMatch(/^(https?:\/\/code\.google\.com\/p\/[^\/]+\/)/) ||
+                urlMatch(/^(https?:\/\/[^.]+\.googlecode\.com\/)/));
       }
       return null;
     };

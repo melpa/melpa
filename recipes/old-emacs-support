@@ -1,0 +1,1 @@
+(old-emacs-support :repo "Lindydancer/old-emacs-support" :fetcher github)

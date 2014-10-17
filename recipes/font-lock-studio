@@ -1,0 +1,1 @@
+(font-lock-studio :repo "Lindydancer/font-lock-studio" :fetcher github)

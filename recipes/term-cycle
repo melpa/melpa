@@ -1,0 +1,1 @@
+(term-cycle :repo "adamrt/term-cycle" :fetcher github)

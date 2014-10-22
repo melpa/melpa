@@ -152,8 +152,14 @@ function for access to this function")
             (format "%d" (or (string-to-number (format-time-string "%H%M" time)) 0)))))
 
 (defun pb/string-match-all (regex str &rest groups)
-  "Find every match for `REGEX' within `STR', returning a list containing the full match string and match for groups `GROUPS'.
-The return list is of the form ((FULL GROUP1 GROUP2 ...) ...) where FULL is the complete regexp match and GROUP1, GROUP2, ... are the regex groups specified by the `GROUPS' argument. If `GROUPS' is nil then FULL and GROUP1 will be identical."
+  "Find every match for `REGEX' within `STR'.
+Return a list containing the full match string and match for
+groups `GROUPS'.  The return list is of the form
+   ((FULL GROUP1 GROUP2 ...) ...)
+where FULL is the complete regexp match and
+GROUP1, GROUP2, ... are the regex groups specified by the
+`GROUPS' argument.  If `GROUPS' is nil then FULL and GROUP1 will
+be identical."
   (let (result
         (pos 0)
         (groups (or groups '(0))))
@@ -172,7 +178,7 @@ The return list is of the form ((FULL GROUP1 GROUP2 ...) ...) where FULL is the 
                         (match-string-no-properties 1))))
 
 (defun pb/valid-version-string (str)
-  "Returns true if STR is a valid version, otherwise return nil."
+  "Return true if STR is a valid version, otherwise return nil."
   (ignore-errors (version-to-list str)))
 
 (defun pb/find-tag-version-newest (regex &optional bound &rest additional-groups)

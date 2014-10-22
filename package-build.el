@@ -994,6 +994,8 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
                                                  pkg-working-dir
                                                  package-build-archive-dir)))
       (pb/dump archive-entry (pb/entry-file-name archive-entry))
+      (when package-build-write-melpa-badge-images
+        (pb/write-melpa-badge-image (symbol-name name) version package-build-archive-dir))
       (pb/message "Built in %.3fs, finished at %s"
                   (time-to-seconds (time-since start-time))
                   (current-time-string))
@@ -1018,93 +1020,90 @@ simply pass `package-build-default-files-spec' in most cases.
 Returns the archive entry for the package."
   (when (symbolp package-name)
     (setq package-name (symbol-name package-name)))
-  (prog1
-      (let ((files (package-build-expand-file-specs source-dir file-specs)))
-        (unless (equal file-specs package-build-default-files-spec)
-          (when (equal files (package-build-expand-file-specs
-                              source-dir package-build-default-files-spec nil t))
-            (pb/message "Note: this :files spec is equivalent to the default.")))
-        (cond
-         ((not version)
-          (error "Unable to check out repository for %s" package-name))
-         ((= 1 (length files))
-          (let* ((pkg-source (expand-file-name (caar files) source-dir))
-                 (pkg-target (expand-file-name
-                              (concat package-name "-" version ".el")
-                              target-dir))
-                 (pkg-info (pb/merge-package-info
-                            (pb/get-package-info pkg-source)
-                            package-name
-                            version)))
-            (unless (string-equal (downcase (concat package-name ".el"))
-                                  (downcase (file-name-nondirectory pkg-source)))
-              (error "Single file %s does not match package name %s"
-                     (file-name-nondirectory pkg-source) package-name))
-            (when (file-exists-p pkg-target)
-              (delete-file pkg-target))
-            (copy-file pkg-source pkg-target)
-            (let ((enable-local-variables nil)
-                  (make-backup-files nil))
-              (with-current-buffer (find-file pkg-target)
-                (pb/update-or-insert-version version)
-                (pb/ensure-ends-here-line pkg-source)
-                (write-file pkg-target nil)
-                (condition-case err
-                    (pb/package-buffer-info-vec)
-                  (error
-                   (pb/message "Warning: %S" err)))
-                (kill-buffer)))
+  (let ((files (package-build-expand-file-specs source-dir file-specs)))
+    (unless (equal file-specs package-build-default-files-spec)
+      (when (equal files (package-build-expand-file-specs
+                          source-dir package-build-default-files-spec nil t))
+        (pb/message "Note: this :files spec is equivalent to the default.")))
+    (cond
+     ((not version)
+      (error "Unable to check out repository for %s" package-name))
+     ((= 1 (length files))
+      (let* ((pkg-source (expand-file-name (caar files) source-dir))
+             (pkg-target (expand-file-name
+                          (concat package-name "-" version ".el")
+                          target-dir))
+             (pkg-info (pb/merge-package-info
+                        (pb/get-package-info pkg-source)
+                        package-name
+                        version)))
+        (unless (string-equal (downcase (concat package-name ".el"))
+                              (downcase (file-name-nondirectory pkg-source)))
+          (error "Single file %s does not match package name %s"
+                 (file-name-nondirectory pkg-source) package-name))
+        (when (file-exists-p pkg-target)
+          (delete-file pkg-target))
+        (copy-file pkg-source pkg-target)
+        (let ((enable-local-variables nil)
+              (make-backup-files nil))
+          (with-current-buffer (find-file pkg-target)
+            (pb/update-or-insert-version version)
+            (pb/ensure-ends-here-line pkg-source)
+            (write-file pkg-target nil)
+            (condition-case err
+                (pb/package-buffer-info-vec)
+              (error
+               (pb/message "Warning: %S" err)))
+            (kill-buffer)))
 
-            (pb/write-pkg-readme target-dir
-                                 (pb/find-package-commentary pkg-source)
-                                 package-name)
-            (pb/archive-entry pkg-info 'single)))
-         ((< 1 (length  files))
-          (let* ((tmp-dir (file-name-as-directory (make-temp-file package-name t)))
-                 (pkg-dir-name (concat package-name "-" version))
-                 (pkg-tmp-dir (expand-file-name pkg-dir-name tmp-dir))
-                 (pkg-file (concat package-name "-pkg.el"))
-                 (pkg-file-source (or (pb/find-source-file pkg-file files)
-                                      pkg-file))
-                 (file-source (concat package-name ".el"))
-                 (pkg-source (or (pb/find-source-file file-source files)
-                                 file-source))
-                 (pkg-info (pb/merge-package-info
-                            (let ((default-directory source-dir))
-                              (or (pb/get-pkg-file-info pkg-file-source)
-                                  ;; some packages (like magit) provide name-pkg.el.in
-                                  (pb/get-pkg-file-info
-                                   (expand-file-name (concat pkg-file ".in")
-                                                     (file-name-directory pkg-source)))
-                                  (pb/get-package-info pkg-source)))
-                            package-name
-                            version)))
+        (pb/write-pkg-readme target-dir
+                             (pb/find-package-commentary pkg-source)
+                             package-name)
+        (pb/archive-entry pkg-info 'single)))
+     ((< 1 (length  files))
+      (let* ((tmp-dir (file-name-as-directory (make-temp-file package-name t)))
+             (pkg-dir-name (concat package-name "-" version))
+             (pkg-tmp-dir (expand-file-name pkg-dir-name tmp-dir))
+             (pkg-file (concat package-name "-pkg.el"))
+             (pkg-file-source (or (pb/find-source-file pkg-file files)
+                                  pkg-file))
+             (file-source (concat package-name ".el"))
+             (pkg-source (or (pb/find-source-file file-source files)
+                             file-source))
+             (pkg-info (pb/merge-package-info
+                        (let ((default-directory source-dir))
+                          (or (pb/get-pkg-file-info pkg-file-source)
+                              ;; some packages (like magit) provide name-pkg.el.in
+                              (pb/get-pkg-file-info
+                               (expand-file-name (concat pkg-file ".in")
+                                                 (file-name-directory pkg-source)))
+                              (pb/get-package-info pkg-source)))
+                        package-name
+                        version)))
 
 
-            (pb/copy-package-files files source-dir pkg-tmp-dir)
-            (pb/write-pkg-file (expand-file-name pkg-file
-                                                 (file-name-as-directory pkg-tmp-dir))
-                               pkg-info)
+        (pb/copy-package-files files source-dir pkg-tmp-dir)
+        (pb/write-pkg-file (expand-file-name pkg-file
+                                             (file-name-as-directory pkg-tmp-dir))
+                           pkg-info)
 
-            (pb/generate-info-files files source-dir pkg-tmp-dir)
-            (pb/generate-dir-file files pkg-tmp-dir)
+        (pb/generate-info-files files source-dir pkg-tmp-dir)
+        (pb/generate-dir-file files pkg-tmp-dir)
 
-            (let ((default-directory tmp-dir))
-              (pb/create-tar (expand-file-name (concat package-name "-" version ".tar")
-                                               target-dir)
-                             pkg-dir-name))
+        (let ((default-directory tmp-dir))
+          (pb/create-tar (expand-file-name (concat package-name "-" version ".tar")
+                                           target-dir)
+                         pkg-dir-name))
 
-            (let ((default-directory source-dir))
-              (pb/write-pkg-readme target-dir
-                                   (pb/find-package-commentary pkg-source)
-                                   package-name))
+        (let ((default-directory source-dir))
+          (pb/write-pkg-readme target-dir
+                               (pb/find-package-commentary pkg-source)
+                               package-name))
 
-            (delete-directory pkg-tmp-dir t nil)
-            (pb/archive-entry pkg-info 'tar)))
+        (delete-directory pkg-tmp-dir t nil)
+        (pb/archive-entry pkg-info 'tar)))
 
-         (t (error "Unable to find files matching recipe patterns"))))
-    (when package-build-write-melpa-badge-images
-      (pb/write-melpa-badge-image package-name version target-dir))))
+     (t (error "Unable to find files matching recipe patterns")))))
 
 
 ;; In future we should provide a hook, and perform this step in a separate package.

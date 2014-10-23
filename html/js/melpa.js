@@ -29,6 +29,7 @@
   //////////////////////////////////////////////////////////////////////////////
 
   var melpa = {};
+  melpa.rootURL = window.location.protocol + "//" + window.location.host;
 
   melpa.Package = function(data) {
     ["name", "description", "version", "dependencies", "source",
@@ -38,6 +39,7 @@
     this._searchText = _([data.name, data.description, data.version])
       .compact().valueOf().join(' ').toLowerCase();
     this.readmeURL = "/packages/" + data.name + "-readme.txt";
+    this.badgeURL = "/packages/" + data.name + "-badge.svg";
     this.matchesTerm = function(term) {
       return this._searchText.indexOf(term) != -1;
     };
@@ -171,6 +173,11 @@
              contents || pkg.name);
   }
 
+  function packagePath(pkg) {
+    if (m.route.mode !== "hash") throw "FIXME: unsupported route mode";
+    return "/#/" + encodeURIComponent(pkg.name);
+  }
+
   //////////////////////////////////////////////////////////////////////////////
   // Package list
   //////////////////////////////////////////////////////////////////////////////
@@ -265,6 +272,7 @@
     this.readme = m.prop('No description available.');
     this.neededBy = m.prop([]);
     this.downloadsPercentile = m.prop(0);
+    this.archivename = new melpa.archivename.controller();
 
     melpa.packageList.then(function(packageList) {
       var p = packageList.packageWithName(this.packageName);
@@ -334,7 +342,18 @@
       m("section", [
         m("h4", "Description"),
         m("pre", ctrl.readme())
-      ])
+      ]),
+      m("section",
+        m("h4", "Badge code"),
+        m(".well", [
+          packageLink(pkg, m("img", {src: melpa.rootURL + pkg.badgeURL})),
+          m("dl", [
+            m("dt", "Markdown"),
+            m("dd", m("pre", "[![" + ctrl.archivename.archiveName() + "](" + melpa.rootURL + pkg.badgeURL +  ")](" + melpa.rootURL + packagePath(pkg) + ")")),
+            m("dt", "HTML"),
+            m("dd", m("pre", '<a href="' + melpa.rootURL + packagePath(pkg) + '"><img alt="' + ctrl.archivename.archiveName() + '" src="' + melpa.rootURL + pkg.badgeURL + '"/></a>'))
+          ])
+      ]))
     ]);
   };
 

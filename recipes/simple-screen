@@ -1,0 +1,1 @@
+(simple-screen :repo "wachikun/simple-screen" :fetcher github)

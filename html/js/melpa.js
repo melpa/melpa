@@ -346,7 +346,7 @@
       m("section",
         m("h4", "Badge code"),
         m(".well", [
-          packageLink(pkg, m("img", {src: melpa.rootURL + pkg.badgeURL})),
+          packageLink(pkg, m("img", {alt: ctrl.archivename.archiveName(), src: melpa.rootURL + pkg.badgeURL})),
           m("dl", [
             m("dt", "Markdown"),
             m("dd", m("pre", "[![" + ctrl.archivename.archiveName() + "](" + melpa.rootURL + pkg.badgeURL +  ")](" + melpa.rootURL + packagePath(pkg) + ")")),

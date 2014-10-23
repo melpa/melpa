@@ -1,0 +1,1 @@
+(logstash-conf :repo "Wilfred/logstash-conf.el" :fetcher github)

@@ -376,6 +376,7 @@
   jQuery(window).load(function() {
     document.title = (new melpa.archivename.controller()).archiveName();
     jQuery(".archive-name").empty().each(function(i, e) {
+      // jshint unused: false
       m.module(e, melpa.archivename);
     });
     if (melpa.stable()) {

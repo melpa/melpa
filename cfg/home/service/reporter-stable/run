@@ -8,7 +8,7 @@ BODY=`mktemp`
 
 cd ${HOME}/melpa
 
-echo "To: MP <dcurtis@milkbox.net>" > ${BODY}
+echo "To: MP <d@milkbox.net>" > ${BODY}
 echo "Subject: [MELPA] `date "+%Y%m%d %H:%M %z"`" >> ${BODY}
 echo >> ${BODY}
 echo "# Old Packages" >> ${BODY}

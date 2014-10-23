@@ -19,7 +19,7 @@
 
 server {
 	server_name hiddencameras.milkbox.net;
-	rewrite ^ $scheme://melpa-stable.milkbox.net$request_uri? permanent;
+	rewrite ^ $scheme://stable.melpa.org$request_uri? permanent;
 }
 
 server {

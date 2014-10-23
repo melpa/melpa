@@ -72,7 +72,7 @@ http {
 	##
 
 	server {
-		server_name melpa-stable.milkbox.net;
+		server_name stable.melpa.org;
 		server_tokens off;
 		server_name_in_redirect off;
 	

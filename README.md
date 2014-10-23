@@ -11,7 +11,7 @@ code using simple recipes. (Think of it as a server-side version of
 Packages are updated at intervals throughout the day.
 
 To browse available packages, check out the
-[archive index page](http://melpa.milkbox.net/).
+[archive index page](http://melpa.org/).
 
 Adding packages is as simple as submitting a pull request; read on for
 details.
@@ -41,7 +41,7 @@ Enable installation of packages from MELPA by adding an entry to
 ```lisp
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
@@ -412,7 +412,7 @@ format.
  such as Emacs 24. If you have an older version of Emacs, you can get a
  suitable `package.el` [here](http://bit.ly/pkg-el23).
 
-[melpa]: http://melpa.milkbox.net
+[melpa]: http://melpa.org
 
 
 ## API
@@ -476,11 +476,11 @@ in your `package-archives` list.
 
 ```lisp
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 ```
 
 An online list of available packages can be found at 
-[http://melpa-stable.milkbox.net](http://melpa-stable.milkbox.net).
+[http://stable.melpa.org](http://stable.melpa.org).
 
 ### Stable Version Generation
 

@@ -18,6 +18,7 @@
 ##
 
 server {
+	server_name melpa-stable.milkbox.net;
 	server_name hiddencameras.milkbox.net;
 	rewrite ^ $scheme://stable.melpa.org$request_uri? permanent;
 }
@@ -30,7 +31,6 @@ server {
 
 	# Make site accessible from http://localhost/
 	server_name localhost;
-	server_name *.milkbox.net;
 	server_name *.melpa.org;
 
 	# proxy to Apache 2 and mod_python

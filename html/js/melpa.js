@@ -362,7 +362,7 @@
   // Changing the appearance of the MELPA Stable page
   //////////////////////////////////////////////////////////////////////////////
 
-  melpa.stable = m.prop(window.location.host === 'melpa-stable.milkbox.net');
+  melpa.stable = m.prop(window.location.host === 'melpa-stable.milkbox.net' || window.location.host === 'stable.melpa.org');
   melpa.archivename = {};
   melpa.archivename.controller = function() {
     this.archiveName = function() {

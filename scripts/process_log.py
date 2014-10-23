@@ -82,7 +82,7 @@ def parse_logfile(logfilename, pkg_ip_time):
                               "%d/%b/%Y:%H:%M:%S").timetuple()))
         pkg = match.group('package')
 
-        pkg_ip_time.setdefault(pkg, {}).setdefault(ip, set()).add(dtstamp)
+        pkg_ip_time.setdefault(pkg, set()).add(ip)
 
         count += 1
 

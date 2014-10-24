@@ -1,0 +1,2 @@
+(boon :fetcher github :repo "jyp/boon" :files ("*.el"))
+

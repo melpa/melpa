@@ -299,6 +299,9 @@
       var depPkg = ctrl.packageWithName(dep.name);
       return depPkg ? packageLink(depPkg, dep.name) : dep.name;
     };
+    var badgeURL = melpa.rootURL + pkg.badgeURL;
+    var fullURL = melpa.rootURL + packagePath(pkg);
+
     return m("section", [
       m("h1", [
         pkg.name,
@@ -347,10 +350,12 @@
         m(".well", [
           packageLink(pkg, m("img", {alt: ctrl.archivename.archiveName(), src: melpa.rootURL + pkg.badgeURL})),
           m("dl", [
-            m("dt", "Markdown"),
-            m("dd", m("pre", "[![" + ctrl.archivename.archiveName() + "](" + melpa.rootURL + pkg.badgeURL +  ")](" + melpa.rootURL + packagePath(pkg) + ")")),
             m("dt", "HTML"),
-            m("dd", m("pre", '<a href="' + melpa.rootURL + packagePath(pkg) + '"><img alt="' + ctrl.archivename.archiveName() + '" src="' + melpa.rootURL + pkg.badgeURL + '"/></a>'))
+            m("dd", m("pre", '<a href="' + fullURL + '"><img alt="' + ctrl.archivename.archiveName() + '" src="' + badgeURL + '"/></a>')),
+            m("dt", "Markdown"),
+            m("dd", m("pre", "[![" + ctrl.archivename.archiveName() + "](" + badgeURL +  ")](" + fullURL + ")")),
+            m("dt", "Org"),
+            m("dd", m("pre", '[[' + fullURL + '][file:' + badgeURL + ']]'))
           ])
       ]))
     ]);

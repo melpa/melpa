@@ -187,8 +187,7 @@
     this.filterTerms = m.prop(m.route.param('q') || '');
     this.sortBy = m.prop("name");
     this.sortAscending = m.prop(true);
-    this.packageList = m.prop();
-    melpa.packageList.then(this.packageList);
+    this.packageList = melpa.packageList;
     this.matchingPackages = function() {
       return this.packageList().matchingPackages(this.filterTerms());
     };

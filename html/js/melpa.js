@@ -74,7 +74,7 @@
       var matching = savedSearches[t];
       if (!matching) {
         matching = savedSearches[t] = _.filter(preFilteredPackages(t),
-                                                 function(p) { return p.matchesTerm(t); });
+                                               function(p) { return p.matchesTerm(t); });
       }
       var visible = {};
       _.each(matching, function(p){ visible[p.name] = true; });

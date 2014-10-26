@@ -1,0 +1,2 @@
+(magnatune :repo "eikek/magnatune.el" :fetcher github)
+

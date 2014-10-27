@@ -334,7 +334,7 @@
             m("dd", intersperse(ctrl.neededBy().map(this.reverseDepLink), " / ")),
             pkg.oldNames.length > 0 ? [
               m("dt", "Renamed from:"),
-              pkg.oldNames
+              m("dd", intersperse(pkg.oldNames, ', '))
               // m("dt", "Old name needed by:"),
               // m("dd", "TODO")
             ] : []

@@ -1,1 +1,1 @@
-(marmalade-client :fetcher github :repo "nicferrier/emacs-marmalade-upload")
+(marmalade-client :fetcher github :repo "nicferrier/emacs-marmalade-upload" :old-names (marmalade-upload))

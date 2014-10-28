@@ -2,26 +2,37 @@
 <section>
       <a name="installing"></a>
       <h2>Installing</h2>
-      <p>
-        To add the snapshot package repository put this before the
-        call to <code>package-initialize</code> in
-        your <code>init.el</code> file.
+
+      <p>To use the MELPA repository, you'll need an Emacs with
+        <code>package.el</code>. Emacs 24 has <code>package.el</code>
+        bundled with it, and there's also
+        a <a href="http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el">version
+        you can use with Emacs 23</a>.
       </p>
 
-      <pre><code>(require 'package)
+      <p>
+        Enable installation of packages from MELPA by adding an entry
+        to <code>package-archives</code> after <code>(require
+        'package)</code> and before the call
+        to <code>package-initialize</code> in
+        your <code>init.el</code> or <code>.emacs</code> file:
+      </p>
+
+      <pre><code>(require 'package) ;; You might already have this line
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.org/packages/") t)</code></pre>
+             '("melpa" . "http://melpa.org/packages/") t)
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize) ;; You might already have this line</code></pre>
 
-      <p>or to add the stable package repository, use this snippet:</p>
+      <p>
+        or to add the stable package repository, use this instead
+        of <code>"melpa"</code>:
+      </p>
 
-      <pre><code>(require 'package)
-(add-to-list 'package-archives
-  '("melpa-stable" . "http://stable.melpa.org/packages/") t)</code></pre>
-
-      <p>In Emacs &lt; 24, you'll also need to explicitly include the GNU
-        ELPA archive, which provides important compatibility libraries like <code>cl-lib</code>:</p>
-      <pre><code>(when (< emacs-major-version 24)
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))</code></pre>
+      <pre><code>(add-to-list 'package-archives
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)</code></pre>
 
       <h3>Customizations</h3>
       <p>

@@ -1,2 +1,2 @@
-(aria2-mode :fetcher git
-             :url "https://bitbucket.org/ukaszg/aria2-mode.git")
+(aria2 :fetcher git
+             :url "https://bitbucket.org/ukaszg/aria2.git")

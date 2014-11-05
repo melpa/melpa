@@ -1,0 +1,3 @@
+(scala-outline-popup
+ :repo "ancane/scala-outline-popup"
+ :fetcher github)

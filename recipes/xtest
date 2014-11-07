@@ -1,1 +1,1 @@
-(xtest :fetcher github :repo "promethial/xtest.el")
+(xtest :fetcher github :repo "promethial/xtest")

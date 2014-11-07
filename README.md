@@ -118,6 +118,10 @@ process and expedite the recipe review process,
   or entering "yes" when prompted after pressing `C-c C-c` in the
   recipe buffer.
 
+* If you are *not* the original author or maintainer of the package you
+  are submitting, please consider notifying the author *prior* to submitting
+  and make reasonable effort to include them in the pull request process.
+
 
 ### Testing
 

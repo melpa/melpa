@@ -708,14 +708,17 @@ Optionally PRETTY-PRINT the data."
   (when (file-exists-p file-path)
     (let ((package-def (pb/read-from-file file-path)))
       (if (eq 'define-package (car package-def))
-          (let ((pkgfile-info (cdr package-def)))
+          (let* ((pkgfile-info (cdr package-def))
+                 (descr (nth 2 pkgfile-info)))
+            (when (string-match "[\r\n]" descr)
+              (error "Illegal multi-line package description"))
             (vector
              (nth 0 pkgfile-info)
              (mapcar
               (lambda (elt)
                 (list (car elt) (version-to-list (cadr elt))))
               (eval (nth 3 pkgfile-info)))
-             (nth 2 pkgfile-info)
+             descr
              (nth 1 pkgfile-info)))
         (error "No define-package found in %s" file-path)))))
 

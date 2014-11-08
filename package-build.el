@@ -711,7 +711,7 @@ Optionally PRETTY-PRINT the data."
           (let* ((pkgfile-info (cdr package-def))
                  (descr (nth 2 pkgfile-info)))
             (when (string-match "[\r\n]" descr)
-              (error "Illegal multi-line package description"))
+              (error "Illegal multi-line package description in %s" file-path))
             (vector
              (nth 0 pkgfile-info)
              (mapcar

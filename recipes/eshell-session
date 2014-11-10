@@ -1,0 +1,3 @@
+(eshell-session
+ :repo "mytoh/emacs-eshell-session"
+ :fetcher github)

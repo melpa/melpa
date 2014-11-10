@@ -1,1 +1,1 @@
-(octomacs :fetcher github :repo "jhelwig/octomacs")
+(octomacs :fetcher git :url "git://git.technosorcery.net/octomacs.git")

@@ -1,0 +1,1 @@
+(kakapo-mode :fetcher github :repo "listx/kakapo-mode")

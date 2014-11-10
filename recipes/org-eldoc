@@ -1,2 +1,0 @@
-(org-eldoc :fetcher git
-           :url "https://bitbucket.org/ukaszg/org-eldoc.git")

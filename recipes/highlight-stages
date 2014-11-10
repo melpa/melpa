@@ -1,0 +1,1 @@
+(highlight-stages :repo "zk-phi/highlight-stages" :fetcher github)

@@ -17,3 +17,4 @@
 /.ecukes-failing-scenarios
 /sandbox
 *~
+/download_log.db

@@ -29,6 +29,7 @@
   //////////////////////////////////////////////////////////////////////////////
 
   var melpa = {};
+  melpa.rootURL = window.location.protocol + "//" + window.location.host;
 
   melpa.Package = function(data) {
     ["name", "description", "version", "dependencies", "source",
@@ -38,6 +39,7 @@
     this._searchText = _([data.name, data.description, data.version])
       .compact().valueOf().join(' ').toLowerCase();
     this.readmeURL = "/packages/" + data.name + "-readme.txt";
+    this.badgeURL = "/packages/" + data.name + "-badge.svg";
     this.matchesTerm = function(term) {
       return this._searchText.indexOf(term) != -1;
     };
@@ -72,7 +74,7 @@
       var matching = savedSearches[t];
       if (!matching) {
         matching = savedSearches[t] = _.filter(preFilteredPackages(t),
-                                                 function(p) { return p.matchesTerm(t); });
+                                               function(p) { return p.matchesTerm(t); });
       }
       var visible = {};
       _.each(matching, function(p){ visible[p.name] = true; });
@@ -124,9 +126,9 @@
         };
         return (urlMatch(/(bitbucket\.org\/[^\/]+\/[^\/\?]+)/, "https://") ||
                 urlMatch(/(gitorious\.org\/[^\/]+\/[^.]+)/, "https://") ||
-                urlMatch(/\Alp:(.*)/, "https://launchpad.net/") ||
-                urlMatch(/\A(https?:\/\/code\.google\.com\/p\/[^\/]+\/)/) ||
-                urlMatch(/\A(https?:\/\/[^.]+\.googlecode\.com\/)/));
+                urlMatch(/^lp:(.*)/, "https://launchpad.net/") ||
+                urlMatch(/^(https?:\/\/code\.google\.com\/p\/[^\/]+\/)/) ||
+                urlMatch(/^(https?:\/\/[^.]+\.googlecode\.com\/)/));
       }
       return null;
     };
@@ -171,6 +173,11 @@
              contents || pkg.name);
   }
 
+  function packagePath(pkg) {
+    if (m.route.mode !== "hash") throw "FIXME: unsupported route mode";
+    return "/#/" + encodeURIComponent(pkg.name);
+  }
+
   //////////////////////////////////////////////////////////////////////////////
   // Package list
   //////////////////////////////////////////////////////////////////////////////
@@ -180,8 +187,7 @@
     this.filterTerms = m.prop(m.route.param('q') || '');
     this.sortBy = m.prop("name");
     this.sortAscending = m.prop(true);
-    this.packageList = m.prop();
-    melpa.packageList.then(this.packageList);
+    this.packageList = melpa.packageList;
     this.matchingPackages = function() {
       return this.packageList().matchingPackages(this.filterTerms());
     };
@@ -238,7 +244,7 @@
             return m("tr", { key: p.name }, [
               m("td", packageLink(p)),
               m("td", packageLink(p, p.description)),
-              m("td.version", packageLink(p, [p.version, " ", glyphicon('download')])),
+              m("td.version", m("a", {href: p.packageURL}, [p.version, " ", glyphicon('download')])),
               m("td.recipe", [
                 m("a", {href: p.recipeURL}, [
                   glyphicon('cutlery')
@@ -265,6 +271,7 @@
     this.readme = m.prop('No description available.');
     this.neededBy = m.prop([]);
     this.downloadsPercentile = m.prop(0);
+    this.archivename = new melpa.archivename.controller();
 
     melpa.packageList.then(function(packageList) {
       var p = packageList.packageWithName(this.packageName);
@@ -292,6 +299,9 @@
       var depPkg = ctrl.packageWithName(dep.name);
       return depPkg ? packageLink(depPkg, dep.name) : dep.name;
     };
+    var badgeURL = melpa.rootURL + pkg.badgeURL;
+    var fullURL = melpa.rootURL + packagePath(pkg);
+
     return m("section", [
       m("h1", [
         pkg.name,
@@ -324,7 +334,7 @@
             m("dd", intersperse(ctrl.neededBy().map(this.reverseDepLink), " / ")),
             pkg.oldNames.length > 0 ? [
               m("dt", "Renamed from:"),
-              pkg.oldNames
+              m("dd", intersperse(pkg.oldNames, ', '))
               // m("dt", "Old name needed by:"),
               // m("dd", "TODO")
             ] : []
@@ -334,7 +344,20 @@
       m("section", [
         m("h4", "Description"),
         m("pre", ctrl.readme())
-      ])
+      ]),
+      m("section",
+        m("h4", "Badge code"),
+        m(".well", [
+          packageLink(pkg, m("img", {alt: ctrl.archivename.archiveName(), src: melpa.rootURL + pkg.badgeURL})),
+          m("dl", [
+            m("dt", "HTML"),
+            m("dd", m("pre", '<a href="' + fullURL + '"><img alt="' + ctrl.archivename.archiveName() + '" src="' + badgeURL + '"/></a>')),
+            m("dt", "Markdown"),
+            m("dd", m("pre", "[![" + ctrl.archivename.archiveName() + "](" + badgeURL +  ")](" + fullURL + ")")),
+            m("dt", "Org"),
+            m("dd", m("pre", '[[' + fullURL + '][file:' + badgeURL + ']]'))
+          ])
+      ]))
     ]);
   };
 
@@ -362,7 +385,7 @@
   // Changing the appearance of the MELPA Stable page
   //////////////////////////////////////////////////////////////////////////////
 
-  melpa.stable = m.prop(window.location.host === 'melpa-stable.milkbox.net');
+  melpa.stable = m.prop(window.location.host === 'melpa-stable.milkbox.net' || window.location.host === 'stable.melpa.org');
   melpa.archivename = {};
   melpa.archivename.controller = function() {
     this.archiveName = function() {
@@ -376,6 +399,7 @@
   jQuery(window).load(function() {
     document.title = (new melpa.archivename.controller()).archiveName();
     jQuery(".archive-name").empty().each(function(i, e) {
+      // jshint unused: false
       m.module(e, melpa.archivename);
     });
     if (melpa.stable()) {

@@ -1,4 +1,2 @@
 (pabbrev
- :fetcher hg
- :url "https://code.google.com/p/phillord-emacs-packages/"
- :files ("pabbrev.el"))
+ :fetcher github :repo "phillord/pabbrev")

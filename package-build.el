@@ -95,6 +95,11 @@ Certain package names (e.g. \"@\") may not work properly with a BSD tar."
   :group 'package-build
   :type '(file :must-match t))
 
+(defcustom package-build-write-melpa-badge-images nil
+  "When non-nil, write MELPA badge images alongside packages, for use on github pages etc."
+  :group 'package-build
+  :type 'boolean)
+
 ;;; Internal Variables
 
 (defvar pb/recipe-alist nil
@@ -152,8 +157,14 @@ function for access to this function")
             (format "%d" (or (string-to-number (format-time-string "%H%M" time)) 0)))))
 
 (defun pb/string-match-all (regex str &rest groups)
-  "Find every match for `REGEX' within `STR', returning a list containing the full match string and match for groups `GROUPS'.
-The return list is of the form ((FULL GROUP1 GROUP2 ...) ...) where FULL is the complete regexp match and GROUP1, GROUP2, ... are the regex groups specified by the `GROUPS' argument. If `GROUPS' is nil then FULL and GROUP1 will be identical."
+  "Find every match for `REGEX' within `STR'.
+Return a list containing the full match string and match for
+groups `GROUPS'.  The return list is of the form
+   ((FULL GROUP1 GROUP2 ...) ...)
+where FULL is the complete regexp match and
+GROUP1, GROUP2, ... are the regex groups specified by the
+`GROUPS' argument.  If `GROUPS' is nil then FULL and GROUP1 will
+be identical."
   (let (result
         (pos 0)
         (groups (or groups '(0))))
@@ -172,7 +183,7 @@ The return list is of the form ((FULL GROUP1 GROUP2 ...) ...) where FULL is the 
                         (match-string-no-properties 1))))
 
 (defun pb/valid-version-string (str)
-  "Returns true if STR is a valid version, otherwise return nil."
+  "Return true if STR is a valid version, otherwise return nil."
   (ignore-errors (version-to-list str)))
 
 (defun pb/find-tag-version-newest (regex &optional bound &rest additional-groups)
@@ -572,30 +583,31 @@ Optionally PRETTY-PRINT the data."
 
 (defun pb/write-pkg-file (pkg-file pkg-info)
   "Write PKG-FILE containing PKG-INFO."
-  (pb/dump
-   `(define-package
-      ,(aref pkg-info 0)
-      ,(aref pkg-info 3)
-      ,(aref pkg-info 2)
-      ',(mapcar
-         (lambda (elt)
-           (list (car elt)
-                 (package-version-join (cadr elt))))
-         (aref pkg-info 1))
-      ;; Append our extra information
-      ,@(apply #'append (mapcar (lambda (entry)
-                                  (let ((value (cdr entry)))
-                                    (when (or (symbolp value) (listp value))
-                                      ;; We must quote lists and symbols,
-                                      ;; because Emacs 24.3 and earlier evaluate
-                                      ;; the package information, which would
-                                      ;; break for unquoted symbols or lists
-                                      (setq value (list 'quote value)))
-                                    (list (car entry) value)))
-                                (when (> (length pkg-info) 4)
-                                  (aref pkg-info 4)))))
-   pkg-file
-   t))
+  (with-temp-file pkg-file
+    (pp
+     `(define-package
+        ,(aref pkg-info 0)
+        ,(aref pkg-info 3)
+        ,(aref pkg-info 2)
+        ',(mapcar
+           (lambda (elt)
+             (list (car elt)
+                   (package-version-join (cadr elt))))
+           (aref pkg-info 1))
+        ;; Append our extra information
+        ,@(apply #'append (mapcar (lambda (entry)
+                                    (let ((value (cdr entry)))
+                                      (when (or (symbolp value) (listp value))
+                                        ;; We must quote lists and symbols,
+                                        ;; because Emacs 24.3 and earlier evaluate
+                                        ;; the package information, which would
+                                        ;; break for unquoted symbols or lists
+                                        (setq value (list 'quote value)))
+                                      (list (car entry) value)))
+                                  (when (> (length pkg-info) 4)
+                                    (aref pkg-info 4)))))
+     (current-buffer))
+    (princ ";; Local Variables:\n;; no-byte-compile: t\n;; End:\n" (current-buffer))))
 
 (defun pb/read-from-file (file-name)
   "Read and return the Lisp data stored in FILE-NAME, or nil if no such file exists."
@@ -696,14 +708,17 @@ Optionally PRETTY-PRINT the data."
   (when (file-exists-p file-path)
     (let ((package-def (pb/read-from-file file-path)))
       (if (eq 'define-package (car package-def))
-          (let ((pkgfile-info (cdr package-def)))
+          (let* ((pkgfile-info (cdr package-def))
+                 (descr (nth 2 pkgfile-info)))
+            (when (string-match "[\r\n]" descr)
+              (error "Illegal multi-line package description in %s" file-path))
             (vector
              (nth 0 pkgfile-info)
              (mapcar
               (lambda (elt)
                 (list (car elt) (version-to-list (cadr elt))))
               (eval (nth 3 pkgfile-info)))
-             (nth 2 pkgfile-info)
+             descr
              (nth 1 pkgfile-info)))
         (error "No define-package found in %s" file-path)))))
 
@@ -970,8 +985,10 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
       (make-directory package-build-archive-dir))
 
     (pb/message "\n;;; %s\n" file-name)
-    (let* ((version (or (package-build-checkout name rcp pkg-working-dir)
-                        (error "No valid package version found!")))
+    (let* ((version (package-version-join
+                     (version-to-list
+                      (or (package-build-checkout name rcp pkg-working-dir)
+                          (error "No valid package version found!")))))
            (default-directory package-build-working-dir)
            (start-time (current-time))
            (archive-entry (package-build-package (symbol-name name)
@@ -980,6 +997,8 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
                                                  pkg-working-dir
                                                  package-build-archive-dir)))
       (pb/dump archive-entry (pb/entry-file-name archive-entry))
+      (when package-build-write-melpa-badge-images
+        (pb/write-melpa-badge-image (symbol-name name) version package-build-archive-dir))
       (pb/message "Built in %.3fs, finished at %s"
                   (time-to-seconds (time-since start-time))
                   (current-time-string))
@@ -1013,82 +1032,100 @@ Returns the archive entry for the package."
      ((not version)
       (error "Unable to check out repository for %s" package-name))
      ((= 1 (length files))
-      (let* ((pkg-source (expand-file-name (caar files) source-dir))
-             (pkg-target (expand-file-name
-                          (concat package-name "-" version ".el")
-                          target-dir))
-             (pkg-info (pb/merge-package-info
-                        (pb/get-package-info pkg-source)
-                        package-name
-                        version)))
-        (unless (string-equal (downcase (concat package-name ".el"))
-                              (downcase (file-name-nondirectory pkg-source)))
-          (error "Single file %s does not match package name %s"
-                 (file-name-nondirectory pkg-source) package-name))
-        (when (file-exists-p pkg-target)
-          (delete-file pkg-target))
-        (copy-file pkg-source pkg-target)
-        (let ((enable-local-variables nil)
-              (make-backup-files nil))
-          (with-current-buffer (find-file pkg-target)
-            (pb/update-or-insert-version version)
-            (pb/ensure-ends-here-line pkg-source)
-            (write-file pkg-target nil)
-            (condition-case err
-                (pb/package-buffer-info-vec)
-              (error
-               (pb/message "Warning: %S" err)))
-            (kill-buffer)))
-
-        (pb/write-pkg-readme target-dir
-                             (pb/find-package-commentary pkg-source)
-                             package-name)
-        (pb/archive-entry pkg-info 'single)))
+      (pb/build-single-file-package package-name version (caar files) source-dir target-dir))
      ((< 1 (length  files))
-      (let* ((tmp-dir (file-name-as-directory (make-temp-file package-name t)))
-             (pkg-dir-name (concat package-name "-" version))
-             (pkg-tmp-dir (expand-file-name pkg-dir-name tmp-dir))
-             (pkg-file (concat package-name "-pkg.el"))
-             (pkg-file-source (or (pb/find-source-file pkg-file files)
-                                  pkg-file))
-             (file-source (concat package-name ".el"))
-             (pkg-source (or (pb/find-source-file file-source files)
-                             file-source))
-             (pkg-info (pb/merge-package-info
-                        (let ((default-directory source-dir))
-                          (or (pb/get-pkg-file-info pkg-file-source)
-                              ;; some packages (like magit) provide name-pkg.el.in
-                              (pb/get-pkg-file-info
-                               (expand-file-name (concat pkg-file ".in")
-                                                 (file-name-directory pkg-source)))
-                              (pb/get-package-info pkg-source)))
-                        package-name
-                        version)))
-
-
-        (pb/copy-package-files files source-dir pkg-tmp-dir)
-        (pb/write-pkg-file (expand-file-name pkg-file
-                                             (file-name-as-directory pkg-tmp-dir))
-                           pkg-info)
-
-        (pb/generate-info-files files source-dir pkg-tmp-dir)
-        (pb/generate-dir-file files pkg-tmp-dir)
-
-        (let ((default-directory tmp-dir))
-          (pb/create-tar (expand-file-name (concat package-name "-" version ".tar")
-                                           target-dir)
-                         pkg-dir-name))
-
-        (let ((default-directory source-dir))
-          (pb/write-pkg-readme target-dir
-                               (pb/find-package-commentary pkg-source)
-                               package-name))
-
-        (delete-directory pkg-tmp-dir t nil)
-        (pb/archive-entry pkg-info 'tar)))
-
+      (pb/build-multi-file-package package-name version files source-dir target-dir))
      (t (error "Unable to find files matching recipe patterns")))))
 
+(defun pb/build-single-file-package (package-name version file source-dir target-dir)
+  (let* ((pkg-source (expand-file-name file source-dir))
+         (pkg-target (expand-file-name
+                      (concat package-name "-" version ".el")
+                      target-dir))
+         (pkg-info (pb/merge-package-info
+                    (pb/get-package-info pkg-source)
+                    package-name
+                    version)))
+    (unless (string-equal (downcase (concat package-name ".el"))
+                          (downcase (file-name-nondirectory pkg-source)))
+      (error "Single file %s does not match package name %s"
+             (file-name-nondirectory pkg-source) package-name))
+    (when (file-exists-p pkg-target)
+      (delete-file pkg-target))
+    (copy-file pkg-source pkg-target)
+    (let ((enable-local-variables nil)
+          (make-backup-files nil))
+      (with-current-buffer (find-file pkg-target)
+        (pb/update-or-insert-version version)
+        (pb/ensure-ends-here-line pkg-source)
+        (write-file pkg-target nil)
+        (condition-case err
+            (pb/package-buffer-info-vec)
+          (error
+           (pb/message "Warning: %S" err)))
+        (kill-buffer)))
+
+    (pb/write-pkg-readme target-dir
+                         (pb/find-package-commentary pkg-source)
+                         package-name)
+    (pb/archive-entry pkg-info 'single)))
+
+(defun pb/build-multi-file-package (package-name version files source-dir target-dir)
+  (let* ((tmp-dir (file-name-as-directory (make-temp-file package-name t)))
+         (pkg-dir-name (concat package-name "-" version))
+         (pkg-tmp-dir (expand-file-name pkg-dir-name tmp-dir))
+         (pkg-file (concat package-name "-pkg.el"))
+         (pkg-file-source (or (pb/find-source-file pkg-file files)
+                              pkg-file))
+         (file-source (concat package-name ".el"))
+         (pkg-source (or (pb/find-source-file file-source files)
+                         file-source))
+         (pkg-info (pb/merge-package-info
+                    (let ((default-directory source-dir))
+                      (or (pb/get-pkg-file-info pkg-file-source)
+                          ;; some packages (like magit) provide name-pkg.el.in
+                          (pb/get-pkg-file-info
+                           (expand-file-name (concat pkg-file ".in")
+                                             (file-name-directory pkg-source)))
+                          (pb/get-package-info pkg-source)))
+                    package-name
+                    version)))
+    (pb/copy-package-files files source-dir pkg-tmp-dir)
+    (pb/write-pkg-file (expand-file-name pkg-file
+                                         (file-name-as-directory pkg-tmp-dir))
+                       pkg-info)
+
+    (pb/generate-info-files files source-dir pkg-tmp-dir)
+    (pb/generate-dir-file files pkg-tmp-dir)
+
+    (let ((default-directory tmp-dir))
+      (pb/create-tar (expand-file-name (concat package-name "-" version ".tar")
+                                       target-dir)
+                     pkg-dir-name))
+
+    (let ((default-directory source-dir))
+      (pb/write-pkg-readme target-dir
+                           (pb/find-package-commentary pkg-source)
+                           package-name))
+
+    (delete-directory pkg-tmp-dir t nil)
+    (pb/archive-entry pkg-info 'tar)))
+
+
+;; In future we should provide a hook, and perform this step in a separate package.
+;; Note also that it would be straightforward to generate the SVG ourselves, which would
+;; save the network overhead.
+(defun pb/write-melpa-badge-image (package-name version target-dir)
+  (url-copy-file
+   (concat "http://img.shields.io/badge/"
+           (if package-build-stable "melpa stable" "melpa")
+           "-"
+           (url-hexify-string version)
+           "-"
+           (if package-build-stable "3e999f" "922793")
+           ".svg")
+   (expand-file-name (concat package-name "-badge.svg") target-dir)
+   t))
 
 
 ;;; Helpers for recipe authors

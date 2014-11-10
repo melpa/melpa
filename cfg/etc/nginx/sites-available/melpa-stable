@@ -1,0 +1,71 @@
+# You may add here your
+# server {
+#	...
+# }
+# statements for each of your virtual hosts to this file
+
+##
+# You should look at the following URL's in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# http://wiki.nginx.org/Pitfalls
+# http://wiki.nginx.org/QuickStart
+# http://wiki.nginx.org/Configuration
+#
+# Generally, you will want to move this file somewhere, and start with a clean
+# file but keep this around for reference. Or just disable in sites-enabled.
+#
+# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+##
+
+server {
+	server_name melpa-stable.milkbox.net;
+	server_name hiddencameras.milkbox.net;
+	rewrite ^ $scheme://stable.melpa.org$request_uri? permanent;
+}
+
+server {
+	listen   80; ## listen for ipv4; this line is default and implied
+	#listen   [::]:80 default ipv6only=on; ## listen for ipv6
+
+	root /usr/share/nginx/www;
+
+	# Make site accessible from http://localhost/
+	server_name localhost;
+	server_name *.melpa.org;
+
+	# proxy to Apache 2 and mod_python
+	location / {
+	    proxy_pass         http://127.0.0.1:1337/;
+	    proxy_redirect     off;
+	    chunked_transfer_encoding off;
+
+	    gzip on;
+	    gzip_disable "msie6|Emacs";
+
+	    gzip_vary on;
+	    gzip_proxied any;
+	    gzip_comp_level 6;
+	    gzip_buffers 16 8k;
+	    gzip_http_version 1.1;
+	    gzip_types text/plain text/xhtml text/css text/js text/csv application/javascript application/x-javascript application/json application/xml text/xml application/atom+xml application/rss+xml;
+
+	    proxy_set_header   Host             $host;
+	    proxy_set_header   X-Real-IP        $remote_addr;
+	    proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+	    proxy_max_temp_file_size 0;
+	
+	    client_max_body_size       10m;
+	    client_body_buffer_size    128k;
+	
+	    proxy_connect_timeout      90;
+	    proxy_send_timeout         90;
+	    proxy_read_timeout         90;
+	
+	    proxy_buffer_size          4k;
+	    proxy_buffers              4 32k;
+	    proxy_busy_buffers_size    64k;
+	    proxy_temp_file_write_size 64k;
+	}
+}
+
+

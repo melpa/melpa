@@ -90,7 +90,7 @@ $(RCPDIR)/.dirstamp: .FORCE
 $(RCPDIR)/%: .FORCE
 	@echo " • Building recipe $(@F) ..."
 
-	- $(TIMEOUT) $(EVAL) "(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name \"$(PKGDIR)\" pb/this-dir))) (package-build-archive '$(@F)))"
+	- $(TIMEOUT) $(EVAL) "(let ((package-build-stable $(STABLE)) (package-build-write-melpa-badge-images t) (package-build-archive-dir (expand-file-name \"$(PKGDIR)\" pb/this-dir))) (package-build-archive '$(@F)))"
 
 	@echo " ✓ Wrote $$(ls -lsh $(PKGDIR)/$(@F)-*) "
 	@echo " Sleeping for $(SLEEP) ..."
@@ -106,7 +106,7 @@ sandbox: packages/archive-contents
 		--eval '(setq user-emacs-directory "$(SANDBOX)")' \
 		-l package \
 		--eval "(add-to-list 'package-archives '(\"gnu\" . \"http://elpa.gnu.org/packages/\") t)" \
-		--eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.milkbox.net/packages/\") t)" \
+		--eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.org/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"sandbox\" . \"$(shell pwd)/$(PKGDIR)/\") t)" \
 		--eval "(package-refresh-contents)"
 		--eval "(package-initialize)"

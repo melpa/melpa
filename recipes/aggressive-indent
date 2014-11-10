@@ -1,0 +1,1 @@
+(aggressive-indent :repo "Bruce-Connor/aggressive-indent-mode" :fetcher github)

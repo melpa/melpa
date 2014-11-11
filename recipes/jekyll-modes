@@ -1,0 +1,3 @@
+(jekyll-modes
+ :fetcher github
+ :repo "fred-o/jekyll-modes")

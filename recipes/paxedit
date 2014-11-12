@@ -1,1 +1,4 @@
-(xtest :fetcher github :repo "promethial/paxedit/paxedit.el")
+(paxedit
+ :fetcher github
+ :repo "promethial/paxedit"
+ :files ("paxedit.el"))

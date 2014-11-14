@@ -19,7 +19,7 @@ function build_all {
     # grep --files-with-match wiki recipes/* | xargs make -j1 &
     make SLEEP=2 -j1 $(grep --files-with-match wiki recipes/*) &
     # grep --files-without-match wiki recipes/* | xargs make -j4 &
-    make -j4 $(grep --files-without-match wiki recipes/*) &
+    make -j4 $(grep --files-without-match googlecode $(grep --files-without-match wiki recipes/*)) &
     wait
 
     echo '{"completed":' `unix_timestamp` '}' > ${MELPA_WWW}/build-status.json

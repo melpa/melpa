@@ -1,0 +1,1 @@
+(autotetris-mode :fetcher github :repo "skeeto/autotetris-mode")

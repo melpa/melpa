@@ -1,0 +1,2 @@
+(hl-anything :repo "boyw165/hl-anything" :fetcher github)
+

@@ -1,0 +1,4 @@
+(llvm-mode
+ :url "http://llvm.org/git/llvm"
+ :files ("utils/emails/llvm-mode.el")
+ :fetcher git)

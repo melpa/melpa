@@ -6,7 +6,7 @@
                "*.lisp"
                "*.asd"
                ("contrib" "contrib/*" (:exclude "contrib/test"))
-               "doc/*.texi"
-               "doc/*.info"
+               "doc/slime.texi"
+               "doc/slime.info"
                "doc/dir"
                "ChangeLog"))

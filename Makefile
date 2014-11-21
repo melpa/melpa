@@ -108,7 +108,7 @@ sandbox: packages/archive-contents
 		--eval "(add-to-list 'package-archives '(\"gnu\" . \"http://elpa.gnu.org/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.org/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"sandbox\" . \"$(shell pwd)/$(PKGDIR)/\") t)" \
-		--eval "(package-refresh-contents)"
+		--eval "(package-refresh-contents)" \
 		--eval "(package-initialize)"
 
 .PHONY: clean build index html json sandbox

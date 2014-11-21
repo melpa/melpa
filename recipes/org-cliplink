@@ -1,0 +1,2 @@
+(org-cliplink :repo "rexim/org-cliplink"
+              :fetcher github)

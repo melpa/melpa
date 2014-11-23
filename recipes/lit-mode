@@ -1,1 +1,1 @@
-(lit-mode :fetcher github :repo "HectorAE/lit-mode" :files ("*.el"))
+(lit-mode :fetcher github :repo "HectorAE/lit-mode")

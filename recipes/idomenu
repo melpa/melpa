@@ -1,1 +1,1 @@
-(idomenu :fetcher wiki)
+(idomenu :repo "birkenfeld/idomenu" :fetcher github)

@@ -1,0 +1,3 @@
+(fasd-shell
+ :url "https://gitlab.com/emacs-stuff/fasd-shell.git"
+ :fetcher git)

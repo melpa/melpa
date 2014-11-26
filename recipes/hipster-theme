@@ -1,0 +1,3 @@
+(hipster-theme :repo "xzerocode/hipster-theme"
+               :fetcher github
+               :files ("hipster-theme.el"))

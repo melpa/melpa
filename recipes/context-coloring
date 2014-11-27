@@ -1,5 +1,5 @@
 (context-coloring
  :fetcher github
  :repo "jacksonrayhamilton/context-coloring"
- :branch "master"
+ :branch "develop"
  :files ("*.el" "*.js" "bin" "lib"))

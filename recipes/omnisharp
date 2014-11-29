@@ -1,4 +1,4 @@
-(omnisharp :repo "sp3ctum/omnisharp-emacs"
+(omnisharp :repo "OmniSharp/omnisharp-emacs"
            :fetcher github
            :files ("*.el"
                    "src/*.el"

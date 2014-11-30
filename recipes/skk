@@ -1,4 +1,4 @@
-(ddskk
+(skk
  :url ":pserver:guest:guest@openlab.jp:/circus/cvsroot"
  :module "skk/main"
  :fetcher cvs

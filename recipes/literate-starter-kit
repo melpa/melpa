@@ -1,0 +1,1 @@
+(literate-starter-kit :fetcher github :repo "eschulte/emacs24-starter-kit")

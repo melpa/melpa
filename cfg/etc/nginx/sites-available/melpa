@@ -68,6 +68,10 @@ server {
 	    proxy_busy_buffers_size    64k;
 	    proxy_temp_file_write_size 64k;
 	}
+
+	location /packages/*.svg {
+	    add_header Cache-Control no-cache;
+	}
 }
 
 

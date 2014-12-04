@@ -1,0 +1,1 @@
+(shackle :fetcher github :repo "wasamasa/shackle")

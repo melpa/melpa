@@ -1,1 +1,3 @@
-(navi2ch :fetcher github :repo "naota/navi2ch" :files ("*.el" "contrib/*.el"))
+(navi2ch :fetcher github
+	 :repo "naota/navi2ch"
+	 :files ("navi2ch*.el" "contrib/*.el" ("icons" "icons/*.xpm")))

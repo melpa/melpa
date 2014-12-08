@@ -1,0 +1,3 @@
+(elscreen-persist
+ :repo "robario/elscreen-persist"
+ :fetcher github)

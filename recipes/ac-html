@@ -1,2 +1,2 @@
 (ac-html :repo "cheunghy/ac-html" :fetcher github
-         :files ("ac-html.el" "ac-haml.el" "html-stuff"))
+         :files ("*.el" "html-stuff"))

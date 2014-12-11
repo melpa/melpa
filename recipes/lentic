@@ -1,1 +1,1 @@
-(lentic :fetcher github :repo "phillord/lentic")
+(lentic :fetcher github :repo "phillord/lentic" :old-names (linked-buffer))

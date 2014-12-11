@@ -1,1 +1,1 @@
-(goto-chg :fetcher wiki)
+(goto-chg :fetcher github :repo "joe9/goto-chg.el")

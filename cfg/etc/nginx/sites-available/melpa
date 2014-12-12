@@ -69,7 +69,7 @@ server {
 	    proxy_temp_file_write_size 64k;
 	}
 
-	location /packages/*.svg {
+	location ~ ^/packages/.*\.svg {
 	    add_header Cache-Control no-cache;
 	}
 }

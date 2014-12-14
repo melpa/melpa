@@ -1,2 +1,0 @@
-(ein2 :repo "millejoh/emacs-ipython-notebook" :fetcher github
-      :files ("lisp/*"))

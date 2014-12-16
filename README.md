@@ -246,6 +246,11 @@ to the root of the package.* More complex options are available,
 submit an [Issue](https://github.com/milkypostman/melpa/issues) if the
 specified package requires more complex file specification.
 
+    If the the package merely requires some additional files, for example for
+bundling external dependencies, but is otherwise fine with the defaults, it's
+recommended to use `:defaults` as the very first element of this list, which
+causes the default value shown above to be prepended to the specified file list.
+
 [git]: http://git-scm.com/
 [github]: https://github.com/
 [bzr]: http://bazaar.canonical.com/en/

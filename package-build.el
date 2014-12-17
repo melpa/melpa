@@ -848,7 +848,14 @@ for ALLOW-EMPTY to prevent this error."
 
 (defun pb/config-file-list (config)
   "Get the :files spec from CONFIG, or return `package-build-default-files-spec'."
-  (or (plist-get config :files) package-build-default-files-spec))
+  (let ((file-list (plist-get config :files)))
+    (cond
+     ((null file-list)
+      package-build-default-files-spec)
+     ((eq :default (car file-list))
+      (append package-build-default-files-spec (cdr file-list)))
+     (t
+      file-list))))
 
 (defun pb/expand-source-file-list (dir config)
   "Shorthand way to expand paths in DIR for source files listed in CONFIG."

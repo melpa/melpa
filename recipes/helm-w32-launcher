@@ -1,2 +1,2 @@
 (helm-w32-launcher :fetcher github :repo "Fanael/helm-w32-launcher"
-                   :files ("*.el" "helper-src" "license.txt"))
+                   :files (:defaults "helper-src" "license.txt"))

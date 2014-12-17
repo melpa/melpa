@@ -852,7 +852,7 @@ for ALLOW-EMPTY to prevent this error."
     (cond
      ((null file-list)
       package-build-default-files-spec)
-     ((eq :default (car file-list))
+     ((eq :defaults (car file-list))
       (append package-build-default-files-spec (cdr file-list)))
      (t
       file-list))))

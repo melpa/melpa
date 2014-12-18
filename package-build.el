@@ -264,6 +264,27 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
            (progn ,@body)
          (setq pb/last-wiki-fetch-time (float-time))))))
 
+(defun package-build-download-url (url newname &optional ok-if-already-exists)
+  "Copy URL to NEWNAME.  Both args must be strings.
+Like `url-copy-file', but it produces an error if the http response is not 200.
+Signals a `file-already-exists' error if file NEWNAME already exists,
+unless a third argument OK-IF-ALREADY-EXISTS is supplied and non-nil.
+A number as third arg means request confirmation if NEWNAME already exists."
+  (if (and (file-exists-p newname)
+           (not ok-if-already-exists))
+      (error "Opening output file: File already exists, %s" newname))
+  (let ((buffer (url-retrieve-synchronously url))
+        (handle nil))
+    (if (not buffer)
+        (error "Opening input file: No such file or directory, %s" url))
+    (with-current-buffer buffer
+      (unless (= 200 url-http-response-status)
+        (error "HTTP error %s fetching %s" url-http-response-status url))
+      (setq handle (mm-dissect-buffer t)))
+    (mm-save-part-to-file handle newname)
+    (kill-buffer buffer)
+    (mm-destroy-parts handle)))
+
 (defun pb/grab-wiki-file (filename)
   "Download FILENAME from emacswiki, returning its last-modified time."
   (let* ((download-url
@@ -271,7 +292,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
          (wiki-url
           (format "http://www.emacswiki.org/emacs/%s" filename)))
     (pb/with-wiki-rate-limit
-     (url-copy-file download-url filename t))
+     (package-build-download-url download-url filename t))
     (when (zerop (nth 7 (file-attributes filename)))
       (error "Wiki file %s was empty - has it been removed?" filename))
     ;; The Last-Modified response header for the download is actually
@@ -1123,7 +1144,7 @@ Returns the archive entry for the package."
 ;; Note also that it would be straightforward to generate the SVG ourselves, which would
 ;; save the network overhead.
 (defun pb/write-melpa-badge-image (package-name version target-dir)
-  (url-copy-file
+  (package-build-download-url
    (concat "http://img.shields.io/badge/"
            (if package-build-stable "melpa stable" "melpa")
            "-"

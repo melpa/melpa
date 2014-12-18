@@ -264,7 +264,8 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
            (progn ,@body)
          (setq pb/last-wiki-fetch-time (float-time))))))
 
-(defun package-build-download-url (url newname &optional ok-if-already-exists)
+(require 'mm-decode)
+(defun pb/url-copy-file (url newname &optional ok-if-already-exists)
   "Copy URL to NEWNAME.  Both args must be strings.
 Like `url-copy-file', but it produces an error if the http response is not 200.
 Signals a `file-already-exists' error if file NEWNAME already exists,
@@ -292,7 +293,7 @@ A number as third arg means request confirmation if NEWNAME already exists."
          (wiki-url
           (format "http://www.emacswiki.org/emacs/%s" filename)))
     (pb/with-wiki-rate-limit
-     (package-build-download-url download-url filename t))
+     (pb/url-copy-file download-url filename t))
     (when (zerop (nth 7 (file-attributes filename)))
       (error "Wiki file %s was empty - has it been removed?" filename))
     ;; The Last-Modified response header for the download is actually
@@ -1144,7 +1145,7 @@ Returns the archive entry for the package."
 ;; Note also that it would be straightforward to generate the SVG ourselves, which would
 ;; save the network overhead.
 (defun pb/write-melpa-badge-image (package-name version target-dir)
-  (package-build-download-url
+  (pb/url-copy-file
    (concat "http://img.shields.io/badge/"
            (if package-build-stable "melpa stable" "melpa")
            "-"

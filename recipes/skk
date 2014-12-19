@@ -1,6 +1,5 @@
 (skk
- :url ":pserver:guest:guest@openlab.jp:/circus/cvsroot"
- :module "skk/main"
- :fetcher cvs
+ :repo "skk-dev/ddskk"
+ :fetcher github
  :files ("ccc.el" "context-skk.el" "queue-m.el" "skk*.el"
          (:exclude "skk-xemacs.el")))

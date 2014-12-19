@@ -99,6 +99,9 @@ Because we care about the quality of packages that are part of MELPA
 we review all submissions. The following steps can help us with this
 process and expedite the recipe review process,
 
+* Use [flycheck-package](https://github.com/purcell/flycheck-package)
+  to help you identify common errors in your package metadata.
+
 * Include the following information in the pull request:
 
     * A brief summary of what the package does.

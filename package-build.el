@@ -689,7 +689,8 @@ Optionally PRETTY-PRINT the data."
 (defun pb/update-or-insert-version (version)
   "Ensure current buffer has a \"Version: VERSION\" header."
   (goto-char (point-min))
-  (if (re-search-forward "^;+* *Version *: *" nil t)
+  (if (let ((case-fold-search t))
+        (re-search-forward "^;+* *Version *: *" nil t))
       (progn
         (move-beginning-of-line nil)
         (search-forward "V" nil t)

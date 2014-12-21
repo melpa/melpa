@@ -1,5 +1,6 @@
-(skk
+(ddskk
  :repo "skk-dev/ddskk"
  :fetcher github
+ :old-names (skk)
  :files ("ccc.el" "context-skk.el" "queue-m.el" "skk*.el"
          (:exclude "skk-xemacs.el")))

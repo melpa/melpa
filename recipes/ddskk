@@ -1,4 +1,4 @@
-(skk
+(ddskk
  :repo "skk-dev/ddskk"
  :fetcher github
  :files ("ccc.el" "context-skk.el" "queue-m.el" "skk*.el"

@@ -1,0 +1,3 @@
+(composite-symbols
+ :fetcher github
+ :repo "ikirill/composite-symbols")

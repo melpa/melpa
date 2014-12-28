@@ -1,0 +1,1 @@
+(cd-compile :repo "jamienicol/emacs-cd-compile" :fetcher github)

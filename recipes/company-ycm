@@ -1,0 +1,3 @@
+(company-ycm :fetcher github
+      :repo "neuromage/ycm.el"
+      :files ("company-ycm.el"))

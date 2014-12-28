@@ -1,0 +1,4 @@
+(company-ess
+ :fetcher github
+ :repo "Lompik/company-ess")
+ 

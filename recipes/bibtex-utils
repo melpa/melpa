@@ -1,0 +1,1 @@
+(bibtex-utils :fetcher hg :url "https://bitbucket.org/tws/bibtex-utils")

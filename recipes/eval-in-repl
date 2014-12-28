@@ -3,4 +3,4 @@
               :repo    "kaz-yos/eval-in-repl"
               :commit  "origin/master"
               :files   ("*.el"
-                        (:exclude "README.md")))
+                        (:exclude "*.md" "*.png")))

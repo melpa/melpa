@@ -1,0 +1,1 @@
+(smart-mode-line-powerline-theme :repo "Bruce-Connor/smart-mode-line" :fetcher github :files ("themes/smart-mode-line-powerline-theme.el"))

@@ -1,3 +1,3 @@
 (insfactor :fetcher github
            :repo "duelinmarkers/insfactor.el"
-           :commit "origin/release")
+           :branch "release")

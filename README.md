@@ -11,7 +11,7 @@ code using simple recipes. (Think of it as a server-side version of
 Packages are updated at intervals throughout the day.
 
 To browse available packages, check out the
-[archive index page](http://melpa.milkbox.net/).
+[archive index page](http://melpa.org/).
 
 Adding packages is as simple as submitting a pull request; read on for
 details.
@@ -24,47 +24,43 @@ details.
 * [Build Scripts](#build-scripts)
 * [API](#api)
 * [About](#about)
+* [Stable Packages](#stable-packages)
 
 
 ## Usage
 
-To use the MELPA repository, add it to `package-archives` after
-`(require 'package)` and before the call to `package-initialize` in
-your `init.el` file.
+To use the MELPA repository, you'll need an Emacs with
+`package.el`. Emacs 24 has `package.el` bundled with it, and there's
+also a
+[version you can use with Emacs 23](http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el).
 
-```lisp
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-```
-
-In Emacs < 24, you'll also need to explicitly include the GNU ELPA
-archive, which provides important compatibility libraries like
-`cl-lib`:
-
-```lisp
-(when (< emacs-major-version 24)
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-```
-
-A complete minimal example for MELPA,
+Enable installation of packages from MELPA by adding an entry to
+`package-archives` after `(require 'package)` and before the call to
+`package-initialize` in your `init.el` or `.emacs` file:
 
 ```lisp
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
 (when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 ```
 
-Since `package.el` doesn't allow locking packages to certain version, MELPA packages
-will override those available from any other package source, so
-we also provide a package `melpa.el` which contains code to allow
-restricting packages to specific repositories.  This allows someone to
-blacklist packages that come from a specific repository, or blacklist
-all packages from a repository and only whitelist certain packages.
+Then just use `M-x package-list-packages` to browse and install
+packages from MELPA and elsewhere.
 
-See the [MELPA Package](#melpa-package) section below if you think you might want that.
+Note that MELPA packages will always have higher versions than those
+from other archives like Marmalade, so if you decide you need
+non-MELPA versions of specific packages for some reason, extra
+configuration will be required:
+
+If your Emacs has the variable `package-pinned-packages`, you can
+customize or modify that variable as needed. Otherwise, use the
+separate
+[package-filter.el](https://github.com/milkypostman/package-filter)
+package which we provide.
 
 
 ## Contributing New Recipes
@@ -88,7 +84,7 @@ New recipe submissions should adhere to the following guidelines,
 * Packages should adhere to the `package.el` format as specified by
   `(info "(elisp) Packaging")`. More information on this format is
   provided by the
-  [marmalade package manual](http://marmalade-repo.org/doc-files/package.5.html).
+  [marmalade package manual](https://web.archive.org/web/20111120220609/http://marmalade-repo.org/doc-files/package.5.html).
 
 * Recipes should try to minimize the size of the resulting package by
   specifying only files relevant to the package. See the
@@ -103,22 +99,31 @@ Because we care about the quality of packages that are part of MELPA
 we review all submissions. The following steps can help us with this
 process and expedite the recipe review process,
 
+* Use [flycheck-package](https://github.com/purcell/flycheck-package)
+  to help you identify common errors in your package metadata.
+
 * Include the following information in the pull request:
 
     * A brief summary of what the package does.
 
+    * A direct link to the package repository.
+
     * Your association with the package (e.g., are you the maintainer?
       have you contributed? do you just like the package a lot?).
 
-    * A direct link to the package repository.
-
-    * Relevant communications with the package maintainer (e.g.,
+    * Relevant communications with the upstream package maintainer (e.g.,
       `package.el` compatibility changes that you have submitted).
 
-* Test that the package builds properly via `make recipes/<recipe>`.
+* Test that the package builds properly via `make recipes/<recipe>`,
+  or pressing `C-c C-c` in the recipe buffer.
 
-* Test that the package installs properly via `package-install-file`.
+* Test that the package installs properly via `package-install-file`,
+  or entering "yes" when prompted after pressing `C-c C-c` in the
+  recipe buffer.
 
+* If you are *not* the original author or maintainer of the package you
+  are submitting, please consider notifying the author *prior* to submitting
+  and make reasonable effort to include them in the pull request process.
 
 
 ### Testing
@@ -128,18 +133,36 @@ Let `<NAME>` denote the name of the recipe to submit.
 1. Fork the MELPA repository.
 2. Add your new file under the directory specified by
 `package-build-recipes-dir` (default: `recipes/` directory where
-`package-build` was loaded).
-3. Confirm your package built properly by running
+`package-build` was loaded). If you prefer, the interactive command
+`package-build-create-recipe` in `package-build.el` will guide you
+through this process.
+
+3. Confirm your package builds properly by running
 
         make recipes/<NAME>
 
   (Be sure that the `emacs` on your path is at least version 23, or
-  set `$EMACS` to the location of a suitable binary.)
+  set `$EMACS_COMMAND` to the location of a suitable binary.)
+
+  Alternatively, open the recipe in Emacs and press `C-c C-c` in the
+  recipe buffer: this will also prompt you to install the
+  freshly-built package.
 
 4. Install the file you built by running `package-install-file` from
 within Emacs and specifying the newly built package in the directory
 specified by `package-build-archive-dir` (default: `packages/`
 directory where `package-build` was loaded).
+
+You can optionally run a sandboxed Emacs in which locally-built
+packages will be available for installation along with those already
+in MELPA:
+
+```
+EMACS=/path/to/emacs make sandbox
+```
+
+then `M-x package-list-packages`, install and test as
+appropriate. This is a useful way to discover missing dependencies!
 
 ### Submitting
 
@@ -157,7 +180,7 @@ the following form (`[...]` denotes optional or conditional values),
 
 ```lisp
 (<package-name>
- :fetcher [git|github|bzr|hg|darcs|svn|cvs|wiki]
+ :fetcher [git|github|bzr|hg|darcs|fossil|svn|cvs|wiki]
  [:url "<repo url>"]
  [:repo "github-user/repo-name"]
  [:module "cvs-module"]
@@ -167,11 +190,11 @@ the following form (`[...]` denotes optional or conditional values),
 - `package-name`
 a lisp symbol that has the same name as the package being specified.
 
-- `:fetcher` (one of `git, github, bzr, hg, darcs, svn, cvs, wiki`)
+- `:fetcher` (one of `git, github, bzr, hg, darcs, fossil, svn, cvs, wiki`)
 specifies the type of repository that `:url` points to. Right now
 package-build supports [git][git], [github][github],
 [bazaar (bzr)][bzr], [mercurial (hg)][hg], [subversion (svn)][svn],
-[cvs][cvs], [darcs][darcs], and [Emacs Wiki (wiki)][emacswiki] as
+[cvs][cvs], [darcs][darcs], [fossil][fossil], and [Emacs Wiki (wiki)][emacswiki] as
 possible mechanisms for checking out the repository.
 
     *package-build* uses
@@ -188,26 +211,35 @@ differs from the package name being built.
 
 - `:url`
 specifies the URL of the version control repository. *required for
-the `git`, `bzr`, `hg`, `darcs`, `svn` and `cvs` fetchers.*
+the `git`, `bzr`, `hg`, `darcs`, `fossil`, `svn` and `cvs` fetchers.*
 
 - `:repo` specifies the github repository and is of the form
 `github-user/repo-name`. *required for the `github` fetcher*.
 
 - `:commit`
-specifies the commit or branch of the git repo to checkout. The value
+specifies the commit of the git repo to checkout. The value
 will be passed to `git reset` in a repo where `upstream` is the
 original repository. Can therefore be either a sha, if pointing at a
-specific commit, or a branch (prefixed with "origin/"). Only used by
+specific commit, or a full ref prefixed with "origin/". Only used by
 the `git` and `github` fetchers.
+
+- `:branch`
+specifies the branch of the git repo to use. This is like `:commit`, but
+it adds the "origin/" prefix automatically.
 
 - `:module`
 specifies the module of a CVS repository to check out.  Defaults to to
 `package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
 
-- `:files` [default: `(*.el *.info dir)`]
-optional property specifying the elisp and info files used to build the
+- `:files` optional property specifying the elisp and info files used to build the
 package. Automatically populated by matching all `.el`, `.info` and `dir` files in the
-root of the repository.
+root of the repository and the `doc` directory. Excludes all files in the root directory 
+ending in `test.el` or `tests.el`. See the default value below,
+
+        ("*.el" "*.el.in" "dir"
+         "*.info" "*.texi" "*.texinfo"
+         "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
+         (:exclude ".dir-locals.el" "tests.el" "*-test.el" "*-tests.el"))
 
     This option is necessary when there are multiple packages in the
 repository and thus the package should only be built from a subset of
@@ -217,6 +249,11 @@ to the root of the package.* More complex options are available,
 submit an [Issue](https://github.com/milkypostman/melpa/issues) if the
 specified package requires more complex file specification.
 
+    If the the package merely requires some additional files, for example for
+bundling external dependencies, but is otherwise fine with the defaults, it's
+recommended to use `:defaults` as the very first element of this list, which
+causes the default value shown above to be prepended to the specified file list.
+
 [git]: http://git-scm.com/
 [github]: https://github.com/
 [bzr]: http://bazaar.canonical.com/en/
@@ -224,6 +261,7 @@ specified package requires more complex file specification.
 [svn]: http://subversion.apache.org/
 [cvs]: http://www.nongnu.org/cvs/
 [darcs]: http://darcs.net/
+[fossil]: http://www.fossil-scm.org/
 [emacswiki]: http://www.emacswiki.org/
 
 
@@ -386,7 +424,7 @@ format.
  such as Emacs 24. If you have an older version of Emacs, you can get a
  suitable `package.el` [here](http://bit.ly/pkg-el23).
 
-[melpa]: http://melpa.milkbox.net
+[melpa]: http://melpa.org
 
 
 ## API
@@ -435,3 +473,48 @@ This can be configured using the `package-build-working-dir` variable.
 
 *MELPA* is *Milkypostman's ELPA* or *Milkypostman's Experimental Lisp
  Package Archive* if you're not into the whole brevity thing.
+
+## Stable Packages
+
+MELPA now includes a mechanism to build *stable* versions of packages
+given that the repositories meet the following criteria,
+
+1. Hosted using *git* or *hg*.
+2. Tag names are version strings compatible parseable by the `version-to-list`
+   function, optionally prefixed with `v`, `v.` or `v-`.
+
+To use the stable versions of packages you should use the stable server
+in your `package-archives` list.
+
+```lisp
+(add-to-list 'package-archives
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+```
+
+An online list of available packages can be found at 
+[http://stable.melpa.org](http://stable.melpa.org).
+
+### Stable Version Generation
+
+To have a stable version generated for your package simply tag the repository
+using a naming compatible with `version-to-list`, optionally prefixed with `v`,
+`v.` or `v-`. The repo state of this tag will be used to generate the stable
+package.
+
+### Notes
+
+*Versions for packages on the original MELPA server are based on the date of the last commit and will likely be higher than any version on the stable server.* Keep the following things in mind,
+
+* If you leave the original MELPA server in your `package-archives`
+  then by default you will get the *development* versions of packages
+  and not the stable ones.
+
+* You will probably want to remove all packages and then reinstall
+  them. Any packages you already have installed from MELPA will never
+  get "updated" to the stable version because of the way version
+  numbering is handled.
+
+
+
+  
+

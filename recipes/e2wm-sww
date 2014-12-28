@@ -1,0 +1,2 @@
+(e2wm-sww :repo "aki2o/e2wm-sww"
+          :fetcher github)

@@ -1,3 +1,3 @@
-(rust-mode :repo "mozilla/rust"
+(rust-mode :repo "rust-lang/rust"
            :fetcher github
            :files ("src/etc/emacs/rust-mode.el"))

@@ -1,0 +1,1 @@
+(paradox :repo "Bruce-Connor/paradox" :fetcher github :files ("paradox.el" "paradox-compat.el"))

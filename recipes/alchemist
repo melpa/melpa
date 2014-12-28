@@ -1,0 +1,3 @@
+(alchemist
+ :fetcher github
+ :repo "tonini/alchemist.el")

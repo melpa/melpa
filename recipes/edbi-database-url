@@ -1,0 +1,3 @@
+(edbi-database-url
+ :fetcher github
+ :repo "proofit404/edbi-database-url")

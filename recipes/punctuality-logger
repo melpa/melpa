@@ -1,0 +1,1 @@
+(punctuality-logger :url "http://gitlab.com/elzair/punctuality-logger.git" :fetcher git)

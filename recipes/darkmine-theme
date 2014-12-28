@@ -1,0 +1,3 @@
+(darkmine-theme
+ :repo "pierre-lecocq/darkmine-theme"
+ :fetcher github)

@@ -4,4 +4,5 @@
  :files ("*.el"
          "haskell-mode.texi"
          "NEWS"
+         "snippets"
          "logo.svg"))

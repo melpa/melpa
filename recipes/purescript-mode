@@ -1,0 +1,8 @@
+(purescript-mode
+ :repo "dysinger/purescript-mode"
+ :fetcher github
+ :files ("*.el"
+         "purescript-mode.texi"
+         "NEWS"
+         "snippets"
+         "logo.svg"))

@@ -1,1 +1,1 @@
-(hi2 :fetcher github :repo "errge/hi2")
+(hi2 :fetcher github :repo "nilcons/hi2")

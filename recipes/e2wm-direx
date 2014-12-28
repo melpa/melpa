@@ -1,0 +1,2 @@
+(e2wm-direx :repo "aki2o/e2wm-direx"
+            :fetcher github)

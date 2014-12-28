@@ -1,0 +1,1 @@
+(slime-theme :fetcher github :repo "emacsfodder/emacs-slime-theme")

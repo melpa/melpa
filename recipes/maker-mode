@@ -1,0 +1,2 @@
+(maker-mode :fetcher github
+            :repo "fommil/maker-mode")

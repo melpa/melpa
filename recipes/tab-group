@@ -1,0 +1,1 @@
+(tab-group :repo "tarao/tab-group-el" :fetcher github)

@@ -1,0 +1,1 @@
+(flappymacs :repo "taksatou/flappymacs" :fetcher github)

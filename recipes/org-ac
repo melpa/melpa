@@ -1,0 +1,2 @@
+(org-ac :repo "aki2o/org-ac"
+        :fetcher github)

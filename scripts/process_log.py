@@ -10,6 +10,7 @@ import re
 import sys
 import time
 import tempfile
+import sqlite3
 from operator import or_
 
 LOGFILE = "/home/melpa/log/melpa.access.log"
@@ -57,7 +58,7 @@ def ip_to_number(ip):
     return reduce(or_, ((int(n) << (i*8)) for i, n in enumerate(
         reversed(ip.split('.')))), 0)
 
-def parse_logfile(logfilename, pkg_ip_time):
+def parse_logfile(logfilename, curs):
     """
     """
     if logfilename.endswith("gz"):
@@ -66,7 +67,6 @@ def parse_logfile(logfilename, pkg_ip_time):
         logfile = open(logfilename, 'r')
 
     logre = re.compile(LOGREGEX)
-
     count = 0
 
     for line in logfile:
@@ -82,8 +82,7 @@ def parse_logfile(logfilename, pkg_ip_time):
                               "%d/%b/%Y:%H:%M:%S").timetuple()))
         pkg = match.group('package')
 
-        pkg_ip_time.setdefault(pkg, {}).setdefault(ip, set()).add(dtstamp)
-
+        curs.execute("INSERT OR IGNORE INTO pkg_ip VALUES (?, ?)", (pkg, ip))
         count += 1
 
     return count
@@ -113,26 +112,25 @@ def main():
 
     file(pidfile, 'w').write(pid)
 
-    # load old data file
-    if os.path.exists("download_log.json.gz"):
-        pkg_ip_time = json_load(gzip.open("download_log.json.gz"))
-    else:
-        pkg_ip_time = {}
+    new_db = not os.path.exists("download_log.db")
+    conn = sqlite3.connect("download_log.db")
+    curs = conn.cursor()
+    if new_db:
+        sys.stdout.write("creating database...\n")
+        curs.execute('''CREATE TABLE pkg_ip (package, ip, PRIMARY KEY (package, ip))''')
+        conn.commit()
 
     # parse each parameter
     for logfile in args.logs:
         sys.stdout.write("processing logfile {0}... ".format(logfile))
         sys.stdout.flush()
 
-        count = parse_logfile(logfile, pkg_ip_time)
+        count = parse_logfile(logfile, curs)
         sys.stdout.write("{0}\n".format(count))
-
-    # dump new data file
-    json_dump(pkg_ip_time, gzip.open("download_log.json.gz", 'w'))
+        conn.commit()
 
     # calculate current package totals
-    pkgcount = {p: len(i) for p, i in pkg_ip_time.iteritems()}
-
+    pkgcount = {p: c for p,c in curs.execute("SELECT package, count(ip) FROM pkg_ip GROUP BY 1")}
     json_dump(pkgcount, open("html/download_counts.json", 'w'), indent=1)
 
     os.unlink(pidfile)

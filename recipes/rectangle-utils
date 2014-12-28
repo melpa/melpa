@@ -1,0 +1,1 @@
+(rectangle-utils :fetcher github :repo "thierryvolpiatto/rectangle-utils")

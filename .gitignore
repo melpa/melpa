@@ -1,5 +1,6 @@
 /sync
 /packages/*
+/packages-stable/*
 /working/*
 /epkgs
 **.elc
@@ -14,3 +15,6 @@
 /html/build-status.json
 /download_log.json.gz
 /.ecukes-failing-scenarios
+/sandbox
+*~
+/download_log.db

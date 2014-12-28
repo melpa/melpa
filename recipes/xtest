@@ -1,0 +1,1 @@
+(xtest :fetcher github :repo "promethial/xtest")

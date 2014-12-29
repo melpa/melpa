@@ -1,0 +1,1 @@
+(ibuffer-projectile :fetcher github :repo "purcell/ibuffer-projectile")

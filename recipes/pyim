@@ -1,0 +1,1 @@
+(pyim :fetcher github :repo "tumashu/chinese-pyim" :old-names (chinese-pyim))

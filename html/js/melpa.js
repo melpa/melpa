@@ -179,6 +179,65 @@
   }
 
   //////////////////////////////////////////////////////////////////////////////
+  // Pagination
+  //////////////////////////////////////////////////////////////////////////////
+
+  melpa.paginator = {};
+  melpa.paginator.controller = function(getItemList) {
+    this.pageLength = m.prop(100);
+    this.windowSize = m.prop(7);
+    this.pageNumber = m.prop(1);
+    this.items = getItemList;
+    this.paginatedItems = function() {
+      if (this.pageNumber() !== null) {
+        return this.items().slice(this.pageLength() * (this.pageNumber() - 1),
+                                  this.pageLength() * this.pageNumber());
+      } else {
+        return this.items();
+      }
+    };
+    this.maxPage = function() {
+      return Math.floor(this.items().length / this.pageLength());
+    };
+    this.prevPages = function() {
+      return _.last(_.range(1, this.pageNumber()),
+                    Math.floor((this.windowSize() - 1) / 2));
+    };
+    this.nextPages = function() {
+      return _.first(_.range(this.pageNumber() + 1, this.maxPage()),
+                     this.windowSize() - 1 - this.prevPages().length);
+    };
+  };
+
+  melpa.paginator.view = function(ctrl) {
+    var prevPage = _.last(ctrl.prevPages());
+    var nextPage = _.first(ctrl.nextPages());
+    var pageLinkAttrs = function(n) {
+      if (n)
+        return { onclick: function(){ ctrl.pageNumber(n); } };
+    };
+    var pageLink = function(n) {
+      return m("li", m("a", pageLinkAttrs(n), m("span", n)));
+    };
+    return m("nav",
+             m("ul.pagination", [
+               m("li", { class: (prevPage ? "" : "disabled") },
+                 m("a", pageLinkAttrs(prevPage), [
+                   m("span", {"aria-hidden": "true"}, m.trust("&laquo;")),
+                   m("span.sr-only", "Previous")
+                 ])),
+               ctrl.prevPages().map(pageLink),
+               m("li.active", m("a", m("span", [ctrl.pageNumber(), " ", m("span.sr-only", "(current)")]))),
+               ctrl.nextPages().map(pageLink),
+               m("li", { class: (nextPage ? "" : "disabled") },
+                 m("a", pageLinkAttrs(nextPage), [
+                   m("span", {"aria-hidden": "true"}, m.trust("&raquo;")),
+                   m("span.sr-only", "Next")
+                 ]))
+             ]));
+  };
+
+  //////////////////////////////////////////////////////////////////////////////
   // Package list
   //////////////////////////////////////////////////////////////////////////////
 
@@ -192,8 +251,11 @@
       return this.packageList().matchingPackages(this.filterTerms());
     };
     this.sortedPackages = function() {
-      return this.packageList().sortedPackages(this.sortBy(), this.sortAscending());
-    };
+      var visible = this.matchingPackages();
+      return this.packageList()
+        .sortedPackages(this.sortBy(), this.sortAscending())
+        .filter(function(p) { return visible[p.name]; });
+    }.bind(this);
     this.toggleSort = function(field) {
       if (this.sortBy() == field) {
         this.sortAscending(!this.sortAscending());
@@ -202,10 +264,10 @@
         this.sortBy(field);
       }
     };
+    this.paginatorCtrl = new melpa.paginator.controller(this.sortedPackages);
   };
 
   melpa.packagelist.view = function(ctrl) {
-    var visible = ctrl.matchingPackages();
     var sortToggler = function(field) {
       return function() { return ctrl.toggleSort(field); };
     };
@@ -223,10 +285,12 @@
         ])
       ]),
       m("p", [
-        m("input.form-control[type=search]", {placeholder: "Enter filter terms", autofocus: true,
-                                 value: ctrl.filterTerms(), onkeyup: m.withAttr("value", ctrl.filterTerms)}),
+        m("input.form-control[type=search]", {
+          placeholder: "Enter filter terms", autofocus: true,
+          value: ctrl.filterTerms(), onkeyup: m.withAttr("value", ctrl.filterTerms)
+        }),
         " ",
-        m("span.help-block", ["Showing ", _.keys(visible).length, " matching package(s)"])
+        m("span.help-block", [_.keys(ctrl.matchingPackages()).length, " matching package(s)"])
       ]),
       m("table#package-list.table.table-bordered.table-responsive.table-hover", [
         m("thead", [
@@ -240,7 +304,7 @@
           ])
         ]),
         m("tbody",
-          ctrl.sortedPackages().filter(function(p) { return visible[p.name]; }).map(function(p) {
+          ctrl.paginatorCtrl.paginatedItems().map(function(p) {
             return m("tr", { key: p.name }, [
               m("td", packageLink(p)),
               m("td", packageLink(p, p.description)),
@@ -256,7 +320,8 @@
               m("td", [p.downloads.toLocaleString()])
             ]);
           }))
-      ])
+      ]),
+      melpa.paginator.view(ctrl.paginatorCtrl)
     ]);
   };
 

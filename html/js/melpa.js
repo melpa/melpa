@@ -1,5 +1,5 @@
 /* global window */
-(function(m, document, _, moment, jQuery){
+(function(m, document, _, moment, jQuery, Cookies){
   "use strict";
 
   // TODO Disqus
@@ -264,6 +264,18 @@
         this.sortBy(field);
       }
     };
+    this.wantPagination = function() {
+      return !Cookies.get("nopagination");
+    };
+    this.togglePagination = function() {
+      console.log("toggle " + this.wantPagination());
+      if (this.wantPagination()) {
+        Cookies.set("nopagination", "1");
+      } else {
+        Cookies.expire("nopagination");
+      }
+      console.log("toggled " + Cookies.get("nopagination"));
+    };
     this.paginatorCtrl = new melpa.paginator.controller(this.sortedPackages);
   };
 
@@ -304,7 +316,7 @@
           ])
         ]),
         m("tbody",
-          ctrl.paginatorCtrl.paginatedItems().map(function(p) {
+          (ctrl.wantPagination() ? ctrl.paginatorCtrl.paginatedItems() : ctrl.sortedPackages()).map(function(p) {
             return m("tr", { key: p.name }, [
               m("td", packageLink(p)),
               m("td", packageLink(p, p.description)),
@@ -321,7 +333,11 @@
             ]);
           }))
       ]),
-      melpa.paginator.view(ctrl.paginatorCtrl)
+      (ctrl.wantPagination() ? melpa.paginator.view(ctrl.paginatorCtrl) : null),
+      m("small",
+        m("a", {onclick: ctrl.togglePagination.bind(ctrl)},
+          (ctrl.wantPagination() ? "Disable pagination (may slow down display)" : "Enable pagination")
+         ))
     ]);
   };
 
@@ -550,4 +566,4 @@
     if (window.twttr && window.twttr.widgets) window.twttr.widgets.load();
   }, 100);
 
-})(window.m, window.document, window._, window.moment, window.jQuery);
+})(window.m, window.document, window._, window.moment, window.jQuery, window.Cookies);

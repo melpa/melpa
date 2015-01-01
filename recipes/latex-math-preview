@@ -1,0 +1,4 @@
+(latex-math-preview
+ :fetcher git
+ :url "https://gitorious.org/latex-math-preview/latex-math-preview.git"
+ :files ("latex-math-preview.el"))

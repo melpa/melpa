@@ -239,7 +239,7 @@ ending in `test.el` or `tests.el`. See the default value below,
         ("*.el" "*.el.in" "dir"
          "*.info" "*.texi" "*.texinfo"
          "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
-         (:exclude ".dir-locals.el" "tests.el" "*-test.el" "*-tests.el"))
+         (:exclude ".dir-locals.el" "test.el" "tests.el" "*-test.el" "*-tests.el"))
 
     This option is necessary when there are multiple packages in the
 repository and thus the package should only be built from a subset of

@@ -1,4 +1,4 @@
 (edbi-sqlite
- :fetcher "github"
+ :fetcher github
  :repo "proofit404/edbi-sqlite"
  :old-names (edbi-sqlite3))

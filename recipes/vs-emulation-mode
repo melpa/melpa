@@ -1,1 +1,1 @@
-(vs-emulation-mode :fetcher "github" :repo "Fanael/vs-emulation-mode")
+(vs-emulation-mode :fetcher github :repo "Fanael/vs-emulation-mode")

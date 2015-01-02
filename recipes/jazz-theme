@@ -1,0 +1,2 @@
+(jazz-theme :repo "donderom/jazz-theme"
+            :fetcher github)

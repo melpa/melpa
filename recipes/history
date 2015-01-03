@@ -1,2 +1,5 @@
-(history :repo "boyw165/history" :fetcher github)
+(history
+ :fetcher github
+ :repo "boyw165/history"
+ :files ("*.el" "images" "images/*.xpm" "images/*.png"))
 

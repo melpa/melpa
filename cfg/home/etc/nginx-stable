@@ -84,7 +84,9 @@ http {
 		location = /50x.html {
 			root   /var/www/nginx-default;
 		}
-	
+		location ~ ^/packages/.*\.svg {
+			add_header Cache-Control no-cache;
+		}
 	}
 
 

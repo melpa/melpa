@@ -87,6 +87,9 @@ http {
 		location = /packages/archive-contents {
 			default_type text/plain;
 		}
+		location ~ ^/packages/.*\.el {
+			default_type text/plain;
+		}
 		location ~ ^/packages/.*\.svg {
 			add_header Cache-Control no-cache;
 		}

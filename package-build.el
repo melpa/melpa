@@ -8,7 +8,7 @@
 ;; Created: 2011-09-30
 ;; Version: 0.1
 ;; Keywords: tools
-;; Package-Requires: ((cl-lib "0.2"))
+;; Package-Requires: ((cl-lib "0.5"))
 
 ;; This file is not (yet) part of GNU Emacs.
 ;; However, it is distributed under the same license.
@@ -805,13 +805,28 @@ of the same-named package which is to be kept."
 
 (defun pb/read-recipe (file-name)
   "Return the plist of recipe info for the package called FILE-NAME."
-  (let ((pkg-info (pb/read-from-file file-name)))
-    (if (string= (symbol-name (car pkg-info))
-                 (file-name-nondirectory file-name))
-        pkg-info
-      (error "Recipe '%s' contains mismatched package name '%s'"
-             (file-name-nondirectory file-name)
-             (car pkg-info)))))
+  (let* ((pkg-info (pb/read-from-file file-name))
+         (pkg-name (car pkg-info))
+         (rest (cdr pkg-info)))
+    (cl-assert pkg-name)
+    (cl-assert (symbolp pkg-name))
+    (cl-assert (string= (symbol-name pkg-name) (file-name-nondirectory file-name))
+               "Recipe '%s' contains mismatched package name '%s'"
+               (file-name-nondirectory file-name)
+               (car pkg-info))
+    (cl-assert rest)
+    (let ((fetcher (plist-get rest :fetcher)))
+      (cl-assert fetcher)
+      (cl-assert (symbolp fetcher)))
+    (dolist (key '(:files :old-names))
+      (let ((val (plist-get rest key)))
+        (when val
+          (cl-assert (listp val) nil "%s must be a list but is %S" key val ))))
+    (dolist (key '(:url :repo :module :commit :branch))
+      (let ((val (plist-get rest key)))
+        (when val
+          (cl-assert (stringp val) nil "%s must be a string but is %S" key val ))))
+    pkg-info))
 
 (defun pb/read-recipes ()
   "Return a list of data structures for all recipes in `package-build-recipes-dir'."

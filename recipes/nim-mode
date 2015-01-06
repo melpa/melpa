@@ -1,0 +1,1 @@
+(nim-mode :fetcher github :repo "reactormonk/nim-mode" :old-names (nimrod-mode))

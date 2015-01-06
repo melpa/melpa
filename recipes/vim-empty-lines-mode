@@ -1,0 +1,2 @@
+(vim-empty-lines-mode :url "https://github.com/jmickelin/vim-empty-lines-mode"
+                      :fetcher git)

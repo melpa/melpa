@@ -1,2 +1,1 @@
-(fountain-mode :fetcher github
-               :repo rnkn/fountain-mode)
+(fountain-mode :fetcher github :repo "rnkn/fountain-mode")

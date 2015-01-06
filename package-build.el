@@ -811,6 +811,7 @@ of the same-named package which is to be kept."
     (cl-assert pkg-name)
     (cl-assert (symbolp pkg-name))
     (cl-assert (string= (symbol-name pkg-name) (file-name-nondirectory file-name))
+               nil
                "Recipe '%s' contains mismatched package name '%s'"
                (file-name-nondirectory file-name)
                (car pkg-info))

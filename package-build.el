@@ -804,7 +804,11 @@ of the same-named package which is to be kept."
                  (pb/entry-file-name archive-entry))))
 
 (defun pb/read-recipe (file-name)
-  "Return the plist of recipe info for the package called FILE-NAME."
+  "Return the plist of recipe info for the package called FILE-NAME.
+It performs some basic checks on the recipe to ensure that known keys have
+values of the right types, and raises an error if that is the not the case.
+If unknown keys or invalid combinations of keys are supplied then errors will
+only be caught when an attempt is made to build the recipe."
   (let* ((pkg-info (pb/read-from-file file-name))
          (pkg-name (car pkg-info))
          (rest (cdr pkg-info)))

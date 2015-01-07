@@ -805,10 +805,11 @@ of the same-named package which is to be kept."
 
 (defun pb/read-recipe (file-name)
   "Return the plist of recipe info for the package called FILE-NAME.
-It performs some basic checks on the recipe to ensure that known keys have
-values of the right types, and raises an error if that is the not the case.
-If unknown keys or invalid combinations of keys are supplied then errors will
-only be caught when an attempt is made to build the recipe."
+It performs some basic checks on the recipe to ensure that known
+keys have values of the right types, and raises an error if that
+is the not the case.  If invalid combinations of keys are
+supplied then errors will only be caught when an attempt is made
+to build the recipe."
   (let* ((pkg-info (pb/read-from-file file-name))
          (pkg-name (car pkg-info))
          (rest (cdr pkg-info)))
@@ -820,17 +821,26 @@ only be caught when an attempt is made to build the recipe."
                (file-name-nondirectory file-name)
                (car pkg-info))
     (cl-assert rest)
-    (let ((fetcher (plist-get rest :fetcher)))
-      (cl-assert fetcher)
-      (cl-assert (symbolp fetcher)))
-    (dolist (key '(:files :old-names))
-      (let ((val (plist-get rest key)))
-        (when val
-          (cl-assert (listp val) nil "%s must be a list but is %S" key val ))))
-    (dolist (key '(:url :repo :module :commit :branch))
-      (let ((val (plist-get rest key)))
-        (when val
-          (cl-assert (stringp val) nil "%s must be a string but is %S" key val ))))
+    (let* ((symbol-keys '(:fetcher))
+           (string-keys '(:url :repo :module :commit :branch))
+           (list-keys '(:files :old-names))
+           (all-keys (append symbol-keys string-keys list-keys)))
+      (dolist (thing rest)
+        (when (keywordp thing)
+          (cl-assert (memq thing all-keys) nil "Unknown keyword %S" thing)))
+      (cl-assert (plist-get rest :fetcher) nil ":fetcher is missing")
+      (dolist (key symbol-keys)
+        (let ((val (plist-get rest key)))
+          (when val
+            (cl-assert (symbolp val) nil "%s must be a list but is %S" key val))))
+      (dolist (key list-keys)
+        (let ((val (plist-get rest key)))
+          (when val
+            (cl-assert (listp val) nil "%s must be a list but is %S" key val ))))
+      (dolist (key string-keys)
+        (let ((val (plist-get rest key)))
+          (when val
+            (cl-assert (stringp val) nil "%s must be a string but is %S" key val )))))
     pkg-info))
 
 (defun pb/read-recipes ()

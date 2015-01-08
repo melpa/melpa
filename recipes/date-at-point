@@ -1,0 +1,1 @@
+(date-at-point :repo "alezost/date-at-point.el" :fetcher github)

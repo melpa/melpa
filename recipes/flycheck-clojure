@@ -1,0 +1,1 @@
+(flycheck-clojure :fetcher github :repo "clojure-emacs/squiggly-clojure")

@@ -1,1 +1,0 @@
-(org-impress-js :fetcher github :repo "kinjo/org-impress-js.el" :files ("*.el" "resources"))

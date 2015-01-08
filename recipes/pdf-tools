@@ -1,0 +1,10 @@
+(pdf-tools :fetcher github
+           :repo "politza/pdf-tools"
+           :files ("lisp/*.el"
+                   "README"
+                   ("server"
+                    "Makefile.am"
+                    "autogen.sh"
+                    "configure.ac"
+                    ("tests" "tests/Makefile.am")
+                    ("src" "src/*"))))

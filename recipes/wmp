@@ -1,0 +1,3 @@
+(wmp
+ :fetcher github
+ :repo "dme/wmp.el")

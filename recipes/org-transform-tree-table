@@ -1,0 +1,3 @@
+(org-transform-tree-table
+ :repo "jplindstrom/emacs-org-transform-tree-table"
+ :fetcher github)

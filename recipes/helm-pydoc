@@ -1,4 +1,4 @@
 (helm-pydoc
- :fetcher "github"
+ :fetcher github
  :repo "syohex/emacs-helm-pydoc"
  :files ("*.el" "*.py"))

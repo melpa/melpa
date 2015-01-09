@@ -8,7 +8,7 @@
 ;; Created: 2011-09-30
 ;; Version: 0.1
 ;; Keywords: tools
-;; Package-Requires: ((cl-lib "0.2"))
+;; Package-Requires: ((cl-lib "0.5"))
 
 ;; This file is not (yet) part of GNU Emacs.
 ;; However, it is distributed under the same license.
@@ -124,7 +124,7 @@ function for access to this function")
   '("*.el" "*.el.in" "dir"
     "*.info" "*.texi" "*.texinfo"
     "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
-    (:exclude ".dir-locals.el" "tests.el" "*-test.el" "*-tests.el"))
+    (:exclude ".dir-locals.el" "test.el" "tests.el" "*-test.el" "*-tests.el"))
   "Default value for :files attribute in recipes.")
 
 (defun pb/message (format-string &rest args)
@@ -236,10 +236,10 @@ the same arguments.
 Returns a last-modification timestamp for the :files listed in
 CONFIG, if any, or `package-build-default-files-spec' otherwise."
   (let ((repo-type (plist-get config :fetcher)))
-    (pb/message "Fetcher: %s" repo-type)
+    (pb/message "Fetcher: %s" (symbol-name repo-type))
     (unless (eq 'wiki repo-type)
       (pb/message "Source: %s\n" (or (plist-get config :repo) (plist-get config :url))))
-    (funcall (intern (format "pb/checkout-%s" repo-type))
+    (funcall (intern (format "pb/checkout-%s" (symbol-name repo-type)))
              package-name config (file-name-as-directory working-dir))))
 
 (defvar pb/last-wiki-fetch-time 0
@@ -264,6 +264,28 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
            (progn ,@body)
          (setq pb/last-wiki-fetch-time (float-time))))))
 
+(require 'mm-decode)
+(defun pb/url-copy-file (url newname &optional ok-if-already-exists)
+  "Copy URL to NEWNAME.  Both args must be strings.
+Like `url-copy-file', but it produces an error if the http response is not 200.
+Signals a `file-already-exists' error if file NEWNAME already exists,
+unless a third argument OK-IF-ALREADY-EXISTS is supplied and non-nil.
+A number as third arg means request confirmation if NEWNAME already exists."
+  (if (and (file-exists-p newname)
+           (not ok-if-already-exists))
+      (error "Opening output file: File already exists, %s" newname))
+  (let ((buffer (url-retrieve-synchronously url))
+        (handle nil))
+    (if (not buffer)
+        (error "Opening input file: No such file or directory, %s" url))
+    (with-current-buffer buffer
+      (unless (= 200 url-http-response-status)
+        (error "HTTP error %s fetching %s" url-http-response-status url))
+      (setq handle (mm-dissect-buffer t)))
+    (mm-save-part-to-file handle newname)
+    (kill-buffer buffer)
+    (mm-destroy-parts handle)))
+
 (defun pb/grab-wiki-file (filename)
   "Download FILENAME from emacswiki, returning its last-modified time."
   (let* ((download-url
@@ -271,7 +293,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
          (wiki-url
           (format "http://www.emacswiki.org/emacs/%s" filename)))
     (pb/with-wiki-rate-limit
-     (url-copy-file download-url filename t))
+     (pb/url-copy-file download-url filename t))
     (when (zerop (nth 7 (file-attributes filename)))
       (error "Wiki file %s was empty - has it been removed?" filename))
     ;; The Last-Modified response header for the download is actually
@@ -667,7 +689,8 @@ Optionally PRETTY-PRINT the data."
 (defun pb/update-or-insert-version (version)
   "Ensure current buffer has a \"Version: VERSION\" header."
   (goto-char (point-min))
-  (if (re-search-forward "^;;;* *Version: *" nil t)
+  (if (let ((case-fold-search t))
+        (re-search-forward "^;+* *Version *: *" nil t))
       (progn
         (move-beginning-of-line nil)
         (search-forward "V" nil t)
@@ -781,14 +804,44 @@ of the same-named package which is to be kept."
                  (pb/entry-file-name archive-entry))))
 
 (defun pb/read-recipe (file-name)
-  "Return the plist of recipe info for the package called FILE-NAME."
-  (let ((pkg-info (pb/read-from-file file-name)))
-    (if (string= (symbol-name (car pkg-info))
-                 (file-name-nondirectory file-name))
-        pkg-info
-      (error "Recipe '%s' contains mismatched package name '%s'"
-             (file-name-nondirectory file-name)
-             (car pkg-info)))))
+  "Return the plist of recipe info for the package called FILE-NAME.
+It performs some basic checks on the recipe to ensure that known
+keys have values of the right types, and raises an error if that
+is the not the case.  If invalid combinations of keys are
+supplied then errors will only be caught when an attempt is made
+to build the recipe."
+  (let* ((pkg-info (pb/read-from-file file-name))
+         (pkg-name (car pkg-info))
+         (rest (cdr pkg-info)))
+    (cl-assert pkg-name)
+    (cl-assert (symbolp pkg-name))
+    (cl-assert (string= (symbol-name pkg-name) (file-name-nondirectory file-name))
+               nil
+               "Recipe '%s' contains mismatched package name '%s'"
+               (file-name-nondirectory file-name)
+               (car pkg-info))
+    (cl-assert rest)
+    (let* ((symbol-keys '(:fetcher))
+           (string-keys '(:url :repo :module :commit :branch))
+           (list-keys '(:files :old-names))
+           (all-keys (append symbol-keys string-keys list-keys)))
+      (dolist (thing rest)
+        (when (keywordp thing)
+          (cl-assert (memq thing all-keys) nil "Unknown keyword %S" thing)))
+      (cl-assert (plist-get rest :fetcher) nil ":fetcher is missing")
+      (dolist (key symbol-keys)
+        (let ((val (plist-get rest key)))
+          (when val
+            (cl-assert (symbolp val) nil "%s must be a list but is %S" key val))))
+      (dolist (key list-keys)
+        (let ((val (plist-get rest key)))
+          (when val
+            (cl-assert (listp val) nil "%s must be a list but is %S" key val ))))
+      (dolist (key string-keys)
+        (let ((val (plist-get rest key)))
+          (when val
+            (cl-assert (stringp val) nil "%s must be a string but is %S" key val )))))
+    pkg-info))
 
 (defun pb/read-recipes ()
   "Return a list of data structures for all recipes in `package-build-recipes-dir'."
@@ -848,7 +901,14 @@ for ALLOW-EMPTY to prevent this error."
 
 (defun pb/config-file-list (config)
   "Get the :files spec from CONFIG, or return `package-build-default-files-spec'."
-  (or (plist-get config :files) package-build-default-files-spec))
+  (let ((file-list (plist-get config :files)))
+    (cond
+     ((null file-list)
+      package-build-default-files-spec)
+     ((eq :defaults (car file-list))
+      (append package-build-default-files-spec (cdr file-list)))
+     (t
+      file-list))))
 
 (defun pb/expand-source-file-list (dir config)
   "Shorthand way to expand paths in DIR for source files listed in CONFIG."
@@ -1116,7 +1176,7 @@ Returns the archive entry for the package."
 ;; Note also that it would be straightforward to generate the SVG ourselves, which would
 ;; save the network overhead.
 (defun pb/write-melpa-badge-image (package-name version target-dir)
-  (url-copy-file
+  (pb/url-copy-file
    (concat "http://img.shields.io/badge/"
            (if package-build-stable "melpa stable" "melpa")
            "-"

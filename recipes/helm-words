@@ -1,0 +1,2 @@
+(helm-words :repo "pronobis/helm-words"
+            :fetcher github)

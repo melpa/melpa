@@ -99,6 +99,9 @@ Because we care about the quality of packages that are part of MELPA
 we review all submissions. The following steps can help us with this
 process and expedite the recipe review process,
 
+* Use [flycheck-package](https://github.com/purcell/flycheck-package)
+  to help you identify common errors in your package metadata.
+
 * Include the following information in the pull request:
 
     * A brief summary of what the package does.
@@ -236,7 +239,7 @@ ending in `test.el` or `tests.el`. See the default value below,
         ("*.el" "*.el.in" "dir"
          "*.info" "*.texi" "*.texinfo"
          "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
-         (:exclude ".dir-locals.el" "tests.el" "*-test.el" "*-tests.el"))
+         (:exclude ".dir-locals.el" "test.el" "tests.el" "*-test.el" "*-tests.el"))
 
     This option is necessary when there are multiple packages in the
 repository and thus the package should only be built from a subset of
@@ -245,6 +248,11 @@ packaged. *Any file specified at any path in the repository is copied
 to the root of the package.* More complex options are available,
 submit an [Issue](https://github.com/milkypostman/melpa/issues) if the
 specified package requires more complex file specification.
+
+    If the the package merely requires some additional files, for example for
+bundling external dependencies, but is otherwise fine with the defaults, it's
+recommended to use `:defaults` as the very first element of this list, which
+causes the default value shown above to be prepended to the specified file list.
 
 [git]: http://git-scm.com/
 [github]: https://github.com/

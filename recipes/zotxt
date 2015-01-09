@@ -1,3 +1,0 @@
-(zotxt :fetcher hg
-       :url "https://bitbucket.org/egh/zotxt-emacs"
-       :files ("elisp/*.el"))

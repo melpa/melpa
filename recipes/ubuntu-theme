@@ -1,0 +1,1 @@
+(ubuntu-theme :fetcher github :repo "rocher/ubuntu-theme" :files ("ubuntu-theme.el"))

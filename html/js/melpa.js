@@ -6,7 +6,6 @@
   // TODO Show compatible emacs versions for any package
   // TODO Google Analytics http://stackoverflow.com/questions/10713708/tracking-google-analytics-page-views-with-angular-js
   // TODO D3 visualisation for deps
-  // TODO Fix json encoding of versions
   // TODO Link to specific github branch
   // TODO Show recent github events on package pages where applicable
   // TODO Voting / starring

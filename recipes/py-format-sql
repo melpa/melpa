@@ -1,0 +1,3 @@
+(py-format-sql
+ :repo "paetzke/py-format-sql.el"
+ :fetcher github)

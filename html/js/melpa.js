@@ -183,7 +183,7 @@
 
   melpa.paginator = {};
   melpa.paginator.controller = function(getItemList) {
-    this.pageLength = m.prop(100);
+    this.pageLength = m.prop(50);
     this.windowSize = m.prop(7);
     this.pageNumber = m.prop(1);
     this.items = getItemList;

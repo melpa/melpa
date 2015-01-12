@@ -6,7 +6,6 @@
   // TODO Show compatible emacs versions for any package
   // TODO Google Analytics http://stackoverflow.com/questions/10713708/tracking-google-analytics-page-views-with-angular-js
   // TODO D3 visualisation for deps
-  // TODO Link to specific github branch
   // TODO Show recent github events on package pages where applicable
   // TODO Voting / starring
 
@@ -115,7 +114,12 @@
 
     var calculateSourceURL = function(name, recipe) {
       if (recipe.fetcher == "github") {
-        return (/\//.test(recipe.repo) ? "https://github.com/" : "https://gist.github.com/") + recipe.repo;
+        if (/\//.test(recipe.repo)) {
+          return "https://github.com/" + recipe.repo +
+            (recipe.branch ? "/tree/" + recipe.branch : "");
+        } else {
+          return "https://gist.github.com/" + recipe.repo;
+        }
       } else if (recipe.fetcher == "wiki" && !recipe.files) {
         return "http://www.emacswiki.org/emacs/" + name + ".el";
       } else if (recipe.url) {

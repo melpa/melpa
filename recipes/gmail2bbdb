@@ -1,0 +1,4 @@
+(gmail2bbdb :fetcher github
+             :repo "redguardtoo/gmail2bbdb"
+             :files ("gmail2bbdb.el"))
+

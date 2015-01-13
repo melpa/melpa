@@ -541,7 +541,8 @@
         ]),
         m(".col-md-4", [
           melpa.buildstatus.view(ctrl.buildstatus),
-          m.trust('<a class="twitter-timeline" data-dnt="true" data-related="milkypostman,sanityinc" href="https://twitter.com/melpa_emacs" data-widget-id="311867756586864640">Tweets by @melpa_emacs</a>')
+          m.trust('<a class="twitter-timeline" data-dnt="true" data-related="milkypostman,sanityinc" href="https://twitter.com/melpa_emacs" data-widget-id="311867756586864640">Tweets by @melpa_emacs</a>'),
+          m('script', {src: "http://platform.twitter.com/widgets.js", type: "text/javascript"})
         ])
       ]),
       melpa.packagelist.view(ctrl.packagelist)
@@ -560,13 +561,4 @@
     "/getting-started": melpa.gettingstarted,
     "/:package": melpa.packagedetails
   });
-
-
-  //////////////////////////////////////////////////////////////////////////////
-  // Lazily initialise twitter widgets as they appear
-  //////////////////////////////////////////////////////////////////////////////
-  window.setInterval(function() {
-    if (window.twttr && window.twttr.widgets) window.twttr.widgets.load();
-  }, 100);
-
 })(window.m, window.document, window._, window.moment, window.jQuery, window.Cookies);

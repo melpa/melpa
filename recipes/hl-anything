@@ -1,2 +1,5 @@
-(hl-anything :repo "boyw165/hl-anything" :fetcher github)
+(hl-anything
+ :fetcher github
+ :repo "boyw165/hl-anything"
+ :files (:defaults ("images" "images/*.xpm" "images/*.png")))
 

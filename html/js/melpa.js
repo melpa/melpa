@@ -441,7 +441,7 @@
             m("dt", "Org"),
             m("dd", m("pre", '[[' + fullURL + '][file:' + badgeURL + ']]'))
           ])
-      ]))
+        ]))
     ]);
   };
 
@@ -455,7 +455,7 @@
     this.buildCompletionTime = m.request({method: 'GET', url: "/build-status.json"})
       .then(function(status){
         return new Date(status.completed * 1000);
-    });
+      });
   };
   melpa.buildstatus.view = function(ctrl) {
     return m(".alert.alert-success", [
@@ -497,7 +497,7 @@
 
   melpa.staticpage = function(partialPath) {
     this.controller = function() {
-    this.content = m.prop('');
+      this.content = m.prop('');
       m.request({method: "GET", url: partialPath,
                  deserialize: function(v){return v;}
                 }).then(this.content);

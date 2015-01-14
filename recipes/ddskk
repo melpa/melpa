@@ -2,5 +2,5 @@
  :repo "skk-dev/ddskk"
  :fetcher github
  :old-names (skk)
- :files ("ccc.el" "context-skk.el" "ddskk*.el" "skk*.el" "doc/skk.texi" "etc/skk.xpm"
+ :files ("context-skk.el" "ddskk*.el" "skk*.el" "doc/skk.texi" "etc/skk.xpm"
          (:exclude "skk-xemacs.el")))

@@ -55,18 +55,6 @@
                               'length').reverse();
       return prefixes.length > 0 ? savedSearches[prefixes[0]] : packages;
     }
-    this.sortedPackages = function(sortBy, sortAscending) {
-      var sortKey = sortBy + "-" + sortAscending;
-      if (this.packages.sortKey === sortKey) return this.packages;
-      if (this.packages.sortKey === sortBy + "-" + !sortAscending) {
-        this.packages = this.packages.reverse();
-      } else {
-        var sorted = _.sortBy(this.packages, sortBy);
-        this.packages = sortAscending ? sorted : sorted.reverse();
-      }
-      this.packages.sortKey = sortKey;
-      return this.packages;
-    };
     this.matchingPackages = function(terms) {
       var t = terms.trim().toLowerCase();
       var matching = savedSearches[t];
@@ -74,9 +62,7 @@
         matching = savedSearches[t] = _.filter(preFilteredPackages(t),
                                                function(p) { return p.matchesTerm(t); });
       }
-      var visible = {};
-      _.each(matching, function(p){ visible[p.name] = true; });
-      return visible;
+      return matching;
     };
     var packagesByName = _.reduce(packages, function(packagesByName, p) {
       packagesByName[p.name] = p;
@@ -254,10 +240,10 @@
       return this.packageList().matchingPackages(this.filterTerms());
     };
     this.sortedPackages = function() {
-      var visible = this.matchingPackages();
-      return this.packageList()
-        .sortedPackages(this.sortBy(), this.sortAscending())
-        .filter(function(p) { return visible[p.name]; });
+      var pkgs = _.sortBy(this.matchingPackages(), this.sortBy());
+      if (!this.sortAscending())
+        pkgs = pkgs.reverse();
+      return pkgs;
     }.bind(this);
     this.toggleSort = function(field) {
       if (this.sortBy() == field) {
@@ -303,7 +289,7 @@
           value: ctrl.filterTerms(), onkeyup: m.withAttr("value", ctrl.filterTerms)
         }),
         " ",
-        m("span.help-block", [_.keys(ctrl.matchingPackages()).length, " matching package(s)"])
+        m("span.help-block", [ctrl.matchingPackages().length, " matching package(s)"])
       ]),
       m("table#package-list.table.table-bordered.table-responsive.table-hover", [
         m("thead", [

@@ -100,13 +100,13 @@
 
     var calculateSourceURL = function(name, recipe) {
       if (recipe.fetcher == "github") {
-        if (/\//.test(recipe.repo)) {
+        if (recipe.repo.indexOf("/") != -1) {
           return "https://github.com/" + recipe.repo +
             (recipe.branch ? "/tree/" + recipe.branch : "");
         } else {
           return "https://gist.github.com/" + recipe.repo;
         }
-      } else if (recipe.fetcher == "wiki" && !recipe.files) {
+      } else if (recipe.fetcher == "wiki") {
         return "http://www.emacswiki.org/emacs/" + name + ".el";
       } else if (recipe.url) {
         var urlMatch = function(re, prefix) {
@@ -138,7 +138,7 @@
         dependencies: deps,
         description: built.desc.replace(/\s*\[((?:source: )?\w+)\]$/, ""),
         source: recipe.fetcher,
-        downloads: _.reduce(oldNames.concat(name), function(sum, n) { return sum + (downloads[n] || 0); }, 0),
+        downloads: oldNames.concat(name).reduce(function(sum, n) { return sum + (downloads[n] || 0); }, 0),
         fetcher: recipe.fetcher,
         recipeURL: "https://github.com/milkypostman/melpa/blob/master/recipes/" + name,
         packageURL: "packages/" + name + "-" + version + "." + (built.type == "single" ? "el" : "tar"),
@@ -202,8 +202,7 @@
     var prevPage = _.last(ctrl.prevPages());
     var nextPage = _.first(ctrl.nextPages());
     var pageLinkAttrs = function(n) {
-      if (n)
-        return { onclick: function(){ ctrl.pageNumber(n); } };
+      return n ? { onclick: function(){ ctrl.pageNumber(n); } } : {};
     };
     var pageLink = function(n) {
       return m("li", m("a", pageLinkAttrs(n), m("span", n)));

@@ -61,7 +61,7 @@
       if (this.packages.sortKey === sortBy + "-" + !sortAscending) {
         this.packages = this.packages.reverse();
       } else {
-        var sorted = _.sortBy(this.packages, function(p) { return p[sortBy]; });
+        var sorted = _.sortBy(this.packages, sortBy);
         this.packages = sortAscending ? sorted : sorted.reverse();
       }
       this.packages.sortKey = sortKey;
@@ -78,13 +78,13 @@
       _.each(matching, function(p){ visible[p.name] = true; });
       return visible;
     };
-    var packagesByName = {};
-    _.each(packages, function(p) {
+    var packagesByName = _.reduce(packages, function(packagesByName, p) {
       packagesByName[p.name] = p;
       if(p.oldNames) {
         _.each(p.oldNames, function(n) { packagesByName[n] = p; });
       }
-    });
+      return packagesByName;
+    }, {});
     this.packageWithName = function(name) {
       return packagesByName[name];
     };
@@ -271,13 +271,11 @@
       return !Cookies.get("nopagination");
     };
     this.togglePagination = function() {
-      console.log("toggle " + this.wantPagination());
       if (this.wantPagination()) {
         Cookies.set("nopagination", "1");
       } else {
         Cookies.expire("nopagination");
       }
-      console.log("toggled " + Cookies.get("nopagination"));
     };
     this.paginatorCtrl = new melpa.paginator.controller(this.sortedPackages);
   };
@@ -324,14 +322,10 @@
               m("td", packageLink(p)),
               m("td", packageLink(p, p.description)),
               m("td.version", m("a", {href: p.packageURL}, [p.version, " ", glyphicon('download')])),
-              m("td.recipe", [
-                m("a", {href: p.recipeURL}, [
-                  glyphicon('cutlery')
-                ])
-              ]),
-              m("td.source", [
-                p.sourceURL ? m("a", {href: p.sourceURL}, [p.source]) : p.source
-              ]),
+              m("td.recipe",
+                m("a", {href: p.recipeURL}, glyphicon('cutlery'))),
+              m("td.source",
+                p.sourceURL ? m("a", {href: p.sourceURL}, [p.source]) : p.source),
               m("td", [p.downloads.toLocaleString()])
             ]);
           }))
@@ -350,25 +344,27 @@
 
   melpa.packagedetails = {};
   melpa.packagedetails.controller = function() {
-    this.packageName = m.route.param("package");
-    this.package = m.prop();
-    this.readme = m.prop('No description available.');
-    this.neededBy = m.prop([]);
-    this.downloadsPercentile = m.prop(0);
-    this.archivename = new melpa.archivename.controller();
-
+    var ctrl = {
+      packageName: m.route.param("package"),
+      package: m.prop(),
+      readme: m.prop('No description available.'),
+      neededBy: m.prop([]),
+      downloadsPercentile: m.prop(0),
+      archivename: new melpa.archivename.controller()
+    };
     melpa.packageList.then(function(packageList) {
-      var p = packageList.packageWithName(this.packageName);
+      var p = packageList.packageWithName(ctrl.packageName);
       if (!p) return;
-      this.package(p);
-      this.downloadsPercentile(packageList.downloadsPercentileForPackage(p));
-      this.neededBy(_.sortBy(packageList.dependenciesOnPackageName(this.packageName), 'name'));
-      this.packageWithName = packageList.packageWithName;
+      ctrl.package(p);
+      ctrl.downloadsPercentile(packageList.downloadsPercentileForPackage(p));
+      ctrl.neededBy(_.sortBy(packageList.dependenciesOnPackageName(ctrl.packageName), 'name'));
+      ctrl.packageWithName = packageList.packageWithName;
       m.request({method: "GET",
                  url: p.readmeURL,
-                 deserialize: function(v){return v;}
-                }).then(this.readme);
-    }.bind(this));
+                 deserialize: _.identity
+                }).then(ctrl.readme);
+    });
+    return ctrl;
   };
 
   melpa.packagedetails.view = function(ctrl) {
@@ -387,11 +383,7 @@
     var fullURL = melpa.rootURL + packagePath(pkg);
 
     return m("section", [
-      m("h1", [
-        pkg.name,
-        " ",
-        m("small", pkg.version)
-      ]),
+      m("h1", [pkg.name, " ", m("small", pkg.version)]),
       m("p.lead", pkg.description),
       m("p", [
         m("a.btn.btn-default", {href: pkg.recipeURL}, [glyphicon('cutlery'), " Recipe"]), ' ',
@@ -410,7 +402,7 @@
             ]),
             m("dt", "Source"),
             m("dd", [
-              pkg.sourceURL ? m("a", {href: pkg.sourceURL}, pkg.source) : m("span", pkg.source)
+              pkg.sourceURL ? m("a", {href: pkg.sourceURL}, pkg.source) : pkg.source
             ]),
             m("dt", "Dependencies"),
             m("dd", intersperse(_.sortBy(pkg.dependencies, 'name').map(this.depLink), " / ")),
@@ -419,8 +411,6 @@
             pkg.oldNames.length > 0 ? [
               m("dt", "Renamed from:"),
               m("dd", intersperse(pkg.oldNames, ', '))
-              // m("dt", "Old name needed by:"),
-              // m("dd", "TODO")
             ] : []
           ])
         ])
@@ -469,7 +459,7 @@
   // Changing the appearance of the MELPA Stable page
   //////////////////////////////////////////////////////////////////////////////
 
-  melpa.stable = m.prop(window.location.host === 'melpa-stable.milkbox.net' || window.location.host === 'stable.melpa.org');
+  melpa.stable = m.prop(window.location.host === 'stable.melpa.org');
   melpa.archivename = {};
   melpa.archivename.controller = function() {
     this.archiveName = function() {

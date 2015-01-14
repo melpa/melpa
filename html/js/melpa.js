@@ -49,9 +49,7 @@
     this.totalPackages = m.prop(packages.length);
     var savedSearches = {};
     function preFilteredPackages(term) {
-      var prefixes = _.sortBy(_.filter(_.keys(savedSearches),
-                                       function(k) { return term.indexOf(k) === 0; }),
-                              'length').reverse();
+      var prefixes = _(savedSearches).keys().filter(function(k) { return term.indexOf(k) === 0; }).sortBy('length').valueOf().reverse();
       return prefixes.length > 0 ? savedSearches[prefixes[0]] : packages;
     }
     this.matchingPackages = function(terms) {
@@ -63,10 +61,10 @@
       }
       return matching;
     };
-    var packagesByName = _.reduce(packages, function(packagesByName, p) {
+    var packagesByName = packages.reduce(function(packagesByName, p) {
       packagesByName[p.name] = p;
       if(p.oldNames) {
-        _.each(p.oldNames, function(n) { packagesByName[n] = p; });
+        _(p.oldNames).each(function(n) { packagesByName[n] = p; });
       }
       return packagesByName;
     }, {});
@@ -309,7 +307,7 @@
               m("td.recipe",
                 m("a", {href: p.recipeURL}, glyphicon('cutlery'))),
               m("td.source",
-                p.sourceURL ? m("a", {href: p.sourceURL}, [p.source]) : p.source),
+                p.sourceURL ? m("a", {href: p.sourceURL}, p.source) : p.source),
               m("td", [p.downloads.toLocaleString()])
             ]);
           }))
@@ -456,7 +454,7 @@
 
   document.addEventListener("DOMContentLoaded", function() {
     document.title = (new melpa.archivename.controller()).archiveName();
-    _.map(document.getElementsByClassName('archive-name'), function (e) {
+    _.each(document.getElementsByClassName('archive-name'), function (e) {
       // jshint unused: false
       m.module(e, melpa.archivename);
     });

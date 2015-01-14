@@ -1,5 +1,5 @@
 /* global window */
-(function(m, document, _, moment, jQuery, Cookies){
+(function(m, document, _, moment, Cookies){
   "use strict";
 
   // TODO Disqus
@@ -455,14 +455,14 @@
     return m("span", ctrl.archiveName());
   };
 
-  jQuery(window).load(function() {
+  document.addEventListener("DOMContentLoaded", function() {
     document.title = (new melpa.archivename.controller()).archiveName();
-    jQuery(".archive-name").each(function(i, e) {
+    _.map(document.getElementsByClassName('archive-name'), function (e) {
       // jshint unused: false
       m.module(e, melpa.archivename);
     });
     if (melpa.stable()) {
-      jQuery("html").addClass("stable");
+      document.getElementsByTagName("html")[0].className += " stable";
     }
   });
 
@@ -536,4 +536,4 @@
     "/getting-started": melpa.gettingstarted,
     "/:package": melpa.packagedetails
   });
-})(window.m, window.document, window._, window.moment, window.jQuery, window.Cookies);
+})(window.m, window.document, window._, window.moment, window.Cookies);

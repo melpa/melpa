@@ -33,7 +33,7 @@
      "downloads", "fetcher", "recipeURL", "packageURL", "sourceURL", "oldNames"].map(function(p) {
       this[p] = data[p];
     }.bind(this));
-    this._searchText = _([data.name, data.description, data.version])
+    this._searchText = _([data.name, data.description, data.version].concat(data.searchExtra || []))
       .compact().valueOf().join(' ').toLowerCase();
     this.readmeURL = "/packages/" + data.name + "-readme.txt";
     this.badgeURL = "/packages/" + data.name + "-badge.svg";
@@ -140,7 +140,8 @@
         recipeURL: "https://github.com/milkypostman/melpa/blob/master/recipes/" + name,
         packageURL: "packages/" + name + "-" + version + "." + (built.type == "single" ? "el" : "tar"),
         sourceURL: calculateSourceURL(name, recipe),
-        oldNames: oldNames
+        oldNames: oldNames,
+        searchExtra: [recipe.repo]
       }));
       return pkgs;
     }, []));

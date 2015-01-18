@@ -1,0 +1,3 @@
+(therapy :fetcher github
+         :repo "abingham/therapy"
+         :files ("therapy.el"))

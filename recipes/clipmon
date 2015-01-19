@@ -1,0 +1,3 @@
+(clipmon :fetcher github
+         :repo "bburns/clipmon"
+         :files ("clipmon.el" "clipmon.wav"))

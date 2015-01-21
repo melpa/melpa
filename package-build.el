@@ -87,6 +87,16 @@ This must be a version which supports the \"-k\" option."
   :group 'package-build
   :type '(file :must-match t))
 
+(defcustom package-build-timeout-secs 600
+  "Wait this many seconds for external processes to complete.
+
+If an external process takes longer than
+`package-build-timeout-secs' seconds to complete, the process is
+terminated. The `package-build-timeout-secs' variable will only
+have an effect if `package-build-timeout-executable' is not nil."
+  :group 'package-build
+  :type 'number)
+
 (defcustom package-build-tar-executable
   (or (executable-find "gtar")
       (executable-find "tar"))
@@ -209,8 +219,9 @@ be identical."
   "In DIR (or `default-directory' if unset) run COMMAND with ARGS.
 Output is written to the current buffer."
   (let* ((default-directory (file-name-as-directory (or dir default-directory)))
+         (timeout (number-to-string package-build-timeout-secs))
          (argv (if package-build-timeout-executable
-                   (append (list package-build-timeout-executable "-k" "60" "600" command) args)
+                   (append (list package-build-timeout-executable "-k" "60" timeout command) args)
                  (cons command args))))
     (unless (file-directory-p default-directory)
       (error "Can't run process in non-existent directory: %s" default-directory))

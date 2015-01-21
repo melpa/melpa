@@ -1,4 +1,1 @@
-(yari :repo "hron/yari.el"
-      :fetcher github
-      :files ("yari.el"))
-
+(yari :repo "hron/yari.el" :fetcher github)

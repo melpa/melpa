@@ -2,7 +2,6 @@
  :repo "haskell/haskell-mode"
  :fetcher github
  :files (:defaults
-         "haskell-mode.texi"
          "NEWS"
          "snippets"
          "logo.svg"))

@@ -1087,7 +1087,8 @@ Returns the archive entry for the package."
     (unless (equal file-specs package-build-default-files-spec)
       (when (equal files (package-build-expand-file-specs
                           source-dir package-build-default-files-spec nil t))
-        (pb/message "Note: this :files spec is equivalent to the default.")))
+        (pb/message "Note: %s :files spec is equivalent to the default."
+                    package-name)))
     (cond
      ((not version)
       (error "Unable to check out repository for %s" package-name))

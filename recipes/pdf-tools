@@ -4,4 +4,5 @@
  :files ("lisp/*.el"
          "README"
          "Makefile"
-         ("server" "server/*")))
+         ("server" "server/*")
+         (:exclude "lisp/tablist.el" "lisp/tablist-filter.el")))

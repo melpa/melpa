@@ -3,6 +3,6 @@
  :repo "politza/pdf-tools"
  :files ("lisp/*.el"
          "README"
-         "Makefile"
-         ("server" "server/*")
+         ("build" "Makefile")
+         ("build" "server")
          (:exclude "lisp/tablist.el" "lisp/tablist-filter.el")))

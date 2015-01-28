@@ -44,8 +44,7 @@
 
   melpa.PackageList = function(packages) {
     this.packages = packages;
-    this.totalDownloads = m.prop(_.reduce(_.map(packages, function(p) { return p.downloads || 0; }),
-                                          function (a, b) { return b === undefined ? a : a + b; }, 0));
+    this.totalDownloads = m.prop(packages.reduce(function (total, p) { return total + (p.downloads || 0); }, 0));
     this.totalPackages = m.prop(packages.length);
     var savedSearches = {};
     function preFilteredPackages(term) {
@@ -56,8 +55,7 @@
       var t = terms.trim().toLowerCase();
       var matching = savedSearches[t];
       if (!matching) {
-        matching = savedSearches[t] = _.filter(preFilteredPackages(t),
-                                               function(p) { return p.matchesTerm(t); });
+        matching = savedSearches[t] = preFilteredPackages(t).filter(function(p) { return p.matchesTerm(t); });
       }
       return matching;
     };
@@ -74,13 +72,13 @@
 
     var downloadCounts = _.pluck(packages, 'downloads');
     this.downloadsPercentileForPackage = function(p) {
-      return _.filter(downloadCounts, function(d) { return d < p.downloads; }).length * 100.0 / downloadCounts.length;
+      return downloadCounts.filter(function(d) { return d < p.downloads; }).length * 100.0 / downloadCounts.length;
     };
 
     this.dependenciesOnPackageName = function(packageName) {
-      return (_.filter(packages, function(p) {
+      return packages.filter(function(p) {
         return _.findWhere(p.dependencies, {name: packageName});
-      }));
+      });
     };
   };
 

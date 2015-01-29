@@ -1,1 +1,1 @@
-(e2ansi :repo "Lindydancer/e2ansi" :fetcher github)
+(e2ansi :repo "Lindydancer/e2ansi" :fetcher github :files (:default "bin"))

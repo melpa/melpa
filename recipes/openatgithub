@@ -1,0 +1,1 @@
+(openatgithub :repo "rmuslimov/openatgithub" :fetcher github)

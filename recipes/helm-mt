@@ -1,0 +1,1 @@
+(helm-mt :repo "dfdeshom/helm-mt" :fetcher github)

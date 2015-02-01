@@ -1,1 +1,4 @@
-(kanji-mode :fetcher github :repo "wsgac/kanji-mode")
+(kanji-mode 
+ :fetcher github 
+ :repo "wsgac/kanji-mode"
+ :files ("kanji/*"))

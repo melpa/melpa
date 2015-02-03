@@ -1,1 +1,1 @@
-(eshell-autojump :fetcher wiki)
+(eshell-autojump :fetcher github :repo "coldnew/eshell-autojump")

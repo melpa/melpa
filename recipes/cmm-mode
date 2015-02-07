@@ -1,0 +1,1 @@
+(cmm-mode :repo "tibbe/cmm-mode" :fetcher github)

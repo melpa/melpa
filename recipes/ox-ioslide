@@ -1,0 +1,2 @@
+(ox-ioslide :repo "coldnew/org-ioslide" :fetcher github
+            :old-names (org-ioslide) :branch "master")

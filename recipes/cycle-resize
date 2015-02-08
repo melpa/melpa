@@ -1,0 +1,4 @@
+(cycle-resize
+ :repo "pierre-lecocq/cycle-resize"
+ :fetcher github
+ :files ("cycle-resize.el"))

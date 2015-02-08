@@ -1,3 +1,2 @@
 (org-toodledo :repo "myuhe/org-toodledo"
-              :fetcher github
-              :files ("org-toodledo.el" "org-toodledo-sim.el"))
+              :fetcher github)

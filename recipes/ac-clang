@@ -1,1 +1,3 @@
-(ac-clang :repo "yaruopooner/ac-clang" :fetcher github)
+(ac-clang :repo "yaruopooner/ac-clang" 
+          :fetcher github
+          :files ("*.el" "readme.org" "*.png" "build" "clang-server"))

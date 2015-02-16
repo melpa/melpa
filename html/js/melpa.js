@@ -189,7 +189,7 @@
                     Math.floor((this.windowSize() - 1) / 2));
     };
     this.nextPages = function() {
-      return _.first(_.range(this.pageNumber() + 1, this.maxPage()),
+      return _.first(_.range(this.pageNumber() + 1, 1 + this.maxPage()),
                      this.windowSize() - 1 - this.prevPages().length);
     };
   };

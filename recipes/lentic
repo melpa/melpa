@@ -1,1 +1,3 @@
-(lentic :fetcher github :repo "phillord/lentic" :old-names (linked-buffer))
+(lentic :fetcher github :repo "phillord/lentic"
+        :files (:defaults "lenticular.org")
+        :old-names (linked-buffer))

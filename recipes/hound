@@ -1,0 +1,1 @@
+(hound :repo "ryoung786/hound.el" :fetcher github)

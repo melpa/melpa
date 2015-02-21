@@ -1,0 +1,5 @@
+(search
+ :fetcher github
+ :repo "boyw165/search”
+ :files (:defaults ("images" "images/*.xpm" "images/*.png")))
+

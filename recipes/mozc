@@ -1,0 +1,4 @@
+(mozc
+ :fetcher svn
+ :url "http://mozc.googlecode.com/svn/trunk/src/unix/emacs/"
+ :files ("mozc.el"))

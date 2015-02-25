@@ -1,1 +1,1 @@
-(cmm-mode :repo "tibbe/cmm-mode" :fetcher github)
+(cmm-mode :repo "bgamari/cmm-mode" :fetcher github)

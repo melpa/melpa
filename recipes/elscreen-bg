@@ -1,0 +1,3 @@
+(elscreen-bg
+ :repo "jeffgran/elscreen-bg"
+ :fetcher github)

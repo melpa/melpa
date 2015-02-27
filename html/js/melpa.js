@@ -403,7 +403,10 @@
       m("section",
         m("h4", "Badge code"),
         m(".well", [
-          packageLink(pkg, m("img", {alt: ctrl.archivename.archiveName(), src: melpa.rootURL + pkg.badgeURL})),
+          m("dl", [
+            m("dt", "Preview"),
+            m("dd", packageLink(pkg, m("img", {alt: ctrl.archivename.archiveName(), src: melpa.rootURL + pkg.badgeURL})))
+          ]),
           m("dl", [
             m("dt", "HTML"),
             m("dd", m("pre", '<a href="' + fullURL + '"><img alt="' + ctrl.archivename.archiveName() + '" src="' + badgeURL + '"/></a>')),

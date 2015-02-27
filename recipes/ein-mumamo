@@ -1,2 +1,2 @@
 (ein-mumamo :repo "millejoh/ein-mumamo" :fetcher github
-            :files ("*"))
+            :files ("*.el"))

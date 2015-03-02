@@ -1,3 +1,0 @@
-(big-fringe-mode
- :repo "EricCrosson/big-fringe-mode"
- :fetcher github)

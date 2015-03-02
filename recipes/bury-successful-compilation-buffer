@@ -1,3 +1,0 @@
-(bury-successful-compilation-buffer
- :repo "EricCrosson/bury-successful-compilation-buffer"
- :fetcher github)

@@ -1,0 +1,3 @@
+(git-wip-timemachine
+ :fetcher github
+ :repo "itsjeyd/git-wip-timemachine")

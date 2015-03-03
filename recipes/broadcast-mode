@@ -1,2 +1,0 @@
-(broadcast-mode :fetcher git
-       :url "https://github.com/killdash9/broadcast-mode.el.git")

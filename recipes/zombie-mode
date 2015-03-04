@@ -1,0 +1,1 @@
+(zombie-mode :fetcher github :repo "david-christiansen/zombie-mode")

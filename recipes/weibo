@@ -1,0 +1,2 @@
+(weibo :repo "austin-----/weibo.emacs"
+       :fetcher github)

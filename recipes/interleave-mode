@@ -1,0 +1,3 @@
+(interleave-mode
+ :fetcher github
+ :repo "rudolfochrist/interleave-mode")

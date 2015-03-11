@@ -220,9 +220,11 @@ be identical."
 Output is written to the current buffer."
   (let* ((default-directory (file-name-as-directory (or dir default-directory)))
          (timeout (number-to-string package-build-timeout-secs))
-         (argv (if package-build-timeout-executable
-                   (append (list package-build-timeout-executable "-k" "60" timeout command) args)
-                 (cons command args))))
+         (argv (append
+                '("env" "LC_ALL=C")
+                (if package-build-timeout-executable
+                    (append (list package-build-timeout-executable "-k" "60" timeout command) args)
+                  (cons command args)))))
     (unless (file-directory-p default-directory)
       (error "Can't run process in non-existent directory: %s" default-directory))
     (let ((exit-code (apply 'process-file (car argv) nil (current-buffer) t (cdr argv))))

@@ -701,18 +701,20 @@ Optionally PRETTY-PRINT the data."
                     target-dir))
 
 (defun pb/update-or-insert-version (version)
-  "Ensure current buffer has a \"Version: VERSION\" header."
+  "Ensure current buffer has a \"Package-Version: VERSION\" header."
   (goto-char (point-min))
   (if (let ((case-fold-search t))
-        (re-search-forward "^;+* *Version *: *" nil t))
+        (re-search-forward "^;+* *Package-Version *: *" nil t))
       (progn
         (move-beginning-of-line nil)
         (search-forward "V" nil t)
         (backward-char)
         (insert "X-Original-")
         (move-beginning-of-line nil))
+    ;; Put the new header in a sensible place if we can
+    (re-search-forward "^;+* *\\(Version:\\|Keywords\\|URL\\)" nil t)
     (forward-line))
-  (insert (format ";; Version: %s" version))
+  (insert (format ";; Package-Version: %s" version))
   (newline))
 
 (defun pb/ensure-ends-here-line (file-path)

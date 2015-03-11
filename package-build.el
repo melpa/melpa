@@ -197,7 +197,8 @@ be identical."
   (ignore-errors (version-to-list str)))
 
 (defun pb/find-tag-version-newest (regex &optional bound &rest additional-groups)
-  "Find the newest version matching REGEX, optionally looking only as far as BOUND."
+  "Find the newest version matching REGEX after point, maybe stopping at BOUND.
+The first capture group 1 is examined, together with any ADDITIONAL-GROUPS."
   (let* ((text (buffer-substring-no-properties
                 (or bound (point-min)) (point)))
          (tags (cl-remove-if-not

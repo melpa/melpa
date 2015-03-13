@@ -1,0 +1,4 @@
+(random-splash-image
+ :fetcher git
+ :url "https://github.com/kakakaya/random-splash-image"
+ :files ("*.el" "README.md" "LICENSE"))

@@ -1,0 +1,3 @@
+(ivy :repo "abo-abo/swiper"
+     :fetcher github
+     :files ("ivy.el"))

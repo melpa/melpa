@@ -111,6 +111,7 @@
         };
         return (urlMatch(/(bitbucket\.org\/[^\/]+\/[^\/\?]+)/, "https://") ||
                 urlMatch(/(gitorious\.org\/[^\/]+\/[^.]+)/, "https://") ||
+                urlMatch(/(gitlab\.com\/[^\/]+\/[^.]+)/, "https://") ||
                 urlMatch(/^lp:(.*)/, "https://launchpad.net/") ||
                 urlMatch(/^(https?:\/\/code\.google\.com\/p\/[^\/]+\/)/) ||
                 urlMatch(/^(https?:\/\/[^.]+\.googlecode\.com\/)/));

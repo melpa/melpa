@@ -748,7 +748,20 @@ Optionally PRETTY-PRINT the data."
     (let ((package-def (pb/read-from-file file-path)))
       (if (eq 'define-package (car package-def))
           (let* ((pkgfile-info (cdr package-def))
-                 (descr (nth 2 pkgfile-info)))
+                 (descr (nth 2 pkgfile-info))
+                 (rest-plist (subseq pkgfile-info 4))
+                 (extras (let (alist)
+                           (while rest-plist
+                             (unless (memq (car rest-plist) '(:kind :archive))
+                               (let ((value (cadr rest-plist)))
+                                 (when value
+                                   (push (cons (car rest-plist)
+                                               (if (eq (car-safe value) 'quote)
+                                                   (cadr value)
+                                                 value))
+                                         alist))))
+                             (setq rest-plist (cddr rest-plist)))
+                           alist)))
             (when (string-match "[\r\n]" descr)
               (error "Illegal multi-line package description in %s" file-path))
             (vector
@@ -758,7 +771,8 @@ Optionally PRETTY-PRINT the data."
                 (list (car elt) (version-to-list (cadr elt))))
               (eval (nth 3 pkgfile-info)))
              descr
-             (nth 1 pkgfile-info)))
+             (nth 1 pkgfile-info)
+             extras))
         (error "No define-package found in %s" file-path)))))
 
 (defun pb/merge-package-info (pkg-info name version)

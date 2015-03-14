@@ -92,7 +92,7 @@ This must be a version which supports the \"-k\" option."
 
 If an external process takes longer than
 `package-build-timeout-secs' seconds to complete, the process is
-terminated. The `package-build-timeout-secs' variable will only
+terminated.  The `package-build-timeout-secs' variable will only
 have an effect if `package-build-timeout-executable' is not nil."
   :group 'package-build
   :type 'number)

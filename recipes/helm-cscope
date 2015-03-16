@@ -1,0 +1,1 @@
+(helm-cscope :fetcher github :repo "alpha22jp/helm-cscope.el")

@@ -749,7 +749,7 @@ Optionally PRETTY-PRINT the data."
       (if (eq 'define-package (car package-def))
           (let* ((pkgfile-info (cdr package-def))
                  (descr (nth 2 pkgfile-info))
-                 (rest-plist (cl-subseq pkgfile-info 4))
+                 (rest-plist (cl-subseq pkgfile-info (min 4 (length pkgfile-info))))
                  (extras (let (alist)
                            (while rest-plist
                              (unless (memq (car rest-plist) '(:kind :archive))

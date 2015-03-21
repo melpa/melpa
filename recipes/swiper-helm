@@ -1,3 +1,2 @@
-(swiper-helm :repo "abo-abo/swiper"
-             :fetcher github
-             :files ("swiper-helm.el"))
+(swiper-helm :repo "abo-abo/swiper-helm"
+             :fetcher github)

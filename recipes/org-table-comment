@@ -1,0 +1,3 @@
+(org-table-comment
+ :fetcher github
+ :repo "mlf176f2/org-table-comment.el")

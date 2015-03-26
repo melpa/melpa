@@ -1,1 +1,1 @@
-(camcorder :repo "Bruce-Connor/camcorder.el" :fetcher github)
+(camcorder :repo "Malabarba/camcorder.el" :fetcher github)

@@ -1,1 +1,1 @@
-(sotlisp :repo "Bruce-Connor/speed-of-thought-lisp" :fetcher github)
+(sotlisp :repo "Malabarba/speed-of-thought-lisp" :fetcher github)

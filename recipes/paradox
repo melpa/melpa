@@ -1,1 +1,1 @@
-(paradox :repo "Bruce-Connor/paradox" :fetcher github)
+(paradox :repo "Malabarba/paradox" :fetcher github)

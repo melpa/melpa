@@ -1,0 +1,7 @@
+(buttercup
+ :fetcher github
+ :repo "jorgenschaefer/emacs-buttercup"
+ :files ("buttercup.el"
+         "buttercup-compat.el"
+         "buttercup-pkg.el"
+         "README.md"))

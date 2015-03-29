@@ -1,3 +1,3 @@
-(apropospriate-theme :repo "waymondo/apropospriate-emacs"
+(apropospriate-theme :repo "waymondo/apropospriate-theme"
                      :fetcher github
                      :files ("apropospriate-theme.el"))

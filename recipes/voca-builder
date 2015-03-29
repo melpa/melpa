@@ -1,0 +1,5 @@
+(voca-builder 
+:fetcher github 
+:url "http://github.com/yitang/voca-builder"
+:repo "yitang/voca-builder"
+:files ("voca-builder.el"))

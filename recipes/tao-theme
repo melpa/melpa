@@ -1,1 +1,1 @@
-(zenburn-theme :repo "11111000000/tao-theme-emacs" :fetcher github)
+(tao-theme :repo "11111000000/tao-theme-emacs" :fetcher github)

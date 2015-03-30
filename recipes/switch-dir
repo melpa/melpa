@@ -1,0 +1,1 @@
+(switch-dir :fetcher github :repo "sabof/switch-dir")

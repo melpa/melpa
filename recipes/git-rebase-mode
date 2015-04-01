@@ -1,3 +1,4 @@
 (git-rebase-mode :repo "magit/git-modes"
                  :fetcher github
+		 :branch "master"
                  :files ("git-rebase-mode.el"))

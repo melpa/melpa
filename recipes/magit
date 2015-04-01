@@ -1,5 +1,6 @@
 (magit :fetcher github
        :repo "magit/magit"
+       :branch "master"
        :files ("magit.el"
 	       "magit-bisect.el"
 	       "magit-blame.el"

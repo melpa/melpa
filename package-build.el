@@ -782,8 +782,8 @@ If PKG-INFO is nil, an empty one is created."
                      (vector name nil "No description available." version))))
     (aset merged 0 name)
     (aset merged 3 version)
-    (when (not (aref merged 1))
-      (aset merged 1 dependencies))
+    (when dependencies
+          (aset merged 1 dependencies))
     merged))
 
 (defun pb/archive-entry (pkg-info type)

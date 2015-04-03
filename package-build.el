@@ -775,13 +775,15 @@ Optionally PRETTY-PRINT the data."
              extras))
         (error "No define-package found in %s" file-path)))))
 
-(defun pb/merge-package-info (pkg-info name version)
+(defun pb/merge-package-info (pkg-info name version dependencies)
   "Return a version of PKG-INFO updated with NAME, VERSION and info from CONFIG.
 If PKG-INFO is nil, an empty one is created."
   (let* ((merged (or (copy-sequence pkg-info)
                      (vector name nil "No description available." version))))
     (aset merged 0 name)
     (aset merged 3 version)
+    (when dependencies
+          (aset merged 1 dependencies))
     merged))
 
 (defun pb/archive-entry (pkg-info type)
@@ -1095,7 +1097,7 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
       file-name)))
 
 ;;;###autoload
-(defun package-build-package (package-name version file-specs source-dir target-dir)
+(defun package-build-package (package-name version file-specs source-dir target-dir &optional dependencies)
   "Create PACKAGE-NAME with VERSION.
 
 The information in FILE-SPECS is used to gather files from
@@ -1123,12 +1125,12 @@ Returns the archive entry for the package."
      ((not version)
       (error "Unable to check out repository for %s" package-name))
      ((= 1 (length files))
-      (pb/build-single-file-package package-name version (caar files) source-dir target-dir))
+      (pb/build-single-file-package package-name version (caar files) source-dir target-dir dependencies))
      ((< 1 (length  files))
-      (pb/build-multi-file-package package-name version files source-dir target-dir))
+      (pb/build-multi-file-package package-name version files source-dir target-dir dependencies))
      (t (error "Unable to find files matching recipe patterns")))))
 
-(defun pb/build-single-file-package (package-name version file source-dir target-dir)
+(defun pb/build-single-file-package (package-name version file source-dir target-dir dependencies)
   (let* ((pkg-source (expand-file-name file source-dir))
          (pkg-target (expand-file-name
                       (concat package-name "-" version ".el")
@@ -1136,7 +1138,8 @@ Returns the archive entry for the package."
          (pkg-info (pb/merge-package-info
                     (pb/get-package-info pkg-source)
                     package-name
-                    version)))
+                    version
+                    dependencies)))
     (unless (string-equal (downcase (concat package-name ".el"))
                           (downcase (file-name-nondirectory pkg-source)))
       (error "Single file %s does not match package name %s"
@@ -1161,7 +1164,7 @@ Returns the archive entry for the package."
                          package-name)
     (pb/archive-entry pkg-info 'single)))
 
-(defun pb/build-multi-file-package (package-name version files source-dir target-dir)
+(defun pb/build-multi-file-package (package-name version files source-dir target-dir dependencies)
   (let* ((tmp-dir (file-name-as-directory (make-temp-file package-name t)))
          (pkg-dir-name (concat package-name "-" version))
          (pkg-tmp-dir (expand-file-name pkg-dir-name tmp-dir))
@@ -1180,7 +1183,8 @@ Returns the archive entry for the package."
                                              (file-name-directory pkg-source)))
                           (pb/get-package-info pkg-source)))
                     package-name
-                    version)))
+                    version
+                    dependencies)))
     (pb/copy-package-files files source-dir pkg-tmp-dir)
     (pb/write-pkg-file (expand-file-name pkg-file
                                          (file-name-as-directory pkg-tmp-dir))

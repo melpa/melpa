@@ -1,1 +1,3 @@
-(buttercup :fetcher github :repo "jorgenschaefer/emacs-buttercup")
+(buttercup :fetcher github
+           :repo "jorgenschaefer/emacs-buttercup"
+           :files ("*.el" "bin"))

@@ -267,17 +267,17 @@ causes the default value shown above to be prepended to the specified file list.
 
 ### Example: Single File Repository
 
-[ido-ubiquitous](https://github.com/DarwinAwardWinner/ido-ubiquitous) is a repository that contains two files:
+[smex](https://github.com/nonsequitur/smex) is a repository that
+contains two files:
 
-* `README.md`
-* `ido-ubiquitous.el`
+* `README.markdown`
+* `smex.el`
 
-Since there is only one `.el` file, this package only needs the `:url` and `:fetcher` specified,
+Since there is only one `.el` file, this package only needs the `:url`
+and `:fetcher` specified,
 
 ```lisp
-(ido-ubiquitous
- :url "https://github.com/DarwinAwardWinner/ido-ubiquitous.git"
- :fetcher git)
+(smex :repo "nonsequitur/smex" :fetcher github)
 ```
 
 ### Example: Multiple Packages in one Repository

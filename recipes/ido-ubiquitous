@@ -1,2 +1,3 @@
-(ido-ubiquitous :repo "DarwinAwardWinner/ido-ubiquitous" :fetcher github)
-
+(ido-ubiquitous :repo "DarwinAwardWinner/ido-ubiquitous"
+                :fetcher github
+                :branch "master")

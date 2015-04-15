@@ -1,0 +1,3 @@
+(syntax-subword
+ :fetcher hg
+ :url "https://bitbucket.org/jpkotta/syntax-subword")

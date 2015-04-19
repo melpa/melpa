@@ -1,0 +1,2 @@
+(mozc-im :fetcher github
+         :repo "d5884/mozc-im")

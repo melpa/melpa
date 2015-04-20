@@ -1,0 +1,2 @@
+(helm-unicode :repo "shosti/helm-unicode"
+              :fetcher github)

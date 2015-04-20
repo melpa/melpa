@@ -1,1 +1,1 @@
-(myTerminal-controls :repo "myTerminal/myTerminal-controls" :fetcher github)
+(myterminal-controls :repo "myTerminal/myterminal-controls" :fetcher github)

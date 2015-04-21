@@ -1,0 +1,3 @@
+(emacs-surround
+ :fetcher github
+ :repo "ganmacs/emacs-surround")

@@ -1,0 +1,3 @@
+(racer :repo "phildawes/racer"
+       :fetcher github
+       :files ("editors/racer.el"))

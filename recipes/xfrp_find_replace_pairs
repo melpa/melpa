@@ -1,1 +1,0 @@
-(xfrp_find_replace_pairs :repo "xahlee/xfrp_find_replace_pairs.el" :fetcher github)

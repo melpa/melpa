@@ -1,0 +1,1 @@
+(golint :fetcher github :repo "meshelton/govet" :files ("*.el"))

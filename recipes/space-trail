@@ -1,0 +1,3 @@
+(space-trail
+ :fetcher github
+ :repo "NateEag/emacs-space-trail")

@@ -1,3 +1,0 @@
-(owp-theme-emacslove :repo "emacs-china/owp-theme-emacslove"
-                     :fetcher github
-                     :files (:defaults "themes"))

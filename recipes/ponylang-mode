@@ -1,0 +1,3 @@
+(ponylang-mode :fetcher github
+               :repo "abingham/ponylang-mode"
+               :files ("ponylang-mode.el"))

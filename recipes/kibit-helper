@@ -1,0 +1,3 @@
+(kibit-helper :fetcher github
+              :repo "brunchboy/kibit-helper"
+              :files ("*.el"))

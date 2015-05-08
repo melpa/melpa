@@ -1,0 +1,1 @@
+(mandoku-meta-kr :fetcher github :repo "cwittern/KR" :files ("KR*.txt" "*.el" ))

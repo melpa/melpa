@@ -1,4 +1,4 @@
-(launch
+(launchctl
  :fetcher github
  :repo "pekingduck/launchctl-el"
  :files ("launchctl.el"))

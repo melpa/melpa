@@ -1,3 +1,0 @@
-(project-persist-drawer-adaptor-sr-speedbar :fetcher github
-                                            :repo "rdallasgray/project-persist-drawer-adaptor-sr-speedbar"
-                                            :files ("lib/*"))

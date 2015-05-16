@@ -1,4 +1,4 @@
 (cask-package-toolset
  :fetcher github
  :repo "AdrieanKhisbe/cask-package-toolset.el"
- :files ("*.el" "bin" "templates")))
+ :files (:defaults "bin" "templates")))

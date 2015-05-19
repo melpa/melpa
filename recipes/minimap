@@ -1,1 +1,1 @@
-(minimap :fetcher github :repo "dustinlacewell/emacs-minimap")
+(minimap :fetcher github :repo "br0ns/emacs-minimap")

@@ -463,7 +463,7 @@
     document.title = (new melpa.archivename.controller()).archiveName();
     _.each(document.getElementsByClassName('archive-name'), function (e) {
       // jshint unused: false
-      m.module(e, melpa.archivename);
+      m.mount(e, melpa.archivename);
     });
     if (melpa.stable()) {
       document.getElementsByTagName("html")[0].className += " stable";

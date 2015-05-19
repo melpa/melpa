@@ -542,6 +542,11 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
   (let* ((url (format "git://github.com/%s.git" (plist-get config :repo))))
     (pb/checkout-git name (plist-put (copy-sequence config) :url url) dir)))
 
+(defun pb/checkout-gitlab (name config dir)
+  "Check package NAME with config CONFIG out of gitlab into DIR."
+  (let* ((url (format "https://gitlab.com/%s.git" (plist-get config :repo))))
+    (pb/checkout-git name (plist-put (copy-sequence config) :url url) dir)))
+
 (defun pb/bzr-expand-repo (repo)
   "Get REPO expanded name."
   (pb/run-process-match "\\(?:branch root\\|repository branch\\): \\(.*\\)" nil "bzr" "info" repo))
@@ -1239,7 +1244,7 @@ Returns the archive entry for the package."
   (interactive
    (list (intern (read-string "Package name: "))
          (intern
-          (let ((fetcher-types (mapcar #'symbol-name '(github git wiki bzr hg cvs svn))))
+          (let ((fetcher-types (mapcar #'symbol-name '(github gitlab git wiki bzr hg cvs svn))))
             (completing-read
              "Fetcher: "
              fetcher-types

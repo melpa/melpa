@@ -180,9 +180,9 @@ the following form (`[...]` denotes optional or conditional values),
 
 ```lisp
 (<package-name>
- :fetcher [git|github|bzr|hg|darcs|fossil|svn|cvs|wiki]
+ :fetcher [git|github|gitlab|bzr|hg|darcs|fossil|svn|cvs|wiki]
  [:url "<repo url>"]
- [:repo "github-user/repo-name"]
+ [:repo "github-or-gitlab-user/repo-name"]
  [:module "cvs-module"]
  [:files ("<file1>" ...)])
 ```
@@ -190,9 +190,9 @@ the following form (`[...]` denotes optional or conditional values),
 - `package-name`
 a lisp symbol that has the same name as the package being specified.
 
-- `:fetcher` (one of `git, github, bzr, hg, darcs, fossil, svn, cvs, wiki`)
+- `:fetcher` (one of `git, github, gitlab, bzr, hg, darcs, fossil, svn, cvs, wiki`)
 specifies the type of repository that `:url` points to. Right now
-package-build supports [git][git], [github][github],
+package-build supports [git][git], [github][github], [gitlab][gitlab],
 [bazaar (bzr)][bzr], [mercurial (hg)][hg], [subversion (svn)][svn],
 [cvs][cvs], [darcs][darcs], [fossil][fossil], and [Emacs Wiki (wiki)][emacswiki] as
 possible mechanisms for checking out the repository.
@@ -213,15 +213,15 @@ differs from the package name being built.
 specifies the URL of the version control repository. *required for
 the `git`, `bzr`, `hg`, `darcs`, `fossil`, `svn` and `cvs` fetchers.*
 
-- `:repo` specifies the github repository and is of the form
-`github-user/repo-name`. *required for the `github` fetcher*.
+- `:repo` specifies the github/gitlab repository and is of the form
+`user/repo-name`. *required for the `github` and `gitlab` fetchers*.
 
 - `:commit`
 specifies the commit of the git repo to checkout. The value
 will be passed to `git reset` in a repo where `upstream` is the
 original repository. Can therefore be either a sha, if pointing at a
 specific commit, or a full ref prefixed with "origin/". Only used by
-the `git` and `github` fetchers.
+the `git`-based fetchers.
 
 - `:branch`
 specifies the branch of the git repo to use. This is like `:commit`, but
@@ -256,6 +256,7 @@ causes the default value shown above to be prepended to the specified file list.
 
 [git]: http://git-scm.com/
 [github]: https://github.com/
+[gitlab]: https://gitlab.com/
 [bzr]: http://bazaar.canonical.com/en/
 [hg]: http://mercurial.selenic.com/
 [svn]: http://subversion.apache.org/

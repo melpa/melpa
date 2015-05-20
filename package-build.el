@@ -222,7 +222,8 @@ Output is written to the current buffer."
   (let* ((default-directory (file-name-as-directory (or dir default-directory)))
          (timeout (number-to-string package-build-timeout-secs))
          (argv (append
-                '("env" "LC_ALL=C")
+                (unless (eq system-type 'windows-nt)
+                  '("env" "LC_ALL=C"))
                 (if package-build-timeout-executable
                     (append (list package-build-timeout-executable "-k" "60" timeout command) args)
                   (cons command args)))))
@@ -657,6 +658,8 @@ Optionally PRETTY-PRINT the data."
 
 (defun pb/create-tar (file dir &optional files)
   "Create a tar FILE containing the contents of DIR, or just FILES if non-nil."
+  (when (eq system-type 'windows-nt)
+    (setq file (replace-regexp-in-string "^\\([a-z]\\):" "/\\1" file)))
   (apply 'process-file
          package-build-tar-executable nil
          (get-buffer-create "*package-build-checkout*")

@@ -1170,45 +1170,45 @@ Returns the archive entry for the package."
     (pb/archive-entry pkg-info 'single)))
 
 (defun pb/build-multi-file-package (package-name version files source-dir target-dir)
-  (let* ((tmp-dir (file-name-as-directory (make-temp-file package-name t)))
-         (pkg-dir-name (concat package-name "-" version))
-         (pkg-tmp-dir (expand-file-name pkg-dir-name tmp-dir))
-         (pkg-file (concat package-name "-pkg.el"))
-         (pkg-file-source (or (pb/find-source-file pkg-file files)
-                              pkg-file))
-         (file-source (concat package-name ".el"))
-         (pkg-source (or (pb/find-source-file file-source files)
-                         file-source))
-         (pkg-info (pb/merge-package-info
-                    (let ((default-directory source-dir))
-                      (or (pb/get-pkg-file-info pkg-file-source)
-                          ;; some packages (like magit) provide name-pkg.el.in
-                          (pb/get-pkg-file-info
-                           (expand-file-name (concat pkg-file ".in")
-                                             (file-name-directory pkg-source)))
-                          (pb/get-package-info pkg-source)))
-                    package-name
-                    version)))
-    (pb/copy-package-files files source-dir pkg-tmp-dir)
-    (pb/write-pkg-file (expand-file-name pkg-file
-                                         (file-name-as-directory pkg-tmp-dir))
-                       pkg-info)
+  (let ((tmp-dir (file-name-as-directory (make-temp-file package-name t))))
+    (unwind-protect
+        (let* ((pkg-dir-name (concat package-name "-" version))
+               (pkg-tmp-dir (expand-file-name pkg-dir-name tmp-dir))
+               (pkg-file (concat package-name "-pkg.el"))
+               (pkg-file-source (or (pb/find-source-file pkg-file files)
+                                    pkg-file))
+               (file-source (concat package-name ".el"))
+               (pkg-source (or (pb/find-source-file file-source files)
+                               file-source))
+               (pkg-info (pb/merge-package-info
+                          (let ((default-directory source-dir))
+                            (or (pb/get-pkg-file-info pkg-file-source)
+                                ;; some packages (like magit) provide name-pkg.el.in
+                                (pb/get-pkg-file-info
+                                 (expand-file-name (concat pkg-file ".in")
+                                                   (file-name-directory pkg-source)))
+                                (pb/get-package-info pkg-source)))
+                          package-name
+                          version)))
+          (pb/copy-package-files files source-dir pkg-tmp-dir)
+          (pb/write-pkg-file (expand-file-name pkg-file
+                                               (file-name-as-directory pkg-tmp-dir))
+                             pkg-info)
 
-    (pb/generate-info-files files source-dir pkg-tmp-dir)
-    (pb/generate-dir-file files pkg-tmp-dir)
+          (pb/generate-info-files files source-dir pkg-tmp-dir)
+          (pb/generate-dir-file files pkg-tmp-dir)
 
-    (let ((default-directory tmp-dir))
-      (pb/create-tar (expand-file-name (concat package-name "-" version ".tar")
-                                       target-dir)
-                     pkg-dir-name))
+          (let ((default-directory tmp-dir))
+            (pb/create-tar (expand-file-name (concat package-name "-" version ".tar")
+                                             target-dir)
+                           pkg-dir-name))
 
-    (let ((default-directory source-dir))
-      (pb/write-pkg-readme target-dir
-                           (pb/find-package-commentary pkg-source)
-                           package-name))
-
-    (delete-directory pkg-tmp-dir t nil)
-    (pb/archive-entry pkg-info 'tar)))
+          (let ((default-directory source-dir))
+            (pb/write-pkg-readme target-dir
+                                 (pb/find-package-commentary pkg-source)
+                                 package-name))
+          (pb/archive-entry pkg-info 'tar))
+      (delete-directory tmp-dir t nil))))
 
 
 ;; In future we should provide a hook, and perform this step in a separate package.

@@ -1,8 +1,10 @@
 (emms-player-mpv-jp-radios :fetcher github :repo "momomo5717/emms-player-mpv-jp-radios"
-                           :files ("*.el"
+                           :files (:defaults
                                    "agqr"
                                    "anitama"
                                    "hibiki"
+                                   "listen"
                                    "onsen"
                                    "radiko"
-                                   "radiru"))
+                                   "radiru"
+                                   "saimaru"))

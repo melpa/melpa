@@ -1,0 +1,3 @@
+(bonjourmadame
+ :repo "pierre-lecocq/bonjourmadame"
+ :fetcher github)

@@ -866,7 +866,10 @@ to build the recipe."
       (dolist (thing rest)
         (when (keywordp thing)
           (cl-assert (memq thing all-keys) nil "Unknown keyword %S" thing)))
-      (cl-assert (plist-get rest :fetcher) nil ":fetcher is missing")
+      (let ((fetcher (plist-get rest :fetcher)))
+        (cl-assert fetcher nil ":fetcher is missing")
+        (when (memq fetcher '(github gitlab))
+          (cl-assert (plist-get rest :repo) ":repo is missing")))
       (dolist (key symbol-keys)
         (let ((val (plist-get rest key)))
           (when val

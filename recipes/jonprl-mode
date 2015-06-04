@@ -1,0 +1,1 @@
+(jonprl-mode :fetcher github :repo "david-christiansen/jonprl-mode")

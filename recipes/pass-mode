@@ -1,0 +1,1 @@
+(pass-mode :fetcher github :repo "NicolasPetton/pass-mode")

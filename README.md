@@ -489,7 +489,7 @@ in your `package-archives` list.
 
 ```lisp
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+             '("melpa-stable" . "http://stable.melpa.org/packages/"))
 ```
 
 An online list of available packages can be found at 

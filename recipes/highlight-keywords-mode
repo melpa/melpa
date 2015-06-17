@@ -1,0 +1,1 @@
+(highlight-keywords-mode :fetcher github :repo "abend/highlight-keywords-mode")

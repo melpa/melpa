@@ -1,0 +1,1 @@
+(highlight2clipboard :repo "Lindydancer/highlight2clipboard" :fetcher github :files (:defaults "bin"))

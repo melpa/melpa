@@ -1,0 +1,2 @@
+(chinese-wbim :fetcher github :repo "andyque/chinese-wbim"
+              :files (:defaults "wb.txt" "wbpy.txt"))

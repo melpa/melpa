@@ -1,0 +1,3 @@
+(on-parens
+  :repo "willghatch/emacs-on-parens"
+  :fetcher github)

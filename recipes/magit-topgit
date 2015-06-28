@@ -1,1 +1,1 @@
-(magit-topgit :fetcher github :repo "magit/magit-topgit" :branch "master")
+(magit-topgit :fetcher github :repo "magit/magit-topgit")

@@ -1,4 +1,0 @@
-(git-commit-mode :repo "magit/git-modes"
-                 :fetcher github
-		 :branch "master"
-                 :files ("git-commit-mode.el"))

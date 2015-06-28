@@ -1,4 +1,4 @@
 (with-editor :fetcher github
              :repo "magit/magit"
-             :branch "next"
-             :files ("with-editor.el"))
+             :files ("lisp/with-editor.el"
+                     "Documentation/with-editor.texi"))

@@ -431,7 +431,7 @@
 
   melpa.buildstatus = {};
   melpa.buildstatus.controller = function() {
-    this.buildCompletionTime = m.request({method: 'GET', url: "/build-status.json"})
+    this.buildCompletionTime = m.request({method: 'GET', url: "/build-status.json", background: true})
       .then(function(status){
         return new Date(status.completed * 1000);
       });
@@ -439,7 +439,7 @@
   melpa.buildstatus.view = function(ctrl) {
     return m(".alert.alert-success", [
       m("strong", "Last build ended: "),
-      m("span", [moment(ctrl.buildCompletionTime()).fromNow()])
+      m("span", [ctrl.buildCompletionTime() ? moment(ctrl.buildCompletionTime()).fromNow() : "unknown"])
     ]);
   };
 

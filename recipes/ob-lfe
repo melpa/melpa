@@ -1,0 +1,1 @@
+(ob-lfe :repo "zweifisch/ob-lfe" :fetcher github)

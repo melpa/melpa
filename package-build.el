@@ -673,7 +673,7 @@ Optionally PRETTY-PRINT the data."
          file
          "--exclude=.svn"
          "--exclude=CVS"
-         "--exclude=.git*"
+         "--exclude=.git"
          "--exclude=_darcs"
          "--exclude=.fslckout"
          "--exclude=_FOSSIL_"

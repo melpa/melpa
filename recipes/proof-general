@@ -1,0 +1,5 @@
+(proof-general
+ :url ":pserver:anon@cvs.inf.ed.ac.uk:/disk/cvs/proofgen"
+ :module "ProofGeneral"
+ :fetcher cvs
+ :files ("generic/proof-site.el"))

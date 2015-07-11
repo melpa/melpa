@@ -36,11 +36,11 @@ index: json
 ## Cleanup rules
 clean-working:
 	@echo " • Removing package sources ..."
-	rm -rf $(WORKDIR)/*
+	git clean -dffX $(WORKDIR)/.
 
 clean-packages:
 	@echo " • Removing packages ..."
-	rm -rfv $(PKGDIR)/*
+	git clean -dffX $(PKGDIR)/.
 
 clean-json:
 	@echo " • Removing json files ..."

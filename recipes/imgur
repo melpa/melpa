@@ -1,0 +1,1 @@
+(imgur :fetcher github :repo "myuhe/imgur.el")

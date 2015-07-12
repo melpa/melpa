@@ -1,3 +1,1 @@
-(magit-svn :fetcher github
-	   :repo "magit/magit"
-	   :files ("magit-svn.el"))
+(magit-svn :fetcher github :repo "magit/magit-svn")

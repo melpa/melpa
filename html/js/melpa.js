@@ -102,6 +102,9 @@
         } else {
           return "https://gist.github.com/" + recipe.repo;
         }
+      } else if (recipe.fetcher == "gitlab") {
+        return "https://gitlab.com/" + recipe.repo +
+          (recipe.branch ? "/tree/" + recipe.branch : "");
       } else if (recipe.fetcher == "wiki") {
         return "http://www.emacswiki.org/emacs/" + name + ".el";
       } else if (recipe.url) {
@@ -111,6 +114,7 @@
         };
         return (urlMatch(/(bitbucket\.org\/[^\/]+\/[^\/\?]+)/, "https://") ||
                 urlMatch(/(gitorious\.org\/[^\/]+\/[^.]+)/, "https://") ||
+                urlMatch(/(gitlab\.com\/[^\/]+\/[^.]+)/, "https://") ||
                 urlMatch(/^lp:(.*)/, "https://launchpad.net/") ||
                 urlMatch(/^(https?:\/\/code\.google\.com\/p\/[^\/]+\/)/) ||
                 urlMatch(/^(https?:\/\/[^.]+\.googlecode\.com\/)/));
@@ -427,7 +431,7 @@
 
   melpa.buildstatus = {};
   melpa.buildstatus.controller = function() {
-    this.buildCompletionTime = m.request({method: 'GET', url: "/build-status.json"})
+    this.buildCompletionTime = m.request({method: 'GET', url: "/build-status.json", background: true})
       .then(function(status){
         return new Date(status.completed * 1000);
       });
@@ -435,7 +439,7 @@
   melpa.buildstatus.view = function(ctrl) {
     return m(".alert.alert-success", [
       m("strong", "Last build ended: "),
-      m("span", [moment(ctrl.buildCompletionTime()).fromNow()])
+      m("span", [ctrl.buildCompletionTime() ? moment(ctrl.buildCompletionTime()).fromNow() : "unknown"])
     ]);
   };
 
@@ -459,7 +463,7 @@
     document.title = (new melpa.archivename.controller()).archiveName();
     _.each(document.getElementsByClassName('archive-name'), function (e) {
       // jshint unused: false
-      m.module(e, melpa.archivename);
+      m.mount(e, melpa.archivename);
     });
     if (melpa.stable()) {
       document.getElementsByTagName("html")[0].className += " stable";

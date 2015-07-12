@@ -1,0 +1,1 @@
+(flyspell-popup :repo "xuchunyang/flyspell-popup" :fetcher github)

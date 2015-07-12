@@ -1,5 +1,3 @@
 (tablist
  :fetcher github
- :repo "politza/pdf-tools"
- :files ("lisp/tablist.el"
-         "lisp/tablist-filter.el"))
+ :repo "politza/tablist")

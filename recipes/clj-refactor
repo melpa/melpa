@@ -1,1 +1,2 @@
-(clj-refactor :fetcher github :repo "magnars/clj-refactor.el")
+(clj-refactor :fetcher github :repo "magnars/clj-refactor.el"
+              :files (:defaults "CHANGELOG.md"))

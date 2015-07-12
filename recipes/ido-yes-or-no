@@ -1,0 +1,2 @@
+(ido-yes-or-no :repo "DarwinAwardWinner/ido-yes-or-no" :fetcher github
+               :files ("ido-yes-or-no.el"))

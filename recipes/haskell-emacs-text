@@ -1,0 +1,4 @@
+(haskell-emacs-text :fetcher github
+                    :repo "knupfer/haskell-emacs"
+                    :files ("modules/text/*.el" "modules/text/*.hs"
+                            (:exclude "*-test.el" "*Test.hs")))

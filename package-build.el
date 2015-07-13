@@ -530,16 +530,19 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
                                         name)))))
             ;; Using reset --hard here to comply with what's used for
             ;; unstable, but maybe this should be a checkout?
-            (package-build--run-process dir "git" "reset" "--hard" (concat "tags/" (car tag-version)))
-            (package-build--run-process dir "git" "submodule" "update" "--init" "--recursive")
+            (package-build--update-git-to-ref dir (concat "tags/" (car tag-version)))
             (cadr tag-version))
-        (package-build--run-process dir "git" "reset" "--hard"
-                        (or commit (concat "origin/" (package-build--git-head-branch dir))))
-        (package-build--run-process dir "git" "submodule" "update" "--init" "--recursive")
+        (package-build--update-git-to-ref dir (or commit (concat "origin/" (package-build--git-head-branch dir))))
         (apply 'package-build--run-process dir "git" "log" "--first-parent" "-n1" "--pretty=format:'\%ci'"
                (package-build--expand-source-file-list dir config))
         (package-build--find-parse-time
          "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)")))))
+
+(defun package-build--update-git-to-ref (dir ref)
+  "Update the git repo in DIR so that HEAD is REF."
+  (package-build--run-process dir "git" "reset" "--hard" ref)
+  (package-build--run-process dir "git" "submodule" "sync" "--recursive")
+  (package-build--run-process dir "git" "submodule" "update" "--init" "--recursive"))
 
 (defun package-build--checkout-github (name config dir)
   "Check package NAME with config CONFIG out of github into DIR."

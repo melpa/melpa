@@ -1,0 +1,1 @@
+(highlight-line :repo "mrkkrp/highlight-line" :fetcher github)

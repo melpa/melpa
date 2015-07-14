@@ -1,0 +1,2 @@
+(folding :repo "jaalto/project-emacs--folding-mode"
+         :fetcher github)

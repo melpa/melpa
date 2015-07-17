@@ -1,0 +1,9 @@
+(simple-mpc :fetcher github
+            :repo "jorenvo/simple-mpc"
+            :files ("simple-mpc.el"
+                    "simple-mpc-mode.el"
+                    "simple-mpc-current-playlist.el"
+                    "simple-mpc-query.el"
+                    "simple-mpc-utils.el"
+                    "simple-mpc-vars.el"
+                    "COPYING"))

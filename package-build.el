@@ -782,6 +782,8 @@ Optionally PRETTY-PRINT the data."
              (nth 0 pkgfile-info)
              (mapcar
               (lambda (elt)
+                (unless (symbolp (car elt))
+                  (error "Invalid package name in dependency: %S" (car elt)))
                 (list (car elt) (version-to-list (cadr elt))))
               (eval (nth 3 pkgfile-info)))
              descr

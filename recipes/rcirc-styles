@@ -1,3 +1,2 @@
 (rcirc-styles :fetcher github
-              :repo "aaron-em/rcirc-styles.el"
-              :commit "refs/tags/v1.1")
+              :repo "aaron-em/rcirc-styles.el")

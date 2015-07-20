@@ -1,0 +1,2 @@
+(rcirc-styles :fetcher github
+              :repo "aaron-em/rcirc-styles.el")

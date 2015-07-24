@@ -1,0 +1,4 @@
+(projectable :repo "domtronn/projectable.el"
+             :fetcher github
+             :files ("projectable.el" "create-file-alist.py"))
+

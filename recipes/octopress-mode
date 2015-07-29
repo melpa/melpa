@@ -1,0 +1,3 @@
+(octopress-mode
+ :fetcher github
+ :repo "aaronbieber/octopress-mode")

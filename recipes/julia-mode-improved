@@ -1,0 +1,3 @@
+(julia-mode-improved
+ :repo "Clemens-H/julia-mode-improved"
+ :fetcher github)

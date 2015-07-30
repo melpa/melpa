@@ -524,7 +524,9 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
           (let* ((bound (goto-char (point-max)))
                  (tag-version (and (package-build--run-process dir "git" "tag")
                                    (or (package-build--find-tag-version-newest
-                                        "^\\(?:v[.-]?\\)?\\([0-9]+[^ \t\n]*\\)$" bound)
+                                        (concat "^\\(?:\\(?:" (regexp-quote (symbol-name name)) "[-]\\)"
+                                                "\\(?:v[.-]?\\)?\\)?\\([0-9]+[^ \t\n]*\\)$")
+                                        bound)
                                        (error
                                         "No valid stable versions found for %s"
                                         name)))))
@@ -607,7 +609,8 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
           (let* ((bound (goto-char (point-max)))
                  (tag-version (and (package-build--run-process dir "hg" "tags")
                                    (or (package-build--find-tag-version-newest
-                                        "^\\(?:v[.-]?\\)?\\([0-9]+[^ \t\n]*\\)[ \t]*[0-9]+:\\([[:xdigit:]]+\\)$"
+                                        (concat "^\\(?:\\(?:" (regexp-quote (symbol-name name)) "[-]\\)"
+                                                "^\\(?:v[.-]?\\)?\\)?\\([0-9]+[^ \t\n]*\\)[ \t]*[0-9]+:\\([[:xdigit:]]+\\)$")
                                         bound
                                         2)
                                        (error

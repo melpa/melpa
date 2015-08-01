@@ -22,6 +22,16 @@
     return res;
   }
 
+  function addPropSetHook(prop, setter) {
+    return function(val) {
+      if (arguments.length === 0)
+        return prop();
+      var ret = prop(val);
+      setter(val);
+      return ret;
+    };
+  }
+
   //////////////////////////////////////////////////////////////////////////////
   // Models
   //////////////////////////////////////////////////////////////////////////////
@@ -177,17 +187,16 @@
     this.pageLength = m.prop(50);
     this.windowSize = m.prop(7);
     this.pageNumber = m.prop(1);
-    this.items = getItemList;
     this.paginatedItems = function() {
       if (this.pageNumber() !== null) {
-        return this.items().slice(this.pageLength() * (this.pageNumber() - 1),
+        return getItemList().slice(this.pageLength() * (this.pageNumber() - 1),
                                   this.pageLength() * this.pageNumber());
       } else {
-        return this.items();
+        return getItemList();
       }
     };
     this.maxPage = function() {
-      return Math.floor(this.items().length / this.pageLength());
+      return Math.floor(getItemList().length / this.pageLength());
     };
     this.prevPages = function() {
       return _.last(_.range(1, this.pageNumber()),
@@ -232,7 +241,9 @@
 
   melpa.packagelist = {};
   melpa.packagelist.controller = function() {
-    this.filterTerms = m.prop(m.route.param('q') || '');
+    var resetPagination = function() { this.paginatorCtrl.pageNumber(1); }.bind(this);
+    this.filterTerms = addPropSetHook(m.prop(m.route.param('q') || ''),
+                                      resetPagination);
     this.sortBy = m.prop("name");
     this.sortAscending = m.prop(true);
     this.packageList = melpa.packageList;
@@ -252,6 +263,7 @@
         this.sortAscending(true);
         this.sortBy(field);
       }
+      resetPagination();
     };
     this.wantPagination = function() {
       return !Cookies.get("nopagination");

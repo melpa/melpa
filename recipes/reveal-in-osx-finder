@@ -1,0 +1,4 @@
+;;; https://github.com/milkypostman/melpa#recipe-format
+(reveal-in-osx-finder :fetcher   github
+                      :repo      "kaz-yos/reveal-in-osx-finder"
+                      :old-names (reveal-in-finder))

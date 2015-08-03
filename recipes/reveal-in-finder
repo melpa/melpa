@@ -1,3 +1,0 @@
-(reveal-in-finder :repo "kaz-yos/elisp" 
-		  :fetcher github
-		  :files ("reveal-in-finder.el"))

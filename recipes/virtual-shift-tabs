@@ -1,0 +1,2 @@
+(virtual-shift-tabs :repo "wavexx/virtual-shift-tabs.el"
+                    :fetcher github)

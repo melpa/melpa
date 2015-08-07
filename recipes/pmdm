@@ -1,1 +1,1 @@
-(per-buffer-theme :fetcher hg :url "https://bitbucket.org/inigoserna/pmdm.el")
+(pmdm :fetcher hg :url "https://bitbucket.org/inigoserna/pmdm.el")

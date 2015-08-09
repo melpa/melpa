@@ -242,15 +242,14 @@ bundling external dependencies, but is otherwise fine with the defaults, it's
 recommended to use `:defaults` as the very first element of this list, which
 causes the default value shown above to be prepended to the specified file list.
 
-[git]: http://git-scm.com/
+[git]: https://git-scm.com/
 [github]: https://github.com/
 [gitlab]: https://gitlab.com/
 [bzr]: http://bazaar.canonical.com/en/
-[hg]: http://mercurial.selenic.com/
-[svn]: http://subversion.apache.org/
-[cvs]: http://www.nongnu.org/cvs/
+[hg]: https://mercurial.selenic.com/
+[svn]: https://subversion.apache.org/
 [darcs]: http://darcs.net/
-[fossil]: http://www.fossil-scm.org/
+[fossil]: https://www.fossil-scm.org/
 [emacswiki]: http://www.emacswiki.org/
 
 

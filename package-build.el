@@ -394,50 +394,6 @@ A number as third arg means request confirmation if NEWNAME already exists."
             (error "No valid timestamps found!"))))))
 
 
-(defun package-build--cvs-repo (dir)
-  "Get the current CVS root and repository for DIR.
-
-Return a cons cell whose `car' is the root and whose `cdr' is the repository."
-  (apply 'cons
-         (mapcar (lambda (file)
-                   (package-build--string-rtrim (package-build--slurp-file (expand-file-name file dir))))
-                 '("CVS/Root" "CVS/Repository"))))
-
-(defun package-build--checkout-cvs (name config dir)
-  "Check package NAME with config CONFIG out of cvs into DIR."
-  (unless package-build-stable
-    (with-current-buffer (get-buffer-create "*package-build-checkout*")
-      (let ((root (package-build--trim (plist-get config :url) ?/))
-            (repo (or (plist-get config :module) (symbol-name name)))
-            (bound (goto-char (point-max))))
-        (cond
-         ((and (file-exists-p (expand-file-name "CVS" dir))
-               (equal (package-build--cvs-repo dir) (cons root repo)))
-          (package-build--princ-exists dir)
-          (package-build--run-process dir "cvs" "update" "-dP"))
-         (t
-          (when (file-exists-p dir)
-            (delete-directory dir t))
-          (package-build--princ-checkout (format "%s from %s" repo root) dir)
-          ;; CVS insists on relative paths as target directory for checkout (for
-          ;; whatever reason), and puts "CVS" directories into every subdirectory
-          ;; of the current working directory given in the target path. To get CVS
-          ;; to just write to DIR, we need to execute CVS from the parent
-          ;; directory of DIR, and specific DIR as relative path.  Hence all the
-          ;; following mucking around with paths.  CVS is really horrid.
-          (let* ((dir (directory-file-name dir))
-                 (working-dir (file-name-directory dir))
-                 (target-dir (file-name-nondirectory dir)))
-            (package-build--run-process working-dir "env" "TZ=UTC" "cvs" "-z3" "-d" root "checkout"
-                            "-d" target-dir repo))))
-        (apply 'package-build--run-process dir "cvs" "log"
-               (package-build--expand-source-file-list dir config))
-        (or (package-build--find-parse-time-latest "date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)" bound)
-            (package-build--find-parse-time-latest "date: \\([0-9]\\{4\\}/[0-9]\\{2\\}/[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\);" bound)
-            (error "No valid timestamps found!"))
-        ))))
-
-
 (defun package-build--git-repo (dir)
   "Get the current git repo for DIR."
   (package-build--run-process-match

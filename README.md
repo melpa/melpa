@@ -180,10 +180,9 @@ the following form (`[...]` denotes optional or conditional values),
 
 ```lisp
 (<package-name>
- :fetcher [git|github|gitlab|bzr|hg|darcs|fossil|svn|cvs|wiki]
+ :fetcher [git|github|gitlab|bzr|hg|darcs|fossil|svn]
  [:url "<repo url>"]
  [:repo "github-or-gitlab-user/repo-name"]
- [:module "cvs-module"]
  [:files ("<file1>" ...)])
 ```
 

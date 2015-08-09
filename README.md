@@ -11,7 +11,7 @@ code using simple recipes. (Think of it as a server-side version of
 Packages are updated at intervals throughout the day.
 
 To browse available packages, check out the
-[archive index page](http://melpa.org/).
+[archive index page](https://melpa.org/).
 
 Adding packages is as simple as submitting a pull request; read on for
 details.

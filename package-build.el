@@ -1132,7 +1132,7 @@ Returns the archive entry for the package."
 ;; save the network overhead.
 (defun package-build--write-melpa-badge-image (package-name version target-dir)
   (package-build--url-copy-file
-   (concat "http://img.shields.io/badge/"
+   (concat "https://img.shields.io/badge/"
            (if package-build-stable "melpa stable" "melpa")
            "-"
            (url-hexify-string version)

@@ -1175,7 +1175,6 @@ Returns the archive entry for the package."
     (let* ((extra-params
             (cond
              ((eq 'github fetcher) '(:repo "USER/REPO"))
-             ((eq 'wiki fetcher) '())
              (t '(:url "SCM_URL_HERE"))))
            (template `(,name :fetcher ,fetcher ,@extra-params)))
       (insert (pp-to-string template))

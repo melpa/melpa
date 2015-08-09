@@ -252,8 +252,7 @@ Returns a last-modification timestamp for the :files listed in
 CONFIG, if any, or `package-build-default-files-spec' otherwise."
   (let ((repo-type (plist-get config :fetcher)))
     (package-build--message "Fetcher: %s" (symbol-name repo-type))
-    (unless (eq 'wiki repo-type)
-      (package-build--message "Source: %s\n" (or (plist-get config :repo) (plist-get config :url))))
+    (package-build--message "Source: %s\n" (or (plist-get config :repo) (plist-get config :url)))
     (funcall (intern (format "package-build--checkout-%s" (symbol-name repo-type)))
              package-name config (file-name-as-directory working-dir))))
 

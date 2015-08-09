@@ -1,5 +1,5 @@
 (llvm-mode
- :url "http://llvm.org/git/llvm"
+ :url "https://llvm.org/git/llvm"
  :files ("utils/emacs/llvm-mode.el"
          "utils/emacs/tablegen-mode.el")
  :fetcher git)

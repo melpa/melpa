@@ -1,4 +1,4 @@
 (confluence
  :fetcher svn
- :url "http://confluence-el.googlecode.com/svn/trunk/"
+ :url "https://confluence-el.googlecode.com/svn/trunk/"
  :files ("confluence*.el" "*.dtd" "*.xsl"))

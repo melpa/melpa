@@ -1,1 +1,1 @@
-(geben :fetcher svn :url "http://geben-on-emacs.googlecode.com/svn/trunk/")
+(geben :fetcher svn :url "https://geben-on-emacs.googlecode.com/svn/trunk/")

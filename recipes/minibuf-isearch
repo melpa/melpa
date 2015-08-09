@@ -1,2 +1,2 @@
-(minibuf-isearch :url "http://svn.coderepos.org:/share/lang/elisp/minibuf-isearch"
+(minibuf-isearch :url "https://svn.coderepos.org:/share/lang/elisp/minibuf-isearch"
                  :fetcher svn)

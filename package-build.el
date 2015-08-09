@@ -546,7 +546,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
 
 (defun package-build--checkout-github (name config dir)
   "Check package NAME with config CONFIG out of github into DIR."
-  (let* ((url (format "git://github.com/%s.git" (plist-get config :repo))))
+  (let* ((url (format "https://github.com/%s.git" (plist-get config :repo))))
     (package-build--checkout-git name (plist-put (copy-sequence config) :url url) dir)))
 
 (defun package-build--checkout-gitlab (name config dir)

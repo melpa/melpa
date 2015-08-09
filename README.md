@@ -476,11 +476,11 @@ in your `package-archives` list.
 
 ```lisp
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/"))
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
 ```
 
 An online list of available packages can be found at 
-[http://stable.melpa.org](http://stable.melpa.org).
+[https://stable.melpa.org](https://stable.melpa.org).
 
 ### Stable Version Generation
 

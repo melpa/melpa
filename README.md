@@ -201,15 +201,9 @@ package. In the case of the `github`
 fetcher, use `:repo` instead of `:url`; the git URL will then be
 deduced.
 
-    The Emacs Wiki fetcher gets the latest version of the package
-from `http://www.emacswiki.org/emacs/download/<NAME>.el` where `NAME`
-is the package name. Note that the `:url` property is not needed for
-the `wiki` engine unless the name of the package file on the EmacsWiki
-differs from the package name being built.
-
 - `:url`
 specifies the URL of the version control repository. *required for
-the `git`, `bzr`, `hg`, `darcs`, `fossil`, `svn` and `cvs` fetchers.*
+the `git`, `bzr`, `hg`, `darcs`, `fossil`, and `svn` fetchers.*
 
 - `:repo` specifies the github/gitlab repository and is of the form
 `user/repo-name`. *required for the `github` and `gitlab` fetchers*.

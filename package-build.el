@@ -1163,7 +1163,7 @@ Returns the archive entry for the package."
   (interactive
    (list (intern (read-string "Package name: "))
          (intern
-          (let ((fetcher-types (mapcar #'symbol-name '(github gitlab git wiki bzr hg cvs svn))))
+          (let ((fetcher-types (mapcar #'symbol-name '(github gitlab git bzr hg svn))))
             (completing-read
              "Fetcher: "
              fetcher-types

@@ -219,10 +219,6 @@ the `git`-based fetchers.
 specifies the branch of the git repo to use. This is like `:commit`, but
 it adds the "origin/" prefix automatically.
 
-- `:module`
-specifies the module of a CVS repository to check out.  Defaults to to
-`package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
-
 - `:files` optional property specifying the elisp and info files used to build the
 package. Automatically populated by matching all `.el`, `.info` and `dir` files in the
 root of the repository and the `doc` directory. Excludes all files in the root directory 

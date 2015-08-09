@@ -410,9 +410,9 @@ format.
 
  Note that these scripts require an Emacs with `package.el` installed,
  such as Emacs 24. If you have an older version of Emacs, you can get a
- suitable `package.el` [here](http://bit.ly/pkg-el23).
+ suitable `package.el` [here](https://bit.ly/pkg-el23).
 
-[melpa]: http://melpa.org
+[melpa]: https://melpa.org
 
 
 ## API

@@ -71,8 +71,8 @@ New recipe submissions should adhere to the following guidelines,
   create a pull request for each branch.
 
 * Upstream source must be stored in an authoritative
-  [SCM](http://en.wikipedia.org/wiki/Software_configuration_management)
-  repository. Emacswiki recipes are discouraged but can be accepted.
+  [SCM](https://en.wikipedia.org/wiki/Software_configuration_management)
+  repository.
 
 * Packages should be built from the *official* package repository.
   Forks of the official repository will not be accepted except in

@@ -303,56 +303,6 @@ A number as third arg means request confirmation if NEWNAME already exists."
     (kill-buffer buffer)
     (mm-destroy-parts handle)))
 
-(defun package-build--grab-wiki-file (filename)
-  "Download FILENAME from emacswiki, returning its last-modified time."
-  (let* ((download-url
-          (format "http://www.emacswiki.org/emacs/download/%s" filename))
-         (wiki-url
-          (format "http://www.emacswiki.org/emacs/%s" filename)))
-    (package-build--with-wiki-rate-limit
-     (package-build--url-copy-file download-url filename t))
-    (when (zerop (nth 7 (file-attributes filename)))
-      (error "Wiki file %s was empty - has it been removed?" filename))
-    ;; The Last-Modified response header for the download is actually
-    ;; correct for the file, but we have no access to that
-    ;; header. Instead, we must query the non-raw emacswiki page for
-    ;; the file.
-    ;; Since those Emacswiki lookups are time-consuming, we maintain a
-    ;; foo.el.stamp file containing ("SHA1" . "PARSED_TIME")
-    (let* ((new-content-hash (secure-hash 'sha1 (package-build--slurp-file filename)))
-           (stamp-file (concat filename ".stamp"))
-           (stamp-info (package-build--read-from-file stamp-file))
-           (prev-content-hash (car stamp-info)))
-      (if (and prev-content-hash
-               (string-equal new-content-hash prev-content-hash))
-          ;; File has not changed, so return old timestamp
-          (progn
-            (package-build--message "%s is unchanged" filename)
-            (cdr stamp-info))
-        (package-build--message "%s has changed - checking mod time" filename)
-        (let ((new-timestamp
-               (with-current-buffer (package-build--with-wiki-rate-limit
-                                     (url-retrieve-synchronously wiki-url))
-                 (unless (= 200 url-http-response-status)
-                   (error "HTTP error %s fetching %s" url-http-response-status wiki-url))
-                 (goto-char (point-max))
-                 (package-build--find-parse-time
-                  "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"
-                  url-http-end-of-headers))))
-          (package-build--dump (cons new-content-hash new-timestamp) stamp-file)
-          new-timestamp)))))
-
-(defun package-build--checkout-wiki (name config dir)
-  "Checkout package NAME with config CONFIG from the EmacsWiki into DIR."
-  (unless package-build-stable
-    (with-current-buffer (get-buffer-create "*package-build-checkout*")
-      (unless (file-exists-p dir)
-        (make-directory dir))
-      (let ((files (or (plist-get config :files)
-                       (list (format "%s.el" name))))
-            (default-directory dir))
-        (car (nreverse (sort (mapcar 'package-build--grab-wiki-file files) 'string-lessp)))))))
-
 (defun package-build--darcs-repo (dir)
   "Get the current darcs repo for DIR."
   (package-build--run-process-match "Default Remote: \\(.*\\)" dir "darcs" "show" "repo"))

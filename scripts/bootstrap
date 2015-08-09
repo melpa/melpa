@@ -41,6 +41,6 @@ rvm install ruby-1.9.3
 rvm use ruby-1.9.3 --default
 echo "source ~/.profile" >> .bash_profile
 
-git clone http://github.com/milkypostman/melpa
+git clone https://github.com/milkypostman/melpa
 
 sudo reboot

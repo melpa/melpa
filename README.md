@@ -13,8 +13,8 @@ Packages are updated at intervals throughout the day.
 To browse available packages, check out the
 [archive index page](http://melpa.org/).
 
-Adding packages is as simple as submitting a pull request; read on for
-details.
+Adding packages is as simple as submitting a new recipe as a pull request;
+read on for details.
 
 ## Table of Contents
 

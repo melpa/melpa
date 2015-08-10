@@ -1,3 +1,4 @@
 (mozc
- :fetcher svn
- :url "http://mozc.googlecode.com/svn/trunk/src/unix/emacs/")
+ :fetcher github
+ :repo "google/mozc"
+ :files ("src/unix/emacs/mozc.el"))

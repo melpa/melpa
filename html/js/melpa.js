@@ -522,7 +522,7 @@
           m("section.jumbotron", [
             m("ul", [
               "<strong>Up-to-date packages built on our servers from upstream source</strong>",
-              "<strong>Installable in any recent Emacs using 'package.el'</strong> - no need to install svn/cvs/hg/bzr/git/darcs/fossil etc.",
+              "<strong>Installable in any recent Emacs using 'package.el'</strong> - no need to install svn/hg/bzr/git/darcs/fossil etc.",
               "<strong>Curated</strong> - no obsolete, renamed, forked or randomly hacked packages",
               "<strong>Comprehensive</strong> - more packages than any other archive",
               "<strong>Automatic updates</strong> - new commits result in new packages",
@@ -533,7 +533,7 @@
         m(".col-md-4", [
           melpa.buildstatus.view(ctrl.buildstatus),
           m.trust('<a class="twitter-timeline" data-dnt="true" data-related="milkypostman,sanityinc" href="https://twitter.com/melpa_emacs" data-widget-id="311867756586864640">Tweets by @melpa_emacs</a>'),
-          m('script', {src: "http://platform.twitter.com/widgets.js", type: "text/javascript"})
+          m('script', {src: "//platform.twitter.com/widgets.js", type: "text/javascript"})
         ])
       ]),
       melpa.packagelist.view(ctrl.packagelist)

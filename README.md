@@ -11,7 +11,7 @@ code using simple recipes. (Think of it as a server-side version of
 Packages are updated at intervals throughout the day.
 
 To browse available packages, check out the
-[archive index page](http://melpa.org/).
+[archive index page](https://melpa.org/).
 
 Adding packages is as simple as submitting a pull request; read on for
 details.
@@ -41,7 +41,7 @@ Enable installation of packages from MELPA by adding an entry to
 ```lisp
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa" . "https://melpa.org/packages/") t)
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
@@ -71,8 +71,8 @@ New recipe submissions should adhere to the following guidelines,
   create a pull request for each branch.
 
 * Upstream source must be stored in an authoritative
-  [SCM](http://en.wikipedia.org/wiki/Software_configuration_management)
-  repository. Emacswiki recipes are discouraged but can be accepted.
+  [SCM](https://en.wikipedia.org/wiki/Software_configuration_management)
+  repository.
 
 * Packages should be built from the *official* package repository.
   Forks of the official repository will not be accepted except in
@@ -180,22 +180,20 @@ the following form (`[...]` denotes optional or conditional values),
 
 ```lisp
 (<package-name>
- :fetcher [git|github|gitlab|bzr|hg|darcs|fossil|svn|cvs|wiki]
+ :fetcher [git|github|gitlab|bzr|hg|darcs|fossil|svn]
  [:url "<repo url>"]
  [:repo "github-or-gitlab-user/repo-name"]
- [:module "cvs-module"]
  [:files ("<file1>" ...)])
 ```
 
 - `package-name`
 a lisp symbol that has the same name as the package being specified.
 
-- `:fetcher` (one of `git, github, gitlab, bzr, hg, darcs, fossil, svn, cvs, wiki`)
-specifies the type of repository that `:url` points to. Right now
-package-build supports [git][git], [github][github], [gitlab][gitlab],
-[bazaar (bzr)][bzr], [mercurial (hg)][hg], [subversion (svn)][svn],
-[cvs][cvs], [darcs][darcs], [fossil][fossil], and [Emacs Wiki (wiki)][emacswiki] as
-possible mechanisms for checking out the repository.
+- `:fetcher` (one of `git, github, gitlab, bzr, hg, darcs, fossil, svn`)
+specifies the type of repository that `:url` points to. Right now package-build
+supports [git][git], [github][github], [gitlab][gitlab], [bazaar (bzr)][bzr],
+[mercurial (hg)][hg], [subversion (svn)][svn], [darcs][darcs], and
+[fossil][fossil] as possible mechanisms for checking out the repository.
 
     *package-build* uses
 the corresponding application to update files before building the
@@ -203,15 +201,9 @@ package. In the case of the `github`
 fetcher, use `:repo` instead of `:url`; the git URL will then be
 deduced.
 
-    The Emacs Wiki fetcher gets the latest version of the package
-from `http://www.emacswiki.org/emacs/download/<NAME>.el` where `NAME`
-is the package name. Note that the `:url` property is not needed for
-the `wiki` engine unless the name of the package file on the EmacsWiki
-differs from the package name being built.
-
 - `:url`
 specifies the URL of the version control repository. *required for
-the `git`, `bzr`, `hg`, `darcs`, `fossil`, `svn` and `cvs` fetchers.*
+the `git`, `bzr`, `hg`, `darcs`, `fossil`, and `svn` fetchers.*
 
 - `:repo` specifies the github/gitlab repository and is of the form
 `user/repo-name`. *required for the `github` and `gitlab` fetchers*.
@@ -226,10 +218,6 @@ the `git`-based fetchers.
 - `:branch`
 specifies the branch of the git repo to use. This is like `:commit`, but
 it adds the "origin/" prefix automatically.
-
-- `:module`
-specifies the module of a CVS repository to check out.  Defaults to to
-`package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
 
 - `:files` optional property specifying the elisp and info files used to build the
 package. Automatically populated by matching all `.el`, `.info` and `dir` files in the
@@ -254,15 +242,14 @@ bundling external dependencies, but is otherwise fine with the defaults, it's
 recommended to use `:defaults` as the very first element of this list, which
 causes the default value shown above to be prepended to the specified file list.
 
-[git]: http://git-scm.com/
+[git]: https://git-scm.com/
 [github]: https://github.com/
 [gitlab]: https://gitlab.com/
 [bzr]: http://bazaar.canonical.com/en/
-[hg]: http://mercurial.selenic.com/
-[svn]: http://subversion.apache.org/
-[cvs]: http://www.nongnu.org/cvs/
+[hg]: https://mercurial.selenic.com/
+[svn]: https://subversion.apache.org/
 [darcs]: http://darcs.net/
-[fossil]: http://www.fossil-scm.org/
+[fossil]: https://www.fossil-scm.org/
 [emacswiki]: http://www.emacswiki.org/
 
 
@@ -423,9 +410,9 @@ format.
 
  Note that these scripts require an Emacs with `package.el` installed,
  such as Emacs 24. If you have an older version of Emacs, you can get a
- suitable `package.el` [here](http://bit.ly/pkg-el23).
+ suitable `package.el` [here](https://bit.ly/pkg-el23).
 
-[melpa]: http://melpa.org
+[melpa]: https://melpa.org
 
 
 ## API
@@ -489,11 +476,11 @@ in your `package-archives` list.
 
 ```lisp
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/"))
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
 ```
 
 An online list of available packages can be found at 
-[http://stable.melpa.org](http://stable.melpa.org).
+[https://stable.melpa.org](https://stable.melpa.org).
 
 ### Stable Version Generation
 

@@ -1,1 +1,1 @@
-(markdown-mode :url "git://jblevins.org/git/markdown-mode.git" :fetcher git)
+(markdown-mode :url "https://jblevins.org/git/markdown-mode.git" :fetcher git)

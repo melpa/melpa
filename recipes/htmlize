@@ -1,3 +1,3 @@
 (htmlize
- :url "http://fly.srk.fer.hr/~hniksic/emacs/htmlize.git"
+ :url "https://fly.srk.fer.hr/~hniksic/emacs/htmlize.git"
  :fetcher git)

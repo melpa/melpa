@@ -252,8 +252,7 @@ Returns a last-modification timestamp for the :files listed in
 CONFIG, if any, or `package-build-default-files-spec' otherwise."
   (let ((repo-type (plist-get config :fetcher)))
     (package-build--message "Fetcher: %s" (symbol-name repo-type))
-    (unless (eq 'wiki repo-type)
-      (package-build--message "Source: %s\n" (or (plist-get config :repo) (plist-get config :url))))
+    (package-build--message "Source: %s\n" (or (plist-get config :repo) (plist-get config :url)))
     (funcall (intern (format "package-build--checkout-%s" (symbol-name repo-type)))
              package-name config (file-name-as-directory working-dir))))
 
@@ -303,56 +302,6 @@ A number as third arg means request confirmation if NEWNAME already exists."
     (mm-save-part-to-file handle newname)
     (kill-buffer buffer)
     (mm-destroy-parts handle)))
-
-(defun package-build--grab-wiki-file (filename)
-  "Download FILENAME from emacswiki, returning its last-modified time."
-  (let* ((download-url
-          (format "http://www.emacswiki.org/emacs/download/%s" filename))
-         (wiki-url
-          (format "http://www.emacswiki.org/emacs/%s" filename)))
-    (package-build--with-wiki-rate-limit
-     (package-build--url-copy-file download-url filename t))
-    (when (zerop (nth 7 (file-attributes filename)))
-      (error "Wiki file %s was empty - has it been removed?" filename))
-    ;; The Last-Modified response header for the download is actually
-    ;; correct for the file, but we have no access to that
-    ;; header. Instead, we must query the non-raw emacswiki page for
-    ;; the file.
-    ;; Since those Emacswiki lookups are time-consuming, we maintain a
-    ;; foo.el.stamp file containing ("SHA1" . "PARSED_TIME")
-    (let* ((new-content-hash (secure-hash 'sha1 (package-build--slurp-file filename)))
-           (stamp-file (concat filename ".stamp"))
-           (stamp-info (package-build--read-from-file stamp-file))
-           (prev-content-hash (car stamp-info)))
-      (if (and prev-content-hash
-               (string-equal new-content-hash prev-content-hash))
-          ;; File has not changed, so return old timestamp
-          (progn
-            (package-build--message "%s is unchanged" filename)
-            (cdr stamp-info))
-        (package-build--message "%s has changed - checking mod time" filename)
-        (let ((new-timestamp
-               (with-current-buffer (package-build--with-wiki-rate-limit
-                                     (url-retrieve-synchronously wiki-url))
-                 (unless (= 200 url-http-response-status)
-                   (error "HTTP error %s fetching %s" url-http-response-status wiki-url))
-                 (goto-char (point-max))
-                 (package-build--find-parse-time
-                  "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"
-                  url-http-end-of-headers))))
-          (package-build--dump (cons new-content-hash new-timestamp) stamp-file)
-          new-timestamp)))))
-
-(defun package-build--checkout-wiki (name config dir)
-  "Checkout package NAME with config CONFIG from the EmacsWiki into DIR."
-  (unless package-build-stable
-    (with-current-buffer (get-buffer-create "*package-build-checkout*")
-      (unless (file-exists-p dir)
-        (make-directory dir))
-      (let ((files (or (plist-get config :files)
-                       (list (format "%s.el" name))))
-            (default-directory dir))
-        (car (nreverse (sort (mapcar 'package-build--grab-wiki-file files) 'string-lessp)))))))
 
 (defun package-build--darcs-repo (dir)
   "Get the current darcs repo for DIR."
@@ -445,50 +394,6 @@ A number as third arg means request confirmation if NEWNAME already exists."
             (error "No valid timestamps found!"))))))
 
 
-(defun package-build--cvs-repo (dir)
-  "Get the current CVS root and repository for DIR.
-
-Return a cons cell whose `car' is the root and whose `cdr' is the repository."
-  (apply 'cons
-         (mapcar (lambda (file)
-                   (package-build--string-rtrim (package-build--slurp-file (expand-file-name file dir))))
-                 '("CVS/Root" "CVS/Repository"))))
-
-(defun package-build--checkout-cvs (name config dir)
-  "Check package NAME with config CONFIG out of cvs into DIR."
-  (unless package-build-stable
-    (with-current-buffer (get-buffer-create "*package-build-checkout*")
-      (let ((root (package-build--trim (plist-get config :url) ?/))
-            (repo (or (plist-get config :module) (symbol-name name)))
-            (bound (goto-char (point-max))))
-        (cond
-         ((and (file-exists-p (expand-file-name "CVS" dir))
-               (equal (package-build--cvs-repo dir) (cons root repo)))
-          (package-build--princ-exists dir)
-          (package-build--run-process dir "cvs" "update" "-dP"))
-         (t
-          (when (file-exists-p dir)
-            (delete-directory dir t))
-          (package-build--princ-checkout (format "%s from %s" repo root) dir)
-          ;; CVS insists on relative paths as target directory for checkout (for
-          ;; whatever reason), and puts "CVS" directories into every subdirectory
-          ;; of the current working directory given in the target path. To get CVS
-          ;; to just write to DIR, we need to execute CVS from the parent
-          ;; directory of DIR, and specific DIR as relative path.  Hence all the
-          ;; following mucking around with paths.  CVS is really horrid.
-          (let* ((dir (directory-file-name dir))
-                 (working-dir (file-name-directory dir))
-                 (target-dir (file-name-nondirectory dir)))
-            (package-build--run-process working-dir "env" "TZ=UTC" "cvs" "-z3" "-d" root "checkout"
-                            "-d" target-dir repo))))
-        (apply 'package-build--run-process dir "cvs" "log"
-               (package-build--expand-source-file-list dir config))
-        (or (package-build--find-parse-time-latest "date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)" bound)
-            (package-build--find-parse-time-latest "date: \\([0-9]\\{4\\}/[0-9]\\{2\\}/[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\);" bound)
-            (error "No valid timestamps found!"))
-        ))))
-
-
 (defun package-build--git-repo (dir)
   "Get the current git repo for DIR."
   (package-build--run-process-match
@@ -546,7 +451,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
 
 (defun package-build--checkout-github (name config dir)
   "Check package NAME with config CONFIG out of github into DIR."
-  (let* ((url (format "git://github.com/%s.git" (plist-get config :repo))))
+  (let* ((url (format "https://github.com/%s.git" (plist-get config :repo))))
     (package-build--checkout-git name (plist-put (copy-sequence config) :url url) dir)))
 
 (defun package-build--checkout-gitlab (name config dir)
@@ -1227,7 +1132,7 @@ Returns the archive entry for the package."
 ;; save the network overhead.
 (defun package-build--write-melpa-badge-image (package-name version target-dir)
   (package-build--url-copy-file
-   (concat "http://img.shields.io/badge/"
+   (concat "https://img.shields.io/badge/"
            (if package-build-stable "melpa stable" "melpa")
            "-"
            (url-hexify-string version)
@@ -1258,7 +1163,7 @@ Returns the archive entry for the package."
   (interactive
    (list (intern (read-string "Package name: "))
          (intern
-          (let ((fetcher-types (mapcar #'symbol-name '(github gitlab git wiki bzr hg cvs svn))))
+          (let ((fetcher-types (mapcar #'symbol-name '(github gitlab git bzr hg svn))))
             (completing-read
              "Fetcher: "
              fetcher-types
@@ -1270,7 +1175,6 @@ Returns the archive entry for the package."
     (let* ((extra-params
             (cond
              ((eq 'github fetcher) '(:repo "USER/REPO"))
-             ((eq 'wiki fetcher) '())
              (t '(:url "SCM_URL_HERE"))))
            (template `(,name :fetcher ,fetcher ,@extra-params)))
       (insert (pp-to-string template))

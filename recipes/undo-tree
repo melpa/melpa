@@ -1,2 +1,2 @@
-(undo-tree :url "http://www.dr-qubit.org/git/undo-tree.git" :fetcher git)
+(undo-tree :url "https://www.dr-qubit.org/git/undo-tree.git" :fetcher git)
 

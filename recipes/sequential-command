@@ -1,1 +1,0 @@
-(sequential-command :fetcher wiki :files ("sequential-command.el" "sequential-command-config.el"))

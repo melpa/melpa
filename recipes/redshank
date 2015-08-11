@@ -1,4 +1,4 @@
 (redshank
- :url "http://www.foldr.org/~michaelw/projects/redshank.git"
+ :url "https://www.foldr.org/~michaelw/projects/redshank.git"
  :fetcher git
  :files ("*.el" "*.lisp"))

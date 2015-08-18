@@ -1,4 +1,4 @@
 (alchemist
  :fetcher github
  :repo "tonini/alchemist.el"
- :files (:defaults "*.exs" "server"))
+ :files (:defaults "*.exs" "alchemist-server"))

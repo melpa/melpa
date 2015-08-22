@@ -285,6 +285,7 @@ seconds; the server cuts off after 10 requests in 20 seconds.")
 
 (defun package-build--url-copy-file (url newname &optional ok-if-already-exists)
   "Copy URL to NEWNAME.  Both args must be strings.
+Returns the http request's header as a string.
 Like `url-copy-file', but it produces an error if the http response is not 200.
 Signals a `file-already-exists' error if file NEWNAME already exists,
 unless a third argument OK-IF-ALREADY-EXISTS is supplied and non-nil.
@@ -293,55 +294,34 @@ A number as third arg means request confirmation if NEWNAME already exists."
            (not ok-if-already-exists))
       (error "Opening output file: File already exists, %s" newname))
   (let ((buffer (url-retrieve-synchronously url))
+        (headers nil)
         (handle nil))
     (if (not buffer)
         (error "Opening input file: No such file or directory, %s" url))
     (with-current-buffer buffer
       (unless (= 200 url-http-response-status)
         (error "HTTP error %s fetching %s" url-http-response-status url))
-      (setq handle (mm-dissect-buffer t)))
+      (setq handle (mm-dissect-buffer t))
+      (mail-narrow-to-head)
+      (setq headers (buffer-string)))
     (mm-save-part-to-file handle newname)
     (kill-buffer buffer)
-    (mm-destroy-parts handle)))
+    (mm-destroy-parts handle)
+    headers))
 
 (defun package-build--grab-wiki-file (filename)
   "Download FILENAME from emacswiki, returning its last-modified time."
   (let* ((download-url
           (format "http://www.emacswiki.org/emacs/download/%s" filename))
-         (wiki-url
-          (format "http://www.emacswiki.org/emacs/%s" filename)))
+         headers)
     (package-build--with-wiki-rate-limit
-     (package-build--url-copy-file download-url filename t))
+     (setq headers (package-build--url-copy-file download-url filename t)))
     (when (zerop (nth 7 (file-attributes filename)))
       (error "Wiki file %s was empty - has it been removed?" filename))
-    ;; The Last-Modified response header for the download is actually
-    ;; correct for the file, but we have no access to that
-    ;; header. Instead, we must query the non-raw emacswiki page for
-    ;; the file.
-    ;; Since those Emacswiki lookups are time-consuming, we maintain a
-    ;; foo.el.stamp file containing ("SHA1" . "PARSED_TIME")
-    (let* ((new-content-hash (secure-hash 'sha1 (package-build--slurp-file filename)))
-           (stamp-file (concat filename ".stamp"))
-           (stamp-info (package-build--read-from-file stamp-file))
-           (prev-content-hash (car stamp-info)))
-      (if (and prev-content-hash
-               (string-equal new-content-hash prev-content-hash))
-          ;; File has not changed, so return old timestamp
-          (progn
-            (package-build--message "%s is unchanged" filename)
-            (cdr stamp-info))
-        (package-build--message "%s has changed - checking mod time" filename)
-        (let ((new-timestamp
-               (with-current-buffer (package-build--with-wiki-rate-limit
-                                     (url-retrieve-synchronously wiki-url))
-                 (unless (= 200 url-http-response-status)
-                   (error "HTTP error %s fetching %s" url-http-response-status wiki-url))
-                 (goto-char (point-max))
-                 (package-build--find-parse-time
-                  "Last edited \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\} [A-Z]\\{3\\}\\)"
-                  url-http-end-of-headers))))
-          (package-build--dump (cons new-content-hash new-timestamp) stamp-file)
-          new-timestamp)))))
+    (package-build--parse-time
+     (with-temp-buffer
+       (insert headers)
+       (mail-fetch-field "last-modified")))))
 
 (defun package-build--checkout-wiki (name config dir)
   "Checkout package NAME with config CONFIG from the EmacsWiki into DIR."

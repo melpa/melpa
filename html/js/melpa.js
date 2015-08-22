@@ -380,6 +380,7 @@
     var badgeURL = melpa.rootURL + pkg.badgeURL;
     var fullURL = melpa.rootURL + packagePath(pkg);
 
+    document.title = pkg.name +  " " + pkg.version + " | " + (new melpa.archivename.controller()).archiveName();
     return m("section", [
       m("h1", [pkg.name, " ", m("small", pkg.version)]),
       m("p.lead", pkg.description),
@@ -472,7 +473,6 @@
   };
 
   document.addEventListener("DOMContentLoaded", function() {
-    document.title = (new melpa.archivename.controller()).archiveName();
     _.each(document.getElementsByClassName('archive-name'), function (e) {
       // jshint unused: false
       m.mount(e, melpa.archivename);
@@ -486,7 +486,7 @@
   // Static pages
   //////////////////////////////////////////////////////////////////////////////
 
-  melpa.staticpage = function(partialPath) {
+  melpa.staticpage = function(partialPath, title) {
     this.controller = function() {
       this.content = m.prop('');
       m.request({method: "GET", url: partialPath,
@@ -494,6 +494,7 @@
                 }).then(this.content);
     };
     this.view = function(ctrl) {
+      document.title = title + " | " + (new melpa.archivename.controller()).archiveName();
       return m("div", [m.trust(ctrl.content())]);
     };
   };
@@ -510,6 +511,7 @@
     this.archivename = new melpa.archivename.controller();
   };
   melpa.frontpage.view = function(ctrl) {
+    document.title = (new melpa.archivename.controller()).archiveName();
     return m("div", [
       m("section.page-header", [
         m("h1", [
@@ -544,7 +546,7 @@
   //////////////////////////////////////////////////////////////////////////////
   // Routing
   //////////////////////////////////////////////////////////////////////////////
-  melpa.gettingstarted = new melpa.staticpage("/partials/getting-started.html");
+  melpa.gettingstarted = new melpa.staticpage("/partials/getting-started.html", "Getting Started");
 
   m.route.mode = "hash";
   m.route(document.getElementById("content"), "/", {

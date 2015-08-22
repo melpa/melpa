@@ -11,7 +11,7 @@ code using simple recipes. (Think of it as a server-side version of
 Packages are updated at intervals throughout the day.
 
 To browse available packages, check out the
-[archive index page](http://melpa.org/).
+[archive index page](https://melpa.org/).
 
 Adding packages is as simple as submitting a new recipe as a pull request;
 read on for details.
@@ -41,10 +41,10 @@ Enable installation of packages from MELPA by adding an entry to
 ```lisp
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa" . "https://melpa.org/packages/") t)
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
 (package-initialize)
 ```
 
@@ -425,7 +425,7 @@ format.
  such as Emacs 24. If you have an older version of Emacs, you can get a
  suitable `package.el` [here](http://bit.ly/pkg-el23).
 
-[melpa]: http://melpa.org
+[melpa]: https://melpa.org
 
 
 ## API
@@ -489,11 +489,11 @@ in your `package-archives` list.
 
 ```lisp
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/"))
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
 ```
 
 An online list of available packages can be found at 
-[http://stable.melpa.org](http://stable.melpa.org).
+[https://stable.melpa.org](https://stable.melpa.org).
 
 ### Stable Version Generation
 

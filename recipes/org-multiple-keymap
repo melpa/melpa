@@ -1,0 +1,3 @@
+(org-multiple-keymap
+ :fetcher github
+ :repo "myuhe/org-multiple-keymap.el")

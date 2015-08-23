@@ -1,4 +1,4 @@
 (scala-mode
- :repo "scala/scala-dist"
+ :repo "scala/scala-tool-support"
  :fetcher github
- :files ("tool-support/src/emacs/*.el"))
+ :files ("tool-support/emacs/*.el"))

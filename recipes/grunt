@@ -1,1 +1,1 @@
-(grunt :fetcher "github" :repo "gempesaw/grunt.el")
+(grunt :fetcher github :repo "gempesaw/grunt.el")

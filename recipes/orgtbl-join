@@ -1,0 +1,3 @@
+(orgtbl-join
+ :fetcher github
+ :repo "tbanel/orgtbljoin")

@@ -1,1 +1,1 @@
-(xahk-mode :fetcher git :url "https://code.google.com/p/ergoemacs/" :files ("packages/xahk-mode.el"))
+(xahk-mode :repo "xahlee/xahk-mode.el" :fetcher github)

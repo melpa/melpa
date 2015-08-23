@@ -1,0 +1,3 @@
+(elscreen-separate-buffer-list
+ :repo "wamei/elscreen-separate-buffer-list"
+ :fetcher github)

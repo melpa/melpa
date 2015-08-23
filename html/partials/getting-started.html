@@ -6,7 +6,7 @@
       <p>To use the MELPA repository, you'll need an Emacs with
         <code>package.el</code>. Emacs 24 has <code>package.el</code>
         bundled with it, and there's also
-        a <a href="http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el">version
+        a <a href="http://repo.or.cz/w/emacs.git/blob_plain/ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09:/lisp/emacs-lisp/package.el">version
         you can use with Emacs 23</a>.
       </p>
 
@@ -20,7 +20,7 @@
 
       <pre><code>(require 'package) ;; You might already have this line
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa" . "https://melpa.org/packages/"))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
@@ -32,7 +32,7 @@
       </p>
 
       <pre><code>(add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/") t)</code></pre>
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)</code></pre>
 
       <h3>Customizations</h3>
       <p>
@@ -125,6 +125,14 @@
         need to go into your <code>~/.emacs.d/elpa/</code> directory
         and delete packages that are installed multiple times. This
         can happen when the install times out.
+      </p>
+      <a name="adding"></a>
+      <h2>Adding a Package</h2>
+      <p>
+	In so many words, fork the project's source tree
+	and create a pull request with a recipe for your package.
+	The <tt>README.md</tt> file on GitHub has more details.
+	See the next section for a link.
       </p>
       <a name="development"></a>
       <h2>Development</h2>

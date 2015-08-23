@@ -1,2 +1,2 @@
 (flycheck-haskell :fetcher github :repo "flycheck/flycheck-haskell"
-                  :files ("*.el" "*.hs"))
+                  :files (:defaults "*.hs"))

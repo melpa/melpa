@@ -1,1 +1,1 @@
-(edit-indirect :fetcher "github" :repo "Fanael/edit-indirect")
+(edit-indirect :fetcher github :repo "Fanael/edit-indirect")

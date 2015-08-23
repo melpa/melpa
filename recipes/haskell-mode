@@ -1,8 +1,7 @@
 (haskell-mode
  :repo "haskell/haskell-mode"
  :fetcher github
- :files ("*.el"
-         "haskell-mode.texi"
+ :files (:defaults
          "NEWS"
          "snippets"
          "logo.svg"))

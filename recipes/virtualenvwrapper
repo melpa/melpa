@@ -1,3 +1,1 @@
-(virtualenvwrapper
-  :repo "porterjamesj/virtualenvwrapper.el"
-  :fetcher "github")
+(virtualenvwrapper :fetcher github :repo "porterjamesj/virtualenvwrapper.el")

@@ -1,0 +1,4 @@
+(tide
+ :fetcher github
+ :repo "ananthakumaran/tide"
+ :files (:defaults "tsserver"))

@@ -1,1 +1,1 @@
-(smart-mode-line :repo "Bruce-Connor/smart-mode-line" :fetcher github)
+(smart-mode-line :repo "Malabarba/smart-mode-line" :fetcher github)

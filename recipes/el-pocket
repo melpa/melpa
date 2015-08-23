@@ -1,0 +1,1 @@
+(el-pocket :repo "pterygota/el-pocket" :fetcher github)

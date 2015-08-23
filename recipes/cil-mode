@@ -1,0 +1,2 @@
+(cil-mode :repo "ForNeVeR/cil-mode"
+          :fetcher github)

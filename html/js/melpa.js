@@ -350,6 +350,7 @@
       downloadsPercentile: m.prop(0),
       archivename: new melpa.archivename.controller()
     };
+    ctrl.title = ctrl.packageName;
     melpa.packageList.then(function(packageList) {
       var p = packageList.packageWithName(ctrl.packageName);
       if (!p) return;
@@ -486,15 +487,18 @@
   // Static pages
   //////////////////////////////////////////////////////////////////////////////
 
-  melpa.staticpage = function(partialPath) {
-    this.controller = function() {
-      this.content = m.prop('');
-      m.request({method: "GET", url: partialPath,
-                 deserialize: function(v){return v;}
-                }).then(this.content);
-    };
-    this.view = function(ctrl) {
-      return m("div", [m.trust(ctrl.content())]);
+  melpa.staticpage = function(partialPath, title) {
+    return {
+      controller: function() {
+        this.content = m.prop('');
+        this.title = title;
+        m.request({method: "GET", url: partialPath,
+                   deserialize: _.identity
+                  }).then(this.content);
+      },
+      view: function(ctrl) {
+        return m("div", [m.trust(ctrl.content())]);
+      }
     };
   };
 
@@ -542,14 +546,45 @@
 
 
   //////////////////////////////////////////////////////////////////////////////
+  // Titled pages
+  //////////////////////////////////////////////////////////////////////////////
+
+  melpa.currentPageTitle = m.prop();
+
+  melpa.titledPage = function(module) {
+    return {
+      controller: function() {
+        var ctrl = new (Function.prototype.bind.apply(module.controller, arguments));
+        var t = ctrl.title;
+        melpa.currentPageTitle(typeof t === "function" ? t() : t);
+        return ctrl;
+      },
+      view: module.view
+    };
+  };
+
+  melpa.titleComponent = {
+    controller: function() {
+      this.archivename = new melpa.archivename.controller();
+    },
+    view: function(ctrl) {
+      return _.compact([ctrl.archivename.archiveName(), melpa.currentPageTitle()]).join(" - ");
+    }
+  };
+
+  var titleElem = document.querySelector("title");
+  titleElem.textContent = "";
+  m.module(titleElem, melpa.titleComponent);
+
+  //////////////////////////////////////////////////////////////////////////////
   // Routing
   //////////////////////////////////////////////////////////////////////////////
-  melpa.gettingstarted = new melpa.staticpage("/partials/getting-started.html");
+  melpa.gettingstarted = melpa.staticpage("/partials/getting-started.html", "Getting Started");
 
   m.route.mode = "hash";
   m.route(document.getElementById("content"), "/", {
-    "/": melpa.frontpage,
-    "/getting-started": melpa.gettingstarted,
-    "/:package": melpa.packagedetails
+    "/": melpa.titledPage(melpa.frontpage),
+    "/getting-started": melpa.titledPage(melpa.gettingstarted),
+    "/:package": melpa.titledPage(melpa.packagedetails)
   });
 })(window.m, window.document, window._, window.moment, window.Cookies);

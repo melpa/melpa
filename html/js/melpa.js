@@ -568,7 +568,7 @@
       this.archivename = new melpa.archivename.controller();
     },
     view: function(ctrl) {
-      return _.compact([ctrl.archivename.archiveName(), melpa.currentPageTitle()]).join(" - ");
+      return _.compact([melpa.currentPageTitle(), ctrl.archivename.archiveName()]).join(" - ");
     }
   };
 

@@ -1,4 +1,4 @@
 (jtags
  :fetcher git
- :url "git://jtags.git.sourceforge.net/gitroot/jtags/jtags"
+ :url "git://git.code.sf.net/p/jtags/code"
  :files ("src/lisp/*.el"))

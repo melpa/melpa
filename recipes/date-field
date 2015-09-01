@@ -1,0 +1,2 @@
+(date-field :repo "aki2o/emacs-date-field"
+            :fetcher github)

@@ -1,2 +1,1 @@
-(magit-annex :fetcher github
-             :repo "kyleam/magit-annex")
+(magit-annex :fetcher github :repo "magit/magit-annex")

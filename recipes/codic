@@ -1,0 +1,3 @@
+(codic :fetcher github
+       :repo "syohex/emacs-codic"
+       :files ("*.el" ("dict" "dict/*.csv")))

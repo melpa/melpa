@@ -1,0 +1,6 @@
+(magma-mode
+ :fetcher github
+ :repo "ThibautVerron/magma-mode"
+ :files ("*.el"
+         "snippets"
+         ("bin" "bin/build_completion_table.sh")))

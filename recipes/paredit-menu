@@ -1,4 +1,4 @@
 (paredit-menu
- :fetcher hg
- :url "https://code.google.com/p/phillord-emacs-packages/"
+ :fetcher github
+ :repo "phillord/phil-emacs-packages"
  :files ("paredit-menu.el"))

@@ -11,10 +11,10 @@ code using simple recipes. (Think of it as a server-side version of
 Packages are updated at intervals throughout the day.
 
 To browse available packages, check out the
-[archive index page](http://melpa.milkbox.net/).
+[archive index page](https://melpa.org/).
 
-Adding packages is as simple as submitting a pull request; read on for
-details.
+Adding packages is as simple as submitting a new recipe as a pull request;
+read on for details.
 
 ## Table of Contents
 
@@ -32,7 +32,7 @@ details.
 To use the MELPA repository, you'll need an Emacs with
 `package.el`. Emacs 24 has `package.el` bundled with it, and there's
 also a
-[version you can use with Emacs 23](http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el).
+[version you can use with Emacs 23](http://repo.or.cz/w/emacs.git/blob_plain/ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09:/lisp/emacs-lisp/package.el).
 
 Enable installation of packages from MELPA by adding an entry to
 `package-archives` after `(require 'package)` and before the call to
@@ -41,10 +41,10 @@ Enable installation of packages from MELPA by adding an entry to
 ```lisp
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "https://melpa.org/packages/") t)
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
 (package-initialize)
 ```
 
@@ -84,7 +84,7 @@ New recipe submissions should adhere to the following guidelines,
 * Packages should adhere to the `package.el` format as specified by
   `(info "(elisp) Packaging")`. More information on this format is
   provided by the
-  [marmalade package manual](http://marmalade-repo.org/doc-files/package.5.html).
+  [marmalade package manual](https://web.archive.org/web/20111120220609/http://marmalade-repo.org/doc-files/package.5.html).
 
 * Recipes should try to minimize the size of the resulting package by
   specifying only files relevant to the package. See the
@@ -98,6 +98,9 @@ New recipe submissions should adhere to the following guidelines,
 Because we care about the quality of packages that are part of MELPA
 we review all submissions. The following steps can help us with this
 process and expedite the recipe review process,
+
+* Use [flycheck-package](https://github.com/purcell/flycheck-package)
+  to help you identify common errors in your package metadata.
 
 * Include the following information in the pull request:
 
@@ -118,6 +121,10 @@ process and expedite the recipe review process,
   or entering "yes" when prompted after pressing `C-c C-c` in the
   recipe buffer.
 
+* If you are *not* the original author or maintainer of the package you
+  are submitting, please consider notifying the author *prior* to submitting
+  and make reasonable effort to include them in the pull request process.
+
 
 ### Testing
 
@@ -135,7 +142,7 @@ through this process.
         make recipes/<NAME>
 
   (Be sure that the `emacs` on your path is at least version 23, or
-  set `$EMACS` to the location of a suitable binary.)
+  set `$EMACS_COMMAND` to the location of a suitable binary.)
 
   Alternatively, open the recipe in Emacs and press `C-c C-c` in the
   recipe buffer: this will also prompt you to install the
@@ -173,9 +180,9 @@ the following form (`[...]` denotes optional or conditional values),
 
 ```lisp
 (<package-name>
- :fetcher [git|github|bzr|hg|darcs|svn|cvs|wiki]
+ :fetcher [git|github|gitlab|bzr|hg|darcs|fossil|svn|cvs|wiki]
  [:url "<repo url>"]
- [:repo "github-user/repo-name"]
+ [:repo "github-or-gitlab-user/repo-name"]
  [:module "cvs-module"]
  [:files ("<file1>" ...)])
 ```
@@ -183,11 +190,11 @@ the following form (`[...]` denotes optional or conditional values),
 - `package-name`
 a lisp symbol that has the same name as the package being specified.
 
-- `:fetcher` (one of `git, github, bzr, hg, darcs, svn, cvs, wiki`)
+- `:fetcher` (one of `git, github, gitlab, bzr, hg, darcs, fossil, svn, cvs, wiki`)
 specifies the type of repository that `:url` points to. Right now
-package-build supports [git][git], [github][github],
+package-build supports [git][git], [github][github], [gitlab][gitlab],
 [bazaar (bzr)][bzr], [mercurial (hg)][hg], [subversion (svn)][svn],
-[cvs][cvs], [darcs][darcs], and [Emacs Wiki (wiki)][emacswiki] as
+[cvs][cvs], [darcs][darcs], [fossil][fossil], and [Emacs Wiki (wiki)][emacswiki] as
 possible mechanisms for checking out the repository.
 
     *package-build* uses
@@ -204,17 +211,17 @@ differs from the package name being built.
 
 - `:url`
 specifies the URL of the version control repository. *required for
-the `git`, `bzr`, `hg`, `darcs`, `svn` and `cvs` fetchers.*
+the `git`, `bzr`, `hg`, `darcs`, `fossil`, `svn` and `cvs` fetchers.*
 
-- `:repo` specifies the github repository and is of the form
-`github-user/repo-name`. *required for the `github` fetcher*.
+- `:repo` specifies the github/gitlab repository and is of the form
+`user/repo-name`. *required for the `github` and `gitlab` fetchers*.
 
 - `:commit`
 specifies the commit of the git repo to checkout. The value
 will be passed to `git reset` in a repo where `upstream` is the
 original repository. Can therefore be either a sha, if pointing at a
 specific commit, or a full ref prefixed with "origin/". Only used by
-the `git` and `github` fetchers.
+the `git`-based fetchers.
 
 - `:branch`
 specifies the branch of the git repo to use. This is like `:commit`, but
@@ -232,7 +239,7 @@ ending in `test.el` or `tests.el`. See the default value below,
         ("*.el" "*.el.in" "dir"
          "*.info" "*.texi" "*.texinfo"
          "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
-         (:exclude ".dir-locals.el" "tests.el" "*-test.el" "*-tests.el"))
+         (:exclude ".dir-locals.el" "test.el" "tests.el" "*-test.el" "*-tests.el"))
 
     This option is necessary when there are multiple packages in the
 repository and thus the package should only be built from a subset of
@@ -242,29 +249,36 @@ to the root of the package.* More complex options are available,
 submit an [Issue](https://github.com/milkypostman/melpa/issues) if the
 specified package requires more complex file specification.
 
+    If the the package merely requires some additional files, for example for
+bundling external dependencies, but is otherwise fine with the defaults, it's
+recommended to use `:defaults` as the very first element of this list, which
+causes the default value shown above to be prepended to the specified file list.
+
 [git]: http://git-scm.com/
 [github]: https://github.com/
+[gitlab]: https://gitlab.com/
 [bzr]: http://bazaar.canonical.com/en/
 [hg]: http://mercurial.selenic.com/
 [svn]: http://subversion.apache.org/
 [cvs]: http://www.nongnu.org/cvs/
 [darcs]: http://darcs.net/
+[fossil]: http://www.fossil-scm.org/
 [emacswiki]: http://www.emacswiki.org/
 
 
 ### Example: Single File Repository
 
-[ido-ubiquitous](https://github.com/DarwinAwardWinner/ido-ubiquitous) is a repository that contains two files:
+[smex](https://github.com/nonsequitur/smex) is a repository that
+contains two files:
 
-* `README.md`
-* `ido-ubiquitous.el`
+* `README.markdown`
+* `smex.el`
 
-Since there is only one `.el` file, this package only needs the `:url` and `:fetcher` specified,
+Since there is only one `.el` file, this package only needs the `:url`
+and `:fetcher` specified,
 
 ```lisp
-(ido-ubiquitous
- :url "https://github.com/DarwinAwardWinner/ido-ubiquitous.git"
- :fetcher git)
+(smex :repo "nonsequitur/smex" :fetcher github)
 ```
 
 ### Example: Multiple Packages in one Repository
@@ -411,7 +425,7 @@ format.
  such as Emacs 24. If you have an older version of Emacs, you can get a
  suitable `package.el` [here](http://bit.ly/pkg-el23).
 
-[melpa]: http://melpa.milkbox.net
+[melpa]: https://melpa.org
 
 
 ## API
@@ -466,25 +480,27 @@ This can be configured using the `package-build-working-dir` variable.
 MELPA now includes a mechanism to build *stable* versions of packages
 given that the repositories meet the following criteria,
 
-1. Hosted using *git*.
-2. Tag names are version strings compatible parseable by the `version-to-list` function.
+1. Hosted using *git* or *hg*.
+2. Tag names are version strings compatible parseable by the `version-to-list`
+   function, optionally prefixed with `v`, `v.` or `v-`.
 
 To use the stable versions of packages you should use the stable server
 in your `package-archives` list.
 
 ```lisp
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://hiddencameras.milkbox.net/packages/") t)
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
 ```
 
 An online list of available packages can be found at 
-[http://hiddencameras.milkbox.net](http://hiddencameras.milkbox.net).
+[https://stable.melpa.org](https://stable.melpa.org).
 
 ### Stable Version Generation
 
-To have a stable version generated for your package simply tag the
-repository using a naming compatible with `version-to-list`. The repo
-state of this tag will be used to generate the stable package.
+To have a stable version generated for your package simply tag the repository
+using a naming compatible with `version-to-list`, optionally prefixed with `v`,
+`v.` or `v-`. The repo state of this tag will be used to generate the stable
+package.
 
 ### Notes
 

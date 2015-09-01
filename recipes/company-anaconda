@@ -1,0 +1,3 @@
+(company-anaconda
+ :fetcher github
+ :repo "proofit404/company-anaconda")

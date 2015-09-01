@@ -1,1 +1,1 @@
-(goto-last-change :fetcher wiki)
+(goto-last-change :repo "camdez/goto-last-change.el" :fetcher github)

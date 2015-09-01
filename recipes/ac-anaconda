@@ -1,0 +1,3 @@
+(ac-anaconda
+ :fetcher github
+ :repo "proofit404/ac-anaconda")

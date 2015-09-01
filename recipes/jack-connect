@@ -1,0 +1,1 @@
+(jack-connect :fetcher git :url "https://bitbucket.org/sbarbit/jack-connect")

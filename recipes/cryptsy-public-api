@@ -1,0 +1,2 @@
+(cryptsy-public-api :repo "sodaware/cryptsy-public-api.el"
+                    :fetcher github)

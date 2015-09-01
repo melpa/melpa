@@ -1,1 +1,1 @@
-(xml-rpc :fetcher bzr :url "lp:xml-rpc-el")
+(xml-rpc :fetcher github :repo "hexmode/xml-rpc-el")

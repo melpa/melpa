@@ -1,0 +1,1 @@
+(grails-projectile-mode :fetcher github :repo "yveszoundi/grails-projectile-mode")

@@ -1,4 +1,4 @@
 (go-mode
- :url "https://code.google.com/p/go/"
- :fetcher hg
- :files ("misc/emacs/*.el"))
+ :repo "dominikh/go-mode.el"
+ :fetcher github)
+

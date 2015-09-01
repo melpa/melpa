@@ -1,0 +1,1 @@
+(cmake-ide :repo "atilaneves/cmake-ide" :fetcher github)

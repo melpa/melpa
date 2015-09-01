@@ -1,0 +1,1 @@
+(handoff :repo "rejeep/handoff.el" :fetcher github)

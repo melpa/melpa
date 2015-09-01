@@ -1,3 +1,6 @@
-(omnisharp :repo "sp3ctum/omnisharp-emacs"
+(omnisharp :repo "OmniSharp/omnisharp-emacs"
            :fetcher github
-           :files ("omnisharp.el"))
+           :branch "master"
+           :files ("*.el"
+                   "src/*.el"
+                   "src/actions/*.el"))

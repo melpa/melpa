@@ -1,0 +1,1 @@
+(ac-html :repo "cheunghy/ac-html" :fetcher github)

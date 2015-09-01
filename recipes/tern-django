@@ -1,0 +1,4 @@
+(tern-django
+ :fetcher github
+ :repo "proofit404/tern-django"
+ :files ("*.el" "*.py" (:exclude "setup.py")))

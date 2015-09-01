@@ -1,0 +1,3 @@
+(org-beautify-theme :repo "jonnay/emagicians-starter-kit"
+					:fetcher github
+					:files ("themes/org-beautify-theme.el"))

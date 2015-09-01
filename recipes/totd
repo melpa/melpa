@@ -1,0 +1,2 @@
+(totd :fetcher gitlab
+      :repo "egh/emacs-totd")

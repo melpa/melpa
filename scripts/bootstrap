@@ -1,31 +1,36 @@
 #!/bin/bash
 
-# \curl -L https://raw.github.com/milkypostman/melpa/fasterbuild/scripts/bootstrap | bash
+# \curl -L https://raw.github.com/milkypostman/melpa/master/scripts/bootstrap | bash
 
 SUDOENV='DEBIAN_FRONTEND=noninteractive'
 
 cd ${HOME}
-sudo ${SUDOENV} add-apt-repository -y ppa:cassou/emacs
-sudo ${SUDOENV} apt-get update
+#sudo ${SUDOENV} add-apt-repository -y ppa:cassou/emacs
+sudo ${SUDOENV} apt-get -y update
 sudo ${SUDOENV} apt-get -y upgrade
-sudo ${SUDOENV} apt-get -y \
-    install \
-    subversion git cvs darcs curl bzr mercurial \
+sudo ${SUDOENV} apt-get -y install \
+    bzr \
+    curl \
+    cvs \
+    darcs \
     emacs24 emacs24-el emacs24-common-non-dfsg \
-    tmux make
+    fossil \
+    git \
+    make \
+    mercurial \
+    nginx \
+    runit \
+    subversion \
+    texinfo \
+    tmux
 
 # build the log stuff
-mkdir -p log
-cat > log/melpa.logrotate <<EOT
-${HOME}/log/melpa.log {
-    rotate 10
-    weekly
-    compress
-    dateext
-}
-EOT
+mkdir -p ~/log
+mkdir -p ~/var/run
+mkdir -p ~/var/lib/logrotate
+mkdir -p ~/www
+mkdir -p ~/etc
 
-mkdir -p www
 
 # ruby is used for templating
 \curl -L https://get.rvm.io | bash -s stable

@@ -1,0 +1,1 @@
+(diffscuss-mode :fetcher github :repo "hut8labs/diffscuss" :files ("diffscuss-mode/*.el"))

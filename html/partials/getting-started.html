@@ -2,16 +2,37 @@
 <section>
       <a name="installing"></a>
       <h2>Installing</h2>
-      <p>To add the repository put this before the call to <code>package-initialize</code> in your <code>init.el</code> file.</p>
 
-      <pre><code>(require 'package)
+      <p>To use the MELPA repository, you'll need an Emacs with
+        <code>package.el</code>. Emacs 24 has <code>package.el</code>
+        bundled with it, and there's also
+        a <a href="http://repo.or.cz/w/emacs.git/blob_plain/ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09:/lisp/emacs-lisp/package.el">version
+        you can use with Emacs 23</a>.
+      </p>
+
+      <p>
+        Enable installation of packages from MELPA by adding an entry
+        to <code>package-archives</code> after <code>(require
+        'package)</code> and before the call
+        to <code>package-initialize</code> in
+        your <code>init.el</code> or <code>.emacs</code> file:
+      </p>
+
+      <pre><code>(require 'package) ;; You might already have this line
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)</code></pre>
+             '("melpa" . "https://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize) ;; You might already have this line</code></pre>
 
-      <p>In Emacs &lt; 24, you'll also need to explicitly include the GNU
-        ELPA archive, which provides important compatibility libraries like <code>cl-lib</code>:</p>
-      <pre><code>(when (< emacs-major-version 24)
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))</code></pre>
+      <p>
+        or to add the stable package repository, use this instead
+        of <code>"melpa"</code>:
+      </p>
+
+      <pre><code>(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)</code></pre>
 
       <h3>Customizations</h3>
       <p>
@@ -105,12 +126,20 @@
         and delete packages that are installed multiple times. This
         can happen when the install times out.
       </p>
+      <a name="adding"></a>
+      <h2>Adding a Package</h2>
+      <p>
+	In so many words, fork the project's source tree
+	and create a pull request with a recipe for your package.
+	The <tt>README.md</tt> file on GitHub has more details.
+	See the next section for a link.
+      </p>
       <a name="development"></a>
       <h2>Development</h2>
       <p><a href="https://github.com/milkypostman/melpa">https://github.com/milkypostman/melpa</a></p>
       <p>
         Contributions are welcome. Currently, the builder supports
-        packages using git, subversion, mercurial, bzr, cvs, darcs and
+        packages using git, subversion, mercurial, bzr, cvs, darcs, fossil and
         emacswiki.
       </p>
     </section>

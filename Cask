@@ -1,4 +1,4 @@
-(source "melpa" "http://melpa.milkbox.net/packages/")
+(source "melpa" "https://melpa.org/packages/")
 
 (development
  (depends-on "ecukes")

@@ -1,0 +1,3 @@
+(jg-quicknav
+ :url "https://github.com/jeffgran/jg-quicknav"
+ :fetcher git)

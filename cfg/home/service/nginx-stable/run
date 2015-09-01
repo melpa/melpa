@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+exec /usr/sbin/nginx -g 'error_log /dev/null crit;' -c ~/etc/nginx-stable
+

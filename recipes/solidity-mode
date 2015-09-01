@@ -1,0 +1,3 @@
+(solidity-mode
+     :repo "ethereum/emacs-solidity"
+     :fetcher github)

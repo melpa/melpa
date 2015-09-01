@@ -1,3 +1,12 @@
 (slime :repo "slime/slime"
        :fetcher github
-       :files ("*.el" ("lib" "lib/hyperspec.el") "*.lisp" "*.asd" "contrib" "doc/*.texi" "doc/*.info" "doc/dir" "ChangeLog"))
+       :files ("*.el"
+               ("lib" "lib/hyperspec.el")
+               "swank"
+               "*.lisp"
+               "*.asd"
+               ("contrib" "contrib/*" (:exclude "contrib/test"))
+               "doc/slime.texi"
+               "doc/slime.info"
+               "doc/dir"
+               "ChangeLog"))

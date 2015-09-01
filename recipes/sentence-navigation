@@ -1,0 +1,3 @@
+(sentence-navigation
+  :fetcher github
+  :repo "angelic-sedition/emacs-sentence-navigation")

@@ -1,0 +1,2 @@
+(ox-pandoc :repo "kawabata/ox-pandoc"
+           :fetcher github)

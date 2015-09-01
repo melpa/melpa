@@ -4,7 +4,7 @@ RCPDIR  := ./recipes
 HTMLDIR := ./html
 WORKDIR := ./working
 WEBROOT := $$HOME/www
-EMACS   ?= emacs
+EMACS_COMMAND   ?= emacs
 SLEEP   ?= 0
 SANDBOX := ./sandbox
 ifdef STABLE
@@ -12,15 +12,15 @@ PKGDIR := ./packages-stable
 endif
 STABLE ?= nil
 
-EVAL := $(EMACS)
+EVAL := $(EMACS_COMMAND)
 
 ## Check for needing to initialize CL-LIB from ELPA
-NEED_CL-LIB := $(shell $(EMACS) --no-site-file --batch --eval '(prin1 (version< emacs-version "24.3"))')
+NEED_CL-LIB := $(shell $(EMACS_COMMAND) --no-site-file --batch --eval '(prin1 (version< emacs-version "24.3"))')
 ifeq ($(NEED_CL-LIB), t)
-	EMACS := $(EMACS) --eval "(package-initialize)"
+	EMACS_COMMAND := $(EMACS_COMMAND) --eval "(package-initialize)"
 endif
 
-EVAL := $(EMACS) --no-site-file --batch -l package-build.el --eval
+EVAL := $(EMACS_COMMAND) --no-site-file --batch -l package-build.el --eval
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
 
@@ -36,11 +36,11 @@ index: json
 ## Cleanup rules
 clean-working:
 	@echo " • Removing package sources ..."
-	rm -rf $(WORKDIR)/*
+	git clean -dffX $(WORKDIR)/.
 
 clean-packages:
 	@echo " • Removing packages ..."
-	rm -rfv $(PKGDIR)/*
+	git clean -dffX $(PKGDIR)/.
 
 clean-json:
 	@echo " • Removing json files ..."
@@ -68,16 +68,16 @@ packages/archive-contents: $(PKGDIR)/*.entry
 	$(EVAL) '(package-build-dump-archive-contents)'
 
 cleanup:
-	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" pb/this-dir))) (package-build-cleanup))'
+	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" package-build--this-dir))) (package-build-cleanup))'
 
 ## Json rules
 html/archive.json: $(PKGDIR)/archive-contents
 	@echo " • Building $@ ..."
-	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" pb/this-dir))) (package-build-archive-alist-as-json "html/archive.json"))'
+	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" package-build--this-dir))) (package-build-archive-alist-as-json "html/archive.json"))'
 
 html/recipes.json: $(RCPDIR)/.dirstamp
 	@echo " • Building $@ ..."
-	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" pb/this-dir))) (package-build-recipe-alist-as-json "html/recipes.json"))'
+	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" package-build--this-dir))) (package-build-recipe-alist-as-json "html/recipes.json"))'
 
 json: html/archive.json html/recipes.json
 
@@ -90,7 +90,7 @@ $(RCPDIR)/.dirstamp: .FORCE
 $(RCPDIR)/%: .FORCE
 	@echo " • Building recipe $(@F) ..."
 
-	- $(TIMEOUT) $(EVAL) "(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name \"$(PKGDIR)\" pb/this-dir))) (package-build-archive '$(@F)))"
+	- $(TIMEOUT) $(EVAL) "(let ((package-build-stable $(STABLE)) (package-build-write-melpa-badge-images t) (package-build-archive-dir (expand-file-name \"$(PKGDIR)\" package-build--this-dir))) (package-build-archive '$(@F)))"
 
 	@echo " ✓ Wrote $$(ls -lsh $(PKGDIR)/$(@F)-*) "
 	@echo " Sleeping for $(SLEEP) ..."
@@ -102,11 +102,13 @@ $(RCPDIR)/%: .FORCE
 sandbox: packages/archive-contents
 	@echo " • Building sandbox ..."
 	mkdir -p $(SANDBOX)
-	$(EMACS) -Q \
+	$(EMACS_COMMAND) -Q \
 		--eval '(setq user-emacs-directory "$(SANDBOX)")' \
 		-l package \
-		--eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.milkbox.net/packages/\") t)" \
+		--eval "(add-to-list 'package-archives '(\"gnu\" . \"http://elpa.gnu.org/packages/\") t)" \
+		--eval "(add-to-list 'package-archives '(\"melpa\" . \"https://melpa.org/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"sandbox\" . \"$(shell pwd)/$(PKGDIR)/\") t)" \
+		--eval "(package-refresh-contents)" \
 		--eval "(package-initialize)"
 
 .PHONY: clean build index html json sandbox

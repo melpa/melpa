@@ -1,0 +1,1 @@
+(vc-fossil :fetcher fossil :url "http://chiselapp.com/user/venks/repository/emacs-fossil/" :files ("vc/el/*.el" "doc/*"))

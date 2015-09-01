@@ -1,0 +1,1 @@
+(chatwork :repo "ataka/chatwork" :fetcher github)

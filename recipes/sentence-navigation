@@ -1,3 +1,3 @@
 (sentence-navigation
   :fetcher github
-  :repo "angelic-sedition/emacs-sentence-navigation")
+  :repo "noctuid/emacs-sentence-navigation")

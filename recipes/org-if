@@ -1,3 +1,2 @@
 (org-if :repo "elzair/org-if"
-        :fetcher gitlab
-        :files ("*.el"))
+        :fetcher gitlab)

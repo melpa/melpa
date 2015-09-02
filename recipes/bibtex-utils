@@ -1,1 +1,1 @@
-(bibtex-utils :fetcher github :url "plantarum/bibtex-utils")
+(bibtex-utils :fetcher github :repo "plantarum/bibtex-utils")

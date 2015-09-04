@@ -1,3 +1,4 @@
 (flycheck-protobuf
     :fetcher github
+    :branch "master"
     :repo "edvorg/flycheck-protobuf")

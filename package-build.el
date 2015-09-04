@@ -494,7 +494,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
        ((and (file-exists-p (expand-file-name ".git" dir))
              (string-equal (package-build--git-repo dir) repo))
         (package-build--princ-exists dir)
-        (package-build--run-process dir "git" "remote" "update"))
+        (package-build--run-process dir "git" "fetch" "--all" "--tags"))
        (t
         (when (file-exists-p dir)
           (delete-directory dir t))

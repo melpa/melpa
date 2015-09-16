@@ -1,0 +1,1 @@
+(flycheck-flow :fetcher github :repo "lbolla/emacs-flycheck-flow")

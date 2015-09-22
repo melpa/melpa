@@ -1,3 +1,0 @@
-(url-hint
-  :fetcher github
-  :repo "noctuid/url-hint.el")

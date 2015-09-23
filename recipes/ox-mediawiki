@@ -1,2 +1,2 @@
 (ox-mediawiki :fetcher github
-              :repo "tomalexander/orgmode-mediawiki")
+              :repo "manuel-uberti/orgmode-mediawiki")

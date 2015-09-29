@@ -1,2 +1,0 @@
-(helm-orgcard :repo "emacs-helm/helm-orgcard"
-              :fetcher github)

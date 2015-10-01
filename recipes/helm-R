@@ -1,0 +1,2 @@
+(helm-R :repo "myuhe/helm-R.el"
+        :fetcher github)

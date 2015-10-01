@@ -1,1 +1,1 @@
-(hoa-pp-mode :repo "stevenremot/hoa-pp-mode" :fetcher github)
+(hoa-pp-mode :repo "hoaproject/Contributions-Emacs-Pp" :fetcher github)

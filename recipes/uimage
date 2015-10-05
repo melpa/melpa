@@ -1,0 +1,4 @@
+(uimage :fetcher github
+		:repo "lujun9972/uimage"
+		:branch "melpa"
+		:files ("*.el"))

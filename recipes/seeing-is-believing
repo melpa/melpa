@@ -1,1 +1,1 @@
-(seeing-is-believing :repo "jcinnamond/seeing-is-believing-mode" :fetcher github)
+(seeing-is-believing :repo "jcinnamond/seeing-is-believing" :fetcher github)

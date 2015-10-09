@@ -1,0 +1,1 @@
+(cargo :repo "attichacker/cargo.el" :fetcher github)

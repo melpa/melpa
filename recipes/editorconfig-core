@@ -1,0 +1,1 @@
+(editorconfig-core :repo "10sr/editorconfig-core-emacslisp" :fetcher github)

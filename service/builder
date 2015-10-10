@@ -12,10 +12,31 @@ git reset --hard origin/${MELPA_BRANCH}
 git pull origin ${MELPA_BRANCH}
 echo
 
+# Amount of time to sleep between rebuilds
+SLEEP_DELAY=$((60 * 60))
+
+# Ensure template exists
+if ! grep started /home/melpa/www/build-status.json; then
+  echo '{"started": 0, "completed": 0, "duration": 0, "delay": 0}' > /home/melpa/www/build-status.json
+fi
+
+# Store sleep delay
+sed -i -e "s/delay: [0-9]+/delay: $SLEEP_DELAY" /home/melpa/www/build-status.json
+
+# Store started date
+BUILD_STARTED=$(date "+%s")
+sed -i -e "s/started: [0-9]+/completed: $BUILD_STARTED" /home/melpa/www/build-status.json
+
 # Build all the packages.
 scripts/parallel_build_all
 
-echo '{"completed":' `date "+%s"` '}' > /home/melpa/www/build-status.json
+# Store completed date
+BUILD_COMPLETED=$(date "+%s")
+sed -i -e "s/completed: [0-9]+/completed: $BUILD_COMPLETED" /home/melpa/www/build-status.json
 
-# Sleep for an hour before rebuilding.
-sleep 1h
+# Store duration
+BUILD_DURATION=$((BUILD_COMPLETED - BUILD_STARTED))
+sed -i -e "s/duration: [0-9]+/duration: $BUILD_DURATION" /home/melpa/www/build-status.json
+
+# Sleep for a while before rebuilding.
+sleep $SLEEP_DELAY

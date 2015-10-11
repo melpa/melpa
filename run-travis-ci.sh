@@ -1,5 +1,6 @@
 #!/bin/sh -e
 
+exec 2>&1
 cd "$(dirname "$0")"
 
 ECUKES_EMACS=${EMACS:-$(which emacs)}
@@ -20,3 +21,5 @@ if [ -n "$TRAVIS_COMMIT_RANGE" ]; then
         "$ECUKES_EMACS" --batch --eval "(progn (load-file \"package-build.el\")(package-build-archive '$recipe_name))"
     done
 fi
+
+echo "Build successful"

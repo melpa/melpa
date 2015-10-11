@@ -1421,7 +1421,7 @@ If FILE-NAME is not specified, the default archive-contents file is used."
 
 ;; Local Variables:
 ;; coding: utf-8
-;; eval: (checkdoc-minor-mode 1)
+;; checkdoc-minor-mode: 1
 ;; End:
 
 ;;; package-build.el ends here

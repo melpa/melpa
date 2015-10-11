@@ -14,12 +14,9 @@ echo
 cask exec ecukes
 
 if [ -n "$TRAVIS_COMMIT_RANGE" ]; then
-    CHANGED_RECIPES=$(git show --pretty=format: --name-only "$TRAVIS_COMMIT_RANGE" |grep -e '^recipes/')
-    if [ -n "$CHANGED_RECIPES" ]; then
-        for recipe_file in $CHANGED_RECIPES; do
-            recipe_name=$(echo "$recipe_file"|sed 's/^recipes\///')
-            echo "Building new/modified recipe: $recipe_name"
-            "$ECUKES_EMACS" --batch --eval "(progn (load-file \"package-build.el\")(package-build-archive '$recipe_name))"
-        done
-    fi
+    changed_recipes=$(git show --pretty=format: --name-only "$TRAVIS_COMMIT_RANGE" |grep -e '^recipes/'|sed 's/^recipes\///'|uniq)
+    for recipe_name in $changed_recipes; do
+        echo "Building new/modified recipe: $recipe_name"
+        "$ECUKES_EMACS" --batch --eval "(progn (load-file \"package-build.el\")(package-build-archive '$recipe_name))"
+    done
 fi

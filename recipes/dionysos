@@ -1,1 +1,1 @@
-(dionysos :fetcher github :repo "nlamirault/dionysos" :files ("dionysos*.el"))
+(dionysos :fetcher github :repo "nlamirault/dionysos")

@@ -444,15 +444,54 @@
 
   melpa.buildstatus = {};
   melpa.buildstatus.controller = function() {
-    this.buildCompletionTime = m.request({method: 'GET', url: "/build-status.json", background: true})
+    this.getCurrentStatus = m.request({method: 'GET', url: "/build-status.json", background: true})
       .then(function(status){
-        return new Date(status.completed * 1000);
+        // Transform timestamps into Date objects
+        status.started   = Date(status.started * 1000);
+        status.completed = Date(status.completed * 1000);
+
+        // FIXME remove this once build-status.json has the correct format
+        if (!status.duration) {
+          status.duration = 3 * 3600; // Fake 3h
+          status.delay = 3600; // 1h
+          var diff = Date() - status.completed;
+          status.started = status.completed;
+          if (diff > status.delay) {
+            status.started += status.delay; // We are currently building
+          } else {
+            status.started -= status.duration; // We are currently waiting
+          }
+        }
+        return status;
       });
   };
   melpa.buildstatus.view = function(ctrl) {
-    return m(".alert.alert-success", [
-      m("strong", "Last build ended: "),
-      m("span", [ctrl.buildCompletionTime() ? moment(ctrl.buildCompletionTime()).fromNow() : "unknown"])
+    var data = ctrl.getCurrentStatus();
+    if (!data)
+      return null;
+    var status;
+    var now = Date();
+    if (data.completed < now && now < data.started) {
+      status = "Waiting (starting in ~";
+      status += moment(data.completed + data.delay).from(now);
+    } else {
+      status = "Building (ending in ~";
+      status += moment(data.completed + data.delay + data.duration).from(now);
+    }
+    status += ")";
+    return m(".status", [
+      m(".alert.alert-success", [
+        m("strong", "Last build ended: "),
+        m("span", moment(data.completed).fromNow())
+      ]),
+      m(".alert.alert-success", [
+        m("strong", "Last build duration: "),
+        m("span", moment.duration(data.duration, "seconds").format())
+      ]),
+      m(".alert.alert-success", [
+        m("strong", "Status: "),
+        m("span", status)
+      ]),
     ]);
   };
 

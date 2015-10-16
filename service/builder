@@ -1,15 +1,15 @@
 #!/bin/bash -e
 
 export HOME=/home/melpa
-cd ${HOME}/melpa
+cd "${HOME}/melpa"
 
-source $HOME/melpa/scripts/env
+source "$HOME/melpa/scripts/env"
 
 ## git pull
-cd ${MELPA_HOME}
+cd "${MELPA_HOME}"
 git fetch origin
-git reset --hard origin/${MELPA_BRANCH}
-git pull origin ${MELPA_BRANCH}
+git reset --hard "origin/${MELPA_BRANCH}"
+git pull origin "${MELPA_BRANCH}"
 echo
 
 # Build all the packages.

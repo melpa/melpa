@@ -444,16 +444,37 @@
 
   melpa.buildstatus = {};
   melpa.buildstatus.controller = function() {
-    this.buildCompletionTime = m.request({method: 'GET', url: "/build-status.json", background: true})
+    this.started = m.prop();
+    this.completed = m.prop();
+    this.next = m.prop();
+    this.running = function() { return !this.completed(); }.bind(this);
+
+    m.request({method: 'GET', url: "/build-status.json", background: true})
       .then(function(status){
-        return new Date(status.completed * 1000);
-      });
+        m.startComputation();
+        this.started(maybeDate(status.started));
+        this.completed(maybeDate(status.completed));
+        this.next(maybeDate(status.next));
+        m.endComputation();
+      }.bind(this));
+    function maybeDate(v) { return v ? new Date(v * 1000) : null; }
   };
   melpa.buildstatus.view = function(ctrl) {
-    return m(".alert.alert-success", [
-      m("strong", "Last build ended: "),
-      m("span", [ctrl.buildCompletionTime() ? moment(ctrl.buildCompletionTime()).fromNow() : "unknown"])
-    ]);
+    function reltime(t) {
+      return t ? moment(t).fromNow() : "unknown";
+    }
+    if (ctrl.running()) {
+      return m(".alert.alert-warning", [
+        m("strong", "Current build started: "),
+        m("span", [reltime(ctrl.started())])
+      ]);
+    } else {
+      return m(".alert.alert-success", [
+        m("strong", "Next build: "),
+        m("span", [reltime(ctrl.next())]),
+        m("span", [", last ended ", reltime(ctrl.completed())])
+      ]);
+    }
   };
 
 

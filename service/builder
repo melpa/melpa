@@ -12,10 +12,35 @@ git reset --hard "origin/${MELPA_BRANCH}"
 git pull origin "${MELPA_BRANCH}"
 echo
 
+BUILD_STATUS_JSON=$HOME/melpa/www/build-status.json
+
+update_json() {
+    cat <<EOF > $BUILD_STATUS_JSON
+{
+  "started": $BUILD_STARTED,
+  "completed": ${BUILD_COMPLETED-null},
+  "next": ${BUILD_NEXT-null},
+  "duration": ${BUILD_DURATION-null}
+}
+EOF
+    echo "Writing $BUILD_STATUS_JSON"
+    cat "$BUILD_STATUS_JSON"
+}
+
+# Amount of time to sleep between rebuilds
+BUILD_DELAY=$((60 * 60))
+
+BUILD_STARTED=$(date "+%s")
+update_json
+
 # Build all the packages.
 scripts/parallel_build_all
 
-echo '{"completed":' `date "+%s"` '}' > /home/melpa/www/build-status.json
+# Store completed date
+BUILD_COMPLETED=$(date "+%s")
+BUILD_DURATION=$((BUILD_COMPLETED - BUILD_STARTED))
+BUILD_NEXT=$((BUILD_COMPLETED + BUILD_DELAY))
+update_json
 
-# Sleep for an hour before rebuilding.
-sleep 1h
+# Sleep for a while before rebuilding.
+sleep $BUILD_DELAY

@@ -7,8 +7,8 @@ source "$HOME/melpa/scripts/env"
 ## git pull
 cd "${MELPA_HOME}"
 git fetch origin
-git reset --hard "origin/master"
-git pull origin master
+git reset --hard "origin/${MELPA_BRANCH}"
+git pull origin "${MELPA_BRANCH}"
 echo
 
 BUILD_STATUS_JSON=$HOME/www/build-status.json

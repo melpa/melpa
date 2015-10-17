@@ -1,5 +1,6 @@
 #!/bin/bash -e
 
+export HOME=/home/melpa
 export STABLE=t
 
 . "$HOME/melpa/service/builder"

@@ -1,6 +1,5 @@
 #!/bin/bash -e
 
-export MELPA_BRANCH=stable
 export STABLE=t
 
-. "$(dirname "$0")/builder"
+. "$HOME/melpa/service/builder"

@@ -12,7 +12,7 @@ git reset --hard "origin/${MELPA_BRANCH}"
 git pull origin "${MELPA_BRANCH}"
 echo
 
-BUILD_STATUS_JSON=$HOME/melpa/www/build-status.json
+BUILD_STATUS_JSON=$HOME/www/build-status.json
 
 update_json() {
     cat <<EOF > $BUILD_STATUS_JSON

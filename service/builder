@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
 export HOME=/home/melpa
-
 source "$HOME/melpa/scripts/env"
 
 ## git pull

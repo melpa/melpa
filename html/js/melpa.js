@@ -554,7 +554,7 @@
           m("section.jumbotron", [
             m("ul", [
               "<strong>Up-to-date packages built on our servers from upstream source</strong>",
-              "<strong>Installable in any recent Emacs using 'package.el'</strong> - no need to install svn/cvs/hg/bzr/git/darcs/fossil etc.",
+              "<strong>Installable in any Emacs with 'package.el'</strong> - no local version-control tools needed",
               "<strong>Curated</strong> - no obsolete, renamed, forked or randomly hacked packages",
               "<strong>Comprehensive</strong> - more packages than any other archive",
               "<strong>Automatic updates</strong> - new commits result in new packages",

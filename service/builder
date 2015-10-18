@@ -11,6 +11,11 @@ git pull origin "${MELPA_BRANCH}"
 echo
 
 BUILD_STATUS_JSON=$HOME/www/build-status.json
+BUILD_LAST_DURATION_FILE=$HOME/www/.last-build-duration
+
+if [ -f "$BUILD_LAST_DURATION_FILE" ]; then
+    BUILD_DURATION=$(cat "$BUILD_LAST_DURATION_FILE")
+fi
 
 update_json() {
     cat <<EOF > $BUILD_STATUS_JSON
@@ -37,6 +42,7 @@ scripts/parallel_build_all
 # Store completed date
 BUILD_COMPLETED=$(date "+%s")
 BUILD_DURATION=$((BUILD_COMPLETED - BUILD_STARTED))
+echo -n "$BUILD_DURATION" > $BUILD_LAST_DURATION_FILE
 BUILD_NEXT=$((BUILD_COMPLETED + BUILD_DELAY))
 update_json
 

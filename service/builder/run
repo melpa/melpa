@@ -1,17 +1,23 @@
 #!/bin/bash -e
 
-export HOME=/home/melpa
-source "$HOME/melpa/scripts/env"
+SCRIPTPATH=$( cd "$(dirname "$0")" ; pwd -P )
+export HOME=$( cd "${SCRIPTPATH}/../../.." ; pwd -P )
 
-## git pull
-cd "${MELPA_HOME}"
+MELPA_REPO="${SCRIPTPATH}/../.."
+cd "${MELPA_REPO}"
+MELPA_BRANCH=$( git rev-parse --abbrev-ref HEAD )
+
+BUILD_STATUS_JSON=${MELPA_REPO}/html/build-status.json
+BUILD_LAST_DURATION_FILE=${MELPA_REPO}/html/.last-build-duration
+
+# Amount of time to sleep between rebuilds
+BUILD_DELAY=$((60 * 60))
+
+## update MELPA repo
 git fetch origin
 git reset --hard "origin/${MELPA_BRANCH}"
 git pull origin "${MELPA_BRANCH}"
 echo
-
-BUILD_STATUS_JSON=$HOME/www/build-status.json
-BUILD_LAST_DURATION_FILE=$HOME/www/.last-build-duration
 
 if [ -f "$BUILD_LAST_DURATION_FILE" ]; then
     BUILD_DURATION=$(cat "$BUILD_LAST_DURATION_FILE")
@@ -30,8 +36,6 @@ EOF
     cat "$BUILD_STATUS_JSON"
 }
 
-# Amount of time to sleep between rebuilds
-BUILD_DELAY=$((60 * 60))
 
 BUILD_STARTED=$(date "+%s")
 update_json

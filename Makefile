@@ -7,9 +7,6 @@ WEBROOT := $$HOME/www
 EMACS_COMMAND   ?= emacs
 SLEEP   ?= 0
 SANDBOX := ./sandbox
-ifdef STABLE
-PKGDIR := ./packages-stable
-endif
 STABLE ?= nil
 
 EVAL := $(EMACS_COMMAND)

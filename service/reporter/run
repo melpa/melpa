@@ -2,11 +2,11 @@
 
 # Service for reporting missing and old packages.
 
-export HOME=/home/melpa
+SCRIPTPATH=$( cd "$(dirname "$0")" ; pwd -P )
+MELPA_REPO="${SCRIPTPATH}/../.."
+cd "${MELPA_REPO}"
 
 BODY=`mktemp`
-
-cd ${HOME}/melpa
 
 echo "To: MP <dcurtis@milkbox.net>" > ${BODY}
 echo "Subject: [MELPA] `date "+%Y%m%d %H:%M %z"`" >> ${BODY}

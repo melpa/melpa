@@ -21,7 +21,6 @@ http {
 	server_tokens off;
 
 	# server_names_hash_bucket_size 64;
-	server_name_in_redirect off;
 
 	charset utf-8;
 	
@@ -72,11 +71,11 @@ http {
 	##
 
 	server {
-		server_name stable.melpa.org;
+		server_name melpa.org;
 		server_tokens off;
 		server_name_in_redirect off;
 	
-		root /home/melpa/www;
+		root /home/melpa/melpa/html;
 
 		listen 1337;
 	

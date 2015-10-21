@@ -1,2 +1,2 @@
 (gregorio-mode :fetcher github
-	       :repo "cajetanus/gregorio-mode")
+	       :repo "cajetanus/gregorio-mode.el")

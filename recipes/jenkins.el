@@ -1,3 +1,2 @@
-(jenkins.el :repo "rmuslimov/jenkins.el"
-            :fetcher github
-            :files ("jenkins.el"))
+(jenkins :repo "rmuslimov/jenkins.el"
+         :fetcher github)

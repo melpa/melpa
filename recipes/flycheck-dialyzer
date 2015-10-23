@@ -1,0 +1,1 @@
+(flycheck-dialyzer :fetcher github :repo "lbolla/emacs-flycheck-dialyzer")

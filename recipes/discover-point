@@ -1,1 +1,0 @@
-(discover-point :repo "netromdk/discover-point" :fetcher github)

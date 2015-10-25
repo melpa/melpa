@@ -1,0 +1,2 @@
+(plantuml-mode :repo "wildsoul/plantuml-mode"
+               :fetcher github)

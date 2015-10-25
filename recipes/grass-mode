@@ -1,0 +1,1 @@
+(grass-mode :fetcher hg :url "https://bitbucket.org/tws/grass-mode.el")

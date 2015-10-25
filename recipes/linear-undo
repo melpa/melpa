@@ -1,4 +1,0 @@
-(linear-undo
- :fetcher github
- :repo "k-talo/linear-undo.el"
- :files ("linear-undo.el"))

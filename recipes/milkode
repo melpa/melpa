@@ -1,0 +1,1 @@
+(milkode :repo "ongaeshi/emacs-milkode" :fetcher github)

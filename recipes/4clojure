@@ -1,0 +1,1 @@
+(4clojure :fetcher github :repo "joshuarh/4clojure.el")

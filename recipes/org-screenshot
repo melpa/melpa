@@ -1,0 +1,3 @@
+(org-screenshot
+ :fetcher github
+ :repo "dfeich/org-screenshot")

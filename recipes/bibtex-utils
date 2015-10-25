@@ -1,0 +1,1 @@
+(bibtex-utils :fetcher github :repo "plantarum/bibtex-utils")

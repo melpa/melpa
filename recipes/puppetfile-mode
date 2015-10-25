@@ -1,0 +1,4 @@
+(puppetfile-mode
+ :fetcher github
+ :repo "ssm/elisp"
+ :files ("puppetfile-mode.el"))

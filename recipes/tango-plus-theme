@@ -1,0 +1,3 @@
+(tango-plus-theme
+ :repo "tmalsburg/tango-plus-theme"
+ :fetcher github)

@@ -1,0 +1,3 @@
+(shell-current-directory
+ :fetcher github
+ :repo "metaperl/shell-current-directory")

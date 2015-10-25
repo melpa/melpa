@@ -1,0 +1,3 @@
+(traad :fetcher github
+       :repo "abingham/traad"
+       :files ("elisp/*.el" "setup.py" "traad"))

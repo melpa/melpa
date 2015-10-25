@@ -1,0 +1,1 @@
+(magit-svn :fetcher github :repo "magit/magit-svn")

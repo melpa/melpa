@@ -1,0 +1,1 @@
+(voca-builder :fetcher github :repo "yitang/voca-builder")

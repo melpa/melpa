@@ -1,0 +1,1 @@
+(ibuffer-git :fetcher github :repo "jrockway/ibuffer-git")

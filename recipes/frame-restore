@@ -1,0 +1,1 @@
+(frame-restore :repo "lunaryorn/frame-restore.el" :fetcher github)

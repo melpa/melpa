@@ -1,0 +1,3 @@
+(gandalf-theme
+ :fetcher github
+ :repo "ptrv/gandalf-theme-emacs")

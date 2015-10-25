@@ -1,0 +1,3 @@
+(ranger :fetcher github
+          :repo "ralesi/ranger.el"
+          :old-names (evil-ranger))

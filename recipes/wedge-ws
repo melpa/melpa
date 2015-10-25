@@ -1,0 +1,1 @@
+(wedge-ws :fetcher github :repo "aes/wedge-ws")

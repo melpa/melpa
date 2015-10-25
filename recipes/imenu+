@@ -1,0 +1,1 @@
+(imenu+ :fetcher wiki)

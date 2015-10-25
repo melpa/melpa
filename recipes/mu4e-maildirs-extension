@@ -1,0 +1,1 @@
+(mu4e-maildirs-extension :repo "agpchil/mu4e-maildirs-extension" :fetcher github)

@@ -1,0 +1,2 @@
+(vlf :repo "m00natic/vlfi" :fetcher github
+     :old-names (vlfi))

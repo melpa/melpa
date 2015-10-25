@@ -1,0 +1,3 @@
+(runner
+ :fetcher github
+ :repo "thamer/runner")

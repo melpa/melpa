@@ -1,0 +1,1 @@
+(flycheck-mypy :fetcher github :repo "lbolla/emacs-flycheck-mypy")

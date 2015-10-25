@@ -1,0 +1,1 @@
+(mode-icons :fetcher git :url "git://ryuslash.org/mode-icons.git" :files ("*.el" "icons"))

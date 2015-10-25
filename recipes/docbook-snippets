@@ -1,0 +1,4 @@
+(docbook-snippets
+ :repo "jhradilek/emacs-docbook-snippets"
+ :fetcher github
+ :files ("docbook-snippets.el" "snippets"))

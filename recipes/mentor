@@ -1,0 +1,1 @@
+(mentor :repo "skangas/mentor" :fetcher github)

@@ -1,0 +1,1 @@
+(audio-notes-mode :repo "Malabarba/audio-notes-mode" :fetcher github)

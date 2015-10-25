@@ -1,0 +1,3 @@
+(parsebib
+ :fetcher github
+ :repo "joostkremers/parsebib")

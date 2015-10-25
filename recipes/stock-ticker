@@ -1,0 +1,1 @@
+(stock-ticker :fetcher github :repo "hagleitn/stock-ticker")

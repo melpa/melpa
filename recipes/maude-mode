@@ -1,0 +1,3 @@
+(maude-mode
+ :fetcher svn
+ :url "svn://svn.code.sf.net/p/maude-mode/code/trunk")

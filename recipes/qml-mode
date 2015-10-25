@@ -1,0 +1,3 @@
+(qml-mode
+ :repo "coldnew/qml-mode"
+ :fetcher github)

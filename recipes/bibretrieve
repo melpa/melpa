@@ -1,0 +1,1 @@
+(bibretrieve :repo "pzorin/bibretrieve" :fetcher github)

@@ -1,0 +1,1 @@
+(python-django :fetcher github :repo "fgallina/python-django.el")

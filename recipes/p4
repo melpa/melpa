@@ -1,0 +1,3 @@
+(p4
+ :fetcher github
+ :repo "gareth-rees/p4.el")

@@ -1,0 +1,2 @@
+(guide-key-tip :repo "aki2o/guide-key-tip"
+               :fetcher github)

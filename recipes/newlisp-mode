@@ -1,0 +1,1 @@
+(newlisp-mode :fetcher github :repo "kosh04/newlisp-mode")

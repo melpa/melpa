@@ -1,0 +1,1 @@
+(wakatime-mode :fetcher github :repo "wakatime/wakatime-mode")

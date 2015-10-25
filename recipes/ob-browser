@@ -1,0 +1,3 @@
+(ob-browser :fetcher github
+	    :repo "krisajenkins/ob-browser"
+	    :files ("*.js" "*.el"))

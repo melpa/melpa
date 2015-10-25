@@ -1,1 +1,1 @@
-(naquadah-theme :repo "sdegutis/naquadah-theme.el" :fetcher github)
+(naquadah-theme :fetcher github :repo "jd/naquadah-theme")

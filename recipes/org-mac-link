@@ -1,0 +1,5 @@
+(org-mac-link
+ :fetcher git
+ :url "git://orgmode.org/org-mode.git"
+ :files ("contrib/lisp/org-mac-link.el")
+ :old-names (org-mac-link-grabber))

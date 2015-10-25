@@ -1,0 +1,2 @@
+(cucumber-goto-step :repo "gstamp/cucumber-goto-step"
+              :fetcher github)

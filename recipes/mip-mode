@@ -1,0 +1,1 @@
+(mip-mode :fetcher github :repo "gaudecker/mip-mode")

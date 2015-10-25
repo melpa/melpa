@@ -1,0 +1,1 @@
+(helm-rubygems-local :repo "f-kubotar/helm-rubygems-local" :fetcher github)

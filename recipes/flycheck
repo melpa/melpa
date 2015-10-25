@@ -1,2 +1,1 @@
-(flycheck :repo "lunaryorn/flycheck" :fetcher github
-          :files ("flycheck.el" "doc/dir" "doc/flycheck.info"))
+(flycheck :repo "flycheck/flycheck" :fetcher github)

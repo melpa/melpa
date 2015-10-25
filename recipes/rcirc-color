@@ -1,0 +1,1 @@
+(rcirc-color :fetcher github :repo "kensanata/elisp" :files ("rcirc-color.el"))

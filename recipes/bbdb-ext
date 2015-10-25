@@ -1,0 +1,1 @@
+(bbdb-ext :fetcher github :repo "vapniks/bbdb-ext")

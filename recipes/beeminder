@@ -1,0 +1,2 @@
+(beeminder :repo "sodaware/beeminder.el"
+					 :fetcher github)

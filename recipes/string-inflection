@@ -1,0 +1,1 @@
+(string-inflection :fetcher github :repo "akicho8/string-inflection")

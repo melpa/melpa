@@ -1,0 +1,2 @@
+(elfeed :repo "skeeto/elfeed"
+        :fetcher github)

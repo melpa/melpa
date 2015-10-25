@@ -1,0 +1,1 @@
+(ac-haskell-process :fetcher github :repo "purcell/ac-haskell-process")

@@ -1,0 +1,4 @@
+(processing-mode
+ :repo "ptrv/processing2-emacs"
+ :fetcher github
+ :files ("processing-mode.el"))

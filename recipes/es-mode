@@ -1,0 +1,3 @@
+(es-mode
+ :fetcher github
+ :repo "dakrone/es-mode")

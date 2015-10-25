@@ -1,0 +1,1 @@
+(misc-cmds :fetcher wiki) ; Miscellaneous commands (interactive functions)

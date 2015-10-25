@@ -1,3 +1,2 @@
-(clojure-mode :repo "technomancy/clojure-mode" :fetcher github :files
+(clojure-mode :repo "clojure-emacs/clojure-mode" :fetcher github :files
               ("clojure-mode.el"))
-

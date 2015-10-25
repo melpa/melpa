@@ -1,0 +1,1 @@
+(gmail-message-mode :repo "Malabarba/gmail-mode" :fetcher github)

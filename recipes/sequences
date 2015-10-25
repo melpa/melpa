@@ -1,0 +1,2 @@
+(sequences :repo "timvisher/sequences.el" :fetcher github :files ("sequences.el"))
+

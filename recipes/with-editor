@@ -1,0 +1,4 @@
+(with-editor :fetcher github
+             :repo "magit/magit"
+             :files ("lisp/with-editor.el"
+                     "Documentation/with-editor.texi"))

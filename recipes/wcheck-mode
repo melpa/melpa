@@ -1,0 +1,1 @@
+(wcheck-mode :fetcher github :repo "tlikonen/wcheck-mode")

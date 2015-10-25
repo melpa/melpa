@@ -1,2 +1,0 @@
-(csv-mode :repo "emacsmirror/csv-mode" :fetcher github)
-

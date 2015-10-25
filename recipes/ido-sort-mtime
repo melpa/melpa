@@ -1,0 +1,2 @@
+(ido-sort-mtime :repo "pkkm/ido-sort-mtime"
+                :fetcher github)

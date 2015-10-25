@@ -1,0 +1,1 @@
+(flymake-puppet :repo "benprew/flymake-puppet" :fetcher github)

@@ -1,0 +1,2 @@
+(hemisu-theme :repo "andrzejsliwa/hemisu-theme"
+	      :fetcher github)

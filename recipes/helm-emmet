@@ -1,0 +1,1 @@
+(helm-emmet :repo "yasuyk/helm-emmet" :fetcher github)

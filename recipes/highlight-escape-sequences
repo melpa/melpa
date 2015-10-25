@@ -1,0 +1,1 @@
+(highlight-escape-sequences :fetcher github :repo "dgutov/highlight-escape-sequences")

@@ -1,3 +1,0 @@
-(clojure-test-mode :repo "technomancy/clojure-mode" :fetcher github :files
-                   ("clojure-test-mode.el"))
-

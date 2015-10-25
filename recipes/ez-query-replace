@@ -1,0 +1,3 @@
+(ez-query-replace
+ :repo "Wilfred/ez-query-replace.el"
+ :fetcher github)

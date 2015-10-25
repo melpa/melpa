@@ -1,2 +1,1 @@
-(rspec-mode :repo "pezra/rspec-mode" :fetcher github :files ("rspec-mode.el"))
-
+(rspec-mode :repo "pezra/rspec-mode" :fetcher github :files ("rspec-mode.el" "snippets"))

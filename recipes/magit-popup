@@ -1,0 +1,4 @@
+(magit-popup :fetcher github
+             :repo "magit/magit"
+             :files ("lisp/magit-popup.el"
+                     "Documentation/magit-popup.texi"))

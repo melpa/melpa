@@ -1,2 +1,0 @@
-(citrus-mode :repo "rejeep/citrus-mode" :fetcher github)
-

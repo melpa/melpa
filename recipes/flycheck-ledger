@@ -1,0 +1,1 @@
+(flycheck-ledger :fetcher github :repo "purcell/flycheck-ledger")

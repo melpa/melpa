@@ -1,0 +1,3 @@
+(mc-extras
+ :fetcher github
+ :repo "knu/mc-extras.el")

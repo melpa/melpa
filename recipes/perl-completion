@@ -1,0 +1,1 @@
+(perl-completion :fetcher github :repo "imakado/perl-completion")

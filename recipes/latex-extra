@@ -1,0 +1,1 @@
+(latex-extra :repo "Malabarba/latex-extra" :fetcher github)

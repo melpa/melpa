@@ -1,13 +1,15 @@
 SHELL  := /bin/bash
 
-.PHONY: all clean updates.rss index.html
-all: index.html updates.rss
-
-index.html: index.html.erb
-	erb index.html.erb > index.html
+.PHONY: all clean updates.rss
+all: updates.rss
 
 updates.rss: updates.rss.erb
-	erb updates.rss.erb > updates.rss
+	erb updates.rss.erb > updates.rss.tmp && mv updates.rss.tmp updates.rss
+
+livejson:
+	for f in recipes archive download_counts build-status; do curl http://melpa.org/$$f.json > $$f.json; done
 
 clean:
-	-rm -v index.html updates.rss
+	-rm -v updates.rss
+
+.dummy: livejson

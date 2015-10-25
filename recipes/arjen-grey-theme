@@ -1,0 +1,2 @@
+(arjen-grey-theme :repo "credmp/arjen-grey-theme"
+                  :fetcher github)

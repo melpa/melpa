@@ -1,0 +1,1 @@
+(org-redmine :fetcher github :repo "gongo/org-redmine")

@@ -1,1 +1,1 @@
-(linum-relative :fetcher wiki)
+(linum-relative :fetcher github :repo "coldnew/linum-relative")

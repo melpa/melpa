@@ -1,0 +1,1 @@
+(region-bindings-mode :fetcher github :repo "fgallina/region-bindings-mode")

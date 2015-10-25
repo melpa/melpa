@@ -1,0 +1,1 @@
+(html-to-markdown :repo "Malabarba/html-to-markdown" :fetcher github)

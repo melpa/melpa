@@ -1,0 +1,3 @@
+(org-page :repo "kelvinh/org-page"
+          :fetcher github
+          :files ("*.el" "doc" "themes"))

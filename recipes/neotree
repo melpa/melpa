@@ -1,0 +1,3 @@
+(neotree :repo "jaypei/emacs-neotree"
+         :fetcher github
+         :files (:defaults "icons"))

@@ -1,0 +1,1 @@
+(elmacro :fetcher github :repo "Silex/elmacro")

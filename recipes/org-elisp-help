@@ -1,0 +1,1 @@
+(org-elisp-help :repo "tarsius/org-elisp-help" :fetcher github)

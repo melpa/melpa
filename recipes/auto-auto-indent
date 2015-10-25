@@ -1,0 +1,3 @@
+(auto-auto-indent
+ :repo "sabof/auto-auto-indent"
+ :fetcher github)

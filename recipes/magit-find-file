@@ -1,0 +1,1 @@
+(magit-find-file :repo "bradleywright/magit-find-file.el" :fetcher github)

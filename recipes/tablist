@@ -1,0 +1,3 @@
+(tablist
+ :fetcher github
+ :repo "politza/tablist")

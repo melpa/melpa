@@ -1,6 +1,8 @@
+(require 'cl)
+
 (Given "^read recipes$"
        (lambda ()
-         (pb/read-recipes)))
+         (package-build--read-recipes)))
 
 (Given "^capture messages to \\(.+\\)$"
        (lambda (varby)

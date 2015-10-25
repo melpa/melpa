@@ -1,0 +1,1 @@
+(backup-each-save :fetcher wiki)

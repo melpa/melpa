@@ -1,0 +1,1 @@
+(ert-modeline :fetcher github :repo "chrisbarrett/ert-modeline")

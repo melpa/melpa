@@ -1,3 +1,1 @@
-(cm-mode :repo "mozilla/rust"
-         :fetcher github
-         :files ("src/etc/emacs/cm-mode.el"))
+(cm-mode :fetcher github :repo "joostkremers/criticmarkup-emacs")

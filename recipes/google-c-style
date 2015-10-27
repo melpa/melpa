@@ -1,3 +1,2 @@
-(google-c-style
- :url "http://google-styleguide.googlecode.com/svn/trunk/"
- :fetcher svn)
+(google-c-style :fetcher github
+                :repo "google/styleguide")

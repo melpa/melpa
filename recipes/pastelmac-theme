@@ -1,0 +1,1 @@
+(pastelmac-theme :repo "bmastenbrook/pastelmac-theme-el" :fetcher github)

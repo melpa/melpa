@@ -1,0 +1,3 @@
+(wilt :fetcher github
+      :repo "sixty-north/emacs-wilt"
+      :files ("wilt.el"))

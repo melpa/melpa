@@ -1,2 +1,2 @@
-(zotxt :fetcher git
-       :url "https://bitbucket.org/egh/zotxt-emacs.git")
+(zotxt :fetcher gitlab
+       :repo "egh/zotxt-emacs")

@@ -28,9 +28,7 @@ sudo ${SUDOENV} apt-get -y install \
 mkdir -p ~/log
 mkdir -p ~/var/run
 mkdir -p ~/var/lib/logrotate
-mkdir -p ~/www
 mkdir -p ~/etc
-
 
 # ruby is used for templating
 \curl -L https://get.rvm.io | bash -s stable

@@ -1,0 +1,1 @@
+(gorepl-mode :fetcher github :repo "manute/gorepl-mode")

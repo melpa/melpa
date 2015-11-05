@@ -1,2 +1,1 @@
-(uimage :fetcher github
-		:repo "lujun9972/uimage")
+(uimage :fetcher github :repo "lujun9972/uimage")

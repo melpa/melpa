@@ -1,3 +1,0 @@
-MELPA_HOME=${MELPA_HOME:-${HOME}/melpa}
-MELPA_BRANCH=${MELPA_BRANCH:-`git rev-parse --abbrev-ref HEAD`}
-MELPA_WWW=${MELPA_WWW:-${HOME}/www}

@@ -444,16 +444,44 @@
 
   melpa.buildstatus = {};
   melpa.buildstatus.controller = function() {
-    this.buildCompletionTime = m.request({method: 'GET', url: "/build-status.json", background: true})
+    this.started = m.prop();
+    this.completed = m.prop();
+    this.next = m.prop();
+    this.duration = m.prop();
+    this.running = function() { return !this.completed(); }.bind(this);
+
+    m.request({method: 'GET', url: "/build-status.json", background: true})
       .then(function(status){
-        return new Date(status.completed * 1000);
-      });
+        m.startComputation();
+        this.started(maybeDate(status.started));
+        this.completed(maybeDate(status.completed));
+        this.next(maybeDate(status.next));
+        this.duration(status.duration);
+        m.endComputation();
+      }.bind(this));
+    function maybeDate(v) { return v ? new Date(v * 1000) : null; }
   };
   melpa.buildstatus.view = function(ctrl) {
-    return m(".alert.alert-success", [
-      m("strong", "Last build ended: "),
-      m("span", [ctrl.buildCompletionTime() ? moment(ctrl.buildCompletionTime()).fromNow() : "unknown"])
-    ]);
+    function reltime(t) {
+      return t ? moment(t).fromNow() : "unknown";
+    }
+    function duration() {
+      return ctrl.duration() ? moment.duration(ctrl.duration(), 'seconds').humanize() : "unknown";
+    }
+    if (ctrl.running()) {
+      return m(".alert.alert-warning", [
+        m("strong", "Current build started: "),
+        m("span", [reltime(ctrl.started())]),
+        m("span", [", last took ", duration()])
+      ]);
+    } else {
+      return m(".alert.alert-success", [
+        m("strong", "Next build: "),
+        m("span", [reltime(ctrl.next())]),
+        m("span", [", last ended ", reltime(ctrl.completed()),
+                   " and took ", duration()])
+      ]);
+    }
   };
 
 
@@ -526,7 +554,7 @@
           m("section.jumbotron", [
             m("ul", [
               "<strong>Up-to-date packages built on our servers from upstream source</strong>",
-              "<strong>Installable in any recent Emacs using 'package.el'</strong> - no need to install svn/cvs/hg/bzr/git/darcs/fossil etc.",
+              "<strong>Installable in any Emacs with 'package.el'</strong> - no local version-control tools needed",
               "<strong>Curated</strong> - no obsolete, renamed, forked or randomly hacked packages",
               "<strong>Comprehensive</strong> - more packages than any other archive",
               "<strong>Automatic updates</strong> - new commits result in new packages",

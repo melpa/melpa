@@ -1,0 +1,2 @@
+(helm-flx :repo "PythonNut/helm-flx"
+          :fetcher github)

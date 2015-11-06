@@ -1,0 +1,4 @@
+(liquid-types
+ :fetcher github
+ :repo "ucsd-progsys/liquid-types.el"
+ :branch "master")

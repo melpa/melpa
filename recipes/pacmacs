@@ -1,5 +1,5 @@
 (pacmacs :fetcher github
-         :repo "rexim/pacmacs.el"
+         :repo "codingteam/pacmacs.el"
          :files (:defaults
                  "maps"
                  ("sprites" "sprites/*.json")

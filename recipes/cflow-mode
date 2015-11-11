@@ -1,0 +1,3 @@
+(cflow-mode :url "git://git.sv.gnu.org/cflow.git"
+            :fetcher git
+            :files ("elisp/cflow-mode.el"))

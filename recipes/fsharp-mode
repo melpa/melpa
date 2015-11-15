@@ -3,5 +3,6 @@
  :repo "rneatherway/emacs-fsharp-mode-bin"
  :files ("*.el"
          ("bin"
-          "fsautocomplete.exe"
+          "*.exe"
+          "*.exe.config"
           "*.dll")))

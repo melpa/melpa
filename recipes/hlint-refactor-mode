@@ -1,0 +1,1 @@
+(hlint-refactor-mode :fetcher github :repo "fatlazycat/hlint-refactor-mode")

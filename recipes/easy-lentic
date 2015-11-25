@@ -1,0 +1,1 @@
+(easy-lentic :repo "tumashu/easy-lentic" :fetcher github)

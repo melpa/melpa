@@ -1,0 +1,1 @@
+(elogcat :fetcher github :repo "youngker/elogcat.el")

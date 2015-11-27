@@ -1,0 +1,1 @@
+(flycheck-typescript-tslint :fetcher github :repo "Simplify/flycheck-typescript-tslint")

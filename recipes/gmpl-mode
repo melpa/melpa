@@ -1,0 +1,2 @@
+(gmpl-mode :repo "cute-jumper/gmpl-mode"
+           :fetcher github)

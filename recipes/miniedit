@@ -1,2 +1,1 @@
-(miniedit :repo "emacsmirror/miniedit"
-          :fetcher github)
+(miniedit :fetcher github :repo "emacsorphanage/miniedit")

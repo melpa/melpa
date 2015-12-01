@@ -1,1 +1,3 @@
-(paren-face :repo "tarsius/paren-face" :fetcher github)
+(paren-face :repo "tarsius/paren-face"
+            :fetcher github
+            :old-names (parenface))

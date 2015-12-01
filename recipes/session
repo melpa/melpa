@@ -1,1 +1,1 @@
-(session :fetcher github :repo "emacsmirror/session")
+(session :fetcher github :repo "emacsorphanage/session")

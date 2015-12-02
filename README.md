@@ -6,7 +6,7 @@ MELPA is a growing collection of `package.el`-compatible Emacs Lisp
 packages built automatically on our server from the upstream source
 code using simple recipes. (Think of it as a server-side version of
 [el-get](https://github.com/dimitri/el-get), or even
-[homebrew](https://github.com/mxcl/homebrew).)
+[homebrew](https://github.com/Homebrew/homebrew).)
 
 Packages are updated at intervals throughout the day.
 
@@ -71,7 +71,7 @@ New recipe submissions should adhere to the following guidelines,
   create a pull request for each branch.
 
 * Upstream source must be stored in an authoritative
-  [SCM](http://en.wikipedia.org/wiki/Software_configuration_management)
+  [SCM](https://en.wikipedia.org/wiki/Software_configuration_management)
   repository. Emacswiki recipes are discouraged but can be accepted.
 
 * Packages should be built from the *official* package repository.
@@ -167,7 +167,7 @@ appropriate. This is a useful way to discover missing dependencies!
 ### Submitting
 
 After verifying the entry works properly please open a pull request on
-Github. Consider the [hub](https://github.com/defunkt/hub)
+Github. Consider the [hub](https://github.com/github/hub)
 command-line utility by [defunkt](http://chriswanstrath.com/) which
 helps simplify this process.
 
@@ -258,7 +258,7 @@ causes the default value shown above to be prepended to the specified file list.
 [github]: https://github.com/
 [gitlab]: https://gitlab.com/
 [bzr]: http://bazaar.canonical.com/en/
-[hg]: http://mercurial.selenic.com/
+[hg]: https://www.mercurial-scm.org/
 [svn]: http://subversion.apache.org/
 [cvs]: http://www.nongnu.org/cvs/
 [darcs]: http://darcs.net/
@@ -283,27 +283,35 @@ and `:fetcher` specified,
 
 ### Example: Multiple Packages in one Repository
 
-The
-[emacs-starter-kit](https://github.com/technomancy/emacs-starter-kit)
-contains the *starter-kit* package along with extra packages in the
-`modules` directory; *starter-kit-bindings*, *starter-kit-lisp*, etc.
+The [projectile](https://github.com/bbatsov/projectile) repository
+contains three libraries `projectile.el`, `helm-projectile.el`, and
+`persp-projectile.el`.  The latter two libraries are optional and
+users who don't want to use the packages `helm` and/or `perspective`
+should not be forced to install them just so they can install
+`projectile`.  These libraries should therefore be distributed as
+separate packages.
+
+The three packages have to be declared in three separate files
+`recipes/projectile`, `recipes/helm-projectile`, and
+`recipes/persp-projectile`:
 
 ```lisp
-(starter-kit
- :url "https://github.com/technomancy/emacs-starter-kit.git"
- :fetcher git)
-(starter-kit-bindings
- :url "https://github.com/technomancy/emacs-starter-kit.git"
- :fetcher git
- :files ("modules/starter-kit-bindings.el"))
+(projectile :repo "bbatsov/projectile"
+            :fetcher github
+            :files ("projectile.el"))
 ```
 
-Notice that `:files` is not specified for `starter-kit` since
-package-build will automatically add all `.el` files in the root
-directory of the repository.  The `starter-kit-bindings` repository is
-contained in the `modules/` subdirectory and thus needs the packages
-files specified explicitly.
+```lisp
+(helm-projectile :repo "bbatsov/projectile"
+                 :fetcher github
+                 :files ("helm-projectile.el"))
+```
 
+```lisp
+(persp-projectile :repo "bbatsov/projectile"
+                  :fetcher github
+                  :files ("persp-projectile.el"))
+```
 
 ### Example: Multiple Files in Multiple Directories
 

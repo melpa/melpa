@@ -1,0 +1,3 @@
+(selectric-mode :repo "rbanffy/selectric-mode"
+                :fetcher github
+                :files (:defaults "*.wav"))

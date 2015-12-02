@@ -1,1 +1,1 @@
-(pointback :fetcher github :repo "emacsmirror/pointback")
+(pointback :fetcher github :repo "emacsorphanage/pointback")

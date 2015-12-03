@@ -1,1 +1,3 @@
-(editorconfig-fnmatch :repo "10sr/editorconfig-fnmatch-el" :fetcher github)
+(editorconfig-fnmatch :repo "editorconfig/editorconfig-emacs"
+                      :fetcher github
+                      :files ("editorconfig-fnmatch.el"))

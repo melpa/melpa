@@ -1,1 +1,3 @@
-(editorconfig-core :repo "10sr/editorconfig-core-emacslisp" :fetcher github)
+(editorconfig-core :repo "editorconfig/editorconfig-emacs"
+                   :fetcher github
+                   :files ("editorconfig-core.el" "editorconfig-core-handle.el"))

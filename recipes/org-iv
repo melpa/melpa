@@ -1,7 +1,7 @@
 (org-iv :repo "kuangdash/org-iv"
         :fetcher github
-        :files ("*.el" ("default"
-                        "default/org-iv-front-file"
-                        "default/org-back-file"
-                        ("css" "default/css/*")
-                        ("js" "default/js/*"))))
+        :files (:defaults ("default"
+                           "default/org-iv-front-file"
+                           "default/org-back-file"
+                           ("css" "default/css/*")
+                           ("js" "default/js/*"))))

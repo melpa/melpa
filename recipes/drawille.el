@@ -1,3 +1,3 @@
 (drawille
  :fetcher github
- :repo "sshbio/elsip-drawille")
+ :repo "sshbio/elisp-drawille")

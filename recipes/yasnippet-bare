@@ -1,0 +1,3 @@
+(yasnippet-bare :repo "capitaomorte/yasnippet"
+                :fetcher github
+                :files ("yasnippet.el"))

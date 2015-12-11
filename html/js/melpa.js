@@ -115,6 +115,9 @@
       } else if (recipe.fetcher == "gitlab") {
         return "https://gitlab.com/" + recipe.repo +
           (recipe.branch ? "/tree/" + recipe.branch : "");
+      } else if (recipe.fetcher == "bitbucket") {
+        return "https://bitbucket.com/" + recipe.repo +
+          (recipe.branch ? "/branch/" + recipe.branch : "");
       } else if (recipe.fetcher == "wiki") {
         return "http://www.emacswiki.org/emacs/" + name + ".el";
       } else if (recipe.url) {

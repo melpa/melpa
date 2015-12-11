@@ -534,6 +534,11 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
   (let* ((url (format "https://gitlab.com/%s.git" (plist-get config :repo))))
     (package-build--checkout-git name (plist-put (copy-sequence config) :url url) dir)))
 
+(defun package-build--checkout-bitbucket (name config dir)
+  "Check package NAME with config CONFIG out of bitbucket into DIR."
+  (let* ((url (format "https://bitbucket.com/%s" (plist-get config :repo))))
+    (package-build--checkout-hg name (plist-put (copy-sequence config) :url url) dir)))
+
 (defun package-build--bzr-expand-repo (repo)
   "Get REPO expanded name."
   (package-build--run-process-match "\\(?:branch root\\|repository branch\\): \\(.*\\)" nil "bzr" "info" repo))
@@ -856,7 +861,7 @@ to build the recipe."
           (cl-assert (memq thing all-keys) nil "Unknown keyword %S" thing)))
       (let ((fetcher (plist-get rest :fetcher)))
         (cl-assert fetcher nil ":fetcher is missing")
-        (when (memq fetcher '(github gitlab))
+        (when (memq fetcher '(github gitlab bitbucket))
           (cl-assert (plist-get rest :repo) ":repo is missing")))
       (dolist (key symbol-keys)
         (let ((val (plist-get rest key)))
@@ -1244,7 +1249,7 @@ Returns the archive entry for the package."
   (interactive
    (list (intern (read-string "Package name: "))
          (intern
-          (let ((fetcher-types (mapcar #'symbol-name '(github gitlab git wiki bzr hg cvs svn))))
+          (let ((fetcher-types (mapcar #'symbol-name '(github gitlab bitbucket git wiki bzr hg cvs svn))))
             (completing-read
              "Fetcher: "
              fetcher-types

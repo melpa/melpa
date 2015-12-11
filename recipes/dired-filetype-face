@@ -1,0 +1,2 @@
+(dired-filetype-face :repo "jixiuf/dired-filetype-face" :fetcher github)
+

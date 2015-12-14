@@ -190,13 +190,15 @@ the following form (`[...]` denotes optional or conditional values),
 - `package-name`
 a lisp symbol that has the same name as the package being specified.
 
-- `:fetcher` (one of `git, github, gitlab, bitbucket, bzr, hg, darcs, fossil,
-svn, cvs, wiki`) specifies the type of repository that `:url` points to. Right
-now package-build supports [git][git], [github][github], [gitlab][gitlab],
-[bitbucket][bitbucket], [bazaar (bzr)][bzr], [mercurial (hg)][hg],
-[subversion (svn)][svn], [cvs][cvs], [darcs][darcs], [fossil][fossil], and
-[Emacs Wiki (wiki)][emacswiki] as possible mechanisms for checking out the
-repository.
+- `:fetcher` (one of `git, github, gitlab, bitbucket, bzr, hg, darcs,
+fossil, svn, cvs, wiki`) specifies the type of repository that `:url`
+points to. Right now package-build supports [git][git],
+[github][github], [gitlab][gitlab], [bitbucket][bitbucket],
+[bazaar (bzr)][bzr], [mercurial (hg)][hg], [subversion (svn)][svn],
+[cvs][cvs], [darcs][darcs], [fossil][fossil], and
+[Emacs Wiki (wiki)][emacswiki] as possible mechanisms for checking out
+the repository. (Note: `bitbucket` assumes `hg`: `git` repos hosted on
+bitbucket should use the `git` fetcher.)
 
     *package-build* uses
 the corresponding application to update files before building the

@@ -1,0 +1,1 @@
+(greek-unicode-insert :fetcher github :repo "Malabarba/greek-unicode-insert")

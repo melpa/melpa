@@ -1,0 +1,4 @@
+(org-ref
+ :fetcher github
+ :repo "jkitchin/org-ref"
+ :branch "melpa")

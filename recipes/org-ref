@@ -1,1 +1,1 @@
-(org-ref :fetcher github :repo "jkitchin/org-ref" :files ("*.el" "org-ref.org" "citeproc/*.el"))
+(org-ref :fetcher github :repo "jkitchin/org-ref" :files (:defaults "org-ref.org" "citeproc))

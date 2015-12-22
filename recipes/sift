@@ -1,2 +1,2 @@
-(sift :repo "nlamirault/sift.el" :fetcher github)
+(sift :repo "nlamirault/sift.el" :fetcher github :files ("sift.el"))
 

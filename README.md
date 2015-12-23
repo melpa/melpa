@@ -1,4 +1,4 @@
-# MELPA 
+# MELPA
 
 [![Build Status](https://travis-ci.org/milkypostman/melpa.png?branch=master)](https://travis-ci.org/milkypostman/melpa)
 
@@ -183,6 +183,7 @@ the following form (`[...]` denotes optional or conditional values),
  :fetcher [git|github|gitlab|bitbucket|bzr|hg|darcs|fossil|svn|cvs|wiki]
  [:url "<repo url>"]
  [:repo "github-gitlab-or-bitbucket-user/repo-name"]
+ [:version-regexp "<regexp>"]
  [:module "cvs-module"]
  [:files ("<file1>" ...)])
 ```
@@ -230,13 +231,19 @@ the `git`-based fetchers.
 specifies the branch of the git repo to use. This is like `:commit`, but
 it adds the "origin/" prefix automatically.
 
+- `:version-regexp` is a regular expression for extracting a
+  version-string from the repository tags.  Version-strings must be
+  parseable by Emacs' `version-to-list` , so for an unusual tag like
+  "OTP-18.1.5", we add `:version "[^0-9]*\\(.*\\)"` to strip the
+  "OTP-" prefix.
+
 - `:module`
 specifies the module of a CVS repository to check out.  Defaults to to
 `package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
 
 - `:files` optional property specifying the elisp and info files used to build the
 package. Automatically populated by matching all `.el`, `.info` and `dir` files in the
-root of the repository and the `doc` directory. Excludes all files in the root directory 
+root of the repository and the `doc` directory. Excludes all files in the root directory
 ending in `test.el` or `tests.el`. See the default value below,
 
         ("*.el" "*.el.in" "dir"
@@ -504,7 +511,7 @@ in your `package-archives` list.
              '("melpa-stable" . "https://stable.melpa.org/packages/"))
 ```
 
-An online list of available packages can be found at 
+An online list of available packages can be found at
 [https://stable.melpa.org](https://stable.melpa.org).
 
 ### Stable Version Generation
@@ -526,8 +533,3 @@ package.
   them. Any packages you already have installed from MELPA will never
   get "updated" to the stable version because of the way version
   numbering is handled.
-
-
-
-  
-

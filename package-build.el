@@ -193,11 +193,31 @@ optionally looking only as far back as BOUND."
                (buffer-substring-no-properties
                  (or bound (point-min)) (point))
                 "\n")))
-    (setq tags (cl-remove-if nil (mapcar
-                                  (lambda (tag)
-                                    (when (package-build--valid-version tag regex)
-                                      (list (package-build--valid-version tag regex) tag)))
-                                  tags)))
+    (setq tags (append
+                (mapcar
+                 ;; Because the default `version-separator' is ".",
+                 ;; version-strings like "1_4_5" will be parsed
+                 ;; wrongly as (1 -4 4 -4 5), so we set
+                 ;; `version-separator' to "_" below and run again.
+                 (lambda (tag)
+                   (when (package-build--valid-version tag regex)
+                     (list (package-build--valid-version tag regex) tag)))
+                 tags)
+                (mapcar
+                 ;; Check for valid versions again, this time using
+                 ;; "_" as a separator instead of "." to catch
+                 ;; version-strings like "1_4_5".  Since "_" is
+                 ;; otherwise treated as a snapshot separator by
+                 ;; `version-regexp-alist', we don't have to worry
+                 ;; about the incorrect version list above—(1 -4 4 -4
+                 ;; 5)—since it will always be treated as older by
+                 ;; `version-list-<'.
+                 (lambda (tag)
+                   (let ((version-separator "_"))
+                     (when (package-build--valid-version tag regex)
+                       (list (package-build--valid-version tag regex) tag))))
+                 tags)))
+    (setq tags (cl-remove-if nil tags))
     ;; Returns a list like ((0 1) ("v0.1")); the first element is used
     ;; for comparison and for `package-version-join', and the second
     ;; (the original tag) is used by git/hg/etc.
@@ -565,20 +585,34 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
 
 (defun package-build--checkout-bzr (name config dir)
   "Check package NAME with config CONFIG out of bzr into DIR."
-  (unless package-build-stable
-    (let ((repo (package-build--bzr-expand-repo (plist-get config :url))))
-      (with-current-buffer (get-buffer-create "*package-build-checkout*")
-        (goto-char (point-max))
-        (cond
-         ((and (file-exists-p (expand-file-name ".bzr" dir))
-               (string-equal (package-build--bzr-repo dir) repo))
-          (package-build--princ-exists dir)
-          (package-build--run-process dir "bzr" "merge"))
-         (t
-          (when (file-exists-p dir)
-            (delete-directory dir t))
-          (package-build--princ-checkout repo dir)
-          (package-build--run-process nil "bzr" "branch" repo dir)))
+  (let ((repo (package-build--bzr-expand-repo (plist-get config :url))))
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (goto-char (point-max))
+      (cond
+       ((and (file-exists-p (expand-file-name ".bzr" dir))
+             (string-equal (package-build--bzr-repo dir) repo))
+        (package-build--princ-exists dir)
+        (package-build--run-process dir "bzr" "merge" "--force"))
+       (t
+        (when (file-exists-p dir)
+          (delete-directory dir t))
+        (package-build--princ-checkout repo dir)
+        (package-build--run-process nil "bzr" "branch" repo dir)))
+      (if package-build-stable
+          (let ( (bound (goto-char (point-max)))
+                 (regexp (or (plist-get config :version-regexp)
+                             package-build-version-regexp))
+                 tag-version )
+            (package-build--run-process dir "bzr" "tags")
+            (goto-char bound)
+            (ignore-errors (while (re-search-forward "\\ +.*")
+                             (replace-match "")))
+            (setq tag-version (or (package-build--find-version-newest regexp bound)
+                                  (error "No valid stable versions found for %s" name)))
+
+            (package-build--run-process dir "bzr" "revert" "-r" (concat "tag:" (cadr tag-version)))
+            ;; Return the parsed version as a string
+            (package-version-join (car tag-version)))
         (apply 'package-build--run-process dir "bzr" "log" "-l1"
                (package-build--expand-source-file-list dir config))
         (package-build--find-parse-time
@@ -629,7 +663,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
                               (error "No valid stable versions found for %s" name)))
 
           (package-build--run-process dir "hg" "update" (cadr tag-version))
-          ;; Return the version as a string
+          ;; Return the parsed version as a string
           (package-version-join (car tag-version)))
         (apply 'package-build--run-process dir "hg" "log" "--style" "compact" "-l1"
                (package-build--expand-source-file-list dir config))

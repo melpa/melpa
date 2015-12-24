@@ -174,10 +174,10 @@ or nil if the version cannot be parsed."
   ;; when stored in the archive-contents
   (let* ((s (substring-no-properties str))
          (time (date-to-time
-                (if (string-match "^\\([0-9]\\{4\\}\\)/\\([0-9]\\{2\\}\\)/\\([0-9]\\{2\\}\\) \\([0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)$" str)
-                    (concat (match-string 1 str) "-" (match-string 2 str) "-"
-                            (match-string 3 str) " " (match-string 4 str))
-                  str))))
+                (if (string-match "^\\([0-9]\\{4\\}\\)/\\([0-9]\\{2\\}\\)/\\([0-9]\\{2\\}\\) \\([0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)$" s)
+                    (concat (match-string 1 s) "-" (match-string 2 s) "-"
+                            (match-string 3 s) " " (match-string 4 s))
+                  s))))
     (concat (format-time-string "%Y%m%d." time)
             (format "%d" (or (string-to-number (format-time-string "%H%M" time)) 0)))))
 

@@ -1,1 +1,4 @@
-(vc-darcs :url "http://www.pps.univ-paris-diderot.fr/~jch/software/repos/vc-darcs/" :fetcher darcs)
+(vc-darcs
+ :url "http://www.pps.univ-paris-diderot.fr/~jch/software/repos/vc-darcs/"
+ :fetcher darcs
+ :version-regexp "vc-darcs-\\(.*\\)")

@@ -190,8 +190,9 @@ optionally looking only as far back as BOUND."
 (defun package-build--find-version-newest (regex &optional bound)
   "Find the newest version matching REGEX before point, optionally stopping at BOUND."
   (let ((tags (split-string
-                (buffer-substring-no-properties
-                  (or bound (point-min)) (point)))))
+               (buffer-substring-no-properties
+                 (or bound (point-min)) (point))
+                "\n")))
     (setq tags (cl-remove-if nil (mapcar
                                   (lambda (tag)
                                     (when (package-build--valid-version tag regex)
@@ -325,19 +326,28 @@ A number as third arg means request confirmation if NEWNAME already exists."
 
 (defun package-build--checkout-darcs (name config dir)
   "Check package NAME with config CONFIG out of darcs into DIR."
-  (unless package-build-stable
-    (let ((repo (plist-get config :url)))
-      (with-current-buffer (get-buffer-create "*package-build-checkout*")
-        (cond
-         ((and (file-exists-p (expand-file-name "_darcs" dir))
-               (string-equal (package-build--darcs-repo dir) repo))
-          (package-build--princ-exists dir)
-          (package-build--run-process dir "darcs" "pull"))
-         (t
-          (when (file-exists-p dir)
-            (delete-directory dir t))
-          (package-build--princ-checkout repo dir)
-          (package-build--run-process nil "darcs" "get" repo dir)))
+  (let ((repo (plist-get config :url)))
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (cond
+       ((and (file-exists-p (expand-file-name "_darcs" dir))
+             (string-equal (package-build--darcs-repo dir) repo))
+        (package-build--princ-exists dir)
+        (package-build--run-process dir "darcs" "pull" "--all"))
+       (t
+        (when (file-exists-p dir)
+          (delete-directory dir t))
+        (package-build--princ-checkout repo dir)
+        (package-build--run-process nil "darcs" "get" repo dir)))
+      (if package-build-stable
+          (let* ( (bound (goto-char (point-max)))
+                  (regexp (or (plist-get config :version-regexp)
+                              package-build-version-regexp))
+                  (tag-version (and (package-build--run-process dir "darcs" "show" "tags")
+                                    (or (package-build--find-version-newest regexp bound)
+                                        (error "No valid stable versions found for %s" name)))) )
+            (package-build--run-process dir "darcs" "obliterate" "--all" "--from-tag" (cadr tag-version))
+            ;; Return the parsed version as a string
+            (package-version-join (car tag-version)))
         (apply 'package-build--run-process dir "darcs" "changes" "--max-count" "1"
                (package-build--expand-source-file-list dir config))
         (package-build--find-parse-time
@@ -516,7 +526,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
           ;; Using reset --hard here to comply with what's used for
           ;; unstable, but maybe this should be a checkout?
           (package-build--update-git-to-ref dir (concat "tags/" (cadr tag-version)))
-          ;; Return the version as a string
+          ;; Return the parsed version as a string
           (package-version-join (car tag-version)))
         (package-build--update-git-to-ref dir (or commit (concat "origin/" (package-build--git-head-branch dir))))
         (apply 'package-build--run-process dir "git" "log" "--first-parent" "-n1" "--pretty=format:'\%ci'"

@@ -234,7 +234,7 @@ it adds the "origin/" prefix automatically.
 - `:version-regexp` is a regular expression for extracting a
   version-string from the repository tags.  Version-strings must be
   parseable by Emacs' `version-to-list` , so for an unusual tag like
-  "OTP-18.1.5", we add `:version "[^0-9]*\\(.*\\)"` to strip the
+  "OTP-18.1.5", we add `:version-regexp "[^0-9]*\\(.*\\)"` to strip the
   "OTP-" prefix.
 
 - `:module`

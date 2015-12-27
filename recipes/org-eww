@@ -1,0 +1,1 @@
+(org-eww :fetcher github :repo "lujun9972/org-eww")

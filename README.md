@@ -72,7 +72,7 @@ New recipe submissions should adhere to the following guidelines,
 
 * Upstream source must be stored in an authoritative
   [SCM](https://en.wikipedia.org/wiki/Software_configuration_management)
-  repository. Emacswiki recipes are discouraged but can be accepted.
+  repository. EmacsWiki recipes are no longer accepted.
 
 * Packages should be built from the *official* package repository.
   Forks of the official repository will not be accepted except in
@@ -197,7 +197,7 @@ points to. Right now package-build supports [git][git],
 [github][github], [gitlab][gitlab], [bitbucket][bitbucket],
 [bazaar (bzr)][bzr], [mercurial (hg)][hg], [subversion (svn)][svn],
 [cvs][cvs], [darcs][darcs], [fossil][fossil], and
-[Emacs Wiki (wiki)][emacswiki] as possible mechanisms for checking out
+[EmacsWiki (deprecated)][emacswiki] as possible mechanisms for checking out
 the repository. (Note: `bitbucket` assumes `hg`: `git` repos hosted on
 bitbucket should use the `git` fetcher.)
 

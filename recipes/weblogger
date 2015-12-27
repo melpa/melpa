@@ -1,1 +1,4 @@
-(weblogger :fetcher bzr :url "lp:weblogger-el")
+(weblogger
+ :fetcher bzr
+ :url "lp:weblogger-el"
+ :version-regexp "REL\\(.*\\)")

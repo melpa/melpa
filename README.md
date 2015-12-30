@@ -6,7 +6,7 @@ MELPA is a growing collection of `package.el`-compatible Emacs Lisp
 packages built automatically on our server from the upstream source
 code using simple recipes. (Think of it as a server-side version of
 [el-get](https://github.com/dimitri/el-get), or even
-[homebrew](https://github.com/Homebrew/homebrew).)
+[Homebrew](https://github.com/Homebrew/homebrew).)
 
 Packages are updated at intervals throughout the day.
 
@@ -51,17 +51,42 @@ Enable installation of packages from MELPA by adding an entry to
 Then just use `M-x package-list-packages` to browse and install
 packages from MELPA and elsewhere.
 
-Note that MELPA packages will always have higher versions than those
-from other archives like Marmalade, so if you decide you need
-non-MELPA versions of specific packages for some reason, extra
-configuration will be required:
+**Note:** Packages from the default “bleeding-edge” repository will
+always have higher versions than those from other archives like
+Marmalade, so if you decide you need non-MELPA versions of specific
+packages for some reason, extra configuration will be required:
 
-If your Emacs has the variable `package-pinned-packages`, you can
-customize or modify that variable as needed. Otherwise, use the
-separate
-[package-filter.el](https://github.com/milkypostman/package-filter)
-package which we provide.
+* If your Emacs has the variable `package-pinned-packages` (available
+  in 24.4 and later), you can customize or modify that variable as
+  needed.
 
+* You can use the
+  [package-filter.el](https://github.com/milkypostman/package-filter)
+  package which we provide.
+
+* You can use MELPA Stable.
+
+### MELPA Stable
+
+By default, MELPA provides the very latest revisions of packages.  If
+you prefer to only receive updates for tagged releases, use
+[https://stable.melpa.org](MELPA Stable) instead:
+
+```lisp
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+```
+
+*Versions for packages on the original MELPA server are based on the date of the last commit and will likely be higher than any version on the stable server.* Keep the following things in mind,
+
+* If you leave the original MELPA server in your `package-archives`
+  then by default you will get the *development* versions of packages
+  and not the stable ones.
+
+* You will probably want to remove all packages and then reinstall
+  them. Any packages you already have installed from MELPA will never
+  get "updated" to the stable version because of the way version
+  numbering is handled.
 
 ## Contributing New Recipes
 
@@ -91,6 +116,9 @@ New recipe submissions should adhere to the following guidelines,
   [Recipe Format](#recipe-format) section for more information on
   specifying package files.
 
+* To have a stable version generated for your package simply tag the
+  repository using a naming compatible with `version-to-list`. The
+  repo state of this tag will be used to generate the stable package.
 
 
 ### Expediting Recipe Reviews
@@ -148,6 +176,12 @@ through this process.
   recipe buffer: this will also prompt you to install the
   freshly-built package.
 
+  If the repository contains tags for releases, confirm that the
+  correct version is detected by running `STABLE=t make
+  recipes/<NAME>`.  The version detection can be adjusted by
+  specifying `:version-regexp` in the recipe (see
+  [#recipe-format](below)).
+
 4. Install the file you built by running `package-install-file` from
 within Emacs and specifying the newly built package in the directory
 specified by `package-build-archive-dir` (default: `packages/`
@@ -167,7 +201,7 @@ appropriate. This is a useful way to discover missing dependencies!
 ### Submitting
 
 After verifying the entry works properly please open a pull request on
-Github. Consider the [hub](https://github.com/github/hub)
+GitHub. Consider the [hub](https://github.com/github/hub)
 command-line utility by [defunkt](http://chriswanstrath.com/) which
 helps simplify this process.
 
@@ -223,7 +257,7 @@ the `git`, `bzr`, `hg`, `darcs`, `fossil`, `svn` and `cvs` fetchers.*
 - `:commit`
 specifies the commit of the git repo to checkout. The value
 will be passed to `git reset` in a repo where `upstream` is the
-original repository. Can therefore be either a sha, if pointing at a
+original repository. Can therefore be either a SHA, if pointing at a
 specific commit, or a full ref prefixed with "origin/". Only used by
 the `git`-based fetchers.
 
@@ -493,43 +527,3 @@ This can be configured using the `package-build-working-dir` variable.
 
 *MELPA* is *Milkypostman's ELPA* or *Milkypostman's Experimental Lisp
  Package Archive* if you're not into the whole brevity thing.
-
-## Stable Packages
-
-MELPA now includes a mechanism to build *stable* versions of packages
-given that the repositories meet the following criteria,
-
-1. Hosted using *git* or *hg*.
-2. Tag names are version strings compatible parseable by the `version-to-list`
-   function, optionally prefixed with `v`, `v.` or `v-`.
-
-To use the stable versions of packages you should use the stable server
-in your `package-archives` list.
-
-```lisp
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/"))
-```
-
-An online list of available packages can be found at
-[https://stable.melpa.org](https://stable.melpa.org).
-
-### Stable Version Generation
-
-To have a stable version generated for your package simply tag the repository
-using a naming compatible with `version-to-list`, optionally prefixed with `v`,
-`v.` or `v-`. The repo state of this tag will be used to generate the stable
-package.
-
-### Notes
-
-*Versions for packages on the original MELPA server are based on the date of the last commit and will likely be higher than any version on the stable server.* Keep the following things in mind,
-
-* If you leave the original MELPA server in your `package-archives`
-  then by default you will get the *development* versions of packages
-  and not the stable ones.
-
-* You will probably want to remove all packages and then reinstall
-  them. Any packages you already have installed from MELPA will never
-  get "updated" to the stable version because of the way version
-  numbering is handled.

@@ -1,0 +1,3 @@
+(elscreen-buffer-group
+ :repo "jeffgran/elscreen-buffer-group"
+ :fetcher github)

@@ -1,0 +1,1 @@
+(haxor-mode :repo "krzysztof-magosa/haxor-mode" :fetcher github)

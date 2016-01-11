@@ -1,0 +1,1 @@
+(markdown-preview-eww :repo "niku/markdown-preview-eww" :fetcher github)

@@ -1,1 +1,1 @@
-(cargo :repo "attichacker/cargo.el" :fetcher github)
+(cargo :repo "kwrooijen/cargo.el" :fetcher github)

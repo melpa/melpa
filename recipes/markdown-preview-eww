@@ -1,1 +1,1 @@
-(markdown-preview-eww :repo "niku/realtime-preview.el" :fetcher github)
+(markdown-preview-eww :repo "niku/realtime-preview.el" :fetcher github :files ("realtime-preview.el"))

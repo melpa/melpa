@@ -19,6 +19,7 @@
                "lisp/magit-blame.el"
                "lisp/magit-ediff.el"
                "lisp/magit-extras.el"
+               "lisp/magit-autorevert.el"
                "lisp/git-rebase.el"
                "Documentation/magit.texi"
                "Documentation/AUTHORS.md"

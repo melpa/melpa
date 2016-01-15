@@ -1,1 +1,4 @@
-(markdown-preview-mode :fetcher github :repo "ancane/markdown-preview-mode")
+(markdown-preview-mode
+  :fetcher github
+  :repo "ancane/markdown-preview-mode"
+  :files (:defaults "preview.html"))

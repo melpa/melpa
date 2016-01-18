@@ -1,0 +1,3 @@
+(org-table-comment
+ :fetcher github
+ :repo "mattfidler/org-table-comment.el")

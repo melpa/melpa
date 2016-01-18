@@ -1,0 +1,1 @@
+(standoff-mode :fetcher github :repo "lueck/standoff-mode")

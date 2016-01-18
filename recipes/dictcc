@@ -1,0 +1,1 @@
+(dictcc :repo "cqql/dictcc.el" :fetcher github)

@@ -1,0 +1,2 @@
+(logview :repo "doublep/logview"
+         :fetcher github)

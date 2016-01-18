@@ -1,0 +1,1 @@
+(docker-tramp :fetcher github :repo "emacs-pe/docker-tramp.el")

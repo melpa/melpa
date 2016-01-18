@@ -1,0 +1,2 @@
+(swiper-helm :repo "abo-abo/swiper-helm"
+             :fetcher github)

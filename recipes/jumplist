@@ -1,0 +1,1 @@
+(jumplist :repo "ganmacs/jumplist" :fetcher github)

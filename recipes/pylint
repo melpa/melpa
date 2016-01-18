@@ -1,4 +1,4 @@
 (pylint
- :url "https://bitbucket.org/logilab/pylint"
- :fetcher hg
+ :repo "PyCQA/pylint"
+ :fetcher github
  :files ("elisp/pylint.el"))

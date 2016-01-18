@@ -1,0 +1,2 @@
+(requirejs :fetcher github :repo "joeheyming/requirejs-emacs"
+                  :files (:defaults "snippets"))

@@ -1,1 +1,1 @@
-(oberon :fetcher github :repo "emacsmirror/oberon")
+(oberon :fetcher github :repo "emacsorphanage/oberon")

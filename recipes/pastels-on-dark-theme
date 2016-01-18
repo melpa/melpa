@@ -1,2 +1,1 @@
-(pastels-on-dark-theme :repo "1974259" :fetcher github)
-
+(pastels-on-dark-theme :url "https://gist.github.com/1974259.git" :fetcher git)

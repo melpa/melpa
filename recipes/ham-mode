@@ -1,1 +1,1 @@
-(ham-mode :repo "Bruce-Connor/ham-mode" :fetcher github)
+(ham-mode :repo "Malabarba/ham-mode" :fetcher github)

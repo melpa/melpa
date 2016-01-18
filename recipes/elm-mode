@@ -1,1 +1,4 @@
-(elm-mode :fetcher github :repo "jcollard/elm-mode")
+(elm-mode
+ :fetcher github
+ :repo "jcollard/elm-mode"
+ :files (:defaults "elm.tags"))

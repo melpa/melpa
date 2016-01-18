@@ -1,1 +1,0 @@
-(seq :fetcher github :repo "NicolasPetton/seq.el")

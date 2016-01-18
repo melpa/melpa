@@ -1,0 +1,2 @@
+(kibit-helper :fetcher github
+              :repo "brunchboy/kibit-helper")

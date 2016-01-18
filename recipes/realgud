@@ -19,6 +19,7 @@
             ("realgud/debugger/trepan2"   "realgud/debugger/trepan2/*.el")
             ("realgud/debugger/trepan3k"  "realgud/debugger/trepan3k/*.el")
             ("realgud/debugger/trepan8"   "realgud/debugger/trepan8/*.el")
+            ("realgud/debugger/trepanjs"  "realgud/debugger/trepanjs/*.el")
             ("realgud/debugger/trepanx"   "realgud/debugger/trepanx/*.el")
             ("realgud/debugger/zshdb"     "realgud/debugger/zshdb/*.el")
             ("realgud/lang" "realgud/lang/*.el")))

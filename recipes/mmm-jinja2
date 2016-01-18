@@ -1,0 +1,1 @@
+(mmm-jinja2 :repo "beardedprojamz/mmm-jinja2" :fetcher github)

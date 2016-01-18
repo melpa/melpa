@@ -1,0 +1,1 @@
+(launchctl :fetcher github :repo "pekingduck/launchctl-el")

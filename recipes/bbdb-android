@@ -1,0 +1,1 @@
+(bbdb-android :fetcher github :repo "tumashu/bbdb-android")

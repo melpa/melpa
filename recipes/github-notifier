@@ -1,0 +1,2 @@
+(github-notifier :fetcher github
+                 :repo "xuchunyang/github-notifier.el")

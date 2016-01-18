@@ -3,5 +3,4 @@
  :fetcher github
  :files (:defaults
          "NEWS"
-         "snippets"
          "logo.svg"))

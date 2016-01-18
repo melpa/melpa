@@ -1,0 +1,3 @@
+(sunshine
+ :fetcher github
+ :repo "aaronbieber/sunshine.el")

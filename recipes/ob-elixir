@@ -1,0 +1,1 @@
+(ob-elixir :repo "zweifisch/ob-elixir" :fetcher github)

@@ -1,0 +1,1 @@
+(rpn-calc :fetcher github :repo "zk-phi/rpn-calc")

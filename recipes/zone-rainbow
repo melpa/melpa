@@ -1,0 +1,2 @@
+(zone-rainbow :repo "kawabata/zone-rainbow"
+              :fetcher github)

@@ -1,0 +1,1 @@
+(faust-mode :repo "magnetophon/emacs-faust-mode" :fetcher github)

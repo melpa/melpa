@@ -1,0 +1,2 @@
+(contextual :repo "lshift-de/contextual" :fetcher github
+            :files ("contextual.el"))

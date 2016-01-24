@@ -1419,13 +1419,14 @@ Returns the archive entry for the package."
   (interactive)
   (setq package-build--recipe-alist-initialized nil))
 
-(defun package-build-dump-archive-contents (&optional file-name)
+(defun package-build-dump-archive-contents (&optional file-name pretty-print)
   "Dump the list of built packages to FILE-NAME.
 
 If FILE-NAME is not specified, the default archive-contents file is used."
   (package-build--dump (cons 1 (package-build--archive-entries))
                        (or file-name
-                           (expand-file-name "archive-contents" package-build-archive-dir))))
+                           (expand-file-name "archive-contents" package-build-archive-dir))
+                       pretty-print))
 
 (defun package-build--archive-entries ()
   "Read all .entry files from the archive directory and return a list of all entries."

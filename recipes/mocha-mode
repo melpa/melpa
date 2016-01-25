@@ -1,3 +1,0 @@
-(mocha-mode
- :repo "scottaj/mocha-mode"
- :fetcher github)

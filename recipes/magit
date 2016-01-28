@@ -5,4 +5,4 @@
                "Documentation/magit.texi"
                "Documentation/AUTHORS.md"
                "COPYING"
-               (:exclude "magit-popup.el")))
+               (:exclude "lisp/magit-popup.el")))

@@ -1,0 +1,2 @@
+(metafmt :repo "lvillani/metafmt"
+         :fetcher github)

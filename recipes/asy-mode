@@ -1,3 +1,0 @@
-(asy-mode :fetcher github
-          :repo "vectorgraphics/asymptote"
-          :files ("base/asy-mode.el"))

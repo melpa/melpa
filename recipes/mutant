@@ -1,0 +1,1 @@
+(mutant :fetcher github :repo "p-lambert/mutant.el")

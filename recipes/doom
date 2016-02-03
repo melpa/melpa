@@ -1,0 +1,1 @@
+(doom :fetcher github :repo "emacsorphanage/doom" :old-names (dom))

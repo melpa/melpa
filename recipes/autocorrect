@@ -1,1 +1,1 @@
-(autocorrect :fetcher github  :repo "jbranso/autocorrect.el")
+(autocorrect :fetcher github  :repo "jbranso/autocorrect")

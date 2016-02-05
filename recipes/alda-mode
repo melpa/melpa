@@ -1,0 +1,1 @@
+(alda-mode :fetcher github :repo "jgkamat/alda-mode")

@@ -1,0 +1,2 @@
+(cabledolphin
+ :fetcher github :repo "legoscia/cabledolphin")

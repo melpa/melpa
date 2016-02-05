@@ -1,0 +1,5 @@
+(org-dp
+ :fetcher github
+ :url "https://github.com/tj64/org-dp"
+ :repo "tj64/org-dp"
+ :files ("org-dp.el"))

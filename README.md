@@ -1,6 +1,6 @@
 # MELPA
 
-[![Build Status](https://travis-ci.org/milkypostman/melpa.png?branch=master)](https://travis-ci.org/milkypostman/melpa)
+[![Build Status](https://travis-ci.org/melpa/melpa.png?branch=master)](https://travis-ci.org/melpa/melpa)
 
 MELPA is a growing collection of `package.el`-compatible Emacs Lisp
 packages built automatically on our server from the upstream source
@@ -290,7 +290,7 @@ repository and thus the package should only be built from a subset of
 `.el` files. For example, elisp test files should not normally be
 packaged. *Any file specified at any path in the repository is copied
 to the root of the package.* More complex options are available,
-submit an [Issue](https://github.com/milkypostman/melpa/issues) if the
+submit an [Issue](https://github.com/melpa/melpa/issues) if the
 specified package requires more complex file specification.
 
     If the the package merely requires some additional files, for example for

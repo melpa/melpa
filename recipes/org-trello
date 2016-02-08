@@ -1,3 +1,4 @@
 (org-trello :fetcher github
             :repo "org-trello/org-trello"
-            :files ("org-trello*.el"))
+            :files ("org-trello*.el"
+                    (:exclude "org-trello-tools*.el")))

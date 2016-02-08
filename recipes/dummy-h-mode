@@ -1,1 +1,1 @@
-(dummy-h-mode :fetcher wiki)
+(dummy-h-mode :fetcher github :repo "yascentur/dummy-h-mode-el")

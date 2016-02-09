@@ -7,7 +7,7 @@
                    (when (fboundp 'flycheck-mode)
                      (flycheck-mode -1))
                    (unless (featurep 'package-build)
-                     (let ((load-path (cons ".." load-path)))
+                     (let ((load-path (cons "../lisp" load-path)))
                        (require 'package-build)))
                    (package-build-minor-mode)
                    (set (make-local-variable 'package-build-working-dir) (expand-file-name "../working/"))

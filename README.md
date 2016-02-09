@@ -483,7 +483,7 @@ format.
 
 ## API
 
-All repository code is contained in the `package-build.el`.
+All repository code is contained in the `lisp/package-build.el`.
 
 ### Functions
 

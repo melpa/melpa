@@ -17,7 +17,7 @@ ifeq ($(NEED_CL-LIB), t)
 	EMACS_COMMAND := $(EMACS_COMMAND) --eval "(package-initialize)"
 endif
 
-EVAL := $(EMACS_COMMAND) --no-site-file --batch -l package-build.el --eval
+EVAL := $(EMACS_COMMAND) --no-site-file --batch -l lisp/package-build.el --eval
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
 
@@ -65,16 +65,16 @@ packages/archive-contents: $(PKGDIR)/*.entry
 	$(EVAL) '(package-build-dump-archive-contents)'
 
 cleanup:
-	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" package-build--this-dir))) (package-build-cleanup))'
+	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" package-build--parent-dir))) (package-build-cleanup))'
 
 ## Json rules
 html/archive.json: $(PKGDIR)/archive-contents
 	@echo " • Building $@ ..."
-	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" package-build--this-dir))) (package-build-archive-alist-as-json "html/archive.json"))'
+	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" package-build--parent-dir))) (package-build-archive-alist-as-json "html/archive.json"))'
 
 html/recipes.json: $(RCPDIR)/.dirstamp
 	@echo " • Building $@ ..."
-	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" package-build--this-dir))) (package-build-recipe-alist-as-json "html/recipes.json"))'
+	$(EVAL) '(let ((package-build-stable $(STABLE)) (package-build-archive-dir (expand-file-name "$(PKGDIR)/" package-build--parent-dir))) (package-build-recipe-alist-as-json "html/recipes.json"))'
 
 json: html/archive.json html/recipes.json
 
@@ -87,7 +87,7 @@ $(RCPDIR)/.dirstamp: .FORCE
 $(RCPDIR)/%: .FORCE
 	@echo " • Building recipe $(@F) ..."
 
-	- $(TIMEOUT) $(EVAL) "(let ((package-build-stable $(STABLE)) (package-build-write-melpa-badge-images t) (package-build-archive-dir (expand-file-name \"$(PKGDIR)\" package-build--this-dir))) (package-build-archive '$(@F)))"
+	- $(TIMEOUT) $(EVAL) "(let ((package-build-stable $(STABLE)) (package-build-write-melpa-badge-images t) (package-build-archive-dir (expand-file-name \"$(PKGDIR)\" package-build--parent-dir))) (package-build-archive '$(@F)))"
 
 	@echo " ✓ Wrote $$(ls -lsh $(PKGDIR)/$(@F)-*) "
 	@echo " Sleeping for $(SLEEP) ..."

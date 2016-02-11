@@ -1,3 +1,3 @@
 (pov-mode
- :fetcher git
- :url "https://github.com/melmothx/pov-mode.git")
+ :fetcher github
+ :repo "melmothx/pov-mode")

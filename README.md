@@ -276,9 +276,8 @@ specifies the module of a CVS repository to check out.  Defaults to to
 `package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
 
 - `:files` optional property specifying the elisp and info files used to build the
-package. Automatically populated by matching all `.el`, `.info` and `dir` files in the
-root of the repository and the `doc` directory. Excludes all files in the root directory
-ending in `test.el` or `tests.el`. See the default value below,
+package. Please do not override this unless the default value (below) is adequate, which
+it should usually be:
 
         ("*.el" "*.el.in" "dir"
          "*.info" "*.texi" "*.texinfo"

@@ -1,0 +1,1 @@
+(auto-virtualenv :fetcher github :repo "marcwebbie/auto-virtualenv")

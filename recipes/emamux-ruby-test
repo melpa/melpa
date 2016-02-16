@@ -1,4 +1,3 @@
 (emamux-ruby-test
  :repo "syohex/emamux-ruby-test"
- :fetcher github
- :files ("emamux-ruby-test.el"))
+ :fetcher github)

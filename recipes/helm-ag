@@ -1,4 +1,3 @@
 (helm-ag
  :repo "syohex/emacs-helm-ag"
- :fetcher github
- :files ("helm-ag.el"))
+ :fetcher github)

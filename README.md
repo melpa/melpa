@@ -70,7 +70,7 @@ packages for some reason, extra configuration will be required:
 
 By default, MELPA provides the very latest revisions of packages.  If
 you prefer to only receive updates for tagged releases, use
-[https://stable.melpa.org](MELPA Stable) instead:
+[MELPA Stable](https://stable.melpa.org) instead:
 
 ```lisp
 (add-to-list 'package-archives

@@ -1,0 +1,1 @@
+(slime-docker :repo "daewok/slime-docker" :fetcher github)

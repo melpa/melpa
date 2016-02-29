@@ -1,0 +1,3 @@
+(realgud :fetcher github :repo "rocky/realgud-byebug"
+	 :files ("realgud-byebug.el"
+		 ("realgud/debugger/byebug" "byebug/*.el")))

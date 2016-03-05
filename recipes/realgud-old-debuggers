@@ -1,4 +1,4 @@
-(realgud :fetcher github :repo "rocky/realgud-old-debuggers"
+(realgud-old-debuggers :fetcher github :repo "rocky/realgud-old-debuggers"
 	 :files ("realgud-old-debuggers.el"
 		 ("pydb" "pydb/*.el")
 		 ("pydbgr" "pydbgr/*.el")

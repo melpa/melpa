@@ -1,3 +1,0 @@
-(evil-annoying-arrows
- :repo "endrebak/evil-annoying-arrows"
- :fetcher github)

@@ -8,5 +8,5 @@
 if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
     git show --pretty=format: --name-only "$TRAVIS_COMMIT_RANGE"|sort|uniq
 elif [ -n "$TRAVIS_PULL_REQUEST" ]; then
-    git diff --stat "$TRAVIS_COMMIT" "$TRAVIS_BRANCH"|cut -d'|' -f1|cut -c2-|sed '$d'
+    git diff --name-only "$TRAVIS_COMMIT" "$TRAVIS_BRANCH"
 fi

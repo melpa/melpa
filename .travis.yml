@@ -19,7 +19,8 @@ before_install:
 
 cache:
   directories:
-  - /usr/local/evm
+  - $HOME/.evm
+  - $HOME/.cask
 
 env:
   #- EVM_EMACS=emacs-23.4-travis

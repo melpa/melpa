@@ -14,16 +14,8 @@ echo
 
 cask exec ecukes
 
-if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-    echo "Building recipes touched in commits $TRAVIS_COMMIT_RANGE"
-    changed_recipes=$(git show --pretty=format: --name-only "$TRAVIS_COMMIT_RANGE"|grep -e '^recipes/[a-z0-9]'|cut -d'|' -f1|sed 's/^recipes\///'|uniq)
-elif [ -n "$TRAVIS_PULL_REQUEST" ]; then
-    echo "Building recipes touched in pull request $TRAVIS_PULL_REQUEST on $TRAVIS_BRANCH"
-    changed_recipes=$(git diff --stat "$TRAVIS_COMMIT" "$TRAVIS_BRANCH"|grep -e '^ *recipes/[a-z0-9]'|cut -d'|' -f1|sed 's/^recipes\///'|uniq)
-else
-    changed_recipes=""
-fi
-
+echo "Building recipes touched in commits $TRAVIS_COMMIT_RANGE"
+changed_recipes=$(./travis-changed-files|grep -e '^recipes/[a-z0-9]'|sed 's/^recipes\///')
 for recipe_name in $changed_recipes; do
     if [ -f "./recipes/$recipe_name" ]; then
         echo "----------------------------------------------------"

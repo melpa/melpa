@@ -1,4 +1,3 @@
 (ergoemacs-status
  :fetcher github
- :repo "ergoemacs/ergoemacs-status"
- :files ("ergoemacs-status.el"))
+ :repo "ergoemacs/ergoemacs-status")

@@ -1,0 +1,1 @@
+(ob-lisp :fetcher github :repo "stardiviner/ob-lisp" :old-names (ob-sly))

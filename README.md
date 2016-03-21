@@ -24,7 +24,7 @@ read on for details.
 * [Build Scripts](#build-scripts)
 * [API](#api)
 * [About](#about)
-* [Stable Packages](#stable-packages)
+* [Stable Packages](#melpa-stable)
 
 
 ## Usage

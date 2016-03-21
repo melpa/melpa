@@ -24,7 +24,7 @@ read on for details.
 * [Build Scripts](#build-scripts)
 * [API](#api)
 * [About](#about)
-* [Stable Packages](#stable-packages)
+* [Stable Packages](#melpa-stable)
 
 
 ## Usage
@@ -90,7 +90,7 @@ you prefer to only receive updates for tagged releases, use
 
 ## Contributing
 
-See the [CONTRIBUTING.md][] document.
+See the [Contributing](CONTRIBUTING.md) document.
 
 ## Recipe Format
 

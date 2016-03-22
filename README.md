@@ -19,12 +19,12 @@ read on for details.
 ## Table of Contents
 
 * [Usage](#usage)
-* [Contributing](CONTRIBUTING.md)
+* [Contributing](#contributing)
 * [Recipe Format](#recipe-format)
 * [Build Scripts](#build-scripts)
 * [API](#api)
 * [About](#about)
-* [Stable Packages](#stable-packages)
+* [Stable Packages](#melpa-stable)
 
 
 ## Usage
@@ -90,7 +90,7 @@ you prefer to only receive updates for tagged releases, use
 
 ## Contributing
 
-See the [CONTRIBUTING.md][] document.
+See the [CONTRIBUTING.md](CONTRIBUTING.md) document.
 
 ## Recipe Format
 

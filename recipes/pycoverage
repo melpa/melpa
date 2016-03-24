@@ -1,0 +1,1 @@
+(pycoverage :fetcher github :repo "mattharrison/pycoverage.el")

@@ -1,0 +1,4 @@
+(biblio-doi
+ :repo "cpitclaudel/biblio.el"
+ :fetcher github
+ :files ("biblio-doi.el"))

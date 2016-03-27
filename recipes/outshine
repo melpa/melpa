@@ -1,1 +1,1 @@
-(outshine :fetcher github :repo "tj64/outshine" :files ("*.el"))
+(outshine :fetcher github :repo "tj64/outshine")

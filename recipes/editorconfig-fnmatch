@@ -1,3 +1,0 @@
-(editorconfig-fnmatch :repo "editorconfig/editorconfig-emacs"
-                      :fetcher github
-                      :files ("editorconfig-fnmatch.el"))

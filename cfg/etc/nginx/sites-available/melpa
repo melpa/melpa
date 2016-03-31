@@ -35,7 +35,7 @@ server {
 	# proxy to Apache 2 and mod_python
 	location / {
 	    proxy_pass         http://127.0.0.1:1337/;
-	    proxy_redirect     http://melpa.org:1337/ $scheme://melpa.org/;
+	    proxy_redirect     http://melpa.org:1337/ http://melpa.org/;
 	    # proxy_redirect     off;
 	    chunked_transfer_encoding off;
 

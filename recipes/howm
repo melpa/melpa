@@ -1,7 +1,5 @@
 (howm  :fetcher git
        :url "git://git.osdn.jp/gitroot/howm/howm.git"
        :files
-       ("*.el" "dir"
-        "*.info" "*.texi" "*.texinfo"
-        "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
-        (:exclude ".dir-locals.el" "test.el" "tests.el" "*-test.el" "*-tests.el")))
+       (:defaults
+        (:exclude "*.el.in")))

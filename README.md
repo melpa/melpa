@@ -213,34 +213,33 @@ and `:fetcher` specified,
 
 ### Example: Multiple Packages in one Repository
 
-The [projectile](https://github.com/bbatsov/projectile) repository
-contains three libraries `projectile.el`, `helm-projectile.el`, and
-`persp-projectile.el`.  The latter two libraries are optional and
-users who don't want to use the packages `helm` and/or `perspective`
-should not be forced to install them just so they can install
-`projectile`.  These libraries should therefore be distributed as
-separate packages.
+Assume we have a repository containing three libraries `mypackage.el`,
+`helm-mypackage.el`, and `persp-mypackage.el`.  The latter two
+libraries are optional and users who don't want to use the packages
+`helm` and/or `perspective` should not be forced to install them just
+so they can install `mypackage`.  These libraries should therefore be
+distributed as separate packages.
 
 The three packages have to be declared in three separate files
-`recipes/projectile`, `recipes/helm-projectile`, and
-`recipes/persp-projectile`:
+`recipes/mypackage`, `recipes/helm-mypackage`, and
+`recipes/persp-mypackage`:
 
 ```lisp
-(projectile :repo "bbatsov/projectile"
+(mypackage :repo "someuser/mypackage"
             :fetcher github
-            :files ("projectile.el"))
+            :files ("mypackage.el"))
 ```
 
 ```lisp
-(helm-projectile :repo "bbatsov/projectile"
+(helm-mypackage :repo "someuser/mypackage"
                  :fetcher github
-                 :files ("helm-projectile.el"))
+                 :files ("helm-mypackage.el"))
 ```
 
 ```lisp
-(persp-projectile :repo "bbatsov/projectile"
+(persp-mypackage :repo "someuser/mypackage"
                   :fetcher github
-                  :files ("persp-projectile.el"))
+                  :files ("persp-mypackage.el"))
 ```
 
 ### Example: Multiple Files in Multiple Directories

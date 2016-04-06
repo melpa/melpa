@@ -1,0 +1,1 @@
+(ob-coffee :fetcher github :repo "zweifisch/ob-coffee")

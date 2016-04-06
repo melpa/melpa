@@ -49,7 +49,9 @@
     this.readmeURL = "/packages/" + data.name + "-readme.txt";
     this.badgeURL = "/packages/" + data.name + "-badge.svg";
     this.matchesTerm = function(term) {
-      return this._searchText.indexOf(term) != -1;
+      return _.every(term.split(' ').map(function(part) {
+        return this._searchText.indexOf(part) !== -1;
+      }.bind(this)));
     };
   };
 

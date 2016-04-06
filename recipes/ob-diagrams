@@ -1,2 +1,2 @@
-
 (ob-diagrams :fetcher github :repo "bergey/org-babel-diagrams")
+;;; ob-diagrams.el ends here

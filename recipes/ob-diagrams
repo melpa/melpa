@@ -1,2 +1,2 @@
 
-(ob-diagrams :fetcher github :repo "dbergey/ob-diagrams")
+(ob-diagrams :fetcher github :repo "bergey/org-babel-diagrams")

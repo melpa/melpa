@@ -1,1 +1,1 @@
-(epresent :fetcher github :repo "eschulte/epresent")
+(epresent :fetcher github :repo "dakrone/epresent")

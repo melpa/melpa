@@ -1,0 +1,1 @@
+(docker :fetcher github :repo "Yuki-Inoue/cql-mode.el")

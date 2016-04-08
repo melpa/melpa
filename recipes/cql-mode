@@ -1,1 +1,1 @@
-(docker :fetcher github :repo "Yuki-Inoue/cql-mode.el")
+(cql-mode :fetcher github :repo "Yuki-Inoue/cql-mode")

@@ -104,7 +104,7 @@ packages will be available for installation along with those already
 in MELPA:
 
 ```
-EMACS=/path/to/emacs make sandbox
+EMACS_COMMAND=/path/to/emacs make sandbox
 ```
 
 then `M-x package-list-packages`, install and test as

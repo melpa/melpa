@@ -1,0 +1,2 @@
+(clomacs :repo "clojure-emacs/clomacs"
+         :fetcher github)

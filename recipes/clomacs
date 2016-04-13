@@ -1,3 +1,3 @@
 (clomacs :repo "clojure-emacs/clomacs"
-         :url "/src/elisp"
+         :files ("src/elisp/*.el")
          :fetcher github)

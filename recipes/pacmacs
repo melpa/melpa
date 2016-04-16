@@ -2,5 +2,6 @@
          :repo "codingteam/pacmacs.el"
          :files (:defaults
                  "maps"
+                 "signs"
                  ("sprites" "sprites/*.json")
                  ("sprites" "sprites/*.xpm")))

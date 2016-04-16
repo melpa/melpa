@@ -191,8 +191,8 @@ optionally looking only as far back as BOUND."
   "Find the newest version matching REGEX before point, optionally stopping at BOUND."
   (let ((tags (split-string
                (buffer-substring-no-properties
-                 (or bound (point-min)) (point))
-                "\n")))
+                (or bound (point-min)) (point))
+               "\n")))
     (setq tags (append
                 (mapcar
                  ;; Because the default `version-separator' is ".",
@@ -476,7 +476,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
                  (working-dir (file-name-directory dir))
                  (target-dir (file-name-nondirectory dir)))
             (package-build--run-process working-dir "env" "TZ=UTC" "cvs" "-z3" "-d" root "checkout"
-                            "-d" target-dir repo))))
+                                        "-d" target-dir repo))))
         (apply 'package-build--run-process dir "cvs" "log"
                (package-build--expand-source-file-list dir config))
 
@@ -536,18 +536,18 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (package-build--princ-checkout repo dir)
         (package-build--run-process nil "git" "clone" repo dir)))
       (if package-build-stable
-        (let* ( (bound (goto-char (point-max)))
-                (regexp (or (plist-get config :version-regexp)
-                            package-build-version-regexp))
-                (tag-version (and (package-build--run-process dir "git" "tag")
-                               (or (package-build--find-version-newest regexp bound)
-                                 (error "No valid stable versions found for %s" name)))) )
+          (let* ((bound (goto-char (point-max)))
+                 (regexp (or (plist-get config :version-regexp)
+                             package-build-version-regexp))
+                 (tag-version (and (package-build--run-process dir "git" "tag")
+                                   (or (package-build--find-version-newest regexp bound)
+                                       (error "No valid stable versions found for %s" name)))) )
 
-          ;; Using reset --hard here to comply with what's used for
-          ;; unstable, but maybe this should be a checkout?
-          (package-build--update-git-to-ref dir (concat "tags/" (cadr tag-version)))
-          ;; Return the parsed version as a string
-          (package-version-join (car tag-version)))
+            ;; Using reset --hard here to comply with what's used for
+            ;; unstable, but maybe this should be a checkout?
+            (package-build--update-git-to-ref dir (concat "tags/" (cadr tag-version)))
+            ;; Return the parsed version as a string
+            (package-version-join (car tag-version)))
         (package-build--update-git-to-ref dir (or commit (concat "origin/" (package-build--git-head-branch dir))))
         (apply 'package-build--run-process dir "git" "log" "--first-parent" "-n1" "--pretty=format:'\%ci'"
                (package-build--expand-source-file-list dir config))
@@ -639,32 +639,32 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (package-build--princ-checkout repo dir)
         (package-build--run-process nil "hg" "clone" repo dir)))
       (if package-build-stable
-        (let ( (bound (goto-char (point-max)))
-               (regexp (or (plist-get config :version-regexp)
-                         package-build-version-regexp))
-               tag-version )
-          (package-build--run-process dir "hg" "tags")
-          ;; The output of `hg tags` shows the ref of the tag as well
-          ;; as the tag itself, e.g.:
-          ;;
-          ;; tip                             1696:73ad80e8fea1
-          ;; 1.2.8                           1691:464af57fd2b7
-          ;;
-          ;; So here we remove that second column before passing the
-          ;; buffer contents to `package-build--find-version-newest'.
-          ;; This isn't strictly necessary for Mercurial since the
-          ;; colon in "1691:464af57fd2b7" means that won't be parsed
-          ;; as a valid version-string, but it's an example of how to
-          ;; do it in case it's necessary elsewhere.
-          (goto-char bound)
-          (ignore-errors (while (re-search-forward "\\ +.*")
-                           (replace-match "")))
-          (setq tag-version (or (package-build--find-version-newest regexp bound)
-                              (error "No valid stable versions found for %s" name)))
+          (let ( (bound (goto-char (point-max)))
+                 (regexp (or (plist-get config :version-regexp)
+                             package-build-version-regexp))
+                 tag-version )
+            (package-build--run-process dir "hg" "tags")
+            ;; The output of `hg tags` shows the ref of the tag as well
+            ;; as the tag itself, e.g.:
+            ;;
+            ;; tip                             1696:73ad80e8fea1
+            ;; 1.2.8                           1691:464af57fd2b7
+            ;;
+            ;; So here we remove that second column before passing the
+            ;; buffer contents to `package-build--find-version-newest'.
+            ;; This isn't strictly necessary for Mercurial since the
+            ;; colon in "1691:464af57fd2b7" means that won't be parsed
+            ;; as a valid version-string, but it's an example of how to
+            ;; do it in case it's necessary elsewhere.
+            (goto-char bound)
+            (ignore-errors (while (re-search-forward "\\ +.*")
+                             (replace-match "")))
+            (setq tag-version (or (package-build--find-version-newest regexp bound)
+                                  (error "No valid stable versions found for %s" name)))
 
-          (package-build--run-process dir "hg" "update" (cadr tag-version))
-          ;; Return the parsed version as a string
-          (package-version-join (car tag-version)))
+            (package-build--run-process dir "hg" "update" (cadr tag-version))
+            ;; Return the parsed version as a string
+            (package-version-join (car tag-version)))
         (apply 'package-build--run-process dir "hg" "log" "--style" "compact" "-l1"
                (package-build--expand-source-file-list dir config))
         (package-build--find-parse-time
@@ -776,7 +776,7 @@ Optionally PRETTY-PRINT the data."
         (insert "X-Original-")
         (move-beginning-of-line nil))
     ;; Put the new header in a sensible place if we can
-    (re-search-forward "^;+* *\\(Version:\\|Keywords\\|URL\\)" nil t)
+    (re-search-forward "^;+* *\\(Version\\|Keywords\\|URL\\) *:" nil t)
     (forward-line))
   (insert (format ";; Package-Version: %s" version))
   (newline))
@@ -952,8 +952,8 @@ to build the recipe."
   (cl-loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
            for pkg-info = (condition-case err (package-build--read-recipe file-name)
                             (error (package-build--message "Error reading recipe %s: %s"
-                                               file-name
-                                               (error-message-string err))
+                                                           file-name
+                                                           (error-message-string err))
                                    nil))
            when pkg-info
            collect pkg-info))
@@ -1156,8 +1156,8 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
       (when package-build-write-melpa-badge-images
         (package-build--write-melpa-badge-image (symbol-name name) version package-build-archive-dir))
       (package-build--message "Built in %.3fs, finished at %s"
-                  (time-to-seconds (time-since start-time))
-                  (current-time-string))
+                              (time-to-seconds (time-since start-time))
+                              (current-time-string))
       (list file-name version))))
 
 ;;;###autoload
@@ -1184,7 +1184,7 @@ Returns the archive entry for the package."
       (when (equal files (package-build-expand-file-specs
                           source-dir package-build-default-files-spec nil t))
         (package-build--message "Note: %s :files spec is equivalent to the default."
-                    package-name)))
+                                package-name)))
     (cond
      ((not version)
       (error "Unable to check out repository for %s" package-name))
@@ -1223,8 +1223,8 @@ Returns the archive entry for the package."
         (kill-buffer)))
 
     (package-build--write-pkg-readme target-dir
-                         (package-build--find-package-commentary pkg-source)
-                         package-name)
+                                     (package-build--find-package-commentary pkg-source)
+                                     package-name)
     (package-build--archive-entry pkg-info 'single)))
 
 (defun package-build--build-multi-file-package (package-name version files source-dir target-dir)
@@ -1419,13 +1419,14 @@ Returns the archive entry for the package."
   (interactive)
   (setq package-build--recipe-alist-initialized nil))
 
-(defun package-build-dump-archive-contents (&optional file-name)
+(defun package-build-dump-archive-contents (&optional file-name pretty-print)
   "Dump the list of built packages to FILE-NAME.
 
 If FILE-NAME is not specified, the default archive-contents file is used."
   (package-build--dump (cons 1 (package-build--archive-entries))
                        (or file-name
-                           (expand-file-name "archive-contents" package-build-archive-dir))))
+                           (expand-file-name "archive-contents" package-build-archive-dir))
+                       pretty-print))
 
 (defun package-build--archive-entries ()
   "Read all .entry files from the archive directory and return a list of all entries."

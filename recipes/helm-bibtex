@@ -1,1 +1,1 @@
-(helm-bibtex :fetcher github :repo "tmalsburg/helm-bibtex")
+(helm-bibtex :fetcher github :repo "tmalsburg/helm-bibtex" :files ("helm-bibtex.el" "bibtex-completion.el"))

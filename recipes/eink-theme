@@ -1,0 +1,1 @@
+(eink-theme :fetcher github :repo "maio/eink-emacs")

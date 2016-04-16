@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# \curl -L https://raw.github.com/milkypostman/melpa/master/scripts/bootstrap | bash
+# \curl -L https://raw.github.com/melpa/melpa/master/scripts/bootstrap | bash
 
 SUDOENV='DEBIAN_FRONTEND=noninteractive'
 
@@ -39,6 +39,6 @@ rvm install ruby-1.9.3
 rvm use ruby-1.9.3 --default
 echo "source ~/.profile" >> .bash_profile
 
-git clone http://github.com/milkypostman/melpa
+git clone http://github.com/melpa/melpa
 
 sudo reboot

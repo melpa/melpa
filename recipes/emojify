@@ -1,1 +1,1 @@
-(emojify :fetcher github :repo "iqbalansari/emacs-emojify" :files ("*.el" ("data" "data/emoji.json") ("images" "images/*")))
+(emojify :fetcher github :repo "iqbalansari/emacs-emojify" :files (:defaults "data" "images"))

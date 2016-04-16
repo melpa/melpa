@@ -1,1 +1,1 @@
-(eredis :fetcher svn :url "http://eredis.googlecode.com/svn/trunk/")
+(eredis :fetcher github :repo "justinhj/eredis")

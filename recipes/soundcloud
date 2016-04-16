@@ -1,1 +1,1 @@
-(soundcloud :fetcher github :repo "tthieman/soundcloud.el")
+(soundcloud :fetcher github :repo "thieman/soundcloud.el")

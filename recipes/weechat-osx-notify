@@ -1,2 +1,0 @@
-(weechat :fetcher github
-         :repo "Kungi/weechat-osx-notify)

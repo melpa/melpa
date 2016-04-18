@@ -1,2 +1,2 @@
 
-(erc-social-graph :repo "vibhavp/erc-twitch" :fetcher github)
+(erc-twitch :repo "vibhavp/erc-twitch" :fetcher github)

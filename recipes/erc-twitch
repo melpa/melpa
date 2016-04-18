@@ -1,0 +1,2 @@
+
+(erc-social-graph :repo "vibhavp/erc-twitch" :fetcher github)

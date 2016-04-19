@@ -19,12 +19,12 @@ read on for details.
 ## Table of Contents
 
 * [Usage](#usage)
-* [Contributing](#contributing-new-recipes)
+* [Contributing](#contributing)
 * [Recipe Format](#recipe-format)
 * [Build Scripts](#build-scripts)
 * [API](#api)
 * [About](#about)
-* [Stable Packages](#stable-packages)
+* [Stable Packages](#melpa-stable)
 
 
 ## Usage
@@ -88,123 +88,9 @@ you prefer to only receive updates for tagged releases, use
   get "updated" to the stable version because of the way version
   numbering is handled.
 
-## Contributing New Recipes
+## Contributing
 
-New recipe submissions should adhere to the following guidelines,
-
-* One pull request per recipe. You can create multiple branches and
-  create a pull request for each branch.
-
-* Upstream source must be stored in an authoritative
-  [SCM](https://en.wikipedia.org/wiki/Software_configuration_management)
-  repository. EmacsWiki recipes are no longer accepted.
-
-* Packages should be built from the *official* package repository.
-  Forks of the official repository will not be accepted except in
-  *extreme* circumstances.
-
-* The package name should match the name of the feature provided.  See
-  the `package` function for more information.
-
-* Packages should adhere to the `package.el` format as specified by
-  `(info "(elisp) Packaging")`. More information on this format is
-  provided by the
-  [marmalade package manual](https://web.archive.org/web/20111120220609/http://marmalade-repo.org/doc-files/package.5.html).
-
-* Recipes should try to minimize the size of the resulting package by
-  specifying only files relevant to the package. See the
-  [Recipe Format](#recipe-format) section for more information on
-  specifying package files.
-
-* To have a stable version generated for your package simply tag the
-  repository using a naming compatible with `version-to-list`. The
-  repo state of this tag will be used to generate the stable package.
-
-
-### Expediting Recipe Reviews
-
-Because we care about the quality of packages that are part of MELPA
-we review all submissions. The following steps can help us with this
-process and expedite the recipe review process,
-
-* Use [flycheck-package](https://github.com/purcell/flycheck-package)
-  to help you identify common errors in your package metadata.
-
-* Include the following information in the pull request:
-
-    * A brief summary of what the package does.
-
-    * A direct link to the package repository.
-
-    * Your association with the package (e.g., are you the maintainer?
-      have you contributed? do you just like the package a lot?).
-
-    * Relevant communications with the upstream package maintainer (e.g.,
-      `package.el` compatibility changes that you have submitted).
-
-* Test that the package builds properly via `make recipes/<recipe>`,
-  or pressing `C-c C-c` in the recipe buffer.
-
-* Test that the package installs properly via `package-install-file`,
-  or entering "yes" when prompted after pressing `C-c C-c` in the
-  recipe buffer.
-
-* If you are *not* the original author or maintainer of the package you
-  are submitting, please consider notifying the author *prior* to submitting
-  and make reasonable effort to include them in the pull request process.
-
-
-### Testing
-
-Let `<NAME>` denote the name of the recipe to submit.
-
-1. Fork the MELPA repository.
-2. Add your new file under the directory specified by
-`package-build-recipes-dir` (default: `recipes/` directory where
-`package-build` was loaded). If you prefer, the interactive command
-`package-build-create-recipe` in `package-build.el` will guide you
-through this process.
-
-3. Confirm your package builds properly by running
-
-        make recipes/<NAME>
-
-  (Be sure that the `emacs` on your path is at least version 23, or
-  set `$EMACS_COMMAND` to the location of a suitable binary.)
-
-  Alternatively, open the recipe in Emacs and press `C-c C-c` in the
-  recipe buffer: this will also prompt you to install the
-  freshly-built package.
-
-  If the repository contains tags for releases, confirm that the
-  correct version is detected by running `STABLE=t make
-  recipes/<NAME>`.  The version detection can be adjusted by
-  specifying `:version-regexp` in the recipe (see
-  [#recipe-format](below)).
-
-4. Install the file you built by running `package-install-file` from
-within Emacs and specifying the newly built package in the directory
-specified by `package-build-archive-dir` (default: `packages/`
-directory where `package-build` was loaded).
-
-You can optionally run a sandboxed Emacs in which locally-built
-packages will be available for installation along with those already
-in MELPA:
-
-```
-EMACS=/path/to/emacs make sandbox
-```
-
-then `M-x package-list-packages`, install and test as
-appropriate. This is a useful way to discover missing dependencies!
-
-### Submitting
-
-After verifying the entry works properly please open a pull request on
-GitHub. Consider the [hub](https://github.com/github/hub)
-command-line utility by [defunkt](http://chriswanstrath.com/) which
-helps simplify this process.
-
+See the [CONTRIBUTING.md](CONTRIBUTING.md) document.
 
 ## Recipe Format
 
@@ -327,34 +213,33 @@ and `:fetcher` specified,
 
 ### Example: Multiple Packages in one Repository
 
-The [projectile](https://github.com/bbatsov/projectile) repository
-contains three libraries `projectile.el`, `helm-projectile.el`, and
-`persp-projectile.el`.  The latter two libraries are optional and
-users who don't want to use the packages `helm` and/or `perspective`
-should not be forced to install them just so they can install
-`projectile`.  These libraries should therefore be distributed as
-separate packages.
+Assume we have a repository containing three libraries `mypackage.el`,
+`helm-mypackage.el`, and `persp-mypackage.el`.  The latter two
+libraries are optional and users who don't want to use the packages
+`helm` and/or `perspective` should not be forced to install them just
+so they can install `mypackage`.  These libraries should therefore be
+distributed as separate packages.
 
 The three packages have to be declared in three separate files
-`recipes/projectile`, `recipes/helm-projectile`, and
-`recipes/persp-projectile`:
+`recipes/mypackage`, `recipes/helm-mypackage`, and
+`recipes/persp-mypackage`:
 
 ```lisp
-(projectile :repo "bbatsov/projectile"
+(mypackage :repo "someuser/mypackage"
             :fetcher github
-            :files ("projectile.el"))
+            :files ("mypackage.el"))
 ```
 
 ```lisp
-(helm-projectile :repo "bbatsov/projectile"
+(helm-mypackage :repo "someuser/mypackage"
                  :fetcher github
-                 :files ("helm-projectile.el"))
+                 :files ("helm-mypackage.el"))
 ```
 
 ```lisp
-(persp-projectile :repo "bbatsov/projectile"
+(persp-mypackage :repo "someuser/mypackage"
                   :fetcher github
-                  :files ("persp-projectile.el"))
+                  :files ("persp-mypackage.el"))
 ```
 
 ### Example: Multiple Files in Multiple Directories

@@ -3,4 +3,4 @@
 		 ("pydb" "pydb/*.el")
 		 ("pydbgr" "pydbgr/*.el")
 		 ("trepan8" "trepan8/*.el")
-		 ("tepanx" "trepanx/*.el")))
+		 ("trepanx" "trepanx/*.el")))

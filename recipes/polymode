@@ -1,4 +1,4 @@
 (polymode
  :fetcher github
- :repo "vitoshka/polymode"
+ :repo "vspinu/polymode"
  :files ("*.el" "modes/*.el"))

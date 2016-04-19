@@ -1,1 +1,1 @@
-(platformio-mode :repo "zachmassia/platformio-mode" :fetcher github)
+(platformio-mode :repo "ZachMassia/PlatformIO-Mode" :fetcher github)

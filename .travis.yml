@@ -17,10 +17,6 @@ before_install:
   - export PATH=$HOME/.cask/bin:$PATH
   - cask
 
-cache:
-  directories:
-  - /usr/local/evm
-
 env:
   #- EVM_EMACS=emacs-23.4-travis
   #- EVM_EMACS=emacs-24.1-travis

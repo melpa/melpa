@@ -1,1 +1,1 @@
-(flymake-solidity :repo "kootenpv/flymake-solidity.el" :fetcher github)
+(flymake-solidity :repo "kootenpv/flymake-solidity" :fetcher github)

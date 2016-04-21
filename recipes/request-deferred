@@ -1,1 +1,1 @@
-(request-deferred :repo "abingham/emacs-request" :fetcher github :files ("request-deferred.el"))
+(request-deferred :repo "tkf/emacs-request" :fetcher github :files ("request-deferred.el"))

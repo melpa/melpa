@@ -1,6 +1,5 @@
 (org-iv :repo "kuangdash/org-iv"
         :fetcher github
-        :url "https://github.com/kuangdash/org-iv"
         :files (:defaults ("default"
                            "default/org-iv-front-file"
                            "default/org-back-file"

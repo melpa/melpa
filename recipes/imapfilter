@@ -1,0 +1,1 @@
+(imapfilter :fetcher github :repo "tarsius/imapfilter")

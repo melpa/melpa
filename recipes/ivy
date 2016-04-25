@@ -1,0 +1,6 @@
+(ivy :repo "abo-abo/swiper"
+     :fetcher github
+     :files ("*.el"
+             (:exclude "swiper.el" "counsel.el")
+             "doc/ivy.texi"
+             "doc/ivy-help.org"))

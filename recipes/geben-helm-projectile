@@ -1,0 +1,4 @@
+(geben-helm-projectile
+ :repo "ahungry/geben-helm-projectile"
+ :files ("geben-helm-projectile.el")
+ :fetcher github)

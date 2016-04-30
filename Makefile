@@ -7,9 +7,6 @@ WEBROOT := $$HOME/www
 EMACS_COMMAND   ?= emacs
 SLEEP   ?= 0
 SANDBOX := ./sandbox
-ifdef STABLE
-PKGDIR := ./packages-stable
-endif
 STABLE ?= nil
 
 EVAL := $(EMACS_COMMAND)
@@ -63,7 +60,7 @@ clean: clean-working clean-packages clean-json clean-sandbox
 
 packages: $(RCPDIR)/*
 
-packages/archive-contents: $(PKGDIR)/*.entry
+packages/archive-contents: .FORCE
 	@echo " • Updating $@ ..."
 	$(EVAL) '(package-build-dump-archive-contents)'
 
@@ -106,7 +103,7 @@ sandbox: packages/archive-contents
 		--eval '(setq user-emacs-directory "$(SANDBOX)")' \
 		-l package \
 		--eval "(add-to-list 'package-archives '(\"gnu\" . \"http://elpa.gnu.org/packages/\") t)" \
-		--eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.org/packages/\") t)" \
+		--eval "(add-to-list 'package-archives '(\"melpa\" . \"https://melpa.org/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"sandbox\" . \"$(shell pwd)/$(PKGDIR)/\") t)" \
 		--eval "(package-refresh-contents)" \
 		--eval "(package-initialize)"

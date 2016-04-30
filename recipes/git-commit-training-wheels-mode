@@ -1,1 +1,0 @@
-(git-commit-training-wheels-mode :repo "yasuyk/git-commit-training-wheels-mode" :fetcher github)

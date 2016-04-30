@@ -1,1 +1,1 @@
-(tea-time :fetcher github :repo "krick/tea-time")
+(tea-time :fetcher github :repo "konzeptual/tea-time")

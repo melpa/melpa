@@ -1,2 +1,0 @@
-(evil-ranger :fetcher github
-          :repo "ralesi/evil-ranger")

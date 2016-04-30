@@ -1,2 +1,0 @@
-(tabulated-list :repo "sigma/tabulated-list.el" :fetcher github)
-

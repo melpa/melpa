@@ -1,0 +1,1 @@
+(evil-rails :repo "antono/evil-rails" :fetcher github)

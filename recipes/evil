@@ -1,1 +1,1 @@
-(evil :url "https://bitbucket.org/lyro/evil" :fetcher hg)
+(evil :repo "lyro/evil" :fetcher bitbucket)

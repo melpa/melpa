@@ -1,0 +1,1 @@
+(simple-mpc :fetcher github :repo "jorenvo/simple-mpc")

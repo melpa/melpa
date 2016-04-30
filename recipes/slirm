@@ -1,0 +1,2 @@
+(slirm :fetcher github
+       :repo "fbie/slirm")

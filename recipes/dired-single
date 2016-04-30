@@ -1,1 +1,1 @@
-(dired-single :fetcher wiki)
+(dired-single :fetcher github :repo "crocket/dired-single")

@@ -1,1 +1,1 @@
-(imenu-anywhere :repo "vitoshka/imenu-anywhere" :fetcher github)
+(imenu-anywhere :repo "vspinu/imenu-anywhere" :fetcher github)

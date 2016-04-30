@@ -20,40 +20,48 @@
 
       <pre><code>(require 'package) ;; You might already have this line
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/"))
+             '("melpa" . "https://melpa.org/packages/"))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize) ;; You might already have this line</code></pre>
 
       <p>
-        or to add the stable package repository, use this instead
+        To use the <a href="https://stable.melpa.org" title="MELPA Stable">
+          stable package repository</a> instead of the default
+        “bleeding-edge” repository, use this instead
         of <code>"melpa"</code>:
       </p>
 
       <pre><code>(add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/") t)</code></pre>
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)</code></pre>
 
+      <p>
+        <strong>Note:</strong> <em>There are some problems using the
+          <code>https</code> location with Emacs on Windows. There is
+          currently no know easy fix for this. You can still use MELPA
+          by using the non-SSL location by replacing <code>https</code>
+          with <code>http</code>.</em>
+      </p>
       <h3>Customizations</h3>
       <p>
         What if you only want some of your packages to be installed
         from MELPA, and the rest from Marmalade or elsewhere?
       </p>
       <p>
-        Only in the very latest Emacs snapshots is there a way to
-        exclude or include versions according to their source
-        (see <code>package-pinned-packages</code>). For all other
-        users, we provide a <code>package-filter.el</code> package (available
-        in MELPA) that will allow you to enable only certain packages
-        or exclude certain packages.
-        You can install the package
-        manually by pasting this into your <code>*scratch*</code>
-        buffer and evaluating it.
+        In Emacs 24.4 and later, <code>package-pinned-packages</code>
+        allows you to exclude or include versions according to their
+        source. For users using older versions of Emacs, we provide
+        a <code>package-filter.el</code> package (available in MELPA)
+        that will allow you to enable only certain packages or exclude
+        certain packages.  You can install the package manually by
+        pasting this into your <code>*scratch*</code> buffer and
+        evaluating it.
       </p>
       <pre><code>(progn
   (switch-to-buffer
     (url-retrieve-synchronously
-      "https://raw.github.com/milkypostman/package-filter/master/package-filter.el"))
+      "https://raw.github.com/melpa/package-filter/master/package-filter.el"))
   (package-install-from-buffer  (package-buffer-info) 'single))</code></pre>
 
       <p>You can then customize two variables:</p>
@@ -98,7 +106,7 @@
         the <code>package-filter.el</code> package.</em>
       </p>
       <p>
-        There is a small bug in Emacs24’s <code>package.el</code> such
+        There is a small bug in Emacs 24’s <code>package.el</code> such
         that the dependency order comes out backwards. The problem is
         patched by some <em>advice</em>.
       </p>
@@ -113,8 +121,7 @@
       <a name="updating"></a>
       <h2>Updating Packages</h2>
       <p>
-        <code>package.el</code> now includes a mechanism to upgrade
-        packages. After running <code>package-list-packages</code>,
+        After running <code>package-list-packages</code>,
         type <em>U</em> (mark Upgradable packages) and then <em>x</em>
         (eXecute the installs and deletions). When it’s done
         installing all the packages it will ask if you want to delete
@@ -126,12 +133,20 @@
         and delete packages that are installed multiple times. This
         can happen when the install times out.
       </p>
+      <a name="adding"></a>
+      <h2>Adding a Package</h2>
+      <p>
+	In so many words, fork the project's source tree
+	and create a pull request with a recipe for your package.
+	The <tt>README.md</tt> file on GitHub has more details.
+	See the next section for a link.
+      </p>
       <a name="development"></a>
       <h2>Development</h2>
-      <p><a href="https://github.com/milkypostman/melpa">https://github.com/milkypostman/melpa</a></p>
+      <p><a href="https://github.com/melpa/melpa">https://github.com/melpa/melpa</a></p>
       <p>
         Contributions are welcome. Currently, the builder supports
-        packages using git, subversion, mercurial, bzr, cvs, darcs, fossil and
-        emacswiki.
+        packages using Git, Subversion, Mercurial, Bazaar, CVS, Darcs, Fossil and
+        EmacsWiki (deprecated).
       </p>
     </section>

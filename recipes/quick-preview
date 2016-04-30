@@ -1,0 +1,2 @@
+(quick-preview :repo "myuhe/quick-preview.el"
+               :fetcher github)

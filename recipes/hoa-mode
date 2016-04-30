@@ -1,0 +1,2 @@
+(hoa-mode :url "https://gitlab.lrde.epita.fr/spot/emacs-modes.git"
+	  :files ("hoa-mode.el") :fetcher git)

@@ -1,4 +1,1 @@
-(tmmofl
- :fetcher hg
- :url "https://code.google.com/p/phillord-emacs-packages/"
- :files ("tmmofl.el"))
+(tmmofl :fetcher github :repo "phillord/tmmofl")

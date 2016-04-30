@@ -22,6 +22,16 @@
     return res;
   }
 
+  function addPropSetHook(prop, setter) {
+    return function(val) {
+      if (arguments.length === 0)
+        return prop();
+      var ret = prop(val);
+      setter(val);
+      return ret;
+    };
+  }
+
   //////////////////////////////////////////////////////////////////////////////
   // Models
   //////////////////////////////////////////////////////////////////////////////
@@ -39,7 +49,9 @@
     this.readmeURL = "/packages/" + data.name + "-readme.txt";
     this.badgeURL = "/packages/" + data.name + "-badge.svg";
     this.matchesTerm = function(term) {
-      return this._searchText.indexOf(term) != -1;
+      return _.every(term.split(' ').map(function(part) {
+        return this._searchText.indexOf(part) !== -1;
+      }.bind(this)));
     };
   };
 
@@ -105,6 +117,9 @@
       } else if (recipe.fetcher == "gitlab") {
         return "https://gitlab.com/" + recipe.repo +
           (recipe.branch ? "/tree/" + recipe.branch : "");
+      } else if (recipe.fetcher == "bitbucket") {
+        return "https://bitbucket.com/" + recipe.repo +
+          (recipe.branch ? "/branch/" + recipe.branch : "");
       } else if (recipe.fetcher == "wiki") {
         return "http://www.emacswiki.org/emacs/" + name + ".el";
       } else if (recipe.url) {
@@ -140,7 +155,7 @@
         source: recipe.fetcher,
         downloads: oldNames.concat(name).reduce(function(sum, n) { return sum + (downloads[n] || 0); }, 0),
         fetcher: recipe.fetcher,
-        recipeURL: "https://github.com/milkypostman/melpa/blob/master/recipes/" + name,
+        recipeURL: "https://github.com/melpa/melpa/blob/master/recipes/" + name,
         packageURL: "packages/" + name + "-" + version + "." + (built.type == "single" ? "el" : "tar"),
         sourceURL: calculateSourceURL(name, recipe),
         oldNames: oldNames,
@@ -177,17 +192,16 @@
     this.pageLength = m.prop(50);
     this.windowSize = m.prop(7);
     this.pageNumber = m.prop(1);
-    this.items = getItemList;
     this.paginatedItems = function() {
       if (this.pageNumber() !== null) {
-        return this.items().slice(this.pageLength() * (this.pageNumber() - 1),
+        return getItemList().slice(this.pageLength() * (this.pageNumber() - 1),
                                   this.pageLength() * this.pageNumber());
       } else {
-        return this.items();
+        return getItemList();
       }
     };
     this.maxPage = function() {
-      return Math.floor(this.items().length / this.pageLength());
+      return Math.floor(getItemList().length / this.pageLength());
     };
     this.prevPages = function() {
       return _.last(_.range(1, this.pageNumber()),
@@ -232,7 +246,9 @@
 
   melpa.packagelist = {};
   melpa.packagelist.controller = function() {
-    this.filterTerms = m.prop(m.route.param('q') || '');
+    var resetPagination = function() { this.paginatorCtrl.pageNumber(1); }.bind(this);
+    this.filterTerms = addPropSetHook(m.prop(m.route.param('q') || ''),
+                                      resetPagination);
     this.sortBy = m.prop("name");
     this.sortAscending = m.prop(true);
     this.packageList = melpa.packageList;
@@ -252,6 +268,7 @@
         this.sortAscending(true);
         this.sortBy(field);
       }
+      resetPagination();
     };
     this.wantPagination = function() {
       return !Cookies.get("nopagination");
@@ -338,6 +355,7 @@
       downloadsPercentile: m.prop(0),
       archivename: new melpa.archivename.controller()
     };
+    ctrl.title = ctrl.packageName;
     melpa.packageList.then(function(packageList) {
       var p = packageList.packageWithName(ctrl.packageName);
       if (!p) return;
@@ -431,16 +449,44 @@
 
   melpa.buildstatus = {};
   melpa.buildstatus.controller = function() {
-    this.buildCompletionTime = m.request({method: 'GET', url: "/build-status.json", background: true})
+    this.started = m.prop();
+    this.completed = m.prop();
+    this.next = m.prop();
+    this.duration = m.prop();
+    this.running = function() { return !this.completed(); }.bind(this);
+
+    m.request({method: 'GET', url: "/build-status.json", background: true})
       .then(function(status){
-        return new Date(status.completed * 1000);
-      });
+        m.startComputation();
+        this.started(maybeDate(status.started));
+        this.completed(maybeDate(status.completed));
+        this.next(maybeDate(status.next));
+        this.duration(status.duration);
+        m.endComputation();
+      }.bind(this));
+    function maybeDate(v) { return v ? new Date(v * 1000) : null; }
   };
   melpa.buildstatus.view = function(ctrl) {
-    return m(".alert.alert-success", [
-      m("strong", "Last build ended: "),
-      m("span", [ctrl.buildCompletionTime() ? moment(ctrl.buildCompletionTime()).fromNow() : "unknown"])
-    ]);
+    function reltime(t) {
+      return t ? moment(t).fromNow() : "unknown";
+    }
+    function duration() {
+      return ctrl.duration() ? moment.duration(ctrl.duration(), 'seconds').humanize() : "unknown";
+    }
+    if (ctrl.running()) {
+      return m(".alert.alert-warning", [
+        m("strong", "Current build started: "),
+        m("span", [reltime(ctrl.started())]),
+        m("span", [", last took ", duration()])
+      ]);
+    } else {
+      return m(".alert.alert-success", [
+        m("strong", "Next build: "),
+        m("span", [reltime(ctrl.next())]),
+        m("span", [", last ended ", reltime(ctrl.completed()),
+                   " and took ", duration()])
+      ]);
+    }
   };
 
 
@@ -474,15 +520,18 @@
   // Static pages
   //////////////////////////////////////////////////////////////////////////////
 
-  melpa.staticpage = function(partialPath) {
-    this.controller = function() {
-      this.content = m.prop('');
-      m.request({method: "GET", url: partialPath,
-                 deserialize: function(v){return v;}
-                }).then(this.content);
-    };
-    this.view = function(ctrl) {
-      return m("div", [m.trust(ctrl.content())]);
+  melpa.staticpage = function(partialPath, title) {
+    return {
+      controller: function() {
+        this.content = m.prop('');
+        this.title = title;
+        m.request({method: "GET", url: partialPath,
+                   deserialize: _.identity
+                  }).then(this.content);
+      },
+      view: function(ctrl) {
+        return m("div", [m.trust(ctrl.content())]);
+      }
     };
   };
 
@@ -510,7 +559,7 @@
           m("section.jumbotron", [
             m("ul", [
               "<strong>Up-to-date packages built on our servers from upstream source</strong>",
-              "<strong>Installable in any recent Emacs using 'package.el'</strong> - no need to install svn/cvs/hg/bzr/git/darcs/fossil etc.",
+              "<strong>Installable in any Emacs with 'package.el'</strong> - no local version-control tools needed",
               "<strong>Curated</strong> - no obsolete, renamed, forked or randomly hacked packages",
               "<strong>Comprehensive</strong> - more packages than any other archive",
               "<strong>Automatic updates</strong> - new commits result in new packages",
@@ -521,7 +570,7 @@
         m(".col-md-4", [
           melpa.buildstatus.view(ctrl.buildstatus),
           m.trust('<a class="twitter-timeline" data-dnt="true" data-related="milkypostman,sanityinc" href="https://twitter.com/melpa_emacs" data-widget-id="311867756586864640">Tweets by @melpa_emacs</a>'),
-          m('script', {src: "http://platform.twitter.com/widgets.js", type: "text/javascript"})
+          m('script', {src: "//platform.twitter.com/widgets.js", type: "text/javascript"})
         ])
       ]),
       melpa.packagelist.view(ctrl.packagelist)
@@ -530,14 +579,45 @@
 
 
   //////////////////////////////////////////////////////////////////////////////
+  // Titled pages
+  //////////////////////////////////////////////////////////////////////////////
+
+  melpa.currentPageTitle = m.prop();
+
+  melpa.titledPage = function(module) {
+    return {
+      controller: function() {
+        var ctrl = new (Function.prototype.bind.apply(module.controller, arguments));
+        var t = ctrl.title;
+        melpa.currentPageTitle(typeof t === "function" ? t() : t);
+        return ctrl;
+      },
+      view: module.view
+    };
+  };
+
+  melpa.titleComponent = {
+    controller: function() {
+      this.archivename = new melpa.archivename.controller();
+    },
+    view: function(ctrl) {
+      return _.compact([melpa.currentPageTitle(), ctrl.archivename.archiveName()]).join(" - ");
+    }
+  };
+
+  var titleElem = document.querySelector("title");
+  titleElem.textContent = "";
+  m.module(titleElem, melpa.titleComponent);
+
+  //////////////////////////////////////////////////////////////////////////////
   // Routing
   //////////////////////////////////////////////////////////////////////////////
-  melpa.gettingstarted = new melpa.staticpage("/partials/getting-started.html");
+  melpa.gettingstarted = melpa.staticpage("/partials/getting-started.html", "Getting Started");
 
   m.route.mode = "hash";
   m.route(document.getElementById("content"), "/", {
-    "/": melpa.frontpage,
-    "/getting-started": melpa.gettingstarted,
-    "/:package": melpa.packagedetails
+    "/": melpa.titledPage(melpa.frontpage),
+    "/getting-started": melpa.titledPage(melpa.gettingstarted),
+    "/:package": melpa.titledPage(melpa.packagedetails)
   });
 })(window.m, window.document, window._, window.moment, window.Cookies);

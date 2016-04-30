@@ -1,0 +1,1 @@
+(clean-buffers :fetcher github :repo "lujun9972/clean-buffers")

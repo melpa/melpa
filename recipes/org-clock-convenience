@@ -1,0 +1,3 @@
+(org-clock-convenience
+ :fetcher github
+ :repo "dfeich/org-clock-convenience")

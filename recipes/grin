@@ -1,1 +1,1 @@
-(grin :fetcher hg :url "https://bitbucket.org/dariusp686/emacs-grin")
+(grin :fetcher bitbucket :repo "dariusp686/emacs-grin")

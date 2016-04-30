@@ -1,2 +1,3 @@
 (lispy :repo "abo-abo/lispy"
-       :fetcher github)
+       :fetcher github
+       :files (:defaults "lispy-clojure.clj"))

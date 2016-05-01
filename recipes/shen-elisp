@@ -1,0 +1,4 @@
+(shen-elisp
+ :repo "deech/shen-elisp"
+ :fetcher github
+ :files ("shen*.el"))

@@ -776,7 +776,7 @@ Optionally PRETTY-PRINT the data."
         (insert "X-Original-")
         (move-beginning-of-line nil))
     ;; Put the new header in a sensible place if we can
-    (re-search-forward "^;+* *\\(Version\\|Keywords\\|URL\\) *:" nil t)
+    (re-search-forward "^;+* *\\(Version\\|Package-Requires\\|Keywords\\|URL\\) *:" nil t)
     (forward-line))
   (insert (format ";; Package-Version: %s" version))
   (newline))

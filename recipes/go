@@ -1,0 +1,3 @@
+(go :fetcher github
+    :repo "eschulte/el-go"
+    :files (:defaults "backends/*.el" "stone.wav"))

@@ -1,0 +1,3 @@
+(timp :repo "Mola-T/timp"
+      :fetcher github
+      :files ("*.el"))

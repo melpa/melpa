@@ -1,3 +1,0 @@
-(thread :repo "Mola-T/thread"
-        :fetcher github
-        :files ("*.el" (:exclude "thread-pkg.el")))

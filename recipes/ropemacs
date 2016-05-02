@@ -1,0 +1,1 @@
+(ropemacs :repo "python-rope/ropemacs" :fetcher github)

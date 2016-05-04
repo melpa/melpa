@@ -1,0 +1,4 @@
+(ycmd-eldoc
+ :fetcher github
+ :repo "abingham/emacs-ycmd"
+ :files ("ycmd-eldoc.el"))

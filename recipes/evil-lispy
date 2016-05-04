@@ -1,3 +1,2 @@
 (evil-lispy :repo "sp3ctum/evil-lispy"
-            :fetcher github
-            :branch "master")
+            :fetcher github)

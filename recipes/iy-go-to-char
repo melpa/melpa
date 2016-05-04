@@ -1,1 +1,1 @@
-(iy-go-to-char :fetcher wiki)
+(iy-go-to-char :fetcher github :repo "doitian/iy-go-to-char")

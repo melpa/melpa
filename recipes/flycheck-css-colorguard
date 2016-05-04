@@ -1,0 +1,1 @@
+(flycheck-css-colorguard :fetcher github :repo "Simplify/flycheck-css-colorguard")

@@ -1,0 +1,1 @@
+(emms-status :repo "alezost/emms-status.el" :fetcher github)

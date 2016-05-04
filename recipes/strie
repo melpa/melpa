@@ -1,1 +1,1 @@
-(strie :fetcher github :repo "hackscience/strie.el")
+(strie :fetcher github :repo "jcatw/strie.el")

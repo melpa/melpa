@@ -1,0 +1,1 @@
+(sendto :fetcher github :repo "lujun9972/sendto.el")

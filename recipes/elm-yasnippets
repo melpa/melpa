@@ -1,0 +1,4 @@
+(elm-yasnippets
+ :fetcher github
+ :repo "abingham/elm-yasnippets"
+ :files (:defaults "snippets"))

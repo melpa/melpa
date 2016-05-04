@@ -1,1 +1,1 @@
-(pastebin :fetcher wiki)
+(pastebin :fetcher github :repo "nicferrier/elpastebin")

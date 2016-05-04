@@ -1,1 +1,1 @@
-(haxe-mode :fetcher hg :url "https://bitbucket.org/jpsecher/haxe-mode")
+(haxe-mode :fetcher bitbucket :repo "jpsecher/haxe-mode")

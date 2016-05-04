@@ -1,1 +1,1 @@
-(ruby-tools :repo "rejeep/ruby-tools" :fetcher github)
+(ruby-tools :repo "rejeep/ruby-tools.el" :fetcher github)

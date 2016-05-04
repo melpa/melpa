@@ -1,4 +1,0 @@
-(flycheck-processing
- :repo "ptrv/processing2-emacs"
- :fetcher github
- :files ("flycheck-processing.el"))

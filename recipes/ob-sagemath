@@ -1,0 +1,3 @@
+(ob-sagemath :repo "stakemori/ob-sagemath"
+             :fetcher github
+             :files ("ob-sagemath.el" "*.py"))

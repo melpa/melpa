@@ -1,7 +1,6 @@
 (elpy
  :fetcher github
  :repo "jorgenschaefer/elpy"
- :branch "release"
  :files ("elpy.el"
          "elpy-refactor.el"
          "elpy-pkg.el.in"

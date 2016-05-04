@@ -1,0 +1,1 @@
+(flycheck-gometalinter :repo "favadi/flycheck-gometalinter" :fetcher github)

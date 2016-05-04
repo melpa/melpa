@@ -1,1 +1,1 @@
-(toxi-theme :fetcher hg :url "http://bitbucket.org/postspectacular/toxi-theme")
+(toxi-theme :fetcher bitbucket :repo "postspectacular/toxi-theme")

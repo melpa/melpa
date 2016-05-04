@@ -1,1 +1,4 @@
-(sly-company :fetcher github :repo "capitaomorte/sly-company" )
+(sly-company
+ :fetcher github
+ :repo "capitaomorte/sly-company"
+ :version-regexp "\\(.*\\)")

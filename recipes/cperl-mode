@@ -1,2 +1,0 @@
-(cperl-mode :repo "jrockway/cperl-mode" :fetcher github)
-

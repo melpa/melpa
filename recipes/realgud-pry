@@ -1,0 +1,3 @@
+(realgud-pry :fetcher github :repo "rocky/realgud-pry"
+	 :files ("realgud-pry.el"
+		 ("pry" "pry/*.el")))

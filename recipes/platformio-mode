@@ -1,0 +1,1 @@
+(platformio-mode :repo "ZachMassia/PlatformIO-Mode" :fetcher github)

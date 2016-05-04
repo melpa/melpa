@@ -1,0 +1,3 @@
+(java-imports
+ :fetcher github
+ :repo "dakrone/emacs-java-imports")

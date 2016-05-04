@@ -1,2 +1,2 @@
-(drag-stuff :repo "rejeep/drag-stuff" :fetcher github)
+(drag-stuff :repo "rejeep/drag-stuff.el" :fetcher github)
 

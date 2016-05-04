@@ -1,0 +1,2 @@
+(zone-sl :repo "kawabata/zone-sl"
+         :fetcher github)

@@ -60,7 +60,7 @@ clean: clean-working clean-packages clean-json clean-sandbox
 
 packages: $(RCPDIR)/*
 
-packages/archive-contents: $(PKGDIR)/*.entry
+packages/archive-contents: .FORCE
 	@echo " • Updating $@ ..."
 	$(EVAL) '(package-build-dump-archive-contents)'
 

@@ -1,1 +1,1 @@
-(rcirc-color :fetcher github :repo "kensanata/elisp" :files ("rcirc-color.el"))
+(rcirc-color :fetcher github :repo "kensanata/rcirc-color")

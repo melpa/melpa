@@ -1,1 +1,1 @@
-(aurora-config-mode :fetcher github :repo "bdd/aurora-config.el")
+(aurora-config-mode :fetcher github :repo "bdd/aurora-config-mode.el")

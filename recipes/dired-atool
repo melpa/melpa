@@ -1,0 +1,1 @@
+(dired-atool :repo "HKey/dired-atool" :fetcher github)

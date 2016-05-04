@@ -1,0 +1,3 @@
+(pov-mode
+ :fetcher github
+ :repo "melmothx/pov-mode")

@@ -1,1 +1,0 @@
-(mandoku-meta-zb :fetcher github :repo "cwittern/ZB" :files ("ZB*.txt" "*.el" ))

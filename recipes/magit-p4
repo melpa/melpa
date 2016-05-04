@@ -1,0 +1,1 @@
+(magit-p4 :repo "qoocku/magit-p4" :fetcher github)

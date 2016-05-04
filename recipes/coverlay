@@ -1,1 +1,1 @@
-(coverlay :repo "FossiFoo/coverlay.el" :fetcher github)
+(coverlay :repo "twada/coverlay.el" :fetcher github)

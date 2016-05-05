@@ -1,0 +1,1 @@
+(mac-notifier :fetcher github :repo "eric-hansen/mac-notifier")

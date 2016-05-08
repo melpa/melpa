@@ -1,2 +1,2 @@
-(timp :repo "Mola-T/timp"
+(timp :repo "mola-T/timp"
       :fetcher github)

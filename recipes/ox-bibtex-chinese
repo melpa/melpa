@@ -1,0 +1,1 @@
+(ox-bibtex-chinese :fetcher github :repo "tumashu/ox-bibtex-chinese")

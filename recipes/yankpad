@@ -1,1 +1,1 @@
-(selected :repo "Kungsgeten/yankpad" :fetcher github)
+(yankpad :repo "Kungsgeten/yankpad" :fetcher github)

@@ -1,1 +1,1 @@
-(sudo-ext :repo "rubikitch/sudo-ext" :fetcher github)
+(sudo-ext :fetcher wiki)

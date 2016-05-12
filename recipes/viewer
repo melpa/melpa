@@ -1,1 +1,1 @@
-(viewer :repo "rubikitch/viewer" :fetcher github)
+(viewer :fetcher wiki)

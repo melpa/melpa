@@ -1,1 +1,1 @@
-(open-junk-file :repo "rubikitch/open-junk-file" :fetcher github)
+(open-junk-file :fetcher wiki)

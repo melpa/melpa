@@ -1,1 +1,1 @@
-(savekill :repo "rubikitch/savekill" :fetcher github)
+(savekill :fetcher wiki)

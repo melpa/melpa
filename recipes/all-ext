@@ -1,1 +1,1 @@
-(all-ext :repo "rubikitch/all-ext" :fetcher github)
+(all-ext :fetcher wiki)

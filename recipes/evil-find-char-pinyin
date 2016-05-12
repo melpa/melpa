@@ -1,0 +1,2 @@
+(evil-find-char-pinyin :repo "cute-jumper/evil-find-char-pinyin"
+                       :fetcher github)

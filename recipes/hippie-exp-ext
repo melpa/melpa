@@ -1,1 +1,1 @@
-(hippie-exp-ext :fetcher wiki)
+(hippie-exp-ext :repo "rubikitch/hippie-exp-ext" :fetcher github)

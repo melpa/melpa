@@ -1,3 +1,3 @@
 (flymd :fetcher github
        :repo "mola-T/flymd"
-       :defaults (:defaults "flymd.html"))
+       :files (:defaults "flymd.html"))

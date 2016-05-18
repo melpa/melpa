@@ -1,1 +1,0 @@
-(ob-scala :repo "reactormonk/ob-scala" :fetcher github)

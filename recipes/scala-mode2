@@ -1,4 +1,0 @@
-(scala-mode2
- :repo "ensime/emacs-scala-mode"
- :branch "scala-mode2"
- :fetcher github)

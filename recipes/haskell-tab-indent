@@ -1,0 +1,4 @@
+(haskell-tab-indent
+ :fetcher git
+ :url "https://git.spwhitton.name/haskell-tab-indent")
+

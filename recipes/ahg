@@ -1,1 +1,1 @@
-(ahg :fetcher hg :url "https://bitbucket.org/agriggio/ahg")
+(ahg :fetcher bitbucket :repo "agriggio/ahg")

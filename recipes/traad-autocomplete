@@ -1,1 +1,0 @@
-(traad-autocomplete :fetcher github :repo "abingham/traad" :files ("elisp/autocomplete/*.el"))

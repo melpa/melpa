@@ -1,1 +1,1 @@
-(pager :fetcher github :repo "emacsmirror/pager")
+(pager :fetcher github :repo "emacsorphanage/pager")

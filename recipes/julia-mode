@@ -1,4 +1,3 @@
 (julia-mode
- :repo "JuliaLang/julia"
- :fetcher github
- :files ("contrib/julia-mode.el"))
+ :repo "JuliaLang/julia-emacs"
+ :fetcher github)

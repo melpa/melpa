@@ -1,0 +1,2 @@
+(composable :repo "paldepind/composable.el"
+            :fetcher github)

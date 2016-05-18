@@ -1,1 +1,1 @@
-(zotelo :repo "vitoshka/zotelo" :fetcher github)
+(zotelo :repo "vspinu/zotelo" :fetcher github)

@@ -1,1 +1,1 @@
-(describe-number :repo "netromdk/describe-number" :fetcher github)
+(describe-number :fetcher github :repo "netromdk/describe-number")

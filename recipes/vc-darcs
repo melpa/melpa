@@ -1,1 +1,3 @@
-(vc-darcs :url "http://www.pps.univ-paris-diderot.fr/~jch/software/repos/vc-darcs/" :fetcher darcs)
+(vc-darcs
+ :fetcher github
+ :repo "velkyel/vc-darcs")

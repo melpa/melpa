@@ -1,4 +1,2 @@
-(helm-projectile :repo "bbatsov/projectile"
-                 :fetcher github
-                 :files ("helm-projectile.el"))
-
+(helm-projectile :repo "bbatsov/helm-projectile"
+                 :fetcher github)

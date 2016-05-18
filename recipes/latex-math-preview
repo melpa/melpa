@@ -1,0 +1,3 @@
+(latex-math-preview
+ :fetcher gitlab
+ :repo "latex-math-preview/latex-math-preview")

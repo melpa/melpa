@@ -1,5 +1,0 @@
-(angularjs-mode
- :fetcher github
- :repo "omouse/angularjs-mode"
- :files (:defaults
-         "snippets"))

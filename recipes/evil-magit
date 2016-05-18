@@ -1,0 +1,1 @@
+(evil-magit :repo "justbur/evil-magit" :fetcher github)

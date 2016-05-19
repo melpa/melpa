@@ -1,1 +1,1 @@
-(go-impl :repo "dominikh/go-impl.el" :fetcher github)
+(go-impl :repo "syohex/emacs-go-impl" :fetcher github)

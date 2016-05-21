@@ -1,4 +1,4 @@
 (datetime-format
  :repo "zonuexe/emacs-datetime"
  :fetcher github
- :files ("README.org" "datetime-format.el"))
+ :files ("datetime-format.el"))

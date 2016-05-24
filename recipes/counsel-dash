@@ -1,0 +1,4 @@
+(helm-dash
+  :repo "nathankot/counsel-dash"
+  :fetcher github
+  :files ("counsel-dash.el"))

@@ -1,1 +1,4 @@
-(euslisp-mode :repo "iory/euslisp-mode" :fetcher github)
+(euslisp-mode :fetcher github
+              :repo "iory/euslisp-mode"
+              :files (:defaults "*.py")
+              )

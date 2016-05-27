@@ -1,1 +1,1 @@
-(window-number :fetcher wiki)
+(window-number :repo "nikolas/window-number" :fetcher github)

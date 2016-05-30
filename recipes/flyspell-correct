@@ -1,0 +1,1 @@
+(flyspell-correct :repo "d12frosted/flyspell-correct" :fetcher github)

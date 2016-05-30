@@ -1,0 +1,3 @@
+(subemacs :fetcher github :repo "kbauer/subemacs"
+          :files (:defaults
+                  (:exclude "*experimental*")))

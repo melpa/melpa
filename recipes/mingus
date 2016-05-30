@@ -1,0 +1,1 @@
+(mingus :repo "pft/mingus" :fetcher github)

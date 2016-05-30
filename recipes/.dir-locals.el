@@ -1,4 +1,5 @@
-((emacs-lisp-mode . ((flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc))))
+((emacs-lisp-mode . ((flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc))
+                     (indent-tabs-mode nil)))
  (nil . ((eval . (when (and (buffer-file-name)
                             (file-regular-p (buffer-file-name))
                             (string-match-p "^[^.]" (buffer-file-name)))

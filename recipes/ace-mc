@@ -1,0 +1,1 @@
+(ace-mc :repo "mm--/ace-mc" :fetcher github)

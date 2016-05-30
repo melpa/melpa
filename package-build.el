@@ -106,9 +106,15 @@ Certain package names (e.g. \"@\") may not work properly with a BSD tar."
   :type '(file :must-match t))
 
 (defcustom package-build-write-melpa-badge-images nil
-  "When non-nil, write MELPA badge images alongside packages, for use on github pages etc."
+  "When non-nil, write MELPA badge images alongside packages, for use on GitHub pages etc."
   :group 'package-build
   :type 'boolean)
+
+(defcustom package-build-version-regexp "^[rRvV]?\\(.*\\)$"
+  "Default pattern for matching valid version-strings within repository tags.
+The string in the capture group should be parsed as valid by `version-to-list'."
+  :group 'package-build
+  :type 'string)
 
 ;;; Internal Variables
 
@@ -153,68 +159,78 @@ function for access to this function")
   "Remove trailing whitespace from `STR'."
   (replace-regexp-in-string "[ \t\n]*$" "" str))
 
+
+(defun package-build--valid-version (str &optional regexp)
+  "Apply to STR the REGEXP if defined, \
+then pass the string to `version-to-list' and return the result, \
+or nil if the version cannot be parsed."
+  (when (and regexp (string-match regexp str))
+    (setq str (match-string 1 str)))
+  (ignore-errors (version-to-list str)))
+
 (defun package-build--parse-time (str)
   "Parse STR as a time, and format as a YYYYMMDD.HHMM string."
   ;; We remove zero-padding the HH portion, as it is lost
   ;; when stored in the archive-contents
   (let* ((s (substring-no-properties str))
          (time (date-to-time
-                (if (string-match "^\\([0-9]\\{4\\}\\)/\\([0-9]\\{2\\}\\)/\\([0-9]\\{2\\}\\) \\([0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)$" str)
-                    (concat (match-string 1 str) "-" (match-string 2 str) "-"
-                            (match-string 3 str) " " (match-string 4 str))
-                  str))))
+                (if (string-match "^\\([0-9]\\{4\\}\\)/\\([0-9]\\{2\\}\\)/\\([0-9]\\{2\\}\\) \\([0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\)$" s)
+                    (concat (match-string 1 s) "-" (match-string 2 s) "-"
+                            (match-string 3 s) " " (match-string 4 s))
+                  s))))
     (concat (format-time-string "%Y%m%d." time)
             (format "%d" (or (string-to-number (format-time-string "%H%M" time)) 0)))))
 
-(defun package-build--string-match-all (regex str &rest groups)
-  "Find every match for `REGEX' within `STR'.
-Return a list containing the full match string and match for
-groups `GROUPS'.  The return list is of the form
-   ((FULL GROUP1 GROUP2 ...) ...)
-where FULL is the complete regexp match and
-GROUP1, GROUP2, ... are the regex groups specified by the
-`GROUPS' argument.  If `GROUPS' is nil then FULL and GROUP1 will
-be identical."
-  (let (result
-        (pos 0)
-        (groups (or groups '(0))))
-    (while (string-match regex str pos)
-      (push (cons (match-string 0 str) (mapcar
-                                        (lambda (group)
-                                          (match-string group str))
-                                        groups))
-            result)
-      (setq pos (match-end 0)))
-    result))
-
 (defun package-build--find-parse-time (regex &optional bound)
-  "Find REGEX in current buffer and format as a time version, optionally looking only as far as BOUND."
-  (package-build--parse-time (progn (re-search-backward regex bound)
-                        (match-string-no-properties 1))))
+  "Find REGEX in current buffer and format as a time-based version string, \
+optionally looking only as far back as BOUND."
+  (package-build--parse-time (and (re-search-backward regex bound t)
+                                  (match-string-no-properties 1))))
 
-(defun package-build--valid-version-string (str)
-  "Return true if STR is a valid version, otherwise return nil."
-  (ignore-errors (version-to-list str)))
+(defun package-build--find-parse-time-newest (regex &optional bound)
+  "Find REGEX in current buffer and format as a time-based version string, \
+optionally looking only as far back as BOUND."
+  (save-match-data
+    (let (cur matches)
+      (while (setq cur (ignore-errors (package-build--find-parse-time regex bound)))
+        (push cur matches))
+      (car (sort matches 'string>)))))
 
-(defun package-build--find-tag-version-newest (regex &optional bound &rest additional-groups)
-  "Find the newest version matching REGEX after point, maybe stopping at BOUND.
-The first capture group 1 is examined, together with any ADDITIONAL-GROUPS."
-  (let* ((text (buffer-substring-no-properties
-                (or bound (point-min)) (point)))
-         (tags (cl-remove-if-not
-                (lambda (tag-version)
-                  (package-build--valid-version-string (cadr tag-version)))
-                (apply 'package-build--string-match-all regex text 1 additional-groups))))
-    (car (nreverse (sort tags (lambda (v1 v2)
-                                (version< (cadr v1) (cadr v2))))))))
-
-(defun package-build--find-parse-time-latest (regex &optional bound)
-  "Find the latest timestamp matching REGEX, optionally looking only as far as BOUND."
-  (let* ((text (buffer-substring-no-properties
-                (or bound (point-min)) (point)))
-         (times (mapcar 'package-build--parse-time
-                        (mapcar 'cadr (package-build--string-match-all regex text 1)))))
-    (car (nreverse (sort times 'string<)))))
+(defun package-build--find-version-newest (regex &optional bound)
+  "Find the newest version matching REGEX before point, optionally stopping at BOUND."
+  (let ((tags (split-string
+               (buffer-substring-no-properties
+                (or bound (point-min)) (point))
+               "\n")))
+    (setq tags (append
+                (mapcar
+                 ;; Because the default `version-separator' is ".",
+                 ;; version-strings like "1_4_5" will be parsed
+                 ;; wrongly as (1 -4 4 -4 5), so we set
+                 ;; `version-separator' to "_" below and run again.
+                 (lambda (tag)
+                   (when (package-build--valid-version tag regex)
+                     (list (package-build--valid-version tag regex) tag)))
+                 tags)
+                (mapcar
+                 ;; Check for valid versions again, this time using
+                 ;; "_" as a separator instead of "." to catch
+                 ;; version-strings like "1_4_5".  Since "_" is
+                 ;; otherwise treated as a snapshot separator by
+                 ;; `version-regexp-alist', we don't have to worry
+                 ;; about the incorrect version list above—(1 -4 4 -4
+                 ;; 5)—since it will always be treated as older by
+                 ;; `version-list-<'.
+                 (lambda (tag)
+                   (let ((version-separator "_"))
+                     (when (package-build--valid-version tag regex)
+                       (list (package-build--valid-version tag regex) tag))))
+                 tags)))
+    (setq tags (cl-remove-if nil tags))
+    ;; Returns a list like ((0 1) ("v0.1")); the first element is used
+    ;; for comparison and for `package-version-join', and the second
+    ;; (the original tag) is used by git/hg/etc.
+    (car (nreverse (sort tags (lambda (v1 v2) (version-list-< (car v1) (car v2))))))))
 
 (defun package-build--run-process (dir command &rest args)
   "In DIR (or `default-directory' if unset) run COMMAND with ARGS.
@@ -248,8 +264,7 @@ In turn, this function uses the :fetcher option in the CONFIG to
 choose a source-specific fetcher function, which it calls with
 the same arguments.
 
-Returns a last-modification timestamp for the :files listed in
-CONFIG, if any, or `package-build-default-files-spec' otherwise."
+Returns the package version as a string."
   (let ((repo-type (plist-get config :fetcher)))
     (package-build--message "Fetcher: %s" (symbol-name repo-type))
     (unless (eq 'wiki repo-type)
@@ -340,19 +355,28 @@ A number as third arg means request confirmation if NEWNAME already exists."
 
 (defun package-build--checkout-darcs (name config dir)
   "Check package NAME with config CONFIG out of darcs into DIR."
-  (unless package-build-stable
-    (let ((repo (plist-get config :url)))
-      (with-current-buffer (get-buffer-create "*package-build-checkout*")
-        (cond
-         ((and (file-exists-p (expand-file-name "_darcs" dir))
-               (string-equal (package-build--darcs-repo dir) repo))
-          (package-build--princ-exists dir)
-          (package-build--run-process dir "darcs" "pull"))
-         (t
-          (when (file-exists-p dir)
-            (delete-directory dir t))
-          (package-build--princ-checkout repo dir)
-          (package-build--run-process nil "darcs" "get" repo dir)))
+  (let ((repo (plist-get config :url)))
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (cond
+       ((and (file-exists-p (expand-file-name "_darcs" dir))
+             (string-equal (package-build--darcs-repo dir) repo))
+        (package-build--princ-exists dir)
+        (package-build--run-process dir "darcs" "pull" "--all"))
+       (t
+        (when (file-exists-p dir)
+          (delete-directory dir t))
+        (package-build--princ-checkout repo dir)
+        (package-build--run-process nil "darcs" "get" repo dir)))
+      (if package-build-stable
+          (let* ( (bound (goto-char (point-max)))
+                  (regexp (or (plist-get config :version-regexp)
+                              package-build-version-regexp))
+                  (tag-version (and (package-build--run-process dir "darcs" "show" "tags")
+                                    (or (package-build--find-version-newest regexp bound)
+                                        (error "No valid stable versions found for %s" name)))) )
+            (package-build--run-process dir "darcs" "obliterate" "--all" "--from-tag" (cadr tag-version))
+            ;; Return the parsed version as a string
+            (package-version-join (car tag-version)))
         (apply 'package-build--run-process dir "darcs" "changes" "--max-count" "1"
                (package-build--expand-source-file-list dir config))
         (package-build--find-parse-time
@@ -421,7 +445,7 @@ A number as third arg means request confirmation if NEWNAME already exists."
           (package-build--run-process nil "svn" "checkout" repo dir)))
         (apply 'package-build--run-process dir "svn" "info"
                (package-build--expand-source-file-list dir config))
-        (or (package-build--find-parse-time-latest "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)" bound)
+        (or (package-build--find-parse-time-newest "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)" bound)
             (error "No valid timestamps found!"))))))
 
 
@@ -440,7 +464,8 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
     (with-current-buffer (get-buffer-create "*package-build-checkout*")
       (let ((root (package-build--trim (plist-get config :url) ?/))
             (repo (or (plist-get config :module) (symbol-name name)))
-            (bound (goto-char (point-max))))
+            (bound (goto-char (point-max)))
+            latest)
         (cond
          ((and (file-exists-p (expand-file-name "CVS" dir))
                (equal (package-build--cvs-repo dir) (cons root repo)))
@@ -460,14 +485,33 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
                  (working-dir (file-name-directory dir))
                  (target-dir (file-name-nondirectory dir)))
             (package-build--run-process working-dir "env" "TZ=UTC" "cvs" "-z3" "-d" root "checkout"
-                            "-d" target-dir repo))))
+                                        "-d" target-dir repo))))
         (apply 'package-build--run-process dir "cvs" "log"
                (package-build--expand-source-file-list dir config))
-        (or (package-build--find-parse-time-latest "date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)" bound)
-            (package-build--find-parse-time-latest "date: \\([0-9]\\{4\\}/[0-9]\\{2\\}/[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\);" bound)
-            (error "No valid timestamps found!"))
-        ))))
 
+        ;; `cvs log` does not provide a way to view the previous N
+        ;; revisions, so instead of parsing the entire log we examine
+        ;; the Entries file, which looks like this:
+        ;;
+        ;; /.cvsignore/1.2/Thu Sep  1 12:42:02 2005//
+        ;; /CHANGES/1.1/Tue Oct  4 11:47:54 2005//
+        ;; /GNUmakefile/1.8/Tue Oct  4 11:47:54 2005//
+        ;; /Makefile/1.14/Tue Oct  4 11:47:54 2005//
+        ;;
+        (insert-file-contents (concat dir "/CVS/Entries"))
+        (setq latest (car (sort
+                           (split-string (buffer-substring-no-properties (point) (point-max)) "\n")
+                           (lambda (x y)
+                             (when (string-match "^\\/[^\\/]*\\/[^\\/]*\\/\\([^\\/]*\\)\\/\\/$" x)
+                               (setq x (package-build--parse-time (match-string 1 x))))
+                             (when (string-match "^\\/[^\\/]*\\/[^\\/]*\\/\\([^\\/]*\\)\\/\\/$" y)
+                               (setq y (package-build--parse-time (match-string 1 y))))
+                             (version-list-<= (package-build--valid-version y)
+                                              (package-build--valid-version x))))))
+        (when (string-match "^\\/[^\\/]*\\/[^\\/]*\\/\\([^\\/]*\\)\\/\\/$" latest)
+          (setq latest (match-string 1 latest)))
+        (or (package-build--parse-time latest)
+            (error "No valid timestamps found!"))))))
 
 (defun package-build--git-repo (dir)
   "Get the current git repo for DIR."
@@ -494,7 +538,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
        ((and (file-exists-p (expand-file-name ".git" dir))
              (string-equal (package-build--git-repo dir) repo))
         (package-build--princ-exists dir)
-        (package-build--run-process dir "git" "remote" "update"))
+        (package-build--run-process dir "git" "fetch" "--all" "--tags"))
        (t
         (when (file-exists-p dir)
           (delete-directory dir t))
@@ -502,16 +546,17 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (package-build--run-process nil "git" "clone" repo dir)))
       (if package-build-stable
           (let* ((bound (goto-char (point-max)))
+                 (regexp (or (plist-get config :version-regexp)
+                             package-build-version-regexp))
                  (tag-version (and (package-build--run-process dir "git" "tag")
-                                   (or (package-build--find-tag-version-newest
-                                        "^\\(?:v[.-]?\\)?\\([0-9]+[^ \t\n]*\\)$" bound)
-                                       (error
-                                        "No valid stable versions found for %s"
-                                        name)))))
+                                   (or (package-build--find-version-newest regexp bound)
+                                       (error "No valid stable versions found for %s" name)))) )
+
             ;; Using reset --hard here to comply with what's used for
             ;; unstable, but maybe this should be a checkout?
-            (package-build--update-git-to-ref dir (concat "tags/" (car tag-version)))
-            (cadr tag-version))
+            (package-build--update-git-to-ref dir (concat "tags/" (cadr tag-version)))
+            ;; Return the parsed version as a string
+            (package-version-join (car tag-version)))
         (package-build--update-git-to-ref dir (or commit (concat "origin/" (package-build--git-head-branch dir))))
         (apply 'package-build--run-process dir "git" "log" "--first-parent" "-n1" "--pretty=format:'\%ci'"
                (package-build--expand-source-file-list dir config))
@@ -526,13 +571,18 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
 
 (defun package-build--checkout-github (name config dir)
   "Check package NAME with config CONFIG out of github into DIR."
-  (let* ((url (format "git://github.com/%s.git" (plist-get config :repo))))
+  (let* ((url (format "https://github.com/%s.git" (plist-get config :repo))))
     (package-build--checkout-git name (plist-put (copy-sequence config) :url url) dir)))
 
 (defun package-build--checkout-gitlab (name config dir)
   "Check package NAME with config CONFIG out of gitlab into DIR."
   (let* ((url (format "https://gitlab.com/%s.git" (plist-get config :repo))))
     (package-build--checkout-git name (plist-put (copy-sequence config) :url url) dir)))
+
+(defun package-build--checkout-bitbucket (name config dir)
+  "Check package NAME with config CONFIG out of bitbucket into DIR."
+  (let* ((url (format "https://bitbucket.com/%s" (plist-get config :repo))))
+    (package-build--checkout-hg name (plist-put (copy-sequence config) :url url) dir)))
 
 (defun package-build--bzr-expand-repo (repo)
   "Get REPO expanded name."
@@ -544,20 +594,34 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
 
 (defun package-build--checkout-bzr (name config dir)
   "Check package NAME with config CONFIG out of bzr into DIR."
-  (unless package-build-stable
-    (let ((repo (package-build--bzr-expand-repo (plist-get config :url))))
-      (with-current-buffer (get-buffer-create "*package-build-checkout*")
-        (goto-char (point-max))
-        (cond
-         ((and (file-exists-p (expand-file-name ".bzr" dir))
-               (string-equal (package-build--bzr-repo dir) repo))
-          (package-build--princ-exists dir)
-          (package-build--run-process dir "bzr" "merge"))
-         (t
-          (when (file-exists-p dir)
-            (delete-directory dir t))
-          (package-build--princ-checkout repo dir)
-          (package-build--run-process nil "bzr" "branch" repo dir)))
+  (let ((repo (package-build--bzr-expand-repo (plist-get config :url))))
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (goto-char (point-max))
+      (cond
+       ((and (file-exists-p (expand-file-name ".bzr" dir))
+             (string-equal (package-build--bzr-repo dir) repo))
+        (package-build--princ-exists dir)
+        (package-build--run-process dir "bzr" "merge" "--force"))
+       (t
+        (when (file-exists-p dir)
+          (delete-directory dir t))
+        (package-build--princ-checkout repo dir)
+        (package-build--run-process nil "bzr" "branch" repo dir)))
+      (if package-build-stable
+          (let ( (bound (goto-char (point-max)))
+                 (regexp (or (plist-get config :version-regexp)
+                             package-build-version-regexp))
+                 tag-version )
+            (package-build--run-process dir "bzr" "tags")
+            (goto-char bound)
+            (ignore-errors (while (re-search-forward "\\ +.*")
+                             (replace-match "")))
+            (setq tag-version (or (package-build--find-version-newest regexp bound)
+                                  (error "No valid stable versions found for %s" name)))
+
+            (package-build--run-process dir "bzr" "revert" "-r" (concat "tag:" (cadr tag-version)))
+            ;; Return the parsed version as a string
+            (package-version-join (car tag-version)))
         (apply 'package-build--run-process dir "bzr" "log" "-l1"
                (package-build--expand-source-file-list dir config))
         (package-build--find-parse-time
@@ -584,17 +648,32 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (package-build--princ-checkout repo dir)
         (package-build--run-process nil "hg" "clone" repo dir)))
       (if package-build-stable
-          (let* ((bound (goto-char (point-max)))
-                 (tag-version (and (package-build--run-process dir "hg" "tags")
-                                   (or (package-build--find-tag-version-newest
-                                        "^\\(?:v[.-]?\\)?\\([0-9]+[^ \t\n]*\\)[ \t]*[0-9]+:\\([[:xdigit:]]+\\)$"
-                                        bound
-                                        2)
-                                       (error
-                                        "No valid stable versions found for %s"
-                                        name)))))
-            (package-build--run-process dir "hg" "update" (nth 2 tag-version))
-            (cadr tag-version))
+          (let ( (bound (goto-char (point-max)))
+                 (regexp (or (plist-get config :version-regexp)
+                             package-build-version-regexp))
+                 tag-version )
+            (package-build--run-process dir "hg" "tags")
+            ;; The output of `hg tags` shows the ref of the tag as well
+            ;; as the tag itself, e.g.:
+            ;;
+            ;; tip                             1696:73ad80e8fea1
+            ;; 1.2.8                           1691:464af57fd2b7
+            ;;
+            ;; So here we remove that second column before passing the
+            ;; buffer contents to `package-build--find-version-newest'.
+            ;; This isn't strictly necessary for Mercurial since the
+            ;; colon in "1691:464af57fd2b7" means that won't be parsed
+            ;; as a valid version-string, but it's an example of how to
+            ;; do it in case it's necessary elsewhere.
+            (goto-char bound)
+            (ignore-errors (while (re-search-forward "\\ +.*")
+                             (replace-match "")))
+            (setq tag-version (or (package-build--find-version-newest regexp bound)
+                                  (error "No valid stable versions found for %s" name)))
+
+            (package-build--run-process dir "hg" "update" (cadr tag-version))
+            ;; Return the parsed version as a string
+            (package-version-join (car tag-version)))
         (apply 'package-build--run-process dir "hg" "log" "--style" "compact" "-l1"
                (package-build--expand-source-file-list dir config))
         (package-build--find-parse-time
@@ -706,7 +785,7 @@ Optionally PRETTY-PRINT the data."
         (insert "X-Original-")
         (move-beginning-of-line nil))
     ;; Put the new header in a sensible place if we can
-    (re-search-forward "^;+* *\\(Version:\\|Keywords\\|URL\\)" nil t)
+    (re-search-forward "^;+* *\\(Version\\|Package-Requires\\|Keywords\\|URL\\) *:" nil t)
     (forward-line))
   (insert (format ";; Package-Version: %s" version))
   (newline))
@@ -848,7 +927,7 @@ to build the recipe."
                (car pkg-info))
     (cl-assert rest)
     (let* ((symbol-keys '(:fetcher))
-           (string-keys '(:url :repo :module :commit :branch))
+           (string-keys '(:url :repo :module :commit :branch :version-regexp))
            (list-keys '(:files :old-names))
            (all-keys (append symbol-keys string-keys list-keys)))
       (dolist (thing rest)
@@ -856,7 +935,7 @@ to build the recipe."
           (cl-assert (memq thing all-keys) nil "Unknown keyword %S" thing)))
       (let ((fetcher (plist-get rest :fetcher)))
         (cl-assert fetcher nil ":fetcher is missing")
-        (when (memq fetcher '(github gitlab))
+        (when (memq fetcher '(github gitlab bitbucket))
           (cl-assert (plist-get rest :repo) ":repo is missing")))
       (dolist (key symbol-keys)
         (let ((val (plist-get rest key)))
@@ -882,8 +961,8 @@ to build the recipe."
   (cl-loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
            for pkg-info = (condition-case err (package-build--read-recipe file-name)
                             (error (package-build--message "Error reading recipe %s: %s"
-                                               file-name
-                                               (error-message-string err))
+                                                           file-name
+                                                           (error-message-string err))
                                    nil))
            when pkg-info
            collect pkg-info))
@@ -1064,7 +1143,7 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
   (interactive (list (package-build--package-name-completing-read)))
   (let* ((file-name (symbol-name name))
          (rcp (or (cdr (assoc name (package-build-recipe-alist)))
-                  (error "Cannot find package %s" file-name)))
+                  (error "Cannot find package %s" (symbol-name name))))
          (pkg-working-dir
           (file-name-as-directory
            (expand-file-name file-name package-build-working-dir))))
@@ -1074,10 +1153,7 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
       (make-directory package-build-archive-dir))
 
     (package-build--message "\n;;; %s\n" file-name)
-    (let* ((version (package-version-join
-                     (version-to-list
-                      (or (package-build-checkout name rcp pkg-working-dir)
-                          (error "No valid package version found!")))))
+    (let* ((version (package-build-checkout name rcp pkg-working-dir))
            (default-directory package-build-working-dir)
            (start-time (current-time))
            (archive-entry (package-build-package (symbol-name name)
@@ -1089,9 +1165,9 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
       (when package-build-write-melpa-badge-images
         (package-build--write-melpa-badge-image (symbol-name name) version package-build-archive-dir))
       (package-build--message "Built in %.3fs, finished at %s"
-                  (time-to-seconds (time-since start-time))
-                  (current-time-string))
-      file-name)))
+                              (time-to-seconds (time-since start-time))
+                              (current-time-string))
+      (list file-name version))))
 
 ;;;###autoload
 (defun package-build-package (package-name version file-specs source-dir target-dir)
@@ -1117,7 +1193,7 @@ Returns the archive entry for the package."
       (when (equal files (package-build-expand-file-specs
                           source-dir package-build-default-files-spec nil t))
         (package-build--message "Note: %s :files spec is equivalent to the default."
-                    package-name)))
+                                package-name)))
     (cond
      ((not version)
       (error "Unable to check out repository for %s" package-name))
@@ -1156,8 +1232,8 @@ Returns the archive entry for the package."
         (kill-buffer)))
 
     (package-build--write-pkg-readme target-dir
-                         (package-build--find-package-commentary pkg-source)
-                         package-name)
+                                     (package-build--find-package-commentary pkg-source)
+                                     package-name)
     (package-build--archive-entry pkg-info 'single)))
 
 (defun package-build--build-multi-file-package (package-name version files source-dir target-dir)
@@ -1206,16 +1282,22 @@ Returns the archive entry for the package."
 ;; Note also that it would be straightforward to generate the SVG ourselves, which would
 ;; save the network overhead.
 (defun package-build--write-melpa-badge-image (package-name version target-dir)
-  (package-build--url-copy-file
-   (concat "http://img.shields.io/badge/"
-           (if package-build-stable "melpa stable" "melpa")
-           "-"
-           (url-hexify-string version)
-           "-"
-           (if package-build-stable "3e999f" "922793")
-           ".svg")
-   (expand-file-name (concat package-name "-badge.svg") target-dir)
-   t))
+  (let ((badge-url (concat "https://img.shields.io/badge/"
+                           (if package-build-stable "melpa stable" "melpa")
+                           "-"
+                           (url-hexify-string version)
+                           "-"
+                           (if package-build-stable "3e999f" "922793")
+                           ".svg"))
+        (badge-filename (expand-file-name (concat package-name "-badge.svg") target-dir)))
+    (if (executable-find "curl")
+        ;; Not strictly needed, but less likely to break due to gnutls issues
+        (shell-command (mapconcat #'identity
+                                  (list "curl" "-o"
+                                        (shell-quote-argument badge-filename)
+                                        (shell-quote-argument badge-url))
+                                  " "))
+      (package-build--url-copy-file badge-url badge-filename t))))
 
 
 ;;; Helpers for recipe authors
@@ -1238,7 +1320,7 @@ Returns the archive entry for the package."
   (interactive
    (list (intern (read-string "Package name: "))
          (intern
-          (let ((fetcher-types (mapcar #'symbol-name '(github gitlab git wiki bzr hg cvs svn))))
+          (let ((fetcher-types (mapcar #'symbol-name '(github gitlab bitbucket git wiki bzr hg cvs svn))))
             (completing-read
              "Fetcher: "
              fetcher-types
@@ -1346,13 +1428,14 @@ Returns the archive entry for the package."
   (interactive)
   (setq package-build--recipe-alist-initialized nil))
 
-(defun package-build-dump-archive-contents (&optional file-name)
+(defun package-build-dump-archive-contents (&optional file-name pretty-print)
   "Dump the list of built packages to FILE-NAME.
 
 If FILE-NAME is not specified, the default archive-contents file is used."
   (package-build--dump (cons 1 (package-build--archive-entries))
                        (or file-name
-                           (expand-file-name "archive-contents" package-build-archive-dir))))
+                           (expand-file-name "archive-contents" package-build-archive-dir))
+                       pretty-print))
 
 (defun package-build--archive-entries ()
   "Read all .entry files from the archive directory and return a list of all entries."
@@ -1421,7 +1504,7 @@ If FILE-NAME is not specified, the default archive-contents file is used."
 
 ;; Local Variables:
 ;; coding: utf-8
-;; eval: (checkdoc-minor-mode 1)
+;; checkdoc-minor-mode: 1
 ;; End:
 
 ;;; package-build.el ends here

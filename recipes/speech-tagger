@@ -1,0 +1,3 @@
+(speech-tagger :fetcher github :repo "cosmicexplorer/speech-tagger"
+               :files ("emacs/speech-tagger.el"
+                       "emacs/penn_treebank_tags.json"))

@@ -34,6 +34,9 @@ pre code { /* Match highlight.js styles to bootstrap */
   font-size: 18px;
   line-height: 30px;
 }
+a {
+  cursor: pointer;
+}
 a[name] { /* Stop navbar from hiding anchors */
   padding-top: 60px;
   margin-top: -60px;

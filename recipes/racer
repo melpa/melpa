@@ -1,3 +1,2 @@
-(racer :repo "phildawes/racer"
-       :fetcher github
-       :files ("editors/emacs/racer.el"))
+(racer :repo "racer-rust/emacs-racer"
+       :fetcher github)

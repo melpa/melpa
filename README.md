@@ -1,12 +1,12 @@
-# MELPA 
+# MELPA
 
-[![Build Status](https://travis-ci.org/milkypostman/melpa.png?branch=master)](https://travis-ci.org/milkypostman/melpa)
+[![Build Status](https://travis-ci.org/melpa/melpa.png?branch=master)](https://travis-ci.org/melpa/melpa)
 
 MELPA is a growing collection of `package.el`-compatible Emacs Lisp
 packages built automatically on our server from the upstream source
 code using simple recipes. (Think of it as a server-side version of
 [el-get](https://github.com/dimitri/el-get), or even
-[homebrew](https://github.com/mxcl/homebrew).)
+[Homebrew](https://github.com/Homebrew/homebrew).)
 
 Packages are updated at intervals throughout the day.
 
@@ -19,12 +19,12 @@ read on for details.
 ## Table of Contents
 
 * [Usage](#usage)
-* [Contributing](#contributing-new-recipes)
+* [Contributing](#contributing)
 * [Recipe Format](#recipe-format)
 * [Build Scripts](#build-scripts)
 * [API](#api)
 * [About](#about)
-* [Stable Packages](#stable-packages)
+* [Stable Packages](#melpa-stable)
 
 
 ## Usage
@@ -51,126 +51,46 @@ Enable installation of packages from MELPA by adding an entry to
 Then just use `M-x package-list-packages` to browse and install
 packages from MELPA and elsewhere.
 
-Note that MELPA packages will always have higher versions than those
-from other archives like Marmalade, so if you decide you need
-non-MELPA versions of specific packages for some reason, extra
-configuration will be required:
+**Note:** Packages from the default “bleeding-edge” repository will
+always have higher versions than those from other archives like
+Marmalade, so if you decide you need non-MELPA versions of specific
+packages for some reason, extra configuration will be required:
 
-If your Emacs has the variable `package-pinned-packages`, you can
-customize or modify that variable as needed. Otherwise, use the
-separate
-[package-filter.el](https://github.com/milkypostman/package-filter)
-package which we provide.
+* If your Emacs has the variable `package-pinned-packages` (available
+  in 24.4 and later), you can customize or modify that variable as
+  needed.
 
+* You can use the
+  [package-filter.el](https://github.com/milkypostman/package-filter)
+  package which we provide.
 
-## Contributing New Recipes
+* You can use MELPA Stable.
 
-New recipe submissions should adhere to the following guidelines,
+### MELPA Stable
 
-* One pull request per recipe. You can create multiple branches and
-  create a pull request for each branch.
+By default, MELPA provides the very latest revisions of packages.  If
+you prefer to only receive updates for tagged releases, use
+[MELPA Stable](https://stable.melpa.org) instead:
 
-* Upstream source must be stored in an authoritative
-  [SCM](http://en.wikipedia.org/wiki/Software_configuration_management)
-  repository. Emacswiki recipes are discouraged but can be accepted.
-
-* Packages should be built from the *official* package repository.
-  Forks of the official repository will not be accepted except in
-  *extreme* circumstances.
-
-* The package name should match the name of the feature provided.  See
-  the `package` function for more information.
-
-* Packages should adhere to the `package.el` format as specified by
-  `(info "(elisp) Packaging")`. More information on this format is
-  provided by the
-  [marmalade package manual](https://web.archive.org/web/20111120220609/http://marmalade-repo.org/doc-files/package.5.html).
-
-* Recipes should try to minimize the size of the resulting package by
-  specifying only files relevant to the package. See the
-  [Recipe Format](#recipe-format) section for more information on
-  specifying package files.
-
-
-
-### Expediting Recipe Reviews
-
-Because we care about the quality of packages that are part of MELPA
-we review all submissions. The following steps can help us with this
-process and expedite the recipe review process,
-
-* Use [flycheck-package](https://github.com/purcell/flycheck-package)
-  to help you identify common errors in your package metadata.
-
-* Include the following information in the pull request:
-
-    * A brief summary of what the package does.
-
-    * A direct link to the package repository.
-
-    * Your association with the package (e.g., are you the maintainer?
-      have you contributed? do you just like the package a lot?).
-
-    * Relevant communications with the upstream package maintainer (e.g.,
-      `package.el` compatibility changes that you have submitted).
-
-* Test that the package builds properly via `make recipes/<recipe>`,
-  or pressing `C-c C-c` in the recipe buffer.
-
-* Test that the package installs properly via `package-install-file`,
-  or entering "yes" when prompted after pressing `C-c C-c` in the
-  recipe buffer.
-
-* If you are *not* the original author or maintainer of the package you
-  are submitting, please consider notifying the author *prior* to submitting
-  and make reasonable effort to include them in the pull request process.
-
-
-### Testing
-
-Let `<NAME>` denote the name of the recipe to submit.
-
-1. Fork the MELPA repository.
-2. Add your new file under the directory specified by
-`package-build-recipes-dir` (default: `recipes/` directory where
-`package-build` was loaded). If you prefer, the interactive command
-`package-build-create-recipe` in `package-build.el` will guide you
-through this process.
-
-3. Confirm your package builds properly by running
-
-        make recipes/<NAME>
-
-  (Be sure that the `emacs` on your path is at least version 23, or
-  set `$EMACS_COMMAND` to the location of a suitable binary.)
-
-  Alternatively, open the recipe in Emacs and press `C-c C-c` in the
-  recipe buffer: this will also prompt you to install the
-  freshly-built package.
-
-4. Install the file you built by running `package-install-file` from
-within Emacs and specifying the newly built package in the directory
-specified by `package-build-archive-dir` (default: `packages/`
-directory where `package-build` was loaded).
-
-You can optionally run a sandboxed Emacs in which locally-built
-packages will be available for installation along with those already
-in MELPA:
-
-```
-EMACS=/path/to/emacs make sandbox
+```lisp
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 ```
 
-then `M-x package-list-packages`, install and test as
-appropriate. This is a useful way to discover missing dependencies!
+*Versions for packages on the original MELPA server are based on the date of the last commit and will likely be higher than any version on the stable server.* Keep the following things in mind,
 
-### Submitting
+* If you leave the original MELPA server in your `package-archives`
+  then by default you will get the *development* versions of packages
+  and not the stable ones.
 
-After verifying the entry works properly please open a pull request on
-Github. Consider the [hub](https://github.com/defunkt/hub)
-command-line utility by [defunkt](http://chriswanstrath.com/) which
-helps simplify this process.
+* You will probably want to remove all packages and then reinstall
+  them. Any packages you already have installed from MELPA will never
+  get "updated" to the stable version because of the way version
+  numbering is handled.
 
+## Contributing
+
+See the [CONTRIBUTING.md](CONTRIBUTING.md) document.
 
 ## Recipe Format
 
@@ -180,9 +100,10 @@ the following form (`[...]` denotes optional or conditional values),
 
 ```lisp
 (<package-name>
- :fetcher [git|github|gitlab|bzr|hg|darcs|fossil|svn|cvs|wiki]
+ :fetcher [git|github|gitlab|bitbucket|bzr|hg|darcs|fossil|svn|cvs|wiki]
  [:url "<repo url>"]
- [:repo "github-or-gitlab-user/repo-name"]
+ [:repo "github-gitlab-or-bitbucket-user/repo-name"]
+ [:version-regexp "<regexp>"]
  [:module "cvs-module"]
  [:files ("<file1>" ...)])
 ```
@@ -190,12 +111,15 @@ the following form (`[...]` denotes optional or conditional values),
 - `package-name`
 a lisp symbol that has the same name as the package being specified.
 
-- `:fetcher` (one of `git, github, gitlab, bzr, hg, darcs, fossil, svn, cvs, wiki`)
-specifies the type of repository that `:url` points to. Right now
-package-build supports [git][git], [github][github], [gitlab][gitlab],
+- `:fetcher` (one of `git, github, gitlab, bitbucket, bzr, hg, darcs,
+fossil, svn, cvs, wiki`) specifies the type of repository that `:url`
+points to. Right now package-build supports [git][git],
+[github][github], [gitlab][gitlab], [bitbucket][bitbucket],
 [bazaar (bzr)][bzr], [mercurial (hg)][hg], [subversion (svn)][svn],
-[cvs][cvs], [darcs][darcs], [fossil][fossil], and [Emacs Wiki (wiki)][emacswiki] as
-possible mechanisms for checking out the repository.
+[cvs][cvs], [darcs][darcs], [fossil][fossil], and
+[EmacsWiki (deprecated)][emacswiki] as possible mechanisms for checking out
+the repository. (Note: `bitbucket` assumes `hg`: `git` repos hosted on
+bitbucket should use the `git` fetcher.)
 
     *package-build* uses
 the corresponding application to update files before building the
@@ -213,13 +137,13 @@ differs from the package name being built.
 specifies the URL of the version control repository. *required for
 the `git`, `bzr`, `hg`, `darcs`, `fossil`, `svn` and `cvs` fetchers.*
 
-- `:repo` specifies the github/gitlab repository and is of the form
-`user/repo-name`. *required for the `github` and `gitlab` fetchers*.
+- `:repo` specifies the github/gitlab/bitbucket repository and is of the form
+`user/repo-name`. *required for the `github`, `gitlab`, and `bitbucket` fetchers*.
 
 - `:commit`
 specifies the commit of the git repo to checkout. The value
 will be passed to `git reset` in a repo where `upstream` is the
-original repository. Can therefore be either a sha, if pointing at a
+original repository. Can therefore be either a SHA, if pointing at a
 specific commit, or a full ref prefixed with "origin/". Only used by
 the `git`-based fetchers.
 
@@ -227,14 +151,19 @@ the `git`-based fetchers.
 specifies the branch of the git repo to use. This is like `:commit`, but
 it adds the "origin/" prefix automatically.
 
+- `:version-regexp` is a regular expression for extracting a
+  version-string from the repository tags.  Version-strings must be
+  parseable by Emacs' `version-to-list` , so for an unusual tag like
+  "OTP-18.1.5", we add `:version-regexp "[^0-9]*\\(.*\\)"` to strip the
+  "OTP-" prefix.
+
 - `:module`
 specifies the module of a CVS repository to check out.  Defaults to to
 `package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
 
 - `:files` optional property specifying the elisp and info files used to build the
-package. Automatically populated by matching all `.el`, `.info` and `dir` files in the
-root of the repository and the `doc` directory. Excludes all files in the root directory 
-ending in `test.el` or `tests.el`. See the default value below,
+package. Please do not override this unless the default value (below) is adequate, which
+it should usually be:
 
         ("*.el" "*.el.in" "dir"
          "*.info" "*.texi" "*.texinfo"
@@ -246,7 +175,7 @@ repository and thus the package should only be built from a subset of
 `.el` files. For example, elisp test files should not normally be
 packaged. *Any file specified at any path in the repository is copied
 to the root of the package.* More complex options are available,
-submit an [Issue](https://github.com/milkypostman/melpa/issues) if the
+submit an [Issue](https://github.com/melpa/melpa/issues) if the
 specified package requires more complex file specification.
 
     If the the package merely requires some additional files, for example for
@@ -257,8 +186,9 @@ causes the default value shown above to be prepended to the specified file list.
 [git]: http://git-scm.com/
 [github]: https://github.com/
 [gitlab]: https://gitlab.com/
+[bitbucket]: https://bitbucket.org/
 [bzr]: http://bazaar.canonical.com/en/
-[hg]: http://mercurial.selenic.com/
+[hg]: https://www.mercurial-scm.org/
 [svn]: http://subversion.apache.org/
 [cvs]: http://www.nongnu.org/cvs/
 [darcs]: http://darcs.net/
@@ -283,27 +213,34 @@ and `:fetcher` specified,
 
 ### Example: Multiple Packages in one Repository
 
-The
-[emacs-starter-kit](https://github.com/technomancy/emacs-starter-kit)
-contains the *starter-kit* package along with extra packages in the
-`modules` directory; *starter-kit-bindings*, *starter-kit-lisp*, etc.
+Assume we have a repository containing three libraries `mypackage.el`,
+`helm-mypackage.el`, and `persp-mypackage.el`.  The latter two
+libraries are optional and users who don't want to use the packages
+`helm` and/or `perspective` should not be forced to install them just
+so they can install `mypackage`.  These libraries should therefore be
+distributed as separate packages.
+
+The three packages have to be declared in three separate files
+`recipes/mypackage`, `recipes/helm-mypackage`, and
+`recipes/persp-mypackage`:
 
 ```lisp
-(starter-kit
- :url "https://github.com/technomancy/emacs-starter-kit.git"
- :fetcher git)
-(starter-kit-bindings
- :url "https://github.com/technomancy/emacs-starter-kit.git"
- :fetcher git
- :files ("modules/starter-kit-bindings.el"))
+(mypackage :repo "someuser/mypackage"
+            :fetcher github
+            :files ("mypackage.el"))
 ```
 
-Notice that `:files` is not specified for `starter-kit` since
-package-build will automatically add all `.el` files in the root
-directory of the repository.  The `starter-kit-bindings` repository is
-contained in the `modules/` subdirectory and thus needs the packages
-files specified explicitly.
+```lisp
+(helm-mypackage :repo "someuser/mypackage"
+                 :fetcher github
+                 :files ("helm-mypackage.el"))
+```
 
+```lisp
+(persp-mypackage :repo "someuser/mypackage"
+                  :fetcher github
+                  :files ("persp-mypackage.el"))
+```
 
 ### Example: Multiple Files in Multiple Directories
 
@@ -474,48 +411,3 @@ This can be configured using the `package-build-working-dir` variable.
 
 *MELPA* is *Milkypostman's ELPA* or *Milkypostman's Experimental Lisp
  Package Archive* if you're not into the whole brevity thing.
-
-## Stable Packages
-
-MELPA now includes a mechanism to build *stable* versions of packages
-given that the repositories meet the following criteria,
-
-1. Hosted using *git* or *hg*.
-2. Tag names are version strings compatible parseable by the `version-to-list`
-   function, optionally prefixed with `v`, `v.` or `v-`.
-
-To use the stable versions of packages you should use the stable server
-in your `package-archives` list.
-
-```lisp
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/"))
-```
-
-An online list of available packages can be found at 
-[https://stable.melpa.org](https://stable.melpa.org).
-
-### Stable Version Generation
-
-To have a stable version generated for your package simply tag the repository
-using a naming compatible with `version-to-list`, optionally prefixed with `v`,
-`v.` or `v-`. The repo state of this tag will be used to generate the stable
-package.
-
-### Notes
-
-*Versions for packages on the original MELPA server are based on the date of the last commit and will likely be higher than any version on the stable server.* Keep the following things in mind,
-
-* If you leave the original MELPA server in your `package-archives`
-  then by default you will get the *development* versions of packages
-  and not the stable ones.
-
-* You will probably want to remove all packages and then reinstall
-  them. Any packages you already have installed from MELPA will never
-  get "updated" to the stable version because of the way version
-  numbering is handled.
-
-
-
-  
-

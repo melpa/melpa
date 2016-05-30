@@ -1,0 +1,1 @@
+(homebrew-mode :repo "dunn/homebrew-mode" :fetcher github)

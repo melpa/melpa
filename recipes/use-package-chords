@@ -1,0 +1,3 @@
+(use-package-chords :repo "waymondo/use-package-chords"
+                    :fetcher github
+                    :files ("use-package-chords.el"))

@@ -1,2 +1,2 @@
-(helm-cmd-t :repo "lewang/helm-cmd-t"
+(helm-cmd-t :repo "emacs-helm/helm-cmd-t"
             :fetcher github)

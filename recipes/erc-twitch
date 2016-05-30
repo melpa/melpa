@@ -1,0 +1,2 @@
+
+(erc-twitch :repo "vibhavp/erc-twitch" :fetcher github)

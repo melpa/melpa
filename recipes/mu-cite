@@ -1,0 +1,6 @@
+(mu-cite
+ :repo "ksato9700/mu-cite"
+ :fetcher github
+ :files ("*.el"
+		 (:exclude
+		  "mu-bbdb.el")))

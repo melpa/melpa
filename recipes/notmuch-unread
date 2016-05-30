@@ -1,3 +1,0 @@
-(notmuch-unread
- :fetcher git
- :url "https://gitorious.org/notmuch-unread/notmuch-unread.git")

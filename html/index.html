@@ -21,7 +21,7 @@
         <ul class="nav navbar-nav">
           <li><a href="#/">Packages</a></li>
           <li><a href="#/getting-started">Getting started</a></li>
-          <li><a href="https://github.com/milkypostman/melpa">GitHub</a></li>
+          <li><a href="https://github.com/melpa/melpa">GitHub</a></li>
         </ul>
       </nav>
     </div>
@@ -30,17 +30,21 @@
     <noscript>
       <h1><span class="archive-name">MELPA</span> (Milkypostman’s Emacs Lisp Package Archive)</h1>
       <ul>
-        <li>Up-to-date packages built on our servers from upstream source</li>
-        <li>Installable in any recent Emacs using 'package.el' - no need to install svn/cvs/hg/bzr/git/darcs/fossil etc.</li>
-        <li>Curated - no obsolete, renamed, forked or randomly hacked packages</li>
-        <li>Comprehensive - more packages than any other archive</li>
-        <li>Automatic updates - new commits result in new packages</li>
-        <li>Extensible - contribute recipes via GitHub, and we'll build the packages</li>
+        <li><strong>Up-to-date packages built on our servers from upstream source</strong></li>
+        <li><strong>Installable in any Emacs with 'package.el'</strong> - no local version-control tools needed</li>
+        <li><strong>Curated</strong> - no obsolete, renamed, forked or randomly hacked packages</li>
+        <li><strong>Comprehensive</strong> - more packages than any other archive</li>
+        <li><strong>Automatic updates</strong> - new commits result in new packages</li>
+        <li><strong>Extensible</strong> - contribute recipes via github, and we'll build the packages</li>
       </ul>
     </noscript>
   </main>
   <footer class="container">
-    <small><a href="https://github.com/milkypostman/melpa/blob/master/html/js/melpa.js">Source code for this page &rarr;</a></small>
+    <small>
+      <a href="https://github.com/melpa/melpa/blob/master/html/js/melpa.js">Source code for this page &rarr;</a>
+      <br/>
+      <a href="jslicense.html" data-jslicense="1">JavaScript license information</a>
+    </small>
   </footer>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/2.3.0/es5-shim.min.js"></script>

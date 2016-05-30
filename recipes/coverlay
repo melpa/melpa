@@ -1,0 +1,1 @@
+(coverlay :repo "twada/coverlay.el" :fetcher github)

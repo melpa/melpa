@@ -1,0 +1,1 @@
+(flycheck-apertium :fetcher github :repo "unhammer/flycheck-apertium" :files ("flycheck-apertium.el" "dix.xsd"))

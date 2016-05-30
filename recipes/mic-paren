@@ -1,1 +1,1 @@
-(mic-paren :fetcher wiki)
+(mic-paren :fetcher github :repo "emacsmirror/mic-paren")

@@ -1,2 +1,0 @@
-(starter-kit :repo "technomancy/emacs-starter-kit" :fetcher github
-             :branch "v2")

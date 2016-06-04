@@ -1,0 +1,1 @@
+(emacs-profiles :repo "myTerminal/emacs-profiles" :fetcher github)

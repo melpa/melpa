@@ -194,7 +194,7 @@ optionally looking only as far back as BOUND."
     (let (cur matches)
       (while (setq cur (ignore-errors (package-build--find-parse-time regex bound)))
         (push cur matches))
-      (car (sort matches 'string>)))))
+      (car (nreverse (sort matches 'string<))))))
 
 (defun package-build--find-version-newest (regex &optional bound)
   "Find the newest version matching REGEX before point, optionally stopping at BOUND."

@@ -1,0 +1,1 @@
+(ox-qmd :fetcher github :repo "0x60df/ox-qmd")

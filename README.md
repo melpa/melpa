@@ -183,6 +183,10 @@ bundling external dependencies, but is otherwise fine with the defaults, it's
 recommended to use `:defaults` as the very first element of this list, which
 causes the default value shown above to be prepended to the specified file list.
 
+    Note that elisp in subdirectories is never included by default, so
+you might find it convenient to separate auxiliiary files such as tests into
+subdirectories to keep packaging simple.
+
 [git]: http://git-scm.com/
 [github]: https://github.com/
 [gitlab]: https://gitlab.com/

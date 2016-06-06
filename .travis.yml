@@ -1,7 +1,17 @@
 language: ruby
-# XXX: Requires sudo because travis-ci apt-package-whitelist doesn't contain the
-# following packages: cvs darcs fossil texinfo
-sudo: required
+
+addons:
+  apt:
+    packages:
+    - bzr
+    - git
+    - mercurial
+    - subversion
+    - cvs
+    - darcs
+    - fossil
+    - texinfo
+
 before_install:
   - sudo apt-get -yq update
   - sudo apt-get -yq install bzr git mercurial subversion cvs darcs fossil texinfo

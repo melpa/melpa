@@ -1,0 +1,4 @@
+(copyit
+ :repo "zonuexe/copyit"
+ :fetcher github
+ :files ("copyit.el"))

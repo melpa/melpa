@@ -1,0 +1,3 @@
+(epm :fetcher github
+     :repo "xuchunyang/epm"
+     :files (:defaults "epm"))

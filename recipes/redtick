@@ -1,1 +1,3 @@
-(redtick :repo "ferfebles/redtick" :fetcher github)
+(redtick :fetcher github
+         :repo "ferfebles/redtick"
+         :files (:defaults "resources"))

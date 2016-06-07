@@ -184,8 +184,17 @@ or nil if the version cannot be parsed."
 (defun package-build--find-parse-time (regex &optional bound)
   "Find REGEX in current buffer and format as a time-based version string, \
 optionally looking only as far back as BOUND."
-  (package-build--parse-time (progn (re-search-backward regex bound)
-                                    (match-string-no-properties 1))))
+  (package-build--parse-time (and (re-search-backward regex bound t)
+                                  (match-string-no-properties 1))))
+
+(defun package-build--find-parse-time-newest (regex &optional bound)
+  "Find REGEX in current buffer and format as a time-based version string, \
+optionally looking only as far back as BOUND."
+  (save-match-data
+    (let (cur matches)
+      (while (setq cur (ignore-errors (package-build--find-parse-time regex bound)))
+        (push cur matches))
+      (car (nreverse (sort matches 'string<))))))
 
 (defun package-build--find-version-newest (regex &optional bound)
   "Find the newest version matching REGEX before point, optionally stopping at BOUND."
@@ -436,7 +445,7 @@ A number as third arg means request confirmation if NEWNAME already exists."
           (package-build--run-process nil "svn" "checkout" repo dir)))
         (apply 'package-build--run-process dir "svn" "info"
                (package-build--expand-source-file-list dir config))
-        (or (package-build--find-parse-time "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)" bound)
+        (or (package-build--find-parse-time-newest "Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)" bound)
             (error "No valid timestamps found!"))))))
 
 
@@ -776,7 +785,7 @@ Optionally PRETTY-PRINT the data."
         (insert "X-Original-")
         (move-beginning-of-line nil))
     ;; Put the new header in a sensible place if we can
-    (re-search-forward "^;+* *\\(Version\\|Keywords\\|URL\\) *:" nil t)
+    (re-search-forward "^;+* *\\(Version\\|Package-Requires\\|Keywords\\|URL\\) *:" nil t)
     (forward-line))
   (insert (format ";; Package-Version: %s" version))
   (newline))

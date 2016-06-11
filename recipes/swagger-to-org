@@ -1,0 +1,3 @@
+(swagger-to-org
+ :repo "ahungry/swagger-to-org"
+ :fetcher github)

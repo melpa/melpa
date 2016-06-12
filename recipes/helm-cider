@@ -1,3 +1,2 @@
 (helm-cider :fetcher github
-            :repo "clojure-emacs/helm-cider"
-            :files ("*.el" (:exclude ".dir-locals.el")))
+            :repo "clojure-emacs/helm-cider")

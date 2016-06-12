@@ -1,0 +1,1 @@
+(kotlin-mode :repo "quantumman/kotlin-mode" :fetcher github)

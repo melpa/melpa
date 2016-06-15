@@ -1,0 +1,2 @@
+(kotlin-mode :repo "gregghz/kotlin-mode"
+             :fetcher github)

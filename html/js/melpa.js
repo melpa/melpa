@@ -49,7 +49,9 @@
     this.readmeURL = "/packages/" + data.name + "-readme.txt";
     this.badgeURL = "/packages/" + data.name + "-badge.svg";
     this.matchesTerm = function(term) {
-      return this._searchText.indexOf(term) != -1;
+      return _.every(term.split(' ').map(function(part) {
+        return this._searchText.indexOf(part) !== -1;
+      }.bind(this)));
     };
   };
 
@@ -153,7 +155,7 @@
         source: recipe.fetcher,
         downloads: oldNames.concat(name).reduce(function(sum, n) { return sum + (downloads[n] || 0); }, 0),
         fetcher: recipe.fetcher,
-        recipeURL: "https://github.com/milkypostman/melpa/blob/master/recipes/" + name,
+        recipeURL: "https://github.com/melpa/melpa/blob/master/recipes/" + name,
         packageURL: "packages/" + name + "-" + version + "." + (built.type == "single" ? "el" : "tar"),
         sourceURL: calculateSourceURL(name, recipe),
         oldNames: oldNames,

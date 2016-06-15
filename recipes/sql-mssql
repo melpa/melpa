@@ -1,0 +1,1 @@
+(sql-mssql :fetcher github :repo "tumashu/sql-mssql")

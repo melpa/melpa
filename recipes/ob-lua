@@ -1,0 +1,1 @@
+(ob-lua :fetcher github :repo "stardiviner/ob-lua")

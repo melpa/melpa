@@ -1,3 +1,0 @@
-(python3-info
- :repo "dvhansen/python3-info"
- :fetcher github)

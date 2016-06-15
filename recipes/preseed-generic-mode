@@ -1,1 +1,1 @@
-(preseed-generic-mode :fetcher github :repo "suntong001/preseed-generic-mode")
+(preseed-generic-mode :fetcher github :repo "suntong/preseed-generic-mode")

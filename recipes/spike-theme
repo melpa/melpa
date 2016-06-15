@@ -1,0 +1,3 @@
+(spike-theme
+ :fetcher github
+ :repo "m31271n/spike-theme")

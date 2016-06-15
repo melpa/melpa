@@ -1,0 +1,1 @@
+(chapel-mode :fetcher github :repo "russel/Emacs-Chapel-Mode")

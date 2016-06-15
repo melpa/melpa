@@ -1,0 +1,2 @@
+(elisp-lint :fetcher github :repo "nschum/elisp-lint")
+

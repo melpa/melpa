@@ -1,1 +1,1 @@
-(list-register :fetcher wiki)
+(list-register :fetcher github :repo "emacsmirror/list-register")

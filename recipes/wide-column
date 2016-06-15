@@ -1,4 +1,1 @@
-(wide-column
- :fetcher hg
- :url "https://code.google.com/p/phillord-emacs-packages/"
- :files ("wide-column.el"))
+(wide-column :fetcher github :repo "phillord/wide-column")

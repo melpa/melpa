@@ -543,7 +543,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (when (file-exists-p dir)
           (delete-directory dir t))
         (package-build--princ-checkout repo dir)
-        (package-build--run-process nil "git" "clone" repo dir)))
+        (package-build--run-process nil "git" "clone" "--depth" "1" "--no-single-branch" repo dir)))
       (if package-build-stable
           (let* ((bound (goto-char (point-max)))
                  (regexp (or (plist-get config :version-regexp)
@@ -1312,7 +1312,9 @@ Returns the archive entry for the package."
   "Helpful functionality for building packages."
   nil
   " PBuild"
-  package-build-minor-mode-map)
+  package-build-minor-mode-map
+  (when package-build-minor-mode
+    (message "Use C-c C-c to build this recipe.")))
 
 ;;;###autoload
 (defun package-build-create-recipe (name fetcher)

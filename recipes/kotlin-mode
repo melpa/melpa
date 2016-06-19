@@ -1,2 +1,2 @@
-(kotlin-mode :repo "Emacs-Kotlin-Mode-Maintainers/kotlin-mode"
+(kotlin-mode :repo "gregghz/kotlin-mode"
              :fetcher github)

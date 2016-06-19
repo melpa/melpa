@@ -1,0 +1,2 @@
+(helm-cider :fetcher github
+            :repo "clojure-emacs/helm-cider")

@@ -1,0 +1,1 @@
+(typoscript-mode :repo "ksjogo/typoscript-mode" :fetcher github)

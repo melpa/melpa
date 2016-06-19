@@ -543,7 +543,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (when (file-exists-p dir)
           (delete-directory dir t))
         (package-build--princ-checkout repo dir)
-        (package-build--run-process nil "git" "clone" "--depth" "1" "--no-single-branch" repo dir)))
+        (package-build--run-process nil "git" "clone" repo dir)))
       (if package-build-stable
           (let* ((bound (goto-char (point-max)))
                  (regexp (or (plist-get config :version-regexp)

@@ -1,0 +1,1 @@
+(git-load :repo "k0hax/git-load" :fetcher github)

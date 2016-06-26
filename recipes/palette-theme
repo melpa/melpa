@@ -1,3 +1,4 @@
-(palette :repo "aslpavel/palette-emacs-theme"
-         :fetcher github
-         :files ("palette-theme.el"))
+(palette-theme 
+ :repo "aslpavel/palette-emacs-theme"
+ :fetcher github
+ :files ("palette-theme.el"))

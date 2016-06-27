@@ -1,4 +1,3 @@
 (palette-theme 
  :repo "aslpavel/palette-emacs-theme"
- :fetcher github
- :files ("palette-theme.el"))
+ :fetcher github)

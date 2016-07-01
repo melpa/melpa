@@ -1,0 +1,2 @@
+(ace-link :repo "magicdirac/avy-flycheck"
+          :fetcher github)

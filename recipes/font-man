@@ -1,1 +1,1 @@
-(font-man :repo "shackra/font-man" :fetcher bitbucket)
+(font-man :url "https://bitbucket.org/shackra/font-man.git" :fetcher git)

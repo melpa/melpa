@@ -1,0 +1,3 @@
+(editorconfig-domain-specific
+ :fetcher github
+ :repo "lassik/editorconfig-emacs-domain-specific")

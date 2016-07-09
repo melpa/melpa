@@ -1,0 +1,1 @@
+(contrast-color-picker :fetcher github :repo "yuutayamada/contrast-color-picker-el")

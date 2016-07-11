@@ -1,1 +1,0 @@
-(buffer-layers :repo "swflint/buffer-layers" :fetcher github)

@@ -1,0 +1,1 @@
+(emacs-js :fetcher github :repo "foretagsplatsen/emacs-js" :files ("emacs-js.el"))

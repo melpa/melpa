@@ -1293,7 +1293,7 @@ Returns the archive entry for the package."
     (if (executable-find "curl")
         ;; Not strictly needed, but less likely to break due to gnutls issues
         (shell-command (mapconcat #'identity
-                                  (list "curl" "-o"
+                                  (list "curl" "-f" "-o"
                                         (shell-quote-argument badge-filename)
                                         (shell-quote-argument badge-url))
                                   " "))

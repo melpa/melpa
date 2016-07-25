@@ -1,0 +1,1 @@
+(evil-visual-replace :fetcher github :repo "troyp/evil-visual-replace")

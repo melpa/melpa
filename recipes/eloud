@@ -1,4 +1,4 @@
 (eloud
  :fetcher github
- url "https://github.com/smythp/eloud"
- repo "smythp/eloud")
+ :url "https://github.com/smythp/eloud"
+ :repo "smythp/eloud")

@@ -1,0 +1,2 @@
+(gg-find-def :fetcher github
+             :repo "mallt/gg-find-def")

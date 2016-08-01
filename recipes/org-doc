@@ -1,3 +1,0 @@
-(org-doc :repo "smaximov/org-doc"
-         :fetcher github
-         :files (:defaults "bin"))

@@ -1,2 +1,2 @@
-(flymake-cursor :repo "illusori/emacs-flymake-cursor" :fetcher github)
+(flymake-cursor :repo "ryoung786/emacs-flymake-cursor" :fetcher github)
 

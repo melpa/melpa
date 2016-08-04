@@ -1,1 +1,1 @@
-(ledger-mode :fetcher github :repo "ledger/ledger" :files ("lisp/*.el") :branch "next" :old-names (ldg-mode))
+(ledger-mode :fetcher github :repo "ledger/ledger-mode" :files ("*.el") :old-names (ldg-mode))

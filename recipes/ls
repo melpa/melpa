@@ -1,0 +1,2 @@
+(ls :fetcher github :repo "troyp/ls")
+

@@ -679,6 +679,48 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (package-build--find-parse-time
          "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)")))))
 
+;; This is a modified copy of package-build--grab-wiki-file.
+;; package-build--grab-local-file and package-build--checkout-local support new
+;; recipe type called "local", e.g.,
+;;
+;;   (let-alist :fetcher local :url "/u/user/clones/elpa/packages/let-alist")
+;;
+(defun package-build--grab-local-file (source-dir filename)
+  "Copy FILENAME from SOURCE-DIR local directory returning its last-modified time."
+  (copy-file (expand-file-name filename source-dir) filename t t t t)
+  (when (zerop (nth 7 (file-attributes filename)))
+    (error "Local file %s was empty - has it been removed?" filename))
+  (let* ((new-content-hash (secure-hash 'sha1 (package-build--slurp-file filename)))
+         (stamp-file (concat filename ".stamp"))
+         (stamp-info (package-build--read-from-file stamp-file))
+         (prev-content-hash (car stamp-info)))
+    (if (and prev-content-hash
+             (string-equal new-content-hash prev-content-hash))
+        ;; File has not changed, so return old timestamp
+        (progn
+          (package-build--message "%s is unchanged" filename)
+          (cdr stamp-info))
+      (package-build--message "%s has changed - checking mod time" filename)
+      (let ((new-timestamp
+             (format-time-string "%Y%m%d.%H%M" (nth 5 (file-attributes filename)))))
+        (package-build--dump (cons new-content-hash new-timestamp) stamp-file)
+        new-timestamp))))
+
+;; This is a modified copy of package-build--checkout-wiki.
+(defun package-build--checkout-local (name config dir)
+  "Checkout package NAME with config CONFIG from local directory into DIR."
+  (unless package-build-stable
+    (with-current-buffer (get-buffer-create "*package-build-checkout*")
+      (unless (file-exists-p dir)
+        (make-directory dir))
+      (let* ((files (or (plist-get config :files)
+                        (list (format "%s.el" name))))
+             (repo (package-build--trim (plist-get config :url) ?/))
+             (default-directory dir)
+             (files (mapcar (lambda (file)
+                              (package-build--grab-local-file repo file)) files)))
+        (car (nreverse (sort files 'string-lessp)))))))
+
 (defun package-build--dump (data file &optional pretty-print)
   "Write DATA to FILE as a Lisp sexp.
 Optionally PRETTY-PRINT the data."

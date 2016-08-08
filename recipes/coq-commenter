@@ -1,0 +1,3 @@
+(coq-commentor
+ :repo "ailrun/coq-commenter"
+ :fetcher github)

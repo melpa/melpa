@@ -1,1 +1,1 @@
-(fn :fetcher github :repo "troyp/fn.el" :files ("fn.el"))
+(fn :fetcher github :repo "troyp/fn.el")

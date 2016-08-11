@@ -20,7 +20,7 @@ for recipe_name in $changed_recipes; do
     if [ -f "./recipes/$recipe_name" ]; then
         echo "----------------------------------------------------"
         echo "Building new/modified recipe: $recipe_name"
-        "$ECUKES_EMACS" --batch --eval "(progn (load-file \"package-build.el\")(package-build-archive '$recipe_name))"
+        "$ECUKES_EMACS" --batch --eval "(progn (load-file \"package-build/package-build.el\")(package-build-archive '$recipe_name))"
     fi
 done
 

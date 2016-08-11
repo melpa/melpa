@@ -74,8 +74,8 @@ Let `<NAME>` denote the name of the recipe to submit.
 2. Add your new file under the directory specified by
 `package-build-recipes-dir` (default: `recipes/` directory where
 `package-build` was loaded). If you prefer, the interactive command
-`package-build-create-recipe` in `package-build.el` will guide you
-through this process.
+`package-build-create-recipe` in `package-build/package-build.el` will
+guide you through this process.
 
 3. Confirm your package builds properly by running
 

@@ -45,23 +45,26 @@
 (require 'lisp-mnt)
 (require 'json)
 
-(defconst package-build--this-dir (file-name-directory (or load-file-name (buffer-file-name))))
+(defconst package-build--melpa-base
+  (file-name-directory
+   (directory-file-name
+    (file-name-directory (or load-file-name (buffer-file-name))))))
 
 (defgroup package-build nil
   "Facilities for building package.el-compliant packages from upstream source code."
   :group 'development)
 
-(defcustom package-build-working-dir (expand-file-name "working/" package-build--this-dir)
+(defcustom package-build-working-dir (expand-file-name "working/" package-build--melpa-base)
   "Directory in which to keep checkouts."
   :group 'package-build
   :type 'string)
 
-(defcustom package-build-archive-dir (expand-file-name "packages/" package-build--this-dir)
+(defcustom package-build-archive-dir (expand-file-name "packages/" package-build--melpa-base)
   "Directory in which to keep compiled archives."
   :group 'package-build
   :type 'string)
 
-(defcustom package-build-recipes-dir (expand-file-name "recipes/" package-build--this-dir)
+(defcustom package-build-recipes-dir (expand-file-name "recipes/" package-build--melpa-base)
   "Directory containing recipe files."
   :group 'package-build
   :type 'string)

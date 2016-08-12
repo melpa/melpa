@@ -1,0 +1,3 @@
+(gforth
+ :fetcher github
+ :repo "smtlaissezfaire/gforth.el")

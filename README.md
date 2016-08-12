@@ -371,10 +371,10 @@ format.
 
 ## API
 
-All repository code is contained in the
-`package-build/package-build.el`.  That package is maintained in a
-[separate repository](https://github.com/melpa/package).  The version
-in the Melpa repository is imported using `git subtree`.
+All repository code is contained in the file
+`package-build/package-build.el`.  That code is maintained in a
+[separate repository](https://github.com/melpa/package-build): the version
+in the MELPA repository is imported using `git subtree`.
 
 ### Functions
 

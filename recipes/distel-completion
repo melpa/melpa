@@ -1,0 +1,3 @@
+(distel-completion
+ :fetcher github
+ :repo   "sebastiw/distel-completion")

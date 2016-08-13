@@ -1,0 +1,3 @@
+(fstar-mode
+ :fetcher github
+ :repo "FStarLang/fstar-mode.el")

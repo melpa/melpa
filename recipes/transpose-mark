@@ -1,1 +1,1 @@
-(transpose-mark :repo "attichacker/transpose-mark" :fetcher github)
+(transpose-mark :repo "kwrooijen/transpose-mark" :fetcher github)

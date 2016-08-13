@@ -1,1 +1,1 @@
-(main-line :fetcher github :repo "jasonm23/emacs-mainline")
+(main-line :fetcher github :repo "emacsfodder/emacs-mainline")

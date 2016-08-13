@@ -1,0 +1,2 @@
+(sweetgreen :repo "CestDiego/sweetgreen.el"
+            :fetcher github)

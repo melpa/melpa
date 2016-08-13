@@ -1,1 +1,1 @@
-(helm-hoogle :fetcher github :repo "jwiegley/haskell-config" :files ("helm-hoogle.el"))
+(helm-hoogle :fetcher github :repo "jwiegley/helm-hoogle")

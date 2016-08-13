@@ -1,0 +1,4 @@
+(go-guru
+ :url "https://go.googlesource.com/tools"
+ :fetcher git
+ :files ("cmd/guru/go-guru.el"))

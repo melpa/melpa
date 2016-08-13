@@ -1,0 +1,2 @@
+(org-rtm :repo "pmiddend/org-rtm"
+	 :fetcher github)

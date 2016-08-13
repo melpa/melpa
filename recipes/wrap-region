@@ -1,2 +1,2 @@
-(wrap-region :repo "rejeep/wrap-region" :fetcher github)
+(wrap-region :repo "rejeep/wrap-region.el" :fetcher github)
 

@@ -1,0 +1,2 @@
+(ido-migemo :repo "myuhe/ido-migemo.el"
+            :fetcher github)

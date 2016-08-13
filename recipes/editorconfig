@@ -1,1 +1,3 @@
-(editorconfig :repo "editorconfig/editorconfig-emacs" :fetcher github)
+(editorconfig :fetcher github
+              :repo "editorconfig/editorconfig-emacs"
+              :old-names (editorconfig-core editorconfig-fnmatch))

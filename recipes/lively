@@ -1,1 +1,1 @@
-(lively :fetcher wiki)
+(lively :fetcher github :repo "emacsorphanage/lively")

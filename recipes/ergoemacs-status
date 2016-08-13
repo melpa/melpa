@@ -1,0 +1,3 @@
+(ergoemacs-status
+ :fetcher github
+ :repo "ergoemacs/ergoemacs-status")

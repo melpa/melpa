@@ -1,0 +1,2 @@
+(sibilant-mode :repo "jbr/sibilant-mode" :fetcher github)
+

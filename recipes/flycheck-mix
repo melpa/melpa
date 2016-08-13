@@ -1,0 +1,1 @@
+(flycheck-mix :repo "tomekowal/flycheck-mix" :fetcher github)

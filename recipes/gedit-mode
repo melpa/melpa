@@ -1,3 +1,0 @@
-(gedit-mode
- :repo "robru/gedit-mode"
- :fetcher github)

@@ -1,0 +1,1 @@
+(eopengrok :fetcher github :repo "youngker/eopengrok.el")

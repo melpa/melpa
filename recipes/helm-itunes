@@ -1,1 +1,1 @@
-(helm-itunes :fetcher github :repo "daschwa/helm-itunes")
+(helm-itunes :fetcher github :repo "anschwa/helm-itunes")

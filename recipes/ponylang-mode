@@ -1,1 +1,1 @@
-(ponylang-mode :fetcher github :repo "abingham/ponylang-mode")
+(ponylang-mode :fetcher github :repo "SeanTAllen/ponylang-mode")

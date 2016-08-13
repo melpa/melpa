@@ -1,1 +1,1 @@
-(metaweblog :fetcher github :repo "punchagan/metaweblog.el")
+(metaweblog :fetcher github :repo "punchagan/metaweblog")

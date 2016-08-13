@@ -1,0 +1,1 @@
+(flycheck-purescript :fetcher github :repo "emacs-pe/flycheck-purescript")

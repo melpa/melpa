@@ -1,0 +1,3 @@
+(company-pollen :fetcher github
+                :repo "lijunsong/pollen-mode"
+                :files ("company-pollen.el"))

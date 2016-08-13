@@ -1,0 +1,3 @@
+(sly-repl-ansi-color
+ :fetcher github
+ :repo "PuercoPop/sly-repl-ansi-color")

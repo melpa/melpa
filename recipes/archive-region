@@ -1,1 +1,1 @@
-(archive-region :fetcher wiki)
+(archive-region :repo "rubikitch/archive-region" :fetcher github)

@@ -1,1 +1,3 @@
-(cal-china-x :fetcher wiki)
+(cal-china-x :repo "xwl/cal-china-x" 
+ :fetcher github
+ :files (:defaults "jieqi.txt"))

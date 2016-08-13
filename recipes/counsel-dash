@@ -1,0 +1,3 @@
+(counsel-dash
+  :repo "nathankot/counsel-dash"
+  :fetcher github)

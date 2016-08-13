@@ -1,0 +1,1 @@
+(mediawiki :repo "hexmode/holiday-pascha-etc" :fetcher github)

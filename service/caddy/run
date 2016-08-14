@@ -1,0 +1,3 @@
+#!/bin/bash -e
+
+/usr/local/bin/caddy --conf /home/melpa/Caddyfile

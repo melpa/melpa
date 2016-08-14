@@ -1,0 +1,4 @@
+(emacs-eclim
+ :fetcher github
+ :repo "emacs-eclim/emacs-eclim"
+ :files ("ac-emacs-eclim-source.el"))

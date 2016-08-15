@@ -1,0 +1,1 @@
+(indie-buffers :repo "anler/indie-buffers" :fetcher github)

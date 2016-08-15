@@ -1,0 +1,4 @@
+(company-distel
+ :fetcher git
+ :uri   "/home/esebwed/Programmering/company-distel/"
+ :files ("company-distel.el" "distel-completion-lib.el"))

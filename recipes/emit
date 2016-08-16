@@ -1,0 +1,1 @@
+(emit :repo "IvanMalison/emit" :fetcher github)

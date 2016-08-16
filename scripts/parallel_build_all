@@ -14,7 +14,7 @@ function build_all {
     PATH=$HOME/.cabal/bin:$HOME/usr/bin:$HOME/bin:$PATH
 
     ## run the script
-    cd $(dirname ${0})/..
+    cd "$(dirname ${0})/.."
     # grep --files-with-match wiki recipes/* | xargs make -j1 &
     make SLEEP=2 -j1 $(grep --files-with-match wiki recipes/*) &
     # grep --files-without-match wiki recipes/* | xargs make -j4 &
@@ -27,7 +27,7 @@ function build_all {
     make recipes/python-info
     make recipes/python3-info
 
-    echo '{"completed":' `unix_timestamp` '}' > html/build-status.json
+    echo '{"completed":' "$(unix_timestamp)" '}' > html/build-status.json
 }
 
 build_all

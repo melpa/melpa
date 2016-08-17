@@ -1138,6 +1138,24 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
                  (aref desc 3)
                  extras)))))
 
+(defconst package-build--this-file load-file-name)
+
+;; TODO: This function should be fairly sound, but it has a few
+;; possible failure modes. Primarily, if a file matching the recipe's
+;; file spec appears in a new upstream revision, but that file has an
+;; older date than the version timestamp provided here, the function
+;; will return t.
+(cl-defun package-build--up-to-date-p (name version)
+  "Return non-nil if there is an up-to-date package for NAME with the given VERSION."
+  (let* ((package-file-base (expand-file-name (format "%s-%s." name version) package-build-archive-dir))
+         (recipe-file (expand-file-name name package-build-recipes-dir)))
+    (dolist (ext '("tar" "el"))
+      (let ((package-file (concat package-file-base ext)))
+        (when (and (file-newer-than-file-p package-file recipe-file)
+                   (or (null package-build--this-file)
+                       (file-newer-than-file-p package-file package-build--this-file)))
+          (return t))))))
+
 
 ;;; Public interface
 ;;;###autoload
@@ -1158,18 +1176,22 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
     (package-build--message "\n;;; %s\n" file-name)
     (let* ((version (package-build-checkout name rcp pkg-working-dir))
            (default-directory package-build-working-dir)
-           (start-time (current-time))
-           (archive-entry (package-build-package (symbol-name name)
-                                                 version
-                                                 (package-build--config-file-list rcp)
-                                                 pkg-working-dir
-                                                 package-build-archive-dir)))
-      (package-build--dump archive-entry (package-build--entry-file-name archive-entry))
-      (when package-build-write-melpa-badge-images
-        (package-build--write-melpa-badge-image (symbol-name name) version package-build-archive-dir))
-      (package-build--message "Built in %.3fs, finished at %s"
-                              (time-to-seconds (time-since start-time))
-                              (current-time-string))
+           (start-time (current-time)))
+      (if (package-build--up-to-date-p (symbol-name name) version)
+          (package-build--message "Package %s is up to date - skipping." name)
+        (progn
+          (let ((archive-entry (package-build-package (symbol-name name)
+                                                      version
+                                                      (package-build--config-file-list rcp)
+                                                      pkg-working-dir
+                                                      package-build-archive-dir)))
+            (package-build--dump archive-entry (package-build--entry-file-name archive-entry)))
+          (when package-build-write-melpa-badge-images
+            (package-build--write-melpa-badge-image (symbol-name name) version package-build-archive-dir))
+          (package-build--message "Built %s in %.3fs, finished at %s"
+                                  name
+                                  (time-to-seconds (time-since start-time))
+                                  (current-time-string))))
       (list file-name version))))
 
 ;;;###autoload
@@ -1219,24 +1241,24 @@ Returns the archive entry for the package."
                           (downcase (file-name-nondirectory pkg-source)))
       (error "Single file %s does not match package name %s"
              (file-name-nondirectory pkg-source) package-name))
-    (when (file-exists-p pkg-target)
-      (delete-file pkg-target))
-    (copy-file pkg-source pkg-target)
-    (let ((enable-local-variables nil)
-          (make-backup-files nil))
-      (with-current-buffer (find-file pkg-target)
-        (package-build--update-or-insert-version version)
-        (package-build--ensure-ends-here-line pkg-source)
-        (write-file pkg-target nil)
-        (condition-case err
-            (package-build--package-buffer-info-vec)
-          (error
-           (package-build--message "Warning: %S" err)))
-        (kill-buffer)))
+    (if (file-exists-p pkg-target)
+        (package-build--message "Skipping rebuild of %s" pkg-target)
+      (copy-file pkg-source pkg-target)
+      (let ((enable-local-variables nil)
+            (make-backup-files nil))
+        (with-current-buffer (find-file pkg-target)
+          (package-build--update-or-insert-version version)
+          (package-build--ensure-ends-here-line pkg-source)
+          (write-file pkg-target nil)
+          (condition-case err
+              (package-build--package-buffer-info-vec)
+            (error
+             (package-build--message "Warning: %S" err)))
+          (kill-buffer)))
 
-    (package-build--write-pkg-readme target-dir
-                                     (package-build--find-package-commentary pkg-source)
-                                     package-name)
+      (package-build--write-pkg-readme target-dir
+                                       (package-build--find-package-commentary pkg-source)
+                                       package-name))
     (package-build--archive-entry pkg-info 'single)))
 
 (defun package-build--build-multi-file-package (package-name version files source-dir target-dir)

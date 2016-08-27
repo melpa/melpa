@@ -23,3 +23,8 @@ stable.melpa.org:80 {
   log /home/melpa/log/melpa.access.log
   errors /home/melpa/log/melpa.error.log
 }
+
+melpa-stable.milkbox.net {
+  tls d@milkbox.net
+  redir https://stable.melpa.org{uri}
+}

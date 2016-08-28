@@ -1,1 +1,1 @@
-(transfer-sh :fetcher github :repo "Brillow/transfer-sh")
+(transfer-sh :fetcher github :repo "Brillow/transfer-sh.el")

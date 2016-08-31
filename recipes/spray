@@ -1,6 +1,6 @@
 (spray
- :repo "ian-kelling/spray"
- :fetcher github)
+ :repo "iankelling/spray"
+ :fetcher gitlab)
 
 
 

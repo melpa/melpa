@@ -25,7 +25,6 @@ read on for details.
 * [API](#api)
 * [Mirrors](#mirrors)
 * [About](#about)
-* [Stable Packages](#melpa-stable)
 
 
 ## Usage
@@ -88,6 +87,9 @@ you prefer to only receive updates for tagged releases, use
   them. Any packages you already have installed from MELPA will never
   get "updated" to the stable version because of the way version
   numbering is handled.
+
+Note that the MELPA maintainers do not use MELPA Stable themselves,
+and do not particularly recommend its use.
 
 ## Contributing
 

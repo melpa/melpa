@@ -23,6 +23,7 @@ read on for details.
 * [Recipe Format](#recipe-format)
 * [Build Scripts](#build-scripts)
 * [API](#api)
+* [Mirrors](#mirrors)
 * [About](#about)
 * [Stable Packages](#melpa-stable)
 
@@ -413,6 +414,23 @@ This can be configured using the `package-build-archive-dir` variable.
 
 Repositories are checked out to the `working/` directory by default.
 This can be configured using the `package-build-working-dir` variable.
+
+## Mirrors
+
+_We are not responsible for the contents of any unofficial mirror of
+our packages._
+
+Official mirrors are available (with many thanks to mirrorservice.org)
+so that if melpa.org is down, packages can still be installed.  The
+following are the HTTP/HTTPS URLs to use in `package-archives` for
+MELPA and MELPA Stable respectively:
+
+* [http://www.mirrorservice.org/sites/melpa.org/packages/](http://www.mirrorservice.org/sites/melpa.org/packages/)
+* [https://www.mirrorservice.org/sites/melpa.org/packages/](https://www.mirrorservice.org/sites/melpa.org/packages/)
+* [http://www.mirrorservice.org/sites/stable.melpa.org/packages/](http://www.mirrorservice.org/sites/stable.melpa.org/packages/)
+* [https://www.mirrorservice.org/sites/stable.melpa.org/packages/](https://www.mirrorservice.org/sites/stable.melpa.org/packages/)
+
+Only the packages are mirrored, not the web site front-end itself.
 
 ## About
 

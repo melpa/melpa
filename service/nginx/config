@@ -66,7 +66,7 @@ http {
 	
 	        location ~ /.well-known {
 	                allow all;
-			root /usr/share/nginx/html/.well-known;
+			root /usr/share/nginx/html;
 	        }
 	
 		error_page   500 502 503 504  /50x.html;

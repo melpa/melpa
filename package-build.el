@@ -1145,16 +1145,16 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
 ;; file spec appears in a new upstream revision, but that file has an
 ;; older date than the version timestamp provided here, the function
 ;; will return t.
-(cl-defun package-build--up-to-date-p (name version)
+(defun package-build--up-to-date-p (name version)
   "Return non-nil if there is an up-to-date package for NAME with the given VERSION."
   (let* ((package-file-base (expand-file-name (format "%s-%s." name version) package-build-archive-dir))
          (recipe-file (expand-file-name name package-build-recipes-dir)))
-    (dolist (ext '("tar" "el"))
+    (cl-dolist (ext '("tar" "el"))
       (let ((package-file (concat package-file-base ext)))
         (when (and (file-newer-than-file-p package-file recipe-file)
                    (or (null package-build--this-file)
                        (file-newer-than-file-p package-file package-build--this-file)))
-          (return t))))))
+          (cl-return t))))))
 
 
 ;;; Public interface

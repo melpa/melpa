@@ -1,2 +1,2 @@
-(avk-emacs-themes :fetcher git
-                  :url "https://github.com/avkoval/avk-emacs-themes")
+(avk-emacs-themes :fetcher github
+                  :repo "avkoval/avk-emacs-themes")

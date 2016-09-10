@@ -23,8 +23,8 @@ read on for details.
 * [Recipe Format](#recipe-format)
 * [Build Scripts](#build-scripts)
 * [API](#api)
+* [Mirrors](#mirrors)
 * [About](#about)
-* [Stable Packages](#melpa-stable)
 
 
 ## Usage
@@ -87,6 +87,9 @@ you prefer to only receive updates for tagged releases, use
   them. Any packages you already have installed from MELPA will never
   get "updated" to the stable version because of the way version
   numbering is handled.
+
+Note that the MELPA maintainers do not use MELPA Stable themselves,
+and do not particularly recommend its use.
 
 ## Contributing
 
@@ -182,6 +185,10 @@ specified package requires more complex file specification.
 bundling external dependencies, but is otherwise fine with the defaults, it's
 recommended to use `:defaults` as the very first element of this list, which
 causes the default value shown above to be prepended to the specified file list.
+
+    Note that elisp in subdirectories is never included by default, so
+you might find it convenient to separate auxiliiary files such as tests into
+subdirectories to keep packaging simple.
 
 [git]: http://git-scm.com/
 [github]: https://github.com/
@@ -367,7 +374,10 @@ format.
 
 ## API
 
-All repository code is contained in the `package-build.el`.
+All repository code is contained in the file
+`package-build/package-build.el`.  That code is maintained in a
+[separate repository](https://github.com/melpa/package-build): the version
+in the MELPA repository is imported using `git subtree`.
 
 ### Functions
 
@@ -406,6 +416,23 @@ This can be configured using the `package-build-archive-dir` variable.
 
 Repositories are checked out to the `working/` directory by default.
 This can be configured using the `package-build-working-dir` variable.
+
+## Mirrors
+
+_We are not responsible for the contents of any unofficial mirror of
+our packages._
+
+Official mirrors are available (with many thanks to mirrorservice.org)
+so that if melpa.org is down, packages can still be installed.  The
+following are the HTTP/HTTPS URLs to use in `package-archives` for
+MELPA and MELPA Stable respectively:
+
+* [http://www.mirrorservice.org/sites/melpa.org/packages/](http://www.mirrorservice.org/sites/melpa.org/packages/)
+* [https://www.mirrorservice.org/sites/melpa.org/packages/](https://www.mirrorservice.org/sites/melpa.org/packages/)
+* [http://www.mirrorservice.org/sites/stable.melpa.org/packages/](http://www.mirrorservice.org/sites/stable.melpa.org/packages/)
+* [https://www.mirrorservice.org/sites/stable.melpa.org/packages/](https://www.mirrorservice.org/sites/stable.melpa.org/packages/)
+
+Only the packages are mirrored, not the web site front-end itself.
 
 ## About
 

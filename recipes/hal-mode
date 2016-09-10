@@ -1,0 +1,2 @@
+(hal-mode :fetcher github :repo "strahlex/hal-mode")
+

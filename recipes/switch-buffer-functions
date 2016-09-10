@@ -1,0 +1,2 @@
+(switch-buffer-functions :fetcher github
+                         :repo "10sr/switch-buffer-functions-el")

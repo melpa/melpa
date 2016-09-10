@@ -1,0 +1,2 @@
+(nix-buffer :fetcher github :repo "shlevy/nix-buffer"
+            :version-regexp "v\\.\\(.*\\)")

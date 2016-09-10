@@ -1,3 +1,2 @@
-(package-build :repo "melpa/melpa"
-               :fetcher github
-               :files ("package-build.el"))
+(package-build :repo "melpa/package-build"
+               :fetcher github)

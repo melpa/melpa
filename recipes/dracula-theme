@@ -1,3 +1,1 @@
-(dracula-theme :fetcher github
-               :repo "zenorocha/dracula-theme"
-               :files ("emacs/dracula-theme.el"))
+(dracula-theme :fetcher github :repo "dracula/emacs")

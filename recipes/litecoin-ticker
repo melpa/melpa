@@ -1,3 +1,3 @@
-(litecoin-ticker :repo"llcc/btcbox-ticker"
+(litecoin-ticker :repo "llcc/btcbox-ticker"
                  :fetcher github
                  :files ("litecoin-ticker.el"))

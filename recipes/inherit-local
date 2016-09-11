@@ -1,2 +1,1 @@
-(inherit-local :fetcher github :repo "shlevy/inherit-local"
-               :version-regexp "v\\.\\(.*\\)")
+(inherit-local :fetcher github :repo "shlevy/inherit-local")

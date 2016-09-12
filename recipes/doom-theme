@@ -1,3 +1,0 @@
-(doom-theme :repo "hlissner/emacs-doom-theme"
-            :fetcher github
-            :files (:defaults (:exclude "doom-modeline.el")))

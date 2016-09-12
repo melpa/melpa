@@ -1,0 +1,1 @@
+(doom-themes :repo "hlissner/emacs-doom-theme" :fetcher github)

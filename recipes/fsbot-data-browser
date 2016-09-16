@@ -1,0 +1,1 @@
+(fsbot-data-browser :repo "benaiah/fsbot-data-browser" :fetcher github)

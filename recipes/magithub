@@ -1,0 +1,4 @@
+(magithub :fetcher github
+          :repo "vermiculus/magithub"
+          :files ("magithub*.el"
+                  "LICENSE"))

@@ -1,5 +1,3 @@
-
-
 ### Brief summary of what the package does
 
 [Please write an introduction of the package.]

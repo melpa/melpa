@@ -1,3 +1,2 @@
 (bar-cursor :repo "ajsquared/bar-cursor"
-            :fetcher github
-            :files ("bar-cursor.el"))
+            :fetcher github)

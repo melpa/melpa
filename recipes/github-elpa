@@ -1,0 +1,3 @@
+(github-elpa :fetcher github
+             :repo "10sr/github-elpa"
+             :files (:defaults "bin"))

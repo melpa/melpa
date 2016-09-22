@@ -1,0 +1,2 @@
+(forth-mode :fetcher github
+            :repo "larsbrinkhoff/forth-mode")

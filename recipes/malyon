@@ -1,0 +1,4 @@
+(malyon
+ :fetcher github
+ :repo "jimm/elisp"
+ :files ("malyon.el"))

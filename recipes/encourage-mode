@@ -1,0 +1,2 @@
+(encourage-mode :fetcher github
+                :repo "halbtuerke/encourage-mode.el")

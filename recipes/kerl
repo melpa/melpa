@@ -1,0 +1,2 @@
+(kerl :fetcher github
+      :repo "correl/kerl.el")

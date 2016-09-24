@@ -1,1 +1,1 @@
-(noctilux-theme :fetcher github :repo "stafu/noctilux-theme")
+(noctilux-theme :fetcher github :repo "sjrmanning/noctilux-theme")

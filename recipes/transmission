@@ -1,0 +1,1 @@
+(transmission :fetcher github :repo "holomorph/transmission")

@@ -1,1 +1,1 @@
-(sql-indent :fetcher wiki)
+(sql-indent :fetcher github :repo "bsvingen/sql-indent")

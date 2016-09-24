@@ -3,6 +3,7 @@
       :fetcher github
       :files ("alist.el"
               "apel-ver.el"
+              "apel-pkg.el"
               "broken.el"
               "calist.el"
               "emu.el"

@@ -1,1 +1,0 @@
-(org-magit :fetcher github :repo "magit/org-magit")

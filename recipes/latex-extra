@@ -1,1 +1,1 @@
-(latex-extra :repo "Bruce-Connor/latex-extra" :fetcher github)
+(latex-extra :repo "Malabarba/latex-extra" :fetcher github)

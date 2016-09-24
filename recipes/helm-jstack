@@ -1,0 +1,1 @@
+(helm-jstack :repo "raghavgautam/helm-jstack" :fetcher github)

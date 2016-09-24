@@ -1,0 +1,3 @@
+(cljr-helm
+ :repo "philjackson/cljr-helm"
+ :fetcher github)

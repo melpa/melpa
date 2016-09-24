@@ -1,1 +1,1 @@
-(peg :fetcher wiki)
+(peg :fetcher github :repo "ellerh/peg.el")

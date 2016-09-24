@@ -1,0 +1,1 @@
+(bury-successful-compilation :fetcher github :repo "EricCrosson/bury-successful-compilation")

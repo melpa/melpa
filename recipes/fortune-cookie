@@ -1,0 +1,2 @@
+(fortune-cookie :repo "andschwa/fortune-cookie" :fetcher github)
+

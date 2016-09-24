@@ -1,0 +1,2 @@
+(electric-operator :repo "davidshepherd7/electric-operator"
+                   :fetcher github)

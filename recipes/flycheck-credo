@@ -1,0 +1,1 @@
+(flycheck-credo :fetcher github :repo "aaronjensen/flycheck-credo")

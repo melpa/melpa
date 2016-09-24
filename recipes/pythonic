@@ -1,0 +1,3 @@
+(pythonic
+ :fetcher github
+ :repo "proofit404/pythonic")

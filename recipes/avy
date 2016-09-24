@@ -1,0 +1,2 @@
+(avy :repo "abo-abo/avy"
+     :fetcher github)

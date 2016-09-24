@@ -1,1 +1,1 @@
-(circe :repo "jorgenschaefer/circe" :fetcher github :files ("lisp/circe*.el"))
+(circe :repo "jorgenschaefer/circe" :fetcher github)

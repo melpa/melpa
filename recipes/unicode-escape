@@ -1,0 +1,1 @@
+(unicode-escape :fetcher github :repo "kosh04/unicode-escape.el")

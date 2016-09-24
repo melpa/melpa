@@ -1,0 +1,3 @@
+#!/bin/bash -e
+
+/usr/bin/authbind /usr/sbin/nginx -g 'error_log /dev/null crit;' -c /home/melpa/service/nginx-stable/config

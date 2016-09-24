@@ -1,4 +1,1 @@
-(with-editor :fetcher github
-             :repo "magit/magit"
-             :branch "next"
-             :files ("with-editor.el"))
+(with-editor :fetcher github :repo "magit/with-editor")

@@ -1,12 +1,8 @@
 (magit :fetcher github
        :repo "magit/magit"
-       :files ("magit.el"
-	       "magit-bisect.el"
-	       "magit-blame.el"
-	       "magit-key-mode.el"
-	       "magit-popup.el"
-	       "magit-wip.el"
-	       "magit.texi"
-	       "AUTHORS.md"
-	       "README.md"))
-
+       :files ("lisp/magit*.el"
+               "lisp/git-rebase.el"
+               "Documentation/magit.texi"
+               "Documentation/AUTHORS.md"
+               "COPYING"
+               (:exclude "lisp/magit-popup.el")))

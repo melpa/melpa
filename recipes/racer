@@ -1,0 +1,2 @@
+(racer :repo "racer-rust/emacs-racer"
+       :fetcher github)

@@ -1,0 +1,1 @@
+(redpen-paragraph :repo "karronoli/redpen-paragraph.el" :fetcher github)

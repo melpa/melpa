@@ -1,0 +1,1 @@
+(springboard :fetcher github :repo "jwiegley/springboard" :files ("springboard.el"))

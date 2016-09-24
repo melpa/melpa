@@ -1,3 +1,0 @@
-(ac-nim :fetcher github
-        :repo "reactormonk/nim-mode"
-        :files ("ac-nim.el"))

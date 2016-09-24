@@ -1,0 +1,4 @@
+(org-doing
+ :fetcher github
+ :repo "omouse/org-doing"
+ :files (:defaults "bin"))

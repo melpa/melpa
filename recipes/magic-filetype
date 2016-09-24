@@ -1,0 +1,1 @@
+(magic-filetype :fetcher github :repo "zonuexe/magic-filetype.el")

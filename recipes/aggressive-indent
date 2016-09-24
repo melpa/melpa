@@ -1,1 +1,1 @@
-(aggressive-indent :repo "Bruce-Connor/aggressive-indent-mode" :fetcher github)
+(aggressive-indent :repo "Malabarba/aggressive-indent-mode" :fetcher github)

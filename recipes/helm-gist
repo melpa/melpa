@@ -1,2 +1,0 @@
-(helm-gist :repo "emacs-helm/helm-gist"
-           :fetcher github)

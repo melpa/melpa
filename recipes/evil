@@ -1,2 +1,1 @@
-(evil :url "git://gitorious.org/evil/evil.git" :fetcher git)
-
+(evil :repo "lyro/evil" :fetcher bitbucket)

@@ -1,0 +1,1 @@
+(lentic-server :fetcher github :repo "phillord/lentic-server")

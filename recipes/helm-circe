@@ -1,0 +1,1 @@
+(helm-circe :repo "lesharris/helm-circe" :fetcher github)

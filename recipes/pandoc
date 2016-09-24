@@ -1,0 +1,2 @@
+(pandoc :repo "zonuexe/pandoc.el"
+        :fetcher github)

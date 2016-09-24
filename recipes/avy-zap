@@ -1,0 +1,2 @@
+(avy-zap :repo "cute-jumper/avy-zap"
+         :fetcher github)

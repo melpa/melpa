@@ -1,0 +1,2 @@
+(aurora-theme :repo "xzerocode/aurora-theme"
+               :fetcher github)

@@ -1,0 +1,1 @@
+(mhc :fetcher github :repo "yoshinari-nomura/mhc" :files ("emacs/mhc*.el"))

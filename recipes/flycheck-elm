@@ -1,0 +1,1 @@
+(flycheck-elm :fetcher github :repo "bsermons/flycheck-elm")

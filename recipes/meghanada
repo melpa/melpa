@@ -1,0 +1,2 @@
+(meghanada :fetcher github
+           :repo "mopemope/meghanada-emacs")

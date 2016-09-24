@@ -1,0 +1,1 @@
+(git-commit-insert-issue :fetcher gitlab :repo "emacs-stuff/git-commit-insert-issue")

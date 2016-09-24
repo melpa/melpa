@@ -1,0 +1,3 @@
+(sentence-navigation
+  :fetcher github
+  :repo "noctuid/emacs-sentence-navigation")

@@ -1,0 +1,2 @@
+(lodgeit :repo "ionrock/lodgeit-el"
+	 :fetcher github)

@@ -1,0 +1,5 @@
+(eclim
+ :fetcher github
+ :repo "emacs-eclim/emacs-eclim"
+ :files ("eclim*.el" "snippets")
+ :old-names (emacs-eclim))

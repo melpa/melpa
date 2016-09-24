@@ -1,0 +1,3 @@
+(project-persist-drawer :fetcher github
+                        :repo "rdallasgray/project-persist-drawer"
+                        :files ("lib/*"))

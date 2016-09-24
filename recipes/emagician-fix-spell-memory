@@ -1,3 +1,0 @@
-(emagician-fix-spell-memory :repo "jonnay/emagicians-starter-kit"
-                            :fetcher github
-                            :files ("emagician-fix-spell-memory.el"))

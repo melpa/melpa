@@ -1,4 +1,4 @@
 (magit-popup :fetcher github
              :repo "magit/magit"
-             :branch "next"
-             :files ("magit-popup.el"))
+             :files ("lisp/magit-popup.el"
+                     "Documentation/magit-popup.texi"))

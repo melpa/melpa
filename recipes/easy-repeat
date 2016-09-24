@@ -1,0 +1,2 @@
+(easy-repeat :repo "xuchunyang/easy-repeat.el"
+             :fetcher github)

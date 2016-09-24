@@ -1,1 +1,1 @@
-(gmail-message-mode :repo "Bruce-Connor/gmail-mode" :fetcher github)
+(gmail-message-mode :repo "Malabarba/gmail-mode" :fetcher github)

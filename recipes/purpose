@@ -1,2 +1,0 @@
-(purpose :repo "bmag/emacs-purpose"
-	 :fetcher github)

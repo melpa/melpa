@@ -1,1 +1,3 @@
-(zeitgeist :url "lp:zeitgeist-datasources" :fetcher bzr :files ("emacs/*.el"))
+(zeitgeist :fetcher git
+	   :url "git://anongit.freedesktop.org/zeitgeist/zeitgeist-datasources"
+	   :files ("emacs/*.el"))

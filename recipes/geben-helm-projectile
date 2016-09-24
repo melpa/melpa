@@ -1,0 +1,3 @@
+(geben-helm-projectile
+ :repo "ahungry/geben-helm-projectile"
+ :fetcher github)

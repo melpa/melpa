@@ -1,5 +1,3 @@
 (ess :repo "emacs-ess/ESS" :fetcher github :files
-     ("*.el" ("lisp" "lisp/*.el") ("etc" "etc/*") "doc/*.texi" "doc/info/dir"))
-
-
-
+     ("*.el" ("lisp" "lisp/*.el") (:exclude "lisp/ess-pkg.el") ("etc" "etc/*")
+      "doc/*.texi" "doc/info/dir" "lisp/ess-pkg.el"))

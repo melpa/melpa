@@ -1,0 +1,1 @@
+(ac-mozc :fetcher github :repo "igjit/ac-mozc")

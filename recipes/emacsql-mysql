@@ -1,0 +1,3 @@
+(emacsql-mysql :repo "skeeto/emacsql"
+               :fetcher github
+               :files ("emacsql-mysql.el"))

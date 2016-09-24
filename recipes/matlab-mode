@@ -1,4 +1,5 @@
 (matlab-mode
- :fetcher cvs
- :url ":pserver:anonymous@matlab-emacs.cvs.sourceforge.net:/cvsroot/matlab-emacs"
- :module "matlab-emacs")
+ :fetcher git
+ :url "git://git.code.sf.net/p/matlab-emacs/src"
+ :module "matlab-emacs"
+ :files ("*.el" "*.m" ("toolbox" "toolbox/*.m") ("templates" "templates/*.srt")))

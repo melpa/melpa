@@ -1,0 +1,1 @@
+(evil-mc :fetcher github :repo "gabesoft/evil-mc")

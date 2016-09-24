@@ -1,0 +1,1 @@
+(pushover :repo "swflint/pushover.el" :fetcher github)

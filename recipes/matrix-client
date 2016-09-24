@@ -1,0 +1,1 @@
+(matrix-client :url "http://fort.kickass.systems/git/rrix/matrix-client.git" :fetcher git)

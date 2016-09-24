@@ -1,2 +1,1 @@
-(ein-mumamo :repo "millejoh/ein-mumamo" :fetcher github
-            :files ("*.el"))
+(ein-mumamo :fetcher github :repo "millejoh/ein-mumamo")

@@ -1,0 +1,4 @@
+(jonprl-mode
+ :fetcher github
+ :repo "david-christiansen/jonprl-mode"
+ :files (:defaults "jonprl-icon.png"))

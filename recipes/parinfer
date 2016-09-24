@@ -1,0 +1,2 @@
+(parinfer :repo "DogLooksGood/parinfer-mode"
+          :fetcher github)

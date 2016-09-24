@@ -1,5 +1,5 @@
 worker_processes 4;
-pid /home/melpa/var/run/nginx2.pid;
+pid /home/melpa/var/run/nginx.pid;
 daemon off;
 
 events {

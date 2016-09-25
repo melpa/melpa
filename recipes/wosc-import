@@ -1,0 +1,2 @@
+(wosc-import :repo "wosc/import-el" :fetcher bitbucket)
+

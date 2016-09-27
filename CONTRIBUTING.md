@@ -44,6 +44,11 @@ process and expedite the recipe review process,
 * Use [flycheck-package](https://github.com/purcell/flycheck-package)
   to help you identify common errors in your package metadata.
 
+* Use *checkdoc* to make sure that your package follows the
+  conventions for documentation strings. See the official
+  [Emacs manual](https://www.gnu.org/software/emacs/manual/html_node/elisp/Documentation-Tips.html#Documentation-Tips) for
+  details.
+
 * Include the following information in the pull request:
 
     * A brief summary of what the package does.

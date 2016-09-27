@@ -18,6 +18,8 @@ New recipe submissions should adhere to the following guidelines,
 * The package name should match the name of the feature provided.  See
   the `package` function for more information.
 
+* The package should follow the conventions of [Emacs Lisp](https://www.gnu.org/software/emacs/manual/html_node/elisp/Tips.html)
+
 * Packages should adhere to the `package.el` format as specified by
   `(info "(elisp) Packaging")`. More information on this format is
   provided by the

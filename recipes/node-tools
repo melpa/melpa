@@ -1,0 +1,3 @@
+(node-tools
+ :repo "cowboyd/node-tools.el"
+ :fetcher github)

@@ -1,3 +1,2 @@
 (gobgen :fetcher github
-        :repo "gergelypolonkai/gobgen.el"
-        :files ("gobgen.el"))
+        :repo "gergelypolonkai/gobgen.el")

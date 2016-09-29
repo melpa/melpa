@@ -1,3 +1,0 @@
-(refs :repo "Wilfred/refs.el"
-      :fetcher github
-      :files (:defaults (:exclude "refs-bench.el")))

@@ -1,0 +1,6 @@
+(dkl
+ :fetcher github
+ :repo "flexibeast/dkl"
+ :files ("dkl.el"
+         "keyboards"
+         "layouts"))

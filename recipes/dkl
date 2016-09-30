@@ -1,6 +1,6 @@
 (dkl
  :fetcher github
  :repo "flexibeast/dkl"
- :files ("dkl.el"
+ :files (:defaults
          "keyboards"
          "layouts"))

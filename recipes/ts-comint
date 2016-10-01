@@ -1,0 +1,2 @@
+(ts-comint
+ :fetcher github :repo "josteink/ts-comint")

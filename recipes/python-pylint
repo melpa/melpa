@@ -1,0 +1,4 @@
+(python-pylint
+ :url "http://hg.logilab.org/pylint"
+ :fetcher hg
+ :files ("elisp/pylint.el"))

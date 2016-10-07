@@ -1,0 +1,1 @@
+(beet :repo "dgutov/beet" :fetcher github :files ("*.el" "*.rb"))

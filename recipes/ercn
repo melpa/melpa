@@ -1,3 +1,4 @@
 (ercn
  :fetcher github
- :repo "leathekd/ercn")
+ :repo "leathekd/ercn"
+ :commit "origin/stable")

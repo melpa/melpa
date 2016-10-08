@@ -1,0 +1,1 @@
+(webpaste :repo "etu/webpaste.el" :fetcher github)

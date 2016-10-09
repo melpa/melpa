@@ -44,6 +44,7 @@
 (require 'package)
 (require 'lisp-mnt)
 (require 'json)
+(require 'subr-x)
 
 (defconst package-build--melpa-base
   (file-name-directory
@@ -160,7 +161,7 @@ function for access to this function")
 
 (defun package-build--string-rtrim (str)
   "Remove trailing whitespace from `STR'."
-  (replace-regexp-in-string "[ \t\n]*$" "" str))
+  (string-trim-right str))
 
 
 (defun package-build--valid-version (str &optional regexp)

@@ -1512,7 +1512,7 @@ If FILE-NAME is not specified, the default archive-contents file is used."
           :props props)))
 
 (defun package-build--archive-alist-for-json ()
-  "Return the archive alist in a form suitable for JSON encoding."  
+  "Return the archive alist in a form suitable for JSON encoding."
   (mappend (lambda (entry)
              (list (package-build--sym-to-keyword (car entry))
                    (package-build--pkg-info-for-json (cdr entry))))

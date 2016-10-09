@@ -147,6 +147,10 @@ function for access to this function")
     (:exclude ".dir-locals.el" "test.el" "tests.el" "*-test.el" "*-tests.el"))
   "Default value for :files attribute in recipes.")
 
+(defun mappend (fn seq)
+  "Apply `FN' to the `SEQ', and append results."
+  (apply #'append (mapcar fn seq)))
+
 (defun package-build--message (format-string &rest args)
   "Log a message using FORMAT-STRING and ARGS as per `message'."
   (when package-build-verbose
@@ -701,17 +705,17 @@ Optionally PRETTY-PRINT the data."
                    (package-version-join (cadr elt))))
            (aref pkg-info 1))
         ;; Append our extra information
-        ,@(apply #'append (mapcar (lambda (entry)
-                                    (let ((value (cdr entry)))
-                                      (when (or (symbolp value) (listp value))
-                                        ;; We must quote lists and symbols,
-                                        ;; because Emacs 24.3 and earlier evaluate
-                                        ;; the package information, which would
-                                        ;; break for unquoted symbols or lists
-                                        (setq value (list 'quote value)))
-                                      (list (car entry) value)))
-                                  (when (> (length pkg-info) 4)
-                                    (aref pkg-info 4)))))
+        ,@(mappend (lambda (entry)
+                     (let ((value (cdr entry)))
+                       (when (or (symbolp value) (listp value))
+                         ;; We must quote lists and symbols,
+                         ;; because Emacs 24.3 and earlier evaluate
+                         ;; the package information, which would
+                         ;; break for unquoted symbols or lists
+                         (setq value (list 'quote value)))
+                       (list (car entry) value)))
+                   (when (> (length pkg-info) 4)
+                     (aref pkg-info 4))))
      (current-buffer))
     (princ ";; Local Variables:\n;; no-byte-compile: t\n;; End:\n" (current-buffer))))
 
@@ -1499,22 +1503,20 @@ If FILE-NAME is not specified, the default archive-contents file is used."
          (type (elt info 3))
          (props (when (> (length info) 4) (elt info 4))))
     (list :ver ver
-          :deps (apply 'append
-                       (mapcar (lambda (dep)
-                                 (list (package-build--sym-to-keyword (car dep))
-                                       (cadr dep)))
-                               deps))
+          :deps (mappend (lambda (dep)
+                           (list (package-build--sym-to-keyword (car dep))
+                                 (cadr dep)))
+                         deps)
           :desc desc
           :type type
           :props props)))
 
 (defun package-build--archive-alist-for-json ()
-  "Return the archive alist in a form suitable for JSON encoding."
-  (apply 'append
-         (mapcar (lambda (entry)
-                   (list (package-build--sym-to-keyword (car entry))
-                         (package-build--pkg-info-for-json (cdr entry))))
-                 (package-build-archive-alist))))
+  "Return the archive alist in a form suitable for JSON encoding."  
+  (mappend (lambda (entry)
+             (list (package-build--sym-to-keyword (car entry))
+                   (package-build--pkg-info-for-json (cdr entry))))
+           (package-build-archive-alist)))
 
 (defun package-build-archive-alist-as-json (file-name)
   "Dump the build packages list to FILE-NAME as json."

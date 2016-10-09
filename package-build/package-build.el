@@ -159,11 +159,6 @@ function for access to this function")
       (insert-file-contents file-name)
       (buffer-substring-no-properties (point-min) (point-max)))))
 
-(defun package-build--string-rtrim (str)
-  "Remove trailing whitespace from `STR'."
-  (string-trim-right str))
-
-
 (defun package-build--valid-version (str &optional regexp)
   "Apply to STR the REGEXP if defined, \
 then pass the string to `version-to-list' and return the result, \
@@ -459,7 +454,7 @@ A number as third arg means request confirmation if NEWNAME already exists."
 Return a cons cell whose `car' is the root and whose `cdr' is the repository."
   (apply 'cons
          (mapcar (lambda (file)
-                   (package-build--string-rtrim (package-build--slurp-file (expand-file-name file dir))))
+                   (string-trim-right (package-build--slurp-file (expand-file-name file dir))))
                  '("CVS/Root" "CVS/Repository"))))
 
 (defun package-build--checkout-cvs (name config dir)

@@ -183,7 +183,7 @@ or nil if the version cannot be parsed."
                             (match-string 3 s) " " (match-string 4 s))
                   s))))
     (concat (format-time-string "%Y%m%d." time)
-            (format "%d" (or (string-to-number (format-time-string "%H%M" time)) 0)))))
+            (format "%d" (string-to-number (format-time-string "%H%M" time))))))
 
 (defun package-build--find-parse-time (regex &optional bound)
   "Find REGEX in current buffer and format as a time-based version string, \

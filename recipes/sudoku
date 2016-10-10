@@ -1,1 +1,1 @@
-(sudoku :fetcher github :repo "zevlg/gnu-emacs-stuff" :files ("sudoku.el"))
+(sudoku :fetcher github :repo "zevlg/sudoku.el")

@@ -1,1 +1,1 @@
-(puml-mode :fetcher github :repo "skuro/puml-mode")
+(puml-mode :fetcher github :repo "skuro/plantuml-mode" :branch "puml-mode")

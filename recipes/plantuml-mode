@@ -1,2 +1,2 @@
-(plantuml-mode :repo "zwz/plantuml-mode"
-               :fetcher github)
+(plantuml-mode :fetcher github
+               :repo "skuro/plantuml-mode")

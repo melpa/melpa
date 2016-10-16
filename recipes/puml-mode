@@ -1,2 +1,0 @@
-(puml-mode :fetcher github
-           :repo "skuro/puml-mode")

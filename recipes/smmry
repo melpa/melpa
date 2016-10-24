@@ -1,0 +1,2 @@
+(smmry :fetcher github
+       :repo "microamp/smmry.el")

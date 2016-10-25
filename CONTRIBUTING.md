@@ -12,7 +12,7 @@ New recipe submissions should adhere to the following guidelines,
   repository. EmacsWiki recipes are no longer accepted.
 
 * Packages should be built from the *official* package repository.
-  Forks of the official repository will not be accepted except in
+  Forks of the official repository will only be accepted except in
   *extreme* circumstances.
 
 * The package name should match the name of the feature provided.  See

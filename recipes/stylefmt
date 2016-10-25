@@ -1,1 +1,1 @@
-(stylefmt :repo "KeenS/stylefmt.el" :fetcher github)
+(stylefmt :repo "KeenS/stylefmt.el" :fetcher github :old-names (cssfmt))

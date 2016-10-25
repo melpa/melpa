@@ -12,7 +12,7 @@ https://example.com/your/awesome_package
 
 ### Relevant communications with the upstream package maintainer
 
-[e.g., package.el compatibility changes that you have submitted. Write **None** if there is no problem.]
+[e.g., package.el compatibility changes that you have submitted. Write **None needed** if there is no problem.]
 
 ### Checklist
 

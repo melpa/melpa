@@ -1,3 +1,2 @@
-(sage-shell-mode :repo "stakemori/sage-shell-mode"
-                 :fetcher github
-                 :files ("sage-shell-mode.el" "*.py"))
+(sage-shell-mode :repo "sagemath/sage-shell-mode" :fetcher github
+                 :files (:defaults "*.py" (:exclude "*test.py")))

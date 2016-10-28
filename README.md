@@ -155,17 +155,19 @@ specifies the branch of the git repo to use. This is like `:commit`, but
 it adds the "origin/" prefix automatically.
 
 - `:version-regexp` is a regular expression for extracting a
-  version-string from the repository tags.  Version-strings must be
-  parseable by Emacs' `version-to-list` , so for an unusual tag like
-  "OTP-18.1.5", we add `:version-regexp "[^0-9]*\\(.*\\)"` to strip the
-  "OTP-" prefix.
+  version-string from the repository tags.  The default matches
+  typical version tags such as `1.0`, `R16` or `v4.3.5`, so you should
+  not override it unless necessary.  For an unusual tag like
+  "OTP-18.1.5", we might add `:version-regexp "[^0-9]*\\(.*\\)"` to
+  strip the "OTP-" prefix.  The captured portion of the regexp must be
+  parseable by Emacs' `version-to-list` function.
 
 - `:module`
 specifies the module of a CVS repository to check out.  Defaults to to
 `package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
 
 - `:files` optional property specifying the elisp and info files used to build the
-package. Please do not override this unless the default value (below) is adequate, which
+package. Please do not override this if the default value (below) is adequate, which
 it should usually be:
 
         ("*.el" "*.el.in" "dir"

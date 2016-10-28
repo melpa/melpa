@@ -1,0 +1,1 @@
+(eshell-up :fetcher github :repo "peterwvj/eshell-up")

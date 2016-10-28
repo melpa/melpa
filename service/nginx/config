@@ -1,5 +1,5 @@
 worker_processes 4;
-pid /home/melpa/var/run/nginx2.pid;
+pid /home/melpa/var/run/nginx.pid;
 daemon off;
 
 events {
@@ -21,10 +21,8 @@ http {
 	include /etc/nginx/mime.types;
 	default_type application/octet-stream;
 
-	#access_log  /home/melpa/log/melpa.access.log combined;
-	#error_log  /home/melpa/log/melpa.error.log info;
-	access_log  /home/melpa/test.melpa.access.log combined;
-	error_log  /home/melpa/test.melpa.error.log info;
+	access_log  /home/melpa/log/melpa.access.log combined;
+	error_log  /home/melpa/log/melpa.error.log info;
 
 	chunked_transfer_encoding off;
 	

@@ -1,0 +1,1 @@
+(persp-mode-fr :fetcher github :repo "rocher/persp-mode-fr")

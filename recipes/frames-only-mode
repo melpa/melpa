@@ -1,0 +1,2 @@
+(frames-only-mode :repo "davidshepherd7/frames-only-mode"
+                  :fetcher github)

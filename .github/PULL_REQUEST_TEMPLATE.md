@@ -17,4 +17,5 @@ https://example.com/your/awesome_package
 ### Checklist
 
 - [ ] I've read [CONTRIBUTING.md](https://github.com/melpa/melpa/blob/master/CONTRIBUTING.md)
+- [ ] I've used [package-lint](https://github.com/purcell/package-lint) to check for packaging issues, and addressed its feedback
 - [ ] I've built and installed the package using the instructions in the [README](https://github.com/melpa/melpa/blob/master/README.md)

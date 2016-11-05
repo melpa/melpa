@@ -41,7 +41,8 @@ Because we care about the quality of packages that are part of MELPA
 we review all submissions. The following steps can help us with this
 process and expedite the recipe review process,
 
-* Use [flycheck-package](https://github.com/purcell/flycheck-package)
+* Use [package-lint](https://github.com/purcell/package-lint)
+  and [flycheck-package](https://github.com/purcell/flycheck-package)
   to help you identify common errors in your package metadata.
 
 * Use *checkdoc* to make sure that your package follows the

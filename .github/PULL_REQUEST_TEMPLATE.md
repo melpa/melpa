@@ -1,14 +1,14 @@
 ### Brief summary of what the package does
 
-[Please write an introduction of the package.]
+[Please write a quick summary of the package.]
 
 ### Direct link to the package repository
 
-https://example.com/your/awesome_package
+https://github.com/your/awesome_package
 
 ### Your association with the package
 
-[Are you the maintainer? have you contributed? do you just like the package a lot?]
+[Are you the maintainer? A contributor? An enthusiastic user?]
 
 ### Relevant communications with the upstream package maintainer
 

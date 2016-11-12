@@ -1,0 +1,3 @@
+(whizzml-mode
+  :fetcher github
+  :repo "whizzml/whizzml-mode")

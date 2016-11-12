@@ -1,0 +1,2 @@
+(dante :repo "jyp/dante"
+       :fetcher github)

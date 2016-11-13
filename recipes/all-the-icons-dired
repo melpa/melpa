@@ -1,0 +1,3 @@
+(all-the-icons-dired
+ :repo "jtbm37/all-the-icons-dired"
+ :fetcher github)

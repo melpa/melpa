@@ -1,0 +1,3 @@
+(flycheck-scala-sbt
+ :fetcher github
+ :repo "rjmac/flycheck-scala-sbt")

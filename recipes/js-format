@@ -1,0 +1,3 @@
+(js-format :fetcher github
+           :repo "futurist/js-format.el"
+           :files ("*.js" "*.el" "*.json"))

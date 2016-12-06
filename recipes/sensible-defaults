@@ -1,0 +1,2 @@
+(sensible-defaults :repo "hrs/sensible-defaults.el"
+                   :fetcher github)

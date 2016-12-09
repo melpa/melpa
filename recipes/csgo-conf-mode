@@ -1,0 +1,2 @@
+(csgo-conf-mode :fetcher github
+                :repo "wynro/emacs-csgo-conf-mode")

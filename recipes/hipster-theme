@@ -1,2 +1,0 @@
-(hipster-theme :repo "xzerocode/hipster-theme"
-               :fetcher github)

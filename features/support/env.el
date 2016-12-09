@@ -11,7 +11,7 @@
   (setq melpa-root-path project-directory)
   (setq melpa-util-path (expand-file-name "util" melpa-root-path)))
 
-(add-to-list 'load-path melpa-root-path)
+(add-to-list 'load-path (expand-file-name "package-build" melpa-root-path))
 (add-to-list 'load-path (expand-file-name "espuds" melpa-util-path))
 
 (require 'package)

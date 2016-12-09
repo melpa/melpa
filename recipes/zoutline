@@ -1,0 +1,2 @@
+(zoutline :repo "abo-abo/zoutline"
+          :fetcher github)

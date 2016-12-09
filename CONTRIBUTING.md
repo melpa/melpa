@@ -18,6 +18,8 @@ New recipe submissions should adhere to the following guidelines,
 * The package name should match the name of the feature provided.  See
   the `package` function for more information.
 
+* The package should follow the conventions of [Emacs Lisp](https://www.gnu.org/software/emacs/manual/html_node/elisp/Tips.html)
+
 * Packages should adhere to the `package.el` format as specified by
   `(info "(elisp) Packaging")`. More information on this format is
   provided by the
@@ -39,8 +41,14 @@ Because we care about the quality of packages that are part of MELPA
 we review all submissions. The following steps can help us with this
 process and expedite the recipe review process,
 
-* Use [flycheck-package](https://github.com/purcell/flycheck-package)
+* Use [package-lint](https://github.com/purcell/package-lint)
+  and [flycheck-package](https://github.com/purcell/flycheck-package)
   to help you identify common errors in your package metadata.
+
+* Use *checkdoc* to make sure that your package follows the
+  conventions for documentation strings. See the official
+  [Emacs manual](https://www.gnu.org/software/emacs/manual/html_node/elisp/Documentation-Tips.html#Documentation-Tips) for
+  details.
 
 * Include the following information in the pull request:
 
@@ -74,8 +82,8 @@ Let `<NAME>` denote the name of the recipe to submit.
 2. Add your new file under the directory specified by
 `package-build-recipes-dir` (default: `recipes/` directory where
 `package-build` was loaded). If you prefer, the interactive command
-`package-build-create-recipe` in `package-build.el` will guide you
-through this process.
+`package-build-create-recipe` in `package-build/package-build.el` will
+guide you through this process.
 
 3. Confirm your package builds properly by running
 

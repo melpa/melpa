@@ -1,0 +1,1 @@
+(flycheck-rebar3 :repo "joedevivo/flycheck-rebar3" :fetcher github)

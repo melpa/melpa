@@ -1,0 +1,4 @@
+(po-mode
+ :fetcher git
+ :url "git://git.savannah.gnu.org/gettext.git"
+ :files ("gettext-tools/misc/po-mode.el"))

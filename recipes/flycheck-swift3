@@ -1,3 +1,1 @@
-(flycheck-swift3 :fetcher github
-                 :repo "GyazSquare/flycheck-swift3"
-                 :branch "master")
+(flycheck-swift3 :fetcher github :repo "GyazSquare/flycheck-swift3")

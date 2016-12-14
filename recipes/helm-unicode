@@ -1,2 +1,2 @@
-(helm-unicode :repo "shosti/helm-unicode"
+(helm-unicode :repo "bomgar/helm-unicode"
               :fetcher github)

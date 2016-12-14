@@ -1,0 +1,1 @@
+(nix-buffer :fetcher github :repo "shlevy/nix-buffer")

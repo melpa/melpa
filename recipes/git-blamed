@@ -1,0 +1,5 @@
+(git-blamed :repo "tsgates/git-emacs"
+            :fetcher github
+            :files ("git-blamed.el")
+	    :old-names ("git-blame"))
+

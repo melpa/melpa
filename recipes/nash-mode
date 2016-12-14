@@ -1,0 +1,3 @@
+(nash-mode
+ :repo "tiago4orion/nash-mode.el"
+ :fetcher github)

@@ -1,4 +1,5 @@
 (go-mode
  :repo "dominikh/go-mode.el"
- :fetcher github)
+ :fetcher github
+ :files ("go-mode.el"))
 

@@ -1,0 +1,1 @@
+(composer :fetcher github :repo "zonuexe/composer.el")

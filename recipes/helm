@@ -5,5 +5,5 @@
               (:exclude "helm.el"
                         "helm-lib.el"
                         "helm-source.el"
-                        "helm-match-plugin.el"
+                        "helm-multi-match.el"
                         "helm-core-pkg.el")))

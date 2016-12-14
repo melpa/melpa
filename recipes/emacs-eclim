@@ -1,4 +1,0 @@
-(emacs-eclim
- :fetcher github
- :repo "emacs-eclim/emacs-eclim"
- :files ("*.el" "snippets"))

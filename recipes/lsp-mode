@@ -1,0 +1,1 @@
+(lsp-mode :repo "vibhavp/emacs-lsp" :fetcher github :files ("*.el"))

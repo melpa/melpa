@@ -1,4 +1,2 @@
 (python-switch-quotes :fetcher github
-                      :repo "werehuman/python-switch-quotes"
-                      :files ("python-switch-quotes.el"
-                              "README.md"))
+                      :repo "werehuman/python-switch-quotes")

@@ -1,0 +1,4 @@
+(reason-mode :fetcher github
+             :repo "facebook/reason"
+             :files ("editorSupport/emacs/refmt.el"
+                     "editorSupport/emacs/reason-mode.el"))

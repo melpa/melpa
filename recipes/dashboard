@@ -1,5 +1,4 @@
 (dashboard :fetcher github
 	   :repo "rakanalh/emacs-dashboard"
 	   :files ("dashboard*.el"
-		   "banners/*.png"
-		   "banners/*.txt"))
+		   "banners"))

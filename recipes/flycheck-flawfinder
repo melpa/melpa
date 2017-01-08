@@ -1,0 +1,1 @@
+(flycheck-flawfinder :fetcher github :repo "alexmurray/flycheck-flawfinder")

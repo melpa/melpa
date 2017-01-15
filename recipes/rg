@@ -1,0 +1,3 @@
+(rg
+ :fetcher github
+ :repo "dajva/rg.el")

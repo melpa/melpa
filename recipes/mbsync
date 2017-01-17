@@ -1,0 +1,3 @@
+(mbsync :fetcher github
+                 :repo "dimitri/mbsync-el"
+                 :files ("mbsync.el"))

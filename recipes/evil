@@ -1,1 +1,1 @@
-(evil :repo "lyro/evil" :fetcher bitbucket)
+(evil :repo "emacs-evil/evil" :fetcher github)

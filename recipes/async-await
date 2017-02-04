@@ -1,1 +1,2 @@
-(async-await :repo "chuntaro/emacs-async-await" :fetcher github)
+(async-await :repo "chuntaro/emacs-async-await" :fetcher github
+             :files ("async-await.el" ("examples" "examples/async-await-examples.el")))

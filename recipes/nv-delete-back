@@ -1,0 +1,1 @@
+(nv-delete-back :fetcher github :repo "nivaca/nv-delete-back")

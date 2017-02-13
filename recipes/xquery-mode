@@ -1,1 +1,1 @@
-(xquery-mode :fetcher github :repo "mblakele/xquery-mode")
+(xquery-mode :fetcher github :repo "xquery-mode/xquery-mode")

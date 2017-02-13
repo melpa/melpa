@@ -1,0 +1,1 @@
+(flycheck-checkpatch :fetcher github :repo "zpp0/flycheck-checkpatch")

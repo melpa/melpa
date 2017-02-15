@@ -1,2 +1,0 @@
-(malabar-mode :fetcher github :repo "m0smith/malabar-mode"
-              :files ("src/main/lisp/*" "src/main/pom"))

@@ -1,0 +1,1 @@
+(eslintd-fix :fetcher github :repo "aaronjensen/eslintd-fix")

@@ -1,1 +1,3 @@
-(nv-delete-back :fetcher github :repo "nivaca/nv-delete-back")
+(nv-delete-back :fetcher github 
+  :repo "nivaca/nv-delete-back"
+  :files ("*.el" ("doc/*.md" "doc/*.gif")))

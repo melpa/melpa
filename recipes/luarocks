@@ -1,0 +1,1 @@
+(luarocks :fetcher github :repo "emacs-pe/luarocks.el")

@@ -1,0 +1,1 @@
+(ssass-mode :fetcher github :repo "AdamNiederer/ssass-mode")

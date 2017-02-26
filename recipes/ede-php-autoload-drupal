@@ -1,0 +1,2 @@
+(ede-php-autoload-drupal :fetcher github
+                         :repo "xendk/ede-php-autoload-drupal")

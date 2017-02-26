@@ -1,0 +1,1 @@
+(vue-html-mode :fetcher github :repo "AdamNiederer/vue-html-mode")

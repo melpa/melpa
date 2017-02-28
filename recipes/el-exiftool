@@ -1,0 +1,3 @@
+(el-exiftool
+ :fetcher git
+ :url "https://git.systemreboot.net/el-exiftool/")

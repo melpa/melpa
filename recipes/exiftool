@@ -1,3 +1,4 @@
 (exiftool
  :fetcher git
- :url "https://git.systemreboot.net/exiftool.el/")
+ :url "https://git.systemreboot.net/exiftool.el/"
+ :old-names (el-exiftool))

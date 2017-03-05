@@ -1,5 +1,2 @@
 (magit-lfs :fetcher github
-           :repo "ailrun/magit-lfs"
-           :files ("magit-lfs-core.el"
-                   "magit-lfs.el"
-                   "COPYING"))
+           :repo "ailrun/magit-lfs")

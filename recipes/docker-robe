@@ -1,0 +1,2 @@
+(docker-robe :repo "aki2o/emacs-docker-robe"
+             :fetcher github)

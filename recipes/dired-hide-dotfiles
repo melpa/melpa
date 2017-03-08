@@ -1,0 +1,3 @@
+(dired-hide-dotfiles :fetcher github
+                     :repo "mattiasb/dired-hide-dotfiles"
+                     :files ( :defaults ))

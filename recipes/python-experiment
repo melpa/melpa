@@ -1,0 +1,2 @@
+(python-experiment :repo "wandersoncferreira/python-experiment"
+                   :fetcher github)

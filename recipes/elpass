@@ -1,0 +1,2 @@
+(elpass :repo "storvik/elpass"
+        :fetcher github)

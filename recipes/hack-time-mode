@@ -1,0 +1,1 @@
+(cask-mode :repo "marcowahl/hack-time" :fetcher gitlab)

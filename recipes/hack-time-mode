@@ -1,1 +1,1 @@
-(cask-mode :repo "marcowahl/hack-time" :fetcher gitlab)
+(hack-time-mode :repo "marcowahl/hack-time-mode" :fetcher gitlab)

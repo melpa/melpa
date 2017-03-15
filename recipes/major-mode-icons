@@ -1,0 +1,4 @@
+(major-mode-icons :fetcher github
+                  :repo "stardiviner/major-mode-icons"
+                  :files (:defaults "icons")
+                  )

@@ -23,8 +23,8 @@ read on for details.
 * [Recipe Format](#recipe-format)
 * [Build Scripts](#build-scripts)
 * [API](#api)
+* [Mirrors](#mirrors)
 * [About](#about)
-* [Stable Packages](#melpa-stable)
 
 
 ## Usage
@@ -87,6 +87,9 @@ you prefer to only receive updates for tagged releases, use
   them. Any packages you already have installed from MELPA will never
   get "updated" to the stable version because of the way version
   numbering is handled.
+
+Note that the MELPA maintainers do not use MELPA Stable themselves,
+and do not particularly recommend its use.
 
 ## Contributing
 
@@ -152,17 +155,19 @@ specifies the branch of the git repo to use. This is like `:commit`, but
 it adds the "origin/" prefix automatically.
 
 - `:version-regexp` is a regular expression for extracting a
-  version-string from the repository tags.  Version-strings must be
-  parseable by Emacs' `version-to-list` , so for an unusual tag like
-  "OTP-18.1.5", we add `:version-regexp "[^0-9]*\\(.*\\)"` to strip the
-  "OTP-" prefix.
+  version-string from the repository tags.  The default matches
+  typical version tags such as `1.0`, `R16` or `v4.3.5`, so you should
+  not override it unless necessary.  For an unusual tag like
+  "OTP-18.1.5", we might add `:version-regexp "[^0-9]*\\(.*\\)"` to
+  strip the "OTP-" prefix.  The captured portion of the regexp must be
+  parseable by Emacs' `version-to-list` function.
 
 - `:module`
 specifies the module of a CVS repository to check out.  Defaults to to
 `package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
 
 - `:files` optional property specifying the elisp and info files used to build the
-package. Please do not override this unless the default value (below) is adequate, which
+package. Please do not override this if the default value (below) is adequate, which
 it should usually be:
 
         ("*.el" "*.el.in" "dir"
@@ -413,6 +418,23 @@ This can be configured using the `package-build-archive-dir` variable.
 
 Repositories are checked out to the `working/` directory by default.
 This can be configured using the `package-build-working-dir` variable.
+
+## Mirrors
+
+_We are not responsible for the contents of any unofficial mirror of
+our packages._
+
+Official mirrors are available (with many thanks to mirrorservice.org)
+so that if melpa.org is down, packages can still be installed.  The
+following are the HTTP/HTTPS URLs to use in `package-archives` for
+MELPA and MELPA Stable respectively:
+
+* [http://www.mirrorservice.org/sites/melpa.org/packages/](http://www.mirrorservice.org/sites/melpa.org/packages/)
+* [https://www.mirrorservice.org/sites/melpa.org/packages/](https://www.mirrorservice.org/sites/melpa.org/packages/)
+* [http://www.mirrorservice.org/sites/stable.melpa.org/packages/](http://www.mirrorservice.org/sites/stable.melpa.org/packages/)
+* [https://www.mirrorservice.org/sites/stable.melpa.org/packages/](https://www.mirrorservice.org/sites/stable.melpa.org/packages/)
+
+Only the packages are mirrored, not the web site front-end itself.
 
 ## About
 

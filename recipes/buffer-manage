@@ -1,0 +1,1 @@
+(buffer-manage :fetcher github :repo "plandes/buffer-manage")

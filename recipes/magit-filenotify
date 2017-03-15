@@ -1,1 +1,1 @@
-(magit-filenotify :fetcher github :repo "magit/magit-filenotify")
+(magit-filenotify :fetcher github :repo "ruediger/magit-filenotify")

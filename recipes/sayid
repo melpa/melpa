@@ -1,0 +1,3 @@
+(sayid :fetcher github
+       :repo "bpiel/sayid"
+       :files ("src/el/*.el"))

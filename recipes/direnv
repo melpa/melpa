@@ -1,0 +1,1 @@
+(direnv :fetcher github :repo "wbolster/emacs-direnv")

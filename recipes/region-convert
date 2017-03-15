@@ -1,0 +1,4 @@
+(region-convert
+ :repo "zonuexe/right-click-context"
+ :fetcher github
+ :files ("region-convert.el"))

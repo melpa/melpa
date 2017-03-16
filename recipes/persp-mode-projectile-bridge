@@ -1,0 +1,2 @@
+(persp-mode-projectile-bridge :repo "Bad-ptr/persp-mode-projectile-bridge.el"
+                              :fetcher github)

@@ -1,1 +1,0 @@
-(counsel-ripgrep :repo "julienXX/counsel-ripgrep" :fetcher github)

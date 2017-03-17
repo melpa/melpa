@@ -1,0 +1,3 @@
+(easy-hugo
+ :repo "masasam/emacs-easy-hugo"
+ :fetcher github)

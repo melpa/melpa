@@ -1,0 +1,2 @@
+(helm-sql-connect :repo "eric-hansen/helm-sql-connect"
+                  :fetcher github)

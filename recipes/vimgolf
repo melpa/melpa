@@ -1,2 +1,2 @@
-(vimgolf :repo "timvisher/vimgolf" :fetcher github :files ("emacs/vimgolf.el"))
+(vimgolf :repo "timvisher/vimgolf" :fetcher github :files ("vimgolf.el"))
 

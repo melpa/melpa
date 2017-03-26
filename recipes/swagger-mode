@@ -1,0 +1,3 @@
+(swagger-mode
+ :repo "Nooby/swagger-mode"
+ :fetcher github)

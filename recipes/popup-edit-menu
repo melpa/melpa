@@ -1,0 +1,1 @@
+(popup-edit-menu :repo "debugfan/popup-edit-menu" :fetcher github)

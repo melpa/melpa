@@ -109,7 +109,9 @@ sandbox: packages/archive-contents
 		--eval "(add-to-list 'package-archives '(\"melpa\" . \"https://melpa.org/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"sandbox\" . \"$(shell pwd)/$(PKGDIR)/\") t)" \
 		--eval "(package-refresh-contents)" \
-		--eval "(package-initialize)"
+		--eval "(package-initialize)" \
+		--eval '(setq sandbox-install-package "$(INSTALL)")' \
+		--eval "(unless (string= \"\" sandbox-install-package) (package-install (intern sandbox-install-package)))"
 
 .PHONY: clean build index html json sandbox
 .FORCE:

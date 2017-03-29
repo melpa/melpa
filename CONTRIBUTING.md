@@ -112,11 +112,12 @@ packages will be available for installation along with those already
 in MELPA:
 
 ```
-EMACS_COMMAND=/path/to/emacs make sandbox
+EMACS_COMMAND=/path/to/emacs make sandbox INSTALL=package-name
 ```
 
-then `M-x package-list-packages`, install and test as
-appropriate. This is a useful way to discover missing dependencies!
+where `package-name` is the name of the package you want to install
+into the sandbox, then install and test as appropriate. This is a
+useful way to discover missing dependencies!
 
 ## Submitting
 

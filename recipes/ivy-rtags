@@ -1,0 +1,3 @@
+(ivy-rtags :repo "Andersbakken/rtags"
+           :fetcher github
+           :files ("src/ivy-rtags.el"))

@@ -1,4 +1,3 @@
 (rtags :repo "Andersbakken/rtags"
        :fetcher github
-       :files ("src/*.el"
-               (:exclude "src/compile-shim.el")))
+       :files ("src/rtags.el"))

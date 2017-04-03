@@ -1,0 +1,1 @@
+(meson-mode :fetcher github :repo "wentasah/meson-mode")

@@ -1,0 +1,3 @@
+(flycheck-rtags :repo "Andersbakken/rtags"
+                :fetcher github
+                :files ("src/flycheck-rtags.el"))

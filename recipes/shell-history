@@ -1,1 +1,1 @@
-(shell-history :fetcher wiki)
+(shell-history :fetcher github :repo "emacsorphanage/shell-history")

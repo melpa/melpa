@@ -1,1 +1,1 @@
-(dirtree :fetcher wiki)
+(dirtree :fetcher github :repo "emacsorphanage/dirtree")

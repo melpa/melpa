@@ -1,1 +1,1 @@
-(look-mode :fetcher wiki)
+(look-mode :fetcher github :repo "emacsorphanage/look-mode")

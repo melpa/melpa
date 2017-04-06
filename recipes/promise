@@ -1,0 +1,1 @@
+(promise :repo "chuntaro/emacs-promise" :fetcher github)

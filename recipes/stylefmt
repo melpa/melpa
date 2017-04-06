@@ -1,0 +1,1 @@
+(stylefmt :repo "KeenS/stylefmt.el" :fetcher github :old-names (cssfmt))

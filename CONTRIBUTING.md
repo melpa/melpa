@@ -41,7 +41,8 @@ Because we care about the quality of packages that are part of MELPA
 we review all submissions. The following steps can help us with this
 process and expedite the recipe review process,
 
-* Use [flycheck-package](https://github.com/purcell/flycheck-package)
+* Use [package-lint](https://github.com/purcell/package-lint)
+  and [flycheck-package](https://github.com/purcell/flycheck-package)
   to help you identify common errors in your package metadata.
 
 * Use *checkdoc* to make sure that your package follows the
@@ -111,11 +112,12 @@ packages will be available for installation along with those already
 in MELPA:
 
 ```
-EMACS_COMMAND=/path/to/emacs make sandbox
+EMACS_COMMAND=/path/to/emacs make sandbox INSTALL=package-name
 ```
 
-then `M-x package-list-packages`, install and test as
-appropriate. This is a useful way to discover missing dependencies!
+where `package-name` is the name of the package you want to install
+into the sandbox, then install and test as appropriate. This is a
+useful way to discover missing dependencies!
 
 ## Submitting
 

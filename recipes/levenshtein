@@ -1,1 +1,1 @@
-(levenshtein :fetcher wiki)
+(levenshtein :fetcher github :repo "emacsorphanage/levenshtein")

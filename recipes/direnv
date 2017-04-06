@@ -1,1 +1,1 @@
-(direnv :fetcher github :repo "jml/direnv-el")
+(direnv :fetcher github :repo "wbolster/emacs-direnv")

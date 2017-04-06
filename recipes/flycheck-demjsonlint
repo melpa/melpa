@@ -1,0 +1,3 @@
+(flycheck-demjsonlint :repo "z4139jq/flycheck-demjsonlint"
+                      :fetcher github
+                      :files (:defaults "demjsonlint" ".demjsonrc"))

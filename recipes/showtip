@@ -1,1 +1,1 @@
-(showtip :fetcher wiki)
+(showtip :fetcher github :repo "emacsorphanage/showtip")

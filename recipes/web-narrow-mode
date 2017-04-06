@@ -1,0 +1,1 @@
+(web-narrow-mode :repo "Qquanwei/web-narrow-mode" :fetcher github :url "https://github.com/Qquanwei/web-narrow-mode" :files ("*.el"))

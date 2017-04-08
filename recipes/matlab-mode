@@ -1,5 +1,5 @@
 (matlab-mode
  :fetcher git
- :url "git://git.code.sf.net/p/matlab-emacs/src"
+ :url "https://git.code.sf.net/p/matlab-emacs/src"
  :module "matlab-emacs"
  :files ("*.el" "*.m" ("toolbox" "toolbox/*.m") ("templates" "templates/*.srt")))

@@ -1,0 +1,3 @@
+(kubernetes-evil :repo "chrisbarrett/kubernetes-el"
+                 :fetcher github
+                 :files ("kubernetes-evil.el"))

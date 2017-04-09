@@ -1,0 +1,1 @@
+(waf-mode :fetcher git :url "https://bitbucket.org/dvalchuk/waf-mode")

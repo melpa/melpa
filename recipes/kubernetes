@@ -1,1 +1,5 @@
-(kubernetes :repo "chrisbarrett/kubernetes-el" :fetcher github)
+(kubernetes :repo "chrisbarrett/kubernetes-el"
+            :fetcher github
+            :files
+            (:defaults
+             (:exclude "kubernetes-evil.el")))

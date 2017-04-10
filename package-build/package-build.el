@@ -405,13 +405,14 @@ A number as third arg means request confirmation if NEWNAME already exists."
         (package-build--princ-checkout repo dir)
         (package-build--run-process nil "darcs" "get" repo dir)))
       (if package-build-stable
-          (let ((tag-version
-                 (and (package-build--run-process dir "darcs" "show" "tags")
-                      (or (package-build--find-version-newest
-                           (or (plist-get config :version-regexp)
-                               package-build-version-regexp)
-                           (goto-char (point-max)))
-                          (error "No valid stable versions found for %s" name)))))
+          (let* ((min-bound (goto-char (point-max)))
+                 (tag-version
+                  (and (package-build--run-process dir "darcs" "show" "tags")
+                       (or (package-build--find-version-newest
+                            (or (plist-get config :version-regexp)
+                                package-build-version-regexp)
+                            min-bound)
+                           (error "No valid stable versions found for %s" name)))))
             (package-build--run-process dir "darcs" "obliterate"
                                         "--all" "--from-tag"
                                         (cadr tag-version))
@@ -603,13 +604,14 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (package-build--princ-checkout repo dir)
         (package-build--run-process nil "git" "clone" repo dir)))
       (if package-build-stable
-          (let ((tag-version
-                 (and (package-build--run-process dir "git" "tag")
-                      (or (package-build--find-version-newest
-                           (or (plist-get config :version-regexp)
-                               package-build-version-regexp)
-                           (goto-char (point-max)))
-                          (error "No valid stable versions found for %s" name)))))
+          (let* ((min-bound (goto-char (point-max)))
+                 (tag-version
+                  (and (package-build--run-process dir "git" "tag")
+                       (or (package-build--find-version-newest
+                            (or (plist-get config :version-regexp)
+                                package-build-version-regexp)
+                            min-bound)
+                           (error "No valid stable versions found for %s" name)))))
             ;; Using reset --hard here to comply with what's used for
             ;; unstable, but maybe this should be a checkout?
             (package-build--update-git-to-ref
@@ -718,7 +720,7 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (package-build--princ-checkout repo dir)
         (package-build--run-process nil "hg" "clone" repo dir)))
       (if package-build-stable
-          (let ((bound (goto-char (point-max)))
+          (let ((min-bound (goto-char (point-max)))
                 (regexp (or (plist-get config :version-regexp)
                             package-build-version-regexp))
                 tag-version)
@@ -735,11 +737,11 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
             ;; colon in "1691:464af57fd2b7" means that won't be parsed
             ;; as a valid version-string, but it's an example of how to
             ;; do it in case it's necessary elsewhere.
-            (goto-char bound)
+            (goto-char min-bound)
             (ignore-errors (while (re-search-forward "\\ +.*")
                              (replace-match "")))
             (setq tag-version
-                  (or (package-build--find-version-newest regexp bound)
+                  (or (package-build--find-version-newest regexp min-bound)
                       (error "No valid stable versions found for %s" name)))
             (package-build--run-process dir "hg" "update" (cadr tag-version))
             ;; Return the parsed version as a string

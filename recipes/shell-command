@@ -1,1 +1,1 @@
-(shell-command :fetcher wiki)
+(shell-command :fetcher github :repo "emacsorphanage/shell-command")

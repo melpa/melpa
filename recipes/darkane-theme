@@ -1,0 +1,3 @@
+(darkane-theme
+ :repo "FelixFortis/emacs-darkane-theme"
+ :fetcher github)

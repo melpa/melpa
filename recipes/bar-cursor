@@ -1,0 +1,2 @@
+(bar-cursor :repo "ajsquared/bar-cursor"
+:fetcher github)

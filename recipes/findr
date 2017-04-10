@@ -1,2 +1,2 @@
-(findr :fetcher wiki)
+(findr :fetcher github :repo "emacsorphanage/findr")
 

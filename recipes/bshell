@@ -1,0 +1,1 @@
+(bshell :fetcher github :repo "plandes/bshell")

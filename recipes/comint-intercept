@@ -1,0 +1,1 @@
+(comint-intercept :repo "hying-caritas/comint-intercept" :fetcher github)

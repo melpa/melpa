@@ -1,0 +1,1 @@
+(flycheck-swift :repo "swift-emacs/flycheck-swift" :fetcher github)

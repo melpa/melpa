@@ -1,1 +1,1 @@
-(evil-magit :repo "justbur/evil-magit" :fetcher github)
+(evil-magit :repo "emacs-evil/evil-magit" :fetcher github)

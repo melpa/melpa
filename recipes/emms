@@ -1,4 +1,4 @@
 (emms
- :url "git://git.sv.gnu.org/emms.git"
+ :url "https://git.savannah.gnu.org/git/emms.git"
  :fetcher git
  :files ("lisp/*.el" "doc/emms.texinfo"))

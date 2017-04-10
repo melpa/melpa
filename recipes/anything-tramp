@@ -1,0 +1,3 @@
+(anything-tramp
+ :repo "masasam/emacs-anything-tramp"
+ :fetcher github)

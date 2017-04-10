@@ -18,6 +18,8 @@
 /process_log.pid
 /recipes/.dirstamp
 /sandbox
+/service/caddy/.caddy
 /service/*/supervise
+/service/*/log
 /sync
 /working/*

@@ -1,0 +1,1 @@
+(helm-bbdb :repo "emacs-helm/helm-bbdb" :fetcher github)

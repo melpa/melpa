@@ -1,0 +1,4 @@
+(opener
+  :fetcher github
+  :repo "0robustus1/opener.el"
+  :files ("opener.el" "opener.texi"))

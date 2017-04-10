@@ -1,1 +1,1 @@
-(rotate :fetcher github :repo "daic-h/emacs-rotate")
+(rotate :fetcher github :repo "daichirata/emacs-rotate")

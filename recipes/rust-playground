@@ -1,0 +1,1 @@
+(rust-playground :repo "grafov/rust-playground" :fetcher github)

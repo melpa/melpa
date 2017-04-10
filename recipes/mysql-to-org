@@ -1,0 +1,2 @@
+(mysql-to-org :fetcher github
+              :repo "mallt/mysql-to-org-mode")

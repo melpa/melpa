@@ -1,1 +1,1 @@
-(salt-mode :repo "beardedprojamz/salt-mode" :fetcher github)
+(salt-mode :repo "glynnforrest/salt-mode" :fetcher github)

@@ -1,0 +1,3 @@
+(flycheck-liquidhs
+ :fetcher github
+ :repo "ucsd-progsys/flycheck-liquidhs.el")

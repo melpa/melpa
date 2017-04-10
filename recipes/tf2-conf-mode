@@ -1,0 +1,2 @@
+(tf2-conf-mode :fetcher github
+               :repo "wynro/emacs-tf2-conf-mode")

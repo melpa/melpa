@@ -1,0 +1,1 @@
+(blackboard-bold-mode :repo "grettke/blackboard-bold-mode" :fetcher github)

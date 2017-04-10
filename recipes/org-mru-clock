@@ -1,0 +1,2 @@
+(org-mru-clock :fetcher github
+               :repo "unhammer/org-mru-clock")

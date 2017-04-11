@@ -1,0 +1,5 @@
+(sourcetrail
+ :repo "CoatiSoftware/emacs-sourcetrail"
+ :fetcher github
+ :old-names (coati))
+

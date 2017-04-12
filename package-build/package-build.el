@@ -171,6 +171,12 @@ Otherwise do nothing."
   "Remove trailing whitespace from `STR'."
   (replace-regexp-in-string "[ \t\n\r]+$" "" str))
 
+(defun package-build--trim (str &optional chr)
+  "Return a copy of STR without any trailing CHR (or space if unspecified)."
+  (if (equal (elt str (1- (length str))) (or chr ? ))
+      (substring str 0 (1- (length str)))
+    str))
+
 ;;; Version Handling
 
 (defun package-build--valid-version (str &optional regexp)
@@ -257,8 +263,8 @@ position.  The match found must not before after that position."
   "In DIR (or `default-directory' if unset) run COMMAND with ARGS.
 Output is written to the current buffer."
   (let ((default-directory (file-name-as-directory (or dir default-directory)))
-        (argv (nconc (and (eq system-type 'windows-nt)
-                          (list "env" "LC_ALL=C"))
+        (argv (nconc (unless (eq system-type 'windows-nt)
+                       (list "env" "LC_ALL=C"))
                      (if package-build-timeout-executable
                          (nconc (list package-build-timeout-executable
                                       "-k" "60" (number-to-string
@@ -294,15 +300,22 @@ choose a source-specific fetcher function, which it calls with
 the same arguments.
 
 Returns the package version as a string."
-  (let ((repo-type (plist-get config :fetcher)))
-    (package-build--message "Fetcher: %s" (symbol-name repo-type))
-    (unless (eq 'wiki repo-type)
+  (let ((fetcher (plist-get config :fetcher)))
+    (package-build--message "Fetcher: %s" fetcher)
+    (unless (eq fetcher 'wiki)
       (package-build--message "Source: %s\n"
                               (or (plist-get config :repo)
                                   (plist-get config :url))))
-    (funcall (intern (format "package-build--checkout-%s"
-                             (symbol-name repo-type)))
+    (funcall (intern (format "package-build--checkout-%s" fetcher))
              package-name config (file-name-as-directory working-dir))))
+
+(defun package-build--princ-exists (dir)
+  "Print a message that the contents of DIR will be updated."
+  (package-build--message "Updating %s" dir))
+
+(defun package-build--princ-checkout (repo dir)
+  "Print a message that REPO will be checked out into DIR."
+  (package-build--message "Cloning %s to %s" repo dir))
 
 ;;;; Wiki
 
@@ -462,20 +475,6 @@ A number as third arg means request confirmation if NEWNAME already exists."
   "Get the current svn repo for DIR."
   (package-build--run-process-match "URL: \\(.*\\)" dir "svn" "info"))
 
-(defun package-build--trim (str &optional chr)
-  "Return a copy of STR without any trailing CHR (or space if unspecified)."
-  (if (equal (elt str (1- (length str))) (or chr ? ))
-      (substring str 0 (1- (length str)))
-    str))
-
-(defun package-build--princ-exists (dir)
-  "Print a message that the contents of DIR will be updated."
-  (package-build--message "Updating %s" dir))
-
-(defun package-build--princ-checkout (repo dir)
-  "Print a message that REPO will be checked out into DIR."
-  (package-build--message "Cloning %s to %s" repo dir))
-
 (defun package-build--checkout-svn (name config dir)
   "Check package NAME with config CONFIG out of svn into DIR."
   (unless package-build-stable
@@ -577,13 +576,6 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
   (package-build--run-process-match
    "Fetch URL: \\(.*\\)" dir "git" "remote" "show" "-n" "origin"))
 
-(defun package-build--git-head-branch (dir)
-  "Get the current git repo for DIR."
-  (or (ignore-errors
-        (package-build--run-process-match
-         "HEAD branch: \\(.*\\)" dir "git" "remote" "show" "origin"))
-      "master"))
-
 (defun package-build--checkout-git (name config dir)
   "Check package NAME with config CONFIG out of git into DIR."
   (let ((repo (plist-get config :url))
@@ -626,6 +618,13 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
         (package-build--find-parse-time "\
 \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} \
 [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)")))))
+
+(defun package-build--git-head-branch (dir)
+  "Get the current git repo for DIR."
+  (or (ignore-errors
+        (package-build--run-process-match
+         "HEAD branch: \\(.*\\)" dir "git" "remote" "show" "origin"))
+      "master"))
 
 (defun package-build--update-git-to-ref (dir ref)
   "Update the git repo in DIR so that HEAD is REF."
@@ -1249,7 +1248,7 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
   (interactive (list (package-build--package-name-completing-read)))
   (let* ((file-name (symbol-name name))
          (rcp (or (cdr (assoc name (package-build-recipe-alist)))
-                  (error "Cannot find package %s" (symbol-name name))))
+                  (error "Cannot find package %s" name)))
          (pkg-working-dir
           (file-name-as-directory
            (expand-file-name file-name package-build-working-dir))))
@@ -1258,15 +1257,15 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
       (package-build--message "Creating directory %s" package-build-archive-dir)
       (make-directory package-build-archive-dir))
 
-    (package-build--message "\n;;; %s\n" file-name)
+    (package-build--message "\n;;; %s\n" name)
     (let* ((version (package-build-checkout name rcp pkg-working-dir))
            (default-directory package-build-working-dir)
            (start-time (current-time)))
-      (if (package-build--up-to-date-p (symbol-name name) version)
+      (if (package-build--up-to-date-p file-name version)
           (package-build--message "Package %s is up to date - skipping." name)
         (progn
           (let ((archive-entry (package-build-package
-                                (symbol-name name)
+                                file-name
                                 version
                                 (package-build--config-file-list rcp)
                                 pkg-working-dir
@@ -1275,7 +1274,7 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
                                  (package-build--entry-file-name archive-entry)))
           (when package-build-write-melpa-badge-images
             (package-build--write-melpa-badge-image
-             (symbol-name name)
+             file-name
              version package-build-archive-dir))
           (package-build--message "Built %s in %.3fs, finished at %s"
                                   name
@@ -1409,7 +1408,7 @@ Returns the archive entry for the package."
     (if (not failed)
         (princ "\nSuccessfully Compiled All Packages\n")
       (princ "\nFailed to Build the Following Packages\n")
-      (princ (mapconcat 'symbol-name failed "\n"))
+      (princ (mapconcat #'symbol-name failed "\n"))
       (princ "\n")))
   (package-build-cleanup))
 
@@ -1560,9 +1559,9 @@ If FILE-NAME is not specified, the default archive-contents file is used."
   (with-temp-file file
     (insert (json-encode (package-build-recipe-alist)))))
 
-(defun package-build--sym-to-keyword (s)
-  "Return a version of symbol S as a :keyword."
-  (intern (concat ":" (symbol-name s))))
+(defun package-build--sym-to-keyword (symbol)
+  "Return a version of SYMBOL as a keyword."
+  (intern (format ":%s" symbol)))
 
 (defun package-build--pkg-info-for-json (info)
   "Convert INFO into a data structure which will serialize to JSON in the desired shape."

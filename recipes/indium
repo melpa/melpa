@@ -1,0 +1,1 @@
+(indium :fetcher github :repo "NicolasPetton/indium" :old-names (jade))

@@ -1,1 +1,1 @@
-(indium :fetcher github :repo "NicolasPetton/indium" :old-names (jade))
+(indium :fetcher github :repo "NicolasPetton/Indium" :old-names (jade))

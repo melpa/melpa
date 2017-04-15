@@ -1,2 +1,3 @@
-(solarized-theme :repo "bbatsov/solarized-emacs" :fetcher github)
-
+(solarized-theme :repo "bbatsov/solarized-emacs"
+                 :fetcher github
+                 :files (*.el (:exclude "solarized-theme-utils.el")))

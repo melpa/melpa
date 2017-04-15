@@ -1,0 +1,1 @@
+(emacs-linphone :fetcher github :repo "zabbal/emacs-linphone")

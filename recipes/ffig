@@ -1,0 +1,1 @@
+(ffig :repo "pteichman/ffig" :fetcher github)

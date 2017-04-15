@@ -1,0 +1,1 @@
+(oz :fetcher git :url "git://github.com/mozart/mozart.git" :files ("share/elisp/*.el" "share/elisp/*.in"))

@@ -1,0 +1,2 @@
+(pkb :fetcher wiki
+     :url "http://www.emacswiki.org/emacs/download/pkb-0.2.el")

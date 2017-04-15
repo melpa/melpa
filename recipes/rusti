@@ -1,0 +1,1 @@
+(rusti :fetcher github :repo "ruediger/rusti.el")

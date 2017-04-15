@@ -1,0 +1,2 @@
+(zephyros-theme :fetcher github
+                :repo "milkypostman/zephyros-theme.el")

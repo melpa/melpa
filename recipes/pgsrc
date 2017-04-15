@@ -1,0 +1,1 @@
+(pgsrc :fetcher github :repo "dimitri/pgsrc-el")

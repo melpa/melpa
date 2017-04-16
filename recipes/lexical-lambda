@@ -1,0 +1,1 @@
+(lexical-lambda :fetcher github :repo "joelmccracken/lexical-lambda.el" :files ("lexical-lambda.el"))

@@ -1,0 +1,3 @@
+(haskell-highlight-indentation
+ :repo "nilninull/haskell-highlight-indentation"
+ :fetcher github)

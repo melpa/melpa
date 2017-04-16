@@ -1,0 +1,1 @@
+(evil-tmux-navigator :repo "Keithbsmiley/evil-tmux-navigator" :fetcher github)

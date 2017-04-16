@@ -1,2 +1,4 @@
 (avy :repo "abo-abo/avy"
-     :fetcher github)
+     :fetcher github
+     :files ("*.el" (:exclude
+                     "avy-init.el" ".dir-locals.el" "*-test.el")))

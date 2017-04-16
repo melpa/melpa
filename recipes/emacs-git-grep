@@ -1,0 +1,3 @@
+(emacs-git-grep
+ :fetcher github
+ :repo "ganmacs/emacs-git-grep")

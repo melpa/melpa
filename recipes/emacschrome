@@ -1,0 +1,1 @@
+(emacs_chrome :fetcher github :repo "stsquad/emacs_chrome")

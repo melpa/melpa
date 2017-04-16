@@ -1,0 +1,4 @@
+(lilypond-mode
+ :fetcher git
+ :url "git://git.savannah.gnu.org/lilypond.git"
+ :files ("elisp/*.el"))

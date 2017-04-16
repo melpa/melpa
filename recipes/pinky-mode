@@ -1,0 +1,3 @@
+(pinky-mode :repo "jayconrod/pinky-mode"
+            :fetcher github
+            :files ("pinky-mode.el"))

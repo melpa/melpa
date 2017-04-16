@@ -1,0 +1,1 @@
+(hidden-mode-line :fetcher github :repo "EricCrosson/hidden-mode-line")

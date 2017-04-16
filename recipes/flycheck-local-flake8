@@ -1,0 +1,1 @@
+(flycheck-local-flake8 :repo "rmuslimov/flycheck-local-flake8" :fetcher github)

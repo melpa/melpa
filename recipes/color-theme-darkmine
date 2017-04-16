@@ -1,0 +1,4 @@
+(color-theme-darkmine
+ :repo "pierre-lecocq/color-theme-darkmine"
+ :fetcher github)
+

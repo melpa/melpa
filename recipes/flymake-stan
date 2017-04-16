@@ -1,0 +1,4 @@
+(flymake-stan
+ :fetcher github
+ :repo "stan-dev/stan-mode"
+ :files ("flymake-stan.el"))

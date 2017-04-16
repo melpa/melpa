@@ -1,0 +1,3 @@
+(bury-successful-compilation-buffer-mode
+ :repo "EricCrosson/bury-successful-compilation-buffer-mode"
+ :fetcher github)

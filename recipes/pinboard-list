@@ -1,0 +1,3 @@
+(pinboard-list
+ :fetcher github
+ :repo "joddie/pinboard-list.el")

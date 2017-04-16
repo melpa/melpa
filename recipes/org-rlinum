@@ -1,0 +1,2 @@
+(org-rlinum :repo "oahziur/org-rlinum"
+            :fetcher github)

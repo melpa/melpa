@@ -1,0 +1,2 @@
+(tasks :repo "joca-bt/emacs-tasks"
+       :fetcher github)

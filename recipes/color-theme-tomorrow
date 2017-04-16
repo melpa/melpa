@@ -1,0 +1,4 @@
+(color-theme-tomorrow
+ :url "https://github.com/ccharles/Tomorrow-Theme.git"
+ :fetcher git
+ :files ("GNU Emacs/*.el"))

@@ -1,0 +1,6 @@
+(skk
+ :url ":pserver:guest:guest@openlab.jp:/circus/cvsroot"
+ :module "skk/main"
+ :fetcher cvs
+ :files ("ccc.el" "context-skk.el" "queue-m.el" "skk*.el"
+         (:exclude "skk-xemacs.el")))

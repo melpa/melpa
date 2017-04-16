@@ -1,0 +1,1 @@
+(helm-perso-wiki :repo "csantosb/helm-perso-wiki" :fetcher github)

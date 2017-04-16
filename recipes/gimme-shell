@@ -1,0 +1,4 @@
+(gimme-shell
+ :repo "etherald/gimme-shell"
+ :fetcher github
+ :files ("gimme-shell.el"))

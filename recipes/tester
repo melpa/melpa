@@ -1,0 +1,2 @@
+(tester :fetcher github
+        :repo "tonini/tester.el")

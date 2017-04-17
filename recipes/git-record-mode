@@ -1,0 +1,1 @@
+(git-record-mode :fetcher github :repo "alakra/git-record-mode")

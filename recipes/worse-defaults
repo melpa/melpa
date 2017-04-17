@@ -1,0 +1,2 @@
+(worse-defaults :fetcher github :repo "hydandata/worse-defaults")
+

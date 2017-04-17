@@ -1,1 +1,1 @@
-(state :fetcher github :repo "thisirs/state")
+(state :fetcher github :repo "thisirs/state" :files ("state.el"))

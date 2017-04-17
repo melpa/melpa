@@ -1,0 +1,2 @@
+(avk-themes :fetcher hg
+            :url "https://avkoval@bitbucket.org/avkoval/avk-emacs-themes")

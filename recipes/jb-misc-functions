@@ -1,0 +1,4 @@
+(jb-misc-functions
+ :repo "vapniks/jb-misc-functions"
+ :fetcher github
+)

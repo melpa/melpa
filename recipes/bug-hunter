@@ -1,0 +1,1 @@
+(bug-hunter :fetcher github :repo "Malabarba/elisp-bug-hunter")

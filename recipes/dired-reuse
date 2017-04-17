@@ -1,0 +1,1 @@
+(dired-reuse :fetcher github :repo "crocket/dired-reuse")

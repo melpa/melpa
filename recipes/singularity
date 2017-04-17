@@ -1,0 +1,5 @@
+(singularity
+   :fetcher github
+   :repo "chillaranand/singularity"
+   :files ("singularity"))
+

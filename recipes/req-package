@@ -1,3 +1,4 @@
 (req-package
     :fetcher github
+    :branch "master"
     :repo "edvorg/req-package")

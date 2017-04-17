@@ -303,7 +303,10 @@
       m("p", [
         m("input.form-control[type=search]", {
           placeholder: "Enter filter terms", autofocus: true,
-          value: ctrl.filterTerms(), onkeyup: m.withAttr("value", ctrl.filterTerms)
+          value: ctrl.filterTerms(), onkeyup: m.withAttr("value", function(value) {
+            ctrl.filterTerms(value);
+            ctrl.paginatorCtrl.pageNumber(1);
+          })
         }),
         " ",
         m("span.help-block", [ctrl.matchingPackages().length, " matching package(s)"])

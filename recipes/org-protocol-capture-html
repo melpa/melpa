@@ -1,0 +1,5 @@
+(org-protocol-capture-html
+ :fetcher github
+ :repo "alphapapa/org-protocol-capture-html"
+ :files ("org-protocol-capture-html.el"
+         "org-protocol-capture-html.sh"))

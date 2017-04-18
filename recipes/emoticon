@@ -1,0 +1,2 @@
+(emoticon :repo "TsubasaWp/Emoticon"
+            :fetcher github)

@@ -1,0 +1,4 @@
+(elisp-fmt
+ :fetcher git
+ :url "https://gitlab.com/fommil/elisp-fmt.git"
+ :files ("*.el" "bin"))

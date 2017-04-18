@@ -1,0 +1,5 @@
+--- all-ext
++++ all-ext
+@@ -1 +1 @@
+-(all-ext :fetcher wiki)
++(all-ext :repo "rubikitch/all-ext" :fetcher github)

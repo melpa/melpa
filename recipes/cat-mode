@@ -1,0 +1,1 @@
+(cat-mode :fetcher github :repo "ad1217/emacs-cat-mode")

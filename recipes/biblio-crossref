@@ -1,0 +1,4 @@
+(biblio-crossref
+ :repo "cpitclaudel/biblio.el"
+ :fetcher github
+ :files ("biblio-crossref.el"))

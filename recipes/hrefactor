@@ -1,0 +1,1 @@
+(hrefactor :fetcher github :repo "tonyday567/hrefactor" :files ("elisp/*.el"))

@@ -1,0 +1,3 @@
+(highlight-fixme
+ :fetcher bitbucket
+ :repo "jpkotta/highlight-fixme")

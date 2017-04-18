@@ -1,0 +1,3 @@
+(ghost-mode :repo "javaguirre/ghost-mode"
+            :fetcher github
+            :files ("ghost-mode.el"))

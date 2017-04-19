@@ -1,0 +1,1 @@
+(nixops-tramp :fetcher github :repo "tathougies/nixops-tramp.el")

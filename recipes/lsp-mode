@@ -1,1 +1,1 @@
-(lsp-mode :repo "vibhavp/emacs-lsp" :fetcher github)
+(lsp-mode :repo "emacs-lsp/lsp-mode" :fetcher github)

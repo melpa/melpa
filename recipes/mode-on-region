@@ -1,0 +1,1 @@
+(mode-on-region :repo "miketz/mor" :fetcher github)

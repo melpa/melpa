@@ -1,0 +1,6 @@
+(org-ref-core :fetcher github
+	      :repo "jkitchin/org-ref"
+	      :files (:defaults
+		      "org-ref.org" "org-ref.bib" "citeproc"
+		      (:exclude "org-ref-ivy*.el" "org-ref-helm*.el")))
+

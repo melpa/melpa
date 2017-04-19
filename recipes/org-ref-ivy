@@ -1,0 +1,3 @@
+(org-ref-ivy :fetcher github
+             :repo "jkitchin/org-ref"
+             :files ("org-ref-ivy*.el"))

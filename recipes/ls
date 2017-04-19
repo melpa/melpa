@@ -1,0 +1,1 @@
+(ls :fetcher github :repo "troyp/ls.el" :files ("ls.el"))

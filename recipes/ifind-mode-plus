@@ -1,0 +1,1 @@
+(ifind-mode-plus :repo "djangoliv/ifind-mode-plus" :fetcher github)

@@ -1,0 +1,2 @@
+(pdf-tools-org :fetcher github
+               :repo "machc/pdf-tools-org")

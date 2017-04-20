@@ -1,0 +1,4 @@
+(sclang :fetcher github
+        :repo "supercollider/supercollider"
+        :files ("editors/scel/el/*.el"
+                "sc"))

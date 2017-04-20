@@ -1,0 +1,1 @@
+(virtual-desktops :fetcher github :repo "chep/virtual-desktops.el")

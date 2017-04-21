@@ -1,4 +1,5 @@
 (htmlize
  :repo "hniksic/emacs-htmlize"
  :fetcher github
- :version-regexp "release/\\(.*\\)")
+ :version-regexp "release/\\(.*\\)"
+ :branch "stable")

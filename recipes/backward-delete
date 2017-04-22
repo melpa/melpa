@@ -1,0 +1,1 @@
+(backward-delete :fetcher github :repo "nivaca/backward-delete")

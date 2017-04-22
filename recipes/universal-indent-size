@@ -1,0 +1,3 @@
+(universal-indent-size
+ :fetcher github
+ :repo "CodeFalling/universal-indent-size")

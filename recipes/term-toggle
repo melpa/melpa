@@ -1,0 +1,2 @@
+(term-toggle :fetcher github
+          :repo "jixiuf/term-toggle")

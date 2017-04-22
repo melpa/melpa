@@ -1,0 +1,1 @@
+(helm-sql-mode :repo "eric-hansen/helm-sql-mode" :fetcher github)

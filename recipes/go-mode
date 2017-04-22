@@ -1,5 +1,5 @@
 (go-mode
  :repo "dominikh/go-mode.el"
  :fetcher github
- :files ("go-mode.el"))
+ :files ("go-mode.el" "go-guru.el" "go-rename.el"))
 

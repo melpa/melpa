@@ -1,0 +1,2 @@
+(pamparam :repo "abo-abo/pamparam"
+          :fetcher github)

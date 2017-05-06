@@ -1,0 +1,3 @@
+(atom-tabs
+ :fetcher github
+ :repo "domtronn/atom-tabs.el")

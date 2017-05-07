@@ -1,0 +1,1 @@
+(helm-frame :fetcher gitlab :repo "chee/helm-frame")

@@ -151,7 +151,7 @@
       pkgs.push(new melpa.Package({
         name: name,
         version: version,
-        commit: built.props.commit,
+        commit: props.commit || '',
         dependencies: deps,
         description: built.desc.replace(/\s*\[((?:source: )?\w+)\]$/, ""),
         source: recipe.fetcher,

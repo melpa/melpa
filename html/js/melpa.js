@@ -140,6 +140,7 @@
     var listed = _.intersection(_.keys(archive), _.keys(recipes));
     return new melpa.PackageList(_(listed).reduce(function(pkgs, name) {
       var built = archive[name];
+      var props = built.props || {};
       var recipe = recipes[name];
       var version = built.ver.join(".");
       var deps = _.map(built.deps || [], function (ver, name) {

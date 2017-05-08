@@ -140,6 +140,7 @@
     var listed = _.intersection(_.keys(archive), _.keys(recipes));
     return new melpa.PackageList(_(listed).reduce(function(pkgs, name) {
       var built = archive[name];
+      var props = built.props || {};
       var recipe = recipes[name];
       var version = built.ver.join(".");
       var deps = _.map(built.deps || [], function (ver, name) {
@@ -150,7 +151,7 @@
       pkgs.push(new melpa.Package({
         name: name,
         version: version,
-        commit: built.props.commit,
+        commit: props.commit || '',
         dependencies: deps,
         description: built.desc.replace(/\s*\[((?:source: )?\w+)\]$/, ""),
         source: recipe.fetcher,

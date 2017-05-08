@@ -1,0 +1,1 @@
+(find-and-ctags :fetcher github :repo "redguardtoo/find-and-ctags")

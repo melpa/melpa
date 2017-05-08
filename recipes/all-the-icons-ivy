@@ -1,0 +1,2 @@
+(all-the-icons-ivy :repo "asok/all-the-icons-ivy"
+                   :fetcher github)

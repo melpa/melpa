@@ -1,0 +1,4 @@
+(org-contrib
+ :url "git://orgmode.org/org-mode.git"
+ :fetcher git
+ :files ("contrib/lisp/*.el" "contrib/babel/langs/*.el"))

@@ -1,0 +1,4 @@
+(quoted-scratch :fetcher github
+                :repo "narendraj9/quoted-scratch"
+                :files ("*.el*"
+                        ("_assets/" "_assets/quotes.txt")))

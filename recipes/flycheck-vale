@@ -1,2 +1,2 @@
-(wilt :fetcher github
-      :repo "abingham/flycheck-vale")
+(flycheck-vale :fetcher github
+               :repo "abingham/flycheck-vale")

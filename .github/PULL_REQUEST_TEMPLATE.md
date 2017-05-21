@@ -22,4 +22,4 @@ Please confirm with `x`:
 - [ ] I've used [package-lint](https://github.com/purcell/package-lint) to check for packaging issues, and addressed its feedback
 - [ ] My elisp byte-compiles cleanly
 - [ ] `M-x checkdoc` is happy with my docstrings
-- [ ] I've built and installed the package using the instructions in the [CONTRIBUTING.md](https://github.com/melpa/melpa/blob/master/CONTRIBUTING.md)
+- [ ] I've built and installed the package using the instructions in [CONTRIBUTING.md](https://github.com/melpa/melpa/blob/master/CONTRIBUTING.md)

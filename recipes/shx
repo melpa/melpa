@@ -1,3 +1,2 @@
 (shx :repo "riscy/shx-for-emacs"
-     :fetcher github
-     :files ("shx.el"))
+     :fetcher github)

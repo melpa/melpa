@@ -1,0 +1,3 @@
+(proof-general :fetcher github
+               :repo "npe9/proof-general"
+)

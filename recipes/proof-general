@@ -1,0 +1,38 @@
+(proof-general
+ :repo "ProofGeneral/PG"
+ :fetcher github
+ :files (
+         ;; provers
+         "acl2/*.el"
+         "ccc/*.el"
+         "coq/*.el"
+         "hol98/*.el"
+         "isar/*.el"
+         "lego/*.el"
+         "hol-light/*.el"
+         "phox/*.el"
+         "pgshell/*.el"
+         "pgocaml/*.el"
+         "pghaskell/*.el"
+
+         ;; other lisp
+         "lib/*.el"
+         "generic/*.el"
+         "contrib/mmm/*.el"
+         "isar/interface/*.el"
+         "isar/isartags/*.el"
+
+         ;; images
+         "images"
+
+         ;; documentation
+         "doc/*.texi"
+         "contrib/mmm/*.texinfo"
+
+         ;; bin scripts
+         ("bin"
+
+          "bin/proofgeneral"
+          "lego/legotags"
+          "coq/coqtags"
+          "isar/isartags")))

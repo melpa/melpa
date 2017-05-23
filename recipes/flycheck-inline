@@ -1,0 +1,1 @@
+(flycheck-inline :repo "stardiviner/flycheck-inline" :fetcher github)

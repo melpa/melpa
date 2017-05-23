@@ -1,0 +1,4 @@
+(pfuture
+ :repo "Alexander-Miller/pfuture"
+ :fetcher github
+ :files (:defaults))

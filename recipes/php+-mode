@@ -1,3 +1,4 @@
 (php+-mode
  :fetcher github
- :repo "echosa/phpplus-mode")
+ :repo "echosa/phpplus-mode"
+ :files (:defaults "php-test.el"))

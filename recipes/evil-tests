@@ -1,0 +1,1 @@
+(evil-tests :repo "expez/evil-tests" :fetcher github :files ("evil-tests.el"))

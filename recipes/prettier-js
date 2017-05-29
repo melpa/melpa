@@ -1,0 +1,1 @@
+(prettier-js :fetcher github :repo "prettier/prettier" :files ("editors/emacs/prettier-js.el"))

@@ -1,0 +1,1 @@
+(monochromatic-theme :repo "diasbruno/monochromatic-theme" :fetcher github)

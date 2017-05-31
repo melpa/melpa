@@ -1,0 +1,1 @@
+(shellenv :repo "zonuexe/shellenv-el" :fetcher github)

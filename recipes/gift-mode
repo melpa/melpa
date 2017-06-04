@@ -1,0 +1,1 @@
+(gift-mode :fetcher github :repo "csrhodes/gift-mode")

@@ -1,1 +1,1 @@
-(evil-surround :repo "timcharper/evil-surround" :fetcher github :old-names (surround))
+(evil-surround :repo "emacs-evil/evil-surround" :fetcher github :old-names (surround))

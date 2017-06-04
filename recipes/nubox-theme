@@ -1,0 +1,1 @@
+(nubox :fetcher github :repo "martijnat/nubox" :files ("LICENSE" "nubox-dark-theme.el" "nubox-light-theme.el"))

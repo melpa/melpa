@@ -1,0 +1,1 @@
+(leader-key-mode :repo "wcy123/leader-key-mode" :fetcher github)

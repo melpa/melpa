@@ -1,0 +1,3 @@
+(fence-edit
+  :fetcher github
+  :repo "aaronbieber/fence-edit.el")

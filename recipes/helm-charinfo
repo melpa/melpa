@@ -1,1 +1,1 @@
-(smex :repo "mandoku/helm-charinfo" :fetcher github)
+(helm-charinfo :repo "mandoku/helm-charinfo" :fetcher github)

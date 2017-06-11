@@ -408,7 +408,7 @@
             ]),
             m("dt", "Source"),
             m("dd", [
-              pkg.sourceURL ? m("a", {href: pkg.sourceURL}, pkg.source + pkg.commit) : pkg.source,
+              pkg.sourceURL ? m("a", {href: pkg.sourceURL}, pkg.source) : pkg.source,
               pkg.commit ? m("span.muted", " (" + pkg.commit.substring(0,6) + ")") : []
             ]),
             m("dt", "Dependencies"),

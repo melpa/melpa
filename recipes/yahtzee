@@ -1,0 +1,1 @@
+(yahtzee :repo "drdv/yahtzee" :fetcher github)

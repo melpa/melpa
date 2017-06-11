@@ -1,0 +1,1 @@
+(postcss-sorting :repo "P233/postcss-sorting.el" :fetcher github)

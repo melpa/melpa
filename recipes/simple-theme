@@ -1,0 +1,1 @@
+(simple-theme :repo "zovt/emacs-simple-theme" :fetcher github)

@@ -1,0 +1,1 @@
+(pasp-mode :fetcher github :repo "santifa/pasp-mode")

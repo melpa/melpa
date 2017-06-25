@@ -1,0 +1,1 @@
+(smallworld :repo "roadrunner1776/smallworld" :fetcher github)

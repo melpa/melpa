@@ -1,0 +1,2 @@
+(config-general-mode :repo "tlinden/config-general-mode" :fetcher github)
+

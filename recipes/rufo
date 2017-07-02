@@ -1,0 +1,1 @@
+(rufo :repo "aleandros/emacs-rufo" :fetcher github)

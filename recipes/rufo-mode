@@ -1,0 +1,1 @@
+(rufo-mode :repo "danielma/rufo-mode.el" :fetcher github)

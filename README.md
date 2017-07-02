@@ -43,7 +43,7 @@ Enable installation of packages from MELPA by adding an entry to
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
        (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
-  (add-to-list 'package-archives '("melpa" . url) t))
+  (add-to-list 'package-archives (cons "melpa" url) t))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))

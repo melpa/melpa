@@ -1,0 +1,1 @@
+(numbers :fetcher github :repo "davep/numbers.el")

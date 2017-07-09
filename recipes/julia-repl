@@ -1,0 +1,1 @@
+(julia-repl :fetcher github :repo "tpapp/julia-repl")

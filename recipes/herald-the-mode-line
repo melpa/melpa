@@ -1,0 +1,1 @@
+(herald-the-mode-line :fetcher github :repo "marcowahl/herald-the-mode-line")

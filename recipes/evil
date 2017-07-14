@@ -1,5 +1,4 @@
 (evil :repo "emacs-evil/evil"
       :fetcher github
-      :files ("evil*.el"
-              "doc/*.texi"
-              (:exclude "evil*test*.el")))
+      :files (:defaults
+              (:exclude "evil-test-helpers.el")))

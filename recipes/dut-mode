@@ -1,4 +1,4 @@
 (dut-mode
  :repo "dut-lang/dut-mode"
  :fetcher github
- :files ("dut-mode"))
+ :files ("dut-mode.el"))

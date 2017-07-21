@@ -1,4 +1,4 @@
 (csound-mode :fetcher github
 	     :repo "hlolli/csound-mode"
-	     :files (:defaults "*.el" "csoundAPI_emacsLisp"
+	     :files (:defaults "csoundAPI_emacsLisp"
 		     (:exclude ".dir-locals.el")))

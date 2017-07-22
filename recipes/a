@@ -1,0 +1,1 @@
+(a :repo "plexus/a.el" :fetcher github)

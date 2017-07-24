@@ -1,0 +1,3 @@
+(alarm
+ :repo "kevindragon/alerm.el"
+ :fetcher github)

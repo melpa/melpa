@@ -1,3 +1,3 @@
 (ids-edit :repo "kawabata/ids-edit"
           :fetcher github
-          :files ("ids-edit.el" "ids.txt" "ucs-strokes.txt"))
+          :files ("ids-edit.el" "ids-cdp.txt" "ucs-strokes.txt"))

@@ -1,0 +1,2 @@
+(bifocal :repo "riscy/bifocal-mode"
+         :fetcher github)

@@ -1,0 +1,1 @@
+(helm-elscreen :repo "emacs-helm/helm-elscreen" :fetcher github)

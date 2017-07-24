@@ -1,0 +1,3 @@
+(poly-ruby
+ :fetcher github
+ :repo "knu/poly-ruby.el")

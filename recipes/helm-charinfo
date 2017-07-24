@@ -1,0 +1,1 @@
+(helm-charinfo :repo "mandoku/helm-charinfo" :fetcher github)

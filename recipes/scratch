@@ -1,1 +1,1 @@
-(scratch :fetcher github :repo "cbbrowne/scratch-el" :files ("scratch.el"))
+(scratch :fetcher github :repo "ieure/scratch-el" :files ("scratch.el"))

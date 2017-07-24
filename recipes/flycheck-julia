@@ -1,0 +1,1 @@
+(flycheck-julia :repo "gdkrmr/flycheck-julia" :fetcher github)

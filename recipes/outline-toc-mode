@@ -1,2 +1,0 @@
-(outline-toc-mode :fetcher github
-                  :repo "abingham/outline-toc.el")

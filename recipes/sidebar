@@ -1,0 +1,1 @@
+(sidebar :repo "sebastiencs/sidebar.el" :fetcher github)

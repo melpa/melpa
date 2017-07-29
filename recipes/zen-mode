@@ -1,0 +1,1 @@
+(zen-mode :repo "aki237/zen-mode" :fetcher github)

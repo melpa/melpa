@@ -1,0 +1,3 @@
+(theme-cycle
+ :repo "Traivok/theme-cycle"
+ :fetcher github)

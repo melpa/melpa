@@ -1,3 +1,1 @@
-(theme-cycle
- :repo "Traivok/theme-cycle"
- :fetcher github)
+(theme-cycle :fetcher github :repo "Traivok/theme-cycle")

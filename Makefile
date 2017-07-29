@@ -1,4 +1,4 @@
-SHELL   := /bin/bash
+SHELL   := bash
 PKGDIR  := ./packages
 RCPDIR  := ./recipes
 HTMLDIR := ./html

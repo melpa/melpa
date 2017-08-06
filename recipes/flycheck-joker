@@ -1,0 +1,1 @@
+(flycheck-joker :fetcher github :repo "candid82/flycheck-joker")

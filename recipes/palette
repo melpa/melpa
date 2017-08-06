@@ -1,1 +1,1 @@
-(palette :fetcher wiki)
+(palette :fetcher wiki :old-names ("eyedropper"))

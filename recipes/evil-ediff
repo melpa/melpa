@@ -1,1 +1,1 @@
-(evil-ediff :repo "justbur/evil-ediff" :fetcher github)
+(evil-ediff :repo "emacs-evil/evil-ediff" :fetcher github)

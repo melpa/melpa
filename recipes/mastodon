@@ -1,0 +1,1 @@
+(mastodon :fetcher github :repo "jdenen/mastodon.el" :files ("lisp/*.el"))

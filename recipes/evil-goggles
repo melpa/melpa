@@ -1,0 +1,1 @@
+(evil-goggles :repo "edkolev/evil-goggles" :fetcher github)

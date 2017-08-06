@@ -1,0 +1,3 @@
+(zig-mode
+  :repo "AndreaOrru/zig-mode"
+  :fetcher github)

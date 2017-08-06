@@ -1,4 +1,1 @@
-(ruby-electric
- :fetcher svn
- :url "http://svn.ruby-lang.org/repos/ruby/trunk/misc/"
- :files ("ruby-electric.el"))
+(ruby-electric :fetcher github :repo "knu/ruby-electric.el")

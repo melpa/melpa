@@ -1,0 +1,1 @@
+(treepy :repo "volrath/treepy.el" :fetcher github)

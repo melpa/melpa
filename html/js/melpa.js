@@ -40,7 +40,7 @@
   melpa.rootURL = window.location.protocol + "//" + window.location.host;
 
   melpa.Package = function(data) {
-    ["name", "description", "version", "dependencies", "source",
+    ["name", "description", "version", "dependencies", "source", "commit",
      "downloads", "fetcher", "recipeURL", "packageURL", "sourceURL", "oldNames"].map(function(p) {
       this[p] = data[p];
     }.bind(this));
@@ -140,6 +140,7 @@
     var listed = _.intersection(_.keys(archive), _.keys(recipes));
     return new melpa.PackageList(_(listed).reduce(function(pkgs, name) {
       var built = archive[name];
+      var props = built.props || {};
       var recipe = recipes[name];
       var version = built.ver.join(".");
       var deps = _.map(built.deps || [], function (ver, name) {
@@ -150,6 +151,7 @@
       pkgs.push(new melpa.Package({
         name: name,
         version: version,
+        commit: props.commit || '',
         dependencies: deps,
         description: built.desc.replace(/\s*\[((?:source: )?\w+)\]$/, ""),
         source: recipe.fetcher,
@@ -406,7 +408,8 @@
             ]),
             m("dt", "Source"),
             m("dd", [
-              pkg.sourceURL ? m("a", {href: pkg.sourceURL}, pkg.source) : pkg.source
+              pkg.sourceURL ? m("a", {href: pkg.sourceURL}, pkg.source) : pkg.source,
+              pkg.commit ? m("span.muted", " (" + pkg.commit.substring(0,6) + ")") : []
             ]),
             m("dt", "Dependencies"),
             m("dd", intersperse(_.sortBy(pkg.dependencies, 'name').map(this.depLink), " / ")),

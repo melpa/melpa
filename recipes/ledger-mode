@@ -1,1 +1,1 @@
-(ledger-mode :fetcher github :repo "ledger/ledger-mode" :files ("*.el") :old-names (ldg-mode))
+(ledger-mode :fetcher github :repo "ledger/ledger-mode" :files (:defaults "ledger-test.el") :old-names (ldg-mode))

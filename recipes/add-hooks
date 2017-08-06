@@ -1,0 +1,1 @@
+(add-hooks :repo "nickmccurdy/add-hooks" :fetcher github)

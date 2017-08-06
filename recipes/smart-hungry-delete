@@ -1,0 +1,1 @@
+(smart-hungry-delete :repo "hrehfeld/emacs-smart-hungry-delete" :fetcher github)

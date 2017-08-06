@@ -1,0 +1,1 @@
+(lsp-haskell :repo "emacs-lsp/lsp-haskell" :fetcher github)

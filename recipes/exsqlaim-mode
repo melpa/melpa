@@ -1,0 +1,3 @@
+(exsqlaim-mode
+ :repo "ahmadnazir/exsqlaim-mode"
+ :fetcher github)

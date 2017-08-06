@@ -1,1 +1,1 @@
-(transpose-frame :fetcher wiki)
+(transpose-frame :fetcher github :repo "emacsorphanage/transpose-frame")

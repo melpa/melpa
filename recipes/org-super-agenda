@@ -1,0 +1,1 @@
+(org-super-agenda :fetcher github :repo "alphapapa/org-super-agenda")

@@ -1,0 +1,3 @@
+(helm-tramp
+ :repo "masasam/emacs-helm-tramp"
+ :fetcher github)

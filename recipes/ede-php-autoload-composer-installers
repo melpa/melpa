@@ -1,0 +1,2 @@
+(ede-php-autoload-composer-installers :fetcher github
+                                      :repo "xendk/ede-php-autoload-composer-installers")

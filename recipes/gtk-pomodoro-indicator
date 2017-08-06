@@ -1,0 +1,3 @@
+(gtk-pomodoro-indicator :fetcher github
+                        :repo "abo-abo/gtk-pomodoro-indicator"
+                        :files ("*.el" "*.py" "icons"))

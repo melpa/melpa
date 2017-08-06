@@ -1,0 +1,1 @@
+(ceylon-mode :fetcher github :repo "lucaswerkmeister/ceylon-mode")

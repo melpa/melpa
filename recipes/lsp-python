@@ -1,0 +1,1 @@
+(lsp-python :repo "emacs-lsp/lsp-python" :fetcher github)

@@ -1,3 +1,0 @@
-(slamhound
- :fetcher github
- :repo "technomancy/slamhound")

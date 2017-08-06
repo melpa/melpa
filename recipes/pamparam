@@ -1,0 +1,3 @@
+(pamparam :repo "abo-abo/pamparam"
+          :fetcher github
+          :files (:defaults (:exclude "elpa.el")))

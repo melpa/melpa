@@ -1,0 +1,2 @@
+(lastpass :repo "storvik/emacs-lastpass"
+          :fetcher github)

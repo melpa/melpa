@@ -1,1 +1,1 @@
-(ghub :fetcher github :repo "tarsius/ghub")
+(ghub :fetcher github :repo "magit/ghub")

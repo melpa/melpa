@@ -1,0 +1,3 @@
+(pyim-cangjie5dict :repo "erstern/pyim-cangjie5dict"
+                   :fetcher github
+                   :files (:defaults "*.pyim"))

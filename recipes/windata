@@ -1,1 +1,1 @@
-(windata :fetcher wiki)
+(windata :fetcher github :repo "emacsorphanage/windata")

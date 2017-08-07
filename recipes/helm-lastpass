@@ -1,0 +1,1 @@
+(helm-lastpass :fetcher github :repo "xuchunyang/helm-lastpass")

@@ -1,0 +1,1 @@
+(dotnet :repo "julienXX/dotnet.el" :fetcher github)

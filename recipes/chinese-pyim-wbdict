@@ -1,3 +1,0 @@
-(chinese-pyim-wbdict :fetcher github
-                     :repo "tumashu/chinese-pyim-wbdict"
-                     :files (:defaults "*.pyim" "*.pyim.gz"))

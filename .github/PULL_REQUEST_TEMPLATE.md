@@ -18,6 +18,7 @@ https://github.com/your/awesome_package
 
 Please confirm with `x`:
 
+- [ ] The package is released under a [GPL-Compatible Free Software License](https://www.gnu.org/licenses/license-list.en.html#GPLCompatibleLicenses). 
 - [ ] I've read [CONTRIBUTING.md](https://github.com/melpa/melpa/blob/master/CONTRIBUTING.md)
 - [ ] I've used [package-lint](https://github.com/purcell/package-lint) to check for packaging issues, and addressed its feedback
 - [ ] My elisp byte-compiles cleanly

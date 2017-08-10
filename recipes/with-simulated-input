@@ -1,0 +1,1 @@
+(with-simulated-input :repo "DarwinAwardWinner/with-simulated-input" :fetcher github)

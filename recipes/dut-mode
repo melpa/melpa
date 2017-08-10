@@ -1,0 +1,3 @@
+(dut-mode
+ :repo "dut-lang/dut-mode"
+ :fetcher github)

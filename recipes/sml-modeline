@@ -1,3 +1,3 @@
 (sml-modeline :fetcher bzr
-              :url "lp:~nxhtml/nxhtml/main"
+              :url "https://code.launchpad.net/~nxhtml/nxhtml/main"
               :files ("util/sml-modeline.el"))

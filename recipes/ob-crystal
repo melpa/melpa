@@ -1,3 +1,2 @@
 (ob-crystal :repo "brantou/ob-crystal"
-                 :fetcher github
-                 :files ("ob-crystal.el"))
+                 :fetcher github)

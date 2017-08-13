@@ -1,0 +1,6 @@
+(flycheck-proselint
+ :fetcher github
+ :repo "amperser/proselint"
+ :files ("plugins/flycheck/flycheck-proselint.el"
+         "README.md"
+         "LICENSE.md"))

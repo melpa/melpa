@@ -1,5 +1,4 @@
 (yasnippet-snippets
  :repo "AndreaCrotti/yasnippet-snippets"
  :fetcher github
- :branch "proper-package"
  :files ("*.el" "snippets"))

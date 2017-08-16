@@ -1,1 +1,0 @@
-(auto-deployment :fetcher github :repo "zonuexe/emacs-auto-deployment")

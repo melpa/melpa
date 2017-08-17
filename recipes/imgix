@@ -1,1 +1,0 @@
-(imgix :repo "imgix/imgix-emacs" :fetcher github :files ("imgix.el" "data"))

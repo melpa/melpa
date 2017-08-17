@@ -1,1 +1,0 @@
-(edit-at-point :repo "enoson/edit-at-point.el" :fetcher github)

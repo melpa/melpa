@@ -1,3 +1,0 @@
-(ivs-edit :repo "kawabata/ivs-edit"
-          :fetcher github
-          :files ("ivs-edit.el" "IVD_Sequences.txt" "jp-old-style.txt"))

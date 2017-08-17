@@ -1,3 +1,0 @@
-(ivariants :repo "kawabata/emacs-ivariants"
-           :fetcher github
-           :files ("ivariants*.el" "tables"))

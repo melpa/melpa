@@ -1,2 +1,0 @@
-(sicp :repo "webframp/sicp-info"
-      :fetcher github)

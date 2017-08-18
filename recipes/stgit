@@ -1,3 +1,0 @@
-(stgit :url "git://repo.or.cz/stgit.git"
-       :fetcher git
-       :files ("contrib/stgit.el"))

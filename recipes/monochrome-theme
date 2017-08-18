@@ -1,0 +1,1 @@
+(monochrome-theme :fetcher github :repo "fxn/monochrome-theme.el")

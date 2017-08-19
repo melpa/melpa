@@ -1,1 +1,1 @@
-(swbuff :fetcher github :repo "emacsorphanage/swbuff")
+(swbuff :fetcher github :repo "emacsorphanage/swbuff" :files ("swbuff.el"))

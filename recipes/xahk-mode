@@ -1,0 +1,1 @@
+(xahk-mode :repo "xahlee/xahk-mode.el" :fetcher github)

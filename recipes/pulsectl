@@ -1,0 +1,1 @@
+(pulsectl :repo "flexibeast/pulsectl" :fetcher github)

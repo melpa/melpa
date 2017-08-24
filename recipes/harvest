@@ -1,1 +1,1 @@
-(harvest :repo "kostajh/harvest.el" :fetcher github)
+(harvest :fetcher github :repo "kostajh/harvest.el")

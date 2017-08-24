@@ -1,1 +1,1 @@
-(lively :fetcher github :repo "emacsorphanage/lively")
+(lively :fetcher github :repo "purcell/lively")

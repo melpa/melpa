@@ -1,2 +1,0 @@
-(ghost-blog :repo "javaguirre/ghost-blog-emacs"
-            :fetcher github)

@@ -1,3 +1,1 @@
-(coq-commenter
- :repo "ailrun/coq-commenter"
- :fetcher github)
+(coq-commenter :fetcher github :repo "ailrun/coq-commenter")

@@ -1,0 +1,3 @@
+(kaleidoscope :repo "algernon/kaleidoscope.el"
+              :fetcher github
+              :files ("kaleidoscope.el"))

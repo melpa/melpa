@@ -1,3 +1,0 @@
-(org-webpage :repo "tumashu/org2web"
-             :fetcher github
-             :files (:defaults "documents" "themes" "uploaders"))

@@ -1,0 +1,5 @@
+(amalgam-mode
+ :fetcher git
+ :url     "https://git.linguaobscura.com/mercury/amalgam-mode"
+ :branch  "master"
+ :files   ("*.el" "snippets"))

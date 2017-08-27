@@ -1,1 +1,1 @@
-(robots-txt-mode :fetcher github :repo "zonuexe/robots-txt-mode")
+(robots-txt-mode :fetcher github :repo "emacs-php/robots-txt-mode")

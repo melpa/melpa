@@ -1,1 +1,1 @@
-(apache-mode :fetcher github :repo "zonuexe/apache-mode")
+(apache-mode :fetcher github :repo "emacs-php/apache-mode")

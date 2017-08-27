@@ -1,0 +1,3 @@
+(maces-game :repo "pawelbx/maces-game"
+            :fetcher github
+            :files ("maces-game.el" "words.txt"))

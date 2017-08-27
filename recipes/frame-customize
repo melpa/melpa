@@ -1,1 +1,0 @@
-(frame-customize :fetcher github :repo "plandes/frame-customize")

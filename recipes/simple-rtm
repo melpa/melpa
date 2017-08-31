@@ -1,1 +1,1 @@
-(simple-rtm :fetcher github :repo "mbunkus/simple-rtm" :files ("lisp/*.el"))
+(simple-rtm :fetcher gitlab :repo "mbunkus/simple-rtm" :files ("lisp/*.el"))

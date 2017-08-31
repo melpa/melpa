@@ -1,4 +1,4 @@
 (faustine
  :fetcher git
  :url "https://bitbucket.org/yassinphilip/faustine"
- :files (("icons" "icons/*.xpm") "faustine.el"))
+ :files (:defaults ("icons" "icons/*.xpm")))

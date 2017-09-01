@@ -1,4 +1,4 @@
 (datetime-format
- :repo "zonuexe/emacs-datetime"
+ :repo "emacs-php/emacs-datetime"
  :fetcher github
  :files ("datetime-format.el"))

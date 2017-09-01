@@ -1,1 +1,1 @@
-(arch-packer :repo "brotzeitmacher/arch-packer" :fetcher github)
+(arch-packer :repo "brotzeit/arch-packer" :fetcher github)

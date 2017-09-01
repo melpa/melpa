@@ -1,0 +1,1 @@
+(sqlite3-api :fetcher github :repo "pekingduck/emacs-sqlite3-api")

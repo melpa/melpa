@@ -1,0 +1,1 @@
+(helm-addressbook :repo "emacs-helm/helm-addressbook" :fetcher github)

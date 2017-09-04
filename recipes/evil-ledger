@@ -1,0 +1,1 @@
+(evil-ledger :repo "atheriel/evil-ledger" :fetcher github)

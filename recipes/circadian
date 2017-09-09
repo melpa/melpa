@@ -1,0 +1,1 @@
+(circadian :fetcher github :repo "GuidoSchmidt/circadian.el")

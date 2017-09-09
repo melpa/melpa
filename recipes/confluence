@@ -1,4 +1,4 @@
 (confluence
- :fetcher svn
- :url "https://svn.code.sf.net/p/confluence-el/code/trunk/"
+ :fetcher github
+ :repo "emacsorphanage/confluence"
  :files ("confluence*.el" "*.dtd" "*.xsl"))

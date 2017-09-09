@@ -2,6 +2,7 @@
 (function(m, document, _, moment, Cookies){
   "use strict";
 
+  // TODO Link to other MELPA in header, e.g. from MELPA to MELPA Stable
   // TODO Disqus
   // TODO Show compatible emacs versions for any package
   // TODO Google Analytics

@@ -350,8 +350,8 @@ accepted by the `Makefile`.
 
 * `recipes/<NAME>` -- Build individual recipe `<NAME>`. Built packages
 are put in the `packages/` folder with version corresponding to the
-newest HEAD revision available; given according to the `%Y%m%d`
-format.
+date of the latest commit that modified at least one of the files
+specified by the recipe; given according to the `%Y%m%d` format.
 
 * `json` -- build all JSON files.
 

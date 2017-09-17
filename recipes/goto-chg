@@ -1,1 +1,1 @@
-(goto-chg :fetcher wiki)
+(goto-chg :repo "emacs-evil/goto-chg" :fetcher github)

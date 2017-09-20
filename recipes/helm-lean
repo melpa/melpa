@@ -1,4 +1,4 @@
-(lean-mode
+(helm-lean
  :repo "leanprover/lean-mode"
  :fetcher github
- :files ("lean-*.el"))
+ :files ("helm-lean.el"))

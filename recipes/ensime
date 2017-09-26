@@ -1,2 +1,3 @@
 (ensime :fetcher github
+    :branch "2.0"
 	:repo "ensime/ensime-emacs")

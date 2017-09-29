@@ -330,7 +330,7 @@
               m("td.recipe",
                 m("a", {href: p.recipeURL}, glyphicon('cutlery'))),
               m("td.source",
-                p.sourceURL ? m("a", {href: p.sourceURL}, p.source) : p.source),
+                p.sourceURL ? m("a", {href: p.sourceURL, target: "_blank"}, p.source) : p.source),
               m("td", [p.downloads.toLocaleString()])
             ]);
           }))

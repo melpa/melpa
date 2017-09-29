@@ -423,9 +423,6 @@ This can be configured using the `package-build-working-dir` variable.
 
 ## Mirrors
 
-_We are not responsible for the contents of any unofficial mirror of
-our packages._
-
 Official mirrors are available (with many thanks to mirrorservice.org)
 so that if melpa.org is down, packages can still be installed.  The
 following are the HTTP/HTTPS URLs to use in `package-archives` for
@@ -437,6 +434,9 @@ MELPA and MELPA Stable respectively:
 * [https://www.mirrorservice.org/sites/stable.melpa.org/packages/](https://www.mirrorservice.org/sites/stable.melpa.org/packages/)
 
 Only the packages are mirrored, not the web site front-end itself.
+
+_We are NOT responsible for the contents of any UNOFFICIAL mirror of
+our packages._
 
 ## About
 

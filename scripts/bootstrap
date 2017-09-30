@@ -9,18 +9,13 @@ cd ${HOME}
 sudo ${SUDOENV} apt-get -y update
 sudo ${SUDOENV} apt-get -y upgrade
 sudo ${SUDOENV} apt-get -y install \
-    bzr \
     curl \
-    cvs \
-    darcs \
     emacs24 emacs24-el emacs24-common-non-dfsg \
-    fossil \
     git \
     make \
     mercurial \
     nginx \
     runit \
-    subversion \
     texinfo \
     tmux
 

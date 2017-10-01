@@ -1,0 +1,3 @@
+(company-plsense
+ :fetcher github
+ :repo "CeleritasCelery/company-plsense")

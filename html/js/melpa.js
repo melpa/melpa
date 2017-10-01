@@ -248,11 +248,31 @@
 
   melpa.packagelist = {};
   melpa.packagelist.controller = function() {
+    var defaultQueryParams = {q: '', sort: 'name', asc: true, page: 1};
+    var queryParams = {
+      q: m.route.param('q') || defaultQueryParams.q,
+      sort: m.route.param('sort') || defaultQueryParams.sort,
+      asc: m.route.param('asc') || defaultQueryParams.asc
+    };
     var resetPagination = function() { this.paginatorCtrl.pageNumber(1); }.bind(this);
-    this.filterTerms = addPropSetHook(m.prop(m.route.param('q') || ''),
-                                      resetPagination);
-    this.sortBy = m.prop("name");
-    this.sortAscending = m.prop(true);
+    var updateRoute = function() {
+      queryParams = {
+        q: this.filterTerms(),
+        sort: this.sortBy(),
+        asc: this.sortAscending()
+      };
+      var parts = [];
+      for (var k in queryParams) {
+        if (queryParams[k] !== defaultQueryParams[k]) {
+          parts.push(k + "=" + encodeURIComponent(queryParams[k]));
+        }
+      }
+      history.replaceState({},"", "/#/" + (parts.length > 0 ? "?" + parts.join("&") : ""));
+    }.bind(this);
+
+    this.filterTerms = addPropSetHook(addPropSetHook(m.prop(queryParams.q), resetPagination), updateRoute);
+    this.sortBy = addPropSetHook(m.prop(queryParams.sort), updateRoute);
+    this.sortAscending = addPropSetHook(m.prop(queryParams.asc), updateRoute);
     this.packageList = melpa.packageList;
     this.matchingPackages = function() {
       return this.packageList().matchingPackages(this.filterTerms());

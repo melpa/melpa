@@ -1,0 +1,1 @@
+(term-sets :url "https://git.flintfam.org/swf-projects/buffer-sets.git" :fetcher git :files ("term-sets.el"))

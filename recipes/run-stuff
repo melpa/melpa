@@ -1,0 +1,3 @@
+(run-stuff
+ :repo "ideasman42/emacs-run-stuff"
+ :fetcher github)

@@ -1,0 +1,1 @@
+(lsp-javascript-typescript :fetcher github :repo "emacs-lsp/lsp-javascript")

@@ -1,0 +1,2 @@
+(projectile-trailblazer :repo "micdahl/projectile-trailblazer"
+                  :fetcher github)

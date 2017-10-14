@@ -252,7 +252,7 @@
     var queryParams = {
       q: m.route.param('q') || defaultQueryParams.q,
       sort: m.route.param('sort') || defaultQueryParams.sort,
-      asc: m.route.param('asc') == 'true' || defaultQueryParams.asc
+      asc: m.route.param('asc') && m.route.param('asc') == 'false' ? false : defaultQueryParams.asc
     };
     var resetPagination = function() { this.paginatorCtrl.pageNumber(1); }.bind(this);
     var updateRoute = function() {

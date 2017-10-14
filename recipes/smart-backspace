@@ -1,0 +1,1 @@
+(smart-backspace :repo "itome/smart-backspace" :fetcher github)

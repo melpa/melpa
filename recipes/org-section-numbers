@@ -1,0 +1,1 @@
+(org-section-numbers :repo "marcowahl/org-section-numbers" :fetcher github)

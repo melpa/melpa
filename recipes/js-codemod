@@ -1,0 +1,1 @@
+(js-codemod :fetcher github :repo "torgeir/js-codemod.el" :files (:defaults "replace"))

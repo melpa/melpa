@@ -1,3 +1,1 @@
-(reason-mode :fetcher github
-             :repo "reasonml-editor/reason-mode"
-             :files ("*.el"))
+(reason-mode :fetcher github :repo "reasonml-editor/reason-mode")

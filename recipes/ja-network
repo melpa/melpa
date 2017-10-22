@@ -1,0 +1,1 @@
+(ja-network :repo "jamiguet/ja-network" :fetcher github)

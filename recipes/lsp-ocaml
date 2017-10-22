@@ -1,0 +1,1 @@
+(lsp-ocaml :repo "emacs-lsp/lsp-ocaml" :fetcher github)

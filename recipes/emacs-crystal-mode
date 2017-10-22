@@ -1,3 +1,3 @@
 (emacs-crystal-mode :repo "crystal-lang-tools/emacs-crystal-mode"
                :fetcher github
-               :files ("crystal-mode.el" "README.md"))
+               :files ("crystal-mode.el"))

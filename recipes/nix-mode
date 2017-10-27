@@ -1,2 +1,1 @@
-(nix-mode :repo "NixOS/nix-mode" :fetcher github
-          :files ("nix-mode.el"))
+(nix-mode :repo "NixOS/nix-mode" :fetcher github)

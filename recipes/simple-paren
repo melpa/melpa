@@ -1,0 +1,4 @@
+(simple-paren
+ :fetcher github
+ :repo "andreas-roehler/simple-paren"
+ :files ("simple-paren.el"))

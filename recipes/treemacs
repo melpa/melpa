@@ -1,4 +1,12 @@
 (treemacs
  :fetcher github
  :repo "Alexander-Miller/treemacs"
- :files (:defaults "icons" "treemacs-dirs-to-collapse.py" (:exclude "treemacs-evil.el" "treemacs-projectile.el")))
+ :files (:defaults
+         "icons"
+         "treemacs-dirs-to-collapse.py"
+         "src/elisp/treemacs*.el"
+         "src/scripts/treemacs*.py"
+         (:exclude "src/elisp/treemacs-evil.el"
+                   "src/elisp/treemacs-projectile.el"
+                   "treemacs-evil.el"
+                   "treemacs-projectile.el")))

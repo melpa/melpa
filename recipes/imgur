@@ -1,1 +1,1 @@
-(imgur :fetcher github :repo "myuhe/imgur.el")
+(imgur :fetcher github :repo "emacs-pe/imgur.el")

@@ -1,0 +1,3 @@
+(use-package-ensure-system-package :repo "waymondo/use-package-ensure-system-package"
+                                   :fetcher github
+                                   :files ("use-package-ensure-system-package.el"))

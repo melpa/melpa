@@ -1,3 +1,3 @@
-(org-random-todo :fetcher github
+(org-randomnote :fetcher github
                  :repo "mwfogleman/org-randomnote"
                  :files ("org-randomnote.el"))

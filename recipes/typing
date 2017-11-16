@@ -1,1 +1,1 @@
-(typing :fetcher wiki)
+(typing :fetcher github :repo "kensanata/typing")

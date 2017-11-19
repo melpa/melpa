@@ -1,0 +1,1 @@
+(company-eshell-autosuggest :fetcher github :repo "dieggsy/company-eshell-autosuggest")

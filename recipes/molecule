@@ -1,1 +1,1 @@
-(nikola :fetcher git :url "https://git.daemons.it/drymer/molecule.el/")
+(molecule :fetcher git :url "https://git.daemons.it/drymer/molecule.el/")

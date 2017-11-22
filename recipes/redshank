@@ -1,0 +1,1 @@
+(redshank :repo "emacsattic/redshank" :fetcher github)

@@ -1,0 +1,1 @@
+(elcord :fetcher github :repo "mstrodl/elcord")

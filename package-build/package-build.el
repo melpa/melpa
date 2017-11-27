@@ -1189,73 +1189,6 @@ If FILE-NAME is not specified, the default archive-contents file is used."
           (setq entries (remove old entries)))
         (add-to-list 'entries new)))))
 
-;;; Helpers for Recipe Authors
-
-(defvar package-build-minor-mode-map
-  (let ((m (make-sparse-keymap)))
-    (define-key m (kbd "C-c C-c") 'package-build-current-recipe)
-    m)
-  "Keymap for `package-build-minor-mode'.")
-
-(define-minor-mode package-build-minor-mode
-  "Helpful functionality for building packages."
-  nil
-  " PBuild"
-  package-build-minor-mode-map
-  (when package-build-minor-mode
-    (message "Use C-c C-c to build this recipe.")))
-
-;;;###autoload
-(defun package-build-create-recipe (name fetcher)
-  "Create a new recipe for the package named NAME using FETCHER."
-  (interactive
-   (list (read-string "Package name: ")
-         (intern (completing-read "Fetcher: "
-                                  (list "git" "github" "gitlab"
-                                        "hg" "bitbucket")
-                                  nil t nil nil "github"))))
-  (let ((recipe-file (expand-file-name name package-build-recipes-dir)))
-    (when (file-exists-p recipe-file)
-      (error "Recipe already exists"))
-    (find-file recipe-file)
-    (insert (pp-to-string `(,(intern name)
-                            :fetcher ,fetcher
-                            ,@(cl-case fetcher
-                                (github (list :repo "USER/REPO"))
-                                (t (list :url "SCM_URL_HERE"))))))
-    (emacs-lisp-mode)
-    (package-build-minor-mode)
-    (goto-char (point-min))))
-
-;;;###autoload
-(defun package-build-current-recipe ()
-  "Build archive for the recipe defined in the current buffer."
-  (interactive)
-  (unless (and (buffer-file-name)
-               (file-equal-p (file-name-directory (buffer-file-name))
-                             package-build-recipes-dir))
-    (error "Buffer is not visiting a recipe"))
-  (when (buffer-modified-p)
-    (if (y-or-n-p (format "Save file %s? " buffer-file-name))
-        (save-buffer)
-      (error "Aborting")))
-  (check-parens)
-  (package-build-reinitialize)
-  (let ((name (file-name-nondirectory (buffer-file-name))))
-    (package-build-archive name)
-    (package-build-dump-archive-contents)
-    (let ((output-buffer-name "*package-build-result*"))
-      (with-output-to-temp-buffer output-buffer-name
-        (princ ";; Please check the following package descriptor.\n")
-        (princ ";; If the correct package description or dependencies are missing,\n")
-        (princ ";; then the source .el file is likely malformed, and should be fixed.\n")
-        (pp (assoc (intern name) (package-build-archive-alist))))
-      (with-current-buffer output-buffer-name
-        (emacs-lisp-mode)
-        (view-mode)))
-    (when (yes-or-no-p "Install new package? ")
-      (package-install-file (package-build--find-package-file name)))))
-
 ;;; Exporting Data as Json
 
 (defun package-build-recipe-alist-as-json (file)
@@ -1293,24 +1226,13 @@ If FILE-NAME is not specified, the default archive-contents file is used."
   (with-temp-file file
     (insert (json-encode (package-build--archive-alist-for-json)))))
 
-;;; Melpa Batches
-
-;; In future we should provide a hook, and perform this step in a
-;; separate package.  Note also that it would be straightforward to
-;; generate the SVG ourselves, which would save the network overhead.
-
-(defun package-build--write-melpa-badge-image (name version target-dir)
-  (shell-command
-   (mapconcat #'shell-quote-argument
-              (list "curl" "-f" "-o"
-                    (expand-file-name (concat name "-badge.svg") target-dir)
-                    (format "https://img.shields.io/badge/%s-%s-%s.svg"
-                            (if package-build-stable "melpa stable" "melpa")
-                            (url-hexify-string version)
-                            (if package-build-stable "3e999f" "922793")))
-              " ")))
-
 (provide 'package-build)
+
+;; For the time being just require all libraries that contain code
+;; that was previously located in this library.
+
+(require 'package-batches)
+(require 'package-recipe-mode)
 
 ;; Local Variables:
 ;; coding: utf-8

@@ -1,0 +1,1 @@
+(sailfish-scratchbox-mb2 :repo "vityafx/mb2.el" :fetcher github)

@@ -1,1 +1,0 @@
-(vala-snippets :repo "gopar/vala-snippets" :fetcher github :files (:defaults "snippets"))

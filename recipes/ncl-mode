@@ -1,4 +1,0 @@
-(ncl-mode
- :repo "yyr/ncl-mode"
- :fetcher github
- :files ("*.el" "snippets" "snippets_generated" "dict" "tools" "img"))

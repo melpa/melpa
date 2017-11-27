@@ -1,2 +1,0 @@
-(google-maps :fetcher github :repo "jd/google-maps.el")
-

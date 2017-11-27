@@ -1,1 +1,0 @@
-(langtool :fetcher github :repo "mhayashi1120/Emacs-langtool" :files ("langtool.el"))

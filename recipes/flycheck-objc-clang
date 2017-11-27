@@ -1,1 +1,0 @@
-(flycheck-objc-clang :fetcher github :repo "GyazSquare/flycheck-objc-clang")

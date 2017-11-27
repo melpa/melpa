@@ -1,3 +1,0 @@
-(bibslurp
- :fetcher github
- :repo "mkmcc/bibslurp")

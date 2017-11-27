@@ -1,2 +1,0 @@
-(wolfram :fetcher github
-         :repo "hsjunnesson/wolfram.el")

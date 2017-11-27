@@ -1,2 +1,0 @@
-(flycheck-d-unittest :repo "flycheck/flycheck-d-unittest" :fetcher github
-                     :old-names (flycheck-d))

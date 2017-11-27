@@ -1,1 +1,0 @@
-(eshell-git-prompt :fetcher github :repo "xuchunyang/eshell-git-prompt")

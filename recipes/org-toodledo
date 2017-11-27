@@ -1,2 +1,0 @@
-(org-toodledo :repo "myuhe/org-toodledo"
-              :fetcher github)

@@ -1,3 +1,0 @@
-(commify
- :fetcher github
- :repo "ddoherty03/commify")

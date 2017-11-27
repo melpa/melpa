@@ -1,1 +1,0 @@
-(defproject :fetcher github :repo "kotfic/defproject")

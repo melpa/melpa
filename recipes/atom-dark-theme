@@ -1,3 +1,0 @@
-(atom-dark-theme
- :fetcher github
- :repo "whitlockjc/atom-dark-theme-emacs")

@@ -1,1 +1,0 @@
-(mongo :fetcher github :repo "m2ym/mongo-el" :files ("mongo.el" "bson.el"))

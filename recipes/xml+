@@ -1,2 +1,0 @@
-(xml+ :fetcher github
-      :repo "bddean/xml-plus")

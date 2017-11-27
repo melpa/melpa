@@ -1,4 +1,0 @@
-(typit
- :repo "mrkkrp/typit"
- :fetcher github
- :files (:defaults "dict"))

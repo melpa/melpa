@@ -1,4 +1,0 @@
-(flow-minor-mode
- :fetcher github
- :repo "an-sh/flow-minor-mode"
- :old-names (flow-mode))

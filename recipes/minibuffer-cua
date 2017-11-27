@@ -1,3 +1,0 @@
-(minibuffer-cua
- :fetcher github
- :repo "knu/minibuffer-cua.el")

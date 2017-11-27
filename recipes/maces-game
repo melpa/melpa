@@ -1,3 +1,0 @@
-(maces-game :repo "pawelbx/maces-game"
-            :fetcher github
-            :files (:defaults "words.txt"))

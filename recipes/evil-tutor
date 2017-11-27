@@ -1,3 +1,0 @@
-(evil-tutor :repo "syl20bnr/evil-tutor"
-            :fetcher github
-            :files (:defaults "tutor.txt"))

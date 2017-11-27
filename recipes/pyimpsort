@@ -1,4 +1,0 @@
-(pyimpsort
- :fetcher github
- :repo "emacs-pe/pyimpsort.el"
- :files ("pyimpsort.el" "pyimpsort.py"))

@@ -1,1 +1,0 @@
-(helm-spaces :repo "yasuyk/helm-spaces" :fetcher github)

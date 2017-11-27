@@ -1,1 +1,0 @@
-(grab-mac-link :fetcher github :repo "xuchunyang/grab-mac-link.el")

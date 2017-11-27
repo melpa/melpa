@@ -1,3 +1,0 @@
-(paredit-menu
- :fetcher github
- :repo "phillord/paredit-menu")

@@ -1,3 +1,0 @@
-(weblogger :fetcher github
-           :repo "hexmode/weblogger-el"
-           :version-regexp "REL\\(.*\\)")

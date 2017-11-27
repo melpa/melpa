@@ -1,2 +1,0 @@
-(jira-markup-mode :repo "mnuessler/jira-markup-mode"
-                  :fetcher github)

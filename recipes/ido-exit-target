@@ -1,1 +1,0 @@
-(ido-exit-target :repo "waymondo/ido-exit-target" :fetcher github)

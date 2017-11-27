@@ -1,3 +1,0 @@
-(evalator-clojure :fetcher github
-                  :repo "seanirby/evalator-clojure"
-                  :files (:defaults "*.clj"))

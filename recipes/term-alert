@@ -1,1 +1,0 @@
-(term-alert :fetcher github :repo "CallumCameron/term-alert" :files (:defaults "setup"))

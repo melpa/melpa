@@ -1,3 +1,0 @@
-(phoenix-dark-pink-theme
- :repo "j0ni/phoenix-dark-pink"
- :fetcher github)

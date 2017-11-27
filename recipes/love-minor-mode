@@ -1,1 +1,0 @@
-(love-minor-mode :repo "ejmr/love-minor-mode" :fetcher github)

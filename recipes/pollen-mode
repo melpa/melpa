@@ -1,3 +1,0 @@
-(pollen-mode :fetcher github
-             :repo "lijunsong/pollen-mode"
-             :files ("pollen-mode.el"))

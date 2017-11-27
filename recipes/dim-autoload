@@ -1,1 +1,0 @@
-(dim-autoload :repo "tarsius/dim-autoload" :fetcher github)

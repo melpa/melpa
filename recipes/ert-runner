@@ -1,4 +1,0 @@
-(ert-runner
- :fetcher github
- :repo "rejeep/ert-runner.el"
- :files ("*.el" "bin" "reporters"))

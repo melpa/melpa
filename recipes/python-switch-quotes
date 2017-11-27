@@ -1,2 +1,0 @@
-(python-switch-quotes :fetcher github
-                      :repo "werehuman/python-switch-quotes")

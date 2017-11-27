@@ -1,1 +1,0 @@
-(ox-jira :repo "stig/ox-jira.el" :fetcher github)

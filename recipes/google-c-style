@@ -1,2 +1,0 @@
-(google-c-style :fetcher github
-                :repo "google/styleguide")

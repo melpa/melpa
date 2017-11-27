@@ -1,1 +1,0 @@
-(govet :fetcher github :repo "meshelton/govet")

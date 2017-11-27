@@ -1,1 +1,0 @@
-(expand-line :repo "cheunghy/expand-line" :fetcher github)

@@ -1,4 +1,0 @@
-(evil-textobj-column
-  :fetcher github
-  :repo "noctuid/evil-textobj-column")
-

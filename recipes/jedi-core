@@ -1,3 +1,0 @@
-(jedi-core :fetcher github
-           :repo "tkf/emacs-jedi"
-           :files ("jedi-core.el" "jediepcserver.py" "Makefile" "setup.py"))

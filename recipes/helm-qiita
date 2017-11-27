@@ -1,1 +1,0 @@
-(helm-qiita :repo "masutaka/emacs-helm-qiita" :fetcher github)

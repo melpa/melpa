@@ -1,1 +1,0 @@
-(org2blog :repo "punchagan/org2blog" :fetcher github)

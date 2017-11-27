@@ -1,3 +1,0 @@
-(jpop :fetcher github
-      :repo "domtronn/jpop.el"
-      :files (:defaults "create-file-alist.py"))

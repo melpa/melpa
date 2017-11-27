@@ -1,1 +1,0 @@
-(git-ps1-mode :repo "10sr/git-ps1-mode-el" :fetcher github)

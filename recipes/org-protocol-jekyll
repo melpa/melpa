@@ -1,1 +1,0 @@
-(org-protocol-jekyll :fetcher github :repo "vonavi/org-protocol-jekyll")

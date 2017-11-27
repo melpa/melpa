@@ -1,1 +1,0 @@
-(typed-clojure-mode :fetcher github :repo "typedclojure/typed-clojure-mode")

@@ -1,1 +1,0 @@
-(apache-mode :fetcher github :repo "emacs-php/apache-mode")

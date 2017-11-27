@@ -1,2 +1,0 @@
-(helm-fuzzier :repo "EphramPerdition/helm-fuzzier"
-                 :fetcher github)

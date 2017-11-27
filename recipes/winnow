@@ -1,1 +1,0 @@
-(winnow :fetcher github :repo "dgtized/winnow.el")

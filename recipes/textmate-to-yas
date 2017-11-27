@@ -1,1 +1,0 @@
-(textmate-to-yas :fetcher github :repo "mattfidler/textmate-to-yas.el" :files (:defaults "*.pl"))

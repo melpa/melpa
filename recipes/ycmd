@@ -1,3 +1,0 @@
-(ycmd :fetcher github
-      :repo "abingham/emacs-ycmd"
-      :files ("ycmd.el" "ycmd-eldoc.el" "contrib/*.el"))

@@ -1,1 +1,0 @@
-(workgroups :repo "tlh/workgroups.el" :fetcher github)

@@ -1,2 +1,0 @@
-(smex :repo "nonsequitur/smex" :fetcher github)
-

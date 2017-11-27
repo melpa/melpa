@@ -1,1 +1,0 @@
-(flymake-yaml :fetcher github :repo "yasuyk/flymake-yaml")

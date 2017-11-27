@@ -1,1 +1,0 @@
-(pbcopy :fetcher github :repo "emacsfodder/pbcopy.el")

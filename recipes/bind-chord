@@ -1,3 +1,0 @@
-(bind-chord :repo "waymondo/use-package-chords"
-            :fetcher github
-            :files ("bind-chord.el"))

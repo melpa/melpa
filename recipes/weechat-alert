@@ -1,2 +1,0 @@
-(weechat-alert :fetcher github
-               :repo "Kungi/weechat-alert")

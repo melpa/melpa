@@ -1,3 +1,0 @@
-(bln-mode
- :repo "mgrachten/bln-mode"
- :fetcher github)

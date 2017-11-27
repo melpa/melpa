@@ -1,4 +1,0 @@
-(popup :repo "auto-complete/popup-el"
-       :fetcher github
-       :files ("popup.el"))
-

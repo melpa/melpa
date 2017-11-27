@@ -1,5 +1,0 @@
-(go-autocomplete
- :fetcher github
- :repo "nsf/gocode"
- :files ("emacs/go-autocomplete.el")
- :version-regexp "v\\.\\(.*\\)")

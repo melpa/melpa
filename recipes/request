@@ -1,1 +1,0 @@
-(request :repo "tkf/emacs-request" :fetcher github :files ("request.el"))

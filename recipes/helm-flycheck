@@ -1,1 +1,0 @@
-(helm-flycheck :fetcher github :repo "yasuyk/helm-flycheck")

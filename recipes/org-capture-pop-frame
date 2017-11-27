@@ -1,1 +1,0 @@
-(org-capture-pop-frame :fetcher github :repo "tumashu/org-capture-pop-frame")

@@ -1,1 +1,0 @@
-(know-your-http-well :fetcher github :repo "for-GET/know-your-http-well" :files ("emacs/*.el"))

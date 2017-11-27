@@ -1,1 +1,0 @@
-(scratch :fetcher github :repo "ieure/scratch-el" :files ("scratch.el"))

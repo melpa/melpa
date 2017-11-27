@@ -1,2 +1,0 @@
-(org-table-sticky-header :repo "cute-jumper/org-table-sticky-header"
-                         :fetcher github)

@@ -1,2 +1,0 @@
-(wrap-region :repo "rejeep/wrap-region.el" :fetcher github)
-

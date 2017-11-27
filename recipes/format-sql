@@ -1,3 +1,0 @@
-(format-sql
- :repo "paetzke/format-sql.el"
- :fetcher github)

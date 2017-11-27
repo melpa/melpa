@@ -1,1 +1,0 @@
-(cmake-font-lock :repo "Lindydancer/cmake-font-lock" :fetcher github)

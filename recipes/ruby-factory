@@ -1,4 +1,0 @@
-(ruby-factory
- :fetcher github
- :repo "sshaw/ruby-factory-mode"
- :files (:defaults "snippets"))

@@ -1,2 +1,0 @@
-(scss-mode :repo "antonj/scss-mode" :fetcher github)
-

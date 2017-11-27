@@ -1,1 +1,0 @@
-(helm-growthforecast :fetcher github :repo "daichirata/helm-growthforecast")

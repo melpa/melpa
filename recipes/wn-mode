@@ -1,1 +1,0 @@
-(wn-mode :repo "luismbo/wn-mode" :fetcher github)

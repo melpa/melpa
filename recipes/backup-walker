@@ -1,3 +1,0 @@
-(backup-walker
- :fetcher github
- :repo "lewang/backup-walker")

@@ -1,2 +1,0 @@
-(gntp :repo "tekai/gntp.el" 
-      :fetcher github)

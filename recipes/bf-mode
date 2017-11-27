@@ -1,2 +1,0 @@
-(bf-mode :repo "emacs-jp/bf-mode"
-         :fetcher github)

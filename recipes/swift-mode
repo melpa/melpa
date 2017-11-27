@@ -1,1 +1,0 @@
-(swift-mode :repo "chrisbarrett/swift-mode" :fetcher github)

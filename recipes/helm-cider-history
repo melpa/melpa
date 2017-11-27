@@ -1,2 +1,0 @@
-(helm-cider-history :fetcher github
-                    :repo "Kungi/helm-cider-history")

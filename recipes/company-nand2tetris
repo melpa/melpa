@@ -1,3 +1,0 @@
-(company-nand2tetris :fetcher github
-                     :repo "CestDiego/nand2tetris.el"
-                     :files ("company-nand2tetris.el"))

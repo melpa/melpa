@@ -1,1 +1,0 @@
-(ob-applescript :repo "stig/ob-applescript.el" :fetcher github)

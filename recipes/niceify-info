@@ -1,2 +1,0 @@
-(niceify-info :fetcher github
-              :repo "aaron-em/niceify-info.el")

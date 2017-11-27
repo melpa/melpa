@@ -1,1 +1,0 @@
-(smart-forward :repo "magnars/smart-forward.el" :fetcher github)

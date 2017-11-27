@@ -1,4 +1,0 @@
-(flymake-haskell-multi
- :fetcher github
- :repo "purcell/flymake-haskell-multi"
- :files ("*.el" "haskell_multi"))

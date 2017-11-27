@@ -1,2 +1,0 @@
-(mocker :repo "sigma/mocker.el" :fetcher github
-        :files ("mocker.el"))

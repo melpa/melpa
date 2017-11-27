@@ -1,3 +1,0 @@
-(tabbar-ruler
- :fetcher github
- :repo "mattfidler/tabbar-ruler.el")

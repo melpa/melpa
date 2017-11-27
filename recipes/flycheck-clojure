@@ -1,2 +1,0 @@
-(flycheck-clojure :fetcher github :repo "clojure-emacs/squiggly-clojure"
-                  :files ("elisp/flycheck-clojure/*.el"))

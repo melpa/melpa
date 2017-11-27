@@ -1,3 +1,0 @@
-(geben
- :repo "ahungry/geben"
- :fetcher github)

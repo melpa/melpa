@@ -1,1 +1,0 @@
-(org2jekyll :fetcher github :repo "ardumont/org2jekyll")

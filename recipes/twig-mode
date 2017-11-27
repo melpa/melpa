@@ -1,1 +1,0 @@
-(twig-mode :repo "moljac024/twig-mode" :fetcher github)

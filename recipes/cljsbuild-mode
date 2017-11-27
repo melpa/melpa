@@ -1,3 +1,0 @@
-(cljsbuild-mode
- :repo "kototama/cljsbuild-mode"
- :fetcher github)

@@ -1,3 +1,0 @@
-(bnfc
-  :repo "jmitchell/bnfc-mode"
-  :fetcher github)

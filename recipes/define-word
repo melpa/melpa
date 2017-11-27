@@ -1,2 +1,0 @@
-(define-word :repo "abo-abo/define-word"
-  :fetcher github)

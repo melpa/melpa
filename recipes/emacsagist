@@ -1,3 +1,0 @@
-(emacsagist
- :fetcher github
- :repo "echosa/emacsagist")

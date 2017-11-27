@@ -1,2 +1,0 @@
-(helm-projectile :repo "bbatsov/helm-projectile"
-                 :fetcher github)

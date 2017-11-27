@@ -1,3 +1,0 @@
-(grab-x-link
- :fetcher github
- :repo "xuchunyang/grab-x-link")

@@ -1,1 +1,0 @@
-(ido-select-window :fetcher github :repo "pjones/ido-select-window" :files ("lisp/*.el"))

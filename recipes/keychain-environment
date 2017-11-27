@@ -1,1 +1,0 @@
-(keychain-environment :repo "tarsius/keychain-environment" :fetcher github)

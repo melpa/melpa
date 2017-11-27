@@ -1,1 +1,0 @@
-(helm-spotify :fetcher github :repo "krisajenkins/helm-spotify")

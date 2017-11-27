@@ -1,8 +1,0 @@
-(guix
- :fetcher github
- :repo "alezost/guix.el"
- :files ("elisp/*.el"
-         "doc/*.texi"
-         ("images" "images/*.svg")
-         ("scheme" "scheme/*")
-         (:exclude "scheme/Makefile.am")))

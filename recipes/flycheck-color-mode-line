@@ -1,1 +1,0 @@
-(flycheck-color-mode-line :repo "flycheck/flycheck-color-mode-line" :fetcher github)

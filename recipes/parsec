@@ -1,2 +1,0 @@
-(parsec :repo "cute-jumper/parsec.el"
-        :fetcher github)

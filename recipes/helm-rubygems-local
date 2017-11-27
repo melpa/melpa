@@ -1,1 +1,0 @@
-(helm-rubygems-local :repo "hadashiA/helm-rubygems-local" :fetcher github)

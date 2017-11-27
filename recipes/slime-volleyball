@@ -1,1 +1,0 @@
-(slime-volleyball :fetcher github :repo "fitzsim/slime-volleyball" :files ("*.el" "*.gz" "*.svg" "*.b64"))

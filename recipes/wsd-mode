@@ -1,4 +1,0 @@
-(wsd-mode
- :fetcher github
- :repo "josteink/wsd-mode"
- :version-regexp "v\\.\\(.*\\)")

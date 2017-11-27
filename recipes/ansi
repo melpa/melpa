@@ -1,2 +1,0 @@
-(ansi :repo "rejeep/ansi.el" :fetcher github)
-

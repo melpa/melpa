@@ -1,1 +1,0 @@
-(db :fetcher github :repo "nicferrier/emacs-db" :files ("db.el"))

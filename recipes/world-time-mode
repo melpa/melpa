@@ -1,1 +1,0 @@
-(world-time-mode :fetcher github :repo "nicferrier/emacs-world-time-mode")

@@ -1,1 +1,0 @@
-(helm-rdefs :fetcher github :repo "saidie/emacs-helm-rdefs")

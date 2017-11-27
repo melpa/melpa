@@ -1,1 +1,0 @@
-(ido-grid-mode :fetcher github :repo "larkery/ido-grid-mode.el")

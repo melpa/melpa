@@ -1,1 +1,0 @@
-(eide :fetcher git :url "git://git.tuxfamily.org/gitroot/eide/emacs-ide.git" :files ("src/*.el" "src/themes/*.el"))

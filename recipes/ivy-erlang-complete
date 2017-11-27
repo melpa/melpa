@@ -1,2 +1,0 @@
-(ivy-erlang-complete :repo "s-kostyaev/ivy-erlang-complete" :fetcher github
-                     :files (:defaults "bin"))

@@ -1,1 +1,0 @@
-(dired-explorer :repo "jidaikobo-shibata/dired-explorer" :fetcher github)

@@ -1,1 +1,0 @@
-(helm-google :fetcher github :repo "steckerhalter/helm-google")

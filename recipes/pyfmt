@@ -1,2 +1,0 @@
-(pyfmt :repo "aheaume/pyfmt.el"
-       :fetcher github)

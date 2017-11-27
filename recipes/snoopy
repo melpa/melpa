@@ -1,2 +1,0 @@
-(snoopy :fetcher github
-        :repo "anmonteiro/snoopy-mode")

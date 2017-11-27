@@ -1,2 +1,0 @@
-(himp :fetcher github
-      :repo "mkcms/himp")

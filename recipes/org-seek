@@ -1,2 +1,0 @@
-(org-seek :fetcher github
-          :repo "stardiviner/org-seek.el")

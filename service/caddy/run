@@ -1,3 +1,0 @@
-#!/bin/bash -e
-
-exec /usr/local/bin/caddy --agree --log /home/melpa/log/caddy.log --conf /home/melpa/Caddyfile

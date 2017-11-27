@@ -1,3 +1,0 @@
-(lockfile-mode
-  :repo "preetpalS/emacs-lockfile-mode"
-  :fetcher github)

@@ -1,1 +1,0 @@
-(cloc :fetcher github :repo "cosmicexplorer/cloc-emacs")

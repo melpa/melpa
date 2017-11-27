@@ -1,1 +1,0 @@
-(github-clone :fetcher github :repo "dgtized/github-clone.el")

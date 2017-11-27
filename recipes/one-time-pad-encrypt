@@ -1,1 +1,0 @@
-(one-time-pad-encrypt :repo "garvinguan/emacs-one-time-pad" :fetcher github)

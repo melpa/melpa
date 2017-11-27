@@ -1,1 +1,0 @@
-(dired-launch :fetcher github :repo "thomp/dired-launch")

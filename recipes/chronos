@@ -1,3 +1,0 @@
-(chronos
- :fetcher github
- :repo "dxknight/chronos")

@@ -1,1 +1,0 @@
-(fancy-battery :repo "lunaryorn/fancy-battery.el" :fetcher github)

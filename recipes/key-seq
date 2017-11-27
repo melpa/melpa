@@ -1,3 +1,0 @@
-(key-seq
- :fetcher github
- :repo "vlevit/key-seq.el")

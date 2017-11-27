@@ -1,3 +1,0 @@
-(ob-axiom :fetcher bitbucket
-          :repo "pdo/axiom-environment"
-          :files ("ob-axiom.el"))

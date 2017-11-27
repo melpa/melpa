@@ -1,3 +1,0 @@
-(inkpot-theme
- :repo "ideasman42/emacs-inkpot-theme"
- :fetcher github)

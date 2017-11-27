@@ -1,4 +1,0 @@
-(company-lua
- :fetcher github
- :repo "ptrv/company-lua"
- :files (:defaults "lua"))

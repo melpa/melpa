@@ -1,1 +1,0 @@
-(restart-emacs :fetcher github :repo "iqbalansari/restart-emacs")

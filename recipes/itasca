@@ -1,3 +1,0 @@
-(itasca :repo "jkfurtney/itasca-emacs"
-        :fetcher github
-        :files ("itasca.el" "ac-dict" "snippets"))

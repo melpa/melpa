@@ -1,1 +1,0 @@
-(tomatinho :fetcher github :repo "konr/tomatinho" :files ("tomatinho.el" "tick.wav" "tack.wav"))

@@ -1,3 +1,0 @@
-(shr-tag-pre-highlight
- :fetcher github
- :repo "xuchunyang/shr-tag-pre-highlight.el")

@@ -1,1 +1,0 @@
-(blgrep :repo "ataka/blgrep" :fetcher github)

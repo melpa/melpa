@@ -1,3 +1,0 @@
-(gl-conf-mode
- :repo "llloret/gitolite-emacs"
- :fetcher github)

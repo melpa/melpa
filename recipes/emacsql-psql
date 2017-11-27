@@ -1,3 +1,0 @@
-(emacsql-psql :repo "skeeto/emacsql"
-              :fetcher github
-              :files ("emacsql-psql.el" "emacsql-pg.el"))

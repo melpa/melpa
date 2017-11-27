@@ -1,1 +1,0 @@
-(bison-mode :repo "Wilfred/bison-mode" :fetcher github)

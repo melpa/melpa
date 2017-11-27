@@ -1,1 +1,0 @@
-(moz :fetcher github :repo "bard/mozrepl" :files ("chrome/content/moz.el"))

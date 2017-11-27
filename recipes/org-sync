@@ -1,1 +1,0 @@
-(org-sync :repo "arbox/org-sync" :fetcher github)

@@ -1,1 +1,0 @@
-(json-reformat :fetcher github :repo "gongo/json-reformat")

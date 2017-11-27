@@ -1,3 +1,0 @@
-(org-commentary :repo "smaximov/org-commentary"
-                :fetcher github
-                :files (:defaults "bin"))

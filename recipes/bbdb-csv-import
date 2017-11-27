@@ -1,3 +1,0 @@
-(bbdb-csv-import
- :repo "iankelling/bbdb-csv-import"
- :fetcher gitlab)

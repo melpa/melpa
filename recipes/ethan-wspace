@@ -1,1 +1,0 @@
-(ethan-wspace :fetcher github :repo "glasserc/ethan-wspace" :files ("lisp/*.el"))

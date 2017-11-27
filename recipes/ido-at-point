@@ -1,1 +1,0 @@
-(ido-at-point :repo "katspaugh/ido-at-point" :fetcher github)

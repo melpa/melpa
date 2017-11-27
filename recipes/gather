@@ -1,1 +1,0 @@
-(gather :fetcher github :repo "mhayashi1120/Emacs-gather" :files ("gather.el"))

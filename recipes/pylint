@@ -1,4 +1,0 @@
-(pylint
- :repo "PyCQA/pylint"
- :fetcher github
- :files ("elisp/pylint.el"))

@@ -1,1 +1,0 @@
-(cask :repo "cask/cask" :fetcher github :old-names (carton))

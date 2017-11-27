@@ -1,3 +1,0 @@
-(ob-coffee
- :fetcher github :repo "zweifisch/ob-coffee"
- :files (:defaults "repl.js"))

@@ -1,3 +1,0 @@
-(which-key :repo "justbur/emacs-which-key"
-           :fetcher github)
-

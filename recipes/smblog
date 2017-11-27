@@ -1,1 +1,0 @@
-(smblog :repo "aaptel/smblog-mode" :fetcher github)

@@ -1,3 +1,0 @@
-(ecb :repo "ecb-home/ecb"
-     :fetcher github
-     :files ("*.el" "ecb-images" "ecb2" "ecb.texi"))

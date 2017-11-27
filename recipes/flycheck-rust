@@ -1,1 +1,0 @@
-(flycheck-rust :repo "flycheck/flycheck-rust" :fetcher github)

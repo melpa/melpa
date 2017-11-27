@@ -1,2 +1,0 @@
-(flycheck-popup-tip :fetcher github
-                    :repo "flycheck/flycheck-popup-tip")

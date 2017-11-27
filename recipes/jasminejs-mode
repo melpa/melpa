@@ -1,3 +1,0 @@
-(jasminejs-mode :fetcher github
-                :repo "stoltene2/jasminejs-mode"
-                :files ("jasminejs-mode.el" "snippets/jasminejs-mode"))

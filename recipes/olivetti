@@ -1,2 +1,0 @@
-(olivetti :fetcher github
-          :repo "rnkn/olivetti")

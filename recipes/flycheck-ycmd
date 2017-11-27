@@ -1,3 +1,0 @@
-(flycheck-ycmd :fetcher github
-               :repo "abingham/emacs-ycmd"
-               :files ("flycheck-ycmd.el"))

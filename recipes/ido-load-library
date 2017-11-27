@@ -1,1 +1,0 @@
-(ido-load-library :repo "rolandwalker/ido-load-library" :fetcher github)

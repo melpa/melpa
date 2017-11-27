@@ -1,3 +1,0 @@
-(zweilight-theme
- :repo "philiparvidsson/emacs-zweilight-theme"
- :fetcher github)

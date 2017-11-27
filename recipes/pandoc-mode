@@ -1,3 +1,0 @@
-(pandoc-mode
- :fetcher github
- :repo "joostkremers/pandoc-mode")

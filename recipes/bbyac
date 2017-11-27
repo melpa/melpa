@@ -1,3 +1,0 @@
-(bbyac :fetcher github
-       :repo "baohaojun/bbyac"
-       :files (:defaults "*.bbyac"))

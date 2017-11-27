@@ -1,4 +1,0 @@
-(inflections :repo "eschulte/jump.el"
-             :fetcher github
-             :files ("inflections.el"))
-

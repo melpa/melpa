@@ -1,3 +1,0 @@
-(mpv
- :repo "kljohann/mpv.el"
- :fetcher github)

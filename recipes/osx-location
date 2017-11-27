@@ -1,4 +1,0 @@
-(osx-location
- :fetcher github
- :repo "purcell/osx-location"
- :files ("*.el" "EmacsLocationHelper"))

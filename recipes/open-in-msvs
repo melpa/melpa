@@ -1,5 +1,0 @@
-(open-in-msvs
- :repo "evgeny-panasyuk/open-in-msvs.el"
- :fetcher github
- :files (:defaults "*.vbs"))
-

@@ -1,1 +1,0 @@
-(circe :repo "jorgenschaefer/circe" :fetcher github)

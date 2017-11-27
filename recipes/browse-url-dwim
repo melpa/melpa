@@ -1,1 +1,0 @@
-(browse-url-dwim :repo "rolandwalker/browse-url-dwim" :fetcher github)

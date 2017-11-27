@@ -1,1 +1,0 @@
-(el2org :repo "tumashu/el2org" :fetcher github)

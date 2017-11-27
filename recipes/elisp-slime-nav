@@ -1,2 +1,0 @@
-(elisp-slime-nav :repo "purcell/elisp-slime-nav" :fetcher github)
-

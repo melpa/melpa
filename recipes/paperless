@@ -1,3 +1,0 @@
-(paperless :fetcher github
-	   :repo "atgreen/paperless"
-	   :files ("paperless.el"))

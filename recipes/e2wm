@@ -1,3 +1,0 @@
-(e2wm :repo "kiwanami/emacs-window-manager" 
-      :fetcher github 
-      :files ("e2wm.el" "e2wm-vcs.el"))

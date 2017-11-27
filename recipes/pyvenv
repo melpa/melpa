@@ -1,1 +1,0 @@
-(pyvenv :fetcher github :repo "jorgenschaefer/pyvenv")

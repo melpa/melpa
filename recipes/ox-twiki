@@ -1,5 +1,0 @@
-(ox-twiki
- :fetcher github
- :repo "dfeich/org8-wikiexporters"
- :files ("ox-twiki.el")
- )

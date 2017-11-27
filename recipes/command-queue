@@ -1,1 +1,0 @@
-(command-queue :repo "Yuki-Inoue/command-queue" :fetcher github)

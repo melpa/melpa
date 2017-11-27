@@ -1,1 +1,0 @@
-(window-numbering :fetcher github :repo "nschum/window-numbering.el" :files ("window-numbering.el"))

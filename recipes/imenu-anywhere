@@ -1,1 +1,0 @@
-(imenu-anywhere :repo "vspinu/imenu-anywhere" :fetcher github)

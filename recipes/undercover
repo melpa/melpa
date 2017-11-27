@@ -1,1 +1,0 @@
-(undercover :fetcher github :repo "sviridov/undercover.el")

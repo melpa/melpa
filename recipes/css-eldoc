@@ -1,3 +1,0 @@
-(css-eldoc :fetcher github
-        :repo "zenozeng/css-eldoc"
-        :files ("css-eldoc.el" "css-eldoc-hash-table.el"))

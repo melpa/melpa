@@ -1,1 +1,0 @@
-(init-open-recentf :fetcher github :repo "zonuexe/init-open-recentf.el")

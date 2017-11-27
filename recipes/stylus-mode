@@ -1,1 +1,0 @@
-(stylus-mode :fetcher github :repo "brianc/jade-mode" :files ("stylus-mode.el"))

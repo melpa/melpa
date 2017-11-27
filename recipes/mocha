@@ -1,3 +1,0 @@
-(mocha
- :repo "scottaj/mocha.el"
- :fetcher github)

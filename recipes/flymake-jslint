@@ -1,1 +1,0 @@
-(flymake-jslint :repo "purcell/flymake-jslint" :fetcher github)

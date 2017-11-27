@@ -1,1 +1,0 @@
-(bdo :fetcher github :repo "chrisdone/bdo" :files ("bdo.el" "bdo.js"))

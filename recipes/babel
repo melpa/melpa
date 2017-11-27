@@ -1,1 +1,0 @@
-(babel :fetcher github :repo "juergenhoetzel/babel")

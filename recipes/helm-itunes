@@ -1,1 +1,0 @@
-(helm-itunes :fetcher github :repo "anschwa/helm-itunes")

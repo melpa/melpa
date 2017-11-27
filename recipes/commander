@@ -1,1 +1,0 @@
-(commander :repo "rejeep/commander.el" :fetcher github)

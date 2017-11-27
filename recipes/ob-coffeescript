@@ -1,3 +1,0 @@
-(ob-coffeescript :repo "brantou/ob-coffeescript"
-                 :fetcher github
-                 :files ("ob-coffeescript.el"))

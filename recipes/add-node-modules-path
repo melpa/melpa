@@ -1,1 +1,0 @@
-(add-node-modules-path :repo "codesuki/add-node-modules-path" :fetcher github)

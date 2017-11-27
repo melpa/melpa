@@ -1,1 +1,0 @@
-(gs-mode :fetcher github :repo "yyr/emacs-grads" :files ("gs-mode.el"))

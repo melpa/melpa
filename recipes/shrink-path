@@ -1,1 +1,0 @@
-(shrink-path :fetcher gitlab :repo "bennya/shrink-path.el")

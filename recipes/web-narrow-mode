@@ -1,1 +1,0 @@
-(web-narrow-mode :repo "Qquanwei/web-narrow-mode" :fetcher github)

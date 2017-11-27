@@ -1,2 +1,0 @@
-(airline-themes :fetcher github
-                :repo "AnthonyDiGirolamo/airline-themes")

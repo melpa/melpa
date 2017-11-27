@@ -1,2 +1,0 @@
-(volatile-highlights :repo "k-talo/volatile-highlights.el" :fetcher github)
-

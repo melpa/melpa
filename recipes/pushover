@@ -1,1 +1,0 @@
-(pushover :url "https://git.flintfam.org/swf-projects/emacs-pushover.git" :fetcher git)

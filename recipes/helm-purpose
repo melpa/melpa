@@ -1,1 +1,0 @@
-(helm-purpose :repo "bmag/helm-purpose" :fetcher github)

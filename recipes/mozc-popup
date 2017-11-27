@@ -1,2 +1,0 @@
-(mozc-popup :fetcher github
-            :repo "d5884/mozc-popup")

@@ -1,3 +1,0 @@
-(xcscope
- :fetcher github
- :repo "dkogan/xcscope.el")

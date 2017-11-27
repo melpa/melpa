@@ -1,2 +1,0 @@
-(company-irony-c-headers :fetcher github
-                         :repo "hotpxl/company-irony-c-headers")

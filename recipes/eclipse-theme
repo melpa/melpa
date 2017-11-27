@@ -1,2 +1,0 @@
-(eclipse-theme :repo "abo-abo/eclipse-theme"
-               :fetcher github)

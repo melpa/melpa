@@ -1,2 +1,0 @@
-(aggressive-fill-paragraph :fetcher github
-                           :repo "davidshepherd7/aggressive-fill-paragraph-mode")

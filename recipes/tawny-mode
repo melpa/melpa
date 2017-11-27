@@ -1,3 +1,0 @@
-(tawny-mode
- :fetcher github :repo "phillord/tawny-owl"
- :files ("emacs/tawny-mode.el"))

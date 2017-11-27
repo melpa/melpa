@@ -1,2 +1,0 @@
-(org-dashboard :fetcher github
-               :repo "bard/org-dashboard")

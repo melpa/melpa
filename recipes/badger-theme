@@ -1,3 +1,0 @@
-(badger-theme
- :repo "ccann/badger-theme"
- :fetcher github)

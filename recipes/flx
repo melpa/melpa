@@ -1,3 +1,0 @@
-(flx :repo "lewang/flx"
-     :fetcher github
-     :files ("flx.el"))

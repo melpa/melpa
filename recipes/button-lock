@@ -1,1 +1,0 @@
-(button-lock :repo "rolandwalker/button-lock" :fetcher github :files ("button-lock.el"))

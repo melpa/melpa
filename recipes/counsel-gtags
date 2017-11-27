@@ -1,1 +1,0 @@
-(counsel-gtags :fetcher github :repo "syohex/emacs-counsel-gtags")

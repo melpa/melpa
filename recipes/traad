@@ -1,2 +1,0 @@
-(traad :fetcher github
-       :repo "abingham/emacs-traad")

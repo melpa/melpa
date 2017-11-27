@@ -1,1 +1,0 @@
-(clmemo :repo "ataka/clmemo" :fetcher github)

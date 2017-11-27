@@ -1,4 +1,0 @@
-(hc-zenburn-theme
- :repo "edran/hc-zenburn-emacs"
- :fetcher github
- :files ("hc-zenburn-theme.el"))

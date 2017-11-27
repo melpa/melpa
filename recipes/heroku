@@ -1,1 +1,0 @@
-(heroku :fetcher github :repo "technomancy/heroku.el")

@@ -1,4 +1,0 @@
-(psc-ide :fetcher github
-         :repo "epost/psc-ide-emacs"
-         :files (:defaults
-                 (:exclude "purescript-extras.el")))

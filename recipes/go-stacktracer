@@ -1,1 +1,0 @@
-(go-stacktracer :fetcher github :repo "samertm/go-stacktracer.el")

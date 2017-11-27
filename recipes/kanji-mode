@@ -1,4 +1,0 @@
-(kanji-mode
- :fetcher github
- :repo "wsgac/kanji-mode"
- :files (:defaults "kanji"))

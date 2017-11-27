@@ -1,1 +1,0 @@
-(exec-path-from-shell :fetcher github :repo "purcell/exec-path-from-shell")

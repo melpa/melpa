@@ -1,1 +1,0 @@
-(strace-mode :repo "pkmoore/strace-mode" :fetcher github)

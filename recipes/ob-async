@@ -1,1 +1,0 @@
-(ob-async :repo "astahlman/ob-async" :fetcher github)

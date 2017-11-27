@@ -1,4 +1,0 @@
-(drupal-mode
- :fetcher github
- :repo "arnested/drupal-mode"
- :files ("drupal-mode.el" "drush-make-mode.el" "drupal"))

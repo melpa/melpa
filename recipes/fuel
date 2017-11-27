@@ -1,1 +1,0 @@
-(fuel :fetcher github :repo "factor/factor" :files ("misc/fuel/*.el"))

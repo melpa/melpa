@@ -1,1 +1,0 @@
-(widget-mvc :repo "kiwanami/emacs-widget-mvc" :fetcher github)

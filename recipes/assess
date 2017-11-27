@@ -1,1 +1,0 @@
-(assess :fetcher github :repo "phillord/assess" :old-names (sisyphus))

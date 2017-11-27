@@ -1,1 +1,0 @@
-(helm-rails :fetcher github :repo "asok/helm-rails" :files ("helm-rails.el"))

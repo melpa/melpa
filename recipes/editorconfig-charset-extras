@@ -1,2 +1,0 @@
-(editorconfig-charset-extras :fetcher github
-                             :repo "10sr/editorconfig-charset-extras-el")

@@ -1,3 +1,0 @@
-(easy-escape
- :repo "cpitclaudel/easy-escape"
- :fetcher github)

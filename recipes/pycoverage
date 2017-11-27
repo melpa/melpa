@@ -1,2 +1,0 @@
-(pycoverage :fetcher github :repo "mattharrison/pycoverage.el"
-            :files ("pycoverage.el" "cov2emacs/bin/cov2emacs" "cov2emacs/cov2emacslib/__init__.py" "cov2emacs/cov2emacslib/meta.py"))

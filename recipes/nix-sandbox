@@ -1,3 +1,0 @@
-(nix-sandbox :fetcher github
-             :repo "travisbhartwell/nix-emacs"
-             :files ("nix-sandbox.el"))

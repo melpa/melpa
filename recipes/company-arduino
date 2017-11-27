@@ -1,1 +1,0 @@
-(company-arduino :repo "yuutayamada/company-arduino" :fetcher github)

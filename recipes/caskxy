@@ -1,2 +1,0 @@
-(caskxy :repo "aki2o/caskxy"
-        :fetcher github)

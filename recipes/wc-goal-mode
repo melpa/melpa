@@ -1,1 +1,0 @@
-(wc-goal-mode :repo "bnbeckwith/wc-goal-mode" :fetcher github)

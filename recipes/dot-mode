@@ -1,1 +1,0 @@
-(dot-mode :repo "wyrickre/dot-mode" :fetcher github)

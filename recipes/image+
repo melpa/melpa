@@ -1,2 +1,0 @@
-(image+ :repo "mhayashi1120/Emacs-imagex"
-        :fetcher github)

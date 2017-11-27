@@ -1,3 +1,0 @@
-(mark-multiple
- :fetcher github
- :repo "magnars/mark-multiple.el")

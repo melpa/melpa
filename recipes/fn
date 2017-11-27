@@ -1,1 +1,0 @@
-(fn :fetcher github :repo "troyp/fn.el")

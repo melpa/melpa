@@ -1,1 +1,0 @@
-(virtualenv :fetcher github :repo "aculich/virtualenv.el")

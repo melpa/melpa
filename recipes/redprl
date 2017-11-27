@@ -1,4 +1,0 @@
-(redprl
- :fetcher github
- :repo "RedPRL/sml-redprl"
- :files ("emacs/*.el"))

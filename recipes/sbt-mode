@@ -1,3 +1,0 @@
-(sbt-mode
- :repo "ensime/emacs-sbt-mode"
- :fetcher github)

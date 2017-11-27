@@ -1,1 +1,0 @@
-(org-babel-eval-in-repl :fetcher github :repo "diadochos/org-babel-eval-in-repl" :branch "master")

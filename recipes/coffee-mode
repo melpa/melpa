@@ -1,2 +1,0 @@
-(coffee-mode :repo "defunkt/coffee-mode" :fetcher github)
-

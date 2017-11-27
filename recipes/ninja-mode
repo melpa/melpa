@@ -1,1 +1,0 @@
-(ninja-mode :fetcher github :repo "martine/ninja" :files ("misc/*.el"))

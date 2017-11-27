@@ -1,1 +1,0 @@
-(org-sync-snippets :repo "abrochard/org-sync-snippets" :fetcher github)

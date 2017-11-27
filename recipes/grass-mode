@@ -1,1 +1,0 @@
-(grass-mode :fetcher bitbucket :repo "tws/grass-mode.el")

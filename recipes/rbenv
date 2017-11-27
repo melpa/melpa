@@ -1,1 +1,0 @@
-(rbenv :repo "senny/rbenv.el" :fetcher github)

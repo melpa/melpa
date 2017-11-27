@@ -1,3 +1,0 @@
-(tern-context-coloring :fetcher github
-                       :repo "jacksonrayhamilton/tern-context-coloring"
-                       :files ("emacs/tern-context-coloring.el"))

@@ -1,3 +1,0 @@
-(phoenix-dark-mono-theme
- :repo "j0ni/phoenix-dark-mono"
- :fetcher github)

@@ -1,2 +1,0 @@
-(datetime :repo "doublep/datetime"
-          :fetcher github)

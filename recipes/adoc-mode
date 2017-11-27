@@ -1,1 +1,0 @@
-(adoc-mode :fetcher github :repo "sensorflo/adoc-mode" :files ("adoc-mode.el"))

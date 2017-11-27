@@ -1,2 +1,0 @@
-(expand-region :repo "magnars/expand-region.el" :fetcher github)
-

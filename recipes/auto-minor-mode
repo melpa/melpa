@@ -1,1 +1,0 @@
-(auto-minor-mode :repo "joewreschnig/auto-minor-mode" :fetcher github)

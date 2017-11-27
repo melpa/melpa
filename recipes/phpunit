@@ -1,1 +1,0 @@
-(phpunit :fetcher github :repo "nlamirault/phpunit.el")

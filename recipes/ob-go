@@ -1,1 +1,0 @@
-(ob-go :fetcher github :repo "pope/ob-go")

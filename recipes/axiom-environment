@@ -1,4 +1,0 @@
-(axiom-environment :fetcher bitbucket
-                   :repo "pdo/axiom-environment"
-                   :files ("*.el" ("data" "data/*.el") ("themes" "themes/*.el")
-                           (:exclude "axiom.el" "ob-axiom.el")))

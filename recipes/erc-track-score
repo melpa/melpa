@@ -1,1 +1,0 @@
-(erc-track-score :fetcher github :repo "jd/erc-track-score.el")

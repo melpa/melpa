@@ -1,4 +1,0 @@
-(datetime-format
- :repo "emacs-php/emacs-datetime"
- :fetcher github
- :files ("datetime-format.el"))

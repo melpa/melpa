@@ -1,3 +1,0 @@
-(highlight-context-line
-	:repo "ska2342/highlight-context-line"
-	:fetcher github)

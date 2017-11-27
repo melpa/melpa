@@ -1,1 +1,0 @@
-(phan :fetcher github :repo "emacs-php/phan.el")

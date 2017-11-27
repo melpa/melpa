@@ -1,1 +1,0 @@
-(magit-filenotify :fetcher github :repo "ruediger/magit-filenotify")

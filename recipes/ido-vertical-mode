@@ -1,1 +1,0 @@
-(ido-vertical-mode :fetcher github :repo "creichert/ido-vertical-mode.el")

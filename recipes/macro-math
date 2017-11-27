@@ -1,1 +1,0 @@
-(macro-math :fetcher github :repo "nschum/macro-math.el")

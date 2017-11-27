@@ -1,3 +1,0 @@
-(symbol-overlay
- :fetcher github
- :repo "wolray/symbol-overlay")

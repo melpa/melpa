@@ -1,3 +1,0 @@
-(osx-dictionary :repo "xuchunyang/osx-dictionary.el"
-                :fetcher github
-                :files ("osx-dictionary.el" "osx-dictionary.m"))

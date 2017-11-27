@@ -1,4 +1,0 @@
-(floobits
- :fetcher github
- :repo "Floobits/floobits-emacs"
- :files ("floo" "floobits.el" "floobits.py"))

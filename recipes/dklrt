@@ -1,1 +1,0 @@
-(dklrt :fetcher github :repo "davidkeegan/dklrt" :files ("*.el" "*.texi" "dir" "*.py"))

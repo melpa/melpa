@@ -1,6 +1,0 @@
-(elpa-mirror :fetcher github
-             :repo "redguardtoo/elpa-mirror"
-             :files ("elpa-mirror.el"
-                     "elpa-mirror.js"
-                     "index.html"))
-

@@ -1,1 +1,0 @@
-(pcsv :fetcher github :repo "mhayashi1120/Emacs-pcsv" :files ("pcsv.el"))

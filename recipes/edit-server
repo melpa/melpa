@@ -1,2 +1,0 @@
-(edit-server :repo "stsquad/emacs_chrome" :fetcher github :files
-     ("servers/edit-server.el"))

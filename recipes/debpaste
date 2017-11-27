@@ -1,1 +1,0 @@
-(debpaste :repo "alezost/debpaste.el" :fetcher github)

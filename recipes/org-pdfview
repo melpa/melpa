@@ -1,1 +1,0 @@
-(org-pdfview :repo "markus1189/org-pdfview" :fetcher github)

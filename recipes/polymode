@@ -1,4 +1,0 @@
-(polymode
- :fetcher github
- :repo "vspinu/polymode"
- :files ("*.el" "modes/*.el"))

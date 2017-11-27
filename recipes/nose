@@ -1,1 +1,0 @@
-(nose :fetcher bitbucket :repo "durin42/nosemacs")

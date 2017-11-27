@@ -1,2 +1,0 @@
-(flycheck-title :repo "Wilfred/flycheck-title"
-                :fetcher github)

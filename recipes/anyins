@@ -1,2 +1,0 @@
-(anyins :fetcher github
-             :repo "antham/anyins")

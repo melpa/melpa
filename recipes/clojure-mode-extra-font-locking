@@ -1,2 +1,0 @@
-(clojure-mode-extra-font-locking :repo "clojure-emacs/clojure-mode" :fetcher github :files
-                                 ("clojure-mode-extra-font-locking.el"))

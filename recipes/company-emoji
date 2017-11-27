@@ -1,1 +1,0 @@
-(company-emoji :repo "dunn/company-emoji" :fetcher github)

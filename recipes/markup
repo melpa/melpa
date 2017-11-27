@@ -1,4 +1,0 @@
-(markup
-  :repo "leoc/markup.el"
-  :fetcher github
-  :files ("markup.el"))

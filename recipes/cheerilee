@@ -1,3 +1,0 @@
-(cheerilee
- :fetcher github
- :repo "Vannil/cheerilee.el")

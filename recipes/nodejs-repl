@@ -1,1 +1,0 @@
-(nodejs-repl :fetcher github :repo "abicky/nodejs-repl.el")

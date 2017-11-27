@@ -1,1 +1,0 @@
-(dactyl-mode :fetcher github :repo "luxbock/dactyl-mode")

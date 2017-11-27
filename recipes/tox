@@ -1,1 +1,0 @@
-(tox :fetcher github :repo "chmouel/tox.el")

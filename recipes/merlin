@@ -1,1 +1,0 @@
-(merlin :fetcher github :repo "the-lambda-church/merlin" :branch "beta" :files ("emacs/*.el"))

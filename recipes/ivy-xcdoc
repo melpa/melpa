@@ -1,1 +1,0 @@
-(ivy-xcdoc :repo "hex2010/emacs-ivy-xcdoc" :fetcher github)

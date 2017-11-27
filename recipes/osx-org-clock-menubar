@@ -1,1 +1,0 @@
-(osx-org-clock-menubar :fetcher github :repo "jordonbiondo/osx-org-clock-menubar" :files (:defaults "*.rb"))

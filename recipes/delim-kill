@@ -1,2 +1,0 @@
-(delim-kill :repo "thomas11/delim-kill" :fetcher github)
-

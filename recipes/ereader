@@ -1,2 +1,0 @@
-(ereader :fetcher github
-         :repo "bddean/emacs-ereader")

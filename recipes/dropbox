@@ -1,1 +1,0 @@
-(dropbox :fetcher github :repo "pavpanchekha/dropbox.el")

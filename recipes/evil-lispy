@@ -1,2 +1,0 @@
-(evil-lispy :repo "sp3ctum/evil-lispy"
-            :fetcher github)

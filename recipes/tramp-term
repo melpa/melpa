@@ -1,1 +1,0 @@
-(tramp-term :fetcher github :repo "randymorris/tramp-term.el")

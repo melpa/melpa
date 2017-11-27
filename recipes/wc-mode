@@ -1,1 +1,0 @@
-(wc-mode :fetcher github :repo "bnbeckwith/wc-mode")

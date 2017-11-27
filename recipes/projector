@@ -1,1 +1,0 @@
-(projector :repo "waymondo/projector.el" :fetcher github)

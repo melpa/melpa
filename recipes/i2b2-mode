@@ -1,2 +1,0 @@
-(i2b2-mode :fetcher github
-           :repo "danlamanna/i2b2-mode")

@@ -1,2 +1,0 @@
-(slideview :repo "mhayashi1120/Emacs-slideview"
-           :fetcher github)

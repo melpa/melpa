@@ -1,2 +1,0 @@
-(cmd-to-echo :fetcher github
-             :repo "mallt/cmd-to-echo")

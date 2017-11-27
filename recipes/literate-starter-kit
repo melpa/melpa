@@ -1,4 +1,0 @@
-(literate-starter-kit
- :fetcher github
- :repo "eschulte/emacs24-starter-kit"
- :files ("elpa" "snippets" "src" "Makefile" "init.el" "*.org"))

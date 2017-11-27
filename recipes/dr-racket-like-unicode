@@ -1,3 +1,0 @@
-(dr-racket-like-unicode
- :fetcher github
- :repo "david-christiansen/dr-racket-like-unicode")

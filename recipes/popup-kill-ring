@@ -1,1 +1,0 @@
-(popup-kill-ring :repo "waymondo/popup-kill-ring" :fetcher github)

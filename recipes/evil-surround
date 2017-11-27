@@ -1,1 +1,0 @@
-(evil-surround :repo "emacs-evil/evil-surround" :fetcher github :old-names (surround))

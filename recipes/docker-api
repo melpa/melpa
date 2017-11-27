@@ -1,1 +1,0 @@
-(docker-api :fetcher github :repo "Silex/docker-api.el")

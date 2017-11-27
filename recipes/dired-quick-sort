@@ -1,3 +1,0 @@
-(dired-quick-sort
- :repo "xuhdev/dired-quick-sort"
- :fetcher gitlab)

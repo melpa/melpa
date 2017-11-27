@@ -1,2 +1,0 @@
-(zone-select :repo "kawabata/zone-select"
-             :fetcher github)

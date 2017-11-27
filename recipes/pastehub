@@ -1,4 +1,0 @@
-(pastehub :repo "kiyoka/pastehub"
-	  :fetcher github
-	  :files ("client/emacs/pastehub.el"))
-

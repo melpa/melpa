@@ -1,3 +1,0 @@
-(ego :repo "emacs-china/EGO"
-             :fetcher github
-             :files (:defaults "themes"))

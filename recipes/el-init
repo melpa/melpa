@@ -1,1 +1,0 @@
-(el-init :fetcher github :repo "HKey/el-init")

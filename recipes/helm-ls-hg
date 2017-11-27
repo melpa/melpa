@@ -1,3 +1,0 @@
-(helm-ls-hg :repo "emacs-helm/helm-ls-hg"
-            :fetcher github
-            :old-names (helm-mercurial-queue))

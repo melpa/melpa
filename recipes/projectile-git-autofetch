@@ -1,2 +1,0 @@
-(projectile-git-autofetch :repo "andrmuel/projectile-git-autofetch"
-                          :fetcher github)

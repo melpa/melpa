@@ -1,1 +1,0 @@
-(org-mobile-sync :repo "steckerhalter/org-mobile-sync" :fetcher github)

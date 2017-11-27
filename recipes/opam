@@ -1,1 +1,0 @@
-(opam :repo "lunaryorn/opam.el" :fetcher github)

@@ -1,1 +1,0 @@
-(pyimport :repo "Wilfred/pyimport" :fetcher github)

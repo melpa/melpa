@@ -1,4 +1,0 @@
-(gnuplot
- :repo "bruceravel/gnuplot-mode"
- :fetcher github
- :files ("gnuplot.el" "gnuplot-gui.el" "gnuplot-context.el"))

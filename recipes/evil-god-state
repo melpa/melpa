@@ -1,2 +1,0 @@
-(evil-god-state :fetcher github
-                :repo "gridaphobe/evil-god-state")

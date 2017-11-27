@@ -1,2 +1,0 @@
-(projectile-rails :repo "asok/projectile-rails"
-                  :fetcher github)

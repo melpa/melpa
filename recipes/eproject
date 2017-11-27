@@ -1,4 +1,0 @@
-(eproject
- :repo "jrockway/eproject"
- :fetcher github
- :files ("eproject.el" "eproject-extras.el" "lang/*.el" "contrib/*.el"))

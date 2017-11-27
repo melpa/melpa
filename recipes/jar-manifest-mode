@@ -1,1 +1,0 @@
-(jar-manifest-mode :fetcher github :repo "omajid/jar-manifest-mode")

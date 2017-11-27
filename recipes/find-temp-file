@@ -1,1 +1,0 @@
-(find-temp-file :fetcher github :repo "thisirs/find-temp-file")

@@ -1,4 +1,0 @@
-(python-docstring
- :fetcher github
- :repo "glyph/python-docstring-mode"
- :files ("docstring_wrap.py" "python-docstring.el"))

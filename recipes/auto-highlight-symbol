@@ -1,2 +1,0 @@
-(auto-highlight-symbol :repo "gennad/auto-highlight-symbol" :fetcher github)
-

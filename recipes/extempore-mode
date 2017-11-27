@@ -1,1 +1,0 @@
-(extempore-mode :fetcher github :repo "extemporelang/extempore-emacs-mode")

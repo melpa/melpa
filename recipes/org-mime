@@ -1,2 +1,0 @@
-(org-mime :repo "org-mime/org-mime" :fetcher github)
-

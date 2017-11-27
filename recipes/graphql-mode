@@ -1,1 +1,0 @@
-(graphql-mode :repo "davazp/graphql-mode" :fetcher github)

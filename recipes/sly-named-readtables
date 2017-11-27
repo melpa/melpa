@@ -1,5 +1,0 @@
-(sly-named-readtables :fetcher github
-		      :repo "capitaomorte/sly-named-readtables"
-		      :files (:defaults
-			      "*.lisp"
-			      "*.asd"))

@@ -1,1 +1,0 @@
-(company-c-headers :repo "randomphrase/company-c-headers" :fetcher github)

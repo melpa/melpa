@@ -1,2 +1,0 @@
-(pillar :fetcher github
-        :repo "pillar-markup/pillar-mode")

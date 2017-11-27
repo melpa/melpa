@@ -1,4 +1,0 @@
-(take-off
- :fetcher github
- :repo "tburette/take-off"
- :files ("*.el" "front"))

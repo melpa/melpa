@@ -1,1 +1,0 @@
-(string-edit :fetcher github :repo "magnars/string-edit.el" :files ("string-edit.el"))

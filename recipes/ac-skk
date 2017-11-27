@@ -1,2 +1,0 @@
-(ac-skk :repo "myuhe/ac-skk.el"
-        :fetcher github)

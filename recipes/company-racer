@@ -1,2 +1,0 @@
-(company-racer :fetcher github
-               :repo "emacs-pe/company-racer")

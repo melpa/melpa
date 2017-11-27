@@ -1,1 +1,0 @@
-(window-jump :repo "chumpage/chumpy-windows" :fetcher github :files ("window-jump.el"))

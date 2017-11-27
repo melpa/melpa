@@ -1,1 +1,0 @@
-(evil-replace-with-register :fetcher github :repo "Dewdrops/evil-ReplaceWithRegister")

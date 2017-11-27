@@ -1,3 +1,0 @@
-(c-c-combo :repo "CestDiego/c-c-combo.el"
-           :fetcher github
-           :files (:defaults "*.wav"))

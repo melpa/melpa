@@ -1,1 +1,0 @@
-(helm-aws :fetcher github :repo "istib/helm-aws")

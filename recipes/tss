@@ -1,2 +1,0 @@
-(tss :repo "aki2o/emacs-tss"
-     :fetcher github)

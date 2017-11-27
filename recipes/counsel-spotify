@@ -1,1 +1,0 @@
-(counsel-spotify :fetcher github :repo "Lautaro-Garcia/counsel-spotify")

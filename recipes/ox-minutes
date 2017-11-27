@@ -1,2 +1,0 @@
-(ox-minutes :fetcher github
-            :repo "kaushalmodi/ox-minutes")

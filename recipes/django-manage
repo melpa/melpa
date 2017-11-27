@@ -1,1 +1,0 @@
-(django-manage :fetcher github :repo "gopar/django-manage")

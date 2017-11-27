@@ -1,1 +1,0 @@
-(helm-hatena-bookmark :repo "masutaka/emacs-helm-hatena-bookmark" :fetcher github)

@@ -1,3 +1,0 @@
-(req-package
-    :fetcher github
-    :repo "edvorg/req-package")

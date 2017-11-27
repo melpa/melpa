@@ -1,4 +1,0 @@
-(idris-mode
- :repo "idris-hackers/idris-mode"
- :fetcher github
- :files (:defaults "logo-small.png"))

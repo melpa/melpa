@@ -1,4 +1,0 @@
-(skewer-reload-stylesheets
- :fetcher github
- :repo "NateEag/skewer-reload-stylesheets"
- :files (:defaults "*.js"))

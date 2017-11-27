@@ -1,3 +1,0 @@
-(drone
- :repo "olymk2/emacs-drone"
- :fetcher github)

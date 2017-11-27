@@ -1,2 +1,0 @@
-(c-eldoc :repo "nflath/c-eldoc" :fetcher github)
-

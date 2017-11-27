@@ -1,1 +1,0 @@
-(aggressive-indent :repo "Malabarba/aggressive-indent-mode" :fetcher github)

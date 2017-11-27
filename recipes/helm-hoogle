@@ -1,1 +1,0 @@
-(helm-hoogle :fetcher github :repo "jwiegley/helm-hoogle")

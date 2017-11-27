@@ -1,1 +1,0 @@
-(helm-dired-recent-dirs :fetcher github :repo "akisute3/helm-dired-recent-dirs")

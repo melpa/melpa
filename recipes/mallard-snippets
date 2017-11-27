@@ -1,4 +1,0 @@
-(mallard-snippets
- :repo "jhradilek/emacs-mallard-snippets"
- :fetcher github
- :files ("mallard-snippets.el" "snippets"))

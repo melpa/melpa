@@ -1,1 +1,0 @@
-(pomidor :fetcher github :repo "TatriX/pomidor" :files (:defaults "tick.wav" "tack.wav" "overwork.wav"))

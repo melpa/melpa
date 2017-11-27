@@ -1,2 +1,0 @@
-(flycheck-vale :fetcher github
-               :repo "abingham/flycheck-vale")

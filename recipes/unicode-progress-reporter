@@ -1,1 +1,0 @@
-(unicode-progress-reporter :repo "rolandwalker/unicode-progress-reporter" :fetcher github)

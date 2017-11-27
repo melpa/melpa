@@ -1,1 +1,0 @@
-(auctex-lua :repo "vermiculus/auctex-lua" :fetcher github)

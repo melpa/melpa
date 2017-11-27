@@ -1,3 +1,0 @@
-(term-projectile :fetcher github
-                 :repo "IvanMalison/term-manager"
-                 :files ("term-projectile.el"))

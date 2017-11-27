@@ -1,1 +1,0 @@
-(chruby :repo "plexus/chruby.el" :fetcher github)

@@ -1,3 +1,0 @@
-(clear-text :fetcher github
-            :repo "xuchunyang/clear-text.el"
-            :files (:defaults "*.txt"))

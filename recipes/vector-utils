@@ -1,1 +1,0 @@
-(vector-utils :repo "rolandwalker/vector-utils" :fetcher github)

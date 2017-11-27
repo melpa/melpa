@@ -1,1 +1,0 @@
-(flycheck-kotlin :fetcher github :repo "whirm/flycheck-kotlin")

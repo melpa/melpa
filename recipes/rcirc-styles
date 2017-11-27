@@ -1,3 +1,0 @@
-(rcirc-styles :fetcher github
-              :repo "aaron-em/rcirc-styles.el"
-	      :old-names (rcirc-controls))

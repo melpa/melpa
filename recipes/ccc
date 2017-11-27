@@ -1,4 +1,0 @@
-(ccc
- :repo "skk-dev/ddskk"
- :fetcher github
- :files ("ccc.el"))

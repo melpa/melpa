@@ -1,1 +1,0 @@
-(web :fetcher github :repo "nicferrier/emacs-web" :files ("web.el"))

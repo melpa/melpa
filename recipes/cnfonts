@@ -1,3 +1,0 @@
-(cnfonts :fetcher github
-         :repo "tumashu/cnfonts"
-         :files ("cnfonts*.el"))

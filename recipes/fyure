@@ -1,1 +1,0 @@
-(fyure :repo "mooz/fyure" :fetcher github :files ("fyure.el" "fyure.py"))

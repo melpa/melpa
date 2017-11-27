@@ -1,1 +1,0 @@
-(recursive-narrow :fetcher github :repo "nflath/recursive-narrow")

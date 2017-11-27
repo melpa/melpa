@@ -1,3 +1,0 @@
-(smiles-mode
- :fetcher github
- :repo "stardiviner/smiles-mode")

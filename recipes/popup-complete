@@ -1,2 +1,0 @@
-(popup-complete :fetcher github
-                :repo "syohex/emacs-popup-complete")

@@ -1,1 +1,0 @@
-(edbi :fetcher github :repo "kiwanami/emacs-edbi" :files ("edbi*.el" "edbi*.pl"))

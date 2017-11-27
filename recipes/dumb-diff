@@ -1,1 +1,0 @@
-(dumb-diff :repo "jacktasia/dumb-diff" :fetcher github)

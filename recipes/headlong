@@ -1,2 +1,0 @@
-(headlong :repo "abo-abo/headlong"
-          :fetcher github)

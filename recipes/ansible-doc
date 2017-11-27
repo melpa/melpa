@@ -1,1 +1,0 @@
-(ansible-doc :repo "lunaryorn/ansible-doc.el" :fetcher github)

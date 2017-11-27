@@ -1,6 +1,0 @@
-(haskell-mode
- :repo "haskell/haskell-mode"
- :fetcher github
- :files (:defaults
-         "NEWS"
-         "logo.svg"))

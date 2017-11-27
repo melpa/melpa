@@ -1,3 +1,0 @@
-(evil-search-highlight-persist
-  :fetcher github
-  :repo "naclander/evil-search-highlight-persist")

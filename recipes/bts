@@ -1,2 +1,0 @@
-(bts :repo "aki2o/emacs-bts"
-     :fetcher github)

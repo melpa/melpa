@@ -1,2 +1,0 @@
-(gitter :fetcher github
-        :repo "xuchunyang/gitter.el")

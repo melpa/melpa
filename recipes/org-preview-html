@@ -1,1 +1,0 @@
-(org-preview-html :fetcher github :repo "lujun9972/org-preview-html")

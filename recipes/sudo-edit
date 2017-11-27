@@ -1,3 +1,0 @@
-(sudo-edit
- :repo "nflath/sudo-edit"
- :fetcher github)

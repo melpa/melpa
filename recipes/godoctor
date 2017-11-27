@@ -1,2 +1,0 @@
-(godoctor :fetcher github
-          :repo "microamp/godoctor.el")

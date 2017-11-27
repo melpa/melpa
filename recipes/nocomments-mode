@@ -1,1 +1,0 @@
-(nocomments-mode :repo "Lindydancer/nocomments-mode" :fetcher github)

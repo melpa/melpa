@@ -1,1 +1,0 @@
-(php-boris-minor-mode :repo "steckerhalter/php-boris-minor-mode" :fetcher github)

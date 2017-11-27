@@ -1,1 +1,0 @@
-(go-add-tags :repo "syohex/emacs-go-add-tags" :fetcher github)

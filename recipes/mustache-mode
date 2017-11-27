@@ -1,1 +1,0 @@
-(mustache-mode :fetcher github :repo "mustache/emacs")

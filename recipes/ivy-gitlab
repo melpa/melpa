@@ -1,1 +1,0 @@
-(ivy-gitlab :fetcher github :repo "nlamirault/emacs-gitlab" :files ("ivy-gitlab.el"))

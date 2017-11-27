@@ -1,2 +1,0 @@
-(helm-notmuch :fetcher github
-              :repo "xuchunyang/helm-notmuch")

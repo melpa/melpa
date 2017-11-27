@@ -1,1 +1,0 @@
-(flymake-sass :repo "purcell/flymake-sass" :fetcher github)

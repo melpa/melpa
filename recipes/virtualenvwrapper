@@ -1,1 +1,0 @@
-(virtualenvwrapper :fetcher github :repo "porterjamesj/virtualenvwrapper.el")

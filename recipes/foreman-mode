@@ -1,1 +1,0 @@
-(foreman-mode :repo "zweifisch/foreman-mode" :fetcher github)

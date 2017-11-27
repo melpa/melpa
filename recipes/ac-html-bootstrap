@@ -1,3 +1,0 @@
-(ac-html-bootstrap :fetcher github
-                   :repo "osv/ac-html-bootstrap"
-                   :files ("*.el" "html-stuff" "fa-html-stuff"))

@@ -1,2 +1,0 @@
-(popup-switcher :repo "kostafey/popup-switcher"
-                :fetcher github)

@@ -1,1 +1,0 @@
-(helm-proc :repo "markus1189/helm-proc" :fetcher github)

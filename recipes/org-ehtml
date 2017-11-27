@@ -1,5 +1,0 @@
-(org-ehtml :fetcher github
-           :repo "eschulte/org-ehtml"
-           :files ("src/*.el"
-                   "src/ox-ehtml.js"
-                   "src/ox-ehtml.css"))

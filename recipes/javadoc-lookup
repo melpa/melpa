@@ -1,3 +1,0 @@
-(javadoc-lookup :repo "skeeto/javadoc-lookup"
-                :fetcher github
-                :files ("*.el" ("webcache" "webcache/*")))

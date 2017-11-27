@@ -1,2 +1,0 @@
-(company-jedi :fetcher github
-              :repo "syohex/emacs-company-jedi")

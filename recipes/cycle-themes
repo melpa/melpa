@@ -1,1 +1,0 @@
-(cycle-themes :fetcher github :repo "toroidal-code/cycle-themes.el")

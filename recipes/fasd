@@ -1,1 +1,0 @@
-(fasd :repo "steckerhalter/emacs-fasd" :fetcher github)

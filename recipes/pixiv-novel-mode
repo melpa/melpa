@@ -1,1 +1,0 @@
-(pixiv-novel-mode :fetcher github :repo "zonuexe/pixiv-novel-mode.el")

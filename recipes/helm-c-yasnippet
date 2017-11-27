@@ -1,2 +1,0 @@
-(helm-c-yasnippet :repo "emacs-jp/helm-c-yasnippet"
-                  :fetcher github)

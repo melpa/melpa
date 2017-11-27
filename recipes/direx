@@ -1,3 +1,0 @@
-(direx :fetcher github
-       :repo "m2ym/direx-el"
-       :files ("direx.el" "direx-project.el"))

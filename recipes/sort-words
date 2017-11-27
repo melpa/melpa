@@ -1,1 +1,0 @@
-(sort-words :fetcher github :repo "dotemacs/sort-words.el")

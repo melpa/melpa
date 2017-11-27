@@ -1,2 +1,0 @@
-(kosmos-theme :repo "habamax/kosmos-theme"
-              :fetcher github)

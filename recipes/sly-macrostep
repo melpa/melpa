@@ -1,5 +1,0 @@
-(sly-macrostep :fetcher github
-                 :repo "capitaomorte/sly-macrostep"
-                 :files (:defaults
-                         "*.lisp"
-                         "*.asd"))

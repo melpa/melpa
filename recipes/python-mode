@@ -1,4 +1,0 @@
-(python-mode
- :fetcher gitlab
- :repo "python-mode-devs/python-mode"
- :files ("python-mode.el" ("completion" "completion/pycomplete.*")))

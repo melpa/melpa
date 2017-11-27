@@ -1,1 +1,0 @@
-(diminish :fetcher github :repo "myrjola/diminish.el")

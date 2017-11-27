@@ -1,7 +1,0 @@
-(elpy
- :fetcher github
- :repo "jorgenschaefer/elpy"
- :files ("*.el"
-         "NEWS.rst"
-         "snippets"
-         "elpy"))

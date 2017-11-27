@@ -1,1 +1,0 @@
-(with-editor :fetcher github :repo "magit/with-editor")

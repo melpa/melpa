@@ -1,1 +1,0 @@
-(git-dwim :repo "rubikitch/emacs-git-dwim" :fetcher github)

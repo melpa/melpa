@@ -1,1 +1,0 @@
-(spotlight :repo "benmaughan/spotlight.el" :fetcher github)

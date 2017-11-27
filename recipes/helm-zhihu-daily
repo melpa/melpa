@@ -1,1 +1,0 @@
-(helm-zhihu-daily :repo "xuchunyang/helm-zhihu-daily" :fetcher github)

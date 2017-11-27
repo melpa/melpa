@@ -1,2 +1,0 @@
-(php-mode :repo "ejmr/php-mode" :fetcher github
-          :files (:defaults "skeleton/*.el"))

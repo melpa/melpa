@@ -1,1 +1,0 @@
-(el2markdown :repo "Lindydancer/el2markdown" :fetcher github)

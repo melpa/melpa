@@ -1,3 +1,0 @@
-(inlineR :repo "myuhe/inlineR.el"
-         :fetcher github
-         :files ("inlineR.el"))

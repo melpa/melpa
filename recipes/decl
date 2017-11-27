@@ -1,4 +1,0 @@
-(decl
-  :repo "preetpalS/decl.el"
-  :fetcher github
-  :files ("decl.el"))

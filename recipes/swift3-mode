@@ -1,3 +1,0 @@
-(swift3-mode
- :fetcher github
- :repo "taku0/swift3-mode")

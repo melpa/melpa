@@ -1,4 +1,0 @@
-(impatient-mode :repo "netguy204/imp.el"
-                :fetcher github
-                :files ("*.html" "*.js" "impatient-mode.el"))
-

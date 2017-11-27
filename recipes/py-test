@@ -1,1 +1,0 @@
-(py-test :repo "Bogdanp/py-test.el" :fetcher github :files ("py-test.el"))

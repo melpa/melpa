@@ -1,3 +1,0 @@
-(autumn-light-theme
- :fetcher github
- :repo "aalpern/emacs-color-theme-autumn-light")

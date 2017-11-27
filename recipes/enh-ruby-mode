@@ -1,3 +1,0 @@
-(enh-ruby-mode :repo "zenspider/enhanced-ruby-mode"
-               :fetcher github
-               :files ("*.el" ("ruby" "ruby/erm.rb" "ruby/erm_buffer.rb")))

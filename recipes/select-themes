@@ -1,3 +1,0 @@
-(select-themes
-    :fetcher github
-    :repo "jasonm23/emacs-select-themes")

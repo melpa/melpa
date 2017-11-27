@@ -1,3 +1,0 @@
-(zephir-mode
- :repo "sergeyklay/zephir-mode"
- :fetcher github)

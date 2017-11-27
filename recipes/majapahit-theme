@@ -1,2 +1,0 @@
-(majapahit-theme :repo "franksn/majapahit-theme"
-	      :fetcher gitlab)

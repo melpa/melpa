@@ -1,1 +1,0 @@
-(fcopy :repo "ataka/fcopy" :fetcher github)

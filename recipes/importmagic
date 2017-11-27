@@ -1,3 +1,0 @@
-(importmagic :fetcher github
-             :repo "anachronic/importmagic.el"
-             :files (:defaults "importmagicserver.py"))

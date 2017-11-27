@@ -1,2 +1,0 @@
-(evil-easymotion :repo "PythonNut/evil-easymotion"
-                 :fetcher github)

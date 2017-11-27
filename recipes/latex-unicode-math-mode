@@ -1,4 +1,0 @@
-(latex-unicode-math-mode
- :repo "Christoph-D/latex-unicode-math-mode"
- :fetcher github
- :files (:defaults "*.sty"))

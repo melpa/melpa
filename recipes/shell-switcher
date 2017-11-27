@@ -1,3 +1,0 @@
-(shell-switcher :fetcher github
-                :repo "DamienCassou/shell-switcher"
-                :files ("rswitcher.el" "shell-switcher.el"))

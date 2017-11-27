@@ -1,1 +1,0 @@
-(nav :fetcher github :repo "ijt/emacs-nav" :files ("ack*" "nav.el"))

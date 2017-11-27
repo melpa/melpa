@@ -1,4 +1,0 @@
-(mozc
- :fetcher github
- :repo "google/mozc"
- :files ("src/unix/emacs/mozc.el"))

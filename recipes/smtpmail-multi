@@ -1,1 +1,0 @@
-(smtpmail-multi :fetcher github :repo "vapniks/smtpmail-multi")

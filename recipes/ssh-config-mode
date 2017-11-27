@@ -1,4 +1,0 @@
-(ssh-config-mode 
- :fetcher github 
- :repo "jhgorrell/ssh-config-mode-el"
- :files (:defaults "*.txt"))

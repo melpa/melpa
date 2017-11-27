@@ -1,3 +1,0 @@
-(neato-graph-bar :fetcher gitlab
-                 :repo "RobertCochran/neato-graph-bar"
-                 :branch "release")

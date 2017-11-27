@@ -1,3 +1,0 @@
-(org-category-capture :repo "IvanMalison/org-projectile"
-                      :fetcher github
-                      :files ("org-category-capture*.el"))

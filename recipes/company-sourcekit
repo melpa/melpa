@@ -1,4 +1,0 @@
-(company-sourcekit
-  :repo "nathankot/company-sourcekit"
-  :fetcher github
-  :files ("company-sourcekit.el"))

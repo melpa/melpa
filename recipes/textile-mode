@@ -1,1 +1,0 @@
-(textile-mode :repo "juba/textile-mode" :fetcher github)

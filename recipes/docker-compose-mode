@@ -1,4 +1,0 @@
-(docker-compose-mode
- :repo "meqif/docker-compose-mode"
- :fetcher github
- :files (:defaults (:exclude "docker-compose-mode-helpers.el")))

@@ -1,5 +1,0 @@
-(elnode
- :fetcher github
- :repo "nicferrier/elnode"
- :branch "melpa"
- :files ("*"))

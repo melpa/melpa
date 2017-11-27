@@ -1,1 +1,0 @@
-(el-patch :fetcher github :repo "raxod502/el-patch")

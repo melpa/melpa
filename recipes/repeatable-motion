@@ -1,3 +1,0 @@
-(repeatable-motion
-  :repo "willghatch/emacs-repeatable-motion"
-  :fetcher github)

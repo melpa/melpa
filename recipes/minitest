@@ -1,3 +1,0 @@
-(minitest :repo "arthurnn/minitest-emacs"
-          :fetcher github
-          :files ("minitest.el" "snippets"))

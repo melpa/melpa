@@ -1,1 +1,0 @@
-(show-css :repo "8cylinder/showcss-mode" :fetcher github :old-names (showcss-mode))

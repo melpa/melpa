@@ -1,2 +1,0 @@
-(rust-mode :repo "rust-lang/rust-mode"
-           :fetcher github)

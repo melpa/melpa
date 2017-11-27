@@ -1,1 +1,0 @@
-(request-deferred :repo "tkf/emacs-request" :fetcher github :files ("request-deferred.el"))

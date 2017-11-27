@@ -1,1 +1,0 @@
-(clocker :repo "roman/clocker.el" :files ("clocker.el") :fetcher github)

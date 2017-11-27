@@ -1,2 +1,0 @@
-(prettier-js :repo "prettier/prettier-emacs"
-             :fetcher github)

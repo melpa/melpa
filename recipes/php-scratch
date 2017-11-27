@@ -1,2 +1,0 @@
-(php-scratch :fetcher github
-             :repo "mallt/php-scratch")

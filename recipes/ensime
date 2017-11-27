@@ -1,2 +1,0 @@
-(ensime :fetcher github
-	:repo "ensime/ensime-emacs")

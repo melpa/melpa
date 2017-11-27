@@ -1,3 +1,0 @@
-(discover-clj-refactor
- :fetcher github
- :repo "maio/discover-clj-refactor.el")

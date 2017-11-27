@@ -1,2 +1,0 @@
-(log4e :repo "aki2o/log4e"
-       :fetcher github)

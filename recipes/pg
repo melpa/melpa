@@ -1,3 +1,0 @@
-(pg
- :repo "cbbrowne/pg.el"
- :fetcher github)

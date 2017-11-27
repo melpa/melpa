@@ -1,3 +1,0 @@
-(clojars
- :fetcher github
- :repo "joshuamiller/clojars.el")

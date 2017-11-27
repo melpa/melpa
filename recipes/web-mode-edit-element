@@ -1,2 +1,0 @@
-(web-mode-edit-element :fetcher github
-                       :repo "jtkDvlp/web-mode-edit-element")

@@ -1,2 +1,0 @@
-(powershell :repo "jschaf/powershell.el"
-            :fetcher github)

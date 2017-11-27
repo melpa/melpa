@@ -1,1 +1,0 @@
-(minimal-session-saver :repo "rolandwalker/minimal-session-saver" :fetcher github)

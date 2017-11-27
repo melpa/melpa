@@ -1,4 +1,0 @@
-(go :fetcher github
-    :repo "eschulte/el-go"
-    :files (:defaults "back-ends" "stone.wav")
-    )

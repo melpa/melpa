@@ -1,2 +1,0 @@
-(persp-projectile :repo "bbatsov/persp-projectile"
-                  :fetcher github)

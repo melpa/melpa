@@ -1,2 +1,0 @@
-(edit-server-htmlize :repo "frobtech/edit-server-htmlize" :fetcher github :files
-     ("edit-server-htmlize.el"))

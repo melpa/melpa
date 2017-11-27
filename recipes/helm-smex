@@ -1,1 +1,0 @@
-(helm-smex :fetcher github :repo "ptrv/helm-smex")

@@ -1,1 +1,0 @@
-(letcheck :fetcher github :repo "Fuco1/letcheck")

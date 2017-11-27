@@ -1,6 +1,0 @@
-(dired-icon
- :repo "xuhdev/dired-icon"
- :fetcher gitlab
- :files (:defaults
-         "get-icon-path-gtk3.py"
-         "get-icon-path-macos.m"))

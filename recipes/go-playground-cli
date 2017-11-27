@@ -1,3 +1,0 @@
-(go-playground-cli :repo "kosh04/emacs-go-playground"
-                   :fetcher github
-                   :files ("go-playground-cli.el"))

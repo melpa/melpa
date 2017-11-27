@@ -1,2 +1,0 @@
-(narrow-reindent :fetcher github
-                 :repo "emallson/narrow-reindent.el")

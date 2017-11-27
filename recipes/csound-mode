@@ -1,6 +1,0 @@
-(csound-mode :fetcher github
-	     :repo "hlolli/csound-mode"
-	     :files (:defaults "csoundAPI_emacsLisp/emacscsnd.c"
-			       "csoundAPI_emacsLisp/Makefile"
-			       "csoundAPI_emacsLisp/float-version.h"
-			       (:exclude ".dir-locals.el")))

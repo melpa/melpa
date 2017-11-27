@@ -1,3 +1,0 @@
-(caml :fetcher github
- :repo "ocaml/ocaml"
- :files ("emacs/*.el"))

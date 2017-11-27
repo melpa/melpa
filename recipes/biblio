@@ -1,4 +1,0 @@
-(biblio
- :repo "cpitclaudel/biblio.el"
- :fetcher github
- :files (:defaults (:exclude "biblio-core.el")))

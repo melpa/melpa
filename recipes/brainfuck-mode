@@ -1,3 +1,0 @@
-(brainfuck-mode
-  :repo "tom-tan/brainfuck-mode"
-  :fetcher github)

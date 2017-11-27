@@ -1,3 +1,0 @@
-(auto-complete :repo "auto-complete/auto-complete" :fetcher github :files
-               ("*.el" "dict"))
-

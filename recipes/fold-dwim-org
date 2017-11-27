@@ -1,1 +1,0 @@
-(fold-dwim-org :fetcher github :repo "mattfidler/fold-dwim-org")

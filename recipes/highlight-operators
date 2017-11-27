@@ -1,3 +1,0 @@
-(highlight-operators
- :repo "jpkotta/highlight-operators"
- :fetcher bitbucket)

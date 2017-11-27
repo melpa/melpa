@@ -1,3 +1,0 @@
-(spaceline-all-the-icons
- :fetcher github
- :repo "domtronn/spaceline-all-the-icons.el")

@@ -1,2 +1,0 @@
-(gobgen :fetcher github
-        :repo "gergelypolonkai/gobgen.el")

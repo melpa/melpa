@@ -1,3 +1,0 @@
-(turnip
- :repo "kljohann/turnip.el"
- :fetcher github)

@@ -1,3 +1,0 @@
-(shoulda
- :repo "marcwebbie/shoulda.el"
- :fetcher github)

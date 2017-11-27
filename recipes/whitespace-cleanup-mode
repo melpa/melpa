@@ -1,1 +1,0 @@
-(whitespace-cleanup-mode :fetcher github :repo "purcell/whitespace-cleanup-mode")

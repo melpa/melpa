@@ -1,2 +1,0 @@
-(ob-restclient :repo "alf/ob-restclient.el"
-               :fetcher github)

@@ -1,1 +1,0 @@
-(jade-mode :fetcher github :repo "brianc/jade-mode" :files ("jade-mode.el"))

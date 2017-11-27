@@ -1,2 +1,0 @@
-(elfeed-goodies :repo "algernon/elfeed-goodies"
-                :fetcher github)

@@ -1,4 +1,0 @@
-(ht
- :repo "Wilfred/ht.el"
- :files ("ht.el")
- :fetcher github)

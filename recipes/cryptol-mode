@@ -1,3 +1,0 @@
-(cryptol-mode
-  :fetcher github
-  :repo "thoughtpolice/cryptol-mode")

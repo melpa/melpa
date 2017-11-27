@@ -1,1 +1,0 @@
-(company-try-hard :repo "Wilfred/company-try-hard" :fetcher github)

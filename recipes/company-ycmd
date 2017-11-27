@@ -1,3 +1,0 @@
-(company-ycmd :fetcher github
-              :repo "abingham/emacs-ycmd"
-              :files ("company-ycmd.el"))

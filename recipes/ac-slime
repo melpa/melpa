@@ -1,1 +1,0 @@
-(ac-slime :repo "purcell/ac-slime" :fetcher github)

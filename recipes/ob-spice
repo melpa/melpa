@@ -1,3 +1,0 @@
-(ob-spice
- :fetcher github
- :repo "stardiviner/ob-spice")

@@ -1,1 +1,0 @@
-(helm-swoop :repo "ShingoFukuyama/helm-swoop" :fetcher github)

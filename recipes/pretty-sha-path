@@ -1,1 +1,0 @@
-(pretty-sha-path :fetcher github :repo "alezost/pretty-sha-path.el")

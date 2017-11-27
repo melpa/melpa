@@ -1,2 +1,0 @@
-(scribble-mode :repo "emacs-pe/scribble-mode" :fetcher github
-             :files ("*.el"))

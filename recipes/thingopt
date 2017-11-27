@@ -1,4 +1,0 @@
-(thingopt
- :repo "m2ym/thingopt-el"
- :fetcher github
- :files ("thingopt.el"))

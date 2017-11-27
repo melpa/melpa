@@ -1,3 +1,0 @@
-(company-edbi
- :fetcher github
- :repo "proofit404/company-edbi")

@@ -1,3 +1,0 @@
-(demangle-mode
- :fetcher github
- :repo "liblit/demangle-mode")

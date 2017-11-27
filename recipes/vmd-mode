@@ -1,1 +1,0 @@
-(vmd-mode :repo "blak3mill3r/vmd-mode" :fetcher github)

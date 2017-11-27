@@ -1,3 +1,0 @@
-(extend-dnd
- :fetcher github
- :repo "mattfidler/extend-dnd")

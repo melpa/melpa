@@ -1,1 +1,0 @@
-(erc-crypt :repo "atomontage/erc-crypt" :fetcher github)

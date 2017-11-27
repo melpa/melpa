@@ -1,1 +1,0 @@
-(conkeror-minor-mode :repo "Malabarba/conkeror-minor-mode" :fetcher github)

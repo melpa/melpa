@@ -1,1 +1,0 @@
-(timer-revert :repo "yyr/timer-revert" :fetcher github)

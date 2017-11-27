@@ -1,1 +1,0 @@
-(yandex-weather :fetcher github :repo "abstractionlayer/yandex-weather.el")

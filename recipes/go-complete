@@ -1,1 +1,0 @@
-(go-complete :repo "vibhavp/go-complete" :fetcher github)

@@ -1,2 +1,0 @@
-(ob-uart :repo "andrmuel/ob-uart"
-         :fetcher github)

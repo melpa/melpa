@@ -1,3 +1,0 @@
-(speechd-el
- :url "git://git.freebsoft.org/git/speechd-el"
- :fetcher git)

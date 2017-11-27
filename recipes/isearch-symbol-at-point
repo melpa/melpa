@@ -1,1 +1,0 @@
-(isearch-symbol-at-point :repo "re5et/isearch-symbol-at-point" :fetcher github)

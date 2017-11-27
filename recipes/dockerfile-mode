@@ -1,1 +1,0 @@
-(dockerfile-mode :fetcher github :repo "spotify/dockerfile-mode")

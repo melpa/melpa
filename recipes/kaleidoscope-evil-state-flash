@@ -1,3 +1,0 @@
-(kaleidoscope-evil-state-flash :repo "algernon/kaleidoscope.el"
-                               :fetcher github
-                               :files ("kaleidoscope-evil-state-flash.el"))

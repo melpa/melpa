@@ -1,1 +1,0 @@
-(find-file-in-repository :repo "hoffstaetter/find-file-in-repository" :fetcher github)

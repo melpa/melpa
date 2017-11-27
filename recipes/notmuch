@@ -1,3 +1,0 @@
-(notmuch :url "git://git.notmuchmail.org/git/notmuch"
-         :fetcher git
-         :files ("emacs/*.el" "emacs/*.png"))

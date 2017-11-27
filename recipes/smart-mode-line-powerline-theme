@@ -1,3 +1,0 @@
-(smart-mode-line-powerline-theme :repo "Malabarba/smart-mode-line"
-                                 :fetcher github
-                                 :files ("themes/*.el"))

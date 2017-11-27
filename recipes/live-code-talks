@@ -1,3 +1,0 @@
-(live-code-talks
- :fetcher github
- :repo "david-christiansen/live-code-talks")

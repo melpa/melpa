@@ -1,4 +1,0 @@
-(org-attach-screenshot
- :fetcher github
- :repo "dfeich/org-screenshot"
- :old-names (org-screenshot))

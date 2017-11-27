@@ -1,4 +1,0 @@
-(clojure-snippets
- :repo "mpenet/clojure-snippets"
- :fetcher github
- :files ("*.el" "snippets"))

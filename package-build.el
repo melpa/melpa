@@ -1231,7 +1231,7 @@ If FILE-NAME is not specified, the default archive-contents file is used."
 ;; For the time being just require all libraries that contain code
 ;; that was previously located in this library.
 
-(require 'package-batches)
+(require 'package-build-badges)
 (require 'package-recipe-mode)
 
 ;; Local Variables:

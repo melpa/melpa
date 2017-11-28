@@ -19,7 +19,7 @@ ifeq ($(NEED_CL-LIB), t)
 	EMACS_COMMAND := $(EMACS_COMMAND) --eval "(package-initialize)"
 endif
 
-EVAL := $(EMACS_COMMAND) --no-site-file --batch -L $(TOP)/package-build -l package-build --eval
+EVAL := $(EMACS_COMMAND) --no-site-file --batch -L $(TOP)/package-build -l package-build.el --eval
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
 

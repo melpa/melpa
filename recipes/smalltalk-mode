@@ -1,0 +1,3 @@
+(smalltalk-mode
+ :url "git://git.sv.gnu.org/smalltalk.git" :fetcher git
+ :files ("smalltalk-mode.el"))

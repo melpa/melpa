@@ -436,7 +436,7 @@
             m("dt", "Source"),
             m("dd", [
               pkg.sourceURL ? m("a", {href: pkg.sourceURL}, pkg.source) : pkg.source,
-              pkg.commit ? m("span.muted", " (" + pkg.commit.substring(0,6) + ")") : []
+              pkg.commit ? m("span.muted", " (commit " + pkg.commit.substring(0,6) + ")") : []
             ]),
             m("dt", "Dependencies"),
             m("dd", intersperse(_.sortBy(pkg.dependencies, 'name').map(this.depLink), " / ")),

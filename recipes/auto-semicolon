@@ -1,0 +1,1 @@
+(auto-semicolon :repo "jcs090218/auto-semicolon" :fetcher github)

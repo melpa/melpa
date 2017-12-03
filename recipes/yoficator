@@ -1,1 +1,1 @@
-(yoficator :fetcher gitlab :repo "link2xt/yoficator" :files ("yoficator.el" "yo.txt"))
+(yoficator :fetcher gitlab :repo "link2xt/yoficator" :files (:defaults "yo.txt"))

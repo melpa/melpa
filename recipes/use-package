@@ -1,9 +1,4 @@
 (use-package
     :fetcher github
     :repo "jwiegley/use-package"
-    :files ("up-core.el"
-            "up-delight.el"
-            "up-diminish.el"
-            "up-ensure.el"
-            "up-jump.el"
-            "use-package.el"))
+    :files (:defaults (:exclude "bind-key.el")))

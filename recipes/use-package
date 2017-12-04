@@ -1,4 +1,4 @@
 (use-package
     :fetcher github
     :repo "jwiegley/use-package"
-    :files ("use-package.el"))
+    :files (:defaults (:exclude "bind-key.el")))

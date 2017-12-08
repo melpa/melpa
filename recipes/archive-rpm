@@ -1,0 +1,1 @@
+(archive-rpm :repo "legoscia/archive-rpm" :fetcher github)

@@ -1,0 +1,1 @@
+(scp :repo "tszg/emacs-scp" :fetcher github)

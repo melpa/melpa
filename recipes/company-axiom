@@ -1,0 +1,3 @@
+(company-axiom :fetcher git
+               :url "https://bitbucket.org/pdo/axiom-environment.git"
+               :files ("company-axiom.el"))

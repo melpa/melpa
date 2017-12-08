@@ -1,0 +1,1 @@
+(adafruit-wisdom :fetcher github :repo "gonewest818/adafruit-wisdom.el")

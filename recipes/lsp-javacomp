@@ -1,0 +1,1 @@
+(lsp-javacomp :repo "tigersoldier/lsp-javacomp" :fetcher github)

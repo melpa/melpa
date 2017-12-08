@@ -1,1 +1,1 @@
-(perl6-mode :fetcher github :repo "hinrik/perl6-mode")
+(perl6-mode :fetcher github :repo "perl6/perl6-mode" :files (:exclude "nqp-mode.el"))

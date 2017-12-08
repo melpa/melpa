@@ -283,8 +283,8 @@ PROG is run in DIR, or if that is nil in `default-directory'."
 ;;; Checkout
 ;;;; Common
 
-(defun package-build-checkout (package-name config working-dir)
-  "Check out source for PACKAGE-NAME with CONFIG under WORKING-DIR.
+(defun package-build-checkout (name config working-dir)
+  "Check out source for the package named NAME with CONFIG under WORKING-DIR.
 In turn, this function uses the :fetcher option in the CONFIG to
 choose a source-specific fetcher function, which it calls with
 the same arguments.
@@ -295,9 +295,9 @@ Returns the package version as a string."
     (unless (eq fetcher 'wiki)
       (package-build--message "Source: %s\n"
                               (or (plist-get config :repo)
-                                  (plist-get config :url))))
-    (funcall (intern (format "package-build--checkout-%s" fetcher))
-             package-name config (file-name-as-directory working-dir))))
+                                  (plist-get config :url)))
+      (funcall (intern (format "package-build--checkout-%s" fetcher))
+               name config (file-name-as-directory working-dir)))))
 
 (defun package-build--princ-exists (dir)
   "Print a message that the contents of DIR will be updated."
@@ -306,258 +306,6 @@ Returns the package version as a string."
 (defun package-build--princ-checkout (repo dir)
   "Print a message that REPO will be checked out into DIR."
   (package-build--message "Cloning %s to %s" repo dir))
-
-;;;; Wiki
-
-(defvar package-build--last-wiki-fetch-time 0
-  "The time at which an emacswiki URL was last requested.
-This is used to avoid exceeding the rate limit of 1 request per 2
-seconds; the server cuts off after 10 requests in 20 seconds.")
-
-(defvar package-build--wiki-min-request-interval 3
-  "The shortest permissible interval between successive requests for Emacswiki URLs.")
-
-(defmacro package-build--with-wiki-rate-limit (&rest body)
-  "Rate-limit BODY code passed to this macro to match EmacsWiki's rate limiting."
-  (let ((elapsed (cl-gensym)))
-    `(let ((,elapsed (- (float-time) package-build--last-wiki-fetch-time)))
-       (when (< ,elapsed package-build--wiki-min-request-interval)
-         (let ((wait (- package-build--wiki-min-request-interval ,elapsed)))
-           (package-build--message
-            "Waiting %.2f secs before hitting Emacswiki again" wait)
-           (sleep-for wait)))
-       (unwind-protect
-           (progn ,@body)
-         (setq package-build--last-wiki-fetch-time (float-time))))))
-
-(require 'mm-decode)
-(defvar url-http-response-status)
-(defvar url-http-end-of-headers)
-
-(defun package-build--url-copy-file (url newname &optional ok-if-already-exists)
-  "Copy URL to NEWNAME.  Both args must be strings.
-Returns the http request's header as a string.
-Like `url-copy-file', but it produces an error if the http response is not 200.
-Signals a `file-already-exists' error if file NEWNAME already exists,
-unless a third argument OK-IF-ALREADY-EXISTS is supplied and non-nil.
-A number as third arg means request confirmation if NEWNAME already exists."
-  (if (and (file-exists-p newname)
-           (not ok-if-already-exists))
-      (error "Opening output file: File already exists, %s" newname))
-  (let ((buffer (url-retrieve-synchronously url))
-        (headers nil)
-        (handle nil))
-    (if (not buffer)
-        (error "Opening input file: No such file or directory, %s" url))
-    (with-current-buffer buffer
-      (unless (= 200 url-http-response-status)
-        (error "HTTP error %s fetching %s" url-http-response-status url))
-      (setq handle (mm-dissect-buffer t))
-      (mail-narrow-to-head)
-      (setq headers (buffer-string)))
-    (mm-save-part-to-file handle newname)
-    (kill-buffer buffer)
-    (mm-destroy-parts handle)
-    headers))
-
-(defun package-build--grab-wiki-file (filename)
-  "Download FILENAME from emacswiki, returning its last-modified time."
-  (let ((download-url
-         (format "https://www.emacswiki.org/emacs/download/%s" filename))
-        headers)
-    (package-build--with-wiki-rate-limit
-     (setq headers (package-build--url-copy-file download-url filename t)))
-    (when (zerop (nth 7 (file-attributes filename)))
-      (error "Wiki file %s was empty - has it been removed?" filename))
-    (package-build--parse-time
-     (with-temp-buffer
-       (insert headers)
-       (mail-fetch-field "last-modified")))))
-
-(defun package-build--checkout-wiki (name config dir)
-  "Checkout package NAME with config CONFIG from the EmacsWiki into DIR."
-  (unless package-build-stable
-    (with-current-buffer (get-buffer-create "*package-build-checkout*")
-      (unless (file-exists-p dir)
-        (make-directory dir))
-      (let ((files (or (plist-get config :files)
-                       (list (format "%s.el" name))))
-            (default-directory dir))
-        (car (nreverse (sort (mapcar 'package-build--grab-wiki-file files)
-                             'string-lessp)))))))
-
-;;;; Darcs
-
-(defun package-build--darcs-repo (dir)
-  "Get the current darcs repo for DIR."
-  (package-build--run-process-match "Default Remote: \\(.*\\)"
-                                    dir "darcs" "show" "repo"))
-
-(defun package-build--checkout-darcs (name config dir)
-  "Check package NAME with config CONFIG out of darcs into DIR."
-  (let ((repo (plist-get config :url)))
-    (with-current-buffer (get-buffer-create "*package-build-checkout*")
-      (cond
-       ((and (file-exists-p (expand-file-name "_darcs" dir))
-             (string-equal (package-build--darcs-repo dir) repo))
-        (package-build--princ-exists dir)
-        (package-build--run-process dir "darcs" "pull" "--all"))
-       (t
-        (when (file-exists-p dir)
-          (delete-directory dir t))
-        (package-build--princ-checkout repo dir)
-        (package-build--run-process nil "darcs" "get" repo dir)))
-      (if package-build-stable
-          (let* ((min-bound (goto-char (point-max)))
-                 (tag-version
-                  (and (package-build--run-process dir "darcs" "show" "tags")
-                       (or (package-build--find-version-newest
-                            (or (plist-get config :version-regexp)
-                                package-build-version-regexp)
-                            min-bound)
-                           (error "No valid stable versions found for %s" name)))))
-            (package-build--run-process dir "darcs" "obliterate"
-                                        "--all" "--from-tag"
-                                        (cadr tag-version))
-            ;; Return the parsed version as a string
-            (package-version-join (car tag-version)))
-        (apply 'package-build--run-process
-               dir "darcs" "changes" "--max-count" "1"
-               (package-build--expand-source-file-list dir config))
-        (package-build--find-parse-time "\
-\\([a-zA-Z]\\{3\\} [a-zA-Z]\\{3\\} \
-\\( \\|[0-9]\\)[0-9] [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} \
-[A-Za-z]\\{3\\} [0-9]\\{4\\}\\)")))))
-
-;;;; Fossil
-
-(defun package-build--fossil-repo (dir)
-  "Get the current fossil repo for DIR."
-  (package-build--run-process-match "\\(.*\\)" dir "fossil" "remote-url"))
-
-(defun package-build--checkout-fossil (name config dir)
-  "Check package NAME with config CONFIG out of fossil into DIR."
-  (unless package-build-stable
-    (let ((repo (plist-get config :url)))
-      (with-current-buffer (get-buffer-create "*package-build-checkout*")
-        (cond
-         ((and (or (file-exists-p (expand-file-name ".fslckout" dir))
-                   (file-exists-p (expand-file-name "_FOSSIL_" dir)))
-               (string-equal (package-build--fossil-repo dir) repo))
-          (package-build--princ-exists dir)
-          (package-build--run-process dir "fossil" "update"))
-         (t
-          (when (file-exists-p dir)
-            (delete-directory dir t))
-          (package-build--princ-checkout repo dir)
-          (make-directory dir)
-          (package-build--run-process dir "fossil" "clone" repo "repo.fossil")
-          (package-build--run-process dir "fossil" "open" "repo.fossil")))
-        (package-build--run-process dir "fossil" "timeline" "-n" "1" "-t" "ci")
-        (or (package-build--find-parse-time "\
-=== \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} ===\n\
-[0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\) ")
-            (error "No valid timestamps found!"))))))
-
-;;;; Svn
-
-(defun package-build--svn-repo (dir)
-  "Get the current svn repo for DIR."
-  (package-build--run-process-match "URL: \\(.*\\)" dir "svn" "info"))
-
-(defun package-build--checkout-svn (name config dir)
-  "Check package NAME with config CONFIG out of svn into DIR."
-  (unless package-build-stable
-    (with-current-buffer (get-buffer-create "*package-build-checkout*")
-      (let ((repo (package-build--trim (plist-get config :url) ?/))
-            (bound (goto-char (point-max))))
-        (cond
-         ((and (file-exists-p (expand-file-name ".svn" dir))
-               (string-equal (package-build--svn-repo dir) repo))
-          (package-build--princ-exists dir)
-          (package-build--run-process dir "svn" "up"))
-         (t
-          (when (file-exists-p dir)
-            (delete-directory dir t))
-          (package-build--princ-checkout repo dir)
-          (package-build--run-process nil "svn" "checkout" repo dir)))
-        (apply 'package-build--run-process dir "svn" "info"
-               (package-build--expand-source-file-list dir config))
-        (or (package-build--find-parse-time-newest "\
-Last Changed Date: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} \
-[0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)"
-             bound)
-            (error "No valid timestamps found!"))))))
-
-;;;; Cvs
-
-(defun package-build--cvs-repo (dir)
-  "Get the current CVS root and repository for DIR.
-
-Return a cons cell whose `car' is the root and whose `cdr' is the repository."
-  (apply 'cons
-         (mapcar (lambda (file)
-                   (package-build--string-rtrim
-                    (package-build--slurp-file (expand-file-name file dir))))
-                 '("CVS/Root" "CVS/Repository"))))
-
-(defun package-build--checkout-cvs (name config dir)
-  "Check package NAME with config CONFIG out of cvs into DIR."
-  (unless package-build-stable
-    (with-current-buffer (get-buffer-create "*package-build-checkout*")
-      (let ((root (package-build--trim (plist-get config :url) ?/))
-            (repo (or (plist-get config :module) (symbol-name name)))
-            (bound (goto-char (point-max)))
-            latest)
-        (cond
-         ((and (file-exists-p (expand-file-name "CVS" dir))
-               (equal (package-build--cvs-repo dir) (cons root repo)))
-          (package-build--princ-exists dir)
-          (package-build--run-process dir "cvs" "update" "-dP"))
-         (t
-          (when (file-exists-p dir)
-            (delete-directory dir t))
-          (package-build--princ-checkout (format "%s from %s" repo root) dir)
-          ;; CVS insists on relative paths as target directory for checkout (for
-          ;; whatever reason), and puts "CVS" directories into every subdirectory
-          ;; of the current working directory given in the target path. To get CVS
-          ;; to just write to DIR, we need to execute CVS from the parent
-          ;; directory of DIR, and specific DIR as relative path.  Hence all the
-          ;; following mucking around with paths.  CVS is really horrid.
-          (let ((dir (directory-file-name dir)))
-            (package-build--run-process (file-name-directory dir)
-                                        "env" "TZ=UTC" "cvs" "-z3"
-                                        "-d" root "checkout"
-                                        "-d" (file-name-nondirectory dir)
-                                        repo))))
-        (apply 'package-build--run-process dir "cvs" "log"
-               (package-build--expand-source-file-list dir config))
-
-        ;; `cvs log` does not provide a way to view the previous N
-        ;; revisions, so instead of parsing the entire log we examine
-        ;; the Entries file, which looks like this:
-        ;;
-        ;; /.cvsignore/1.2/Thu Sep  1 12:42:02 2005//
-        ;; /CHANGES/1.1/Tue Oct  4 11:47:54 2005//
-        ;; /GNUmakefile/1.8/Tue Oct  4 11:47:54 2005//
-        ;; /Makefile/1.14/Tue Oct  4 11:47:54 2005//
-        ;;
-        (insert-file-contents (concat dir "/CVS/Entries"))
-        (setq latest
-              (car
-               (sort
-                (split-string (buffer-substring-no-properties (point) (point-max)) "\n")
-                (lambda (x y)
-                  (when (string-match "^\\/[^\\/]*\\/[^\\/]*\\/\\([^\\/]*\\)\\/\\/$" x)
-                    (setq x (package-build--parse-time (match-string 1 x))))
-                  (when (string-match "^\\/[^\\/]*\\/[^\\/]*\\/\\([^\\/]*\\)\\/\\/$" y)
-                    (setq y (package-build--parse-time (match-string 1 y))))
-                  (version-list-<= (package-build--valid-version y)
-                                   (package-build--valid-version x))))))
-        (when (string-match "^\\/[^\\/]*\\/[^\\/]*\\/\\([^\\/]*\\)\\/\\/$" latest)
-          (setq latest (match-string 1 latest)))
-        (or (package-build--parse-time latest)
-            (error "No valid timestamps found!"))))))
 
 ;;;; Git
 
@@ -637,52 +385,6 @@ Return a cons cell whose `car' is the root and whose `cdr' is the repository."
   "Check package NAME with config CONFIG out of gitlab into DIR."
   (let ((url (format "https://gitlab.com/%s.git" (plist-get config :repo))))
     (package-build--checkout-git name (plist-put (copy-sequence config) :url url) dir)))
-
-;;;; Bzr
-
-(defun package-build--bzr-repo (dir)
-  "Get the current bzr repo for DIR."
-  (package-build--run-process-match "parent branch: \\(.*\\)" dir "bzr" "info"))
-
-(defun package-build--checkout-bzr (name config dir)
-  "Check package NAME with config CONFIG out of bzr into DIR."
-  (let ((repo (package-build--run-process-match
-               "\\(?:branch root\\|repository branch\\): \\(.*\\)"
-               nil "bzr" "info" (plist-get config :url))))
-    (with-current-buffer (get-buffer-create "*package-build-checkout*")
-      (goto-char (point-max))
-      (cond
-       ((and (file-exists-p (expand-file-name ".bzr" dir))
-             (string-equal (package-build--bzr-repo dir) repo))
-        (package-build--princ-exists dir)
-        (package-build--run-process dir "bzr" "merge" "--force"))
-       (t
-        (when (file-exists-p dir)
-          (delete-directory dir t))
-        (package-build--princ-checkout repo dir)
-        (package-build--run-process nil "bzr" "branch" repo dir)))
-      (if package-build-stable
-          (let ((bound (goto-char (point-max)))
-                (regexp (or (plist-get config :version-regexp)
-                            package-build-version-regexp))
-                tag-version)
-            (package-build--run-process dir "bzr" "tags")
-            (goto-char bound)
-            (ignore-errors (while (re-search-forward "\\ +.*")
-                             (replace-match "")))
-            (setq tag-version
-                  (or (package-build--find-version-newest regexp bound)
-                      (error "No valid stable versions found for %s" name)))
-            (package-build--run-process dir
-                                        "bzr" "revert" "-r"
-                                        (concat "tag:" (cadr tag-version)))
-            ;; Return the parsed version as a string
-            (package-version-join (car tag-version)))
-        (apply 'package-build--run-process dir "bzr" "log" "-l1"
-               (package-build--expand-source-file-list dir config))
-        (package-build--find-parse-time "\
-\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} \
-[0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)")))))
 
 ;;;; Hg
 
@@ -799,13 +501,7 @@ Optionally PRETTY-PRINT the data."
          (get-buffer-create "*package-build-checkout*")
          nil "-cvf"
          file
-         "--exclude=.svn"
-         "--exclude=CVS"
          "--exclude=.git"
-         "--exclude=_darcs"
-         "--exclude=.fslckout"
-         "--exclude=_FOSSIL_"
-         "--exclude=.bzr"
          "--exclude=.hg"
          (or (mapcar (lambda (fn) (concat dir "/" fn)) files) (list dir))))
 
@@ -980,66 +676,62 @@ of the same-named package which is to be kept."
 
 ;;; Recipes
 
-(defun package-build--read-recipe (file-name)
-  "Return the plist of recipe info for the package called FILE-NAME.
+(defun package-build--read-recipe (name)
+  "Return the recipe of the package named NAME as a list.
 It performs some basic checks on the recipe to ensure that known
 keys have values of the right types, and raises an error if that
 is the not the case.  If invalid combinations of keys are
 supplied then errors will only be caught when an attempt is made
 to build the recipe."
-  (let* ((pkg-info (package-build--read-from-file file-name))
-         (pkg-name (car pkg-info))
-         (rest (cdr pkg-info)))
-    (cl-assert pkg-name)
-    (cl-assert (symbolp pkg-name))
-    (cl-assert (string= (symbol-name pkg-name) (file-name-nondirectory file-name))
-               nil
-               "Recipe '%s' contains mismatched package name '%s'"
-               (file-name-nondirectory file-name)
-               pkg-name)
-    (cl-assert rest)
+  (let* ((recipe (package-build--read-from-file
+                  (expand-file-name name package-build-recipes-dir)))
+         (ident (car recipe))
+         (plist (cdr recipe)))
+    (cl-assert ident)
+    (cl-assert (symbolp ident))
+    (cl-assert (string= (symbol-name ident) name)
+               nil "Recipe '%s' contains mismatched package name '%s'"
+               name ident)
+    (cl-assert plist)
     (let* ((symbol-keys '(:fetcher))
            (string-keys '(:url :repo :module :commit :branch :version-regexp))
            (list-keys '(:files :old-names))
            (all-keys (append symbol-keys string-keys list-keys)))
-      (dolist (thing rest)
+      (dolist (thing plist)
         (when (keywordp thing)
           (cl-assert (memq thing all-keys) nil "Unknown keyword %S" thing)))
-      (let ((fetcher (plist-get rest :fetcher)))
+      (let ((fetcher (plist-get plist :fetcher)))
         (cl-assert fetcher nil ":fetcher is missing")
         (when (memq fetcher '(github gitlab bitbucket))
-          (cl-assert (plist-get rest :repo) ":repo is missing")))
+          (cl-assert (plist-get plist :repo) ":repo is missing")))
       (dolist (key symbol-keys)
-        (let ((val (plist-get rest key)))
+        (let ((val (plist-get plist key)))
           (when val
             (cl-assert (symbolp val) nil "%s must be a symbol but is %S" key val))))
       (dolist (key list-keys)
-        (let ((val (plist-get rest key)))
+        (let ((val (plist-get plist key)))
           (when val
             (cl-assert (listp val) nil "%s must be a list but is %S" key val))))
       (dolist (key string-keys)
-        (let ((val (plist-get rest key)))
+        (let ((val (plist-get plist key)))
           (when val
             (cl-assert (stringp val) nil "%s must be a string but is %S" key val)))))
-    pkg-info))
+    recipe))
 
 (defun package-build--read-recipes ()
-  "Return a list of data structures for all recipes in `package-build-recipes-dir'."
-  (cl-loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
-           collect (package-build--read-recipe file-name)))
+  "Return a list of data structures for all recipes."
+  (mapcar #'package-build--read-recipe
+          (directory-files package-build-recipes-dir nil "^[^.]")))
 
 (defun package-build--read-recipes-ignore-errors ()
-  "Return a list of data structures for all recipes in `package-build-recipes-dir'."
-  (cl-loop for file-name in (directory-files  package-build-recipes-dir t "^[^.]")
-           for pkg-info = (condition-case err
-                              (package-build--read-recipe file-name)
-                            (error (package-build--message
-                                    "Error reading recipe %s: %s"
-                                    file-name
-                                    (error-message-string err))
-                                   nil))
-           when pkg-info
-           collect pkg-info))
+  "Return a list of data structures for all recipes."
+  (cl-mapcan (lambda (name)
+               (condition-case err
+                   (list (package-build--read-recipe name))
+                 (error (package-build--message "Error reading recipe %s: %s"
+                                                name (error-message-string err))
+                        nil)))
+             (directory-files package-build-recipes-dir nil "^[^.]")))
 
 (defun package-build-expand-file-specs (dir specs &optional subdir allow-empty)
   "In DIR, expand SPECS, optionally under SUBDIR.
@@ -1172,15 +864,15 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
     (copy-directory file newname))))
 
 (defun package-build--package-name-completing-read ()
-  "Prompt for a package name, returning a symbol."
-  (intern (completing-read "Package: " (package-build-packages))))
+  "Read the name of a package and return it as a string."
+  (completing-read "Package: " (package-build-packages)))
 
 (defun package-build--find-source-file (target files)
   "Search for source of TARGET in FILES."
   (car (rassoc target files)))
 
 (defun package-build--find-package-file (name)
-  "Return the filename of the most recently built package of NAME."
+  "Return the most recently built archive of the package named NAME."
   (package-build--archive-file-name (assoc name (package-build-archive-alist))))
 
 (defun package-build--package-buffer-info-vec ()
@@ -1221,7 +913,7 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
 ;; older date than the version timestamp provided here, the function
 ;; will return t.
 (defun package-build--up-to-date-p (name version)
-  "Return non-nil if there is an up-to-date package for NAME with the given VERSION."
+  "Return non-nil if there is an up-to-date package named NAME with the given VERSION."
   (let* ((package-file-base (expand-file-name (format "%s-%s." name version)
                                               package-build-archive-dir))
          (recipe-file (expand-file-name name package-build-recipes-dir)))
@@ -1257,14 +949,14 @@ ARCHIVE-ENTRY is destructively modified."
 
 ;;;###autoload
 (defun package-build-archive (name)
-  "Build a package archive for package NAME."
+  "Build a package archive for the package named NAME."
   (interactive (list (package-build--package-name-completing-read)))
-  (let* ((file-name (symbol-name name))
-         (rcp (or (cdr (assoc name (package-build-recipe-alist)))
-                  (error "Cannot find package %s" name)))
-         (pkg-working-dir
-          (file-name-as-directory
-           (expand-file-name file-name package-build-working-dir))))
+  (let ((rcp (or (cdr (assoc (intern name)
+                             (package-build-recipe-alist)))
+                 (error "Cannot find package %s" name)))
+        (pkg-working-dir
+         (file-name-as-directory
+          (expand-file-name name package-build-working-dir))))
 
     (unless (file-exists-p package-build-archive-dir)
       (package-build--message "Creating directory %s" package-build-archive-dir)
@@ -1275,12 +967,11 @@ ARCHIVE-ENTRY is destructively modified."
            (commit (package-build-get-commit rcp pkg-working-dir))
            (default-directory package-build-working-dir)
            (start-time (current-time)))
-      (if (package-build--up-to-date-p file-name version)
+      (if (package-build--up-to-date-p name version)
           (package-build--message "Package %s is up to date - skipping." name)
         (progn
           (let ((archive-entry (package-build-package
-                                file-name
-                                version
+                                name version
                                 (package-build--config-file-list rcp)
                                 pkg-working-dir
                                 package-build-archive-dir)))
@@ -1290,16 +981,15 @@ ARCHIVE-ENTRY is destructively modified."
                                  (package-build--entry-file-name archive-entry)))
           (when package-build-write-melpa-badge-images
             (package-build--write-melpa-badge-image
-             file-name
-             version package-build-archive-dir))
+             name version package-build-archive-dir))
           (package-build--message "Built %s in %.3fs, finished at %s"
                                   name
-                                  (time-to-seconds (time-since start-time))
+                                  (float-time (time-since start-time))
                                   (current-time-string))))
-      (list file-name version))))
+      (list name version))))
 
-(defun package-build-archive-ignore-errors (pkg)
-  "Build archive for package PKG, ignoring any errors."
+(defun package-build-archive-ignore-errors (name)
+  "Build archive for the package named NAME, ignoring any errors."
   (interactive (list (package-build--package-name-completing-read)))
   (let* ((debug-on-error t)
          (debug-on-signal t)
@@ -1308,14 +998,14 @@ ARCHIVE-ENTRY is destructively modified."
                      (setq package-build--debugger-return
                            (with-output-to-string (backtrace))))))
     (condition-case err
-        (package-build-archive pkg)
+        (package-build-archive name)
       (error
        (package-build--message "%s" (error-message-string err))
        nil))))
 
 ;;;###autoload
-(defun package-build-package (package-name version file-specs source-dir target-dir)
-  "Create PACKAGE-NAME with VERSION.
+(defun package-build-package (name version file-specs source-dir target-dir)
+  "Create version VERSION of the package named NAME.
 
 The information in FILE-SPECS is used to gather files from
 SOURCE-DIR.
@@ -1330,23 +1020,21 @@ syntax is currently only documented in the MELPA README.  You can
 simply pass `package-build-default-files-spec' in most cases.
 
 Returns the archive entry for the package."
-  (when (symbolp package-name)
-    (setq package-name (symbol-name package-name)))
   (let ((files (package-build-expand-file-specs source-dir file-specs)))
     (unless (equal file-specs package-build-default-files-spec)
       (when (equal files (package-build-expand-file-specs
                           source-dir package-build-default-files-spec nil t))
-        (package-build--message "Note: %s :files spec is equivalent to the default."
-                                package-name)))
+        (package-build--message
+         "Note: %s :files spec is equivalent to the default." name)))
     (cond
      ((not version)
-      (error "Unable to check out repository for %s" package-name))
+      (error "Unable to check out repository for %s" name))
      ((= 1 (length files))
       (package-build--build-single-file-package
-       package-name version (caar files) source-dir target-dir))
+       name version (caar files) source-dir target-dir))
      ((< 1 (length  files))
       (package-build--build-multi-file-package
-       package-name version files source-dir target-dir))
+       name version files source-dir target-dir))
      (t (error "Unable to find files matching recipe patterns")))))
 
 (defun package-build--build-single-file-package
@@ -1501,75 +1189,6 @@ If FILE-NAME is not specified, the default archive-contents file is used."
           (setq entries (remove old entries)))
         (add-to-list 'entries new)))))
 
-;;; Helpers for Recipe Authors
-
-(defvar package-build-minor-mode-map
-  (let ((m (make-sparse-keymap)))
-    (define-key m (kbd "C-c C-c") 'package-build-current-recipe)
-    m)
-  "Keymap for `package-build-minor-mode'.")
-
-(define-minor-mode package-build-minor-mode
-  "Helpful functionality for building packages."
-  nil
-  " PBuild"
-  package-build-minor-mode-map
-  (when package-build-minor-mode
-    (message "Use C-c C-c to build this recipe.")))
-
-;;;###autoload
-(defun package-build-create-recipe (name fetcher)
-  "Create a new recipe for package NAME using FETCHER."
-  (interactive
-   (list (intern (read-string "Package name: "))
-         (intern (completing-read "Fetcher: "
-                                  (list "github" "gitlab" "bitbucket"
-                                        "git" "wiki" "bzr" "hg" "cvs" "svn")
-                                  nil t nil nil "github"))))
-  (let ((recipe-file (expand-file-name (symbol-name name)
-                                       package-build-recipes-dir)))
-    (when (file-exists-p recipe-file)
-      (error "Recipe already exists"))
-    (find-file recipe-file)
-    (insert (pp-to-string `(,name
-                            :fetcher ,fetcher
-                            ,@(cl-case fetcher
-                                (github (list :repo "USER/REPO"))
-                                (wiki nil)
-                                (t (list :url "SCM_URL_HERE"))))))
-    (emacs-lisp-mode)
-    (package-build-minor-mode)
-    (goto-char (point-min))))
-
-;;;###autoload
-(defun package-build-current-recipe ()
-  "Build archive for the recipe defined in the current buffer."
-  (interactive)
-  (unless (and (buffer-file-name)
-               (file-equal-p (file-name-directory (buffer-file-name))
-                             package-build-recipes-dir))
-    (error "Buffer is not visiting a recipe"))
-  (when (buffer-modified-p)
-    (if (y-or-n-p (format "Save file %s? " buffer-file-name))
-        (save-buffer)
-      (error "Aborting")))
-  (check-parens)
-  (package-build-reinitialize)
-  (let ((pkg-name (intern (file-name-nondirectory (buffer-file-name)))))
-    (package-build-archive pkg-name)
-    (package-build-dump-archive-contents)
-    (let ((output-buffer-name "*package-build-result*"))
-      (with-output-to-temp-buffer output-buffer-name
-        (princ ";; Please check the following package descriptor.\n")
-        (princ ";; If the correct package description or dependencies are missing,\n")
-        (princ ";; then the source .el file is likely malformed, and should be fixed.\n")
-        (pp (assoc pkg-name (package-build-archive-alist))))
-      (with-current-buffer output-buffer-name
-        (emacs-lisp-mode)
-        (view-mode)))
-    (when (yes-or-no-p "Install new package? ")
-      (package-install-file (package-build--find-package-file pkg-name)))))
-
 ;;; Exporting Data as Json
 
 (defun package-build-recipe-alist-as-json (file)
@@ -1607,32 +1226,13 @@ If FILE-NAME is not specified, the default archive-contents file is used."
   (with-temp-file file
     (insert (json-encode (package-build--archive-alist-for-json)))))
 
-;;; Melpa Batches
-
-;; In future we should provide a hook, and perform this step in a
-;; separate package.  Note also that it would be straightforward to
-;; generate the SVG ourselves, which would save the network overhead.
-
-(defun package-build--write-melpa-badge-image (package-name version target-dir)
-  (let ((badge-url (concat "https://img.shields.io/badge/"
-                           (if package-build-stable "melpa stable" "melpa")
-                           "-"
-                           (url-hexify-string version)
-                           "-"
-                           (if package-build-stable "3e999f" "922793")
-                           ".svg"))
-        (badge-filename (expand-file-name (concat package-name "-badge.svg")
-                                          target-dir)))
-    (if (executable-find "curl")
-        ;; Not strictly needed, but less likely to break due to gnutls issues
-        (shell-command (mapconcat #'identity
-                                  (list "curl" "-f" "-o"
-                                        (shell-quote-argument badge-filename)
-                                        (shell-quote-argument badge-url))
-                                  " "))
-      (package-build--url-copy-file badge-url badge-filename t))))
-
 (provide 'package-build)
+
+;; For the time being just require all libraries that contain code
+;; that was previously located in this library.
+
+(require 'package-build-badges)
+(require 'package-recipe-mode)
 
 ;; Local Variables:
 ;; coding: utf-8

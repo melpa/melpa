@@ -1,0 +1,1 @@
+(xcode-project :fetcher github :repo "nhojb/xcode-project")

@@ -106,20 +106,26 @@
   ]).then(function (info) {
     var recipes = info[0], archive = info[1], downloads = info[2];
 
-    var calculateSourceURL = function(name, recipe) {
+    var calculateSourceURL = function(name, recipe, commit) {
+      var base, ref;
       if (recipe.fetcher == "github") {
         if (recipe.repo.indexOf("/") != -1) {
+          ref = commit || recipe.branch;
           return "https://github.com/" + recipe.repo +
-            (recipe.branch ? "/tree/" + recipe.branch : "");
+            (ref ? "/tree/" + ref : "");
         } else {
           return "https://gist.github.com/" + recipe.repo;
         }
       } else if (recipe.fetcher == "gitlab") {
+        base = "https://gitlab.com/" + recipe.repo;
+        ref = commit || recipe.branch;
         return "https://gitlab.com/" + recipe.repo +
-          (recipe.branch ? "/tree/" + recipe.branch : "");
+          (ref ? "/tree/" + ref : "");
       } else if (recipe.fetcher == "bitbucket") {
-        return "https://bitbucket.com/" + recipe.repo +
-          (recipe.branch ? "/branch/" + recipe.branch : "");
+        base = "https://bitbucket.com/" + recipe.repo;
+        if (commit) return base + "/src/" + commit;
+        if (recipe.branch) return base + "/branch/" + recipe.branch;
+        return base;
       } else if (recipe.fetcher == "wiki") {
         return "http://www.emacswiki.org/emacs/" + name + ".el";
       } else if (recipe.url) {
@@ -147,11 +153,12 @@
         return {name: name, version: ver.join('.')};
       });
       var oldNames = recipe['old-names'] || [];
+      var commit = props.commit;
 
       pkgs.push(new melpa.Package({
         name: name,
         version: version,
-        commit: props.commit || '',
+        commit: commit,
         dependencies: deps,
         description: built.desc.replace(/\s*\[((?:source: )?\w+)\]$/, ""),
         source: recipe.fetcher,
@@ -159,7 +166,7 @@
         fetcher: recipe.fetcher,
         recipeURL: "https://github.com/melpa/melpa/blob/master/recipes/" + name,
         packageURL: "packages/" + name + "-" + version + "." + (built.type == "single" ? "el" : "tar"),
-        sourceURL: calculateSourceURL(name, recipe),
+        sourceURL: calculateSourceURL(name, recipe, commit),
         oldNames: oldNames,
         searchExtra: [recipe.repo]
       }));
@@ -248,11 +255,31 @@
 
   melpa.packagelist = {};
   melpa.packagelist.controller = function() {
+    var defaultQueryParams = {q: '', sort: 'name', asc: true, page: 1};
+    var queryParams = {
+      q: m.route.param('q') || defaultQueryParams.q,
+      sort: m.route.param('sort') || defaultQueryParams.sort,
+      asc: m.route.param('asc') ? (m.route.param('asc') == 'true') :  defaultQueryParams.asc
+    };
     var resetPagination = function() { this.paginatorCtrl.pageNumber(1); }.bind(this);
-    this.filterTerms = addPropSetHook(m.prop(m.route.param('q') || ''),
-                                      resetPagination);
-    this.sortBy = m.prop("name");
-    this.sortAscending = m.prop(true);
+    var updateRoute = function() {
+      queryParams = {
+        q: this.filterTerms(),
+        sort: this.sortBy(),
+        asc: this.sortAscending()
+      };
+      var parts = [];
+      for (var k in queryParams) {
+        if (queryParams[k] !== defaultQueryParams[k]) {
+          parts.push(k + "=" + encodeURIComponent(queryParams[k]));
+        }
+      }
+      history.replaceState({},"", "/#/" + (parts.length > 0 ? "?" + parts.join("&") : ""));
+    }.bind(this);
+
+    this.filterTerms = addPropSetHook(addPropSetHook(m.prop(queryParams.q), resetPagination), updateRoute);
+    this.sortBy = addPropSetHook(m.prop(queryParams.sort), updateRoute);
+    this.sortAscending = addPropSetHook(m.prop(queryParams.asc), updateRoute);
     this.packageList = melpa.packageList;
     this.matchingPackages = function() {
       return this.packageList().matchingPackages(this.filterTerms());
@@ -409,7 +436,7 @@
             m("dt", "Source"),
             m("dd", [
               pkg.sourceURL ? m("a", {href: pkg.sourceURL}, pkg.source) : pkg.source,
-              pkg.commit ? m("span.muted", " (" + pkg.commit.substring(0,6) + ")") : []
+              pkg.commit ? m("span.muted", " (commit " + pkg.commit.substring(0,6) + ")") : []
             ]),
             m("dt", "Dependencies"),
             m("dd", intersperse(_.sortBy(pkg.dependencies, 'name').map(this.depLink), " / ")),

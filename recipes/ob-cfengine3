@@ -1,0 +1,1 @@
+(ob-cfengine3 :repo "nickanderson/ob-cfengine3" :fetcher github)

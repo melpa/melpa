@@ -5,8 +5,6 @@
             "dir"
             "use-package*.info"
             "use-package*.texi"
-            "LICENSE"
-            "*.md"
             (:exclude
              "use-package-chords.el"
              "use-package-ensure-system-package.el"

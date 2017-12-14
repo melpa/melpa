@@ -4,5 +4,4 @@
                "lisp/git-rebase.el"
                "Documentation/magit.texi"
                "Documentation/AUTHORS.md"
-               "COPYING"
-               (:exclude "lisp/magit-popup.el")))
+               "COPYING"))

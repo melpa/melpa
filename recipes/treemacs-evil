@@ -1,4 +1,5 @@
 (treemacs-evil
  :fetcher github
  :repo "Alexander-Miller/treemacs"
- :files ("treemacs-evil.el"))
+ :files ("treemacs-evil.el"
+         "src/elisp/treemacs-evil.el"))

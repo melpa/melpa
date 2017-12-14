@@ -1,5 +1,5 @@
 (howm  :fetcher git
-       :url "git://git.osdn.jp/gitroot/howm/howm.git"
+       :url "https://scm.osdn.net/gitroot/howm/howm.git"
        :files
        (:defaults
         (:exclude "*.el.in")))

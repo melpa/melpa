@@ -106,20 +106,26 @@
   ]).then(function (info) {
     var recipes = info[0], archive = info[1], downloads = info[2];
 
-    var calculateSourceURL = function(name, recipe) {
+    var calculateSourceURL = function(name, recipe, commit) {
+      var base, ref;
       if (recipe.fetcher == "github") {
         if (recipe.repo.indexOf("/") != -1) {
+          ref = commit || recipe.branch;
           return "https://github.com/" + recipe.repo +
-            (recipe.branch ? "/tree/" + recipe.branch : "");
+            (ref ? "/tree/" + ref : "");
         } else {
           return "https://gist.github.com/" + recipe.repo;
         }
       } else if (recipe.fetcher == "gitlab") {
+        base = "https://gitlab.com/" + recipe.repo;
+        ref = commit || recipe.branch;
         return "https://gitlab.com/" + recipe.repo +
-          (recipe.branch ? "/tree/" + recipe.branch : "");
+          (ref ? "/tree/" + ref : "");
       } else if (recipe.fetcher == "bitbucket") {
-        return "https://bitbucket.com/" + recipe.repo +
-          (recipe.branch ? "/branch/" + recipe.branch : "");
+        base = "https://bitbucket.com/" + recipe.repo;
+        if (commit) return base + "/src/" + commit;
+        if (recipe.branch) return base + "/branch/" + recipe.branch;
+        return base;
       } else if (recipe.fetcher == "wiki") {
         return "http://www.emacswiki.org/emacs/" + name + ".el";
       } else if (recipe.url) {
@@ -147,11 +153,12 @@
         return {name: name, version: ver.join('.')};
       });
       var oldNames = recipe['old-names'] || [];
+      var commit = props.commit;
 
       pkgs.push(new melpa.Package({
         name: name,
         version: version,
-        commit: props.commit || '',
+        commit: commit,
         dependencies: deps,
         description: built.desc.replace(/\s*\[((?:source: )?\w+)\]$/, ""),
         source: recipe.fetcher,
@@ -159,7 +166,7 @@
         fetcher: recipe.fetcher,
         recipeURL: "https://github.com/melpa/melpa/blob/master/recipes/" + name,
         packageURL: "packages/" + name + "-" + version + "." + (built.type == "single" ? "el" : "tar"),
-        sourceURL: calculateSourceURL(name, recipe),
+        sourceURL: calculateSourceURL(name, recipe, commit),
         oldNames: oldNames,
         searchExtra: [recipe.repo]
       }));
@@ -252,7 +259,7 @@
     var queryParams = {
       q: m.route.param('q') || defaultQueryParams.q,
       sort: m.route.param('sort') || defaultQueryParams.sort,
-      asc: m.route.param('asc') == 'true' || defaultQueryParams.asc
+      asc: m.route.param('asc') ? (m.route.param('asc') == 'true') :  defaultQueryParams.asc
     };
     var resetPagination = function() { this.paginatorCtrl.pageNumber(1); }.bind(this);
     var updateRoute = function() {
@@ -429,7 +436,7 @@
             m("dt", "Source"),
             m("dd", [
               pkg.sourceURL ? m("a", {href: pkg.sourceURL}, pkg.source) : pkg.source,
-              pkg.commit ? m("span.muted", " (" + pkg.commit.substring(0,6) + ")") : []
+              pkg.commit ? m("span.muted", " (commit " + pkg.commit.substring(0,6) + ")") : []
             ]),
             m("dt", "Dependencies"),
             m("dd", intersperse(_.sortBy(pkg.dependencies, 'name').map(this.depLink), " / ")),

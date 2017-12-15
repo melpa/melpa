@@ -1,1 +1,1 @@
-(tfs :fetcher wiki)
+(tfs :fetcher github :repo "DinoChiesa/dpchiesa-elisp" :files '("tfs.el"))

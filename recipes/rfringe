@@ -1,1 +1,1 @@
-(rfringe :fetcher wiki)
+(rfringe :fetcher github :repo "DinoChiesa/dpchiesa-elisp" :files '("rfringe.el"))

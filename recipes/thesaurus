@@ -1,1 +1,1 @@
-(thesaurus :fetcher wiki)
+(thesaurus :fetcher github :repo "DinoChiesa/dpchiesa-elisp" :files '("thesaurus.el"))

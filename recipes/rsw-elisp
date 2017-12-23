@@ -1,0 +1,3 @@
+(rsw-elisp
+  :repo "rswgnu/rsw-elisp"
+  :fetcher github)

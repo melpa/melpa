@@ -1,0 +1,4 @@
+(cyanide
+ :repo "mciocchi/cyanide"
+ :fetcher github
+ :files ("*.el" "lib" "Cask" "README.md" "COPYING"))

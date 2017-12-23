@@ -1,0 +1,1 @@
+(ipython-shell-send :fetcher github :repo "jackkamm/ipython-shell-send-el")

@@ -1,0 +1,3 @@
+(ob-clojure-literate-programming
+  :fetcher github
+  :repo "stardiviner/ob-clojure-literate-programming")

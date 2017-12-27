@@ -1,1 +1,3 @@
-(go-imports :repo "yasushi-saito/go-imports" :fetcher github)
+(go-imports :repo "yasushi-saito/go-imports"
+  :files (:defaults "find-packages.pl")
+  :fetcher github)

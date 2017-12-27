@@ -1,0 +1,2 @@
+(ialign :fetcher github
+	:repo "mkcms/interactive-align")

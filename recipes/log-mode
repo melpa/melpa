@@ -1,1 +1,0 @@
-(log-mode :fetcher bitbucket :repo "ellisvelo/log-mode")

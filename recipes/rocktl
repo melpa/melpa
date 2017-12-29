@@ -1,0 +1,1 @@
+(rocktl :repo "stevenremot/emacs-rocktl" :fetcher github)

@@ -1,2 +1,3 @@
 (google-c-style :fetcher github
+                :branch "gh-pages"
                 :repo "google/styleguide")

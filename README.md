@@ -85,6 +85,10 @@ you prefer to only receive updates for tagged releases, use
   then by default you will get the *development* versions of packages
   and not the stable ones.
 
+* In order to remove the development repo, remove this line:
+  ```  (add-to-list 'package-archives (cons "melpa" url) t))
+  ```
+
 * You will probably want to remove all packages and then reinstall
   them. Any packages you already have installed from MELPA will never
   get "updated" to the stable version because of the way version

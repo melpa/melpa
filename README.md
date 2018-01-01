@@ -42,48 +42,42 @@ Enable installation of packages from MELPA by adding an entry to
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
-       (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
-  (add-to-list 'package-archives (cons "melpa" url) t))
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
+       (proto (if no-ssl "http" "https")))
+  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  (when (< emacs-major-version 24)
+    ;; For important compatibility libraries like cl-lib
+    (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 ```
 
 Then just use `M-x package-list-packages` to browse and install
 packages from MELPA and elsewhere.
 
-**Note:** Packages from the default “bleeding-edge” repository will
-always have higher versions than those from other archives like
-Marmalade, so if you decide you need non-MELPA versions of specific
-packages for some reason, extra configuration will be required:
+### MELPA Stable
 
-* If your Emacs has the variable `package-pinned-packages` (available
-  in 24.4 and later), you can customize or modify that variable as
-  needed.
+Packages in MELPA are built directly from the latest package source
+code in the upstream repositories, but we also build and publish
+packages corresponding to the latest tagged code in those
+repositories, where version tags exist. These packages are published
+in a separate package archive called [MELPA
+Stable](https://stable.melpa.org). Most users should prefer MELPA over
+MELPA Stable.
+
+Some notes:
+
+* If you leave the original MELPA server in your `package-archives`
+  then by default you will get the *development* versions of packages
+  and not the stable ones, because the development versions are higher.
+
+* If your Emacs has the variables `package-pinned-packages` (available
+  in 24.4 and later) and/or `package-archive-priorities`, you can
+  customize or modify those variables as needed.
 
 * You can use the
   [package-filter.el](https://github.com/milkypostman/package-filter)
   package which we provide.
-
-* You can use MELPA Stable.
-
-### MELPA Stable
-
-By default, MELPA provides the very latest revisions of packages.  If
-you prefer to only receive updates for tagged releases, use
-[MELPA Stable](https://stable.melpa.org) instead:
-
-```lisp
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-```
-
-*Versions for packages on the original MELPA server are based on the date of the last commit and will likely be higher than any version on the stable server.* Keep the following things in mind,
-
-* If you leave the original MELPA server in your `package-archives`
-  then by default you will get the *development* versions of packages
-  and not the stable ones.
 
 * You will probably want to remove all packages and then reinstall
   them. Any packages you already have installed from MELPA will never

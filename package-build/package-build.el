@@ -311,8 +311,11 @@ Returns the package version as a string."
 
 (defun package-build--git-repo (dir)
   "Get the current git repo for DIR."
-  (package-build--run-process-match
-   "Fetch URL: \\(.*\\)" dir "git" "remote" "show" "-n" "origin"))
+  (or (ignore-errors
+        (package-build--run-process-match
+         "Fetch URL: \\(.*\\)" dir "git" "remote" "show" "-n" "origin"))
+      (package-build--run-process-match
+       "\\(.*\\)" dir "git" "config" "remote.origin.url")))
 
 (defun package-build--checkout-git (name config dir)
   "Check package NAME with config CONFIG out of git into DIR."

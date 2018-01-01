@@ -362,6 +362,8 @@ Returns the package version as a string."
   (or (ignore-errors
         (package-build--run-process-match
          "HEAD branch: \\(.*\\)" dir "git" "remote" "show" "origin"))
+      (ignore-errors
+        (package-build--run-process-match "^\\* \\(.*\\)" dir "git" "branch"))
       "master"))
 
 (defun package-build--git-head-sha (dir)

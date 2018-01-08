@@ -1,0 +1,3 @@
+(leuven-theme-stable
+ :fetcher github
+ :repo "bzindovic/emacs-leuven-theme")

@@ -1,1 +1,1 @@
-(library :fetcher github :repo "cadadr/elisp" :files ("library.el"))
+(bibliothek :fetcher github :repo "cadadr/elisp" :files ("bibliothek.el"))

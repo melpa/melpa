@@ -1,0 +1,1 @@
+(play :fetcher github :repo "akirak/play.el" :files ("play.el"))

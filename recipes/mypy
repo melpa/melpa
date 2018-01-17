@@ -1,0 +1,3 @@
+(mypy :fetcher github
+:url "https://github.com/SerialDev/mypy-mode"
+:repo "SerialDev/mypy-mode")

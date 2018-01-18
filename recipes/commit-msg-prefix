@@ -1,1 +1,0 @@
-(commit-msg-prefix :repo "kidd/commit-msg-prefix" :fetcher github)

@@ -1,0 +1,4 @@
+(md4rd
+ :repo "ahungry/md4rd"
+ :files ("md4rd.el")
+ :fetcher github)

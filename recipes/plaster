@@ -1,0 +1,2 @@
+(plaster :repo "shirakumo/plaster"
+         :fetcher github)

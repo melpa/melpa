@@ -1,0 +1,6 @@
+(elcord
+ :fetcher github
+ :repo "Zulu-Inuoe/elcord"
+ :files
+ (:defaults
+  "stdpipe.ps1"))

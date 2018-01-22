@@ -1,0 +1,1 @@
+(flycheck-swiftlint :fetcher github :repo "jojojames/flycheck-swiftlint")

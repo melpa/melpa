@@ -1,1 +1,1 @@
-(inf-crystal :repo "brantou/inf-crystal" :fetcher github)
+(inf-crystal :repo "brantou/inf-crystal.el" :fetcher github)

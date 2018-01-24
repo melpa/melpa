@@ -1,1 +1,1 @@
-(highlight :fetcher wiki)
+(highlight :fetcher github :repo "emacsmirror/highlight")

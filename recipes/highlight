@@ -1,1 +1,1 @@
-(highlight :fetcher github :repo "emacsmirror/highlight")
+(highlight :fetcher github :repo "steckerhalter/highlight.el")

@@ -1,0 +1,4 @@
+(modeline-posn
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("modeline-posn.el"))

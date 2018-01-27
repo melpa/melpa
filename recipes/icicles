@@ -1,0 +1,4 @@
+(icicles
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("icicles.el"))

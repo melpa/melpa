@@ -1,0 +1,4 @@
+(recentf-ext
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("recentf-ext.el"))

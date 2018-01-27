@@ -1,0 +1,4 @@
+(highlight-tail
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("highlight-tail.el"))

@@ -1,0 +1,4 @@
+(synonyms
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("synonyms.el"))

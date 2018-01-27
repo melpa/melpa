@@ -1,0 +1,4 @@
+(dropdown-list
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("dropdown-list.el"))

@@ -1,0 +1,4 @@
+(dummy-h-mode
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("dummy-h-mode.el"))

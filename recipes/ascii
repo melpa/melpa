@@ -1,0 +1,4 @@
+(ascii
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("ascii.el"))

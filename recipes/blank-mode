@@ -1,0 +1,4 @@
+(blank-mode
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("blank-mode.el"))

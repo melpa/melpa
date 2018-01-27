@@ -1,0 +1,4 @@
+(gnus-spotlight
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("gnus-spotlight.el"))

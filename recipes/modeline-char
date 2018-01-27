@@ -1,0 +1,4 @@
+(modeline-char
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("modeline-char.el"))

@@ -1,0 +1,4 @@
+(browse-kill-ring+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("browse-kill-ring+.el"))

@@ -1,0 +1,4 @@
+(header2
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("header2.el"))

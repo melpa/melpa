@@ -1,0 +1,4 @@
+(macros+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("macros+.el"))

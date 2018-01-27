@@ -1,0 +1,4 @@
+(lib-requires
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("lib-requires.el"))

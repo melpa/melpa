@@ -1,0 +1,4 @@
+(better-registers
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("better-registers.el"))

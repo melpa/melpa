@@ -1,0 +1,4 @@
+(mouse3
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("mouse3.el"))

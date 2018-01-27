@@ -1,0 +1,4 @@
+(col-highlight
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("col-highlight.el"))

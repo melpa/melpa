@@ -1,0 +1,4 @@
+(judge-indent
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("judge-indent.el"))

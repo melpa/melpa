@@ -1,0 +1,4 @@
+(gregorio-mode
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("gregorio-mode.el"))

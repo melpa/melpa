@@ -1,0 +1,4 @@
+(anchored-transpose
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("anchored-transpose.el"))

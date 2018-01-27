@@ -1,0 +1,4 @@
+(cus-edit+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("cus-edit+.el"))

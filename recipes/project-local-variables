@@ -1,0 +1,4 @@
+(project-local-variables
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("project-local-variables.el"))

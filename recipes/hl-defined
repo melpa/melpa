@@ -1,0 +1,4 @@
+(hl-defined
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("hl-defined.el"))

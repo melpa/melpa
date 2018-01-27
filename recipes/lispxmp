@@ -1,0 +1,4 @@
+(lispxmp
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("lispxmp.el"))

@@ -1,0 +1,4 @@
+(buffer-stack
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("buffer-stack.el"))

@@ -1,0 +1,4 @@
+(highlight-cl
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("highlight-cl.el"))

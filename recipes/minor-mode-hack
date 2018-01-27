@@ -1,0 +1,4 @@
+(minor-mode-hack
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("minor-mode-hack.el"))

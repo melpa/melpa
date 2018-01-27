@@ -1,0 +1,4 @@
+(filesets+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("filesets+.el"))

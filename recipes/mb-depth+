@@ -1,0 +1,4 @@
+(mb-depth+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("mb-depth+.el"))

@@ -1,0 +1,4 @@
+(frame-fns
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("frame-fns.el"))

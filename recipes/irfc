@@ -1,0 +1,4 @@
+(irfc
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("irfc.el"))

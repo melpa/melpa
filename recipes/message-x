@@ -1,0 +1,4 @@
+(message-x
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("message-x.el"))

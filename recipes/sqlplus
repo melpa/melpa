@@ -1,0 +1,4 @@
+(sqlplus
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("sqlplus.el"))

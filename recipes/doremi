@@ -1,0 +1,4 @@
+(doremi
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("doremi.el"))

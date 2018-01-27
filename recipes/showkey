@@ -1,0 +1,4 @@
+(showkey
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("showkey.el"))

@@ -1,0 +1,4 @@
+(cursor-in-brackets
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("cursor-in-brackets.el"))

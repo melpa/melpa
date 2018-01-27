@@ -1,0 +1,4 @@
+(finder+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("finder+.el"))

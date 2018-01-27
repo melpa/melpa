@@ -1,0 +1,4 @@
+(menu-bar+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("menu-bar+.el"))

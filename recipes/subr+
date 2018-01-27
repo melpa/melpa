@@ -1,0 +1,4 @@
+(subr+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("subr+.el"))

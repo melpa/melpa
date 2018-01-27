@@ -1,0 +1,4 @@
+(auto-capitalize
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("auto-capitalize.el"))

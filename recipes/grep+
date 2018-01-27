@@ -1,0 +1,4 @@
+(grep+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("grep+.el"))

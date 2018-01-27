@@ -1,0 +1,4 @@
+(eldoc-extension
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("eldoc-extension.el"))

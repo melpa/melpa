@@ -1,0 +1,4 @@
+(crosshairs
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("crosshairs.el"))

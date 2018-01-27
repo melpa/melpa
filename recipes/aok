@@ -1,0 +1,4 @@
+(aok
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("aok.el"))

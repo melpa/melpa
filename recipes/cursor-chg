@@ -1,0 +1,4 @@
+(cursor-chg
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("cursor-chg.el"))

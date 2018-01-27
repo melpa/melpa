@@ -1,0 +1,4 @@
+(awk-it
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("awk-it.el"))

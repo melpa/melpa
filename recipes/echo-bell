@@ -1,0 +1,4 @@
+(echo-bell
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("echo-bell.el"))

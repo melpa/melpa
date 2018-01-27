@@ -1,0 +1,4 @@
+(jira
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("jira.el"))

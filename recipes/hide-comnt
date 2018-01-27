@@ -1,0 +1,4 @@
+(hide-comnt
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("hide-comnt.el"))

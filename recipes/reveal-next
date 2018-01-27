@@ -1,0 +1,4 @@
+(reveal-next
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("reveal-next.el"))

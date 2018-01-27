@@ -1,0 +1,4 @@
+(narrow-indirect
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("narrow-indirect.el"))

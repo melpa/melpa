@@ -1,0 +1,4 @@
+(igrep
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("igrep.el"))

@@ -1,0 +1,4 @@
+(naked
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("naked.el"))

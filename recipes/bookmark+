@@ -1,0 +1,4 @@
+(bookmark+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("bookmark+.el"))

@@ -1,0 +1,4 @@
+(hexrgb
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("hexrgb.el"))

@@ -1,0 +1,4 @@
+(plsql
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("plsql.el"))

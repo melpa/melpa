@@ -1,0 +1,4 @@
+(muttrc-mode
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("muttrc-mode.el"))

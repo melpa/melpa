@@ -1,0 +1,4 @@
+(etags-select
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("etags-select.el"))

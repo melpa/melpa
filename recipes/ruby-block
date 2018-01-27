@@ -1,0 +1,4 @@
+(ruby-block
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("ruby-block.el"))

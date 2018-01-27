@@ -1,0 +1,4 @@
+(swbuff-x
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("swbuff-x.el"))

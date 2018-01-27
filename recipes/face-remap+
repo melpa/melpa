@@ -1,0 +1,4 @@
+(face-remap+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("face-remap+.el"))

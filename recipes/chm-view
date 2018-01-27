@@ -1,0 +1,4 @@
+(chm-view
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("chm-view.el"))

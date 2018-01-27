@@ -1,0 +1,4 @@
+(ac-dabbrev
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("ac-dabbrev.el"))

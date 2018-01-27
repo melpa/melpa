@@ -1,0 +1,4 @@
+(el-swank-fuzzy
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("el-swank-fuzzy.el"))

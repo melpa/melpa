@@ -1,0 +1,4 @@
+(frame-cmds
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("frame-cmds.el"))

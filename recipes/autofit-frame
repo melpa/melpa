@@ -1,0 +1,4 @@
+(autofit-frame
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("autofit-frame.el"))

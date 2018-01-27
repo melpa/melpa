@@ -1,0 +1,4 @@
+(batch-mode
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("batch-mode.el"))

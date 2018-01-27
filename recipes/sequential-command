@@ -1,0 +1,4 @@
+(sequential-command
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("sequential-command.el"))

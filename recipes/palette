@@ -1,0 +1,4 @@
+(palette
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("palette.el"))

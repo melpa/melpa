@@ -1,0 +1,4 @@
+(column-marker
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("column-marker.el"))

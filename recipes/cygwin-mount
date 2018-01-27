@@ -1,0 +1,4 @@
+(cygwin-mount
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("cygwin-mount.el"))

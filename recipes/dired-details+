@@ -1,0 +1,4 @@
+(dired-details+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("dired-details+.el"))

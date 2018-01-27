@@ -1,0 +1,4 @@
+(help-mode+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("help-mode+.el"))

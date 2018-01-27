@@ -1,0 +1,4 @@
+(point-undo
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("point-undo.el"))

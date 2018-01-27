@@ -1,0 +1,4 @@
+(lacarte
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("lacarte.el"))

@@ -1,0 +1,4 @@
+(hide-region
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("hide-region.el"))

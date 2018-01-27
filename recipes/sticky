@@ -1,0 +1,4 @@
+(sticky
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("sticky.el"))

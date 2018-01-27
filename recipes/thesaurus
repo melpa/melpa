@@ -1,0 +1,4 @@
+(thesaurus
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("thesaurus.el"))

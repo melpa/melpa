@@ -1,0 +1,4 @@
+(strings
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("strings.el"))

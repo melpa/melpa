@@ -1,0 +1,4 @@
+(auto-install
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("auto-install.el"))

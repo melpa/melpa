@@ -1,0 +1,4 @@
+(mwe-log-commands
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("mwe-log-commands.el"))

@@ -1,0 +1,4 @@
+(pretty-lambdada
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("pretty-lambdada.el"))

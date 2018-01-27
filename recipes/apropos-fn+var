@@ -1,0 +1,4 @@
+(apropos-fn+var
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("apropos-fn+var.el"))

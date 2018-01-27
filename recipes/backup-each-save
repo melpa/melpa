@@ -1,0 +1,4 @@
+(backup-each-save
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("backup-each-save.el"))

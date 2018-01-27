@@ -1,0 +1,4 @@
+(fuzzy-format
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("fuzzy-format.el"))

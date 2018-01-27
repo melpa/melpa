@@ -1,0 +1,4 @@
+(multi-eshell
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("multi-eshell.el"))

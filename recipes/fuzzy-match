@@ -1,0 +1,4 @@
+(fuzzy-match
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("fuzzy-match.el"))

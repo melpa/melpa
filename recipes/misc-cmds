@@ -1,0 +1,4 @@
+(misc-cmds
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("misc-cmds.el"))

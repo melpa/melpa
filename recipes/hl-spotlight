@@ -1,0 +1,4 @@
+(hl-spotlight
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("hl-spotlight.el"))

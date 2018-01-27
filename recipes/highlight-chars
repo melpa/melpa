@@ -1,0 +1,4 @@
+(highlight-chars
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("highlight-chars.el"))

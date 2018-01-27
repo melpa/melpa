@@ -1,0 +1,4 @@
+(redo+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("redo+.el"))

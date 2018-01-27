@@ -1,0 +1,4 @@
+(hl-line+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("hl-line+.el"))

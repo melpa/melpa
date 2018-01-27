@@ -1,0 +1,4 @@
+(pp-c-l
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("pp-c-l.el"))

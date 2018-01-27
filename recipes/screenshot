@@ -1,0 +1,4 @@
+(screenshot
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("screenshot.el"))

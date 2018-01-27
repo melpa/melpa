@@ -1,0 +1,4 @@
+(icomplete+
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("icomplete+.el"))

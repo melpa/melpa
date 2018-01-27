@@ -1,0 +1,4 @@
+(hideshowvis
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("hideshowvis.el"))

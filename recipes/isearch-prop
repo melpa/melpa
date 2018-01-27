@@ -1,0 +1,4 @@
+(isearch-prop
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("isearch-prop.el"))

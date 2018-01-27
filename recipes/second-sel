@@ -1,0 +1,4 @@
+(second-sel
+ :fetcher github
+ :repo "ahungry/emacswiki-mirror"
+ :files ("second-sel.el"))

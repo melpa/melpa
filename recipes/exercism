@@ -1,0 +1,1 @@
+(exercism :fetcher github :repo "jdenen/exercism.el")

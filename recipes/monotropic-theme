@@ -1,0 +1,1 @@
+(monotropic-theme :repo "caffo/monotropic-theme" :fetcher github)

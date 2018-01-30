@@ -1,0 +1,1 @@
+(rg3 :fetcher github :repo "cosmicexplorer/rg3")

@@ -1,1 +1,1 @@
-(sticky :fetcher wiki)
+(sticky :fetcher github :repo "rubikitch/sticky")

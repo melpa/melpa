@@ -1,1 +1,1 @@
-(recentf-ext :fetcher wiki)
+(recentf-ext :fetcher github :repo "rubikitch/recentf-ext")

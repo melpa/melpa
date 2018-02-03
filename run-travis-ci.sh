@@ -18,7 +18,7 @@ for recipe_name in $changed_recipes; do
     if [ -f "./recipes/$recipe_name" ]; then
         echo "----------------------------------------------------"
         echo "Building new/modified recipe: $recipe_name"
-        cask emacs --batch --eval "(progn (load-file \"package-build/package-build.el\")(package-build-archive '$recipe_name))"
+        cask emacs --batch --eval "(progn (add-to-list 'load-path \"$TRAVIS_BUILD_DIR/package-build/\")(load-file \"package-build/package-build.el\")(package-build-archive \"$recipe_name\"))"
     fi
 done
 

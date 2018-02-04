@@ -1,0 +1,1 @@
+(panda-theme :repo "jamiecollinson/emacs-panda-theme" :fetcher github)

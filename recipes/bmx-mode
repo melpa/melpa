@@ -1,0 +1,2 @@
+(bmx-mode :repo "josteink/bmx-mode" :fetcher github)
+

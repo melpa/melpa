@@ -1,0 +1,3 @@
+(admb :fetcher github
+      :repo "admb-project/admb"
+      :files ("contrib/emacs/*"))

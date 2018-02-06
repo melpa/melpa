@@ -4,4 +4,4 @@
                "lisp/git-rebase.el"
                "Documentation/magit.texi"
                "Documentation/AUTHORS.md"
-               "COPYING"))
+               "LICENSE"))

@@ -1,4 +1,4 @@
 (nordless-theme
-  :repo "lethom/nordless-theme.el"
+  :repo "lthms/nordless-theme.el"
   :files ("nordless-theme.el")
   :fetcher github)

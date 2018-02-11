@@ -1,0 +1,1 @@
+(docker-popups :fetcher github :repo "olymk2/emacs-docker-compose")

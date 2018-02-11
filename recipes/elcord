@@ -1,6 +1,6 @@
 (elcord
  :fetcher github
- :repo "Zulu-Inuoe/elcord"
+ :repo "mstrodl/elcord"
  :files
  (:defaults
   "stdpipe.ps1"))

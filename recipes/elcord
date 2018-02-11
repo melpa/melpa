@@ -3,4 +3,4 @@
  :repo "Zulu-Inuoe/elcord"
  :files
  (:defaults
-  "stdpipe.ps1"))
+ "stdpipe.ps1"))

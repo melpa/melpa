@@ -1,0 +1,3 @@
+(rust-mode-reloaded
+    :repo "brotzeit/rust-mode-reloaded"
+    :fetcher github)

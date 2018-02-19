@@ -1,0 +1,3 @@
+(lawndart
+ :repo "ahungry/lawndart-mode"
+ :fetcher github)

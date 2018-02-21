@@ -207,20 +207,20 @@ The three packages have to be declared in three separate files
 
 ```lisp
 (mypackage :repo "someuser/mypackage"
-            :fetcher github
-            :files ("mypackage.el"))
+           :fetcher github
+           :files ("mypackage.el"))
 ```
 
 ```lisp
 (helm-mypackage :repo "someuser/mypackage"
-                 :fetcher github
-                 :files ("helm-mypackage.el"))
+                :fetcher github
+                :files ("helm-mypackage.el"))
 ```
 
 ```lisp
 (persp-mypackage :repo "someuser/mypackage"
-                  :fetcher github
-                  :files ("persp-mypackage.el"))
+                 :fetcher github
+                 :files ("persp-mypackage.el"))
 ```
 
 ### Example: Multiple Files in Multiple Directories

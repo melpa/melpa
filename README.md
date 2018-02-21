@@ -99,9 +99,11 @@ the following form (`[...]` denotes optional or conditional values),
 
 ```lisp
 (<package-name>
- :fetcher [git|github|gitlab|bitbucket|hg|wiki]
+ :fetcher [git|github|gitlab|hg|bitbucket]
  [:url "<repo url>"]
  [:repo "github-gitlab-or-bitbucket-user/repo-name"]
+ [:commit "commit"]
+ [:branch "branch"]
  [:version-regexp "<regexp>"]
  [:files ("<file1>" ...)])
 ```
@@ -111,27 +113,10 @@ a lisp symbol that has the same name as the package being specified.
 
 - `:fetcher` specifies the type of repository that `:url` or `:repo`
   points to.  Melpa supports [`git`][git], [`github`][github],
-  [`gitlab`][gitlab], [`hg`][hg] (Mercurial), and [`wiki`][emacswiki]
-  (for packages from Emacswiki.org).
-
-  - The `bitbucket` fetcher derives from `hg`, so you have to use
-    `git` for Git repositories hosted on Bitbucket.
-
-  - The `wiki` fetcher gets the latest version from
-    `http://www.emacswiki.org/emacs/download/<NAME>.el` where `NAME`
-    is the package name.  Note that the `:url` property is not needed
-    for the `wiki` fetcher unless the name of the package file on the
-    EmacsWiki differs from the package name being built.  This fetcher
-    is deprecated due to security concerns.  Please distribute your
-    packages using a `git` or `hg` repository.
-
-  - Bazaar, CVS, Darcs, Fossil and Subversion used to be supported,
-    until only a dozen packages remained on Melpa that used one of
-    these five version control systems.  These packages are now
-    imported from the Emacsorphanage, which features semi-regularly
-    updated Git mirrors of the upstream non-Git repositories.  (The
-    latest stable `package-build.el` release actually still supports
-    these vcs.)
+  [`gitlab`][gitlab], [`hg`][hg] (Mercurial), and
+  [`bitbucket`][bitbucket].  The `bitbucket` fetcher derives from
+  `hg`, so you have to use `git` for Git repositories hosted on
+  Bitbucket.
 
 - `:url`
 specifies the URL of the version control repository. *required for
@@ -190,7 +175,6 @@ subdirectories to keep packaging simple.
 [gitlab]: https://gitlab.com/
 [bitbucket]: https://bitbucket.org/
 [hg]: https://www.mercurial-scm.org/
-[emacswiki]: http://www.emacswiki.org/
 
 
 ### Example: Single File Repository

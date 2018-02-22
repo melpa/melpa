@@ -82,8 +82,7 @@ $(RCPDIR)/.dirstamp: .FORCE
 
 ## Recipe rules
 $(RCPDIR)/%: .FORCE
-	@echo " • Building recipe $(@F) ..."
-
+	@echo " • Building package $(@F) ..."
 	- $(TIMEOUT) $(EVAL) "(let ((package-build-stable $(STABLE)) (package-build-write-melpa-badge-images t) (package-build-archive-dir (expand-file-name \"$(PKGDIR)\" package-build--melpa-base))) (package-build-archive \"$(@F)\"))"
 
 	@echo " ✓ Wrote $$(ls -lsh $(PKGDIR)/$(@F)-*) "

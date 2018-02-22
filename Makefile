@@ -14,11 +14,18 @@ SLEEP   ?= 0
 SANDBOX := sandbox
 STABLE  ?= nil
 
+LISP_CONFIG ?= '(progn\
+  (setq package-build-working-dir "$(TOP)/$(WORKDIR)/")\
+  (setq package-build-archive-dir "$(TOP)/$(PKGDIR)/")\
+  (setq package-build-recipes-dir "$(TOP)/$(RCPDIR)/")\
+  (setq package-build-stable $(STABLE))\
+  (setq package-build-write-melpa-badge-images t))'
+
 LOAD_PATH ?= $(TOP)/package-build
 
 EVAL := $(EMACS_COMMAND) --no-site-file --batch \
 $(addprefix -L ,$(LOAD_PATH)) \
---eval '(setq package-build-archive-dir "$(TOP)/$(PKGDIR)/")' \
+--eval $(LISP_CONFIG) \
 --load package-build.el \
 --eval
 
@@ -92,7 +99,7 @@ $(RCPDIR)/.dirstamp: .FORCE
 ## Recipe rules
 $(RCPDIR)/%: .FORCE
 	@echo " • Building package $(@F) ..."
-	- $(TIMEOUT) $(EVAL) "(let ((package-build-stable $(STABLE)) (package-build-write-melpa-badge-images t) (package-build-archive-dir (expand-file-name \"$(PKGDIR)\" package-build--melpa-base))) (package-build-archive \"$(@F)\"))" \
+	- $(TIMEOUT) $(EVAL) "(package-build-archive \"$(@F)\")" \
 	&& echo " ✓ Success:" \
 	&& ls -lsh $(PKGDIR)/$(@F)-*
 	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." && sleep $(SLEEP) || true

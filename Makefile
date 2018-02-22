@@ -1,4 +1,4 @@
-TOP := $(dir $(lastword $(MAKEFILE_LIST)))
+TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 
 SHELL         := bash
 EMACS_COMMAND ?= emacs
@@ -12,7 +12,11 @@ SLEEP   ?= 0
 SANDBOX := sandbox
 STABLE  ?= nil
 
-EVAL := $(EMACS_COMMAND) --no-site-file --batch -L $(TOP)/package-build -l package-build.el --eval
+EVAL := $(EMACS_COMMAND) --no-site-file --batch \
+-L $(TOP)/package-build \
+--eval '(setq package-build-archive-dir "$(TOP)/$(PKGDIR)/")' \
+--load package-build.el \
+--eval
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
 
@@ -63,16 +67,16 @@ packages/archive-contents: .FORCE
 	$(EVAL) '(package-build-dump-archive-contents)'
 
 cleanup:
-	$(EVAL) '(let ((package-build-archive-dir (expand-file-name "$(PKGDIR)/" package-build--melpa-base))) (package-build-cleanup))'
+	$(EVAL) '(package-build-cleanup)'
 
 ## Json rules
 html/archive.json: $(PKGDIR)/archive-contents
 	@echo " • Building $@ ..."
-	$(EVAL) '(let ((package-build-archive-dir (expand-file-name "$(PKGDIR)/" package-build--melpa-base))) (package-build-archive-alist-as-json "html/archive.json"))'
+	$(EVAL) '(package-build-archive-alist-as-json "html/archive.json")'
 
 html/recipes.json: $(RCPDIR)/.dirstamp
 	@echo " • Building $@ ..."
-	$(EVAL) '(let ((package-build-archive-dir (expand-file-name "$(PKGDIR)/" package-build--melpa-base))) (package-build-recipe-alist-as-json "html/recipes.json"))'
+	$(EVAL) '(package-build-recipe-alist-as-json "html/recipes.json")'
 
 json: html/archive.json html/recipes.json
 
@@ -100,7 +104,7 @@ sandbox: packages/archive-contents
 		-l package \
 		--eval "(add-to-list 'package-archives '(\"gnu\" . \"http://elpa.gnu.org/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"melpa\" . \"https://melpa.org/packages/\") t)" \
-		--eval "(add-to-list 'package-archives '(\"sandbox\" . \"$(shell pwd)/$(PKGDIR)/\") t)" \
+		--eval "(add-to-list 'package-archives '(\"sandbox\" . \"$(TOP)/$(PKGDIR)/\") t)" \
 		--eval "(package-refresh-contents)" \
 		--eval "(package-initialize)" \
 		--eval '(setq sandbox-install-package "$(INSTALL)")' \

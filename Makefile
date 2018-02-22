@@ -1,5 +1,7 @@
 TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 
+-include ./config.mk
+
 SHELL         := bash
 EMACS_COMMAND ?= emacs
 

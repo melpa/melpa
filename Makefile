@@ -83,9 +83,9 @@ $(RCPDIR)/.dirstamp: .FORCE
 ## Recipe rules
 $(RCPDIR)/%: .FORCE
 	@echo " • Building package $(@F) ..."
-	- $(TIMEOUT) $(EVAL) "(let ((package-build-stable $(STABLE)) (package-build-write-melpa-badge-images t) (package-build-archive-dir (expand-file-name \"$(PKGDIR)\" package-build--melpa-base))) (package-build-archive \"$(@F)\"))"
-
-	@echo " ✓ Wrote $$(ls -lsh $(PKGDIR)/$(@F)-*) "
+	- $(TIMEOUT) $(EVAL) "(let ((package-build-stable $(STABLE)) (package-build-write-melpa-badge-images t) (package-build-archive-dir (expand-file-name \"$(PKGDIR)\" package-build--melpa-base))) (package-build-archive \"$(@F)\"))" \
+	&& echo " ✓ Success:" \
+	&& ls -lsh $(PKGDIR)/$(@F)-*
 	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." && sleep $(SLEEP) || true
 	@echo
 

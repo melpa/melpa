@@ -43,27 +43,28 @@ index: json
 ## Cleanup rules
 clean-working:
 	@echo " • Removing package sources ..."
-	git clean -dffX $(WORKDIR)/.
+	@git clean -dffX $(WORKDIR)/.
 
 clean-packages:
 	@echo " • Removing packages ..."
-	git clean -dffX $(PKGDIR)/.
+	@git clean -dffX $(PKGDIR)/.
 
 clean-json:
 	@echo " • Removing json files ..."
-	-rm -vf html/archive.json html/recipes.json
+	@-rm -vf html/archive.json html/recipes.json
 
 clean-sandbox:
 	@echo " • Removing sandbox files ..."
-	if [ -d '$(SANDBOX)' ]; then \
+	@if [ -d '$(SANDBOX)' ]; then \
 		rm -rfv '$(SANDBOX)/elpa'; \
 		rmdir '$(SANDBOX)'; \
 	fi
 
 sync:
-	rsync -avz --delete $(PKGDIR)/ $(WEBROOT)/packages
-	rsync -avz --safe-links --delete $(HTMLDIR)/* $(WEBROOT)/
-	chmod -R go+rx $(WEBROOT)/packages/*
+	@echo " • Synchronizing files ..."
+	@rsync -avz --delete $(PKGDIR)/ $(WEBROOT)/packages
+	@rsync -avz --safe-links --delete $(HTMLDIR)/* $(WEBROOT)/
+	@chmod -R go+rx $(WEBROOT)/packages/*
 
 
 pull-package-build:
@@ -75,19 +76,19 @@ packages: $(RCPDIR)/*
 
 packages/archive-contents: .FORCE
 	@echo " • Updating $@ ..."
-	$(EVAL) '(package-build-dump-archive-contents)'
+	@$(EVAL) '(package-build-dump-archive-contents)'
 
 cleanup:
-	$(EVAL) '(package-build-cleanup)'
+	@$(EVAL) '(package-build-cleanup)'
 
 ## Json rules
 html/archive.json: $(PKGDIR)/archive-contents
 	@echo " • Building $@ ..."
-	$(EVAL) '(package-build-archive-alist-as-json "html/archive.json")'
+	@$(EVAL) '(package-build-archive-alist-as-json "html/archive.json")'
 
 html/recipes.json: $(RCPDIR)/.dirstamp
 	@echo " • Building $@ ..."
-	$(EVAL) '(package-build-recipe-alist-as-json "html/recipes.json")'
+	@$(EVAL) '(package-build-recipe-alist-as-json "html/recipes.json")'
 
 json: html/archive.json html/recipes.json
 
@@ -99,7 +100,7 @@ $(RCPDIR)/.dirstamp: .FORCE
 ## Recipe rules
 $(RCPDIR)/%: .FORCE
 	@echo " • Building package $(@F) ..."
-	- $(TIMEOUT) $(EVAL) "(package-build-archive \"$(@F)\")" \
+	@- $(TIMEOUT) $(EVAL) "(package-build-archive \"$(@F)\")" \
 	&& echo " ✓ Success:" \
 	&& ls -lsh $(PKGDIR)/$(@F)-*
 	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." && sleep $(SLEEP) || true
@@ -109,8 +110,8 @@ $(RCPDIR)/%: .FORCE
 ## Sandbox
 sandbox: packages/archive-contents
 	@echo " • Building sandbox ..."
-	mkdir -p $(SANDBOX)
-	$(EMACS_COMMAND) -Q \
+	@mkdir -p $(SANDBOX)
+	@$(EMACS_COMMAND) -Q \
 		--eval '(setq user-emacs-directory (file-truename "$(SANDBOX)"))' \
 		-l package \
 		--eval "(add-to-list 'package-archives '(\"gnu\" . \"http://elpa.gnu.org/packages/\") t)" \

@@ -11,14 +11,6 @@ SLEEP   ?= 0
 SANDBOX := ./sandbox
 STABLE ?= nil
 
-EVAL := $(EMACS_COMMAND)
-
-## Check for needing to initialize CL-LIB from ELPA
-NEED_CL-LIB := $(shell $(EMACS_COMMAND) --no-site-file --batch --eval '(prin1 (version< emacs-version "24.3"))')
-ifeq ($(NEED_CL-LIB), t)
-	EMACS_COMMAND := $(EMACS_COMMAND) --eval "(package-initialize)"
-endif
-
 EVAL := $(EMACS_COMMAND) --no-site-file --batch -L $(TOP)/package-build -l package-build.el --eval
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")

@@ -14,8 +14,10 @@ SLEEP   ?= 0
 SANDBOX := sandbox
 STABLE  ?= nil
 
+LOAD_PATH ?= $(TOP)/package-build
+
 EVAL := $(EMACS_COMMAND) --no-site-file --batch \
--L $(TOP)/package-build \
+$(addprefix -L ,$(LOAD_PATH)) \
 --eval '(setq package-build-archive-dir "$(TOP)/$(PKGDIR)/")' \
 --load package-build.el \
 --eval

@@ -1,15 +1,16 @@
 TOP := $(dir $(lastword $(MAKEFILE_LIST)))
 
-SHELL   := bash
-PKGDIR  := ./packages
-RCPDIR  := ./recipes
-HTMLDIR := ./html
-WORKDIR := ./working
+SHELL         := bash
+EMACS_COMMAND ?= emacs
+
+PKGDIR  := packages
+RCPDIR  := recipes
+HTMLDIR := html
+WORKDIR := working
 WEBROOT := $$HOME/www
-EMACS_COMMAND   ?= emacs
 SLEEP   ?= 0
-SANDBOX := ./sandbox
-STABLE ?= nil
+SANDBOX := sandbox
+STABLE  ?= nil
 
 EVAL := $(EMACS_COMMAND) --no-site-file --batch -L $(TOP)/package-build -l package-build.el --eval
 

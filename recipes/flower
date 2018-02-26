@@ -1,3 +1,4 @@
 (flower :repo "PositiveTechnologies/flower"
+        :branch "emacs"
         :files (:defaults "project.clj")
         :fetcher github)

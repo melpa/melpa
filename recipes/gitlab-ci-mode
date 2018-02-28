@@ -1,0 +1,3 @@
+(gitlab-ci-mode
+ :fetcher git
+ :url "https://gitlab.com/joewreschnig/gitlab-ci-mode.git")

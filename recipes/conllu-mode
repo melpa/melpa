@@ -1,0 +1,3 @@
+(conllu-mode
+ :fetcher github
+ :repo "odanoburu/conllu-mode")

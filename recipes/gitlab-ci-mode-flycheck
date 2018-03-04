@@ -1,0 +1,3 @@
+(gitlab-ci-mode-flycheck
+ :fetcher git
+ :url "https://gitlab.com/joewreschnig/gitlab-ci-mode-flycheck.git")

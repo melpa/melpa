@@ -1,0 +1,4 @@
+(babcore
+  :fetcher bitbucket
+  :repo "ArneBab/babcore.el"
+  :files (:defaults "babcore.org"))

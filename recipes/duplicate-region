@@ -1,0 +1,1 @@
+(duplicate-region :repo "craiglyons/duplicate-region" :fetcher github)

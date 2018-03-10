@@ -1,2 +1,2 @@
-(elisp-lint :fetcher github :repo "nschum/elisp-lint")
+(elisp-lint :fetcher github :repo "gonewest818/elisp-lint")
 

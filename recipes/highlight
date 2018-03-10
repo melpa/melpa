@@ -1,1 +1,1 @@
-(highlight :fetcher wiki)
+(highlight :fetcher github :repo "steckerhalter/highlight.el")

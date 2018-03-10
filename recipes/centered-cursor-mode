@@ -1,1 +1,1 @@
-(centered-cursor-mode :fetcher wiki)
+(centered-cursor-mode :fetcher github :repo "andre-r/centered-cursor-mode.el")

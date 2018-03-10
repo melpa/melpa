@@ -1,0 +1,1 @@
+(org-chef :fetcher github :repo "Chobbes/org-chef")

@@ -105,7 +105,7 @@ sandbox: packages/archive-contents
 	@echo " • Building sandbox ..."
 	mkdir -p $(SANDBOX)
 	$(EMACS_COMMAND) -Q \
-		--eval '(setq user-emacs-directory "$(SANDBOX)")' \
+		--eval '(setq user-emacs-directory (file-truename "$(SANDBOX)"))' \
 		-l package \
 		--eval "(add-to-list 'package-archives '(\"gnu\" . \"http://elpa.gnu.org/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"melpa\" . \"https://melpa.org/packages/\") t)" \

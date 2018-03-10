@@ -292,46 +292,33 @@ the same arguments.
 Returns the package version as a string."
   (let ((fetcher (plist-get config :fetcher)))
     (package-build--message "Fetcher: %s" fetcher)
-    (unless (eq fetcher 'wiki)
-      (package-build--message "Source: %s\n"
-                              (or (plist-get config :repo)
-                                  (plist-get config :url)))
-      (funcall (intern (format "package-build--checkout-%s" fetcher))
-               name config (file-name-as-directory working-dir)))))
-
-(defun package-build--princ-exists (dir)
-  "Print a message that the contents of DIR will be updated."
-  (package-build--message "Updating %s" dir))
-
-(defun package-build--princ-checkout (repo dir)
-  "Print a message that REPO will be checked out into DIR."
-  (package-build--message "Cloning %s to %s" repo dir))
+    (package-build--message "Source: %s\n"
+                            (or (plist-get config :repo)
+                                (plist-get config :url)))
+    (funcall (intern (format "package-build--checkout-%s" fetcher))
+             name config (file-name-as-directory working-dir))))
 
 ;;;; Git
 
 (defun package-build--git-repo (dir)
   "Get the current git repo for DIR."
-  (package-build--run-process-match
-   "Fetch URL: \\(.*\\)" dir "git" "remote" "show" "-n" "origin"))
+  (let ((default-directory dir))
+    (car (process-lines "git" "config" "remote.origin.url"))))
 
 (defun package-build--checkout-git (name config dir)
   "Check package NAME with config CONFIG out of git into DIR."
-  (let ((repo (plist-get config :url))
-        (commit (or (plist-get config :commit)
-                    (let ((branch (plist-get config :branch)))
-                      (when branch
-                        (concat "origin/" branch))))))
+  (let ((repo (plist-get config :url)))
     (with-current-buffer (get-buffer-create "*package-build-checkout*")
       (goto-char (point-max))
       (cond
        ((and (file-exists-p (expand-file-name ".git" dir))
              (string-equal (package-build--git-repo dir) repo))
-        (package-build--princ-exists dir)
+        (package-build--message "Updating %s" dir)
         (package-build--run-process dir "git" "fetch" "--all" "--tags"))
        (t
         (when (file-exists-p dir)
           (delete-directory dir t))
-        (package-build--princ-checkout repo dir)
+        (package-build--message "Cloning %s to %s" repo dir)
         (package-build--run-process nil "git" "clone" repo dir)))
       (if package-build-stable
           (let* ((min-bound (goto-char (point-max)))
@@ -342,14 +329,15 @@ Returns the package version as a string."
                                 package-build-version-regexp)
                             min-bound)
                            (error "No valid stable versions found for %s" name)))))
-            ;; Using reset --hard here to comply with what's used for
-            ;; unstable, but maybe this should be a checkout?
             (package-build--update-git-to-ref
              dir (concat "tags/" (cadr tag-version)))
             ;; Return the parsed version as a string
             (package-version-join (car tag-version)))
         (package-build--update-git-to-ref
-         dir (or commit (concat "origin/" (package-build--git-head-branch dir))))
+         dir (or (plist-get config :commit)
+                 (concat "origin/"
+                         (or (plist-get config :branch)
+                             (package-build--git-head-branch dir)))))
         (apply 'package-build--run-process
                dir "git" "log" "--first-parent" "-n1" "--pretty=format:'\%ci'"
                (package-build--expand-source-file-list dir config))
@@ -372,6 +360,8 @@ Returns the package version as a string."
 
 (defun package-build--update-git-to-ref (dir ref)
   "Update the git repo in DIR so that HEAD is REF."
+  ;; TODO Checkout local ref, and in case of a
+  ;; branch reset to upstream branch if necessary.
   (package-build--run-process dir "git" "reset" "--hard" ref)
   (package-build--run-process dir "git" "submodule" "sync" "--recursive")
   (package-build--run-process dir "git" "submodule" "update" "--init" "--recursive"))
@@ -400,13 +390,13 @@ Returns the package version as a string."
       (cond
        ((and (file-exists-p (expand-file-name ".hg" dir))
              (string-equal (package-build--hg-repo dir) repo))
-        (package-build--princ-exists dir)
+        (package-build--message "Updating %s" dir)
         (package-build--run-process dir "hg" "pull")
         (package-build--run-process dir "hg" "update"))
        (t
         (when (file-exists-p dir)
           (delete-directory dir t))
-        (package-build--princ-checkout repo dir)
+        (package-build--message "Cloning %s to %s" repo dir)
         (package-build--run-process nil "hg" "clone" repo dir)))
       (if package-build-stable
           (let ((min-bound (goto-char (point-max)))

@@ -1,1 +1,0 @@
-(centered-window-mode :repo "anler/centered-window-mode" :fetcher github)

@@ -1,1 +1,1 @@
-(doom :fetcher github :repo "emacsorphanage/doom" :old-names (dom))
+(doom :fetcher github :repo "kensanata/doom" :old-names (dom))

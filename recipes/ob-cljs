@@ -1,1 +1,0 @@
-(ob-cljs :repo "statonjr/ob-cljs :fetcher gitlab)

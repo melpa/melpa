@@ -1,1 +1,1 @@
-(academic-phrases :fetcher github :repo "nashamri/academic-phrases" :files ("academic-phrases.el"))
+(academic-phrases :fetcher github :repo "nashamri/academic-phrases")

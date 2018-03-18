@@ -3,6 +3,7 @@
 .#*
 /.cask
 /.ecukes-failing-scenarios
+/config.mk
 /download_log.db
 /download_log.json.gz
 /elpa

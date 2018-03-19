@@ -863,7 +863,8 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 (defun package-build--find-package-file (name)
   "Return the most recently built archive of the package named NAME."
-  (package-build--archive-file-name (assoc name (package-build-archive-alist))))
+  (package-build--archive-file-name
+   (assq (intern name) (package-build-archive-alist))))
 
 (defun package-build--package-buffer-info-vec ()
   "Return a vector of package info.

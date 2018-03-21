@@ -1,0 +1,5 @@
+(outlook
+ :fetcher github
+ :repo "asavonic/outlook.el"
+ :files ("outlook.el"
+         "outlook-mu4e.el"))

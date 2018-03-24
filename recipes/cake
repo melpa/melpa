@@ -1,1 +1,0 @@
-(cake :fetcher github :repo "k1LoW/emacs-cake" :files ("*.el" "snippets"))

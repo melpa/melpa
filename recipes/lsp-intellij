@@ -1,1 +1,1 @@
-(lsp-rust :repo "Ruin0x11/lsp-intellij" :fetcher github)
+(lsp-intellij :repo "Ruin0x11/lsp-intellij" :fetcher github)

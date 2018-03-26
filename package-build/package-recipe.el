@@ -61,7 +61,7 @@
               (push val args)
               (push key args)))
           (apply (intern (format "package-%s-recipe" fetcher))
-                 :name name args))
+                 name :name name args))
       (error "Cannot find valid recipe for package %s" name))))
 
 (defmethod package-recipe--working-tree ((rcp package-recipe))

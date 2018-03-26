@@ -815,8 +815,10 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
   (package-build--message
    "Copying files (->) and directories (=>)\n  from %s\n  to %s"
    source-dir target-dir)
-  (pcase-dolist (`(,src . ,dst) files)
-    (let ((src* (expand-file-name src source-dir))
+  (dolist (elt files)
+    (let ((src  (car elt))
+          (dst  (cdr elt))
+          (src* (expand-file-name src source-dir))
           (dst* (expand-file-name dst target-dir)))
       (make-directory (file-name-directory dst*) t)
       (cond ((file-regular-p src*)

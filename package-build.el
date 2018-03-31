@@ -285,7 +285,8 @@ is used instead."
     (if package-build-stable
         (cl-destructuring-bind (tag . version)
             (or (package-build--find-version-newest
-                 (process-lines "git" "tag")
+                 (let ((default-directory (package-recipe--working-tree rcp)))
+                   (process-lines "git" "tag"))
                  (oref rcp version-regexp))
                 (error "No valid stable versions found for %s" (oref rcp name)))
           (package-build--checkout-1 rcp (concat "tags/" tag))

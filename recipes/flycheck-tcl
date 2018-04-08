@@ -1,0 +1,1 @@
+(flycheck-tcl :fetcher github :repo "nwidger/flycheck-tcl")

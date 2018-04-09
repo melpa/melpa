@@ -1,0 +1,1 @@
+(etop-mode :repo "akacase/etop-mode" :fetcher github)

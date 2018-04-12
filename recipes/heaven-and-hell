@@ -1,0 +1,5 @@
+(heaven-and-hell
+ :fetcher github
+ :repo "valignatev/heaven-and-hell"
+ :files ("*.el"
+         "README.md"))

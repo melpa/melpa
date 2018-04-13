@@ -1,1 +1,1 @@
-(ql :fetcher github :repo "ieure/ql-el" :files ("ql.el"))
+(ql :fetcher github :repo "ieure/ql-el")

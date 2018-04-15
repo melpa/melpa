@@ -1,0 +1,1 @@
+(phpstan :fetcher github :repo "emacs-php/phpstan.el")

@@ -1,0 +1,3 @@
+(helm-eww
+ :repo "emacs-helm/helm-eww"
+ :fetcher github)

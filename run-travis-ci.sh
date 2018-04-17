@@ -13,7 +13,7 @@ echo
 cask exec ecukes
 
 echo "Building recipes touched in commits $TRAVIS_COMMIT_RANGE"
-changed_recipes=$(./travis-changed-files|grep -e '^recipes/[a-z0-9]'|sed 's/^recipes\///')
+changed_recipes=$(./travis-changed-files|sed -n 's/^recipes\///p')
 for recipe_name in $changed_recipes; do
     if [ -f "./recipes/$recipe_name" ]; then
         echo "----------------------------------------------------"

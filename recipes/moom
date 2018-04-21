@@ -1,4 +1,1 @@
-(moom :repo "takaxp/moom"
-      :fetcher github
-      :files ("*.el"
-              (:exclude "fig/*.gif")))
+(moom :repo "takaxp/moom" :fetcher github)

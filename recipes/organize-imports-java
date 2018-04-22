@@ -1,1 +1,1 @@
-(organize-imports-java :repo "jcs090218@gmail.com" :fetcher github)
+(organize-imports-java :repo "jcs090218/organize-imports-java" :fetcher github)

@@ -1,0 +1,1 @@
+(moom :repo "takaxp/moom" :fetcher github)

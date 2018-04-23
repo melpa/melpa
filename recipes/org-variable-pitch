@@ -1,0 +1,3 @@
+(org-variable-pitch
+ :fetcher github :repo "cadadr/elisp"
+ :files ("org-variable-pitch.el"))

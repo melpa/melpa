@@ -1,5 +1,2 @@
 (counsel-recentp :fetcher github
-                 :repo "pepone/counsel-recentp"
-                 :files ("counsel-recentp.el"
-                         "README.md"
-                         "LICENSE"))
+                 :repo "pepone/counsel-recentp")

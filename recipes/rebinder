@@ -1,0 +1,1 @@
+(rebinder :repo "darkstego/rebinder.el" :fetcher github)

@@ -1,3 +1,2 @@
 (habamax-theme :repo "habamax/habamax-theme"
-               :fetcher github
-               :files ("habamax-theme.el"))
+               :fetcher github)

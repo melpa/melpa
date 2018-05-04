@@ -1,1 +1,1 @@
-(lsp-php :repo "tszg/lsp-php" :fetcher github)
+(lsp-php :repo "emacs-lsp/lsp-php" :fetcher github)

@@ -1,0 +1,3 @@
+(emacs-google-java-format
+ :fetcher github
+ :repo "sideshowcoder/emacs-google-java-format")

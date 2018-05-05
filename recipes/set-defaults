@@ -1,1 +1,1 @@
-(nix-update :repo "matthewbauer/bauer" :fetcher github :files ("site-lisp/set-defaults.el"))
+(set-defaults :repo "matthewbauer/bauer" :fetcher github :files ("site-lisp/set-defaults.el"))

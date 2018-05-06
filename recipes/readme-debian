@@ -1,0 +1,2 @@
+(readme-debian :fetcher git :url "https://salsa.debian.org/debian/emacs-goodies-el.git"
+               :files ("elisp/dpkg-dev-el/readme-debian.el"))

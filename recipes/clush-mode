@@ -1,0 +1,1 @@
+(clush-mode :fetcher github :repo "alexvorobiev/clush-mode")

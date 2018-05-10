@@ -1,0 +1,6 @@
+(echange
+ :fetcher github
+ :repo "kirill-gerasimenko/echange"
+ :files ("bin/echange.el"
+         "bin/echange.bat"
+         "bin/echange.jar"))

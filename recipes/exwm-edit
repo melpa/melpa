@@ -1,0 +1,3 @@
+(exwm-edit
+ :repo "agzam/exwm-edit"
+ :fetcher github)

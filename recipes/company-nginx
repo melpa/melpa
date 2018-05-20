@@ -1,0 +1,1 @@
+(company-nginx :fetcher github :repo "stardiviner/company-nginx")

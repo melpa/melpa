@@ -1,0 +1,2 @@
+(filelock :repo "DarwinAwardWinner/emacs-filelock" :fetcher github
+          :files ("filelock.el"))

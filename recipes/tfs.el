@@ -1,1 +1,1 @@
-(tfs.el :repo "sebasmonia/tfs.el" :fetcher github)
+(tfs :repo "sebasmonia/tfs.el" :fetcher github)

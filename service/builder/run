@@ -11,7 +11,7 @@ BUILD_STATUS_JSON=${MELPA_REPO}/html/build-status.json
 BUILD_LAST_DURATION_FILE=${MELPA_REPO}/html/.last-build-duration
 
 # Amount of time to sleep between rebuilds
-BUILD_DELAY=$((60 * 60))
+BUILD_DELAY=$((10 * 60))
 
 ## update MELPA repo
 git fetch origin

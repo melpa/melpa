@@ -1,1 +1,0 @@
-(ob-php :fetcher github :repo "stardiviner/ob-php")

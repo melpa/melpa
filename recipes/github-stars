@@ -1,0 +1,1 @@
+(github-stars :repo "xuchunyang/github-stars.el" :fetcher github)

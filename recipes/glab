@@ -1,1 +1,3 @@
-(glab :fetcher gitlab :repo "tarsius/glab")
+(glab :fetcher github
+      :repo "magit/ghub"
+      :files ("glab.el"))

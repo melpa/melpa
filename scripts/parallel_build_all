@@ -15,10 +15,7 @@ function build_all {
 
     ## run the script
     cd "$(dirname "${0}")/.."
-    # grep --files-with-match wiki recipes/* | xargs make -j1 &
-    make SLEEP=2 -j1 $(grep --files-with-match wiki recipes/*) &
-    # grep --files-without-match wiki recipes/* | xargs make -j4 &
-    make -j4 $(grep --files-without-match wiki $(find recipes/ -type f -not -name python-info -and -not -name python3-info | sort)) &
+    make -j4 $(grep --files-without-match ':fetcher\s*wiki' $(find recipes/ -type f -not -name python-info -and -not -name python3-info | sort)) &
     wait
 
     # python-info and python3-info are too big to run while other are

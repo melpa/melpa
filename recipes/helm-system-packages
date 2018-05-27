@@ -1,0 +1,3 @@
+(helm-system-packages
+ :repo "emacs-helm/helm-system-packages"
+ :fetcher github)

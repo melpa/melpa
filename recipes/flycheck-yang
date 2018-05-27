@@ -1,0 +1,1 @@
+(flycheck-yang :repo "andaru/flycheck-yang" :fetcher github)

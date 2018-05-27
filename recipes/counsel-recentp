@@ -1,0 +1,2 @@
+(counsel-recentp :fetcher github
+                 :repo "pepone/counsel-recentp")

@@ -1,0 +1,2 @@
+(logpad :fetcher bitbucket
+        :repo "tux_/logpad.el")

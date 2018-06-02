@@ -1,0 +1,3 @@
+(org-listcruncher
+ :fetcher github
+ :repo "dfeich/org-listcruncher")

@@ -1,0 +1,1 @@
+(nethack :repo "matthewbauer/bauer" :fetcher github :files ("site-lisp/nethack.el"))

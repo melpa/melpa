@@ -1,0 +1,1 @@
+(macho-mode :repo "matthewbauer/bauer" :fetcher github :files ("site-lisp/macho-mode.el"))

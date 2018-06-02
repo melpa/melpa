@@ -1,0 +1,1 @@
+(em-dired :repo "matthewbauer/bauer" :fetcher github :files ("site-lisp/em-dired.el"))

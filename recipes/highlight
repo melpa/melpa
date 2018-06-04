@@ -1,1 +1,1 @@
-(highlight :fetcher github :repo "steckerhalter/highlight.el")
+(highlight :fetcher git :url "https://framagit.org/steckerhalter/highlight.el.git")

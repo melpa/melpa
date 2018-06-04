@@ -1,1 +1,1 @@
-(fasd :repo "steckerhalter/emacs-fasd" :fetcher github)
+(fasd :url "https://framagit.org/steckerhalter/emacs-fasd.git" :fetcher git)

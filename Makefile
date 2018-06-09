@@ -70,6 +70,9 @@ sync:
 pull-package-build:
 	git subtree pull --squash -P package-build package-build master
 
+add-package-build-remote:
+	git remote add package-build git@github.com:melpa/package-build.git
+
 clean: clean-working clean-packages clean-json clean-sandbox
 
 packages: $(RCPDIR)/*

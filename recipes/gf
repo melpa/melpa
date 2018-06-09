@@ -1,0 +1,1 @@
+(gf :fetcher github :repo "grammaticalframework/gf-emacs-mode")

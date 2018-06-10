@@ -952,7 +952,8 @@ artifacts, and return a list of the up-to-date archive entries."
                        ;; Filter out invalid recipes.
                        (when (with-demoted-errors (package-recipe-lookup name))
                          (with-temp-buffer
-                           (insert-file-contents file)
+                           (insert-file-contents
+                            (expand-file-name name package-build-recipes-dir))
                            (list (read (current-buffer)))))))
                  (package-recipe-recipes))))))
 

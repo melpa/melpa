@@ -1,0 +1,5 @@
+(helm-mkr
+  :fetcher github
+  :repo nabeo/helm-mkr
+  :branch master
+  :files ("helm-mkr.el"))

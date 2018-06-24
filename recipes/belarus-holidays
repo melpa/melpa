@@ -1,1 +1,1 @@
-(belarus-holidays :fetcher git :url "https://bitbucket.org/EugeneMakei/belarus-holidays.el" :commit "410a7dc")
+(belarus-holidays :fetcher git :url "https://bitbucket.org/EugeneMakei/belarus-holidays.el")

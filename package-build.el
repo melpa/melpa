@@ -611,8 +611,8 @@ for ALLOW-EMPTY to prevent this error."
                              (cons f
                                    (concat prefix
                                            (replace-regexp-in-string
-                                            "\\.in\\'"
-                                            ""
+                                            "\\.el\\.in\\'"
+                                            ".el"
                                             (file-name-nondirectory f)))))
                            (file-expand-wildcards entry))))))
     (when (and (null lst) (not allow-empty))

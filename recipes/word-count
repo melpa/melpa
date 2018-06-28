@@ -1,0 +1,1 @@
+(word-count :repo "mhatta/word-count-mode" :fetcher github)

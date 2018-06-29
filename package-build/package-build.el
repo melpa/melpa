@@ -549,8 +549,7 @@ If PKG-INFO is nil, an empty one is created."
           (vector (version-to-list version)
                   requires
                   desc
-                  type
-                  extras))))
+                  type))))
 
 (defun package-build--artifact-file (archive-entry)
   "Return the path of the file in which the package for ARCHIVE-ENTRY is stored."
@@ -775,6 +774,17 @@ in `package-build-archive-dir'."
       (package-build--build-multi-file-package
        rcp version files source-dir))
      (t (error "Unable to find files matching recipe patterns")))))
+
+(define-obsolete-function-alias 'package-build-package 'package-build--package
+  "Package-Build 2.0.
+
+The purpose of this alias is to get Cask working again.
+
+This alias is only a temporary kludge and is going to be removed
+again.  It will likely be replaced by a function with the same
+name but a different signature.
+
+Do not use this alias elsewhere.")
 
 (defun package-build--build-single-file-package (rcp version file source-dir)
   (let* ((name (oref rcp name))

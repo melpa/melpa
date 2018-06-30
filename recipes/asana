@@ -1,0 +1,1 @@
+(asana :fetcher github :repo "lmartel/emacs-asana")

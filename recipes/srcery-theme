@@ -1,1 +1,1 @@
-(srcery-theme :fetcher github :repo "roosta/emacs-srcery")
+(srcery-theme :fetcher github :repo "srcery-colors/srcery-emacs")

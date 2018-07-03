@@ -10,7 +10,7 @@ echo "ECUKES_EMACS = $ECUKES_EMACS"
 "$ECUKES_EMACS" --version
 echo
 
-cask exec ecukes
+# cask exec ecukes
 
 echo "Building recipes touched in commits $TRAVIS_COMMIT_RANGE"
 changed_recipes=$(./travis-changed-files|grep -e '^recipes/[a-z0-9]'|sed 's/^recipes\///')

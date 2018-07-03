@@ -84,10 +84,8 @@
         (save-buffer)
       (error "Aborting")))
   (check-parens)
-  (package-build-reinitialize)
   (let ((name (file-name-nondirectory (buffer-file-name))))
-    (package-build-archive name)
-    (package-build-dump-archive-contents)
+    (package-build-archive name t)
     (let ((output-buffer-name "*package-build-result*"))
       (with-output-to-temp-buffer output-buffer-name
         (princ ";; Please check the following package descriptor.\n")
@@ -98,7 +96,9 @@
         (emacs-lisp-mode)
         (view-mode)))
     (when (yes-or-no-p "Install new package? ")
-      (package-install-file (package-build--find-package-file name)))))
+      (package-install-file
+       (package-build--artifact-file
+        (assq (intern name) (package-build-archive-alist)))))))
 
 (provide 'package-recipe-mode)
 

@@ -1,4 +1,4 @@
 (keypress-multi-event
  :fetcher github
- [:repo "Boruch-Baum/MELPA_misc_contrib"]
- [:files ("keypress-multi-event.el")])
+ :repo "Boruch-Baum/MELPA_misc_contrib"
+ :files ("keypress-multi-event.el"))

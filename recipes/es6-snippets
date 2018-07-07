@@ -1,0 +1,1 @@
+(es6-snippets :fetcher github :repo "CodyReichert/es6-snippets")

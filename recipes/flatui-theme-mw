@@ -1,0 +1,4 @@
+(flatui-theme-mw
+ :fetcher github
+ :repo "MetroWind/emacs-flatui-theme"
+ :branch "master")

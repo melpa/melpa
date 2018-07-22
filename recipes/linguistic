@@ -1,0 +1,1 @@
+(linguistic :fetcher github :repo "andcarnivorous/linguistic" :files ("linguistic.el" "graphs.org"))

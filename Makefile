@@ -9,10 +9,13 @@ PKGDIR  := packages
 RCPDIR  := recipes
 HTMLDIR := html
 WORKDIR := working
-WEBROOT := $$HOME/www
 SLEEP   ?= 0
 SANDBOX := sandbox
 STABLE  ?= nil
+ifneq ($(STABLE), nil)
+PKGDIR  := packages-stable
+HTMLDIR := html-stable
+endif
 
 LISP_CONFIG ?= '(progn\
   (setq package-build-working-dir "$(TOP)/$(WORKDIR)/")\
@@ -51,7 +54,7 @@ clean-packages:
 
 clean-json:
 	@echo " • Removing json files ..."
-	@-rm -vf html/archive.json html/recipes.json
+	@-rm -vf $(HTMLDIR)/archive.json $(HTMLDIR)/recipes.json
 
 clean-sandbox:
 	@echo " • Removing sandbox files ..."
@@ -59,13 +62,6 @@ clean-sandbox:
 		rm -rfv '$(SANDBOX)/elpa'; \
 		rmdir '$(SANDBOX)'; \
 	fi
-
-sync:
-	@echo " • Synchronizing files ..."
-	@rsync -avz --delete $(PKGDIR)/ $(WEBROOT)/packages
-	@rsync -avz --safe-links --delete $(HTMLDIR)/* $(WEBROOT)/
-	@chmod -R go+rx $(WEBROOT)/packages/*
-
 
 pull-package-build:
 	git subtree pull --squash -P package-build package-build master
@@ -93,7 +89,15 @@ html/recipes.json: $(RCPDIR)/.dirstamp
 	@echo " • Building $@ ..."
 	@$(EVAL) '(package-build-recipe-alist-as-json "html/recipes.json")'
 
-json: html/archive.json html/recipes.json
+html-stable/archive.json: $(PKGDIR)/archive-contents
+	@echo " • Building $@ ..."
+	@$(EVAL) '(package-build-archive-alist-as-json "html-stable/archive.json")'
+
+html-stable/recipes.json: $(RCPDIR)/.dirstamp
+	@echo " • Building $@ ..."
+	@$(EVAL) '(package-build-recipe-alist-as-json "html-stable/recipes.json")'
+
+json: $(HTMLDIR)/archive.json $(HTMLDIR)/recipes.json
 
 $(RCPDIR)/.dirstamp: .FORCE
 	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] \

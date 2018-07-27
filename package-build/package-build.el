@@ -706,24 +706,6 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 (defconst package-build--this-file load-file-name)
 
-;; TODO: This function should be fairly sound, but it has a few
-;; possible failure modes. Primarily, if a file matching the recipe's
-;; file spec appears in a new upstream revision, but that file has an
-;; older date than the version timestamp provided here, the function
-;; will return t.
-(defun package-build--up-to-date-p (name version)
-  "Return non-nil if there is an up-to-date package named NAME with the given VERSION."
-  (let* ((package-file-base (expand-file-name (format "%s-%s." name version)
-                                              package-build-archive-dir))
-         (recipe-file (expand-file-name name package-build-recipes-dir)))
-    (cl-dolist (ext '("tar" "el"))
-      (let ((package-file (concat package-file-base ext)))
-        (when (and (file-newer-than-file-p package-file recipe-file)
-                   (or (null package-build--this-file)
-                       (file-newer-than-file-p package-file
-                                               package-build--this-file)))
-          (cl-return t))))))
-
 ;;; Building
 
 ;;;###autoload
@@ -737,16 +719,14 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
       (make-directory package-build-archive-dir))
     (let ((default-directory package-build-working-dir)
           (version (package-build--checkout rcp)))
-      (if (package-build--up-to-date-p name version)
-          (package-build--message "Package %s is up to date - skipping." name)
-        (package-build--package rcp version)
-        (when package-build-write-melpa-badge-images
-          (package-build--write-melpa-badge-image
-           name version package-build-archive-dir))
-        (package-build--message "Built %s in %.3fs, finished at %s"
-                                name
-                                (float-time (time-since start-time))
-                                (current-time-string)))
+      (package-build--package rcp version)
+      (when package-build-write-melpa-badge-images
+        (package-build--write-melpa-badge-image
+         name version package-build-archive-dir))
+      (package-build--message "Built %s in %.3fs, finished at %s"
+                              name
+                              (float-time (time-since start-time))
+                              (current-time-string))
       (list name version)))
   (when dump-archive-contents
     (package-build-dump-archive-contents)))
@@ -800,25 +780,22 @@ Do not use this alias elsewhere.")
                           (downcase (file-name-nondirectory pkg-source)))
       (error "Single file %s does not match package name %s"
              (file-name-nondirectory pkg-source) name))
-    (if (file-exists-p pkg-target)
-        (package-build--message "Skipping rebuild of %s" pkg-target)
-      (copy-file pkg-source pkg-target)
-      (let ((enable-local-variables nil)
-            (make-backup-files nil))
-        (with-current-buffer (find-file pkg-target)
-          (package-build--update-or-insert-version version)
-          (package-build--ensure-ends-here-line pkg-source)
-          (write-file pkg-target nil)
-          (condition-case err
-              (package-build--package-buffer-info-vec)
-            (error
-             (package-build--message "Warning: %S" err)))
-          (kill-buffer)))
-
-      (package-build--write-pkg-readme
-       package-build-archive-dir
-       (package-build--find-package-commentary pkg-source)
-       name))
+    (copy-file pkg-source pkg-target)
+    (let ((enable-local-variables nil)
+          (make-backup-files nil))
+      (with-current-buffer (find-file pkg-target)
+        (package-build--update-or-insert-version version)
+        (package-build--ensure-ends-here-line pkg-source)
+        (write-file pkg-target nil)
+        (condition-case err
+            (package-build--package-buffer-info-vec)
+          (error
+           (package-build--message "Warning: %S" err)))
+        (kill-buffer)))
+    (package-build--write-pkg-readme
+     package-build-archive-dir
+     (package-build--find-package-commentary pkg-source)
+     name)
     (package-build--write-archive-entry rcp pkg-info 'single)))
 
 (defun package-build--build-multi-file-package (rcp version files source-dir)

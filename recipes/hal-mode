@@ -1,2 +1,2 @@
-(hal-mode :fetcher github :repo "strahlex/hal-mode")
+(hal-mode :fetcher github :repo "machinekoder/hal-mode")
 

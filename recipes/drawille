@@ -1,1 +1,1 @@
-(drawille :repo "sshbio/drawille" :fetcher github)
+(drawille :repo "josuah/drawille-el" :fetcher github)

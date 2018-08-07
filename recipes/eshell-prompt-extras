@@ -1,1 +1,2 @@
-(eshell-prompt-extras :fetcher github :repo "hiddenlotus/eshell-prompt-extras")
+(eshell-prompt-extras :fetcher github
+		      :repo "kaihaosw/eshell-prompt-extras")

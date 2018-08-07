@@ -780,7 +780,7 @@ Do not use this alias elsewhere.")
                           (downcase (file-name-nondirectory pkg-source)))
       (error "Single file %s does not match package name %s"
              (file-name-nondirectory pkg-source) name))
-    (copy-file pkg-source pkg-target)
+    (copy-file pkg-source pkg-target t)
     (let ((enable-local-variables nil)
           (make-backup-files nil))
       (with-current-buffer (find-file pkg-target)

@@ -1,4 +1,2 @@
-(debian-changelog-mode :fetcher cvs
-            :url ":pserver:anonymous@cvs.alioth.debian.org:/cvs/pkg-goodies-el"
-            :module "emacs-goodies-el"
-            :files ("elisp/dpkg-dev-el/debian-changelog-mode.el"))
+(debian-changelog-mode :fetcher git :url "https://salsa.debian.org/debian/emacs-goodies-el.git"
+                       :files ("elisp/dpkg-dev-el/debian-changelog-mode.el"))

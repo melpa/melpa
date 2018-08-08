@@ -1,0 +1,1 @@
+(cquery :repo "cquery-project/emacs-cquery" :fetcher github)

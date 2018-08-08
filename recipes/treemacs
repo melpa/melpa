@@ -1,4 +1,9 @@
 (treemacs
  :fetcher github
  :repo "Alexander-Miller/treemacs"
- :files (:defaults "icons" (:exclude "treemacs-evil.el")))
+ :files (:defaults
+         "icons"
+         "src/elisp/treemacs*.el"
+         "src/scripts/treemacs*.py"
+         (:exclude "src/elisp/treemacs-evil.el"
+                   "src/elisp/treemacs-projectile.el")))

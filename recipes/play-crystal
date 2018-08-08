@@ -1,0 +1,1 @@
+(play-crystal :repo "veelenga/play-crystal.el" :fetcher github)

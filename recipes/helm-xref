@@ -1,1 +1,1 @@
-(helm-xref :repo "brotzeitmacher/helm-xref" :fetcher github)
+(helm-xref :repo "brotzeit/helm-xref" :fetcher github)

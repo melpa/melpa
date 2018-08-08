@@ -1,1 +1,1 @@
-(flappymacs :repo "taksatou/flappymacs" :fetcher github)
+(flappymacs :fetcher github :repo "taksatou/flappymacs")

@@ -1,0 +1,2 @@
+(line-up-words :fetcher github
+               :repo "janestreet/line-up-words")

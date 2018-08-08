@@ -1,0 +1,5 @@
+(cfml-mode
+ :repo "am2605/cfml-mode"
+ :fetcher github
+ :files ("cfml-mode.el")
+ )

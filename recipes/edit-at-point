@@ -1,1 +1,1 @@
-(edit-at-point :repo "enoson/edit-at-point.el" :fetcher github)
+(edit-at-point :fetcher github :repo "enoson/edit-at-point.el")

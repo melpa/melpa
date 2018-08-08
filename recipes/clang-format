@@ -1,4 +1,1 @@
-(clang-format
- :fetcher svn
- :url "http://llvm.org/svn/llvm-project/cfe/trunk/tools/clang-format"
- :files ("clang-format.el"))
+(clang-format :fetcher github :repo "emacsorphanage/clang-format")

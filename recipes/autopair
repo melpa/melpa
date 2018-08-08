@@ -1,1 +1,1 @@
-(autopair :fetcher github :repo "capitaomorte/autopair")
+(autopair :fetcher github :repo "joaotavora/autopair")

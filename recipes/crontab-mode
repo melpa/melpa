@@ -1,1 +1,0 @@
-(crontab-mode :fetcher github :repo "emacsorphanage/crontab-mode")

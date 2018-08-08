@@ -1,0 +1,3 @@
+(bart-mode :fetcher github
+           :repo "mschuldt/bart-mode")
+

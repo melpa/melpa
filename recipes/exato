@@ -1,0 +1,1 @@
+(exato :repo "ninrod/exato" :fetcher github)

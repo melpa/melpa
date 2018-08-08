@@ -1,0 +1,1 @@
+(tfsmacs :repo "sebasmonia/tfsmacs" :fetcher github)

@@ -1,0 +1,3 @@
+(use-package-ensure-system-package :repo "jwiegley/use-package"
+                                   :fetcher github
+                                   :files ("use-package-ensure-system-package.el"))

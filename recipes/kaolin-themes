@@ -1,0 +1,1 @@
+(kaolin-themes :fetcher github :repo "ogdenwebb/emacs-kaolin-themes" :old-names (kaolin-theme) :files (:defaults "themes/*.el"))

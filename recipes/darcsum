@@ -1,2 +1,2 @@
-(darcsum :url "http://hub.darcs.net/simon/darcsum" :fetcher darcs)
+(darcsum :fetcher github :repo "emacsorphanage/darcsum")
 

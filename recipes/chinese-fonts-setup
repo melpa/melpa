@@ -1,3 +1,0 @@
-(chinese-fonts-setup :fetcher github
-                     :repo "tumashu/cnfonts"
-                     :files ("chinese-fonts-setup.el"))

@@ -1,0 +1,2 @@
+(nodemcu-mode :repo "andrmuel/nodemcu-mode"
+              :fetcher github)

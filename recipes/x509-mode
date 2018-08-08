@@ -1,0 +1,3 @@
+(x509-mode :repo "jobbflykt/x509-mode"
+           :fetcher github
+           :files (:defaults "*.txt"))

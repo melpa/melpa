@@ -1,0 +1,4 @@
+(webkit-color-picker
+ :fetcher github
+ :repo "osener/emacs-webkit-color-picker"
+ :files (:defaults "color-picker.html"))

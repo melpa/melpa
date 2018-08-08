@@ -1,2 +1,2 @@
-(deft :url "git://jblevins.org/git/deft.git" :fetcher git)
+(deft :repo "jrblevin/deft" :fetcher github)
 

@@ -1,1 +1,3 @@
-(bbyac :fetcher github :repo "baohaojun/bbyac")
+(bbyac :fetcher github
+       :repo "baohaojun/bbyac"
+       :files (:defaults "*.bbyac"))

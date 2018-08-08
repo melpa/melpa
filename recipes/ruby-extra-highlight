@@ -1,0 +1,1 @@
+(ruby-extra-highlight :repo "Lindydancer/ruby-extra-highlight" :fetcher github)

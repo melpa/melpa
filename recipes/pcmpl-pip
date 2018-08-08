@@ -1,1 +1,1 @@
-(pcmpl-pip :fetcher github :repo "hiddenlotus/pcmpl-pip")
+(pcmpl-pip :fetcher github :repo "kaihaosw/pcmpl-pip")

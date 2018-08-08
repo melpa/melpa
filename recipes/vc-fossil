@@ -1,1 +1,1 @@
-(vc-fossil :fetcher github :repo "emacsorphanage/vc-fossil")
+(vc-fossil :fetcher github :repo "venks1/emacs-fossil" :files ("vc/el/*.el" "doc/*"))

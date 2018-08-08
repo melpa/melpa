@@ -1,4 +1,4 @@
-(w3m :url ":pserver:anonymous@cvs.namazu.org:/storage/cvsroot"
-     :module "emacs-w3m"
-     :fetcher cvs
-     :files (:defaults "icons" (:exclude "octet.el" "mew-w3m.el" "w3m-xmas.el")))
+(w3m
+ :fetcher github
+ :repo "emacsorphanage/w3m"
+ :files (:defaults "icons" (:exclude "octet.el" "mew-w3m.el" "w3m-xmas.el")))

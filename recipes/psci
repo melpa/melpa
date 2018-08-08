@@ -1,1 +1,1 @@
-(psci :fetcher github :repo "ardumont/emacs-psci")
+(psci :fetcher github :repo "purescript-emacs/emacs-psci")

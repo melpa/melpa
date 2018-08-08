@@ -1,0 +1,4 @@
+(org-fancy-priorities
+ :repo "harrybournis/org-fancy-priorities"
+ :fetcher github)
+

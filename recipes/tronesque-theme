@@ -1,1 +1,0 @@
-(tronesque-theme :fetcher github :repo "aurelienbottazini/tronesque" :files ("themes/*.el"))

@@ -1,0 +1,1 @@
+(use-ttf :repo "jcs090218/use-ttf" :fetcher github)

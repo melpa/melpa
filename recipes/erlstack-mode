@@ -1,0 +1,4 @@
+(erlstack-mode :repo "k32/erlstack-mode"
+               :fetcher github
+               :branch "stable"
+               :files ("erlstack-mode.el"))

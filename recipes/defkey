@@ -1,0 +1,1 @@
+(defkey :repo "nickdrozd/defkey" :fetcher github)

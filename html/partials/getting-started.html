@@ -19,15 +19,12 @@
       </p>
 
       <pre><code>(require 'package)
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                    (not (gnutls-available-p))))
-       (proto (if no-ssl "http" "https")))
-  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
-  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
-  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
-  (when (< emacs-major-version 24)
-    ;; For important compatibility libraries like cl-lib
-    (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
+;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+(add-to-list 'package-archives ("melpa" . "https://melpa.org/packages/")) t)
+;;(add-to-list 'package-archives ("melpa-stable" . "https://stable.melpa.org/packages/")) t)
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))))
 (package-initialize)
 </code></pre>
 
@@ -41,13 +38,6 @@
       <pre><code>(add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)</code></pre>
 
-      <p>
-        <strong>Note:</strong> <em>There are some problems using the
-          <code>https</code> location with Emacs on Windows. There is
-          currently no know easy fix for this. You can still use MELPA
-          by using the non-SSL location by replacing <code>https</code>
-          with <code>http</code>.</em>
-      </p>
       <h3>Customizations</h3>
       <p>
         What if you only want some of your packages to be installed

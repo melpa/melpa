@@ -1,1 +1,1 @@
-(sos :fetcher github :repo "omouse/emacs-sos")
+(sos :fetcher github :repo "rudolfolah/emacs-sos")

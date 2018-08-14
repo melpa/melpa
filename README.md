@@ -89,7 +89,7 @@ and do not particularly recommend its use.
 
 ## Contributing
 
-See the [CONTRIBUTING.md](CONTRIBUTING.md) document.
+See the [CONTRIBUTING.org](CONTRIBUTING.org) document.
 
 ## Recipe Format
 

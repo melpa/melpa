@@ -1,4 +1,4 @@
 (keypress-multi-event
  :fetcher github
- :repo "Boruch-Baum/keypress-multi-event"
+ :repo "Boruch-Baum/emacs-keypress-multi-event"
  :files ("keypress-multi-event.el"))

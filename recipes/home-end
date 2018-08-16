@@ -1,4 +1,3 @@
 (home-end
   :fetcher github
-  :repo "Boruch-Baum/emacs-home-end"
-  :files ("home-end.el"))
+  :repo "Boruch-Baum/emacs-home-end")

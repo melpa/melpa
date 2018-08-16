@@ -1,0 +1,3 @@
+(lsp-ruby
+ :fetcher github
+ :repo "emacs-lsp/lsp-ruby")

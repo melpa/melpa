@@ -1,4 +1,4 @@
 (home-end
   :fetcher github
-  :repo "Boruch-Baum/MELPA_misc_contrib"
+  :repo "Boruch-Baum/emacs-home-end"
   :files ("home-end.el"))

@@ -1,1 +1,1 @@
-(renpy-mode :fetcher github :repo "billywade/renpy-mode")
+(renpy :fetcher github :repo "billywade/renpy-mode")

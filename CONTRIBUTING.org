@@ -70,6 +70,15 @@ New recipe submissions should adhere to the following guidelines:
      maintainer of the package you are submitting, please notify the
      authors prior to submitting and include them in the pull request
      process.
+     
+- Reasonably active maintainer :: Packages submitted should have a
+     reasonably committed and active maintainer (at least, at the time
+     they are submitted).  MELPA is not intended to be a place to
+     "dump" code, even if it works well at the time.  Users should be
+     able to expect that a package's maintainer will make reasonable
+     efforts to maintain it in the future.  (Of course, "life
+     happens," so this is not a guarantee, and sometimes packages are
+     transferred to new maintainers.)
 
 - Recipe maintenance :: If the package author moves the upstream
      repository, then update the recipe too. If the package author

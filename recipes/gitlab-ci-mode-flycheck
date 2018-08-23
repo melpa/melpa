@@ -1,0 +1,3 @@
+(gitlab-ci-mode-flycheck
+ :fetcher gitlab
+ :repo "joewreschnig/gitlab-ci-mode-flycheck")

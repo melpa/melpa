@@ -1,5 +1,5 @@
 (sly-quicklisp :fetcher github
-               :repo "capitaomorte/sly-quicklisp"
+               :repo "joaotavora/sly-quicklisp"
                :files (:defaults
                        "*.lisp"
                        "*.asd"))

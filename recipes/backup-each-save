@@ -1,0 +1,1 @@
+(backup-each-save :fetcher github :repo "conornash/backup-each-save")

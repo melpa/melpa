@@ -1,1 +1,1 @@
-(evil-collection :fetcher github :repo "jojojames/evil-collection")
+(evil-collection :fetcher github :repo "emacs-evil/evil-collection")

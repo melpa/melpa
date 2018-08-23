@@ -1,1 +1,4 @@
-(glab :fetcher gitlab :repo "tarsius/glab")
+(glab :fetcher github
+      :repo "magit/ghub"
+      :branch "glab-part-of-ghub"
+      :files ("glab.el"))

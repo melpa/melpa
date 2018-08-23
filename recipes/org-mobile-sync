@@ -1,1 +1,1 @@
-(org-mobile-sync :repo "steckerhalter/org-mobile-sync" :fetcher github)
+(org-mobile-sync :url "https://framagit.org/steckerhalter/org-mobile-sync.git" :fetcher git)

@@ -1,0 +1,3 @@
+(kapacitor :repo "Manoj321/kapacitor-el"
+           :fetcher github)
+

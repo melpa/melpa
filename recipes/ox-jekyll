@@ -1,2 +1,0 @@
-(ox-jekyll :repo "gonsie/ox-jekyll"
-           :fetcher github)

@@ -1,0 +1,1 @@
+(proc :repo "jmjoy/proc" :fetcher github)

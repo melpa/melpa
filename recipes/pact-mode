@@ -1,3 +1,2 @@
 (pact-mode :fetcher github
-           :repo "kadena-io/pact-mode"
-           :files ("pact-mode.el"))
+           :repo "kadena-io/pact-mode")

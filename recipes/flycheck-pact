@@ -1,4 +1,4 @@
 (pact-mode 
   :fetcher github
-  :repo "kadena-io/pact-mode"
+  :repo "kadena-io/flycheck-pact"
   :files ("flycheck-pact.el"))

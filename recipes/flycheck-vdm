@@ -1,5 +1,4 @@
 (flycheck-vdm
  :fetcher github
  :repo "peterwvj/vdm-mode"
- :files ("flycheck-vdm.el"
-         "vdm-mode-util.el"))
+ :files ("flycheck-vdm.el"))

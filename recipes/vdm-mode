@@ -1,0 +1,5 @@
+(vdm-mode
+ :fetcher github
+ :repo "peterwvj/vdm-mode"
+ :files ("vdm-mode.el"
+         "vdm-mode-util.el"))

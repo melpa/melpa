@@ -1,0 +1,3 @@
+(counsel-repo
+  :repo "keegancsmith/counsel-repo"
+  :fetcher github)

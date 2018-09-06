@@ -1,2 +1,10 @@
-(racket-mode :repo "greghendershott/racket-mode" :fetcher github
-             :files ("*.el" "*.rkt"))
+(racket-mode
+ :repo    "greghendershott/racket-mode"
+ :fetcher github
+ :files   ("*.el"
+           "*.rkt"
+           (:exclude ".dir-locals.el"
+                     "racket-tests.el")
+           ("racket" "racket/*")
+           (:exclude "racket/example/*"
+                     "racket/test/*")))

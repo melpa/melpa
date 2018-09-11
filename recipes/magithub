@@ -1,1 +1,1 @@
-(magithub :fetcher github :repo "vermiculus/magithub.el")
+(magithub :fetcher github :repo "vermiculus/magithub")

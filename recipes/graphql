@@ -1,1 +1,1 @@
-(graphql :fetcher github :repo "vermiculus/graphql")
+(graphql :fetcher github :repo "vermiculus/graphql.el")

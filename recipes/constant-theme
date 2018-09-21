@@ -1,0 +1,1 @@
+(constant-theme :fetcher github :repo "jannis/emacs-constant-theme")

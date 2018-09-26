@@ -1,0 +1,1 @@
+(rem :fetcher github :repo "baygeldin/rem.el" :files ("rem.el"))

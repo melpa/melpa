@@ -1,0 +1,1 @@
+(company-octave :fetcher github :repo "okamsn/company-octave" :branch "master")

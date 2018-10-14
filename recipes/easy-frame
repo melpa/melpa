@@ -1,0 +1,1 @@
+(easy-frame :repo "onixie/easy-fwb" :fetcher github :files ("easy-frame.el"))

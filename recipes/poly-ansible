@@ -1,0 +1,4 @@
+(poly-ansible
+ :fetcher gitlab
+ :branch "test"
+ :repo "mavit/poly-ansible")

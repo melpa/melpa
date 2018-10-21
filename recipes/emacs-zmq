@@ -1,0 +1,7 @@
+(emacs-zmq
+ :fetcher github
+ :repo "dzop/emacs-zmq"
+ :files (:defaults "Makefile" ("src"
+                               "src/*.c" "src/*.h"
+                               "src/Makefile.am"
+                               "src/configure.ac")))

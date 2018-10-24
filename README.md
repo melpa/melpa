@@ -55,6 +55,12 @@ Enable installation of packages from MELPA by adding an entry to
 Then just use `M-x package-list-packages` to browse and install
 packages from MELPA and elsewhere.
 
+Note that you'll need to run `M-x package-refresh-contents` or `M-x
+package-list-packages` to ensure that Emacs has fetched the MELPA
+package list before you can install packages with `M-x
+package-install` or similar.
+
+
 ### MELPA Stable
 
 Packages in MELPA are built directly from the latest package source

@@ -29,7 +29,14 @@
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
-</code></pre>
+      </code></pre>
+
+      <p>
+        Note that you'll need to run <code>M-x package-refresh-contents</code> or
+        <code>M-x package-list-packages</code> to ensure that Emacs has fetched
+        the MELPA package list before you can install packages with
+        <code>M-x package-install</code> or similar.
+      </p>
 
       <p>
         To use the <a href="https://stable.melpa.org" title="MELPA Stable">

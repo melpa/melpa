@@ -1,1 +1,1 @@
-(constant-theme :fetcher github :repo "jannis/emacs-constant-theme")
+(constant-theme :fetcher github :repo "Jannis/emacs-constant-theme")

@@ -1,2 +1,2 @@
 (ob-nim   :fetcher github
-          :repo "lompik/ob-nim")
+          :repo "Lompik/ob-nim")

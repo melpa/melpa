@@ -1,1 +1,1 @@
-(gf :fetcher github :repo "grammaticalframework/gf-emacs-mode")
+(gf :fetcher github :repo "GrammaticalFramework/gf-emacs-mode")

@@ -1,1 +1,1 @@
-(hindent :fetcher github :repo "chrisdone/hindent" :files ("elisp/*.el"))
+(hindent :fetcher github :repo "commercialhaskell/hindent" :files ("elisp/*.el"))

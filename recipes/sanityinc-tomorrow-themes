@@ -1,0 +1,4 @@
+(sanityinc-tomorrow-themes
+ :fetcher github
+ :repo "purcell/color-theme-sanityinc-tomorrow"
+ :files (:defaults (:exclude "color-theme-sanityinc-tomorrow.el")))

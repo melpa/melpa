@@ -1,6 +1,6 @@
 (ruby-additional
  :fetcher github
- :repo "emacsorphanage/ruby-additional"
+ :repo "ruby/elisp"
  :files ("ruby-additional.el"
          "rdoc-mode.el"
          "ruby-style.el"

@@ -1,1 +1,3 @@
-(color-theme :fetcher github :repo "emacsorphanage/color-theme" :files (:defaults "themes"))
+(color-theme :fetcher github
+	     :repo "emacsattic/color-theme"
+	     :files (:defaults "themes"))

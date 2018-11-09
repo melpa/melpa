@@ -1,3 +1,2 @@
 (objed :repo "clemera/objed"
-       :fetcher github
-       :files ("objed.el" "objed-objects.el"))
+       :fetcher github)

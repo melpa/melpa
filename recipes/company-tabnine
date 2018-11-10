@@ -1,1 +1,1 @@
-(company-tabnine :repo "TommyX12/company-tabnine" :fetcher github :files (:defaults "binaries"))
+(company-tabnine :repo "TommyX12/company-tabnine" :fetcher github)

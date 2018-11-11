@@ -1,0 +1,1 @@
+(company-phpactor :repo "emacs-php/phpactor.el" :fetcher github :files ( "company-phpactor.el"))

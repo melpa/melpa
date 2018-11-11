@@ -1,1 +1,0 @@
-(load-bash-shell-aliases :repo "daviderestivo/load-bash-shell-aliases" :fetcher github)

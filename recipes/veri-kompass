@@ -1,0 +1,1 @@
+(veri-kompass :repo "koral/veri-kompass" :fetcher gitlab)

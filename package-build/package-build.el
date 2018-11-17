@@ -533,7 +533,12 @@ If PKG-INFO is nil, an empty one is created."
      (package-recipe--working-tree rcp)
      "git" "rev-parse" "HEAD")))
 
-(defmethod package-build--get-commit ((rcp package-hg-recipe))) ; TODO
+(defmethod package-build--get-commit ((rcp package-hg-recipe))
+  (ignore-errors
+    (package-build--run-process-match
+     "changeset:[[:space:]]+[[:digit:]]+:\\([[:xdigit:]]+\\)"
+     (package-recipe--working-tree rcp)
+     "hg" "log" "--debug" "--limit=1")))
 
 (defun package-build--archive-entry (rcp pkg-info type)
   (let ((name (intern (aref pkg-info 0)))

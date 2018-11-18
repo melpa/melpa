@@ -1,0 +1,5 @@
+(mint-mode
+ :fetcher github
+ :url "https://github.com/creatorrr/emacs-mint-mode"
+ :repo "creatorrr/emacs-mint-mode"
+ :files ("mint-mode.el"))

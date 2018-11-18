@@ -1,0 +1,1 @@
+(org-insert-url :repo "ramprakash-94/org-insert-url.el" :fetcher github)

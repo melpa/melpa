@@ -1,0 +1,2 @@
+(gnus-recent :fetcher github
+             :repo "unhammer/gnus-recent")

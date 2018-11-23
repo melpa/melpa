@@ -76,6 +76,7 @@ packages: $(RCPDIR)/*
 packages/archive-contents: .FORCE
 	@echo " • Updating $@ ..."
 	@$(EVAL) '(package-build-dump-archive-contents)'
+	@$(EVAL) '(progn (find-file "packages/archive-contents") (emacs-lisp-mode) (pp-buffer) (save-buffer))'
 
 cleanup:
 	@$(EVAL) '(package-build-cleanup)'

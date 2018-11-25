@@ -1,0 +1,3 @@
+(emidje :fetcher github
+:repo "nubank/emidje")
+

@@ -1,0 +1,1 @@
+(moccur-edit :repo "myuhe/moccur-edit.el" :fetcher github)

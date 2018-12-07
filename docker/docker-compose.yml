@@ -20,7 +20,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'
+          cpus: '0.8'
     volumes:
       - /mnt/store/melpa:/mnt/store/melpa
   logprocessor:

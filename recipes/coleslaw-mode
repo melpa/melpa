@@ -1,0 +1,1 @@
+(coleslaw-mode :fetcher github :repo "equwal/coleslaw-mode")

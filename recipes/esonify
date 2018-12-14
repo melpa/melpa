@@ -1,0 +1,4 @@
+(sound-wav
+:repo "oflatt/esonify"
+:fetcher github
+:files ("sounds/*"))

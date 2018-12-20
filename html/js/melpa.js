@@ -2,12 +2,10 @@
 (function(m, document, _, moment, Cookies){
   "use strict";
 
-  // TODO Link to other MELPA in header, e.g. from MELPA to MELPA Stable
   // TODO Show compatible emacs versions for any package
   // TODO Google Analytics
   // TODO D3 visualisation for deps
   // TODO Voting / starring
-  // TODO Add header links from MELPA to MELPA Stable and vice-versa
 
   //////////////////////////////////////////////////////////////////////////////
   // Helpers
@@ -542,9 +540,15 @@
       // jshint unused: false
       m.mount(e, melpa.archivename);
     });
+
+    // Add a link to the other Melpa site
+    var otherMelpa = document.getElementsByClassName("other-melpa-link")[0]
     if (melpa.stable()) {
       document.getElementsByTagName("html")[0].className += " stable";
+      otherMelpa.href = "https://melpa.org"
+      otherMelpa.textContent = "Melpa"
     }
+    otherMelpa.classList.remove("hidden")
   });
 
   //////////////////////////////////////////////////////////////////////////////

@@ -527,7 +527,8 @@
     stable: { name: "MELPA Stable", hosts: ["stable.melpa.org", "stable-test.melpa.org"] }
   };
 
-  melpa.stable = m.prop(_.findIndex(melpa.sites.stable.hosts, window.location.host.toLowerCase()) != -1);
+  melpa.stable = m.prop(_.findIndex(melpa.sites.stable.hosts,
+                                    function(s) { return s == window.location.host.toLowerCase(); }) != -1);
   melpa.archivename = {};
   melpa.archivename.controller = function() {
     this.archiveName = function() {

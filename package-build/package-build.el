@@ -935,21 +935,38 @@ artifacts, and return a list of the up-to-date archive entries."
   (let ((escape-fn (lambda (find-str replace-str)
                      (goto-char (point-min))
                      (while (search-forward find-str nil t)
-                       (replace-match replace-str nil t)))))
+                       (replace-match replace-str nil t))))
+        (escape-:exclude-fn
+         (lambda (lst)
+           (let ((frg))
+             (mapcar (lambda (x)
+                       (cond ((eq x :files) (setq frg t) x)
+                             (frg (setq frg nil)
+                                  (mapcan (lambda (y)
+                                            (if (listp y)
+                                                (if (eq (car y) :exclude)
+                                                    `((:exclude ,(cdr y)))
+                                                  y)
+                                              (list y)))
+                                          x))
+                             (t x)))
+                     lst)))))
     (with-temp-file file
       (insert
        (json-encode
-        (cl-mapcan (lambda (name)
-                     (condition-case nil
-                         ;; Filter out invalid recipes.
-                         (when (with-demoted-errors (package-recipe-lookup name))
-                           (with-temp-buffer
-                             (insert-file-contents
-                              (expand-file-name name package-build-recipes-dir))
-                             (funcall escape-fn ":defaults" "\"//:defaults//\"")
-                             (funcall escape-fn ":exclude" "\"//:exclude//\"")
-                             (list (read (buffer-string)))))))
-                   (package-recipe-recipes)))))))
+        (cl-mapcan
+         (lambda (name)
+           (condition-case nil
+               ;; Filter out invalid recipes.
+               (when (with-demoted-errors (package-recipe-lookup name))
+                 (with-temp-buffer
+                   (insert-file-contents
+                    (expand-file-name name package-build-recipes-dir))
+                   (funcall escape-fn ":defaults" "\"//:defaults//\"")
+                   ;; (funcall escape-fn ":exclude" "\"exclude\"")
+                   (list (funcall escape-:exclude-fn
+                                  (read (buffer-string))))))))
+         (package-recipe-recipes)))))))
 
 (defun package-build--pkg-info-for-json (info)
   "Convert INFO into a data structure which will serialize to JSON in the desired shape."

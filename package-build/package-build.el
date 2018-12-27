@@ -932,18 +932,23 @@ artifacts, and return a list of the up-to-date archive entries."
 (defun package-build-recipe-alist-as-json (file)
   "Dump the recipe list to FILE as json."
   (interactive)
-  (with-temp-file file
-    (insert
-     (json-encode
-      (cl-mapcan (lambda (name)
-                   (condition-case nil
-                       ;; Filter out invalid recipes.
-                       (when (with-demoted-errors (package-recipe-lookup name))
-                         (with-temp-buffer
-                           (insert-file-contents
-                            (expand-file-name name package-build-recipes-dir))
-                           (list (read (current-buffer)))))))
-                 (package-recipe-recipes))))))
+  (let ((escape-fn (lambda ()
+                     (goto-char (point-min))
+                     (while (search-forward ":defaults" nil t)
+                       (replace-match "\":defaults\"" nil t)))))
+    (with-temp-file file
+      (insert
+       (json-encode
+        (cl-mapcan (lambda (name)
+                     (condition-case nil
+                         ;; Filter out invalid recipes.
+                         (when (with-demoted-errors (package-recipe-lookup name))
+                           (with-temp-buffer
+                             (insert-file-contents
+                              (expand-file-name name package-build-recipes-dir))
+                             (funcall escape-fn)
+                             (list (read (buffer-string)))))))
+                   (package-recipe-recipes)))))))
 
 (defun package-build--pkg-info-for-json (info)
   "Convert INFO into a data structure which will serialize to JSON in the desired shape."

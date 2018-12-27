@@ -942,13 +942,13 @@ artifacts, and return a list of the up-to-date archive entries."
              (mapcar (lambda (x)
                        (cond ((eq x :files) (setq frg t) x)
                              (frg (setq frg nil)
-                                  (mapcan (lambda (y)
-                                            (if (listp y)
-                                                (if (eq (car y) :exclude)
-                                                    `((:exclude ,(cdr y)))
-                                                  y)
-                                              (list y)))
-                                          x))
+                                  (mapcan
+                                   (lambda (y)
+                                     (if (listp y)
+                                         (if (eq (car y) :exclude)
+                                             `((:exclude ,(cdr y))) y)
+                                       (list y)))
+                                   x))
                              (t x)))
                      lst)))))
     (with-temp-file file
@@ -963,7 +963,6 @@ artifacts, and return a list of the up-to-date archive entries."
                    (insert-file-contents
                     (expand-file-name name package-build-recipes-dir))
                    (funcall escape-fn ":defaults" "\"//:defaults//\"")
-                   ;; (funcall escape-fn ":exclude" "\"exclude\"")
                    (list (funcall escape-:exclude-fn
                                   (read (buffer-string))))))))
          (package-recipe-recipes)))))))

@@ -935,7 +935,7 @@ artifacts, and return a list of the up-to-date archive entries."
   (let ((escape-fn (lambda ()
                      (goto-char (point-min))
                      (while (search-forward ":defaults" nil t)
-                       (replace-match "\":defaults\"" nil t)))))
+                       (replace-match "\"//:defaults//\"" nil t)))))
     (with-temp-file file
       (insert
        (json-encode

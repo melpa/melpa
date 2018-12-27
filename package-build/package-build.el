@@ -932,10 +932,10 @@ artifacts, and return a list of the up-to-date archive entries."
 (defun package-build-recipe-alist-as-json (file)
   "Dump the recipe list to FILE as json."
   (interactive)
-  (let ((escape-fn (lambda ()
+  (let ((escape-fn (lambda (find-str replace-str)
                      (goto-char (point-min))
-                     (while (search-forward ":defaults" nil t)
-                       (replace-match "\"//:defaults//\"" nil t)))))
+                     (while (search-forward find-str nil t)
+                       (replace-match replace-str nil t)))))
     (with-temp-file file
       (insert
        (json-encode
@@ -946,7 +946,8 @@ artifacts, and return a list of the up-to-date archive entries."
                            (with-temp-buffer
                              (insert-file-contents
                               (expand-file-name name package-build-recipes-dir))
-                             (funcall escape-fn)
+                             (funcall escape-fn ":defaults" "\"//:defaults//\"")
+                             (funcall escape-fn ":exclude" "\"//:exclude//\"")
                              (list (read (buffer-string)))))))
                    (package-recipe-recipes)))))))
 

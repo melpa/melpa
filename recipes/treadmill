@@ -1,0 +1,3 @@
+(treadmill
+ :fetcher github
+ :repo "thunknyc/emacs-treadmill")

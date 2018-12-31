@@ -1,0 +1,2 @@
+(use-package-hydra :repo "to1ne/use-package-hydra"
+                    :fetcher gitlab)

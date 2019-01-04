@@ -1,0 +1,5 @@
+(emacs-reveal
+ :repo "oer/emacs-reveal"
+ :branch "melpa"
+ :fetcher gitlab
+ :files (:defaults "org-reveal" "org" "css" "title-slide" "reveal.js" "reveal.js-plugins" "Reveal.js-TOC-Progress" "reveal.js-jump-plugin" "reveal.js-quiz"))

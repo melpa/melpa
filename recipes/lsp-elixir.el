@@ -1,4 +1,4 @@
-(lsp-elixir 
+(lsp-elixir.el
   :fetcher github 
-  :repo "trevoke/lsp-elixir" 
-  :files (:default "elixir-ls"))
+  :repo "trevoke/lsp-elixir.el" 
+  :files (:defaults "elixir-ls"))

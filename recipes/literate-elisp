@@ -1,1 +1,1 @@
-(literate-elisp :fetcher github :repo "jingtaozf/literate-elisp")
+(literate-elisp :fetcher github :repo "jingtaozf/literate-elisp" :files ("*.el" "*.org"))

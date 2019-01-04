@@ -1,4 +1,1 @@
-(right-click-context
- :repo "zonuexe/right-click-context"
- :fetcher github
- :files ("right-click-context.el"))
+(right-click-context :fetcher github :repo "zonuexe/right-click-context")

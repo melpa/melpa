@@ -1,4 +1,1 @@
-(decl
-  :repo "preetpalS/decl.el"
-  :fetcher github
-  :files ("decl.el"))
+(decl :fetcher github :repo "preetpalS/decl.el")

@@ -1,1 +1,1 @@
-(hledger-mode :fetcher github :repo "narendraj9/hledger-mode" :files ("*.el"))
+(hledger-mode :fetcher github :repo "narendraj9/hledger-mode")

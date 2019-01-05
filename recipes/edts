@@ -1,4 +1,5 @@
 (edts
+ ;; [wip] refining...
  :fetcher github
  :repo   "tjarvstrand/edts"
  :files  ("*.el"

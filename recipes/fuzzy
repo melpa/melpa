@@ -1,4 +1,1 @@
-(fuzzy
- :repo "auto-complete/fuzzy-el"
- :fetcher github
- :files ("fuzzy.el"))
+(fuzzy :fetcher github :repo "auto-complete/fuzzy-el")

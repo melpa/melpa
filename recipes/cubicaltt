@@ -1,4 +1,1 @@
-(cubicaltt
- :fetcher github
- :repo "mortberg/cubicaltt"
- :files ("cubicaltt.el"))
+(cubicaltt :fetcher github :repo "mortberg/cubicaltt")

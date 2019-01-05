@@ -1,3 +1,1 @@
-(emms-info-mediainfo :repo "fgallina/emms-info-mediainfo"
-                     :fetcher github
-                     :files ("emms-info-mediainfo.el"))
+(emms-info-mediainfo :fetcher github :repo "fgallina/emms-info-mediainfo")

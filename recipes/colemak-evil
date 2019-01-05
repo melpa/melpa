@@ -1,4 +1,1 @@
-(colemak-evil
- :repo "patbl/colemak-evil"
- :fetcher github
- :files ("colemak-evil.el"))
+(colemak-evil :fetcher github :repo "patbl/colemak-evil")

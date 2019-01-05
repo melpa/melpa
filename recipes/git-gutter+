@@ -1,1 +1,1 @@
-(git-gutter+ :fetcher github :repo "nonsequitur/git-gutter-plus" :files ("git-gutter+.el"))
+(git-gutter+ :fetcher github :repo "nonsequitur/git-gutter-plus")

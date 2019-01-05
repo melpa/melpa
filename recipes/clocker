@@ -1,1 +1,1 @@
-(clocker :repo "roman/clocker.el" :files ("clocker.el") :fetcher github)
+(clocker :fetcher github :repo "roman/clocker.el")

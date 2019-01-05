@@ -43,17 +43,44 @@ Enable installation of packages from MELPA by adding an entry to
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
        (proto (if no-ssl "http" "https")))
+  (when no-ssl (warn "\
+Your version of Emacs does not support SSL connections,
+which is unsafe because it allows man-in-the-middle attacks.
+There are two things you can do about this warning:
+1. Install an Emacs version that does support SSL and be safe.
+2. Remove this warning from your init file so you won't see it again."))
   ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
   (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
   ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
   (when (< emacs-major-version 24)
     ;; For important compatibility libraries like cl-lib
-    (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
+    (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 ```
 
 Then just use `M-x package-list-packages` to browse and install
 packages from MELPA and elsewhere.
+
+Note that you'll need to run `M-x package-refresh-contents` or `M-x
+package-list-packages` to ensure that Emacs has fetched the MELPA
+package list before you can install packages with `M-x
+package-install` or similar.
+
+Instead of the messy code above, you can of course use something like
+the following instead:
+
+```lisp
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+```
+
+Before doing so you should understand what it does though.  To make
+sure of that, you should read the official
+[documentation](https://www.gnu.org/software/emacs/manual/html_node/emacs/Packages.html)
+from the Emacs manual.  Also note that the calls to `require` and
+`package-initialize` may be unnecessary depending on the Emacs version
+you use.
 
 ### MELPA Stable
 

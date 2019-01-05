@@ -1,1 +1,1 @@
-(merlin-eldoc :fetcher github :repo "khady/merlin-eldoc")
+(merlin-eldoc :fetcher github :repo "Khady/merlin-eldoc")

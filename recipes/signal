@@ -1,1 +1,1 @@
-(signal :repo "Mola-T/signal" :fetcher github)
+(signal :repo "mola-T/signal" :fetcher github)

@@ -6,7 +6,7 @@ mkdir -p /etc/letsencrypt/ssl 2> /dev/null
 [ -f /etc/letsencrypt/ssl/dhparam.pem ] || openssl dhparam -out /etc/letsencrypt/ssl/dhparam.pem 2048
 
 # bootstrap certbot
-[ -d /etc/letsencrypt/live/test.melpa.org ] || certbot certonly \
+[ -d /etc/letsencrypt/live/melpa.org ] || certbot certonly \
     --standalone \
     --agree-tos \
     --email dcurtis@gmail.com \

@@ -1,1 +1,1 @@
-(fakir :fetcher github :repo "nicferrier/emacs-fakir" :files ("fakir.el"))
+(fakir :fetcher github :repo "nicferrier/emacs-fakir")

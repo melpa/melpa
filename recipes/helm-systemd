@@ -1,3 +1,1 @@
-(helm-systemd :repo "Lompik/helm-systemd"
-                 :fetcher github
-                 :files ("helm-systemd.el"))
+(helm-systemd :fetcher github :repo "Lompik/helm-systemd")

@@ -1,3 +1,1 @@
-(helm-j-cheatsheet :repo "abo-abo/helm-j-cheatsheet"
-                   :fetcher github
-                   :files ("helm-j-cheatsheet.el"))
+(helm-j-cheatsheet :fetcher github :repo "abo-abo/helm-j-cheatsheet")

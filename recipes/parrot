@@ -1,4 +1,4 @@
 (parrot
  :fetcher github
  :repo "dp12/parrot"
- :files ("parrot.el" "party-parrot.el" "img"))
+ :files (:defaults "img"))

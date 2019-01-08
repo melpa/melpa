@@ -1,2 +1,2 @@
-(viking-mode :repo "tlinden/viking-mode" :fetcher github)
+(viking-mode :repo "TLINDEN/viking-mode" :fetcher github)
 

@@ -1,0 +1,1 @@
+(lsp-fortran :repo "MagB93/lsp-fortran" :fetcher github)

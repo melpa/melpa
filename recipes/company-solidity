@@ -1,3 +1,4 @@
 (company-solidity
- :repo "ssmolkin1/company-solidity"
- :fetcher github)
+    :fetcher github
+    :repo "ethereum/emacs-solidity"
+    :files ("company-solidity.el"))

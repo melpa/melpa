@@ -1,0 +1,2 @@
+(fullframe-minor-mode :fetcher github
+                      :repo "jtkDvlp/fullframe-minor-mode")

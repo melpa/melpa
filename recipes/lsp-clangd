@@ -1,3 +1,0 @@
-(lsp-clangd
- :fetcher github
- :repo "emacs-lsp/lsp-clangd")

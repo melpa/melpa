@@ -1,1 +1,0 @@
-(lsp-php :repo "emacs-lsp/lsp-php" :fetcher github)

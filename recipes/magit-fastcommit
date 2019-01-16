@@ -1,0 +1,1 @@
+(magit-fastcommit :fetcher github :repo "Asgavar/magit-fastcommit")

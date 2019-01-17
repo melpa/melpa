@@ -90,6 +90,9 @@ New recipe submissions should adhere to the following guidelines:
      update the README at the old location with a link to the new
      location.
 
+- GPL compatible license :: The package is released under a 
+     [[https://www.gnu.org/licenses/license-list.en.html#GPLCompatibleLicenses][GPL-Compatible Free Software License]].
+
 ** Making your package ready for inclusion
 
 MELPA maintainers control the quality of each recipe and associated

@@ -1,0 +1,5 @@
+(org-revealjs
+ :repo "oer/org-revealjs"
+ :branch "melpa"
+ :fetcher gitlab
+ :files (:defaults "LICENSES" "Readme.org" "local.css" "images"))

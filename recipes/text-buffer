@@ -1,1 +1,1 @@
-(text-buffer :repo "dkrivets/text-buffer" :fetcher github :version-regexp "v0.0.1" :files ("*.el"))
+(text-buffer :repo "dkrivets/text-buffer" :fetcher github :files ("*.el*"))

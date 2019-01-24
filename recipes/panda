@@ -1,1 +1,1 @@
-(tfsmacs :repo "sebasmonia/panda" :fetcher github)
+(panda :repo "sebasmonia/panda" :fetcher github)

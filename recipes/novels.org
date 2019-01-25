@@ -1,0 +1,2 @@
+(novels.org :repo "eubarbosa/novels.org"
+:fetcher github)

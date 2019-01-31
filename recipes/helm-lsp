@@ -1,0 +1,1 @@
+(helm-lsp :repo "yyoncho/helm-lsp" :fetcher github)

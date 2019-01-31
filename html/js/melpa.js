@@ -2,12 +2,10 @@
 (function(m, document, _, moment, Cookies){
   "use strict";
 
-  // TODO Link to other MELPA in header, e.g. from MELPA to MELPA Stable
   // TODO Show compatible emacs versions for any package
   // TODO Google Analytics
   // TODO D3 visualisation for deps
   // TODO Voting / starring
-  // TODO Add header links from MELPA to MELPA Stable and vice-versa
 
   //////////////////////////////////////////////////////////////////////////////
   // Helpers
@@ -524,12 +522,17 @@
   // Changing the appearance of the MELPA Stable page
   //////////////////////////////////////////////////////////////////////////////
 
-    melpa.stable = m.prop(window.location.host === 'stable.melpa.org' ||
-                          window.location.host === 'stable-test.melpa.org');
+  melpa.sites = {
+    unstable: { name: "MELPA", hosts: ["melpa.org"] },
+    stable: { name: "MELPA Stable", hosts: ["stable.melpa.org", "stable-test.melpa.org"] }
+  };
+
+  melpa.stable = m.prop(_.findIndex(melpa.sites.stable.hosts,
+                                    function(s) { return s == window.location.host.toLowerCase(); }) != -1);
   melpa.archivename = {};
   melpa.archivename.controller = function() {
     this.archiveName = function() {
-      return melpa.stable() ? "MELPA Stable" : "MELPA";
+      return melpa.stable() ? melpa.sites.stable.name : melpa.sites.unstable.name;
     };
   };
   melpa.archivename.view = function(ctrl) {
@@ -542,9 +545,17 @@
       // jshint unused: false
       m.mount(e, melpa.archivename);
     });
+
     if (melpa.stable()) {
       document.getElementsByTagName("html")[0].className += " stable";
     }
+
+    // Add a link to the other MELPA site
+    var otherSite = melpa.stable() ? melpa.sites.unstable : melpa.sites.stable;
+    var otherSiteLink = document.getElementsByClassName("other-melpa-link")[0];
+    otherSiteLink.href = "//" + otherSite.hosts[0];
+    otherSiteLink.textContent = otherSite.name;
+    otherSiteLink.classList.remove("hidden");
   });
 
   //////////////////////////////////////////////////////////////////////////////

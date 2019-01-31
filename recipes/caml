@@ -1,3 +1,1 @@
-(caml :fetcher github
- :repo "ocaml/ocaml"
- :files ("emacs/*.el"))
+(caml :repo "ocaml/caml-mode" :fetcher github)

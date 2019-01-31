@@ -1,3 +1,4 @@
+# docker service create --name registry --publish 127.0.0.1:5000:5000 registry:2
 version: "3"
 services:
   nginx:
@@ -16,6 +17,10 @@ services:
     build: ./builder
     image: melpa/builder:v1
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.8'
     volumes:
       - /mnt/store/melpa:/mnt/store/melpa
   logprocessor:

@@ -5,5 +5,4 @@
          "icons"
          "src/elisp/treemacs*.el"
          "src/scripts/treemacs*.py"
-         (:exclude "src/elisp/treemacs-evil.el"
-                   "src/elisp/treemacs-projectile.el")))
+         (:exclude "src/extra/*")))

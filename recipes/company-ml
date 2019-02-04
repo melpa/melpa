@@ -1,0 +1,4 @@
+(company-ml
+  :repo    "fgeorges/company-ml"
+  :fetcher github
+  :files   ("src/*.el"))

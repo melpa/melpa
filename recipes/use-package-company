@@ -1,0 +1,2 @@
+(use-package-company :repo "foltik/use-package-company" :fetcher github)
+

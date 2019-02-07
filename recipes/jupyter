@@ -1,0 +1,4 @@
+(jupyter
+ :fetcher github
+ :repo "dzop/emacs-jupyter"
+ :files (:defaults "Makefile" "widget.html" "js"))

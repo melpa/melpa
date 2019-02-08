@@ -1,0 +1,4 @@
+(pretty-py 
+  :repo "simonfxr/pretty-py.el"
+  :fetcher github
+  :files ("pretty-py.el"))

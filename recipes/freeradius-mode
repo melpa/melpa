@@ -1,2 +1,1 @@
-(freeradius-mode :fetcher github :repo "VersBinarii/freeradius-mode
-")
+(freeradius-mode :fetcher github :repo "VersBinarii/freeradius-mode")

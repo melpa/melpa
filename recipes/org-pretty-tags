@@ -1,0 +1,3 @@
+(org-pretty-tags :repo "marcowahl/org-pretty-tags"
+           :fetcher gitlab
+           :files ("org-pretty-tags.el"))

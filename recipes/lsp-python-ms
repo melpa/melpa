@@ -1,0 +1,1 @@
+(lsp-python-ms :fetcher github :repo "andrew-christianson/lsp-python-ms")

@@ -1,0 +1,1 @@
+(termianl-toggle :fetcher github :repo "mtekman/terminal-toggle.el")

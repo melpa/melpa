@@ -1,0 +1,1 @@
+(maple-package :repo "honmaple/emacs-maple-package" :fetcher github)

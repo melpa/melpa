@@ -1,0 +1,4 @@
+(eldoc-cmake
+ :fetcher github
+ :repo "ikirill/eldoc-cmake"
+ :files ("eldoc-cmake.el"))

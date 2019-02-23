@@ -1,1 +1,1 @@
-(github-review :repo "charignon/greview" :fetcher github :files ("github-review.el"))
+(github-review :repo "charignon/github-review" :fetcher github)

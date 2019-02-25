@@ -1,2 +1,4 @@
-(multi-term :fetcher github :repo "emacsorphanage/multi-term")
-
+(multi-term
+ :fetcher github
+ :repo "manateelazycat/lazycat-emacs"
+ :files ("site-lisp/extensions/lazycat/multi-term.el"))

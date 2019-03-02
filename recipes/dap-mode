@@ -1,1 +1,1 @@
-(dap-mode :repo "yyoncho/dap-mode" :fetcher github :files (:defaults "icons"))
+(dap-mode :repo "emacs-lsp/dap-mode" :fetcher github :files (:defaults "icons"))

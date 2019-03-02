@@ -1,1 +1,1 @@
-(helm-lsp :repo "yyoncho/helm-lsp" :fetcher github)
+(helm-lsp :repo "emacs-lsp/helm-lsp" :fetcher github)

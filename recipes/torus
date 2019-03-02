@@ -1,4 +1,2 @@
-;;; -*- mode: emacs-lisp; -*-
-
 (torus :repo "chimay/torus"
        :fetcher github)

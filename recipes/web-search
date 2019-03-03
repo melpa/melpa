@@ -1,0 +1,3 @@
+(web-search :fetcher github
+            :repo "xuchunyang/web-search.el"
+            :files (:defaults "web-search" "web-search-completion.bash"))

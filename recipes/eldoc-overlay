@@ -1,0 +1,4 @@
+(eldoc-overlay
+  :fetcher github
+  :repo "stardiviner/eldoc-overlay"
+  :old-names (eldoc-overlay-mode))

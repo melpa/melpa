@@ -1,0 +1,4 @@
+(elisp-demos
+ :fetcher github
+ :repo "xuchunyang/elisp-demos"
+ :files (:defaults "*.org"))

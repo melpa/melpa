@@ -1,4 +1,4 @@
-(shimbun :url ":pserver:anonymous@cvs.namazu.org:/storage/cvsroot"
-     :module "emacs-w3m"
-     :fetcher cvs
-     :files ("shimbun/*.el"))
+(shimbun
+ :fetcher github
+ :repo "emacsorphanage/w3m"
+ :files ("shimbun/*.el"))

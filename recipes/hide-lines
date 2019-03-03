@@ -1,1 +1,1 @@
-(hide-lines :fetcher wiki)
+(hide-lines :fetcher github :repo "emacsorphanage/hide-lines")

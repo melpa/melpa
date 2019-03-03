@@ -1,0 +1,1 @@
+(org-static-blog :repo "bastibe/org-static-blog" :fetcher github)

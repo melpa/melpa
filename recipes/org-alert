@@ -1,1 +1,1 @@
-(org-alert :fetcher github :repo "groksteve/org-alert")
+(org-alert :fetcher github :repo "spegoraro/org-alert")

@@ -1,2 +1,2 @@
-(multi-term :fetcher wiki)
+(multi-term :fetcher github :repo "emacsorphanage/multi-term")
 

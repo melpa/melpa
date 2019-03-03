@@ -1,4 +1,0 @@
-(debian-bug :fetcher cvs
-            :url ":pserver:anonymous@cvs.alioth.debian.org:/cvs/pkg-goodies-el"
-            :module "emacs-goodies-el"
-            :files ("elisp/debian-el/debian-bug.el"))

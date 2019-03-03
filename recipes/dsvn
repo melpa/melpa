@@ -1,1 +1,1 @@
-(dsvn :fetcher svn :url "http://svn.apache.org/repos/asf/subversion/trunk/contrib/client-side/emacs/" :files ("dsvn.el"))
+(dsvn :fetcher github :repo "emacsorphanage/dsvn" :files ("dsvn.el"))

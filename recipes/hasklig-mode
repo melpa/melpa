@@ -1,0 +1,3 @@
+(hasklig-mode
+ :repo "minad/hasklig-mode"
+ :fetcher github)

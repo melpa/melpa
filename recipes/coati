@@ -1,2 +1,0 @@
-(coati :repo "CoatiSoftware/emacs-coati" :fetcher github)
-

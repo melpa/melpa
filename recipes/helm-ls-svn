@@ -1,1 +1,1 @@
-(helm-ls-svn :fetcher svn :url "https://svn.macports.org/repository/macports/users/chunyang/helm-ls-svn.el")
+(helm-ls-svn :fetcher github :repo "emacsorphanage/helm-ls-svn")

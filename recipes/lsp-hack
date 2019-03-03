@@ -1,0 +1,1 @@
+(lsp-hack :repo "jra3/lsp-hack" :fetcher github)

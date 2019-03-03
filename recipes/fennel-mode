@@ -1,0 +1,2 @@
+(fennel-mode :repo "technomancy/fennel-mode"
+             :fetcher gitlab)

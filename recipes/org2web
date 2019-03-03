@@ -1,0 +1,3 @@
+(org2web :repo "tumashu/org2web"
+         :fetcher github
+         :files ("org2web*.el" "documents" "themes" "uploaders"))

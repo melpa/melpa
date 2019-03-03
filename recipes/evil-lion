@@ -1,0 +1,3 @@
+(evil-lion :repo "edkolev/evil-lion"
+           :fetcher github
+           :files ("evil-lion.el"))

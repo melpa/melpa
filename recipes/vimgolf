@@ -1,2 +1,0 @@
-(vimgolf :repo "timvisher/vimgolf" :fetcher github :files ("emacs/vimgolf.el"))
-

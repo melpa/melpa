@@ -1,4 +1,4 @@
 (log4j-mode
  :fetcher git
- :url "git://git.code.sf.net/p/log4j-mode/code"
+ :url "https://git.code.sf.net/p/log4j-mode/code"
  :files ("src/*.el"))

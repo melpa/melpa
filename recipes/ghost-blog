@@ -1,2 +1,1 @@
-(ghost-blog :repo "javaguirre/ghost-blog-emacs"
-            :fetcher github)
+(ghost-blog :fetcher github :repo "javaguirre/ghost-blog-emacs")

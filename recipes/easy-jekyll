@@ -1,0 +1,3 @@
+(easy-jekyll
+ :repo "masasam/emacs-easy-jekyll"
+ :fetcher github)

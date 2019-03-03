@@ -1,6 +1,6 @@
 (ruby-additional
- :fetcher svn
- :url "http://svn.ruby-lang.org/repos/ruby/trunk/misc/"
+ :fetcher github
+ :repo "ruby/elisp"
  :files ("ruby-additional.el"
          "rdoc-mode.el"
          "ruby-style.el"

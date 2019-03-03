@@ -1,3 +1,4 @@
 (fstar-mode
  :fetcher github
- :repo "FStarLang/fstar-mode.el")
+ :repo "FStarLang/fstar-mode.el"
+ :files (:defaults "etc"))

@@ -1,1 +1,1 @@
-(minor-mode-hack :fetcher wiki)
+(minor-mode-hack :fetcher github :repo "rubikitch/minor-mode-hack")

@@ -1,2 +1,1 @@
-(disk :fetcher wiki)
-
+(disk :fetcher github :repo "kensanata/disk")

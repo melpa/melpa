@@ -1,4 +1,4 @@
-(sly :repo "capitaomorte/sly"
+(sly :repo "joaotavora/sly"
      :fetcher github
      :files ("*.el"
              ("lib" "lib/*")

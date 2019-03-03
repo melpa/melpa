@@ -3,18 +3,13 @@ language: ruby
 addons:
   apt:
     packages:
-    - bzr
     - git
     - mercurial
-    - subversion
-    - cvs
-    - darcs
-    - fossil
     - texinfo
 
 before_install:
   - sudo apt-get -yq update
-  - sudo apt-get -yq install bzr git mercurial subversion cvs darcs fossil texinfo
+  - sudo apt-get -yq install git mercurial texinfo
 
   - git clone https://github.com/rejeep/evm.git $HOME/.evm
   - export PATH=$HOME/.evm/bin:$PATH

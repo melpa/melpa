@@ -1,0 +1,3 @@
+(alan-mode
+ :repo "M-industries/AlanForEmacs"
+ :fetcher github)

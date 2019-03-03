@@ -1,3 +1,1 @@
-(tex-smart-umlauts
- :fetcher darcs
- :url "http://hub.darcs.net/lyro/tex-smart-umlauts")
+(tex-smart-umlauts :fetcher github :repo "emacsorphanage/tex-smart-umlauts")

@@ -1,0 +1,2 @@
+(greek-polytonic :fetcher github
+                 :repo "jhanschoo/greek-polytonic")

@@ -1,0 +1,3 @@
+(maple-preview :repo "honmaple/emacs-maple-preview"
+               :fetcher github
+               :files ("index.html" "static"))

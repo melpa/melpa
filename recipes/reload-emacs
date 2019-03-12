@@ -1,0 +1,1 @@
+(reload-emacs :repo "jcs090218/reload-emacs" :fetcher github)

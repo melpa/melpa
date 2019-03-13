@@ -1,0 +1,3 @@
+(org2md
+  :fetcher github
+  :repo "loveminimal/org2md")

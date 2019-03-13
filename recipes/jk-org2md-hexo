@@ -1,3 +1,0 @@
-(jk-org2md-hexo 
-  :fetcher github
-  :repo "loveminimal/jk-org2md-hexo")

@@ -1,1 +1,0 @@
-(org-send-ebook :fetcher github :repo "stardiviner/org-send-ebook")

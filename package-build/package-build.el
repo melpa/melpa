@@ -246,7 +246,7 @@ is used instead."
      ((and (file-exists-p (expand-file-name ".git" dir))
            (string-equal (package-build--used-url rcp) url))
       (package-build--message "Updating %s" dir)
-      (package-build--run-process dir nil "git" "fetch" "--all" "--tags"))
+      (package-build--run-process dir nil "git" "fetch" "-f" "--all" "--tags"))
      (t
       (when (file-exists-p dir)
         (delete-directory dir t))
@@ -454,19 +454,14 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
     (if (fboundp 'package-desc-create)
         (let ((extras (package-desc-extras desc)))
           (when (and keywords (not (assq :keywords extras)))
-            ;; Add keywords to package properties, if not already present
             (push (cons :keywords keywords) extras))
           (vector (package-desc-name desc)
                   (package-desc-reqs desc)
                   (package-desc-summary desc)
                   (package-desc-version desc)
                   extras))
-      ;; The regexp and the processing is taken from `lm-homepage' in Emacs 24.4
-      (let* ((page (lm-header "\\(?:x-\\)?\\(?:homepage\\|url\\)"))
-             (homepage (if (and page (string-match "^<.+>$" page))
-                           (substring page 1 -1)
-                         page))
-             extras)
+      (let ((homepage (package-build--lm-homepage))
+            extras)
         (when keywords (push (cons :keywords keywords) extras))
         (when homepage (push (cons :url homepage) extras))
         (vector  (aref desc 0)
@@ -533,7 +528,12 @@ If PKG-INFO is nil, an empty one is created."
      (package-recipe--working-tree rcp)
      "git" "rev-parse" "HEAD")))
 
-(defmethod package-build--get-commit ((rcp package-hg-recipe))) ; TODO
+(defmethod package-build--get-commit ((rcp package-hg-recipe))
+  (ignore-errors
+    (package-build--run-process-match
+     "changeset:[[:space:]]+[[:digit:]]+:\\([[:xdigit:]]+\\)"
+     (package-recipe--working-tree rcp)
+     "hg" "log" "--debug" "--limit=1")))
 
 (defun package-build--archive-entry (rcp pkg-info type)
   (let ((name (intern (aref pkg-info 0)))
@@ -853,7 +853,7 @@ Do not use this alias elsewhere.")
     (dolist (name recipes)
       (let ((rcp (with-demoted-errors (package-recipe-lookup name))))
         (if rcp
-            (if (with-demoted-errors (package-build-archive rcp))
+            (if (with-demoted-errors (package-build-archive name))
                 (cl-incf success)
               (push name failed))
           (push name invalid))))
@@ -891,13 +891,24 @@ Do not use this alias elsewhere.")
 (defun package-build-dump-archive-contents (&optional file pretty-print)
   "Dump the list of built packages to FILE.
 
-If FILE-NAME is not specified, the default archive-contents file is used."
+If FILE-NAME is not specified, the default archive-contents file is used.
+
+When PRETTY-PRINT is non-nil, fully pretty-print the output.
+This can be very slow when the list of known packages is extremely long."
   (with-temp-file
       (or file (expand-file-name "archive-contents" package-build-archive-dir))
-    (let ((data (cons 1 (package-build--archive-entries))))
+    (let ((entries (package-build--archive-entries))
+          ;; Avoid truncation
+          print-level
+          print-length)
       (if pretty-print
-          (pp data (current-buffer))
-        (print data (current-buffer))))))
+          (pp (cons 1 entries) (current-buffer))
+        ;; Pseudo-pretty-printing, placing each entry on one line
+        (insert "(1")
+        (dolist (entry entries)
+          (newline)
+          (prin1 entry (current-buffer)))
+        (insert ")")))))
 
 (defun package-build--archive-entries ()
   "Return up-to-date archive list.
@@ -991,6 +1002,19 @@ artifacts, and return a list of the up-to-date archive entries."
   "Dump the build packages list to FILE as json."
   (with-temp-file file
     (insert (json-encode (package-build--archive-alist-for-json)))))
+
+;;; Backports
+
+(defun package-build--lm-homepage (&optional file)
+  "Return the homepage in file FILE, or current buffer if FILE is nil.
+This is a copy of `lm-homepage', which first appeared in Emacs 24.4."
+  (let ((page (lm-with-file file
+                            (lm-header "\\(?:x-\\)?\\(?:homepage\\|url\\)"))))
+    (if (and page (string-match "^<.+>$" page))
+        (substring page 1 -1)
+      page)))
+
+;;; _
 
 (provide 'package-build)
 

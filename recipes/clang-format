@@ -1,1 +1,1 @@
-(clang-format :fetcher github :repo "emacsorphanage/clang-format")
+(clang-format :fetcher github :repo "emacsmirror/clang-format")

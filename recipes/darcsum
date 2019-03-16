@@ -1,2 +1,2 @@
-(darcsum :fetcher github :repo "emacsorphanage/darcsum")
+(darcsum :fetcher github :repo "emacsmirror/darcsum")
 

@@ -1,1 +1,1 @@
-(cg :fetcher github :repo "emacsorphanage/cg")
+(cg :fetcher github :repo "emacsmirror/cg")

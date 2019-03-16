@@ -1,0 +1,4 @@
+(catkin
+ :fetcher github
+ :repo "gollth/catkin"
+ :branch "master")

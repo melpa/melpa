@@ -1,4 +1,4 @@
 (shimbun
  :fetcher github
- :repo "emacsorphanage/w3m"
+ :repo "emacs-w3m/emacs-w3m"
  :files ("shimbun/*.el"))

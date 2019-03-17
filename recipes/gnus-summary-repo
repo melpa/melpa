@@ -1,0 +1,3 @@
+(gnus-summary-repo
+ :repo "TxGVNN/gnus-summary-repo"
+ :fetcher github)

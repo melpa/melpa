@@ -1,0 +1,1 @@
+(expand-region-subword :repo "flatwhatson/expand-region-subword" :fetcher github)

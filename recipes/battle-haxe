@@ -1,0 +1,3 @@
+(battle-haxe :fetcher github
+			 :repo "AlonTzarafi/battle-haxe"
+			 :files ("*.el"))

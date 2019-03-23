@@ -24,3 +24,4 @@ Please confirm with `x`:
 - [ ] My elisp byte-compiles cleanly
 - [ ] `M-x checkdoc` is happy with my docstrings
 - [ ] I've built and installed the package using the instructions in [CONTRIBUTING.org](https://github.com/melpa/melpa/blob/master/CONTRIBUTING.org)
+- [ ] I have confirmed some of these without doing them

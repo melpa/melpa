@@ -1,1 +1,1 @@
-(magit-svn :fetcher github :repo "magit/magit-svn")
+(magit-svn :fetcher github :repo "emacsorphanage/magit-svn")

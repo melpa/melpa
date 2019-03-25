@@ -1,4 +1,3 @@
 (catkin
  :fetcher github
- :repo "gollth/catkin"
- :branch "master")
+ :repo "gollth/helm-catkin")

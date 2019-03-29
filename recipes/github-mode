@@ -1,0 +1,3 @@
+(github-mode
+ :repo "TxGVNN/github-mode"
+ :fetcher github)

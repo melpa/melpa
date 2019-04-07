@@ -1,1 +1,1 @@
-(line-reminder :repo "jcs090218/line-reminder" :fetcher github)
+(line-reminder :repo "elpa-host/line-reminder" :fetcher github)

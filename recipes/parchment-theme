@@ -1,0 +1,3 @@
+(parchment-theme
+ :fetcher github
+ :repo "ajgrf/parchment")

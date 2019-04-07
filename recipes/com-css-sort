@@ -1,1 +1,1 @@
-(com-css-sort :repo "jcs090218/com-css-sort" :fetcher github)
+(com-css-sort :repo "elpa-host/com-css-sort" :fetcher github)

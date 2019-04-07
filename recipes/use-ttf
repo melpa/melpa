@@ -1,1 +1,1 @@
-(use-ttf :repo "jcs090218/use-ttf" :fetcher github)
+(use-ttf :repo "elpa-host/use-ttf" :fetcher github)

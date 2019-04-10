@@ -1,0 +1,3 @@
+(ewal
+ :fetcher gitlab
+ :repo "jjzmajic/ewal")

@@ -1,0 +1,1 @@
+(shift-select :repo "jcs090218/shift-select" :fetcher github)

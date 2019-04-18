@@ -1,0 +1,4 @@
+(share :fetcher github
+             :repo "o-nly/emacs-share"
+             :branch "master"
+             )

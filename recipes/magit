@@ -5,4 +5,5 @@
                "lisp/git-rebase.el"
                "Documentation/magit.texi"
                "Documentation/AUTHORS.md"
-               "LICENSE"))
+               "LICENSE"
+	       (:exclude "lisp/magit-libgit.el")))

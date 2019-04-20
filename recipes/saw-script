@@ -1,4 +1,0 @@
-(saw-script
- :repo "GaloisInc/saw-script"
- :fetcher github
- :files ("saw-script.el"))

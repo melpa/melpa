@@ -1,4 +1,0 @@
-(flycheck-saw-script
- :repo "GaloisInc/saw-script"
- :fetcher github
- :files ("flycheck-saw-script.el"))

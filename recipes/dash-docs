@@ -1,0 +1,2 @@
+(dash-docs :repo "gilbertw1/dash-docs"
+                 :fetcher github)

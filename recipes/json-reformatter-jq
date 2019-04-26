@@ -1,3 +1,0 @@
-(json-reformatter-jq
- :fetcher github
- :repo "wbolster/emacs-json-reformatter-jq")

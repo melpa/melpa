@@ -1,0 +1,5 @@
+(realgud-ipdb
+ :fetcher github
+ :repo "realgud/realgud-ipdb"
+ :files ("realgud-ipdb.el"
+         ("ipdb" "ipdb/*.el")))

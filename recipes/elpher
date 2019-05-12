@@ -1,0 +1,3 @@
+(elpher
+ :repo "tgvaughan/elpher"
+ :fetcher github)

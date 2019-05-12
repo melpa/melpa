@@ -1,0 +1,5 @@
+(sly-asdf :fetcher github
+          :repo "mmgeorge/sly-asdf"
+          :files (:defaults
+                  "*.lisp"
+                  "*.asd"))

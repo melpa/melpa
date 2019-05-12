@@ -1,1 +1,1 @@
-(indian-ext :fetcher github :repo "paddymcall/indian-ext.el")
+(indian-ext :fetcher github :repo "paddymcall/indian-ext")

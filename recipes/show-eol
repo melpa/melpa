@@ -1,1 +1,1 @@
-(show-eol :repo "jcs090218/show-eol" :fetcher github)
+(show-eol :repo "elpa-host/show-eol" :fetcher github)

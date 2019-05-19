@@ -1,0 +1,1 @@
+(show-eol :repo "jcs090218/show-eol" :fetcher github)

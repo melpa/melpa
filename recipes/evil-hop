@@ -1,0 +1,2 @@
+(evil-hop :repo "3e33/evil-hop"
+          :fetcher github)

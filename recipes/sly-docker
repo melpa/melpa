@@ -1,0 +1,5 @@
+(sly-docker :fetcher github
+            :repo "fisxoj/sly-docker"
+            :files (:defaults
+                    "*.lisp"
+                    "*.asd"))

@@ -1,0 +1,1 @@
+(ruby-extra-mode :fetcher gitlab :repo "samuelfirst/ruby-extra-mode")

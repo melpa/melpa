@@ -1,0 +1,1 @@
+(helm-ag-preview :repo "jcs090218/helm-ag-preview" :fetcher github)

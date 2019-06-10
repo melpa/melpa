@@ -1,0 +1,2 @@
+(insert-kaomoji :url "https://git.sr.ht/~zge/kaomoji" :fetcher git
+				:files ("insert-kaomoji.el" "KAOMOJIS"))

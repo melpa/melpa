@@ -1,0 +1,1 @@
+(laguna :repo "henrynewcomer/laguna/laguna-theme.el" :fetcher github)

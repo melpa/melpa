@@ -1,1 +1,1 @@
-(laguna-theme :repo "HenryNewcomer/laguna-theme" :fetcher github)
+(laguna-theme :repo "HenryNewcomer/laguana-theme" :fetcher github)

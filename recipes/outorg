@@ -1,1 +1,1 @@
-(outorg :fetcher github :repo "tj64/outorg")
+(outorg :fetcher github :repo "alphapapa/outorg")

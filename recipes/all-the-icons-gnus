@@ -1,0 +1,2 @@
+(all-the-icons-gnus :repo "nlamirault/all-the-icons-gnus"
+                   :fetcher github)

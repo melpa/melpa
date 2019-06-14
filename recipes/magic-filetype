@@ -1,1 +1,1 @@
-(magic-filetype :fetcher github :repo "zonuexe/magic-filetype.el")
+(magic-filetype :fetcher github :repo "emacs-php/magic-filetype.el")

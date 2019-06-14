@@ -1,0 +1,2 @@
+(pygen :repo "JackCrawley/pygen"
+       :fetcher github)

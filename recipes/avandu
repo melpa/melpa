@@ -1,1 +1,1 @@
-(avandu :fetcher git :url "git://ryuslash.org/avandu.git")
+(avandu :fetcher github :repo "ryuslash/avandu")

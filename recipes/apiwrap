@@ -1,0 +1,1 @@
+(apiwrap :fetcher github :repo "vermiculus/apiwrap.el")

@@ -1,0 +1,1 @@
+(flycheck-plantuml :fetcher github :repo "alexmurray/flycheck-plantuml")

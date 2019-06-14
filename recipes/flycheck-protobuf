@@ -1,3 +1,0 @@
-(flycheck-protobuf
-    :fetcher github
-    :repo "edvorg/flycheck-protobuf")

@@ -1,1 +1,1 @@
-(key-chord :fetcher wiki)
+(key-chord :fetcher github :repo "emacsorphanage/key-chord")

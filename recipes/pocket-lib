@@ -1,0 +1,1 @@
+(pocket-lib :fetcher github :repo "alphapapa/pocket-lib.el")

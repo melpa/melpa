@@ -1,0 +1,1 @@
+(goto-line-preview :repo "elpa-host/goto-line-preview" :fetcher github)

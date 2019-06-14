@@ -1,0 +1,2 @@
+(shroud :fetcher github
+              :repo "o-nly/emacs-shroud")

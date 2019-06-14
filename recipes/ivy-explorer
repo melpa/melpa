@@ -1,0 +1,2 @@
+(ivy-explorer :repo "clemera/ivy-explorer"
+              :fetcher github)

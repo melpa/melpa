@@ -1,3 +1,4 @@
 (htmlize
- :repo "dunn/htmlize-mirror"
- :fetcher github)
+ :repo "hniksic/emacs-htmlize"
+ :fetcher github
+ :version-regexp "release/\\(.*\\)")

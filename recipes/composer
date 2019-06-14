@@ -1,1 +1,1 @@
-(composer :fetcher github :repo "zonuexe/composer.el")
+(composer :fetcher github :repo "emacs-php/composer.el")

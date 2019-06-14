@@ -1,0 +1,2 @@
+(company-erlang :repo "s-kostyaev/company-erlang" :fetcher github
+                :files (:defaults))

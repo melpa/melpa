@@ -1,3 +1,3 @@
-(paredit :url "http://mumble.net/~campbell/git/paredit.git"
+(paredit :url "https://mumble.net/~campbell/git/paredit.git"
          :fetcher git
          :files ("paredit.el"))

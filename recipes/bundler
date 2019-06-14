@@ -1,1 +1,1 @@
-(bundler :repo "tobiassvn/bundler.el" :fetcher github)
+(bundler :repo "endofunky/bundler.el" :fetcher github)

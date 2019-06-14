@@ -1,0 +1,1 @@
+(flycheck-ensime :repo "ncaq/flycheck-ensime" :fetcher github)

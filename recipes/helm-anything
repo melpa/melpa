@@ -1,1 +1,0 @@
-(helm-anything :repo "rubikitch/helm-anything" :fetcher github)

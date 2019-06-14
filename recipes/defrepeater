@@ -1,0 +1,1 @@
+(defrepeater :fetcher github :repo "alphapapa/defrepeater.el")

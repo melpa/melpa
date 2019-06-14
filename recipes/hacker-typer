@@ -1,0 +1,3 @@
+(hacker-typer :fetcher github
+	      :repo "dieggsy/emacs-hacker-typer"
+	      :files (:defaults "hackerman.png"))

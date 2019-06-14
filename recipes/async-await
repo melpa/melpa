@@ -1,0 +1,1 @@
+(async-await :repo "chuntaro/emacs-async-await" :fetcher github)

@@ -1,0 +1,3 @@
+(use-package-el-get
+    :fetcher gitlab
+    :repo "edvorg/use-package-el-get")

@@ -1,0 +1,1 @@
+(vdiff-magit :repo "justbur/emacs-vdiff-magit" :fetcher github)

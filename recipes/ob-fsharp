@@ -1,0 +1,1 @@
+(ob-fsharp :repo "juergenhoetzel/ob-fsharp" :fetcher github)

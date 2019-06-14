@@ -1,0 +1,2 @@
+(orgnav :repo "facetframer/orgnav"
+      :fetcher github)

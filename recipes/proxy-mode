@@ -1,0 +1,1 @@
+(proxy-mode :fetcher github :repo "stardiviner/proxy-mode")

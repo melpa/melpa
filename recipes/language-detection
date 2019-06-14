@@ -1,0 +1,2 @@
+(language-detection :fetcher github
+                    :repo "andreasjansson/language-detection.el")

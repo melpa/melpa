@@ -1,3 +1,1 @@
-(applescript-mode
- :fetcher svn
- :url "http://svn.osdn.jp/svnroot/macemacsjp/applescript-mode/trunk")
+(applescript-mode :fetcher github :repo "ieure/applescript-mode")

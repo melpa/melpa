@@ -1,0 +1,1 @@
+(i3wm :fetcher git :url "https://git.flintfam.org/swf-projects/emacs-i3.git")

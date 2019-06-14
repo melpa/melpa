@@ -1,0 +1,3 @@
+(rustic
+    :repo "brotzeit/rustic"
+    :fetcher github)

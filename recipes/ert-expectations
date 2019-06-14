@@ -1,1 +1,1 @@
-(ert-expectations :fetcher wiki)
+(ert-expectations :fetcher github :repo "emacsorphanage/ert-expectations")

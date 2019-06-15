@@ -1,0 +1,1 @@
+(helm-gtags-preview :repo "jcs090218/helm-gtags-preview" :fetcher github)

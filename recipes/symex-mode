@@ -1,0 +1,2 @@
+(symex-mode :repo "countvajhula/symex-mode"
+            :fetcher github)

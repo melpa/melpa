@@ -1,0 +1,1 @@
+(org-json :fetcher github :repo "jlumpe/org-json")

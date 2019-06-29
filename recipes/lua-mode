@@ -1,4 +1,4 @@
 (lua-mode
  :repo "immerrr/lua-mode"
  :fetcher github
- :files ("lua-mode.el" ("scripts" "scripts/*")))
+ :files (:defaults "scripts"))

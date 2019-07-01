@@ -1,0 +1,3 @@
+(subed :fetcher github
+       :repo "rndusr/subed"
+       :files ("subed/*.el"))

@@ -1,1 +1,1 @@
-(alt-codes :repo "jcs090218/alt-codes" :fetcher github)
+(alt-codes :repo "elpa-host/alt-codes" :fetcher github)

@@ -127,7 +127,9 @@ sandbox: packages/archive-contents
 		--eval "(package-refresh-contents)" \
 		--eval "(package-initialize)" \
 		--eval '(setq sandbox-install-package "$(INSTALL)")' \
-		--eval "(unless (string= \"\" sandbox-install-package) (package-install (intern sandbox-install-package)))"
+		--eval "(unless (string= \"\" sandbox-install-package) (package-install (intern sandbox-install-package)))" \
+		--eval "(when (get-buffer \"*Compile-Log*\") (display-buffer \"*Compile-Log*\"))"
+
 
 .PHONY: clean build index html json sandbox
 .FORCE:

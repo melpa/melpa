@@ -938,7 +938,7 @@ artifacts, and return a list of the up-to-date archive entries."
                        (replace-match replace-str nil t))))
         (escape-:exclude-fn
          (lambda (lst)
-           (let ((frg))
+           (let (frg)
              (mapcar (lambda (x)
                        (cond ((eq x :files) (prog1 x (setq frg t)))
                              (frg (prog1 x

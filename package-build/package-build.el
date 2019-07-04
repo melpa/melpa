@@ -940,15 +940,14 @@ artifacts, and return a list of the up-to-date archive entries."
          (lambda (lst)
            (let (frg)
              (mapcar (lambda (x)
-                       (cond ((eq x :files) (prog1 x (setq frg t)))
-                             (frg (prog1 x
-                                    (setq frg nil)
-                                    (cl-mapcan
-                                     (lambda (y)
-                                       (if (listp y)
-                                           (if (eq (car y) :exclude)
-                                               `((:exclude ,(cdr y))) y)
-                                         (list y))))))
+                       (cond ((eq x :files) (setq frg t) x)
+                             (frg (setq frg nil)
+                                  (cl-mapcan
+                                   (lambda (y)
+                                     (if (listp y)
+                                         (if (eq (car y) :exclude)
+                                             `((:exclude ,(cdr y))) y)
+                                       (list y))) x))
                              (t x))) lst)))))
     (with-temp-file file
       (insert

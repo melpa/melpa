@@ -949,8 +949,7 @@ artifacts, and return a list of the up-to-date archive entries."
                                            (if (eq (car y) :exclude)
                                                `((:exclude ,(cdr y))) y)
                                          (list y))))))
-                             (t x)))
-                     lst)))))
+                             (t x))) lst)))))
     (with-temp-file file
       (insert
        (json-encode

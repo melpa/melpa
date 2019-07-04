@@ -943,7 +943,7 @@ artifacts, and return a list of the up-to-date archive entries."
                        (cond ((eq x :files) (prog1 x (setq frg t)))
                              (frg (prog1 x
                                     (setq frg nil)
-                                    (mapcan
+                                    (cl-mapcan
                                      (lambda (y)
                                        (if (listp y)
                                            (if (eq (car y) :exclude)

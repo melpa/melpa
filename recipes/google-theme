@@ -1,1 +1,4 @@
-(google-theme :url "https://github.com/Gulkbag/Emacs-Google-Theme" :repo "Gulkbag/Emacs-Google-Theme" :fetcher github)
+(google-theme 
+:fetcher github
+:url "https://github.com/Gulkbag/Emacs-Google-Theme" 
+:repo "Gulkbag/Emacs-Google-Theme")

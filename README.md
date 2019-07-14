@@ -139,7 +139,7 @@ the following form (`[...]` denotes optional or conditional values),
 a lisp symbol that has the same name as the package being specified.
 
 - `:fetcher` specifies the type of repository that `:url` or `:repo`
-  points to.  Melpa supports [`git`][git], [`github`][github],
+  points to.  MELPA supports [`git`][git], [`github`][github],
   [`gitlab`][gitlab], [`hg`][hg] (Mercurial), and
   [`bitbucket`][bitbucket].  The `bitbucket` fetcher derives from
   `hg`, so you have to use `git` for Git repositories hosted on
@@ -194,7 +194,7 @@ recommended to use `:defaults` as the very first element of this list, which
 causes the default value shown above to be prepended to the specified file list.
 
     Note that elisp in subdirectories is never included by default, so
-you might find it convenient to separate auxiliiary files such as tests into
+you might find it convenient to separate auxiliary files such as tests into
 subdirectories to keep packaging simple.
 
 [git]: http://git-scm.com/
@@ -368,7 +368,7 @@ specified by the recipe; given according to the `%Y%m%d` format.
 
  Note that these scripts require an Emacs with `package.el` installed,
  such as Emacs 24. If you have an older version of Emacs, you can get a
- suitable `package.el` [here](http://bit.ly/pkg-el23).
+ suitable `package.el` [here](https://git.savannah.gnu.org/gitweb/?p=emacs.git;a=blob_plain;hb=ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09;f=lisp/emacs-lisp/package.el).
 
 [melpa]: https://melpa.org
 

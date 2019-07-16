@@ -1,1 +1,1 @@
-(side-notes :fetcher git :url "https://git.sr.ht/~pwr/side-notes")
+(side-notes :fetcher github :repo "rnkn/side-notes")

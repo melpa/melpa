@@ -1,4 +1,5 @@
 (haskell-tng
  :repo "tseenshe/haskell-tng.el"
  :branch "tng"
- :fetcher gitlab)
+ :fetcher gitlab
+ :files ("*.el" "snippets" ".nosearch"))

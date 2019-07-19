@@ -1,0 +1,3 @@
+(orgraphy
+ :repo "matthias-margush/orgraphy"
+ :fetcher github)

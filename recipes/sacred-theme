@@ -1,0 +1,3 @@
+(sacred-theme
+ :repo "matthias-margush/sacred-theme"
+ :fetcher github)

@@ -1,0 +1,3 @@
+(streamline
+ :repo "matthias-margush/streamline"
+ :fetcher github)

@@ -1,0 +1,2 @@
+(sysctl :repo "dantecatalfamo/sysctl.el"
+        :fetcher github)

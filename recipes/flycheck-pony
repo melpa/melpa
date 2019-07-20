@@ -1,1 +1,1 @@
-(flycheck-pony :fetcher github :repo "SeanTAllen/flycheck-pony")
+(flycheck-pony :fetcher github :repo "ponylang/flycheck-pony")

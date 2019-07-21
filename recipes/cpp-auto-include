@@ -1,0 +1,2 @@
+(cpp-auto-include :fetcher github
+                  :repo "syohex/emacs-cpp-auto-include")

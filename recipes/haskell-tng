@@ -2,4 +2,4 @@
  :repo "tseenshe/haskell-tng.el"
  :branch "tng"
  :fetcher gitlab
- :files ("*.el" "snippets" ".nosearch"))
+ :files (:defaults "snippets"))

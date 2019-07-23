@@ -23,7 +23,7 @@ LISP_CONFIG ?= '(progn\
   (setq package-build-recipes-dir "$(TOP)/$(RCPDIR)/")\
   (setq package-build-stable $(STABLE))\
   (setq package-build-write-melpa-badge-images t)\
-  (setq package-build-timeout-secs 600))'
+  (setq package-build-timeout-secs (when (string= "linux" (symbol-name system-type)) 600)))'
 
 LOAD_PATH ?= $(TOP)/package-build
 

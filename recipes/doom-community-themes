@@ -1,0 +1,1 @@
+(doom-community-themes :repo "Emiller88/emacs-doom-community-themes" :fetcher github)

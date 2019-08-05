@@ -1,1 +1,0 @@
-(go-impl :repo "syohex/emacs-go-impl" :fetcher github)

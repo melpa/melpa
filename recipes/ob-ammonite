@@ -1,2 +1,0 @@
-(ob-ammonite :fetcher github
-             :repo "zwild/ob-ammonite")

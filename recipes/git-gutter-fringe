@@ -1,3 +1,0 @@
-(git-gutter-fringe
- :repo "syohex/emacs-git-gutter-fringe"
- :fetcher github)

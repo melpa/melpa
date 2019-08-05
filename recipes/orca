@@ -1,2 +1,0 @@
-(orca :repo "abo-abo/orca"
-      :fetcher github)

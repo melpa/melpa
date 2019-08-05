@@ -1,1 +1,0 @@
-(dim :repo "alezost/dim.el" :fetcher github)

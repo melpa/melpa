@@ -1,4 +1,0 @@
-(concurrent
-  :repo "kiwanami/emacs-deferred"
-  :fetcher github
-  :files ("concurrent.el"))

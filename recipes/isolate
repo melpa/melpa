@@ -1,1 +1,0 @@
-(isolate :repo "casouri/isolate" :fetcher github)

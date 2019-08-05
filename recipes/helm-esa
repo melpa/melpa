@@ -1,1 +1,0 @@
-(helm-esa :repo "masutaka/emacs-helm-esa" :fetcher github)

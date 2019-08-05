@@ -1,2 +1,0 @@
-(kotlin-mode :repo "Emacs-Kotlin-Mode-Maintainers/kotlin-mode"
-             :fetcher github)

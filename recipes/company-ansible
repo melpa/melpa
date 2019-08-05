@@ -1,1 +1,0 @@
-(company-ansible :repo "krzysztof-magosa/company-ansible" :fetcher github)

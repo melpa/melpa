@@ -1,1 +1,0 @@
-(save-load-path :repo "rubikitch/save-load-path" :fetcher github)

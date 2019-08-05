@@ -1,4 +1,0 @@
-(sql-presto
- :fetcher github
- :repo "kat-co/sql-prestodb"
- :files ("artifacts/*.el"))

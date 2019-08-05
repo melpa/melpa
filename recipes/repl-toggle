@@ -1,1 +1,0 @@
-(repl-toggle :repo "tomterl/repl-toggle" :fetcher github)

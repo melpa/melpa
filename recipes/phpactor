@@ -1,2 +1,0 @@
-(phpactor :fetcher github :repo "emacs-php/phpactor.el"
-          :files ("phpactor.el" "composer.json" "composer.lock"))

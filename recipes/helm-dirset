@@ -1,1 +1,0 @@
-(helm-dirset :fetcher github :repo "k1LoW/helm-dirset")

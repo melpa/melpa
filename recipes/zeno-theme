@@ -1,3 +1,0 @@
-(zeno-theme
- :repo "jbharat/zeno-theme"
- :fetcher github)

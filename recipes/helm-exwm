@@ -1,3 +1,0 @@
-(helm-exwm
- :repo "emacs-helm/helm-exwm"
- :fetcher github)

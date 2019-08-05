@@ -1,1 +1,0 @@
-(pytest :fetcher github :repo "ionrock/pytest-el")

@@ -1,2 +1,0 @@
-(projectile-hanami :repo "avdgaag/projectile-hanami"
-                   :fetcher github)

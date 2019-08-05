@@ -1,1 +1,0 @@
-(dna-mode :fetcher github :repo "jhgorrell/dna-mode-el")

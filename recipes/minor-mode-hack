@@ -1,1 +1,0 @@
-(minor-mode-hack :fetcher github :repo "rubikitch/minor-mode-hack")

@@ -1,5 +1,0 @@
-(pippel
- :fetcher github
- :repo "brotzeit/pippel"
- :files (:defaults
-         "pippel.py"))

@@ -1,1 +1,0 @@
-(flymake-phpcs :repo "senda-akiha/flymake-phpcs" :fetcher github)

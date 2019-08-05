@@ -1,3 +1,0 @@
-(latex-pretty-symbols
- :repo "mortiferus/latex-pretty-symbols.el"
- :fetcher bitbucket)

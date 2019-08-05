@@ -1,2 +1,0 @@
-(hayoo :repo "benma/hayoo.el"
-       :fetcher github)

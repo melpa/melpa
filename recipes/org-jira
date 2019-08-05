@@ -1,1 +1,0 @@
-(org-jira :fetcher github :repo "ahungry/org-jira" :files ("jiralib.el" "org-jira.el" "org-jira-sdk.el"))

@@ -1,4 +1,0 @@
-(company-solidity
-    :fetcher github
-    :repo "ethereum/emacs-solidity"
-    :files ("company-solidity.el"))

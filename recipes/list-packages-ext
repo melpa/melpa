@@ -1,2 +1,0 @@
-(list-packages-ext :repo "laynor/list-packages-ext" :fetcher github)
-

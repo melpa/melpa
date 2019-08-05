@@ -1,1 +1,0 @@
-(flymake-coffee :repo "purcell/flymake-coffee" :fetcher github)

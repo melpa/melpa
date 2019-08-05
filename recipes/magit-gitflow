@@ -1,2 +1,0 @@
-(magit-gitflow :fetcher github :repo "jtatarik/magit-gitflow")
-

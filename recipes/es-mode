@@ -1,4 +1,0 @@
-(es-mode
- :fetcher github
- :repo "dakrone/es-mode"
- :files ("*.el" "snippets"))

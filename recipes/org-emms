@@ -1,1 +1,0 @@
-(org-emms :repo "jagrg/org-emms" :fetcher gitlab)

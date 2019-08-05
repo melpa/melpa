@@ -1,3 +1,0 @@
-(backward-forward
- :fetcher gitlab
- :repo "vancan1ty/emacs-backward-forward")

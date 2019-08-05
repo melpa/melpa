@@ -1,4 +1,0 @@
-(egison-mode
- :fetcher github
- :repo "egison/egison"
- :files ("elisp/*.el"))

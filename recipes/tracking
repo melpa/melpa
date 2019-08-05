@@ -1,1 +1,0 @@
-(tracking :repo "jorgenschaefer/circe" :fetcher github :files ("tracking.el" "shorten.el"))

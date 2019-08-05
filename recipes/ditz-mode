@@ -1,1 +1,0 @@
-(ditz-mode :fetcher bitbucket :repo "zondo/ditz-mode")

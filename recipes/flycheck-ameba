@@ -1,1 +1,0 @@
-(flycheck-ameba :fetcher github :repo "veelenga/ameba.el" :files ("flycheck-ameba.el"))

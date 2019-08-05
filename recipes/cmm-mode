@@ -1,1 +1,0 @@
-(cmm-mode :repo "bgamari/cmm-mode" :fetcher github)

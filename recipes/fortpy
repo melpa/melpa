@@ -1,3 +1,0 @@
-(fortpy :fetcher github
-      :repo "rosenbrockc/fortpy-el"
-      :files ("fortpy*" "Makefile" "setup.py"))

@@ -1,3 +1,0 @@
-(projectile-sift :repo "nlamirault/sift.el"
-                 :fetcher github
-                 :files ("projectile-sift.el"))

@@ -1,3 +1,0 @@
-(load-theme-buffer-local :fetcher github
-                         :repo "vic/color-theme-buffer-local"
-                         :files ("load-theme-buffer-local.el"))

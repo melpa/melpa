@@ -1,1 +1,0 @@
-(undohist :repo "m2ym/undohist-el" :fetcher github)

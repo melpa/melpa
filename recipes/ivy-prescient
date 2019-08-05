@@ -1,3 +1,0 @@
-(ivy-prescient :fetcher github
-               :repo "raxod502/prescient.el"
-               :files ("ivy-prescient.el"))

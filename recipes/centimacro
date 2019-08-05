@@ -1,2 +1,0 @@
-(centimacro :repo "abo-abo/centimacro"
-            :fetcher github)

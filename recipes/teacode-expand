@@ -1,3 +1,0 @@
-(teacode-expand
-   :fetcher github
-   :repo "raguay/TeaCode-Expand")

@@ -1,1 +1,0 @@
-(review-mode :fetcher github :repo "kmuto/review-el")

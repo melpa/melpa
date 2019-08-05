@@ -1,3 +1,0 @@
-(color-theme :fetcher github
-	     :repo "emacsattic/color-theme"
-	     :files (:defaults "themes"))

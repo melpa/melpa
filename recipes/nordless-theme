@@ -1,4 +1,0 @@
-(nordless-theme
-  :repo "lthms/nordless-theme.el"
-  :files ("nordless-theme.el")
-  :fetcher github)

@@ -1,2 +1,0 @@
-(enclose :repo "rejeep/enclose.el" :fetcher github)
-

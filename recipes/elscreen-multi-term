@@ -1,3 +1,0 @@
-(elscreen-multi-term
- :repo "wamei/elscreen-multi-term"
- :fetcher github)

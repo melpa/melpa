@@ -1,3 +1,0 @@
-(spray
- :repo "iankelling/spray"
- :fetcher gitlab)

@@ -1,4 +1,0 @@
-(dircmp
- :fetcher github
- :repo "matthewlmcclure/dircmp-mode"
- :files ("*.el" "*.sh"))

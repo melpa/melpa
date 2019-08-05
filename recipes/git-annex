@@ -1,1 +1,0 @@
-(git-annex :fetcher github :repo "jwiegley/git-annex-el")

@@ -1,1 +1,0 @@
-(load-env-vars :fetcher github :repo "diasjorge/emacs-load-env-vars")

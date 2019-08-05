@@ -1,1 +1,0 @@
-(dashboard-hackernews :fetcher github :repo "hyakt/emacs-dashboard-hackernews")

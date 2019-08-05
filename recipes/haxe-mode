@@ -1,1 +1,0 @@
-(haxe-mode :repo "elpa-host/haxe-mode" :fetcher github )

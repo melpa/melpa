@@ -1,3 +1,0 @@
-(alarm-clock :fetcher github
-             :repo "wlemuel/alarm-clock"
-             :files (:defaults "*.mp3"))

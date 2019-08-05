@@ -1,3 +1,0 @@
-(chyla-theme
- :repo "chyla/ChylaThemeForEmacs"
- :fetcher github)

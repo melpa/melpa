@@ -1,3 +1,0 @@
-(ten-hundred-mode :fetcher github
-                  :repo "aaron-em/ten-hundred-mode.el"
-                  :files (:defaults "lib"))

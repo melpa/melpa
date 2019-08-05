@@ -1,2 +1,0 @@
-(csharp-mode
- :fetcher github :repo "josteink/csharp-mode")

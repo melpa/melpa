@@ -1,3 +1,0 @@
-(helm-core :repo "emacs-helm/helm" 
-           :fetcher github 
-           :files ("helm-core-pkg.el" "helm.el" "helm-lib.el" "helm-source.el" "helm-multi-match.el"))

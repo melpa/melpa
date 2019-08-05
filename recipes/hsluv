@@ -1,3 +1,0 @@
-(hsluv
- :fetcher github
- :repo "hsluv/hsluv-emacs")

@@ -1,1 +1,0 @@
-(logito :repo "sigma/logito" :fetcher github)

@@ -1,1 +1,0 @@
-(alert :fetcher github :repo "jwiegley/alert")

@@ -1,3 +1,0 @@
-(calfw :repo "kiwanami/emacs-calfw"
-       :fetcher github
-       :files ("calfw.el"))

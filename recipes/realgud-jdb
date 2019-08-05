@@ -1,5 +1,0 @@
-(realgud-jdb
- :fetcher github
- :repo "realgud/realgud-jdb"
- :files (:defaults
-         ("realgud-jdb" "realgud-jdb/*.el")))

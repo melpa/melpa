@@ -1,1 +1,0 @@
-(conda :repo "necaris/conda.el" :fetcher github)

@@ -1,2 +1,0 @@
-(ansible-vault :fetcher github
-               :repo "zellio/ansible-vault-mode")

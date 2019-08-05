@@ -1,3 +1,0 @@
-(dhall-mode
- :repo "psibi/dhall-mode"
- :fetcher github)

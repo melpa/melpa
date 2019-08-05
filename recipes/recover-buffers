@@ -1,2 +1,0 @@
-(recover-buffers :fetcher github :repo "tripleee/recover-buffers")
-

@@ -1,2 +1,0 @@
-(html-to-hiccup :repo "plexus/html-to-hiccup"
-                :fetcher github)

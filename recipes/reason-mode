@@ -1,1 +1,0 @@
-(reason-mode :fetcher github :repo "reasonml-editor/reason-mode")

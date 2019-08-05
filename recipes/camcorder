@@ -1,1 +1,0 @@
-(camcorder :repo "Malabarba/camcorder.el" :fetcher github)

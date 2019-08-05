@@ -1,4 +1,0 @@
-(evil :repo "emacs-evil/evil"
-      :fetcher github
-      :files (:defaults
-              (:exclude "evil-test-helpers.el")))

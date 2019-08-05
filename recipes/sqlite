@@ -1,1 +1,0 @@
-(sqlite :fetcher gitlab :repo "cnngimenez/sqlite.el")

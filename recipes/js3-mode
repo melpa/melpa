@@ -1,2 +1,0 @@
-(js3-mode :repo "thomblake/js3-mode" :fetcher github)
-

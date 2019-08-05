@@ -1,1 +1,0 @@
-(ghc :fetcher github :repo "DanielG/ghc-mod" :files ("elisp/*.el"))

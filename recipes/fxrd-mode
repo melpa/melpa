@@ -1,2 +1,0 @@
-(fxrd-mode :fetcher github :repo "msherry/fxrd-mode"
-           :files (:defaults "fxrd-modes/*el"))

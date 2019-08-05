@@ -1,1 +1,0 @@
-(quelpa-use-package :fetcher git :url "https://framagit.org/steckerhalter/quelpa-use-package.git")

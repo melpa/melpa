@@ -1,1 +1,0 @@
-(sound-wav :repo "syohex/emacs-sound-wav" :fetcher github)

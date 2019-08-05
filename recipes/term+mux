@@ -1,1 +1,0 @@
-(term+mux :repo "tarao/term-plus-mux-el" :fetcher github)

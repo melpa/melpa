@@ -1,3 +1,0 @@
-(yesql-ghosts
- :repo "magnars/yesql-ghosts"
- :fetcher github)

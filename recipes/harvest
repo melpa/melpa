@@ -1,1 +1,0 @@
-(harvest :fetcher github :repo "kostajh/harvest.el")

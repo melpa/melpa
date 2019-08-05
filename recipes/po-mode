@@ -1,3 +1,0 @@
-(po-mode
- :fetcher github
- :repo "emacsmirror/po-mode")

@@ -1,5 +1,0 @@
-(angular-mode
- :fetcher github
- :repo "rudolfolah/angularjs-mode"
- :files (:defaults "snippets")
- :old-names (angularjs-mode))

@@ -1,3 +1,0 @@
-(connection :repo "myrkr/dictionary-el"
-	    :fetcher github
-	    :files ("connection.el"))

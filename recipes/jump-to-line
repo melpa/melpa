@@ -1,1 +1,0 @@
-(jump-to-line :repo "ongaeshi/jump-to-line" :fetcher github)

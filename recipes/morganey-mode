@@ -1,2 +1,0 @@
-(morganey-mode :repo "morganey-lang/morganey-mode"
-               :fetcher github)

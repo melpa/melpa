@@ -1,3 +1,0 @@
-(ac-html :fetcher github
-	 :repo "zhangkaiyulw/ac-html"
-         :files (:defaults "completion-data"))

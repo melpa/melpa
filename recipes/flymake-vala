@@ -1,1 +1,0 @@
-(flymake-vala :repo "daniellawrence/flymake-vala" :fetcher github)

@@ -1,1 +1,0 @@
-(format-all :fetcher github :repo "lassik/emacs-format-all-the-code")

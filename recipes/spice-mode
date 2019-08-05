@@ -1,3 +1,0 @@
-(spice-mode
- :fetcher github
- :repo "stardiviner/spice-mode")

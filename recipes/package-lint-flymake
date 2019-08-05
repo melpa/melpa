@@ -1,1 +1,0 @@
-(package-lint-flymake :fetcher github :repo "purcell/package-lint" :files ("package-lint-flymake.el"))

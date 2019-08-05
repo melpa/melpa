@@ -1,2 +1,0 @@
-(devdocs :fetcher github
-         :repo "xuchunyang/DevDocs.el")

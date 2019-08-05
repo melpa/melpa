@@ -1,3 +1,0 @@
-(ejc-sql :repo "kostafey/ejc-sql"
-         :files (:defaults "project.clj" "src" "snippets")
-         :fetcher github)

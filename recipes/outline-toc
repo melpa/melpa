@@ -1,2 +1,0 @@
-(outline-toc :fetcher github
-             :repo "abingham/outline-toc.el")

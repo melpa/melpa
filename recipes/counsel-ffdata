@@ -1,1 +1,0 @@
-(counsel-ffdata :repo "cireu/counsel-ffdata" :fetcher github)

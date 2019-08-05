@@ -1,2 +1,0 @@
-(intellij-theme :fetcher gitlab
-                :repo "fommil/emacs-intellij-theme")

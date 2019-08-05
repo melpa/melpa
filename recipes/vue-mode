@@ -1,3 +1,0 @@
-(vue-mode
- :fetcher github
- :repo "AdamNiederer/vue-mode")

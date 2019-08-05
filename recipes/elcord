@@ -1,6 +1,0 @@
-(elcord
- :fetcher github
- :repo "Mstrodl/elcord"
- :files
- (:defaults
- "stdpipe.ps1"))

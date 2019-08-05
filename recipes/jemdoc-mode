@@ -1,1 +1,0 @@
-(jemdoc-mode :repo "drdv/jemdoc-mode" :fetcher github)

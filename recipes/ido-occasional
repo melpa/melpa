@@ -1,2 +1,0 @@
-(ido-occasional :repo "abo-abo/ido-occasional"
-                :fetcher github)

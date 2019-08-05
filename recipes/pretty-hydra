@@ -1,3 +1,0 @@
-(pretty-hydra :repo "jerrypnz/major-mode-hydra.el"
-              :fetcher github
-              :files ("pretty-hydra.el"))

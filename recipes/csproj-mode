@@ -1,4 +1,0 @@
-(csproj-mode
- :repo "omajid/csproj-mode"
- :fetcher github
- :files (:defaults "snippets"))

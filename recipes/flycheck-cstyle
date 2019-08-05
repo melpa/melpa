@@ -1,1 +1,0 @@
-(flycheck-cstyle :fetcher github :repo "alexmurray/flycheck-cstyle")

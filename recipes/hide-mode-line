@@ -1,1 +1,0 @@
-(hide-mode-line :repo "hlissner/emacs-hide-mode-line" :fetcher github)

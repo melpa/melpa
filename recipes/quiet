@@ -1,1 +1,0 @@
-(quiet :repo "zzkt/quiet" :fetcher github)

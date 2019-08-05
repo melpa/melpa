@@ -1,3 +1,0 @@
-(evil-tutor-ja :repo "kenjimyzk/evil-tutor-ja"
-	:fetcher github
-	:files (:defaults "tutor-ja.txt"))

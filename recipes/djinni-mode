@@ -1,2 +1,0 @@
-(djinni-mode :repo "danielmartin/djinni-mode"
-             :fetcher github)

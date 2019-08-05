@@ -1,1 +1,0 @@
-(magit-gerrit :repo "terranpro/magit-gerrit" :fetcher github)

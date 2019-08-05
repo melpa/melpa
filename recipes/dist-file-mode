@@ -1,1 +1,0 @@
-(dist-file-mode :fetcher github :repo "emacs-php/dist-file-mode.el")

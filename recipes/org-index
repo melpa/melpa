@@ -1,2 +1,0 @@
-(org-index :fetcher github
-	   :repo "marcIhm/org-index")

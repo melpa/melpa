@@ -1,1 +1,0 @@
-(runtests :fetcher github :repo "sunesimonsen/emacs-runtests")

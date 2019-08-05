@@ -1,1 +1,0 @@
-(benchmark-init :fetcher github :repo "dholm/benchmark-init-el")

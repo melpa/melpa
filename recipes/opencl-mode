@@ -1,2 +1,0 @@
-(opencl-mode :fetcher github
-	     :repo "salmanebah/opencl-mode")

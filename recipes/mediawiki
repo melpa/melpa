@@ -1,1 +1,0 @@
-(mediawiki :repo "hexmode/mediawiki-el" :fetcher github)

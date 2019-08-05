@@ -1,2 +1,0 @@
-(mu4e-jump-to-list :repo "wavexx/mu4e-jump-to-list.el"
-                   :fetcher gitlab)

@@ -1,1 +1,0 @@
-(dash-functional :fetcher github :repo "magnars/dash.el" :files ("dash-functional.el"))

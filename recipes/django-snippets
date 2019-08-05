@@ -1,1 +1,0 @@
-(django-snippets :fetcher github :repo "myfreeweb/django-mode" :files ("django-snippets.el" "snippets"))

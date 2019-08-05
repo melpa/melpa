@@ -1,3 +1,0 @@
-(flex-isearch
- :fetcher bitbucket
- :repo "jpkotta/flex-isearch")

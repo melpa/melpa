@@ -1,3 +1,0 @@
-(poly-org
- :fetcher github
- :repo "polymode/poly-org")

@@ -1,1 +1,0 @@
-(org2blog :repo "org2blog/org2blog" :fetcher github)

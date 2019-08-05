@@ -1,2 +1,0 @@
-(lcb-mode :repo "peter-b/lcb-mode"
-          :fetcher github)

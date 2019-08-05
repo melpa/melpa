@@ -1,1 +1,0 @@
-(lognav-mode :fetcher bitbucket :repo "ellisvelo/lognav-mode")

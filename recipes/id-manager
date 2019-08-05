@@ -1,2 +1,0 @@
-(id-manager :fetcher github
-	    :repo "kiwanami/emacs-id-manager")

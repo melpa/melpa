@@ -1,3 +1,0 @@
-(info-buffer
- :fetcher github
- :repo "llvilanova/info-buffer")

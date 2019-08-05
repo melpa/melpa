@@ -1,2 +1,0 @@
-(viking-mode :repo "TLINDEN/viking-mode" :fetcher github)
-

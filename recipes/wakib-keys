@@ -1,3 +1,0 @@
-(wakib-keys
- :repo "darkstego/wakib-keys"
- :fetcher github)

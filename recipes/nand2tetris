@@ -1,3 +1,0 @@
-(nand2tetris :fetcher github
-             :repo "CestDiego/nand2tetris.el"
-             :files ("nand2tetris.el" "nand2tetris-core.el" "snippets"))

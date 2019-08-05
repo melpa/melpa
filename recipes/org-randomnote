@@ -1,2 +1,0 @@
-(org-randomnote :fetcher github
-                 :repo "mwfogleman/org-randomnote")

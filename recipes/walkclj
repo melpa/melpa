@@ -1,1 +1,0 @@
-(walkclj :repo "plexus/walkclj" :fetcher github)

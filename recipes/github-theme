@@ -1,3 +1,0 @@
-(github-theme
- :repo "philiparvidsson/GitHub-Theme-for-Emacs"
- :fetcher github)

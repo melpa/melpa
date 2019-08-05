@@ -1,3 +1,0 @@
-(iss-mode
- :repo "rasmus-toftdahl-olesen/iss-mode"
- :fetcher github)

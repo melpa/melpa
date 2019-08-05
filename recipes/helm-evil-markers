@@ -1,3 +1,0 @@
-(helm-evil-markers
- :repo "xueeinstein/helm-evil-markers"
- :fetcher github)

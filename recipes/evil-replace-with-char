@@ -1,1 +1,0 @@
-(evil-replace-with-char :repo "ninrod/evil-replace-with-char" :fetcher github)

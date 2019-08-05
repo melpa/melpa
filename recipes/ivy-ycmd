@@ -1,2 +1,0 @@
-(ivy-ycmd :fetcher github
-          :repo "abingham/emacs-ivy-ycmd")

@@ -1,3 +1,0 @@
-(go-gopath
- :repo "iced/go-gopath"
- :fetcher github)

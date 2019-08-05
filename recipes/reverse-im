@@ -1,1 +1,0 @@
-(reverse-im :repo "a13/reverse-im.el" :fetcher github)

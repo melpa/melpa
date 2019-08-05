@@ -1,5 +1,0 @@
-(vdm-snippets
- :fetcher github
- :repo "peterwvj/vdm-mode"
- :files ("vdm-snippets.el"
-         "snippets"))

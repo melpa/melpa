@@ -1,1 +1,0 @@
-(python-environment :repo "tkf/emacs-python-environment" :fetcher github)

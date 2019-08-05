@@ -1,1 +1,0 @@
-(org-dropbox :fetcher github :repo "heikkil/org-dropbox")

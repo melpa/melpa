@@ -1,1 +1,0 @@
-(robe :repo "dgutov/robe" :fetcher github :files ("*robe.el" "lib"))

@@ -1,2 +1,0 @@
-(extmap :repo "doublep/extmap"
-        :fetcher github)

@@ -1,3 +1,0 @@
-(pamparam :repo "abo-abo/pamparam"
-          :fetcher github
-          :files ("pamparam.el" "doc"))

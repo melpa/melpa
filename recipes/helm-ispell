@@ -1,1 +1,0 @@
-(helm-ispell :repo "syohex/emacs-helm-ispell" :fetcher github)

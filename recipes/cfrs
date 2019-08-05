@@ -1,3 +1,0 @@
-(cfrs
- :repo "Alexander-Miller/cfrs"
- :fetcher github)

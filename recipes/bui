@@ -1,1 +1,0 @@
-(bui :repo "alezost/bui.el" :fetcher github)

@@ -1,1 +1,0 @@
-(ob-mermaid :repo "arnm/ob-mermaid" :fetcher github)

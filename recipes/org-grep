@@ -1,1 +1,0 @@
-(org-grep :fetcher github :repo "emacsorphanage/org-grep")

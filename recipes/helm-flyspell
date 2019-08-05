@@ -1,2 +1,0 @@
-(helm-flyspell :repo "pronobis/helm-flyspell"
-               :fetcher github)

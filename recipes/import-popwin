@@ -1,1 +1,0 @@
-(import-popwin :repo "syohex/emacs-import-popwin" :fetcher github)

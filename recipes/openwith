@@ -1,3 +1,0 @@
-(openwith
- :fetcher bitbucket
- :repo "jpkotta/openwith")

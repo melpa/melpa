@@ -1,1 +1,0 @@
-(magit-gh-pulls :fetcher github :repo "sigma/magit-gh-pulls")

@@ -1,4 +1,0 @@
-(ewal
- :fetcher gitlab
- :repo "jjzmajic/ewal"
- :files ("ewal.el"))

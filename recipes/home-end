@@ -1,3 +1,0 @@
-(home-end
-  :fetcher github
-  :repo "Boruch-Baum/emacs-home-end")

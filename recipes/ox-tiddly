@@ -1,5 +1,0 @@
-(ox-tiddly
- :fetcher github
- :repo "dfeich/org8-wikiexporters"
- :files ("ox-tiddly.el")
- )

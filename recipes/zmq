@@ -1,4 +1,0 @@
-(zmq
- :fetcher github
- :repo "dzop/emacs-zmq"
- :files (:defaults "Makefile" "src"))

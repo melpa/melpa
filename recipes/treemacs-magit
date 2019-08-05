@@ -1,4 +1,0 @@
-(treemacs-magit
- :fetcher github
- :repo "Alexander-Miller/treemacs"
- :files ("src/extra/treemacs-magit.el"))

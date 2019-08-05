@@ -1,3 +1,0 @@
-(py-isort
- :repo "paetzke/py-isort.el"
- :fetcher github)

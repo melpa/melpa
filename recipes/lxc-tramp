@@ -1,3 +1,0 @@
-(lxc-tramp
- :repo "montag451/lxc-tramp"
- :fetcher github)

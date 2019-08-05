@@ -1,3 +1,0 @@
-(pfuture
- :repo "Alexander-Miller/pfuture"
- :fetcher github)

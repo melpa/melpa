@@ -1,2 +1,0 @@
-(mu4e-query-fragments :repo "wavexx/mu4e-query-fragments.el"
-                      :fetcher gitlab)

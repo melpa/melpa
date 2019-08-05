@@ -1,1 +1,0 @@
-(aws-ec2 :fetcher github :repo "Yuki-Inoue/aws.el")

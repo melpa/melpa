@@ -1,3 +1,0 @@
-(ttl-mode
- :fetcher bitbucket
- :repo "nxg/ttl-mode")

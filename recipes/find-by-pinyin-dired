@@ -1,2 +1,0 @@
-(find-by-pinyin-dired :fetcher github
-                      :repo "redguardtoo/find-by-pinyin-dired")

@@ -1,3 +1,0 @@
-(yatemplate
- :fetcher github
- :repo "mineo/yatemplate")

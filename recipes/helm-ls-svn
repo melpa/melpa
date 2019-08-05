@@ -1,1 +1,0 @@
-(helm-ls-svn :fetcher github :repo "emacsmirror/helm-ls-svn")

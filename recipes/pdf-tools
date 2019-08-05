@@ -1,8 +1,0 @@
-(pdf-tools
- :fetcher github
- :repo "politza/pdf-tools"
- :files ("lisp/*.el"
-         "README"
-         ("build" "Makefile")
-         ("build" "server")
-         (:exclude "lisp/tablist.el" "lisp/tablist-filter.el")))

@@ -1,1 +1,0 @@
-(terraform-mode :repo "syohex/emacs-terraform-mode" :fetcher github)

@@ -1,2 +1,0 @@
-(gruber-darker-theme :repo "rexim/gruber-darker-theme"
-                     :fetcher github)

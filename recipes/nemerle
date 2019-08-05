@@ -1,1 +1,0 @@
-(nemerle :fetcher github :repo "rsdn/nemerle" :files ("misc/nemerle.el"))

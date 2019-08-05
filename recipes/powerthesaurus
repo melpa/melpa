@@ -1,3 +1,0 @@
-(powerthesaurus
- :repo "SavchenkoValeriy/emacs-powerthesaurus"
- :fetcher github)

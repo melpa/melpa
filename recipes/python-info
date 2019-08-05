@@ -1,3 +1,0 @@
-(python-info
- :repo "Wilfred/python-info"
- :fetcher github)

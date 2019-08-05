@@ -1,1 +1,0 @@
-(ameba :fetcher github :repo "veelenga/ameba.el" :files ("ameba.el"))

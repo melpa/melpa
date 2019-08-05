@@ -1,2 +1,0 @@
-(diary-manager :fetcher github
-               :repo "raxod502/diary-manager")

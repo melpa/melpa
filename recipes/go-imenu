@@ -1,3 +1,0 @@
-(go-imenu
- :repo "brantou/go-imenu.el"
- :fetcher github)

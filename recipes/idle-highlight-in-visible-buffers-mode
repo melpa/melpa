@@ -1,1 +1,0 @@
-(idle-highlight-in-visible-buffers-mode :repo "ignacy/idle-highlight-in-visible-buffers-mode" :fetcher github)

@@ -1,1 +1,0 @@
-(dired-single :fetcher github :repo "crocket/dired-single")

@@ -1,8 +1,0 @@
-(treemacs
- :fetcher github
- :repo "Alexander-Miller/treemacs"
- :files (:defaults
-         "icons"
-         "src/elisp/treemacs*.el"
-         "src/scripts/treemacs*.py"
-         (:exclude "src/extra/*")))

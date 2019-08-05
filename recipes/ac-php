@@ -1,1 +1,0 @@
-(ac-php :repo "xcwen/ac-php" :fetcher github :files ("ac-php.el" ))

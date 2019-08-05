@@ -1,3 +1,0 @@
-(taskpaper-mode
- :repo "saf-dmitry/taskpaper-mode"
- :fetcher github)

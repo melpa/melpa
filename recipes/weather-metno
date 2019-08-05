@@ -1,1 +1,0 @@
-(weather-metno :fetcher github :repo "ruediger/weather-metno-el")

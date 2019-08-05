@@ -1,2 +1,0 @@
-(org-rich-yank :fetcher github
-               :repo "unhammer/org-rich-yank")

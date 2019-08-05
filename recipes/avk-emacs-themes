@@ -1,2 +1,0 @@
-(avk-emacs-themes :fetcher github
-                  :repo "avkoval/avk-emacs-themes")

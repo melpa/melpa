@@ -1,3 +1,0 @@
-(org-pivotal
- :fetcher github
- :repo "org-pivotal/org-pivotal")

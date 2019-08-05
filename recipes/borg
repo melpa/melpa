@@ -1,3 +1,0 @@
-(borg :fetcher github
-      :repo "emacscollective/borg"
-      :files (:defaults "borg.mk"))

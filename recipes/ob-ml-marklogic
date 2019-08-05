@@ -1,1 +1,0 @@
-(ob-ml-marklogic :fetcher github :repo "ndw/ob-ml-marklogic")

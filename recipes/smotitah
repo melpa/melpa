@@ -1,4 +1,0 @@
-(smotitah :repo "laynor/smotitah"
-          :fetcher github
-          :files ("*.el" "templates"))
-

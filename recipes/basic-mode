@@ -1,4 +1,0 @@
-(basic-mode
- :repo "dykstrom/basic-mode"
- :fetcher github
- :files ("src/*.el"))

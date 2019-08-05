@@ -1,2 +1,0 @@
-(gnus-x-gm-raw :repo "aki2o/gnus-x-gm-raw"
-               :fetcher github)

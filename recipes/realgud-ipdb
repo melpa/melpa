@@ -1,5 +1,0 @@
-(realgud-ipdb
- :fetcher github
- :repo "realgud/realgud-ipdb"
- :files (:defaults 
-         ("ipdb" "ipdb/*.el")))

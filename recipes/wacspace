@@ -1,3 +1,0 @@
-(wacspace
- :fetcher github
- :repo "shosti/wacspace.el")

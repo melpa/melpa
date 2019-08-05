@@ -1,2 +1,0 @@
-(org-clock-today :fetcher github
-                 :repo "mallt/org-clock-today-mode")

@@ -1,1 +1,0 @@
-(magit-popup :fetcher github :repo "magit/magit-popup")

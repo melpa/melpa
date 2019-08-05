@@ -1,3 +1,0 @@
-(dpkg-dev-el :fetcher git
-	     :url "https://salsa.debian.org/emacsen-team/dpkg-dev-el.git"
-	     :old-names (debian-changelog-mode))

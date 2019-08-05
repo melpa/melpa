@@ -1,2 +1,0 @@
-(embrace :repo "cute-jumper/embrace.el"
-         :fetcher github)

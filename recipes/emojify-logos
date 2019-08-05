@@ -1,1 +1,0 @@
-(emojify-logos :fetcher github :repo "mxgoldstein/emojify-logos" :files (:defaults "logos"))

@@ -1,2 +1,0 @@
-(counsel-notmuch :fetcher github
-              :repo "fuxialexander/counsel-notmuch")

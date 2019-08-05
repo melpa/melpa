@@ -1,2 +1,0 @@
-(wotd :repo "cute-jumper/emacs-word-of-the-day"
-      :fetcher github)

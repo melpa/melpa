@@ -1,3 +1,0 @@
-(helm-catkin
- :fetcher github
- :repo "gollth/helm-catkin")

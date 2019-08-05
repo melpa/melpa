@@ -1,1 +1,0 @@
-(org-repo-todo :repo "waymondo/org-repo-todo" :fetcher github)

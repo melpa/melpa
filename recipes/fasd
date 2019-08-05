@@ -1,1 +1,0 @@
-(fasd :url "https://framagit.org/steckerhalter/emacs-fasd.git" :fetcher git)

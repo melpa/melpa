@@ -1,1 +1,0 @@
-(rust-auto-use :repo "vmalloc/rust-auto-use.el" :fetcher github)

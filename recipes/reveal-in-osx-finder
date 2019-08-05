@@ -1,3 +1,0 @@
-(reveal-in-osx-finder :repo "kaz-yos/reveal-in-osx-finder"
-                      :fetcher github
-                      :old-names (reveal-in-finder))

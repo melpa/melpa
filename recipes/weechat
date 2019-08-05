@@ -1,2 +1,0 @@
-(weechat :fetcher github
-         :repo "the-kenny/weechat.el")

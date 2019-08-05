@@ -1,3 +1,0 @@
-(copyit :repo "zonuexe/emacs-copyit"
-        :fetcher github
-        :files ("copyit.el"))

@@ -1,1 +1,0 @@
-(org-tracktable :fetcher github :repo "tty-tourist/org-tracktable")

@@ -1,3 +1,0 @@
-(motion-mode :fetcher github
-             :repo "ainame/motion-mode"
-             :files ("*.el" "bin" "lib"))

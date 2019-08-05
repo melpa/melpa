@@ -1,2 +1,0 @@
-(browse-kill-ring :repo "browse-kill-ring/browse-kill-ring" :fetcher github)
-

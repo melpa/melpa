@@ -1,5 +1,0 @@
-(realgud-lldb
- :fetcher github
- :repo "realgud/realgud-lldb"
- :files (:defaults
-         ("lldb" "lldb/*.el")))

@@ -1,3 +1,0 @@
-(tql-mode
-  :fetcher github
-  :repo "tiros-dev/tql-mode")

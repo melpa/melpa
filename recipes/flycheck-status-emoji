@@ -1,3 +1,0 @@
-(flycheck-status-emoji
- :fetcher github
- :repo "liblit/flycheck-status-emoji")

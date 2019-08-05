@@ -1,4 +1,0 @@
-(treemacs-icons-dired
- :fetcher github
- :repo "Alexander-Miller/treemacs"
- :files ("src/extra/treemacs-icons-dired.el"))

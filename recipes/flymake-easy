@@ -1,1 +1,0 @@
-(flymake-easy :fetcher github :repo "purcell/flymake-easy")

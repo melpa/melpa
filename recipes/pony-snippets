@@ -1,4 +1,0 @@
-(pony-snippets
- :repo "SeanTAllen/pony-snippets"
- :fetcher github
- :files (:defaults "snippets"))

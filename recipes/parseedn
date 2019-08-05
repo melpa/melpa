@@ -1,1 +1,0 @@
-(parseedn :repo "clojure-emacs/parseedn" :fetcher github)

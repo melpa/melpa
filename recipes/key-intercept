@@ -1,1 +1,0 @@
-(key-intercept :repo "tarao/key-intercept-el" :fetcher github)

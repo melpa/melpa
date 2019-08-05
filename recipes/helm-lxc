@@ -1,3 +1,0 @@
-(helm-lxc
- :repo "montag451/helm-lxc"
- :fetcher github)

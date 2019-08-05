@@ -1,134 +1,72 @@
-TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
+-include config.mk
 
--include ./config.mk
+PKG = package-build
 
-SHELL         := bash
-EMACS_COMMAND ?= emacs
+ELS   = $(PKG).el
+ELS  += package-build-badges.el
+ELS  += package-recipe.el
+ELS  += package-recipe-mode.el
+ELCS  = $(ELS:.el=.elc)
 
-PKGDIR  := packages
-RCPDIR  := recipes
-HTMLDIR := html
-WORKDIR := working
-SLEEP   ?= 0
-SANDBOX := sandbox
-STABLE  ?= nil
-ifneq ($(STABLE), nil)
-PKGDIR  := packages-stable
-HTMLDIR := html-stable
-endif
+DEPS  =
 
-LISP_CONFIG ?= '(progn\
-  (setq package-build-working-dir "$(TOP)/$(WORKDIR)/")\
-  (setq package-build-archive-dir "$(TOP)/$(PKGDIR)/")\
-  (setq package-build-recipes-dir "$(TOP)/$(RCPDIR)/")\
-  (setq package-build-stable $(STABLE))\
-  (setq package-build-write-melpa-badge-images t)\
-  (setq package-build-timeout-secs 600))'
+EMACS      ?= emacs
+EMACS_ARGS ?=
 
-LOAD_PATH ?= $(TOP)/package-build
+LOAD_PATH  ?= $(addprefix -L ../,$(DEPS))
+LOAD_PATH  += -L .
 
-EVAL := $(EMACS_COMMAND) --no-site-file --batch \
-$(addprefix -L ,$(LOAD_PATH)) \
---eval $(LISP_CONFIG) \
---load package-build.el \
---eval
+all: lisp
 
-TIMEOUT := $(shell which timeout && echo "-k 60 600")
+help:
+	$(info make [all|lisp]   - generate byte-code and autoloads)
+	$(info make clean        - remove generated files)
+	@printf "\n"
 
-all: packages packages/archive-contents json index
+lisp: $(ELCS) loaddefs
 
-## General rules
-html: index
-index: json
-	@echo " • Building html index ..."
-	$(MAKE) -C $(HTMLDIR)
+loaddefs: $(PKG)-autoloads.el
 
+%.elc: %.el
+	@printf "Compiling $<\n"
+	@$(EMACS) -Q --batch \
+	--load eieio \
+	--eval "(put 'object-class-fast 'byte-obsolete-info nil)" \
+	--load eieio-compat \
+	--eval "(put 'defmethod 'byte-obsolete-info nil)" \
+	--eval "(put 'defgeneric 'byte-obsolete-info nil)" \
+	$(EMACS_ARGS) $(LOAD_PATH) -f batch-byte-compile $<
 
-## Cleanup rules
-clean-working:
-	@echo " • Removing package sources ..."
-	@git clean -dffX $(WORKDIR)/.
+CLEAN  = $(ELCS) $(PKG)-autoloads.el
 
-clean-packages:
-	@echo " • Removing packages ..."
-	@git clean -dffX $(PKGDIR)/.
+clean:
+	@printf "Cleaning...\n"
+	@rm -rf $(CLEAN)
 
-clean-json:
-	@echo " • Removing json files ..."
-	@-rm -vf $(HTMLDIR)/archive.json $(HTMLDIR)/recipes.json
+define LOADDEFS_TMPL
+;;; $(PKG)-autoloads.el --- automatically extracted autoloads
+;;
+;;; Code:
+(add-to-list 'load-path (directory-file-name \
+(or (file-name-directory #$$) (car load-path))))
+
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; $(PKG)-autoloads.el ends here
+endef
+export LOADDEFS_TMPL
+#'
 
-clean-sandbox:
-	@echo " • Removing sandbox files ..."
-	@if [ -d '$(SANDBOX)' ]; then \
-		rm -rfv '$(SANDBOX)/elpa'; \
-		rmdir '$(SANDBOX)'; \
-	fi
-
-pull-package-build:
-	git subtree pull --squash -P package-build package-build master
-
-add-package-build-remote:
-	git remote add package-build git@github.com:melpa/package-build.git
-
-clean: clean-working clean-packages clean-json clean-sandbox
-
-packages: $(RCPDIR)/*
-
-packages/archive-contents: .FORCE
-	@echo " • Updating $@ ..."
-	@$(EVAL) '(package-build-dump-archive-contents)'
-
-cleanup:
-	@$(EVAL) '(package-build-cleanup)'
-
-## Json rules
-html/archive.json: $(PKGDIR)/archive-contents
-	@echo " • Building $@ ..."
-	@$(EVAL) '(package-build-archive-alist-as-json "html/archive.json")'
-
-html/recipes.json: $(RCPDIR)/.dirstamp
-	@echo " • Building $@ ..."
-	@$(EVAL) '(package-build-recipe-alist-as-json "html/recipes.json")'
-
-html-stable/archive.json: $(PKGDIR)/archive-contents
-	@echo " • Building $@ ..."
-	@$(EVAL) '(package-build-archive-alist-as-json "html-stable/archive.json")'
-
-html-stable/recipes.json: $(RCPDIR)/.dirstamp
-	@echo " • Building $@ ..."
-	@$(EVAL) '(package-build-recipe-alist-as-json "html-stable/recipes.json")'
-
-json: $(HTMLDIR)/archive.json $(HTMLDIR)/recipes.json
-
-$(RCPDIR)/.dirstamp: .FORCE
-	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] \
-	&& touch $@ || exit 0
-
-
-## Recipe rules
-$(RCPDIR)/%: .FORCE
-	@echo " • Building package $(@F) ..."
-	@- $(TIMEOUT) $(EVAL) "(package-build-archive \"$(@F)\")" \
-	&& echo " ✓ Success:" \
-	&& ls -lsh $(PKGDIR)/$(@F)-*
-	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." && sleep $(SLEEP) || true
-	@echo
-
-
-## Sandbox
-sandbox: packages/archive-contents
-	@echo " • Building sandbox ..."
-	@mkdir -p $(SANDBOX)
-	@$(EMACS_COMMAND) -Q \
-		--eval '(setq user-emacs-directory (file-truename "$(SANDBOX)"))' \
-		-l package \
-		--eval "(add-to-list 'package-archives '(\"gnu\" . \"http://elpa.gnu.org/packages/\") t)" \
-		--eval "(add-to-list 'package-archives '(\"melpa\" . \"https://melpa.org/packages/\") t)" \
-		--eval "(add-to-list 'package-archives '(\"sandbox\" . \"$(TOP)/$(PKGDIR)/\") t)" \
-		--eval "(package-refresh-contents)" \
-		--eval "(package-initialize)" \
-		--eval '(setq sandbox-install-package "$(INSTALL)")' \
-		--eval "(unless (string= \"\" sandbox-install-package) (package-install (intern sandbox-install-package)))"
-
-.PHONY: clean build index html json sandbox
-.FORCE:
+$(PKG)-autoloads.el: $(ELS)
+	@printf "Generating $@\n"
+	@printf "%s" "$$LOADDEFS_TMPL" > $@
+	@$(EMACS) -Q --batch --eval "(progn\
+	(setq make-backup-files nil)\
+	(setq vc-handled-backends nil)\
+	(setq default-directory (file-truename default-directory))\
+	(setq generated-autoload-file (expand-file-name \"$@\"))\
+	(setq find-file-visit-truename t)\
+	(update-directory-autoloads default-directory))"

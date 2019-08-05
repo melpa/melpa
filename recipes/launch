@@ -1,4 +1,0 @@
-(launch
- :fetcher github
- :repo "sfllaw/emacs-launch"
- :files ("launch.el"))

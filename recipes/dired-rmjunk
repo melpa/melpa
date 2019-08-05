@@ -1,1 +1,0 @@
-(dired-rmjunk :url "https://git.sr.ht/~jakob/dired-rmjunk" :fetcher git)

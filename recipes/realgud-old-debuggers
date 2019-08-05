@@ -1,8 +1,0 @@
-(realgud-old-debuggers
- :fetcher github
- :repo "realgud/realgud-old-debuggers"
- :files ("realgud-old-debuggers.el"
-         ("pydb" "pydb/*.el")
-         ("pydbgr" "pydbgr/*.el")
-         ("trepan8" "trepan8/*.el")
-         ("trepanx" "trepanx/*.el")))

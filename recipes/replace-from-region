@@ -1,1 +1,0 @@
-(replace-from-region :repo "rubikitch/replace-from-region" :fetcher github)

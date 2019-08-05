@@ -1,3 +1,0 @@
-(helm-migemo :repo "emacs-jp/helm-migemo"
-             :fetcher github)
-

@@ -1,3 +1,0 @@
-(gitlab-ci-mode
- :fetcher gitlab
- :repo "joewreschnig/gitlab-ci-mode")

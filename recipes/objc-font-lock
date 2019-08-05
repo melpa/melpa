@@ -1,1 +1,0 @@
-(objc-font-lock :repo "Lindydancer/objc-font-lock" :fetcher github)

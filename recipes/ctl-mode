@@ -1,1 +1,0 @@
-(ctl-mode :fetcher github :repo "yyr/emacs-grads" :files ("ctl-mode.el"))

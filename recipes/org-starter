@@ -1,4 +1,0 @@
-(org-starter :repo "akirak/org-starter"
-     :fetcher github
-     :files (:defaults
-             (:exclude "counsel-org-starter.el" "helm-org-starter.el")))

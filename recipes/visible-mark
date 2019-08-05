@@ -1,3 +1,0 @@
-(visible-mark
- :repo "iankelling/visible-mark"
- :fetcher gitlab)

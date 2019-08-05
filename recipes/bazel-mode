@@ -1,1 +1,0 @@
-(bazel-mode :repo "codesuki/bazel-mode" :fetcher github)

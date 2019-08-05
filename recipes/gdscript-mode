@@ -1,4 +1,0 @@
-(gdscript-mode
- :fetcher github
- :repo "AdamBark/gdscript-mode")
- 

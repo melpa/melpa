@@ -1,1 +1,0 @@
-(jq-mode :repo "ljos/jq-mode" :fetcher github)

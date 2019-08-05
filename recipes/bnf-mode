@@ -1,2 +1,0 @@
-(bnf-mode :repo "sergeyklay/bnf-mode"
-          :fetcher github)

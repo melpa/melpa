@@ -1,1 +1,0 @@
-(multi-project :fetcher bitbucket :repo "ellisvelo/multi-project")

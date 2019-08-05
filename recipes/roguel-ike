@@ -1,3 +1,0 @@
-(roguel-ike :fetcher github
-            :repo "stevenremot/roguel-ike"
-            :files ("*.el" "roguel-ike" "roguel-ike-lib"))

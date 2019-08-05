@@ -1,3 +1,0 @@
-(helm-img
- :repo "l3msh0/helm-img"
- :fetcher github)

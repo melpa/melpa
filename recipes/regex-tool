@@ -1,1 +1,0 @@
-(regex-tool :fetcher github :repo "jwiegley/regex-tool")

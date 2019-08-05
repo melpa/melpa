@@ -1,1 +1,0 @@
-(grep-context :fetcher github :repo "mkcms/grep-context")

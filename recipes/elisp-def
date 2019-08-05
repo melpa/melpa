@@ -1,1 +1,0 @@
-(elisp-def :repo "Wilfred/elisp-def" :fetcher github)

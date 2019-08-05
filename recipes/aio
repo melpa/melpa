@@ -1,3 +1,0 @@
-(aio :fetcher github
-     :repo "skeeto/emacs-aio"
-     :files ("aio.el" "README.md" "UNLICENSE"))

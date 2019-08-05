@@ -1,1 +1,0 @@
-(keyswap :repo "hardenedapple/keyswap.el" :fetcher github)

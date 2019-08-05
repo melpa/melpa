@@ -1,4 +1,0 @@
-(ewal-evil-cursors
- :fetcher gitlab
- :repo "jjzmajic/ewal"
- :files ("evil-cursors/*.el"))

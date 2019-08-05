@@ -1,1 +1,0 @@
-(copy-file-on-save :fetcher github :repo "emacs-php/emacs-auto-deployment")

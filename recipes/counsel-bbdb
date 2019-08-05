@@ -1,1 +1,0 @@
-(counsel-bbdb :repo "redguardtoo/counsel-bbdb" :fetcher github)

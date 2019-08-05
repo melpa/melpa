@@ -1,1 +1,0 @@
-(erc-terminal-notifier :repo "julienXX/erc-terminal-notifier.el" :fetcher github)

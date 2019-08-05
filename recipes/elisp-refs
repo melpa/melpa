@@ -1,3 +1,0 @@
-(elisp-refs :repo "Wilfred/elisp-refs"
-            :fetcher github
-            :files (:defaults (:exclude "elisp-refs-bench.el")))

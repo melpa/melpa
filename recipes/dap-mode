@@ -1,1 +1,0 @@
-(dap-mode :repo "emacs-lsp/dap-mode" :fetcher github :files (:defaults "icons"))

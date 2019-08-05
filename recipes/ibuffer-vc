@@ -1,1 +1,0 @@
-(ibuffer-vc :repo "purcell/ibuffer-vc" :fetcher github)

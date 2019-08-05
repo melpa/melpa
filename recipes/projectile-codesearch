@@ -1,3 +1,0 @@
-(projectile-codesearch :fetcher github
-                       :repo "abingham/emacs-codesearch"
-                       :files ("projectile-codesearch.el"))

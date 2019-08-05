@@ -1,3 +1,0 @@
-(flycheck-tip
- :repo "yuutayamada/flycheck-tip"
- :fetcher github)

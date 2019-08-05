@@ -1,2 +1,0 @@
-(rake :repo "asok/rake"
-      :fetcher github)

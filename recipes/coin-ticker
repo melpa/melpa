@@ -1,1 +1,0 @@
-(coin-ticker :fetcher github :repo "eklitzke/coin-ticker-mode")

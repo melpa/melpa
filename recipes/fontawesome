@@ -1,3 +1,0 @@
-(fontawesome :repo "syohex/emacs-fontawesome"
-             :fetcher github
-             :old-names (emacs-fontawesome))

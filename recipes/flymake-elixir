@@ -1,1 +1,0 @@
-(flymake-elixir :repo "syl20bnr/flymake-elixir" :fetcher github)

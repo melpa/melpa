@@ -139,7 +139,8 @@ Otherwise do nothing."
 ;;; Version Handling
 
 (defun package-build--parse-time (str &optional regexp)
-  "Parse STR as a time, and format as a YYYYMMDD.HHMM string."
+  "Parse STR as a time, and format as a YYYYMMDD.HHMM string.
+Always use Coordinated Universal Time (UTC) for output string."
   (unless str
     (error "No valid timestamp found"))
   (setq str (substring-no-properties str))
@@ -156,8 +157,8 @@ Otherwise do nothing."
                    (concat (match-string 1 str) "-" (match-string 2 str) "-"
                            (match-string 3 str) " " (match-string 4 str))
                  str))))
-    (concat (format-time-string "%Y%m%d." time)
-            (format "%d" (string-to-number (format-time-string "%H%M" time))))))
+    (concat (format-time-string "%Y%m%d." time t)
+            (format "%d" (string-to-number (format-time-string "%H%M" time t))))))
 
 (defun package-build--find-version-newest (tags &optional regexp)
   "Find the newest version in TAGS matching REGEXP.
@@ -854,23 +855,21 @@ Do not use this alias elsewhere.")
     (dolist (name recipes)
       (let ((rcp (with-demoted-errors (package-recipe-lookup name))))
         (if rcp
-            (if (with-demoted-errors (package-build-archive name))
+            (if (with-demoted-errors (package-build-archive name) t)
                 (cl-incf success)
               (push name failed))
           (push name invalid))))
     (if (not (or invalid failed))
         (message "Successfully built all %s packages" total)
-      (message
-       (concat
-        (format "Successfully built %i of %s packages" success total)
-        (and invalid
-             (format "Did not built packages for %i invalid recipes:\n%s"
-                     (length invalid)
-                     (mapconcat (lambda (n) (concat "  " n)) invalid "\n")))
-        (and failed
-             (format "Building %i packages failed:\n%s"
-                     (length failed)
-                     (mapconcat (lambda (n) (concat "  " n)) invalid "\n")))))))
+      (message "Successfully built %i of %s packages" success total)
+      (when invalid
+        (message "Did not built packages for %i invalid recipes:\n%s"
+                 (length invalid)
+                 (mapconcat (lambda (n) (concat "  " n)) invalid "\n")))
+      (when failed
+        (message "Building %i packages failed:\n%s"
+                 (length failed)
+                 (mapconcat (lambda (n) (concat "  " n)) failed "\n")))))
   (package-build-cleanup))
 
 (defun package-build-cleanup ()

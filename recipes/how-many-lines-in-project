@@ -1,2 +1,0 @@
-(how-many-lines-in-project :fetcher github
-			   :repo "kaihaosw/how-many-lines-in-project")

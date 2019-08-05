@@ -1,2 +1,0 @@
-(flycheck-soar :repo "tszg/flycheck-soar"
-          :fetcher github)

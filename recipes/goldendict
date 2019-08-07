@@ -1,0 +1,1 @@
+(goldendict :fetcher github :repo "stardiviner/goldendict.el")

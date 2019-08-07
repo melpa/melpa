@@ -1,1 +1,0 @@
-(how-many-lines-in-project :fetcher github :repo "hiddenlotus/how-many-lines-in-project")

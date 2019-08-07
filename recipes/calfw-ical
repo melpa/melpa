@@ -1,0 +1,3 @@
+(calfw-ical :repo "kiwanami/emacs-calfw"
+            :fetcher github
+            :files ("calfw-ical.el"))

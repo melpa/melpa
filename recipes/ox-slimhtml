@@ -1,0 +1,1 @@
+(ox-slimhtml :fetcher github :repo "balddotcat/ox-slimhtml")

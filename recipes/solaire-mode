@@ -1,0 +1,1 @@
+(solaire-mode :repo "hlissner/emacs-solaire-mode" :fetcher github)

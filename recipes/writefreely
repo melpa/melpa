@@ -1,0 +1,1 @@
+(writefreely :repo "dangom/writefreely.el" :fetcher github)

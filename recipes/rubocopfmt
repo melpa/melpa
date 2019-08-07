@@ -1,0 +1,1 @@
+(rubocopfmt :fetcher github :repo "jimeh/rubocopfmt.el")

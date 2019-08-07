@@ -1,0 +1,4 @@
+(company-box
+ :fetcher github
+ :repo "sebastiencs/company-box"
+ :files (:defaults "images"))

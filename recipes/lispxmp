@@ -1,1 +1,1 @@
-(lispxmp :fetcher wiki)
+(lispxmp :fetcher github :repo "rubikitch/lispxmp")

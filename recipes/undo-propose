@@ -1,0 +1,1 @@
+(undo-propose :fetcher github :repo "jackkamm/undo-propose-el")

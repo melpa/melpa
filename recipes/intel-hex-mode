@@ -1,0 +1,2 @@
+(intel-hex-mode :fetcher github
+                :repo "mschuldt/intel-hex-mode")

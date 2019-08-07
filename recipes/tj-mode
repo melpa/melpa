@@ -1,1 +1,0 @@
-(tj-mode :repo "katspaugh/tj-mode" :fetcher github)

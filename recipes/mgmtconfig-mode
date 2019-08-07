@@ -1,0 +1,4 @@
+(mgmtconfig-mode
+ :fetcher github
+ :repo "purpleidea/mgmt"
+ :files ("misc/emacs/*.el"))

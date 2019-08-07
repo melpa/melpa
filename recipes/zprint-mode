@@ -1,0 +1,1 @@
+(zprint-mode :repo "pesterhazy/zprint-mode.el" :fetcher github)

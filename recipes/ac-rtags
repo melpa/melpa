@@ -1,0 +1,3 @@
+(ac-rtags :repo "Andersbakken/rtags"
+          :fetcher github
+          :files ("src/ac-rtags.el"))

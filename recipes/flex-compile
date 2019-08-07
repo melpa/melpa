@@ -1,0 +1,1 @@
+(flex-compile :fetcher github :repo "plandes/flex-compile")

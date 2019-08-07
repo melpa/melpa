@@ -1,0 +1,1 @@
+(show-eol :repo "elpa-host/show-eol" :fetcher github)

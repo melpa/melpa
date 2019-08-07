@@ -1,2 +1,0 @@
-(firebelly-theme :repo "startling/firebelly"
-                 :fetcher github)

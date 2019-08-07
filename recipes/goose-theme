@@ -1,1 +1,1 @@
-(goose-theme :repo "thwg/goose-theme" :fetcher github)
+(goose-theme :repo "tokenrove/goose-theme" :fetcher github)

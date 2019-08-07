@@ -1,0 +1,1 @@
+(ox-mdx-deck :fetcher github :repo "WolfeCub/ox-mdx-deck")

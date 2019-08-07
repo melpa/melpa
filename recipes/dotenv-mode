@@ -1,0 +1,3 @@
+(dotenv-mode
+  :repo "preetpalS/emacs-dotenv-mode"
+  :fetcher github)

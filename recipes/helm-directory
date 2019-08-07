@@ -1,0 +1,3 @@
+(helm-directory
+ :repo "masasam/emacs-helm-directory"
+ :fetcher github)

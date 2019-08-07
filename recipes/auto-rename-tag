@@ -1,0 +1,1 @@
+(auto-rename-tag :repo "elpa-host/auto-rename-tag" :fetcher github)

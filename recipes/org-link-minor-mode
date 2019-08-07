@@ -1,0 +1,1 @@
+(org-link-minor-mode :fetcher github :repo "seanohalpin/org-link-minor-mode")

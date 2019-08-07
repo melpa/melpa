@@ -1,3 +1,1 @@
-(dic-lookup-w3m
- :url "http://svn.osdn.jp/svnroot/dic-lookup-w3m/"
- :fetcher svn)
+(dic-lookup-w3m :fetcher github :repo "emacsorphanage/dic-lookup-w3m")

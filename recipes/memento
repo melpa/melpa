@@ -1,2 +1,0 @@
-(memento :repo "ehartc/memento"
-         :fetcher github)

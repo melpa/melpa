@@ -1,0 +1,1 @@
+(qt-pro-mode :fetcher github :repo "EricCrosson/qt-pro-mode")

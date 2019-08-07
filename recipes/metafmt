@@ -1,3 +1,0 @@
-(metafmt :repo "lvillani/metafmt"
-         :fetcher github
-         :files ("emacs/*.el"))

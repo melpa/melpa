@@ -1,0 +1,1 @@
+(mpdel :fetcher github :repo "mpdel/mpdel")

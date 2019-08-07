@@ -1,1 +1,1 @@
-(monochrome-theme :repo "fxn/monochrome-theme.el" :fetcher github)
+(monochrome-theme :fetcher github :repo "fxn/monochrome-theme.el")

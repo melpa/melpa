@@ -1,0 +1,3 @@
+(ob-blockdiag
+  :fetcher github
+  :repo "corpix/ob-blockdiag.el")

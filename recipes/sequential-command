@@ -1,1 +1,1 @@
-(sequential-command :fetcher wiki :files ("sequential-command.el" "sequential-command-config.el"))
+(sequential-command :fetcher github :repo "rubikitch/sequential-command")

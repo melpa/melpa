@@ -1,1 +1,0 @@
-(anything-git-files :fetcher github :repo "tarao/anything-git-files-el")

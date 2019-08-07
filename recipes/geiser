@@ -1,5 +1,5 @@
 (geiser
- :fetcher github
+ :fetcher gitlab
  :repo "jaor/geiser"
  :files ("elisp/*.el"
          "elisp/geiser-version.el.in"

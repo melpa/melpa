@@ -1,2 +1,0 @@
-(org-fstree :url "http://repo.or.cz/r/org-fstree.git" :fetcher git)
-

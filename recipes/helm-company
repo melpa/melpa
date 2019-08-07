@@ -1,1 +1,1 @@
-(helm-company :repo "manuel-uberti/helm-company" :fetcher github)
+(helm-company :repo "Sodel-the-Vociferous/helm-company" :fetcher github)

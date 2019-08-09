@@ -1,0 +1,2 @@
+(org-rifle :fetcher github :repo "alphapapa/org-rifle"
+           :files ("org-rifle.el"))

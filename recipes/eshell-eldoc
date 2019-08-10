@@ -1,0 +1,1 @@
+(eshell-eldoc :fetcher github :repo "defaultxr/eshell-eldoc")

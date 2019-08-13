@@ -1,1 +1,0 @@
-(clj-mvt-el :repo "davidneu/clj-mvt-el" :fetcher github)

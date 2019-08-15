@@ -1,0 +1,3 @@
+(json-process-client
+ :fetcher git
+ :url "https://gitlab.petton.fr/nico/json-process-client.git")

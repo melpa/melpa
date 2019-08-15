@@ -1,0 +1,1 @@
+(elispfl :repo "cireu/elispfl" :fetcher github)

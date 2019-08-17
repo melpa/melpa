@@ -1,0 +1,1 @@
+(auto-clang-format :repo "jrosdahl/auto-clang-format" :fetcher github)

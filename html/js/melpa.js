@@ -136,7 +136,8 @@
                 urlMatch(/(gitlab\.com\/[^\/]+\/[^.]+)/, "https://") ||
                 urlMatch(/^lp:(.*)/, "https://launchpad.net/") ||
                 urlMatch(/^(https?:\/\/code\.google\.com\/p\/[^\/]+\/)/) ||
-                urlMatch(/^(https?:\/\/[^.]+\.googlecode\.com\/)/));
+                urlMatch(/^(https?:\/\/[^.]+\.googlecode\.com\/)/) ||
+                urlMatch(/^(https?:\/\/git\..*)/));
       }
       return null;
     };

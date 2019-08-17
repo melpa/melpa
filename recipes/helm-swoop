@@ -1,1 +1,1 @@
-(helm-swoop :repo "ShingoFukuyama/helm-swoop" :fetcher github)
+(helm-swoop :fetcher github :repo "emacsorphanage/helm-swoop")

@@ -1,5 +1,3 @@
 (picolisp-mode
  :fetcher github
- :repo "flexibeast/picolisp-mode"
- :files ("picolisp-mode.el"
-         "eww.sh"))
+ :repo "flexibeast/picolisp-mode")

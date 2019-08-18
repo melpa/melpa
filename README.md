@@ -38,7 +38,7 @@ Enable installation of packages from MELPA by adding an entry to
 `package-archives` after `(require 'package)` and before the call to
 `package-initialize` in your `init.el` or `.emacs` file:
 
-```lisp
+```elisp
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
@@ -69,7 +69,7 @@ package-install` or similar.
 Instead of the messy code above, you can of course use something like
 the following instead:
 
-```lisp
+```elisp
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
@@ -124,7 +124,7 @@ Packages are specified by files in the `recipes` directory.  You can
 contribute a new package by adding a new file under `recipes` using
 the following form (`[...]` denotes optional or conditional values),
 
-```lisp
+```elisp
 (<package-name>
  :fetcher [git|github|gitlab|hg|bitbucket]
  [:url "<repo url>"]
@@ -215,7 +215,7 @@ contains two files:
 Since there is only one `.el` file, this package only needs the `:url`
 and `:fetcher` specified,
 
-```lisp
+```elisp
 (smex :repo "nonsequitur/smex" :fetcher github)
 ```
 
@@ -232,19 +232,19 @@ The three packages have to be declared in three separate files
 `recipes/mypackage`, `recipes/helm-mypackage`, and
 `recipes/persp-mypackage`:
 
-```lisp
+```elisp
 (mypackage :repo "someuser/mypackage"
            :fetcher github
            :files ("mypackage.el"))
 ```
 
-```lisp
+```elisp
 (helm-mypackage :repo "someuser/mypackage"
                 :fetcher github
                 :files ("helm-mypackage.el"))
 ```
 
-```lisp
+```elisp
 (persp-mypackage :repo "someuser/mypackage"
                  :fetcher github
                  :files ("persp-mypackage.el"))
@@ -258,7 +258,7 @@ sub-directories need to be explicitly set.
 
 Consider the `flymake-perlcritic` recipe,
 
-```lisp
+```elisp
 (flymake-perlcritic :repo "illusori/emacs-flymake-perlcritic"
                     :fetcher github
                     :files ("*.el" ("bin" "bin/flymake_perlcritic")))
@@ -278,7 +278,7 @@ Notice that specifying an entry in `:files` that is a list takes the
 first element to be the destination directory.  These can be embedded
 further, such as the following---hypothetical---entry for `:files`,
 
-```lisp
+```elisp
 ("*.el" ("snippets"
          ("html-mode" "snippets/html-mode/*")
          ("python-mode" "snippets/python-mode/*")))
@@ -302,7 +302,7 @@ But a better solution, given that we probably want to copy the
 *entire* `snippets` directory to the root of the package, we could
 just specify that directory.  Consider the `pony-mode` recipe,
 
-```lisp
+```elisp
 (pony-mode
  :repo "davidmiller/pony-mode"
  :fetcher github

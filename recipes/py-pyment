@@ -1,4 +1,4 @@
-(<package-name>
+(py-pyment
  :fetcher github
  :repo "humitos/py-cmd-buffer.el"
  :files ("py-pyment.el")

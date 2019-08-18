@@ -1,0 +1,3 @@
+(kconfig-mode
+ :fetcher github
+ :repo "delaanthonio/kconfig-mode")

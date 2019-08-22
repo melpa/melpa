@@ -1,4 +1,4 @@
-(es7-snippets
+(js-react-redux-yasnippets
  :fetcher github
  :repo "sooqua/js-react-redux-yasnippets"
  :files ("*.el" "snippets"))

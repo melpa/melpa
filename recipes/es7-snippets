@@ -1,5 +1,4 @@
 (es7-snippets
  :fetcher github
- :url "https://github.com/sooqua/es7-snippets"
  :repo "sooqua/es7-snippets"
  :files ("*.el" "snippets"))

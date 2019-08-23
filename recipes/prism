@@ -1,0 +1,1 @@
+(prism :fetcher github :repo "alphapapa/prism.el")

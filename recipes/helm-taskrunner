@@ -1,0 +1,1 @@
+(helm-taskrunner :fetcher github :repo "emacs-taskrunner/helm-taskrunner")

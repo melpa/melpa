@@ -1,0 +1,1 @@
+(ivy-taskrunner :fetcher github :repo "emacs-taskrunner/ivy-taskrunner")

@@ -1,0 +1,1 @@
+(rev-mode :fetcher github :repo "gaballench/rev-mode" :branch "release")

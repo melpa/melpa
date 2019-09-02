@@ -1,0 +1,3 @@
+(balanced-windows
+ :fetcher github
+ :repo "wbolster/emacs-balanced-windows")

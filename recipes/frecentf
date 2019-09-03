@@ -1,3 +1,2 @@
 (frecentf :fetcher git
-	  :url "https://git.launchpad.net/frecentf.el"
-	  :commit "origin/master")
+	  :url "https://git.launchpad.net/frecentf.el")

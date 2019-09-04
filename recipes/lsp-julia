@@ -1,0 +1,5 @@
+(lsp-julia :fetcher github
+           :repo "gdkrmr/lsp-julia"
+           :files ("*.el"
+                   "README.org"
+                   "languageserver"))

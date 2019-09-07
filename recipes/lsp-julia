@@ -1,5 +1,5 @@
 (lsp-julia :fetcher github
-           :repo "gdkrmr/lsp-julia"
+           :repo "non-Jedi/lsp-julia"
            :files ("*.el"
                    "README.org"
                    "languageserver"))

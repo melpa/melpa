@@ -1,0 +1,1 @@
+(amixer :fetcher github :repo "remvee/amixer-el")

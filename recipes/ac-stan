@@ -1,0 +1,6 @@
+(ac-stan
+ :fetcher github
+ :repo "stan-dev/stan-mode"
+ :files ("ac-stan/*.el"
+         ("ac-dict" "ac-stan/ac-dict/stan-mode")
+         (:exclude "ac-stan/test-*.el")))

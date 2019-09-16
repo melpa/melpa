@@ -1,1 +1,1 @@
-(phps-mode :repo "cjohansson/emacs-phps-mode" :fetcher github (:exclude ".dir-locals.el" "test.el" "tests.el" "*-test.el" "*-tests.el" "phps-mode-test*"))
+(phps-mode :fetcher github :repo "cjohansson/emacs-phps-mode" (:exclude ".dir-locals.el" "test.el" "tests.el" "*-test.el" "*-tests.el" "phps-mode-test-*"))

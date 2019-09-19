@@ -1,0 +1,3 @@
+(rms-quote :fetcher github :repo "m0n73/rms-quote" 
+           :files (:defaults "rms-quotes.list"))
+ 

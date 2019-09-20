@@ -1,4 +1,4 @@
 (scala-mode
- :repo "ensime/emacs-scala-mode"
+ :repo "hvesalai/scala-mode2"
  :branch "master"
  :fetcher github)

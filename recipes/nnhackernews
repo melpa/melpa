@@ -1,3 +1,2 @@
 (nnhackernews :repo "dickmao/nnhackernews"
-              :fetcher github
-              :files ("nnhackernews.el"))
+              :fetcher github)

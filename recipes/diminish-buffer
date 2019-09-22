@@ -1,1 +1,1 @@
-(diminish-buffer :repo "jcs090218/diminish-buffer" :fetcher github)
+(diminish-buffer :repo "elpa-host/diminish-buffer" :fetcher github)

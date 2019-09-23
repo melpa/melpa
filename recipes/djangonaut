@@ -1,1 +1,1 @@
-(djangonaut :fetcher github :repo "proofit404/djangonaut")
+(djangonaut :fetcher github :repo "pythonic-emacs/djangonaut")

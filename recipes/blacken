@@ -1,1 +1,1 @@
-(blacken :fetcher github :repo "proofit404/blacken")
+(blacken :fetcher github :repo "pythonic-emacs/blacken")

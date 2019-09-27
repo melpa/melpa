@@ -1,2 +1,2 @@
-(logpad :fetcher bitbucket
-        :repo "tux_/logpad.el")
+(logpad :fetcher github
+        :repo "dertuxmalwieder/logpad.el")

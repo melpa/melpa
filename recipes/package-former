@@ -1,0 +1,4 @@
+(package-former :fetcher github
+                :repo "alhassy/next-700-module-systems"
+                :files ("prototype/package-former.el")
+                )

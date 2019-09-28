@@ -1,0 +1,1 @@
+(spinner :repo "brotzeit/spinner" :fetcher github)

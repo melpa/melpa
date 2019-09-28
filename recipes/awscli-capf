@@ -1,1 +1,1 @@
-(awscli-capf :repo "sebasmonia/awscli-capf" :fetcher github)
+(awscli-capf :repo "sebasmonia/awscli-capf" :fetcher github :files (:defaults "*.data"))

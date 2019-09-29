@@ -1,2 +1,2 @@
 (scala-mode :fetcher github
-            :repo "hvesalai/emacs-scala-mode2")
+            :repo "hvesalai/emacs-scala-mode")

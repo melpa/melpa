@@ -1,0 +1,4 @@
+(flymake-golangci
+ :fetcher gitlab
+ :url "https://gitlab.com/shackra/flymake-golangci"
+ :repo "shackra/flymake-golangci")

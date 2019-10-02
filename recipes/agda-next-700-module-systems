@@ -1,0 +1,3 @@
+(agda-next-700-module-systems :fetcher github
+                              :repo "alhassy/next-700-module-systems"
+                              :files ("prototype/agda-next-700-module-systems.el"))

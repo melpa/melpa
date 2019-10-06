@@ -1,1 +1,1 @@
-(gotn :fetcher github :repo "yauhen-l/gotn" :files ("gotn.el"))
+(gotn :fetcher github :repo "yauhen-l/gotn")

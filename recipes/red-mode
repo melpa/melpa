@@ -1,0 +1,1 @@
+(red-mode :fetcher github :repo "dutch/red-mode")

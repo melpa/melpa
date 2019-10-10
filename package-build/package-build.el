@@ -946,15 +946,19 @@ artifacts, and return a list of the up-to-date archive entries."
   (with-temp-file file
     (insert
      (json-encode
-      (cl-mapcan (lambda (name)
-                   (condition-case nil
-                       ;; Filter out invalid recipes.
-                       (when (with-demoted-errors (package-recipe-lookup name))
-                         (with-temp-buffer
-                           (insert-file-contents
-                            (expand-file-name name package-build-recipes-dir))
-                           (list (read (current-buffer)))))))
-                 (package-recipe-recipes))))))
+      (cl-mapcan
+       (lambda (name)
+         (ignore-errors ; Silently ignore corrupted recipes.
+           (and (package-recipe-lookup name)
+                (with-temp-buffer
+                  (insert-file-contents
+                   (expand-file-name name package-build-recipes-dir))
+                  (let ((exp (read (current-buffer))))
+                    (when (plist-member (cdr exp) :files)
+                      (plist-put (cdr exp) :files
+                                 (format "%S" (plist-get (cdr exp) :files))))
+                    (list exp))))))
+       (package-recipe-recipes))))))
 
 (defun package-build--pkg-info-for-json (info)
   "Convert INFO into a data structure which will serialize to JSON in the desired shape."
@@ -993,8 +997,10 @@ artifacts, and return a list of the up-to-date archive entries."
                            (setcdr maintainer
                                    (format-person (cdr maintainer))))
                          (when authors
-                           (setcdr authors
-                                   (mapcar #'format-person (cdr authors))))
+                           (if (cl-every #'listp (cdr authors))
+                               (setcdr authors
+                                       (mapcar #'format-person (cdr authors)))
+                             (assq-delete-all :authors extra)))
                          (package-build--pkg-info-for-json info))))
                (package-build-archive-alist))))
 
@@ -1009,7 +1015,7 @@ artifacts, and return a list of the up-to-date archive entries."
   "Return the homepage in file FILE, or current buffer if FILE is nil.
 This is a copy of `lm-homepage', which first appeared in Emacs 24.4."
   (let ((page (lm-with-file file
-                            (lm-header "\\(?:x-\\)?\\(?:homepage\\|url\\)"))))
+                (lm-header "\\(?:x-\\)?\\(?:homepage\\|url\\)"))))
     (if (and page (string-match "^<.+>$" page))
         (substring page 1 -1)
       page)))

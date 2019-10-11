@@ -1,0 +1,1 @@
+(zimwiki-mode :fetcher github :repo "WillForan/zimwiki-mode")

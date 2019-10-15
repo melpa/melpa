@@ -1,1 +1,2 @@
-(grass-mode :fetcher bitbucket :repo "tws/grass-mode.el")
+(grass-mode :fetcher github
+            :repo "plantarum/grass-mode")

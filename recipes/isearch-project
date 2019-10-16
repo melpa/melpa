@@ -1,1 +1,1 @@
-(isearch-project :repo "elpa-host/isearch-project" :fetcher github)
+(isearch-project :repo "jcs-elpa/isearch-project" :fetcher github)

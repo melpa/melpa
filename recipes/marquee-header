@@ -1,1 +1,1 @@
-(marquee-header :repo "elpa-host/marquee-header" :fetcher github)
+(marquee-header :repo "jcs-elpa/marquee-header" :fetcher github)

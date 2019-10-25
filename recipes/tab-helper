@@ -1,0 +1,3 @@
+(tab-helper :fetcher gitlab
+            :repo "RobertCochran/tab-helper"
+            :branch "master")

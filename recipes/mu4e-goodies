@@ -1,0 +1,2 @@
+(mu4e-goodies :fetcher github 
+              :repo "panjie/mu4e-goodies")

@@ -1,0 +1,3 @@
+(aio-request
+ :fetcher github
+ :repo "truls/aio-request")

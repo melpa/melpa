@@ -1,0 +1,2 @@
+(pest-mode :repo "ksqsf/pest-mode"
+           :fetcher github)

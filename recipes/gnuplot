@@ -1,4 +1,4 @@
 (gnuplot
- :repo "bruceravel/gnuplot-mode"
+ :repo "emacsorphange/gnuplot"
  :fetcher github
  :files ("gnuplot.el" "gnuplot-gui.el" "gnuplot-context.el"))

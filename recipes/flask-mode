@@ -1,0 +1,1 @@
+(flask-mode :fetcher gitlab :repo "flexw/flask-mode")

@@ -1,4 +1,4 @@
 (org-pomodoro
  :fetcher github
- :repo "lolownia/org-pomodoro"
+ :repo "marcinkoziej/org-pomodoro"
  :files (:defaults "resources"))

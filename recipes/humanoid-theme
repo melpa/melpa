@@ -1,0 +1,2 @@
+(humanoid-theme :repo "tasmo/humanoid-theme"
+                :fetcher github)

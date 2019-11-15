@@ -1,7 +1,1 @@
-<<<<<<< HEAD
-(nv-delete-forward :fetcher github
-  :repo "nivaca/nv-delete-forward"
-  :files ("*.el" ("doc/*.md" "doc/*.gif")))
-=======
 (nv-delete-forward :fetcher gitlab :repo "nivaca/nv-delete-forward")
->>>>>>> upstream/master

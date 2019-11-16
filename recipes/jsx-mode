@@ -1,3 +1,0 @@
-(jsx-mode :repo "jsx/jsx-mode.el"
-          :fetcher github
-          :files ("src/*.el"))

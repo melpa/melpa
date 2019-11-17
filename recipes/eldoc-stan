@@ -3,4 +3,5 @@
  :repo "stan-dev/stan-mode"
  :files ("eldoc-stan/*.el"
 	 "eldoc-stan/eldoc-stan.json"
-         (:exclude "eldoc-stan/test-*.el")))
+         (:exclude "eldoc-stan/test-*.el"
+                   "eldoc-stan/eldoc-stan-create-json.el")))

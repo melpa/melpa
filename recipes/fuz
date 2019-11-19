@@ -1,2 +1,2 @@
-(fuz :repo "cireu/fuz.el" :fetcher github
+(fuz :repo "rustify-emacs/fuz.el" :fetcher github
      :files ("fuz*.el" "Cargo.toml" "Cargo.lock" "src"))

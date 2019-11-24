@@ -1,4 +1,0 @@
-(picolisp-mode
- :fetcher github
- :repo "flexibeast/plisp-mode"
- :files ("picolisp-mode.el" "inferior-picolisp.el"))

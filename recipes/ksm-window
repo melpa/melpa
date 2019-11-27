@@ -1,0 +1,3 @@
+(ksm-window :repo "karrick/ksm-window"
+            :fetcher github
+            :files ("ksm-window.el"))

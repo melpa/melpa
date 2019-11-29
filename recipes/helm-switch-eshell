@@ -1,1 +1,0 @@
-(helm-switch-eshell :fetcher github :repo "jamesnvc/helm-switch-eshell")

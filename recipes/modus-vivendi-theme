@@ -1,0 +1,4 @@
+(modus-vivendi-theme
+ :fetcher gitlab
+ :repo "protesilaos/modus-themes"
+ :files ("modus-vivendi-theme.el"))

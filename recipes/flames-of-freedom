@@ -1,1 +1,1 @@
-(flames-of-freedom :fetcher github :repo "wiz21b/FlamesOfFreedom")
+(flames-of-freedom :fetcher github :repo "wiz21b/FlamesOfFreedom" :branch "melpa")

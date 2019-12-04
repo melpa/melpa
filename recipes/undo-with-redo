@@ -1,0 +1,3 @@
+(undo-with-redo
+ :repo "ideasman42/emacs-undo-with-redo"
+ :fetcher gitlab)

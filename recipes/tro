@@ -1,1 +1,1 @@
-(tro :fetcher github :repo "cyberthal/treefactor")
+(treefactor :fetcher github :repo "cyberthal/treefactor")

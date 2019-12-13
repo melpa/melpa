@@ -1,0 +1,1 @@
+(aftersave :repo "roman/aftersave.el" :fetcher github)

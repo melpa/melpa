@@ -1,0 +1,2 @@
+(pyenv :fetcher github
+       :repo "aiguofer/pyenv.el")

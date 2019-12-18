@@ -1,4 +1,1 @@
-(vfl-mode
- :fetcher gitlab
- :repo "val314159/vfl-mode"
- :files ("vfl-mode.el"))
+(vfl-mode :fetcher gitlab :repo "val314159/vfl-mode")

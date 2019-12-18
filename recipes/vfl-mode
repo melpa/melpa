@@ -1,4 +1,4 @@
 (vfl-mode
  :fetcher gitlab
- :repo "val314159/python-mode"
+ :repo "val314159/vfl-mode"
  :files ("vfl-mode.el"))

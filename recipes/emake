@@ -1,0 +1,2 @@
+(emake :repo "doublep/emake"
+       :fetcher github)

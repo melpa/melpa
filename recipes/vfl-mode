@@ -1,4 +1,4 @@
 (vfl-mode
  :fetcher gitlab
  :repo "val314159/python-mode"
- :files ("vfl-mode.el" ("completion" "completion/pycomplete.*")))
+ :files ("vfl-mode.el"))

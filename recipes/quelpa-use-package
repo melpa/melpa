@@ -1,1 +1,1 @@
-(quelpa-use-package :fetcher git :url "https://framagit.org/steckerhalter/quelpa-use-package.git")
+(quelpa-use-package :fetcher github :repo "quelpa/quelpa-use-package")

@@ -1,2 +1,0 @@
-(tracker :repo "ianxm/emacs-tracker"
-           :fetcher github)

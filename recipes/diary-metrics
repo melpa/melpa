@@ -1,0 +1,2 @@
+(diary-metrics :repo "ianxm/emacs-tracker"
+               :fetcher github)

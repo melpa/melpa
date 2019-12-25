@@ -1,0 +1,4 @@
+(poe-filter-mode
+ :fetcher gitlab
+ :repo "queertypes/poe-filter-mode"
+ )

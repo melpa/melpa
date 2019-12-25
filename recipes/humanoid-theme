@@ -1,2 +1,0 @@
-(humanoid-theme :repo "humanoid-colors/emacs-humanoid-theme"
-                :fetcher github)

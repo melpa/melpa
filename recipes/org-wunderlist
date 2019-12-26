@@ -1,2 +1,1 @@
-(org-wunderlist :repo "myuhe/org-wunderlist.el"
-                :fetcher github)
+(org-wunderlist :fetcher github :repo "emacsattic/org-wunderlist")

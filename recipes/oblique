@@ -1,0 +1,4 @@
+(oblique
+ :repo "zzkt/oblique-strategies"
+ :fetcher github
+ :files ("oblique.el" "README.org" "strategies"))

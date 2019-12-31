@@ -1,0 +1,1 @@
+(hashem-mode :fetcher github :repo "iamvee/el-hashem-mode")

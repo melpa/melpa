@@ -1,0 +1,2 @@
+(random-idle-quote :repo "jcowgar/random-idle-quote"
+		   :fetcher github)

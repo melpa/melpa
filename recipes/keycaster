@@ -1,0 +1,1 @@
+(keycaster :repo "chuntaro/emacs-keycaster" :fetcher github)

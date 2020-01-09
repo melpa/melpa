@@ -1,2 +1,1 @@
-(promise :repo "chuntaro/emacs-promise" :fetcher github
-         :files ("*.el" ("examples" "examples/*.el")))
+(promise :repo "chuntaro/emacs-promise" :fetcher github)

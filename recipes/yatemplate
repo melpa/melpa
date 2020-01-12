@@ -1,4 +1,3 @@
 (yatemplate
  :fetcher github
- :repo "mineo/yatemplate"
- :files (:defaults (:exclude "test-*.el")))
+ :repo "mineo/yatemplate")

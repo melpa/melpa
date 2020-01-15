@@ -1,2 +1,2 @@
-(shroud :fetcher github
-              :repo "o-nly/emacs-shroud")
+(shroud :fetcher git
+              :repo "https://git.savannah.nongnu.org/git/emacs-shroud.git")

@@ -1,2 +1,2 @@
 (shroud :fetcher git
-              :repo "https://git.savannah.nongnu.org/git/emacs-shroud.git")
+              :url "https://git.savannah.nongnu.org/git/emacs-shroud.git")

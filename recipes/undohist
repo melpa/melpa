@@ -1,1 +1,1 @@
-(undohist :repo "m2ym/undohist-el" :fetcher github)
+(undohist :repo "ideasman42/emacs-undohist" :fetcher gitlab)

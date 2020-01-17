@@ -907,8 +907,9 @@ line per entry."
           (when other-entry
             (when (version-list-< (elt (cdr entry) 0)
                                   (elt (cdr other-entry) 0))
+              # Swap so that other-entry has the smallest version.
               (cl-rotatef other-entry entry))
-            (package-build--remove-archive-files entry)
+            (package-build--remove-archive-files other-entry)
             (setq entries (remove other-entry entries)))
           (add-to-list 'entries entry))))
     (setq entries (nreverse entries))

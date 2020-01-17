@@ -907,7 +907,7 @@ line per entry."
           (when other-entry
             (when (version-list-< (elt (cdr entry) 0)
                                   (elt (cdr other-entry) 0))
-              # Swap so that other-entry has the smallest version.
+              ;; Swap so that other-entry has the smallest version.
               (cl-rotatef other-entry entry))
             (package-build--remove-archive-files other-entry)
             (setq entries (remove other-entry entries)))
@@ -1019,7 +1019,7 @@ line per entry."
   "Return the homepage in file FILE, or current buffer if FILE is nil.
 This is a copy of `lm-homepage', which first appeared in Emacs 24.4."
   (let ((page (lm-with-file file
-                (lm-header "\\(?:x-\\)?\\(?:homepage\\|url\\)"))))
+                            (lm-header "\\(?:x-\\)?\\(?:homepage\\|url\\)"))))
     (if (and page (string-match "^<.+>$" page))
         (substring page 1 -1)
       page)))

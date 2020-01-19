@@ -1019,7 +1019,7 @@ line per entry."
   "Return the homepage in file FILE, or current buffer if FILE is nil.
 This is a copy of `lm-homepage', which first appeared in Emacs 24.4."
   (let ((page (lm-with-file file
-                            (lm-header "\\(?:x-\\)?\\(?:homepage\\|url\\)"))))
+                (lm-header "\\(?:x-\\)?\\(?:homepage\\|url\\)"))))
     (if (and page (string-match "^<.+>$" page))
         (substring page 1 -1)
       page)))

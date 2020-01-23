@@ -8,7 +8,7 @@
 ;; Created: 2011-09-30
 ;; Version: 0.1
 ;; Keywords: tools
-;; Package-Requires: ((cl-lib "0.5"))
+;; Package-Requires: ((cl-lib "0.5") (emacs "24.1"))
 
 ;; This file is not (yet) part of GNU Emacs.
 ;; However, it is distributed under the same license.
@@ -132,7 +132,7 @@ The string in the capture group should be parsed as valid by `version-to-list'."
 
 (defun package-build--message (format-string &rest args)
   "Behave like `message' if `package-build-verbose' is non-nil.
-Otherwise do nothing."
+Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
   (when package-build-verbose
     (apply 'message format-string args)))
 
@@ -140,7 +140,9 @@ Otherwise do nothing."
 
 (defun package-build--parse-time (str &optional regexp)
   "Parse STR as a time, and format as a YYYYMMDD.HHMM string.
-Always use Coordinated Universal Time (UTC) for output string."
+Always use Coordinated Universal Time (UTC) for output string.
+If REGEXP is provided, it is applied to STR and the function
+parses the first match group instead of STR."
   (unless str
     (error "No valid timestamp found"))
   (setq str (substring-no-properties str))
@@ -712,7 +714,9 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 ;;;###autoload
 (defun package-build-archive (name &optional dump-archive-contents)
-  "Build a package archive for the package named NAME."
+  "Build a package archive for the package named NAME.
+if DUMP-ARCHIVE-CONTENTS is non-nil, the updated archive contents
+are subsequently dumped."
   (interactive (list (package-recipe-read-name) t))
   (let ((start-time (current-time))
         (rcp (package-recipe-lookup name)))

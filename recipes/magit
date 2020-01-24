@@ -7,4 +7,7 @@
                "Documentation/AUTHORS.md"
                "LICENSE"
 	       (:exclude "lisp/magit-libgit.el"
-			 "lisp/magit-section.el")))
+			 ;; Cannot remove this yet because it would
+			 ;; also be removed from the stable version.
+			 ;; "lisp/magit-section.el"
+			 )))

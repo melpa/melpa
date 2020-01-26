@@ -1,2 +1,0 @@
-(alarm :fetcher github
-       :repo "wpcarro/alarm.el")

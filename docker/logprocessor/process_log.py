@@ -101,14 +101,13 @@ def main():
     if STABLE:
         db_filename = "/mnt/db/download_log_stable.db"
 
-    new_db = not os.path.exists(db_filename)
     conn = sqlite3.connect(db_filename)
     curs = conn.cursor()
-    if new_db:
-        sys.stdout.write("creating database...\n")
-        curs.execute(
-            '''CREATE TABLE pkg_ip (package, ip, PRIMARY KEY (package, ip))''')
-        conn.commit()
+
+    sys.stdout.write("ensuring database setup...\n")
+    curs.execute(
+        '''CREATE TABLE IF NOT EXISTS pkg_ip (package, ip, PRIMARY KEY (package, ip)) WITHOUT ROWID''')
+    conn.commit()
 
     # parse each parameter
     for logfile in args.logs:

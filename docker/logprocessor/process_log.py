@@ -17,7 +17,7 @@ STABLE = os.getenv("STABLE")
 LOGFILE = "/mnt/store/log/melpa.access.log"
 if STABLE:
     LOGFILE = "/mnt/store/log-stable/melpa.access.log"
-LOGREGEX = r'(?P<ip>[\d.]+) [ -]+ \[(?P<date>[\w/: +-]+)\] ' \
+LOGREGEX = r'^(?P<ip>[\d.]+) [ -]+ \[(?P<date>[\w/: +-]+)\] ' \
            r'"GET /packages/(?P<package>[^ ]+)-[0-9.]+.(?:el|tar) ' \
            r'HTTP/\d.\d" 200'
 

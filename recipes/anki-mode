@@ -1,0 +1,2 @@
+(anki-mode :repo "davidshepherd7/anki-mode"
+           :fetcher github)

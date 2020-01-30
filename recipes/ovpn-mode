@@ -1,0 +1,1 @@
+(ovpn-mode :repo "anticomputer/ovpn-mode" :fetcher github)

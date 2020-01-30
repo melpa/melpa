@@ -1,1 +1,3 @@
-(cmake-mode :fetcher github :repo "Kitware/CMake" :files ("Auxiliary/*.el"))
+(cmake-mode :fetcher git
+            :url "https://gitlab.kitware.com/cmake/cmake.git"
+            :files ("Auxiliary/*.el"))

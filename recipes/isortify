@@ -1,1 +1,1 @@
-(isortify :fetcher github :repo "proofit404/isortify")
+(isortify :fetcher github :repo "pythonic-emacs/isortify")

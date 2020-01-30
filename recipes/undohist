@@ -1,1 +1,1 @@
-(undohist :repo "m2ym/undohist-el" :fetcher github)
+(undohist :fetcher github :repo "emacsorphanage/undohist")

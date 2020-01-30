@@ -1,0 +1,1 @@
+(company-tabnine :repo "TommyX12/company-tabnine" :fetcher github)

@@ -1,3 +1,0 @@
-(lsp-css
- :fetcher github
- :repo "emacs-lsp/lsp-css")

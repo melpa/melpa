@@ -1,4 +1,4 @@
 (gap-mode
- :fetcher bitbucket
+ :fetcher gitlab
  :repo "gvol/gap-mode"
- :files ("*.el" "emacs.gaprc"))
+ :files (:defaults "emacs.gaprc"))

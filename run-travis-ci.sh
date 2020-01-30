@@ -3,7 +3,7 @@
 exec 2>&1
 cd "$(dirname "$0")"
 
-EMACS=${EMACS:-$(which emacs)}
+EMACS=${EMACS:-$(command -v emacs)}
 
 echo "*** Emacs version ***"
 echo "EMACS = $EMACS"

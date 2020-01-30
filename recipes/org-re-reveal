@@ -1,0 +1,4 @@
+(org-re-reveal
+ :repo "oer/org-re-reveal"
+ :fetcher gitlab
+ :files (:defaults "LICENSES" "Readme.org" "local.css" "images"))

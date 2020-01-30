@@ -1,1 +1,1 @@
-(4clojure :fetcher github :repo "losingkeys/4clojure.el")
+(4clojure :fetcher github :repo "emacsorphanage/4clojure")

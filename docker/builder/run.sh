@@ -70,3 +70,5 @@ if [ -f "$LAST_DURATION_FILE" ]; then
 fi
 
 flux_capacitor
+
+sleep 3600  # give the server an hour break. it's working hard.

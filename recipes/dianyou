@@ -1,0 +1,2 @@
+(dianyou :fetcher github
+         :repo "redguardtoo/dianyou")

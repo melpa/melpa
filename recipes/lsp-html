@@ -1,3 +1,0 @@
-(lsp-html
- :fetcher github
- :repo "emacs-lsp/lsp-html")

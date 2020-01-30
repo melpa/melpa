@@ -1,1 +1,1 @@
-(applescript-mode :fetcher github :repo "ieure/applescript-mode")
+(applescript-mode :fetcher github :repo "emacsorphanage/applescript-mode")

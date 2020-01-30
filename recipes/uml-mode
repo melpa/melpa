@@ -1,0 +1,2 @@
+(uml-mode :fetcher github
+          :repo "ianxm/emacs-uml")

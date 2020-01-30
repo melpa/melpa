@@ -13,10 +13,6 @@ import tempfile
 import sqlite3
 from operator import or_
 
-STABLE = os.getenv("STABLE")
-LOGFILE = "/mnt/store/log/melpa.access.log"
-if STABLE:
-    LOGFILE = "/mnt/store/log-stable/melpa.access.log"
 LOGREGEX = r'^(?P<ip>[\d.]+) [ -]+ \[(?P<date>[\w/: +-]+)\] ' \
            r'"GET /+packages/+(?P<package>[^ ]+)-(?P<version>[0-9.]+).(?:el|tar) ' \
            r'HTTP/\d.\d" 200'
@@ -93,15 +89,13 @@ def main():
     """main function"""
 
     parser = argparse.ArgumentParser(description='MELPA Log File Parser')
-    parser.add_argument('logs', metavar="logs", type=unicode, nargs="*",
-                        help="Log files to parse.", default=[LOGFILE])
+    parser.add_argument('--jsondir', help='JSON output directory (default: working directory)', default=".")
+    parser.add_argument('--db', help='Database file (default: download_log.db)', default="download_log.db")
+    parser.add_argument('logs', metavar="logs", type=unicode, nargs="+",
+                        help="HTTP access log files to parse.")
     args = parser.parse_args()
 
-    db_filename = "/mnt/db/download_log.db"
-    if STABLE:
-        db_filename = "/mnt/db/download_log_stable.db"
-
-    conn = sqlite3.connect(db_filename)
+    conn = sqlite3.connect(args.db)
     curs = conn.cursor()
 
     sys.stdout.write("ensuring database setup...\n")
@@ -121,11 +115,7 @@ def main():
     # calculate current package totals
     pkgcount = {p: c for p, c in curs.execute(
         "SELECT package, count(ip) FROM pkg_ip GROUP BY 1")}
-    if STABLE:
-        json_dump(pkgcount, open(
-            "html-stable/download_counts.json", 'w'), indent=1)
-    else:
-        json_dump(pkgcount, open("html/download_counts.json", 'w'), indent=1)
+    json_dump(pkgcount, open(args.jsondir + "/download_counts.json", 'w'), indent=1)
 
     return 0
 

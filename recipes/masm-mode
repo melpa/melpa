@@ -1,3 +1,1 @@
-(masm-mode :fetcher github
-            :url "https://github.com/YiGeeker/masm-mode"
-            :repo "YiGeeker/masm-mode")
+(masm-mode :fetcher github :repo "YiGeeker/masm-mode")

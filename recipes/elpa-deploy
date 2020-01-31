@@ -1,0 +1,1 @@
+(elpa-deploy :fetcher github :repo "oitofelix/elpa-deploy")

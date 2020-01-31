@@ -1,0 +1,1 @@
+(syslog-mode :fetcher github :repo "vapniks/syslog-mode")

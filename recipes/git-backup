@@ -1,0 +1,2 @@
+(git-backup :fetcher github
+             :repo "antham/git-backup")

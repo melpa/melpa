@@ -1,1 +1,1 @@
-(opam :repo "lunaryorn/opam.el" :fetcher github)
+(opam :repo "emacsorphanage/opam" :fetcher github)

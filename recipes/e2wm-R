@@ -1,2 +1,1 @@
-(e2wm-R :repo "myuhe/e2wm-R.el" 
-        :fetcher github)
+(e2wm-R :fetcher github :repo "emacsattic/e2wm-R")

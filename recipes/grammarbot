@@ -1,1 +1,1 @@
-(grammarly :repo "zevlg/grammarbot.el" :fetcher github)
+(grammarbot :repo "zevlg/grammarbot.el" :fetcher github)

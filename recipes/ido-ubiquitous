@@ -1,2 +1,0 @@
-(ido-ubiquitous :repo "DarwinAwardWinner/ido-ubiquitous" :fetcher github
-                :files ("ido-ubiquitous.el"))

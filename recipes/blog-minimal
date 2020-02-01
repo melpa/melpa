@@ -1,0 +1,3 @@
+(blog-minimal :fetcher github
+	      :repo "thiefuniverse/blog-minimal"
+	      :files (:defaults "media" "templates" "about.org"))

@@ -1,0 +1,1 @@
+(celestial-mode-line :fetcher github :repo "ecraven/celestial-mode-line")

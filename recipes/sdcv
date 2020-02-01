@@ -1,0 +1,2 @@
+(sdcv :fetcher github
+      :repo "stardiviner/sdcv.el")

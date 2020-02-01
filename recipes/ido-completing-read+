@@ -1,2 +1,2 @@
-(ido-completing-read+ :repo "DarwinAwardWinner/ido-ubiquitous" :fetcher github
+(ido-completing-read+ :repo "DarwinAwardWinner/ido-completing-read-plus" :fetcher github
                       :files ("ido-completing-read+.el"))

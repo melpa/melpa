@@ -1,0 +1,1 @@
+(js-auto-format-mode :fetcher github :repo "ybiquitous/js-auto-format-mode")

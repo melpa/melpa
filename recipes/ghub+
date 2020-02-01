@@ -1,0 +1,1 @@
+(ghub+ :fetcher github :repo "vermiculus/ghub-plus")

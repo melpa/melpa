@@ -1,3 +1,0 @@
-(php+-mode
- :fetcher github
- :repo "echosa/phpplus-mode")

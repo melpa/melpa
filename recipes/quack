@@ -1,1 +1,1 @@
-(quack :repo "emacsmirror/quack" :fetcher github)
+(quack :fetcher github :repo "emacsmirror/quack")

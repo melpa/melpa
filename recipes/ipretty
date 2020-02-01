@@ -1,1 +1,1 @@
-(ipretty :fetcher github :repo "steckerhalter/ipretty")
+(ipretty :fetcher git :url "https://framagit.org/steckerhalter/ipretty.git")

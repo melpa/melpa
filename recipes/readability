@@ -1,1 +1,1 @@
-(readability :repo "ShingoFukuyama/emacs-readability" :fetcher github)
+(readability :fetcher github :repo "emacsorphanage/readability")

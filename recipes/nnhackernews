@@ -1,0 +1,2 @@
+(nnhackernews :repo "dickmao/nnhackernews"
+              :fetcher github)

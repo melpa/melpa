@@ -1,0 +1,3 @@
+(helm-rtags :repo "Andersbakken/rtags"
+            :fetcher github
+            :files ("src/helm-rtags.el"))

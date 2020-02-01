@@ -1,1 +1,1 @@
-(flymake-lua :fetcher github :repo "sroccaserra/emacs" :files ("flymake-lua.el"))
+(flymake-lua :fetcher github :repo "sroccaserra/flymake-lua")

@@ -1,0 +1,2 @@
+(shadowenv :repo "Shopify/shadowenv.el"
+           :fetcher github)

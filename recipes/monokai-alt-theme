@@ -1,0 +1,3 @@
+(monokai-alt-theme
+ :repo "dawidof/emacs-monokai-theme"
+ :fetcher github)

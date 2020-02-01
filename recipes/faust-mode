@@ -1,1 +1,1 @@
-(faust-mode :repo "magnetophon/emacs-faust-mode" :fetcher github)
+(faust-mode :repo "rukano/emacs-faust-mode" :fetcher github)

@@ -22,14 +22,13 @@
   (match-string 1 fn))
 
 
-(add-to-list 'load-path (expand-file-name ".." (file-name-directory load-file-name)))
+(add-to-list 'load-path (expand-file-name "../package-build" (file-name-directory load-file-name)))
 (require 'package-build)
 
 (dolist (entry-file (directory-files package-build-archive-dir t ".*\.entry$"))
   (when (> (time-to-seconds
-	    (time-subtract (current-time)
-			   (nth 5 (file-attributes entry-file))))
-	   (* 23 60 60))
+        (time-subtract (current-time)
+               (nth 5 (file-attributes entry-file))))
+       (* 23 60 60))
     (princ (symbol-name (car (package-build--read-from-file entry-file))))
     (princ "\n")))
-

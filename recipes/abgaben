@@ -1,0 +1,1 @@
+(abgaben :repo "akoehn/abgaben" :fetcher gitlab)

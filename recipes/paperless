@@ -1,0 +1,2 @@
+(paperless :fetcher github
+	   :repo "atgreen/paperless")

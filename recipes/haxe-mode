@@ -1,1 +1,1 @@
-(haxe-mode :fetcher bitbucket :repo "jpsecher/haxe-mode")
+(haxe-mode :repo "jcs-elpa/haxe-mode" :fetcher github )

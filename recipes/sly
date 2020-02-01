@@ -1,10 +1,7 @@
-(sly :repo "capitaomorte/sly"
+(sly :repo "joaotavora/sly"
      :fetcher github
-     :files ("*.el"
-             ("lib" "lib/*")
-             ("slynk/backend" "slynk/backend/*") 
-             ("slynk" "slynk/*")
-             ("contrib" "contrib/*")
-             "doc/*.texi"
-             "doc/*.info"
-             "doc/dir"))
+     :files (:defaults
+             "lib"
+             "slynk"
+             "contrib"
+             (:exclude "sly-autoloads.el")))

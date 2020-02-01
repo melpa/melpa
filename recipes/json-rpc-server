@@ -1,0 +1,3 @@
+(json-rpc-server
+ :fetcher github
+ :repo "jcaw/json-rpc-server.el")

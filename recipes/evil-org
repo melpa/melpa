@@ -1,1 +1,1 @@
-(evil-org :fetcher github :repo "edwtjo/evil-org-mode")
+(evil-org :fetcher github :repo "Somelauw/evil-org-mode")

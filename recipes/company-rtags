@@ -1,0 +1,3 @@
+(company-rtags :repo "Andersbakken/rtags"
+               :fetcher github
+               :files ("src/company-rtags.el"))

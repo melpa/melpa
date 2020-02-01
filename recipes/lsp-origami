@@ -1,0 +1,1 @@
+(lsp-origami :repo "emacs-lsp/lsp-origami" :fetcher github)

@@ -1,20 +1,16 @@
 language: ruby
+dist: xenial
 
 addons:
   apt:
     packages:
-    - bzr
     - git
     - mercurial
-    - subversion
-    - cvs
-    - darcs
-    - fossil
     - texinfo
 
 before_install:
   - sudo apt-get -yq update
-  - sudo apt-get -yq install bzr git mercurial subversion cvs darcs fossil texinfo
+  - sudo apt-get -yq install git mercurial texinfo
 
   - git clone https://github.com/rejeep/evm.git $HOME/.evm
   - export PATH=$HOME/.evm/bin:$PATH
@@ -26,6 +22,10 @@ before_install:
   - curl -fsSkL https://raw.github.com/cask/cask/master/go | python
   - export PATH=$HOME/.cask/bin:$PATH
   - cask
+
+  # Work around SSL-related failures in Travis, see
+  # https://stackoverflow.com/questions/21477683/mercurial-https-clone-abort-error-wrong-version-number
+  - echo "[ui]\ntls = False" > $HOME/.hgrc
 
 env:
   #- EVM_EMACS=emacs-23.4-travis

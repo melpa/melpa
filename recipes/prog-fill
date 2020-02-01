@@ -1,0 +1,3 @@
+(prog-fill
+ :repo "ahungry/prog-fill"
+ :fetcher github)

@@ -1,0 +1,1 @@
+(evil-expat :repo "edkolev/evil-expat" :fetcher github)

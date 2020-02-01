@@ -1,3 +1,1 @@
-(ox-jira :repo "stig/ox-jira.el"
-         :fetcher github
-         :files ("ox-jira.el"))
+(ox-jira :repo "stig/ox-jira.el" :fetcher github)

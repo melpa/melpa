@@ -1,0 +1,1 @@
+(blacken :fetcher github :repo "pythonic-emacs/blacken")

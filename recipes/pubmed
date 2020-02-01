@@ -1,0 +1,3 @@
+(pubmed
+ :fetcher gitlab
+ :repo "fvdbeek/emacs-pubmed")

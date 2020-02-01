@@ -1,0 +1,3 @@
+(org-kindle :fetcher github
+            :repo "stardiviner/org-kindle"
+            :old-names (org-send-ebook))

@@ -1,0 +1,3 @@
+(hl-block-mode
+ :repo "ideasman42/emacs-hl-block-mode"
+ :fetcher gitlab)

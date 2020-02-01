@@ -1,0 +1,2 @@
+(csv :fetcher gitlab
+     :repo "u11/csv.el")

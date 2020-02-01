@@ -1,0 +1,3 @@
+(auto-virtualenvwrapper
+ :fetcher github
+ :repo "robert-zaremba/auto-virtualenvwrapper.el")

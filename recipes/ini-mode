@@ -1,0 +1,1 @@
+(ini-mode :repo "Lindydancer/ini-mode" :fetcher github)

@@ -1,0 +1,1 @@
+(ns-auto-titlebar :fetcher github :repo "purcell/ns-auto-titlebar")

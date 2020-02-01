@@ -1,0 +1,1 @@
+(helm-navi :fetcher github :repo "emacs-helm/helm-navi")

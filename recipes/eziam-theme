@@ -1,0 +1,1 @@
+(eziam-theme :repo "thblt/eziam-theme-emacs" :fetcher github)

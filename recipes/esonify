@@ -1,0 +1,4 @@
+(esonify
+:repo "oflatt/esonify"
+:fetcher github
+:files (:defaults "sounds"))

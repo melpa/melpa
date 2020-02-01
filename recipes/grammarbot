@@ -1,0 +1,1 @@
+(grammarly :repo "zevlg/grammarbot.el" :fetcher github)

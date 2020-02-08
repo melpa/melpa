@@ -1,0 +1,4 @@
+(lavenderless-theme
+  :fetcher git
+  :url "https://git.sr.ht/~lthms/colorless-themes.el"
+  :files ("lavenderless-theme.el"))

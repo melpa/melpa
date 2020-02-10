@@ -91,7 +91,11 @@ New recipe submissions should adhere to the following guidelines:
      location.
 
 - GPL compatible license :: The package is released under a 
-     [[https://www.gnu.org/licenses/license-list.en.html#GPLCompatibleLicenses][GPL-Compatible Free Software License]].
+     [[https://www.gnu.org/licenses/license-list.en.html#GPLCompatibleLicenses][GPL-Compatible Free Software License]], preferably the
+     GNU General Public License (GPL) version 3.  The license
+     boilerplate should be applied above the  ~;;; Commentary~ of each
+     source file.  The repository should contain a LICENSE or COPYING
+     file, formatted so that it can be detected by [[https://github.com/licensee/licensee][common tooling]].
 
 ** Making your package ready for inclusion
 

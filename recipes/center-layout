@@ -1,0 +1,4 @@
+(center-layout
+ :fetcher gitlab
+ :repo "lae/emacs-center-layout"
+ :branch "stable")

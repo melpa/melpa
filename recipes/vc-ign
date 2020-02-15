@@ -1,0 +1,1 @@
+(vc-ign :repo "wolfmanx/vc-ign" :fetcher github :files ("vc-ign.el"))

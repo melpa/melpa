@@ -1,1 +1,3 @@
-(vc-ign :repo "wolfmanx/vc-ign" :fetcher github :files ("vc-ign.el"))
+(vc-ign :repo "wolfmanx/vc-ign" :fetcher github :files ("vc-ign.el" "vc-default-ign.el"
+ "vc-cvs-ign.el" "vc-svn-ign.el" "vc-src-ign.el"
+ "vc-bzr-ign.el" "vc-git-ign.el" "vc-hg-ign.el" "vc-mtn-ign.el"))

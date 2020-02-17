@@ -1,0 +1,1 @@
+(org-pdftools :repo "fuxialexander/org-pdftools" :fetcher github)

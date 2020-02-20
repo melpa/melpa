@@ -1,0 +1,1 @@
+(bufler :fetcher github :repo "alphapapa/bufler.el")

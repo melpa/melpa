@@ -1,0 +1,1 @@
+(sbuffer :fetcher github :repo "alphapapa/sbuffer.el")

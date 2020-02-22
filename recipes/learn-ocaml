@@ -1,0 +1,4 @@
+(learn-ocaml
+ :fetcher github
+ :repo "pfitaxel/learn-ocaml.el"
+ :files (:defaults "LICENSE"))

@@ -1,0 +1,1 @@
+(krain :repo "knarkzel/krain" :fetcher gitlab)

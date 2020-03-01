@@ -1,0 +1,1 @@
+(privacy-mode :repo "riscy/privacy-mode" :fetcher github)

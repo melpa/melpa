@@ -27,6 +27,7 @@ before_install:
   # https://stackoverflow.com/questions/21477683/mercurial-https-clone-abort-error-wrong-version-number
   - echo "[ui]\ntls = False" > $HOME/.hgrc
 
+  - git clone https://github.com/riscy/melpazoid.git $HOME/melpazoid
 env:
   #- EVM_EMACS=emacs-23.4-travis
   #- EVM_EMACS=emacs-24.1-travis

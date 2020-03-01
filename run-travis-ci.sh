@@ -20,4 +20,8 @@ for recipe_name in $changed_recipes; do
     fi
 done
 
+if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+    MELPA_PR_URL=https://github.com/melpa/melpa/pull/"$TRAVIS_PULL_REQUEST" make -C "$HOME"/melpazoid
+fi
+
 echo "Build successful"

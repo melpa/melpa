@@ -1,5 +1,4 @@
 (julia-snail
  :fetcher github
  :repo "gcv/julia-snail"
- :files ("*"
-         (:exclude ".dir-locals.el" ".gitignore" ".travis.yml" "tests")))
+ :files (:defaults "JuliaSnail.jl"))

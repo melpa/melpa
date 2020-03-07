@@ -1,0 +1,1 @@
+(muze-mode :repo "ACov96/muze-mode" :fetcher github)

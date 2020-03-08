@@ -1,1 +1,1 @@
-(org-superstar :fetcher github :repo "dw-github-mirror/org-superstar-mode")
+(org-superstar :fetcher github :repo "integral-dw/org-superstar-mode")

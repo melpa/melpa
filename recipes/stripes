@@ -1,0 +1,1 @@
+(stripes :fetcher gitlab :repo "stepnem/stripes-el")

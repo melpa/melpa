@@ -1,0 +1,1 @@
+(company-quickhelp-terminal :repo "jcs-elpa/company-quickhelp-terminal" :fetcher github)

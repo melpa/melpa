@@ -1,0 +1,4 @@
+(git-invoke
+ :repo "oer/git-invoke"
+ :fetcher gitlab
+ :files (:defaults "LICENSES"))

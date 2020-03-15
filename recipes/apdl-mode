@@ -1,4 +1,4 @@
 (apdl-mode
 :fetcher github
 :repo "dieter-wilhelm/apdl-mode"
-:files ("*.el" "*.org" "apdl-mode-readme.txt" ("doc" "doc/*.org" "doc/example.*") "matlib" "template"))
+:files (:defaults "matlib" "template"))

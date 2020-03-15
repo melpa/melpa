@@ -1,1 +1,1 @@
-(go-direx :repo "syohex/emacs-go-direx" :fetcher github)
+(go-direx :repo "emacsorphanage/go-direx" :fetcher github)

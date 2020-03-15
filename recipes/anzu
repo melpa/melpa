@@ -1,1 +1,1 @@
-(anzu :fetcher github :repo "syohex/emacs-anzu")
+(anzu :fetcher github :repo "emacsorphanage/anzu")

@@ -1,0 +1,1 @@
+(php-align :repo "tetsujin/emacs-php-align" :fetcher github :files ("php-align.el"))

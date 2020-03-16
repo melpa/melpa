@@ -1,1 +1,1 @@
-(brf :fetcher git :url "https://bitbucket.org/MikeWoolley/brf-mode")
+(brf :fetcher bitbucket :repo "MikeWoolley/brf-mode")

@@ -1,0 +1,3 @@
+(rime :repo "DogLooksGood/emacs-rime"
+      :files (:defaults "rime.el" "lib.c" "Makefile")
+      :fetcher github)

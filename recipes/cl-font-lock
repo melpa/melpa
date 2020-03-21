@@ -1,1 +1,0 @@
-(cl-font-lock :repo "equwal/cl-font-lock" :fetcher github)

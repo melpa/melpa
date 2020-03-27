@@ -1,0 +1,3 @@
+(ctune :repo "maurooaranda/ctune" :fetcher github
+       :files (:defaults
+	      (:exclude "doclicense.texi" "docstyle.texi")))

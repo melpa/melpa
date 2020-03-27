@@ -1,1 +1,1 @@
-(bbcode-mode :fetcher github :repo "lassik/bbcode-mode")
+(bbcode-mode :fetcher github :repo "lassik/emacs-bbcode-mode")

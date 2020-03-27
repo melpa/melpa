@@ -1,0 +1,3 @@
+(org-roam :fetcher github
+          :repo "jethrokuan/org-roam"
+          :files ("org-roam.el" "org-roam-protocol.el"))

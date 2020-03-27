@@ -1,0 +1,1 @@
+(dired-git :fetcher github :repo "conao3/dired-git.el")

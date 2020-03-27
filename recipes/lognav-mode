@@ -1,1 +1,1 @@
-(lognav-mode :fetcher bitbucket :repo "ellisvelo/lognav-mode")
+(lognav-mode :fetcher hg :url "https://hg.osdn.net/view/lognav-mode/lognav-mode")

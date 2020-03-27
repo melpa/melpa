@@ -1,4 +1,5 @@
 language: ruby
+dist: xenial
 
 addons:
   apt:
@@ -21,6 +22,10 @@ before_install:
   - curl -fsSkL https://raw.github.com/cask/cask/master/go | python
   - export PATH=$HOME/.cask/bin:$PATH
   - cask
+
+  # Work around SSL-related failures in Travis, see
+  # https://stackoverflow.com/questions/21477683/mercurial-https-clone-abort-error-wrong-version-number
+  - echo "[ui]\ntls = False" > $HOME/.hgrc
 
 env:
   #- EVM_EMACS=emacs-23.4-travis

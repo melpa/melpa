@@ -1,0 +1,1 @@
+(magit-reviewboard :fetcher github :repo "jtamagnan/magit-reviewboard")

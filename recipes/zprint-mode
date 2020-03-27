@@ -1,1 +1,3 @@
-(zprint-mode :repo "pesterhazy/zprint-mode.el" :fetcher github)
+(zprint-mode :repo "pesterhazy/zprint-mode.el"
+             :fetcher github
+             :files (:defaults "bin"))

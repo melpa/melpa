@@ -1,3 +1,0 @@
-(lsp-dart
- :fetcher github
- :repo "twlz0ne/lsp-dart")

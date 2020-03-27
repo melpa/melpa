@@ -1,0 +1,2 @@
+(helm-fd :fetcher github
+         :repo "lerouxrgd/helm-fd")

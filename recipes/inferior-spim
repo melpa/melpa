@@ -1,1 +1,0 @@
-(inferior-spim :repo "kaihaosw/inferior-spim" :fetcher github)

@@ -1,1 +1,0 @@
-(goto-gem :fetcher gitlab :repo "pidu/goto-gem")

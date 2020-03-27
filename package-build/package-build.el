@@ -8,7 +8,7 @@
 ;; Created: 2011-09-30
 ;; Version: 0.1
 ;; Keywords: tools
-;; Package-Requires: ((cl-lib "0.5"))
+;; Package-Requires: ((cl-lib "0.5") (emacs "24.1"))
 
 ;; This file is not (yet) part of GNU Emacs.
 ;; However, it is distributed under the same license.
@@ -86,32 +86,33 @@
   :group 'package-build
   :type 'boolean)
 
-(defcustom package-build-timeout-executable
-  (let ((prog (or (executable-find "timeout")
-                  (executable-find "gtimeout"))))
-    (when (and prog
-               (string-match-p "^ *-k"
-                               (shell-command-to-string (concat prog " --help"))))
-      prog))
+(defcustom package-build-timeout-executable "timeout"
   "Path to a GNU coreutils \"timeout\" command if available.
-This must be a version which supports the \"-k\" option."
+This must be a version which supports the \"-k\" option.
+
+On MacOS it is possible to install coreutils using Homebrew or
+similar, which will provide the GNU timeout program as
+\"gtimeout\"."
   :group 'package-build
   :type '(file :must-match t))
 
-(defcustom package-build-timeout-secs 600
+(defcustom package-build-timeout-secs nil
   "Wait this many seconds for external processes to complete.
 
 If an external process takes longer than specified here to
-complete, then it is terminated.  This only has an effect
-if `package-build-timeout-executable' is non-nil."
+complete, then it is terminated.  If nil, then no time limit is
+applied.  This setting requires
+`package-build-timeout-executable' to be set."
   :group 'package-build
   :type 'number)
 
-(defcustom package-build-tar-executable
-  (or (executable-find "gtar")
-      (executable-find "tar"))
+(defcustom package-build-tar-executable "tar"
   "Path to a (preferably GNU) tar command.
-Certain package names (e.g. \"@\") may not work properly with a BSD tar."
+Certain package names (e.g. \"@\") may not work properly with a BSD tar.
+
+On MacOS it is possible to install coreutils using Homebrew or
+similar, which will provide the GNU timeout program as
+\"gtar\"."
   :group 'package-build
   :type '(file :must-match t))
 
@@ -131,14 +132,17 @@ The string in the capture group should be parsed as valid by `version-to-list'."
 
 (defun package-build--message (format-string &rest args)
   "Behave like `message' if `package-build-verbose' is non-nil.
-Otherwise do nothing."
+Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
   (when package-build-verbose
     (apply 'message format-string args)))
 
 ;;; Version Handling
 
 (defun package-build--parse-time (str &optional regexp)
-  "Parse STR as a time, and format as a YYYYMMDD.HHMM string."
+  "Parse STR as a time, and format as a YYYYMMDD.HHMM string.
+Always use Coordinated Universal Time (UTC) for output string.
+If REGEXP is provided, it is applied to STR and the function
+parses the first match group instead of STR."
   (unless str
     (error "No valid timestamp found"))
   (setq str (substring-no-properties str))
@@ -155,8 +159,8 @@ Otherwise do nothing."
                    (concat (match-string 1 str) "-" (match-string 2 str) "-"
                            (match-string 3 str) " " (match-string 4 str))
                  str))))
-    (concat (format-time-string "%Y%m%d." time)
-            (format "%d" (string-to-number (format-time-string "%H%M" time))))))
+    (concat (format-time-string "%Y%m%d." time t)
+            (format "%d" (string-to-number (format-time-string "%H%M" time t))))))
 
 (defun package-build--find-version-newest (tags &optional regexp)
   "Find the newest version in TAGS matching REGEXP.
@@ -195,7 +199,7 @@ is used instead."
             (file-name-as-directory (or directory default-directory)))
           (argv (nconc (unless (eq system-type 'windows-nt)
                          (list "env" "LC_ALL=C"))
-                       (if package-build-timeout-executable
+                       (if (and package-build-timeout-secs package-build-timeout-executable)
                            (nconc (list package-build-timeout-executable
                                         "-k" "60" (number-to-string
                                                    package-build-timeout-secs)
@@ -246,7 +250,7 @@ is used instead."
      ((and (file-exists-p (expand-file-name ".git" dir))
            (string-equal (package-build--used-url rcp) url))
       (package-build--message "Updating %s" dir)
-      (package-build--run-process dir nil "git" "fetch" "--all" "--tags"))
+      (package-build--run-process dir nil "git" "fetch" "-f" "--all" "--tags"))
      (t
       (when (file-exists-p dir)
         (delete-directory dir t))
@@ -454,19 +458,14 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
     (if (fboundp 'package-desc-create)
         (let ((extras (package-desc-extras desc)))
           (when (and keywords (not (assq :keywords extras)))
-            ;; Add keywords to package properties, if not already present
             (push (cons :keywords keywords) extras))
           (vector (package-desc-name desc)
                   (package-desc-reqs desc)
                   (package-desc-summary desc)
                   (package-desc-version desc)
                   extras))
-      ;; The regexp and the processing is taken from `lm-homepage' in Emacs 24.4
-      (let* ((page (lm-header "\\(?:x-\\)?\\(?:homepage\\|url\\)"))
-             (homepage (if (and page (string-match "^<.+>$" page))
-                           (substring page 1 -1)
-                         page))
-             extras)
+      (let ((homepage (package-build--lm-homepage))
+            extras)
         (when keywords (push (cons :keywords keywords) extras))
         (when homepage (push (cons :url homepage) extras))
         (vector  (aref desc 0)
@@ -533,7 +532,12 @@ If PKG-INFO is nil, an empty one is created."
      (package-recipe--working-tree rcp)
      "git" "rev-parse" "HEAD")))
 
-(defmethod package-build--get-commit ((rcp package-hg-recipe))) ; TODO
+(defmethod package-build--get-commit ((rcp package-hg-recipe))
+  (ignore-errors
+    (package-build--run-process-match
+     "changeset:[[:space:]]+[[:digit:]]+:\\([[:xdigit:]]+\\)"
+     (package-recipe--working-tree rcp)
+     "hg" "log" "--debug" "--limit=1")))
 
 (defun package-build--archive-entry (rcp pkg-info type)
   (let ((name (intern (aref pkg-info 0)))
@@ -710,7 +714,9 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 ;;;###autoload
 (defun package-build-archive (name &optional dump-archive-contents)
-  "Build a package archive for the package named NAME."
+  "Build a package archive for the package named NAME.
+if DUMP-ARCHIVE-CONTENTS is non-nil, the updated archive contents
+are subsequently dumped."
   (interactive (list (package-recipe-read-name) t))
   (let ((start-time (current-time))
         (rcp (package-recipe-lookup name)))
@@ -853,35 +859,32 @@ Do not use this alias elsewhere.")
     (dolist (name recipes)
       (let ((rcp (with-demoted-errors (package-recipe-lookup name))))
         (if rcp
-            (if (with-demoted-errors (package-build-archive rcp))
+            (if (with-demoted-errors (package-build-archive name) t)
                 (cl-incf success)
               (push name failed))
           (push name invalid))))
     (if (not (or invalid failed))
         (message "Successfully built all %s packages" total)
-      (message
-       (concat
-        (format "Successfully built %i of %s packages" success total)
-        (and invalid
-             (format "Did not built packages for %i invalid recipes:\n%s"
-                     (length invalid)
-                     (mapconcat (lambda (n) (concat "  " n)) invalid "\n")))
-        (and failed
-             (format "Building %i packages failed:\n%s"
-                     (length failed)
-                     (mapconcat (lambda (n) (concat "  " n)) invalid "\n")))))))
+      (message "Successfully built %i of %s packages" success total)
+      (when invalid
+        (message "Did not built packages for %i invalid recipes:\n%s"
+                 (length invalid)
+                 (mapconcat (lambda (n) (concat "  " n)) invalid "\n")))
+      (when failed
+        (message "Building %i packages failed:\n%s"
+                 (length failed)
+                 (mapconcat (lambda (n) (concat "  " n)) failed "\n")))))
   (package-build-cleanup))
 
 (defun package-build-cleanup ()
   "Remove previously built packages that no longer have recipes."
   (interactive)
-  (package-build--archive-entries)
   (package-build-dump-archive-contents))
 
 ;;; Archive
 
 (defun package-build-archive-alist ()
-  "Return the archive list."
+  "Return the archive contents, without updating it first."
   (let ((file (expand-file-name "archive-contents" package-build-archive-dir)))
     (and (file-exists-p file)
          (with-temp-buffer
@@ -889,43 +892,59 @@ Do not use this alias elsewhere.")
            (cdr (read (current-buffer)))))))
 
 (defun package-build-dump-archive-contents (&optional file pretty-print)
-  "Dump the list of built packages to FILE.
+  "Update and return the archive contents.
 
-If FILE-NAME is not specified, the default archive-contents file is used."
-  (with-temp-file
-      (or file (expand-file-name "archive-contents" package-build-archive-dir))
-    (let ((data (cons 1 (package-build--archive-entries))))
-      (if pretty-print
-          (pp data (current-buffer))
-        (print data (current-buffer))))))
-
-(defun package-build--archive-entries ()
-  "Return up-to-date archive list.
-Read archive entry files, remove obsolete entry files and
-artifacts, and return a list of the up-to-date archive entries."
+If non-nil, then store the archive contents in FILE instead of in
+the \"archive-contents\" file inside `package-build-archive-dir'.
+If PRETTY-PRINT is non-nil, then pretty-print insted of using one
+line per entry."
   (let (entries)
-    (dolist (new (mapcar (lambda (file)
-                           (with-temp-buffer
-                             (insert-file-contents file)
-                             (read (current-buffer))))
-                         (directory-files package-build-archive-dir t
-                                          ".*\.entry$"))
-                 entries)
-      (let ((old (assq (car new) entries)))
-        (when old
-          (when (version-list-< (elt (cdr new) 0)
-                                (elt (cdr old) 0))
-            ;; swap old and new
-            (cl-rotatef old new))
-          (package-build--message "Removing archive: %s" old)
-          (let ((file (package-build--artifact-file old)))
-            (when (file-exists-p file)
-              (delete-file file)))
-          (let ((file (package-build--archive-entry-file old)))
-            (when (file-exists-p file)
-              (delete-file file)))
-          (setq entries (remove old entries)))
-        (add-to-list 'entries new)))))
+    (dolist (file (directory-files package-build-archive-dir t ".*\.entry$"))
+      (let* ((entry (with-temp-buffer
+                      (insert-file-contents file)
+                      (read (current-buffer))))
+             (name (car entry))
+             (other-entry (assq name entries)))
+        (if (not (file-exists-p (expand-file-name (symbol-name name)
+                                                  package-build-recipes-dir)))
+            (package-build--remove-archive-files entry)
+          (when other-entry
+            (when (version-list-< (elt (cdr entry) 0)
+                                  (elt (cdr other-entry) 0))
+              ;; Swap so that other-entry has the smallest version.
+              (cl-rotatef other-entry entry))
+            (package-build--remove-archive-files other-entry)
+            (setq entries (remove other-entry entries)))
+          (add-to-list 'entries entry))))
+    (setq entries (nreverse entries))
+    (with-temp-file
+        (or file
+            (expand-file-name "archive-contents" package-build-archive-dir))
+      (let ((print-level nil)
+            (print-length nil))
+        (if pretty-print
+            (pp (cons 1 entries) (current-buffer))
+          (insert "(1")
+          (dolist (entry entries)
+            (newline)
+            (insert " ")
+            (prin1 entry (current-buffer)))
+          (insert ")"))))
+    entries))
+
+(defalias 'package-build--archive-entries 'package-build-dump-archive-contents)
+
+(defun package-build--remove-archive-files (archive-entry)
+  "Remove the entry and archive file for ARCHIVE-ENTRY."
+  (package-build--message "Removing archive: %s-%s"
+                          (car archive-entry)
+                          (package-version-join (aref (cdr archive-entry) 0)))
+  (let ((file (package-build--artifact-file archive-entry)))
+    (when (file-exists-p file)
+      (delete-file file)))
+  (let ((file (package-build--archive-entry-file archive-entry)))
+    (when (file-exists-p file)
+      (delete-file file))))
 
 ;;; Exporting Data as Json
 
@@ -935,15 +954,19 @@ artifacts, and return a list of the up-to-date archive entries."
   (with-temp-file file
     (insert
      (json-encode
-      (cl-mapcan (lambda (name)
-                   (condition-case nil
-                       ;; Filter out invalid recipes.
-                       (when (with-demoted-errors (package-recipe-lookup name))
-                         (with-temp-buffer
-                           (insert-file-contents
-                            (expand-file-name name package-build-recipes-dir))
-                           (list (read (current-buffer)))))))
-                 (package-recipe-recipes))))))
+      (cl-mapcan
+       (lambda (name)
+         (ignore-errors ; Silently ignore corrupted recipes.
+           (and (package-recipe-lookup name)
+                (with-temp-buffer
+                  (insert-file-contents
+                   (expand-file-name name package-build-recipes-dir))
+                  (let ((exp (read (current-buffer))))
+                    (when (plist-member (cdr exp) :files)
+                      (plist-put (cdr exp) :files
+                                 (format "%S" (plist-get (cdr exp) :files))))
+                    (list exp))))))
+       (package-recipe-recipes))))))
 
 (defun package-build--pkg-info-for-json (info)
   "Convert INFO into a data structure which will serialize to JSON in the desired shape."
@@ -982,8 +1005,10 @@ artifacts, and return a list of the up-to-date archive entries."
                            (setcdr maintainer
                                    (format-person (cdr maintainer))))
                          (when authors
-                           (setcdr authors
-                                   (mapcar #'format-person (cdr authors))))
+                           (if (cl-every #'listp (cdr authors))
+                               (setcdr authors
+                                       (mapcar #'format-person (cdr authors)))
+                             (assq-delete-all :authors extra)))
                          (package-build--pkg-info-for-json info))))
                (package-build-archive-alist))))
 
@@ -991,6 +1016,19 @@ artifacts, and return a list of the up-to-date archive entries."
   "Dump the build packages list to FILE as json."
   (with-temp-file file
     (insert (json-encode (package-build--archive-alist-for-json)))))
+
+;;; Backports
+
+(defun package-build--lm-homepage (&optional file)
+  "Return the homepage in file FILE, or current buffer if FILE is nil.
+This is a copy of `lm-homepage', which first appeared in Emacs 24.4."
+  (let ((page (lm-with-file file
+                (lm-header "\\(?:x-\\)?\\(?:homepage\\|url\\)"))))
+    (if (and page (string-match "^<.+>$" page))
+        (substring page 1 -1)
+      page)))
+
+;;; _
 
 (provide 'package-build)
 

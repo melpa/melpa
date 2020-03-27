@@ -1,0 +1,2 @@
+(register-quicknav :fetcher git
+                   :url "https://schlomp.space/tastytea/register-quicknav.git")

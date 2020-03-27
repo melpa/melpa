@@ -1,1 +1,1 @@
-(project-abbrev :repo "jcs090218/project-abbrev" :fetcher github)
+(project-abbrev :repo "jcs-elpa/project-abbrev" :fetcher github)

@@ -1,0 +1,3 @@
+(clang-format+
+ :repo "SavchenkoValeriy/emacs-clang-format-plus"
+ :fetcher github)

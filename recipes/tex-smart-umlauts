@@ -1,1 +1,1 @@
-(tex-smart-umlauts :fetcher github :repo "emacsorphanage/tex-smart-umlauts")
+(tex-smart-umlauts :fetcher github :repo "emacsmirror/tex-smart-umlauts")

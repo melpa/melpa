@@ -1,1 +1,1 @@
-(multi-libvterm :fetcher github :repo "suonlight/multi-libvterm")
+(multi-vterm :fetcher github :repo "suonlight/multi-libvterm")

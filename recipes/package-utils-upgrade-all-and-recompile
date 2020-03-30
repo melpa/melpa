@@ -1,0 +1,3 @@
+(package-utils-upgrade-all-and-recompile
+ :repo "ideasman42/emacs-package-utils-upgrade-all-and-recompile"
+ :fetcher gitlab)

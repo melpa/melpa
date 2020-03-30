@@ -1,1 +1,1 @@
-(vhdl-tools :repo "csantosb/vhdl-tools" :fetcher github)
+(vhdl-tools :repo "csantosb/vhdl-tools" :fetcher gitlab)

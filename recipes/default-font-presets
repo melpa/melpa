@@ -1,0 +1,3 @@
+(default-font-presets
+ :repo "ideasman42/emacs-default-font-presets"
+ :fetcher gitlab)

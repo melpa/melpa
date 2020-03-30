@@ -1,0 +1,3 @@
+(revert-buffer-all
+ :repo "ideasman42/emacs-revert-buffer-all"
+ :fetcher gitlab)

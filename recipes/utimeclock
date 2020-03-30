@@ -1,0 +1,3 @@
+(utimeclock
+ :repo "ideasman42/emacs-utimeclock"
+ :fetcher gitlab)

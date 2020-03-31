@@ -1,0 +1,4 @@
+(simple-modeline
+ :repo "gexplorer/flycheck-indicator"
+ :fetcher github
+ :files ("*.el"))

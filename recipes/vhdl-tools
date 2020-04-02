@@ -1,1 +1,1 @@
-(vhdl-tools :repo "csantosb/vhdl-tools" :fetcher gitlab)
+(vhdl-tools :repo "emacs-elisp/vhdl-tools" :fetcher gitlab)

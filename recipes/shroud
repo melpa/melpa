@@ -1,2 +1,10 @@
-(shroud :fetcher github
-              :repo "o-nly/emacs-shroud")
+(shroud :fetcher git
+        :url "https://git.savannah.nongnu.org/git/emacs-shroud.git"
+        :files ("src/shroud"
+                "src/shroud*.el"
+                "doc/emacs-shroud.texi"
+                "README"
+                "NEWS"
+                "AUTHORS"
+                "COPYING"
+                (:exclude "make.el")))

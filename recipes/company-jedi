@@ -1,2 +1,1 @@
-(company-jedi :fetcher github
-              :repo "syohex/emacs-company-jedi")
+(company-jedi :fetcher github :repo "emacsorphanage/company-jedi")

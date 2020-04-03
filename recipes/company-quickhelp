@@ -1,1 +1,1 @@
-(company-quickhelp :fetcher github :repo "expez/company-quickhelp")
+(company-quickhelp :fetcher github :repo "company-mode/company-quickhelp")

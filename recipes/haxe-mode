@@ -1,1 +1,1 @@
-(haxe-mode :repo "jcs-elpa/haxe-mode" :fetcher github )
+(haxe-mode :repo "emacsorphanage/haxe-mode" :fetcher github )

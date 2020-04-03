@@ -30,9 +30,7 @@ read on for details.
 ## Usage
 
 To use the MELPA repository, you'll need an Emacs with
-`package.el`. Emacs 24 has `package.el` bundled with it, and there's
-also a
-[version you can use with Emacs 23](http://repo.or.cz/w/emacs.git/blob_plain/ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09:/lisp/emacs-lisp/package.el).
+`package.el`, ie. Emacs 24.1 or greater.
 
 Enable installation of packages from MELPA by adding an entry to
 `package-archives` after `(require 'package)` and before the call to
@@ -49,12 +47,11 @@ which is unsafe because it allows man-in-the-middle attacks.
 There are two things you can do about this warning:
 1. Install an Emacs version that does support SSL and be safe.
 2. Remove this warning from your init file so you won't see it again."))
-  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
   (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+  ;; and `package-pinned-packages`. Most users will not need or want to do this.
   ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
-  (when (< emacs-major-version 24)
-    ;; For important compatibility libraries like cl-lib
-    (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
+  )
 (package-initialize)
 ```
 
@@ -161,7 +158,8 @@ the `git`-based fetchers.
 
 - `:branch`
 specifies the branch of the git repo to use. This is like `:commit`, but
-it adds the "origin/" prefix automatically.
+it adds the "origin/" prefix automatically. This must be specified when
+using a branch other than "master".
 
 - `:version-regexp` is a regular expression for extracting a
   version-string from the repository tags.  The default matches

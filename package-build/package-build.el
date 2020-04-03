@@ -8,7 +8,7 @@
 ;; Created: 2011-09-30
 ;; Version: 0.1
 ;; Keywords: tools
-;; Package-Requires: ((cl-lib "0.5"))
+;; Package-Requires: ((cl-lib "0.5") (emacs "24.1"))
 
 ;; This file is not (yet) part of GNU Emacs.
 ;; However, it is distributed under the same license.
@@ -132,7 +132,7 @@ The string in the capture group should be parsed as valid by `version-to-list'."
 
 (defun package-build--message (format-string &rest args)
   "Behave like `message' if `package-build-verbose' is non-nil.
-Otherwise do nothing."
+Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
   (when package-build-verbose
     (apply 'message format-string args)))
 
@@ -140,7 +140,9 @@ Otherwise do nothing."
 
 (defun package-build--parse-time (str &optional regexp)
   "Parse STR as a time, and format as a YYYYMMDD.HHMM string.
-Always use Coordinated Universal Time (UTC) for output string."
+Always use Coordinated Universal Time (UTC) for output string.
+If REGEXP is provided, it is applied to STR and the function
+parses the first match group instead of STR."
   (unless str
     (error "No valid timestamp found"))
   (setq str (substring-no-properties str))
@@ -712,7 +714,9 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 
 ;;;###autoload
 (defun package-build-archive (name &optional dump-archive-contents)
-  "Build a package archive for the package named NAME."
+  "Build a package archive for the package named NAME.
+if DUMP-ARCHIVE-CONTENTS is non-nil, the updated archive contents
+are subsequently dumped."
   (interactive (list (package-recipe-read-name) t))
   (let ((start-time (current-time))
         (rcp (package-recipe-lookup name)))
@@ -875,13 +879,12 @@ Do not use this alias elsewhere.")
 (defun package-build-cleanup ()
   "Remove previously built packages that no longer have recipes."
   (interactive)
-  (package-build--archive-entries)
   (package-build-dump-archive-contents))
 
 ;;; Archive
 
 (defun package-build-archive-alist ()
-  "Return the archive list."
+  "Return the archive contents, without updating it first."
   (let ((file (expand-file-name "archive-contents" package-build-archive-dir)))
     (and (file-exists-p file)
          (with-temp-buffer
@@ -889,54 +892,59 @@ Do not use this alias elsewhere.")
            (cdr (read (current-buffer)))))))
 
 (defun package-build-dump-archive-contents (&optional file pretty-print)
-  "Dump the list of built packages to FILE.
+  "Update and return the archive contents.
 
-If FILE-NAME is not specified, the default archive-contents file is used.
-
-When PRETTY-PRINT is non-nil, fully pretty-print the output.
-This can be very slow when the list of known packages is extremely long."
-  (with-temp-file
-      (or file (expand-file-name "archive-contents" package-build-archive-dir))
-    (let ((entries (package-build--archive-entries))
-          ;; Avoid truncation
-          print-level
-          print-length)
-      (if pretty-print
-          (pp (cons 1 entries) (current-buffer))
-        ;; Pseudo-pretty-printing, placing each entry on one line
-        (insert "(1")
-        (dolist (entry entries)
-          (newline)
-          (prin1 entry (current-buffer)))
-        (insert ")")))))
-
-(defun package-build--archive-entries ()
-  "Return up-to-date archive list.
-Read archive entry files, remove obsolete entry files and
-artifacts, and return a list of the up-to-date archive entries."
+If non-nil, then store the archive contents in FILE instead of in
+the \"archive-contents\" file inside `package-build-archive-dir'.
+If PRETTY-PRINT is non-nil, then pretty-print insted of using one
+line per entry."
   (let (entries)
-    (dolist (new (mapcar (lambda (file)
-                           (with-temp-buffer
-                             (insert-file-contents file)
-                             (read (current-buffer))))
-                         (directory-files package-build-archive-dir t
-                                          ".*\.entry$"))
-                 entries)
-      (let ((old (assq (car new) entries)))
-        (when old
-          (when (version-list-< (elt (cdr new) 0)
-                                (elt (cdr old) 0))
-            ;; swap old and new
-            (cl-rotatef old new))
-          (package-build--message "Removing archive: %s" old)
-          (let ((file (package-build--artifact-file old)))
-            (when (file-exists-p file)
-              (delete-file file)))
-          (let ((file (package-build--archive-entry-file old)))
-            (when (file-exists-p file)
-              (delete-file file)))
-          (setq entries (remove old entries)))
-        (add-to-list 'entries new)))))
+    (dolist (file (directory-files package-build-archive-dir t ".*\.entry$"))
+      (let* ((entry (with-temp-buffer
+                      (insert-file-contents file)
+                      (read (current-buffer))))
+             (name (car entry))
+             (other-entry (assq name entries)))
+        (if (not (file-exists-p (expand-file-name (symbol-name name)
+                                                  package-build-recipes-dir)))
+            (package-build--remove-archive-files entry)
+          (when other-entry
+            (when (version-list-< (elt (cdr entry) 0)
+                                  (elt (cdr other-entry) 0))
+              ;; Swap so that other-entry has the smallest version.
+              (cl-rotatef other-entry entry))
+            (package-build--remove-archive-files other-entry)
+            (setq entries (remove other-entry entries)))
+          (add-to-list 'entries entry))))
+    (setq entries (nreverse entries))
+    (with-temp-file
+        (or file
+            (expand-file-name "archive-contents" package-build-archive-dir))
+      (let ((print-level nil)
+            (print-length nil))
+        (if pretty-print
+            (pp (cons 1 entries) (current-buffer))
+          (insert "(1")
+          (dolist (entry entries)
+            (newline)
+            (insert " ")
+            (prin1 entry (current-buffer)))
+          (insert ")"))))
+    entries))
+
+(defalias 'package-build--archive-entries 'package-build-dump-archive-contents)
+
+(defun package-build--remove-archive-files (archive-entry)
+  "Remove the entry and archive file for ARCHIVE-ENTRY."
+  (package-build--message "Removing archive: %s-%s"
+                          (car archive-entry)
+                          (package-version-join (aref (cdr archive-entry) 0)))
+  (let ((file (package-build--artifact-file archive-entry)))
+    (when (file-exists-p file)
+      (delete-file file)))
+  (let ((file (package-build--archive-entry-file archive-entry)))
+    (when (file-exists-p file)
+      (delete-file file))))
 
 ;;; Exporting Data as Json
 

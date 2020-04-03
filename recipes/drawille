@@ -1,1 +1,1 @@
-(drawille :repo "josuah/drawille-el" :fetcher github)
+(drawille :repo "emacsattic/drawille" :fetcher github)

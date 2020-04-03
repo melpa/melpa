@@ -3,9 +3,14 @@
 MELPA_REPO=/mnt/store/melpa
 cd "${MELPA_REPO}"
 
-unset STABLE
-/usr/bin/python ${MELPA_REPO}/docker/logprocessor/process_log.py
+# Unstable
+/usr/bin/python ${MELPA_REPO}/docker/logprocessor/process_log.py \
+  --db /mnt/db/download_log_full.db \
+  --jsondir html \
+  /mnt/store/log/melpa.access.log
 
-export STABLE=t
-/usr/bin/python ${MELPA_REPO}/docker/logprocessor/process_log.py
-
+# Stable
+/usr/bin/python ${MELPA_REPO}/docker/logprocessor/process_log.py \
+   --db /mnt/db/download_log_stable_full.db \
+   --jsondir html-stable \
+   /mnt/store/log-stable/melpa.access.log

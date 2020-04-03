@@ -1,1 +1,1 @@
-(helm-ack :repo "syohex/emacs-helm-ack" :fetcher github)
+(helm-ack :repo "emacsorphanage/helm-ack" :fetcher github)

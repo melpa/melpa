@@ -1,0 +1,2 @@
+(vimgolf :repo "timvisher/vimgolf.el" :fetcher github)
+

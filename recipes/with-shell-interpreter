@@ -1,0 +1,2 @@
+(with-shell-interpreter :repo "p3r7/with-shell-interpreter"
+                        :fetcher github)

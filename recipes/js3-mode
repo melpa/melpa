@@ -1,2 +1,2 @@
-(js3-mode :repo "thomblake/js3-mode" :fetcher github)
+(js3-mode :repo "tamzinblake/js3-mode" :fetcher github)
 

@@ -5,7 +5,7 @@
 # in the commit range associated with the build.
 #
 
-set -exo pipefail
+set -eo pipefail
 
 if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
     git show --pretty=format: --name-only "$TRAVIS_COMMIT_RANGE"|sort|uniq

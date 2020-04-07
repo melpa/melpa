@@ -1,0 +1,3 @@
+(smart-input-source
+  :fetcher github
+  :repo "laishulu/emacs-smart-input-source")

@@ -1,0 +1,4 @@
+(lambdapi-mode
+ :fetcher github
+ :repo "Deducteam/lambdapi"
+ :files ("editors/emacs/*.el"))

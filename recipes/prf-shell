@@ -1,0 +1,2 @@
+(prf-shell :repo "p3r7/prf-shell"
+           :fetcher github)

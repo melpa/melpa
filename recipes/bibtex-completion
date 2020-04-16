@@ -1,0 +1,1 @@
+(bibtex-completion :fetcher github :repo "tmalsburg/helm-bibtex" :files ("bibtex-completion.el"))

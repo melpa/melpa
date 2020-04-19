@@ -1,0 +1,1 @@
+(setup :url "https://git.sr.ht/~zge/setup.el" :fetcher git)

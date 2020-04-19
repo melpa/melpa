@@ -1,4 +1,0 @@
-(prf-shell :repo "p3r7/prf-shell"
-           :fetcher github
-           :files (:defaults
-                   (:exclude "prf-shell-command.el" "prf-remote-shell.el")))

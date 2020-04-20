@@ -1,0 +1,1 @@
+(helm-treemacs-icons :repo "yyoncho/helm-treemacs-icons " :fetcher github)

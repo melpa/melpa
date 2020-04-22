@@ -1,1 +1,0 @@
-(perl6-mode :fetcher github :repo "perl6/perl6-mode" :files (:defaults (:exclude "nqp-mode.el")))

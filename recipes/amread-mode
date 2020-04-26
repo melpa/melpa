@@ -1,0 +1,1 @@
+(amread-mode :repo "stardiviner/amread-mode" :fetcher github)

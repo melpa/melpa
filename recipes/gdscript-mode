@@ -1,4 +1,2 @@
-(gdscript-mode
- :fetcher github
- :repo "AdamBark/gdscript-mode")
- 
+(gdscript-mode :fetcher github
+               :repo "GDQuest/emacs-gdscript-mode")

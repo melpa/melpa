@@ -1,0 +1,2 @@
+(flymake-phpstan :fetcher github :repo "emacs-php/phpstan.el"
+                 :files ("flymake-phpstan.el"))

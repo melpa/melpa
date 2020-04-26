@@ -1,0 +1,1 @@
+(ivy-emoji :fetcher github :repo "sbozzolo/ivy-emoji")

@@ -1,0 +1,1 @@
+(dashboard-ls :repo "jcs-elpa/dashboard-ls" :fetcher github)

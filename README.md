@@ -158,7 +158,8 @@ the `git`-based fetchers.
 
 - `:branch`
 specifies the branch of the git repo to use. This is like `:commit`, but
-it adds the "origin/" prefix automatically.
+it adds the "origin/" prefix automatically. This must be specified when
+using a branch other than "master".
 
 - `:version-regexp` is a regular expression for extracting a
   version-string from the repository tags.  The default matches

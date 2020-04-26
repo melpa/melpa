@@ -1,1 +1,3 @@
-(smart-tab :repo "genehack/smart-tab" :fetcher github)
+(smart-tab
+ :fetcher git
+ :url "https://git.genehack.net/genehack/smart-tab.git")

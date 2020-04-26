@@ -1,1 +1,1 @@
-(ivy-bibtex :fetcher github :repo "tmalsburg/helm-bibtex" :files ("ivy-bibtex.el" "bibtex-completion.el"))
+(ivy-bibtex :fetcher github :repo "tmalsburg/helm-bibtex" :files ("ivy-bibtex.el"))

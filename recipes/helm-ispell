@@ -1,1 +1,1 @@
-(helm-ispell :repo "syohex/emacs-helm-ispell" :fetcher github)
+(helm-ispell :repo "emacsorphanage/helm-ispell" :fetcher github)

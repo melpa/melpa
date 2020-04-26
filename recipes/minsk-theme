@@ -1,1 +1,1 @@
-(minsk-theme :repo "jlpaca/minsk-theme" :fetcher github)
+(minsk-theme :fetcher github :repo "jlpaca/minsk-theme" :files ("theme/emacs/minsk-theme.el"))

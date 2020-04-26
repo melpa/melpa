@@ -123,6 +123,13 @@ will delay the process.
      decomposing your long functions into smaller, well-named and
      documented, ones.
 
+- Avoid change logs and readmes :: Files like these would only end up
+     in an obscure installation directory where a user would never know
+     to look when searching for information. Possible exceptions to this
+     policy are .info files since these are automatically added to Emacs'
+     info index and the presence of interactive commands that would
+     display the files.
+
 - (optional) Tag commits to release :: To have a stable version
      generated for your package simply tag the SCM repository using a
      naming compatible with the ~version-to-list~ function. The

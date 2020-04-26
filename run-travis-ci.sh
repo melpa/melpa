@@ -1,4 +1,6 @@
-#!/bin/sh -e
+#!/bin/bash
+
+set -eo pipefail
 
 exec 2>&1
 cd "$(dirname "$0")"
@@ -11,7 +13,7 @@ echo "EMACS = $EMACS"
 echo
 
 echo "Building recipes touched in commits $TRAVIS_COMMIT_RANGE"
-changed_recipes=$(./travis-changed-files|grep -e '^recipes/[a-z0-9]'|sed 's/^recipes\///')
+changed_recipes=$(./travis-changed-files | (grep -Po '(?<=^recipes/)[a-z0-9].*' || true))
 for recipe_name in $changed_recipes; do
     if [ -f "./recipes/$recipe_name" ]; then
         echo "----------------------------------------------------"

@@ -1,0 +1,1 @@
+(auto-scroll-mode :repo "stardiviner/auto-scroll-mode" :fetcher github)

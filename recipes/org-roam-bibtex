@@ -1,0 +1,2 @@
+(org-roam-bibtex :fetcher github
+                 :repo "zaeph/org-roam-bibtex")

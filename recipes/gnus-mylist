@@ -1,2 +1,0 @@
-(gnus-mylist :fetcher github
-              :repo "deusmax/gnus-mylist")

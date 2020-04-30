@@ -6,7 +6,7 @@ MELPA is a growing collection of `package.el`-compatible Emacs Lisp
 packages built automatically on our server from the upstream source
 code using simple recipes. (Think of it as a server-side version of
 [el-get](https://github.com/dimitri/el-get), or even
-[Homebrew](https://github.com/Homebrew/homebrew).)
+[Homebrew](https://github.com/Homebrew/brew).)
 
 Packages are updated at intervals throughout the day.
 

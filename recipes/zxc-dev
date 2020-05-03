@@ -1,0 +1,3 @@
+(zxc-dev :repo "zxcwindy/zxc-dev"
+	:fetcher github
+	:files ("*.el" "backend"))

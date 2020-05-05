@@ -1,0 +1,3 @@
+(emacros
+  :repo "CsBigDataHub/emacros"
+  :fetcher github)

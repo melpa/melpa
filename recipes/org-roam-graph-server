@@ -1,4 +1,0 @@
-(org-roam-graph-server
- :repo "goktug97/org-roam-graph-server"
- :fetcher github
- :files ("*.el" "index.html" "assets"))

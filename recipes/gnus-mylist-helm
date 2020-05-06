@@ -1,2 +1,0 @@
-(gnus-mylist-helm :fetcher github
-                  :repo "deusmax/gnus-mylist-helm")

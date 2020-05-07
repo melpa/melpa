@@ -1,2 +1,4 @@
-(org-pdftools :repo "fuxialexander/org-pdftools" :fetcher github
-              :files ("org-pdftools.el"))
+(org-pdftools :fetcher github
+              :repo "fuxialexander/org-pdftools"
+              :files ("org-pdftools.el")
+              :old-names (org-pdfview))

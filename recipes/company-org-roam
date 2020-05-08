@@ -1,2 +1,2 @@
 (company-org-roam :fetcher github
-                   :repo "jethrokuan/company-org-roam")
+                   :repo "org-roam/company-org-roam")

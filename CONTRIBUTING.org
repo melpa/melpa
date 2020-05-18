@@ -190,7 +190,7 @@ Please test that the package builds properly by following the steps
 below.
 
 Let ~<NAME>~ denote the filename of the new recipe. Build the recipe
-via ~make recipes/<name>~, or through pressing ~C-c C-c~ in the recipe
+via ~make recipes/<NAME>~, or through pressing ~C-c C-c~ in the recipe
 file buffer. Be sure that the ~emacs~ binary on your ~PATH~ is at
 least version 23, or set ~$EMACS_COMMAND~ to the location of a
 suitable binary.
@@ -212,7 +212,7 @@ packages will be available for installation along with those already
 in MELPA:
 
 #+BEGIN_SRC shell
-EMACS_COMMAND=/path/to/emacs make sandbox INSTALL=<name>
+EMACS_COMMAND=/path/to/emacs make sandbox INSTALL=<NAME>
 #+END_SRC
 
 From within Emacs, install and test your package as appropriate. This

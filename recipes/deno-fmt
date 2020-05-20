@@ -1,0 +1,3 @@
+(deno-fmt :repo "rclarey/deno-emacs"
+           :fetcher github
+           :files ("deno-fmt.el"))

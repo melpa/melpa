@@ -39,7 +39,7 @@
 
   melpa.Package = function(data) {
     ["name", "description", "version", "dependencies", "source", "commit",
-     "downloads", "fetcher", "recipeURL", "packageURL", "sourceURL", "oldNames"].map(function(p) {
+     "downloads", "fetcher", "recipeURL", "packageURL", "homeURL", "sourceURL", "oldNames"].map(function(p) {
       this[p] = data[p];
     }.bind(this));
     this._searchText = _([data.name, data.description, data.version].concat(data.searchExtra || []))
@@ -153,6 +153,7 @@
       });
       var oldNames = recipe['old-names'] || [];
       var commit = props.commit;
+      var sourceURL = calculateSourceURL(name, recipe, commit);
 
       pkgs.push(new melpa.Package({
         name: name,
@@ -165,7 +166,8 @@
         fetcher: recipe.fetcher,
         recipeURL: "https://github.com/melpa/melpa/blob/master/recipes/" + name,
         packageURL: "packages/" + name + "-" + version + "." + (built.type == "single" ? "el" : "tar"),
-        sourceURL: calculateSourceURL(name, recipe, commit),
+        homeURL: props.url,
+        sourceURL: sourceURL,
         oldNames: oldNames,
         searchExtra: [recipe.repo]
       }));
@@ -420,7 +422,8 @@
       m("p", [
         m("a.btn.btn-default", {href: pkg.recipeURL}, [glyphicon('cutlery'), " Recipe"]), ' ',
         m("a.btn.btn-default", {href: pkg.packageURL}, [glyphicon('download'), " Download"]), ' ',
-        (pkg.sourceURL ? m("a.btn.btn-default", {href: pkg.sourceURL}, [glyphicon('home'), " Homepage"]) : '')
+        (pkg.sourceURL ? m("a.btn.btn-default", {href: pkg.sourceURL}, [glyphicon('folder-open'), " Source code"]) : ''), ' ',
+        (pkg.homeURL ? m("a.btn.btn-default", {href: pkg.homeURL}, [glyphicon('home'), " Homepage"]) : '')
       ]),
       m("section", [
         m(".well", [

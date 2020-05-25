@@ -1,0 +1,1 @@
+(company-tern :fetcher github :repo "kocubinski/company-tern")

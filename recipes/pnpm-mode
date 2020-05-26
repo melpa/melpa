@@ -1,1 +1,1 @@
-(npm-mode :fetcher github :repo "rajasegar/pnpm-mode")
+(pnpm-mode :fetcher github :repo "rajasegar/pnpm-mode")

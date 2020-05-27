@@ -1,0 +1,4 @@
+(gemini-mode
+ :fetcher git
+ :url "http://git.carcosa.net/jmcbray/gemini.el.git"
+ :branch "stable")

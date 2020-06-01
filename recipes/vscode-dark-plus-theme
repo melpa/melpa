@@ -1,0 +1,3 @@
+(vscode-dark-plus-theme
+ :fetcher github
+ :repo "ianpan870102/vscode-dark-plus-emacs-theme")

@@ -1,3 +1,0 @@
-(flycheck-demjsonlint :repo "uqix/flycheck-demjsonlint"
-                      :fetcher github
-                      :files (:defaults "demjsonlint" ".demjsonrc"))

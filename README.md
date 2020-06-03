@@ -123,9 +123,9 @@ the following form (`[...]` denotes optional or conditional values),
 
 ```elisp
 (<package-name>
- :fetcher [git|github|gitlab|hg|bitbucket]
+ :fetcher [git|github|gitlab|hg]
  [:url "<repo url>"]
- [:repo "github-gitlab-or-bitbucket-user/repo-name"]
+ [:repo "github-or-gitlab-user/repo-name"]
  [:commit "commit"]
  [:branch "branch"]
  [:version-regexp "<regexp>"]
@@ -137,17 +137,14 @@ a lisp symbol that has the same name as the package being specified.
 
 - `:fetcher` specifies the type of repository that `:url` or `:repo`
   points to.  MELPA supports [`git`][git], [`github`][github],
-  [`gitlab`][gitlab], [`hg`][hg] (Mercurial), and
-  [`bitbucket`][bitbucket].  The `bitbucket` fetcher derives from
-  `hg`, so you have to use `git` for Git repositories hosted on
-  Bitbucket.
+  [`gitlab`][gitlab], and [`hg`][hg] (Mercurial).
 
 - `:url`
 specifies the URL of the version control repository. *required for
 the `git`, and `hg` fetchers.*
 
-- `:repo` specifies the github/gitlab/bitbucket repository and is of the form
-`user/repo-name`. *required for the `github`, `gitlab`, and `bitbucket` fetchers*.
+- `:repo` specifies the github or gitlab repository and is of the form
+  `user/repo-name`. *required for the `github` and `gitlab` fetchers*.
 
 - `:commit`
 specifies the commit of the git repo to checkout. The value
@@ -198,7 +195,6 @@ subdirectories to keep packaging simple.
 [git]: http://git-scm.com/
 [github]: https://github.com/
 [gitlab]: https://gitlab.com/
-[bitbucket]: https://bitbucket.org/
 [hg]: https://www.mercurial-scm.org/
 
 

@@ -1,0 +1,3 @@
+(udiskie
+ :repo "tuedachu/udiskie.el"
+ :fetcher gitlab)

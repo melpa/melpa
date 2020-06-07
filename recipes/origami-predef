@@ -1,1 +1,1 @@
-(origami-predef :repo "alvarogonzalezsotillo/origami-predef" :fetcher github)
+(origami-predef :repo "alvarogonzalezsotillo/origami-predef" :branch "melpa-stable" :fetcher github)

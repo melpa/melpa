@@ -1,5 +1,5 @@
 (ivy :repo "abo-abo/swiper"
      :fetcher github
      :files (:defaults
-             (:exclude "swiper.el" "counsel.el" "ivy-hydra.el")
+             (:exclude "swiper.el" "counsel.el" "ivy-hydra.el" "ivy-avy.el")
              "doc/ivy-help.org"))

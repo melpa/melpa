@@ -1,0 +1,1 @@
+(php-quickhelp :fetcher github :repo "vpxyz/php-quickhelp")

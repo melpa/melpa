@@ -1,0 +1,2 @@
+(nixut :fetcher github :repo "akirak/nixut.el"
+   :files ("nixut.el"))

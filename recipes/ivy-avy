@@ -1,3 +1,3 @@
-(ivy-hydra :repo "abo-abo/swiper"
-           :fetcher github
-           :files ("ivy-avy.el"))
+(ivy-avy :repo "abo-abo/swiper"
+         :fetcher github
+         :files ("ivy-avy.el"))

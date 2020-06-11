@@ -503,7 +503,9 @@
       return t ? moment(t).fromNow() : "unknown";
     }
     function duration() {
-      return ctrl.duration() ? moment.duration(ctrl.duration(), 'seconds').humanize() : "unknown";
+      return ctrl.duration() ?
+        moment.duration(ctrl.duration(), 'seconds').humanize() :
+        "an unknown amount of time";
     }
     if (ctrl.running()) {
       return m(".alert.alert-warning", [

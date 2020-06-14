@@ -1,3 +1,2 @@
 (helm-wikipedia :fetcher github
-                :repo "emacs-helm/helm-wikipedia"
-                :files ("helm-wikipedia.el"))
+                :repo "emacs-helm/helm-wikipedia")

@@ -1,0 +1,1 @@
+(flycheck-guile :fetcher github :repo "flatwhatson/flycheck-guile")

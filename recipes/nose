@@ -1,0 +1,2 @@
+(nose :fetcher github
+      :repo "rocx/nose")

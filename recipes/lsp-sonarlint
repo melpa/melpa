@@ -1,0 +1,6 @@
+(lsp-sonarlint
+	  :fetcher gitlab
+	  :repo "sasanidas/lsp-sonarlint"
+	  :files ("lsp-sonarlint.el"
+		  ("languages" "languages/*")
+		  ("server" "server/*")))

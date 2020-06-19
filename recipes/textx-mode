@@ -1,1 +1,1 @@
-(textx-mode :fetcher github :repo "novakboskov/textx-mode")
+(textx-mode :fetcher github :repo "textX/textx-mode")

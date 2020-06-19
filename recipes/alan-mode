@@ -1,3 +1,1 @@
-(alan-mode
- :repo "M-industries/AlanForEmacs"
- :fetcher github)
+(alan-mode :fetcher github :repo "alan-platform/AlanForEmacs")

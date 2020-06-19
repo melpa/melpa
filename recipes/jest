@@ -1,1 +1,1 @@
-(jest :repo "emiller88/emacs-jest" :fetcher github)
+(jest :repo "Emiller88/emacs-jest" :fetcher github)

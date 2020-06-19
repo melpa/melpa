@@ -1,1 +1,1 @@
-(ivy-emoji :fetcher github :repo "sbozzolo/ivy-emoji")
+(ivy-emoji :fetcher github :repo "Sbozzolo/ivy-emoji")

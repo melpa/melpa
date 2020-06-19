@@ -1,1 +1,1 @@
-(shm :fetcher github :repo "chrisdone/structured-haskell-mode" :files ("elisp/*.el" (:exclude "shm-test.el" "shm-tests.el")))
+(shm :fetcher github :repo "projectional-haskell/structured-haskell-mode" :files ("elisp/*.el" (:exclude "shm-test.el" "shm-tests.el")))

@@ -1,1 +1,1 @@
-(bap-mode :fetcher github :repo "fkie-cad/bap-mode")
+(bap-mode :fetcher github :repo "BinaryAnalysisPlatform/bap-mode")

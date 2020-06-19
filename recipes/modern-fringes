@@ -1,1 +1,1 @@
-(modern-fringes :repo "specialbomb/emacs-modern-fringes" :fetcher github)
+(modern-fringes :repo "SpecialBomb/emacs-modern-fringes" :fetcher github)

@@ -1,0 +1,4 @@
+(M2-mode
+ :fetcher github
+ :repo "Macaulay2/M2-emacs"
+ :files (:defaults "M2-*" "README.md" (:exclude "*.in")))

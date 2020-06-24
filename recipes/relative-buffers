@@ -1,3 +1,0 @@
-(relative-buffers
- :fetcher github
- :repo "proofit404/relative-buffers")

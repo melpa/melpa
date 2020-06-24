@@ -1,0 +1,3 @@
+(rainbow-fart :fetcher github
+              :repo "stardiviner/emacs-rainbow-fart"
+              :files (:defaults "voices"))

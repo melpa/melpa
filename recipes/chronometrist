@@ -1,3 +1,6 @@
 (chronometrist
- :fetcher git
- :url "https://framagit.org/contrapunctus/chronometrist/")
+ :repo "contrapunctus-1/chronometrist"
+ :fetcher github
+ :files (:defaults
+         "elisp/*.el"
+         (:exclude "elisp/chronometrist-goals.el")))

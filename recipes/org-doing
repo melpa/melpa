@@ -1,4 +1,4 @@
 (org-doing
  :fetcher github
- :repo "rudolfolah/org-doing"
+ :repo "emacsattic/org-doing"
  :files (:defaults "bin"))

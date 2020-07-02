@@ -1,0 +1,1 @@
+(ivy-describe-modes :repo "jcs-elpa/ivy-describe-modes" :fetcher github)

@@ -1,4 +1,6 @@
 (emms
  :url "https://git.savannah.gnu.org/git/emms.git"
  :fetcher git
- :files ("lisp/*.el" "doc/emms.texinfo"))
+ ;; Allows for repo contents both up to and after release 5.4. Once 5.5 is out,
+ ;; the defaults will probably be okay here. See https://github.com/melpa/melpa/issues/6963
+ :files ("*.el" "lisp/*.el" "doc/emms.texinfo"))

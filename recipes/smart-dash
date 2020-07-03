@@ -1,1 +1,1 @@
-(smart-dash :fetcher bitbucket :repo "malsyned/smart-dash")
+(smart-dash :fetcher github :repo "malsyned/smart-dash")

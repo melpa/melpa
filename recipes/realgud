@@ -1,7 +1,7 @@
 (realgud
  :fetcher github
  :repo "realgud/realgud"
- :files ("realgud.el" "realgud/.nosearch"
+ :files ("realgud.el" "realgud/.nosearch" "realgud-recursive-autoloads.el"
          ("realgud/common"             "realgud/common/*.el")
          ("realgud/common/buffer"      "realgud/common/buffer/*.el")
          ("realgud/debugger/bashdb"    "realgud/debugger/bashdb/*.el")

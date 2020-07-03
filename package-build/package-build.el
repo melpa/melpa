@@ -1,14 +1,15 @@
 ;;; package-build.el --- Tools for assembling a package archive
 
-;; Copyright (C) 2011-2013 Donald Ephraim Curtis <dcurtis@milkbox.net>
-;; Copyright (C) 2012-2014 Steve Purcell <steve@sanityinc.com>
+;; Copyright (C) 2011-2020 Donald Ephraim Curtis <dcurtis@milkbox.net>
+;; Copyright (C) 2012-2020 Steve Purcell <steve@sanityinc.com>
+;; Copyright (C) 2016-2020 Jonas Bernoulli <jonas@bernoul.li>
 ;; Copyright (C) 2009 Phil Hagelberg <technomancy@gmail.com>
 
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
-;; Created: 2011-09-30
-;; Version: 0.1
 ;; Keywords: tools
+;; Homepage: https://github.com/melpa/package-build
 ;; Package-Requires: ((cl-lib "0.5") (emacs "24.1"))
+;; Package-Version: 0-git
 
 ;; This file is not (yet) part of GNU Emacs.
 ;; However, it is distributed under the same license.
@@ -405,11 +406,14 @@ is used instead."
 
 ;;; Entries
 
-(defun package-build--update-or-insert-version (version)
-  "Ensure current buffer has a \"Package-Version: VERSION\" header."
+(defun package-build--update-or-insert-header (name value)
+  "Ensure current buffer has NAME header with the given VALUE.
+Any existing header will be preserved and given the \"X-Original-\" prefix.
+If VALUE is nil, the new header will not be inserted, but any original will
+still be renamed."
   (goto-char (point-min))
   (if (let ((case-fold-search t))
-        (re-search-forward "^;+* *Package-Version *: *" nil t))
+        (re-search-forward (concat "^;+* *" (regexp-quote name)  " *: *") nil t))
       (progn
         (move-beginning-of-line nil)
         (search-forward "V" nil t)
@@ -420,7 +424,7 @@ is used instead."
     (re-search-forward "^;+* *\\(Version\\|Package-Requires\\|Keywords\\|URL\\) *:"
                        nil t)
     (forward-line))
-  (insert (format ";; Package-Version: %s" version))
+  (insert (format ";; %s: %s" name value))
   (newline))
 
 (defun package-build--ensure-ends-here-line (file-path)
@@ -444,7 +448,7 @@ is used instead."
         (insert-file-contents file-path)
         ;; next few lines are a hack for some packages that aren't
         ;; commented properly.
-        (package-build--update-or-insert-version "0")
+        (package-build--update-or-insert-header "Package-Version" "0")
         (package-build--ensure-ends-here-line file-path)
         (cl-flet ((package-strip-rcs-id (str) "0"))
           (package-build--package-buffer-info-vec))))))
@@ -455,7 +459,10 @@ is used instead."
 and a cl struct in Emacs HEAD.  This wrapper normalises the results."
   (let ((desc (package-buffer-info))
         (keywords (lm-keywords-list)))
-    (if (fboundp 'package-desc-create)
+    (if (and (fboundp 'package-desc-name)
+             (fboundp 'package-desc-extras)
+             (fboundp 'package-desc-summary)
+             (fboundp 'package-desc-version))
         (let ((extras (package-desc-extras desc)))
           (when (and keywords (not (assq :keywords extras)))
             (push (cons :keywords keywords) extras))
@@ -511,13 +518,16 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
              extras))
         (error "No define-package found in %s" file-path)))))
 
-(defun package-build--merge-package-info (pkg-info name version)
+(defun package-build--merge-package-info (pkg-info name version commit)
   "Return a version of PKG-INFO updated with NAME, VERSION and info from CONFIG.
-If PKG-INFO is nil, an empty one is created."
+If PKG-INFO is nil, an empty one is created.  If a COMMIT string
+is included, a corresponding :commit metadata value is included."
   (let ((merged (or (copy-sequence pkg-info)
-                    (vector name nil "No description available." version))))
+                    (vector name nil "No description available." version nil))))
     (aset merged 0 name)
     (aset merged 3 version)
+    (when commit
+      (aset merged 4 (cons (cons :commit commit) (elt pkg-info 4))))
     merged))
 
 (defun package-build--write-archive-entry (rcp pkg-info type)
@@ -545,10 +555,7 @@ If PKG-INFO is nil, an empty one is created."
         (desc (or (aref pkg-info 2) "No description available."))
         (version (aref pkg-info 3))
         (extras (and (> (length pkg-info) 4)
-                     (aref pkg-info 4)))
-        (commit (package-build--get-commit rcp)))
-    (when commit
-      (push (cons :commit commit) extras))
+                     (aref pkg-info 4))))
     (cons name
           (vector (version-to-list version)
                   requires
@@ -745,6 +752,7 @@ in `package-build-archive-dir'."
   (let* ((source-dir (package-recipe--working-tree rcp))
          (file-specs (package-build--config-file-list rcp))
          (files (package-build-expand-file-specs source-dir file-specs))
+         (commit (package-build--get-commit rcp))
          (name (oref rcp name)))
     (unless (equal file-specs package-build-default-files-spec)
       (when (equal files (package-build-expand-file-specs
@@ -756,10 +764,10 @@ in `package-build-archive-dir'."
       (error "Unable to check out repository for %s" name))
      ((= 1 (length files))
       (package-build--build-single-file-package
-       rcp version (caar files) source-dir))
+       rcp version commit (caar files) source-dir))
      ((< 1 (length  files))
       (package-build--build-multi-file-package
-       rcp version files source-dir))
+       rcp version commit files source-dir))
      (t (error "Unable to find files matching recipe patterns")))))
 
 (define-obsolete-function-alias 'package-build-package 'package-build--package
@@ -773,7 +781,7 @@ name but a different signature.
 
 Do not use this alias elsewhere.")
 
-(defun package-build--build-single-file-package (rcp version file source-dir)
+(defun package-build--build-single-file-package (rcp version commit file source-dir)
   (let* ((name (oref rcp name))
          (pkg-source (expand-file-name file source-dir))
          (pkg-target (expand-file-name
@@ -781,7 +789,7 @@ Do not use this alias elsewhere.")
                       package-build-archive-dir))
          (pkg-info (package-build--merge-package-info
                     (package-build--get-package-info pkg-source)
-                    name version)))
+                    name version commit)))
     (unless (string-equal (downcase (concat name ".el"))
                           (downcase (file-name-nondirectory pkg-source)))
       (error "Single file %s does not match package name %s"
@@ -790,7 +798,8 @@ Do not use this alias elsewhere.")
     (let ((enable-local-variables nil)
           (make-backup-files nil))
       (with-current-buffer (find-file pkg-target)
-        (package-build--update-or-insert-version version)
+        (package-build--update-or-insert-header "Package-Commit" commit)
+        (package-build--update-or-insert-header "Package-Version" version)
         (package-build--ensure-ends-here-line pkg-source)
         (write-file pkg-target nil)
         (condition-case err
@@ -804,7 +813,7 @@ Do not use this alias elsewhere.")
      name)
     (package-build--write-archive-entry rcp pkg-info 'single)))
 
-(defun package-build--build-multi-file-package (rcp version files source-dir)
+(defun package-build--build-multi-file-package (rcp version commit files source-dir)
   (let* ((name (oref rcp name))
          (tmp-dir (file-name-as-directory (make-temp-file name t))))
     (unwind-protect
@@ -824,7 +833,7 @@ Do not use this alias elsewhere.")
                                  (expand-file-name (concat pkg-file ".in")
                                                    (file-name-directory pkg-source)))
                                 (package-build--get-package-info pkg-source)))
-                          name version)))
+                          name version commit)))
           (package-build--copy-package-files files source-dir pkg-tmp-dir)
           (package-build--write-pkg-file (expand-file-name
                                           pkg-file
@@ -896,7 +905,7 @@ Do not use this alias elsewhere.")
 
 If non-nil, then store the archive contents in FILE instead of in
 the \"archive-contents\" file inside `package-build-archive-dir'.
-If PRETTY-PRINT is non-nil, then pretty-print insted of using one
+If PRETTY-PRINT is non-nil, then pretty-print instead of using one
 line per entry."
   (let (entries)
     (dolist (file (directory-files package-build-archive-dir t ".*\.entry$"))

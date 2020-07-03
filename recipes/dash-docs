@@ -1,2 +1,2 @@
-(dash-docs :repo "gilbertw1/dash-docs"
+(dash-docs :repo "dash-docs-el/dash-docs"
                  :fetcher github)

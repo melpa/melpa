@@ -1,0 +1,1 @@
+(inform7 :fetcher github :repo "GuiltyDolphin/inform7-mode")

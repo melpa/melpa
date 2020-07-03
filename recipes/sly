@@ -4,4 +4,5 @@
              "lib"
              "slynk"
              "contrib"
+             "doc/images"
              (:exclude "sly-autoloads.el")))

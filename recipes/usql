@@ -1,1 +1,0 @@
-(usql :fetcher github :repo "nickbarnwell/usql.el")

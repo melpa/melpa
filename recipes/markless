@@ -1,2 +1,1 @@
-(markless :repo "shirakumo/markless.el"
-          :fetcher github)
+(markless :fetcher github :repo "Shirakumo/markless.el")

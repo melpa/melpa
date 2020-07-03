@@ -1,0 +1,6 @@
+(chronometrist
+ :repo "contrapunctus-1/chronometrist"
+ :fetcher github
+ :files (:defaults
+         "elisp/*.el"
+         (:exclude "elisp/chronometrist-goals.el")))

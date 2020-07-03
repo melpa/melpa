@@ -1,0 +1,4 @@
+(languagetool
+ :repo "PillFall/Emacs-LanguageTool.el"
+ :fetcher github)
+ 

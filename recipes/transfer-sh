@@ -1,1 +1,1 @@
-(transfer-sh :fetcher github :repo "SRoskamp/transfer-sh.el")
+(transfer-sh :fetcher gitlab :repo "tuedachu/transfer-sh.el")

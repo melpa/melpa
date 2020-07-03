@@ -1,0 +1,1 @@
+(elisp-depmap :fetcher github :repo "mtekman/elisp-depmap.el" )

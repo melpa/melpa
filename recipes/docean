@@ -1,1 +1,1 @@
-(docean :fetcher github :repo "emacs-pe/docean.el")
+(docean :fetcher github :repo "emacsorphanage/docean")

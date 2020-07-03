@@ -1,0 +1,1 @@
+(vega-view :repo "applied-science/emacs-vega-view" :fetcher github)

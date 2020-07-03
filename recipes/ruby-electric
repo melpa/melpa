@@ -1,1 +1,1 @@
-(ruby-electric :fetcher github :repo "knu/ruby-electric.el")
+(ruby-electric :fetcher github :repo "ruby/elisp-ruby-electric")

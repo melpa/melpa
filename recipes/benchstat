@@ -1,1 +1,1 @@
-(benchstat :repo "Quasilyte/benchstat.el" :fetcher github)
+(benchstat :repo "quasilyte/benchstat.el" :fetcher github)

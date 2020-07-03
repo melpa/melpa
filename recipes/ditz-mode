@@ -1,1 +1,1 @@
-(ditz-mode :fetcher bitbucket :repo "zondo/ditz-mode")
+(ditz-mode :fetcher hg :url "https://hg.sr.ht/~zondo/ditz-mode")

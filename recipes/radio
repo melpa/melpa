@@ -1,0 +1,3 @@
+(radio
+ :fetcher github
+ :repo "olav35/radio")

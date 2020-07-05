@@ -1,3 +1,3 @@
-(chronometrist-goals
- :repo "contrapunctus-1/chronometrist-goals"
+(chronometrist-goal
+ :repo "contrapunctus-1/chronometrist-goal"
  :fetcher github)

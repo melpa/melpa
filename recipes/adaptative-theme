@@ -1,0 +1,6 @@
+(adaptative-theme
+ :fetcher github
+ :url "https://github.com/alvarocsm91/adaptative-theme"
+ :repo "alvarocsm91/adaptative-theme"
+ :commit "b106df3e6abb9b955cf3948b836369c77efe836e"
+ :branch "master")

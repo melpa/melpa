@@ -1,4 +1,4 @@
 (zetz-mode
- :fetcher github
- :repo "damon-kwok/zetz-mode"
- :files (:defaults "etc"))
+  :fetcher github
+  :repo "damon-kwok/zetz-mode"
+  :files (:defaults "etc"))

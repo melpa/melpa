@@ -1,1 +1,4 @@
-(zetz-mode :fetcher github :repo "damon-kwok/zetz-mode")
+(zetz-mode
+ :fetcher github
+ :repo "damon-kwok/zetz-mode.el"
+ :files (:defaults "etc"))

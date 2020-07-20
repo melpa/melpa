@@ -1,0 +1,1 @@
+(circuitpython-mode :repo "nelnet-team/circuitpython-mode" :fetcher github)

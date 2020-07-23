@@ -1,1 +1,2 @@
+;; fixed byte-compile warnings in package
 (circuitpython-mode :repo "nelnet-team/circuitpython-mode" :fetcher github)

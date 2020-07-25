@@ -1,0 +1,1 @@
+(unisonlang-mode :repo "dariooddenino/unison-mode-emacs" :fetcher github)

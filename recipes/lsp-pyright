@@ -1,0 +1,3 @@
+(lsp-pyright
+  :fetcher github
+  :repo "emacs-lsp/lsp-pyright")

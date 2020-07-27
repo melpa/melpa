@@ -1,2 +1,2 @@
-;; Remove remaining byte-compile warning
+;; Replace 'C-c @' with 'C-c #'
 (circuitpython-mode :repo "nelnet-team/circuitpython-mode" :fetcher github)

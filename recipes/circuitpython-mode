@@ -1,2 +1,2 @@
-;; Make suggested changes
+;; Remove remaining byte-compile warning
 (circuitpython-mode :repo "nelnet-team/circuitpython-mode" :fetcher github)

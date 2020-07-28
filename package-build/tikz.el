@@ -3,7 +3,7 @@
 ;; Copyright (C) 2020  Emilio Torres-Manzanera <torres@uniovi.es>
 
 ;; Author: Emilio Torres-Manzanera <torres@uniovi.es>
-;; Version: 0.11
+;; Version: 0.12
 ;; Keywords: tex
 ;; URL: https://github.com/emiliotorres/tikz
 ;; Package-Requires: ((emacs "24.1"))
@@ -72,12 +72,8 @@
 ;; ** Alternatives
 ;; - QtikZ
 
-;; ** ChangeLog
-
-;; | date             |  ver | Change                 |
-;; |------------------+------+------------------------|
-;; | <2020-07-08 lun> | 0.11 | Time to launch Zathura |
-;; | <2020-06-22 lun> |  0.1 |                        |
+;; ** Acknowledgement
+;; Partially supported by PGC2018-098623-B-I00.
 
 ;;; Code:
 
@@ -194,10 +190,12 @@ Run pdflatex in FILE-TEMP-TEX."
       ;; (message "pdf %s" file-temp-pdf)
       ;; Wait until the pdf exists.
       (while (and (not (file-exists-p file-temp-pdf))
-                  (< secs 20))
+                  (< secs 20)
+                  )
         (message "TikZing waiting for the first compilation (%s seconds)..." (- 20 secs))
         (sit-for 1)
         (setq secs (+ 1 secs)))
+      (sit-for 1)
       ;; Otherwise, Zathura fails.
       (start-process (concat "tikz" tikz-zathura)  nil  tikz-zathura file-temp-pdf)
       (message "TikZing waiting for the first compilation...done")

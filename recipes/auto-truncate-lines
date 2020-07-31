@@ -1,1 +1,0 @@
-(auto-truncate-lines :repo "jcs-elpa/auto-truncate-lines" :fetcher github)

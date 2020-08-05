@@ -1,0 +1,3 @@
+ (elegant-emacs :fetcher github
+ :repo "NicoloZorzetto/elegant-emacs"
+ :files ("elegant-emacs-common.el" "elegant-emacs-dark-theme.el" "elegant-emacs-light-theme.el"))

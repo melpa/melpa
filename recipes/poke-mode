@@ -1,0 +1,4 @@
+(poke-mode
+  :fetcher github
+  :repo "RyanMillerC/poke-mode"
+  :files (:defaults "img"))

@@ -1,4 +1,4 @@
 (spotify+
   :fetcher github
-   :repo "SnootierMoon/emacs-spotify-plus")
+  :repo "SnootierMoon/emacs-spotify-plus")
 

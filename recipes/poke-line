@@ -1,4 +1,4 @@
-(poke-mode
+(poke-line
   :fetcher github
-  :repo "RyanMillerC/poke-mode"
+  :repo "RyanMillerC/poke-line"
   :files (:defaults "img"))

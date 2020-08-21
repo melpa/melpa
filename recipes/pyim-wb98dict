@@ -1,0 +1,3 @@
+(pyim-wb98dict :repo "HesperusArcher/pyim-wb98dict"
+               :fetcher github
+               :files (:defaults "*.pyim"))

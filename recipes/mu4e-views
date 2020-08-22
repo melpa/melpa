@@ -1,1 +1,1 @@
-(mu4e-views :fetcher github :repo "lordpretzel/mu4e-views" :files ("mu4e-views.el"))
+(mu4e-views :fetcher github :repo "lordpretzel/mu4e-views")

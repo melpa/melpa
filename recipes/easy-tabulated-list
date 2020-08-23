@@ -1,0 +1,1 @@
+(easy-tabulated-list :repo "jcs-elpa/easy-tabulated-list" :fetcher github)

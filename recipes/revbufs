@@ -1,1 +1,1 @@
-(revbufs :repo "joaotavora/revbufs" :fetcher github)
+(revbufs :repo "tychoish/revbufs" :fetcher github)

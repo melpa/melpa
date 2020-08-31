@@ -1,1 +1,4 @@
-(impatient-showdown :repo "jcs-elpa/impatient-showdown" :fetcher github)
+(impatient-showdown 
+  :repo "jcs-elpa/impatient-showdown" 
+  :fetcher github
+  :files (:defaults "preview.html"))

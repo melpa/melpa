@@ -154,6 +154,7 @@
       var oldNames = recipe['old-names'] || [];
       var commit = props.commit;
       var sourceURL = calculateSourceURL(name, recipe, commit);
+      var homeURL = props.url || calculateSourceURL(name, recipe, null);
 
       pkgs.push(new melpa.Package({
         name: name,
@@ -166,7 +167,7 @@
         fetcher: recipe.fetcher,
         recipeURL: "https://github.com/melpa/melpa/blob/master/recipes/" + name,
         packageURL: "packages/" + name + "-" + version + "." + (built.type == "single" ? "el" : "tar"),
-        homeURL: props.url,
+        homeURL: homeURL,
         sourceURL: sourceURL,
         oldNames: oldNames,
         searchExtra: [recipe.repo]

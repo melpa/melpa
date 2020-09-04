@@ -1,0 +1,4 @@
+(maxima
+	  :fetcher gitlab
+	  :repo "sasanidas/maxima"
+	  :files ("*.el"))

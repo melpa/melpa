@@ -1,0 +1,1 @@
+(fuzzy-finder :repo "10sr/fuzzy-finder-el" :fetcher github)

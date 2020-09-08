@@ -1,3 +1,3 @@
-(adaptative-theme
+(adaptive-theme
  :fetcher github
- :repo "alvarocsm91/adaptative-theme")
+ :repo "alvarocsm91/adaptive-theme")

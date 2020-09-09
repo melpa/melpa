@@ -908,24 +908,28 @@ the \"archive-contents\" file inside `package-build-archive-dir'.
 If PRETTY-PRINT is non-nil, then pretty-print instead of using one
 line per entry."
   (let (entries)
-    (dolist (file (directory-files package-build-archive-dir t ".*\.entry$"))
+    (dolist (file (sort (directory-files package-build-archive-dir t ".*\.entry$")
+                        ;; Sort more recently-build packages first
+                        (lambda (f1 f2)
+                          (let ((default-directory package-build-archive-dir))
+                            (file-newer-than-file-p f1 f2)))))
       (let* ((entry (with-temp-buffer
                       (insert-file-contents file)
                       (read (current-buffer))))
              (name (car entry))
-             (other-entry (assq name entries)))
+             (newer-entry (assq name entries)))
         (if (not (file-exists-p (expand-file-name (symbol-name name)
                                                   package-build-recipes-dir)))
             (package-build--remove-archive-files entry)
-          (when other-entry
-            (when (version-list-< (elt (cdr entry) 0)
-                                  (elt (cdr other-entry) 0))
-              ;; Swap so that other-entry has the smallest version.
-              (cl-rotatef other-entry entry))
-            (package-build--remove-archive-files other-entry)
-            (setq entries (remove other-entry entries)))
-          (add-to-list 'entries entry))))
-    (setq entries (nreverse entries))
+          ;; Prefer the more-recently-built package, which may not
+          ;; necessarily have the highest version number, e.g. if
+          ;; commit histories were changed.
+          (if newer-entry
+              (package-build--remove-archive-files entry)
+            (push entry entries)))))
+    (setq entries (sort entries (lambda (a b)
+                                  (string< (symbol-name (car a))
+                                           (symbol-name (car b))))))
     (with-temp-file
         (or file
             (expand-file-name "archive-contents" package-build-archive-dir))

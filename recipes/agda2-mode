@@ -1,4 +1,2 @@
 (agda2-mode :fetcher github :repo "agda/agda"
-        ;; eri and annotation are seperate packages
-        :files ("src/data/emacs-mode/agda*.el")
-)
+            :files ("src/data/emacs-mode/agda*.el"))

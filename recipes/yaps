@@ -1,0 +1,1 @@
+(yaps :repo "rayw000/yaps" :fetcher github)

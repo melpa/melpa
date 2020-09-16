@@ -1,4 +1,4 @@
 (ewal-doom-themes
- :fetcher gitlab
- :repo "jjzmajic/ewal"
+ :fetcher github
+ :repo "wurosh/ewal"
  :files ("doom-themes/*.el"))

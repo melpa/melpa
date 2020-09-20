@@ -1,0 +1,3 @@
+(elmpd
+ :fetcher github
+ :repo "sp1ff/elmpd")

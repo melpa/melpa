@@ -1,0 +1,1 @@
+(chalk :repo "jcs-elpa/chalk" :fetcher github)

@@ -1,1 +1,1 @@
-(find-file-rg :fetcher github :repo "muffinmad/emacs-ctrlxo")
+(ctrlxo :fetcher github :repo "muffinmad/emacs-ctrlxo")

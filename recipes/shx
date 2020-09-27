@@ -1,2 +1,1 @@
-(shx :repo "riscy/shx-for-emacs"
-     :fetcher github)
+(shx :repo "riscy/shx-for-emacs" :fetcher github)

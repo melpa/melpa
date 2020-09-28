@@ -1,2 +1,3 @@
 (humanoid-themes :repo "humanoid-colors/emacs-humanoid-themes"
-                 :fetcher github)
+                 :fetcher "github"
+                 :branch "main")

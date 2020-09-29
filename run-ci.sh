@@ -12,13 +12,12 @@ echo "EMACS = $EMACS"
 "$EMACS" --version
 echo
 
-echo "Building recipes touched in commits $TRAVIS_COMMIT_RANGE"
-changed_recipes=$(./travis-changed-files | (grep -Po '(?<=^recipes/)[a-z0-9].*' || true))
+changed_recipes=$(echo "$CHANGED_FILES" | (grep -Po '(?<=^recipes/)[a-z0-9].*' || true))
 for recipe_name in $changed_recipes; do
     if [ -f "./recipes/$recipe_name" ]; then
         echo "----------------------------------------------------"
         echo "Building new/modified recipe: $recipe_name"
-        cask emacs --batch --eval "(progn (add-to-list 'load-path \"$TRAVIS_BUILD_DIR/package-build/\")(load-file \"package-build/package-build.el\")(package-build-archive \"$recipe_name\"))"
+        ~/.cask/bin/cask emacs --batch --eval "(progn (add-to-list 'load-path \"$PWD/package-build/\")(load-file \"package-build/package-build.el\")(package-build-archive \"$recipe_name\"))"
     fi
 done
 

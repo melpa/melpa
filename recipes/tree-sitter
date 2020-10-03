@@ -4,4 +4,4 @@
                      "Cargo.toml"
                      "Cargo.lock"
                      "src"
-                     (:exclude "lisp/tree-sitter-tests.el"))
+                     (:exclude "lisp/tree-sitter-tests.el")))

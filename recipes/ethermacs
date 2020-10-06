@@ -1,0 +1,1 @@
+(ethermacs :repo "zzkt/ethermacs" :fetcher github)

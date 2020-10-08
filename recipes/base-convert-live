@@ -1,0 +1,1 @@
+(base-convert-live :fetcher github :repo "lassik/emacs-base-convert-live")

@@ -212,7 +212,7 @@
       }
     };
     this.maxPage = function() {
-      return Math.floor(getItemList().length / this.pageLength());
+      return Math.ceil(getItemList().length / this.pageLength());
     };
     this.prevPages = function() {
       return _.last(_.range(1, this.pageNumber()),

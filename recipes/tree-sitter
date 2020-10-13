@@ -1,7 +1,4 @@
 (tree-sitter :repo "ubolonton/emacs-tree-sitter"
              :fetcher github
              :files ("lisp/*.el"
-                     "Cargo.toml"
-                     "Cargo.lock"
-                     "src"
                      (:exclude "lisp/tree-sitter-tests.el")))

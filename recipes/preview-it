@@ -1,0 +1,1 @@
+(preview-it :repo "jcs-elpa/preview-it" :fetcher github)

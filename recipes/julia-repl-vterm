@@ -1,2 +1,0 @@
-(julia-repl-vterm :repo "shg/julia-repl-vterm.el" :fetcher github)
-

@@ -9,7 +9,7 @@ Three contributor roles are involved in the maintenance of MELPA :
 - MELPA maintainers :: They are responsible for reviewing new recipes
      and associated packages as well as keeping the system working.
 
-- Recipe authors :: They responsible for submitting good recipes and
+- Recipe authors :: They are responsible for submitting good recipes and
                     maintaining them when the package is changed
                     (e.g., renamed or deprecated).
 

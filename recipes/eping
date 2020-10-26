@@ -1,1 +1,1 @@
-(eping :fetcher github :repo "sean-hut/eping" :branch "releases")
+(eping :fetcher github :repo "sean-hut/eping" :branch "develop")

@@ -1,0 +1,6 @@
+(tsc :repo "ubolonton/emacs-tree-sitter"
+     :fetcher github
+     :files ("core/*.el"
+             "core/Cargo.toml"
+             "core/Cargo.lock"
+             "core/src"))

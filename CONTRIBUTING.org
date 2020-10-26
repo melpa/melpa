@@ -186,10 +186,14 @@ specifying only files relevant to the package.
 
 *** Test your recipe
 
-Please test that the package builds properly by following the steps
-below.
+Please test that the package builds and installs properly by following
+the steps below.
 
-Let ~<NAME>~ denote the filename of the new recipe. Build the recipe
+**** Test your recipe builds
+
+Navigate to the root directory of your copy of the MELPA repository.
+
+Let ~<NAME>~ denote the filename of the new recipe.  Build the recipe
 via ~make recipes/<NAME>~, or through pressing ~C-c C-c~ in the recipe
 file buffer. Be sure that the ~emacs~ binary on your ~PATH~ is at
 least version 23, or set ~$EMACS_COMMAND~ to the location of a
@@ -199,6 +203,12 @@ If the repository contains tags for releases, confirm that the correct
 version is detected by running ~STABLE=t make recipes/<NAME>~.  The
 version detection can be adjusted by specifying ~:version-regexp~ in
 the recipe (see [[file:README.md#recipe-format][recipe format]] in the README).
+
+**** Test your recipe installs
+
+In your copy of the MELPA repository.  Run the installation check
+below for your built package in the ~packages~ directory and also the
+~packages-stable~ directory if you ran ~STABLE=t make recipes/<NAME>~.
 
 Test that the package installs properly by running
 ~package-install-file~ from within Emacs and specifying the newly

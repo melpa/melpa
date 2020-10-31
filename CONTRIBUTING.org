@@ -189,44 +189,71 @@ specifying only files relevant to the package.
 Please test that the package builds and installs properly by following
 the steps below.
 
-**** Test your recipe builds
+**** Build recipe
 
-Navigate to the root directory of your copy of the MELPA repository.
+- Regular package
 
-Let ~<NAME>~ denote the filename of the new recipe.  Build the recipe
-via ~make recipes/<NAME>~, or through pressing ~C-c C-c~ in the recipe
-file buffer. Be sure that the ~emacs~ binary on your ~PATH~ is at
+  Running the command ~make recipes/<RECIPE>~ in the MELPA repository's
+  root directory.  (where ~<RECIPE>~ is the recipe file's name)
+
+- Stable package
+
+  If the repository contains tags for releases, confirm that the
+  correct version is detected.  This can be done by running ~STABLE=t
+  make recipes/<RECIPE>~ in the MELPA repository's root directory.
+  (where ~<RECIPE>~ is the recipe file's name) The version detection can
+  be adjusted by specifying ~:version-regexp~ in the recipe (see
+  [[file:README.md#recipe-format][recipe format]] in the README).
+
+- Emacs key binding build
+
+  Build the recipe by pressing ~C-c C-c~ in the recipe file's buffer.
+
+Be sure that the ~emacs~ binary on your ~PATH~ is at
 least version 23, or set ~$EMACS_COMMAND~ to the location of a
 suitable binary.
 
-If the repository contains tags for releases, confirm that the correct
-version is detected by running ~STABLE=t make recipes/<NAME>~.  The
-version detection can be adjusted by specifying ~:version-regexp~ in
-the recipe (see [[file:README.md#recipe-format][recipe format]] in the README).
+**** Install recipe
 
-**** Test your recipe installs
+Run the installation check below for your built package.  There are
+different ways to do the installation including
+~package-install-file~, an Emacs key binding or with a sandbox.
 
-In your copy of the MELPA repository.  Run the installation check
-below for your built package in the ~packages~ directory and also the
-~packages-stable~ directory if you ran ~STABLE=t make recipes/<NAME>~.
+- ~package-install-file~
 
-Test that the package installs properly by running
-~package-install-file~ from within Emacs and specifying the newly
-built package in the directory specified by
-~package-build-archive-dir~ (default: ~packages/~ directory where
-~package-build~ was loaded). Entering "yes" when prompted after
-pressing ~C-c C-c~ in the recipe buffer also works.
+  + Regular package
 
-You can optionally run a sandboxed Emacs in which locally-built
-packages will be available for installation along with those already
-in MELPA:
+    In the ~packages~ directory of the MELPA repository run
+    ~package-install-file~ within Emacs on the package you built in
+    the previous build step.
+
+  + Stable package
+
+    If you built a stable package in the previous build step with
+    ~STABLE=t make recipes/<RECIPE>~ test that it installs.  In the
+    ~packages-stable~ directory of the MELPA repository run
+    ~package-install-file~ within Emacs on the package you built in
+    the previous build step.
+
+- Emacs key binding
+
+  Pressing ~C-c C-c~ in the recipe file's buffer.
+
+- Sandbox
+
+  You can optionally run a sandboxed Emacs in which locally-built
+  packages will be available for installation along with those already
+  in MELPA:
 
 #+BEGIN_SRC shell
 EMACS_COMMAND=/path/to/emacs make sandbox INSTALL=<NAME>
 #+END_SRC
 
-From within Emacs, install and test your package as appropriate. This
-is a useful way to discover missing dependencies.
+**** Test package
+
+By following the previous steps you should now have your package built
+and installed.  Test it in Emacs as appropriate.  This is a useful way
+to discover missing dependencies.
 
 ** Opening a pull request
 

@@ -612,7 +612,7 @@
               "<strong>Curated</strong> - no obsolete, renamed, forked or randomly hacked packages",
               "<strong>Comprehensive</strong> - more packages than any other archive",
               "<strong>Automatic updates</strong> - new commits result in new packages",
-              "<strong>Extensible</strong> - contribute recipes via github, and we'll build the packages"
+              "<strong>Extensible</strong> - contribute new recipes, and we'll build the packages"
             ].map(function(content) { return m("li", m.trust(content)); }))
           ])
         ]),

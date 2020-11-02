@@ -8,7 +8,7 @@
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
 ;; Keywords: tools
 ;; Homepage: https://github.com/melpa/package-build
-;; Package-Requires: ((cl-lib "0.5") (emacs "24.1"))
+;; Package-Requires: ((cl-lib "0.5") (emacs "25.1"))
 ;; Package-Version: 0-git
 
 ;; This file is not (yet) part of GNU Emacs.
@@ -231,20 +231,18 @@ is used instead."
 ;;; Checkout
 ;;;; Common
 
-(defmethod package-build--checkout :before ((rcp package-recipe))
+(cl-defmethod package-build--checkout :before ((rcp package-recipe))
   (package-build--message "Package: %s" (oref rcp name))
   (package-build--message "Fetcher: %s"
                           (substring (symbol-name
                                       (with-no-warnings
-                                        ;; Use eieio-object-class once we
-                                        ;; no longer support Emacs 24.3.
-                                        (object-class-fast rcp)))
+                                        (eieio-object-class rcp)))
                                      8 -7))
   (package-build--message "Source:  %s\n" (package-recipe--upstream-url rcp)))
 
 ;;;; Git
 
-(defmethod package-build--checkout ((rcp package-git-recipe))
+(cl-defmethod package-build--checkout ((rcp package-git-recipe))
   (let ((dir (package-recipe--working-tree rcp))
         (url (package-recipe--upstream-url rcp)))
     (cond
@@ -273,7 +271,7 @@ is used instead."
                    (package-build--expand-source-file-list rcp)))
        (oref rcp tag-regexp)))))
 
-(defmethod package-build--checkout-1 ((rcp package-git-recipe) &optional rev)
+(cl-defmethod package-build--checkout-1 ((rcp package-git-recipe) &optional rev)
   (let ((dir (package-recipe--working-tree rcp)))
     (unless rev
       (setq rev (or (oref rcp commit)
@@ -289,13 +287,13 @@ is used instead."
     (package-build--run-process dir nil "git" "submodule" "update"
                                 "--init" "--recursive")))
 
-(defmethod package-build--used-url ((rcp package-git-recipe))
+(cl-defmethod package-build--used-url ((rcp package-git-recipe))
   (let ((default-directory (package-recipe--working-tree rcp)))
     (car (process-lines "git" "config" "remote.origin.url"))))
 
 ;;;; Hg
 
-(defmethod package-build--checkout ((rcp package-hg-recipe))
+(cl-defmethod package-build--checkout ((rcp package-hg-recipe))
   (let ((dir (package-recipe--working-tree rcp))
         (url (package-recipe--upstream-url rcp)))
     (cond
@@ -327,7 +325,7 @@ is used instead."
                    (package-build--expand-source-file-list rcp)))
        (oref rcp tag-regexp)))))
 
-(defmethod package-build--used-url ((rcp package-hg-recipe))
+(cl-defmethod package-build--used-url ((rcp package-hg-recipe))
   (package-build--run-process-match "default = \\(.*\\)"
                                     (package-recipe--working-tree rcp)
                                     "hg" "paths"))
@@ -349,14 +347,8 @@ is used instead."
            (aref pkg-info 1))
         ;; Append our extra information
         ,@(cl-mapcan (lambda (entry)
-                       (let ((value (cdr entry)))
-                         (when (or (symbolp value) (listp value))
-                           ;; We must quote lists and symbols,
-                           ;; because Emacs 24.3 and earlier evaluate
-                           ;; the package information, which would
-                           ;; break for unquoted symbols or lists
-                           (setq value (list 'quote value)))
-                         (list (car entry) value)))
+                       (list (car entry)
+                             (cdr entry)))
                      (when (> (length pkg-info) 4)
                        (aref pkg-info 4))))
      (current-buffer))
@@ -471,7 +463,7 @@ and a cl struct in Emacs HEAD.  This wrapper normalises the results."
                   (package-desc-summary desc)
                   (package-desc-version desc)
                   extras))
-      (let ((homepage (package-build--lm-homepage))
+      (let ((homepage (lm-homepage))
             extras)
         (when keywords (push (cons :keywords keywords) extras))
         (when homepage (push (cons :url homepage) extras))
@@ -535,14 +527,14 @@ is included, a corresponding :commit metadata value is included."
     (with-temp-file (package-build--archive-entry-file entry)
       (print entry (current-buffer)))))
 
-(defmethod package-build--get-commit ((rcp package-git-recipe))
+(cl-defmethod package-build--get-commit ((rcp package-git-recipe))
   (ignore-errors
     (package-build--run-process-match
      "\\(.*\\)"
      (package-recipe--working-tree rcp)
      "git" "rev-parse" "HEAD")))
 
-(defmethod package-build--get-commit ((rcp package-hg-recipe))
+(cl-defmethod package-build--get-commit ((rcp package-hg-recipe))
   (ignore-errors
     (package-build--run-process-match
      "changeset:[[:space:]]+[[:digit:]]+:\\([[:xdigit:]]+\\)"
@@ -1029,17 +1021,6 @@ line per entry."
   "Dump the build packages list to FILE as json."
   (with-temp-file file
     (insert (json-encode (package-build--archive-alist-for-json)))))
-
-;;; Backports
-
-(defun package-build--lm-homepage (&optional file)
-  "Return the homepage in file FILE, or current buffer if FILE is nil.
-This is a copy of `lm-homepage', which first appeared in Emacs 24.4."
-  (let ((page (lm-with-file file
-                (lm-header "\\(?:x-\\)?\\(?:homepage\\|url\\)"))))
-    (if (and page (string-match "^<.+>$" page))
-        (substring page 1 -1)
-      page)))
 
 ;;; _
 

@@ -1,1 +1,1 @@
-(remind-bindings :fetcher github :repo "mtekman/remind-bindings.el")
+(remind-bindings :fetcher gitlab :repo "mtekman/remind-bindings.el")

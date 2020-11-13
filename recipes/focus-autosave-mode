@@ -1,3 +1,3 @@
 (focus-autosave-mode
  :fetcher github
- :repo "Vifon/focus-autosave-mode.el")
+ :repo "vifon/focus-autosave-mode.el")

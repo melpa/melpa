@@ -1,1 +1,1 @@
-(wsl :repo "m0smith/wsl" :fetcher github)
+(wsl :repo "m0smith/wsl-el" :fetcher github)

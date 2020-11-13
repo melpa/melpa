@@ -1,1 +1,1 @@
-(ciel :repo "cs14095/ciel.el" :fetcher github)
+(ciel :repo "takumatt/ciel.el" :fetcher github)

@@ -1,0 +1,3 @@
+(zephir-mode
+ :repo "zephir-lang/zephir-mode"
+ :fetcher github)

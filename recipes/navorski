@@ -1,0 +1,1 @@
+(navorski :repo "roman/navorski.el" :fetcher github)

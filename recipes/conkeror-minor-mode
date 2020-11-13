@@ -1,1 +1,1 @@
-(conkeror-minor-mode :repo "Bruce-Connor/conkeror-minor-mode" :fetcher github)
+(conkeror-minor-mode :repo "Malabarba/conkeror-minor-mode" :fetcher github)

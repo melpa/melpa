@@ -1,0 +1,1 @@
+(ox-nikola :fetcher github :repo "msnoigrs/ox-nikola")

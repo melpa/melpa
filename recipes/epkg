@@ -1,0 +1,1 @@
+(epkg :fetcher github :repo "emacscollective/epkg")

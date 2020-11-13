@@ -1,4 +1,3 @@
 (with-namespace
  :repo "Wilfred/with-namespace.el"
- :files ("with-namespace.el")
  :fetcher github)

@@ -1,0 +1,2 @@
+(eshell-fixed-prompt :fetcher github
+                     :repo "mallt/eshell-fixed-prompt-mode")

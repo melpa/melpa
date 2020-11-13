@@ -1,0 +1,3 @@
+(haxe-imports
+ :fetcher github
+ :repo "accidentalrebel/emacs-haxe-imports")

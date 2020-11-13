@@ -1,0 +1,2 @@
+(unicode-troll-stopper :fetcher github
+                       :repo "camsaul/emacs-unicode-troll-stopper")

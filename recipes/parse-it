@@ -1,0 +1,1 @@
+(parse-it :repo "jcs-elpa/parse-it" :fetcher github)

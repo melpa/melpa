@@ -1,0 +1,1 @@
+(terraform-mode :repo "emacsorphanage/terraform-mode" :fetcher github)

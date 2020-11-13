@@ -1,0 +1,3 @@
+(org-beautify-theme :repo "jonnay/org-beautify-theme"
+                    :fetcher github
+                    :files ("org-beautify-theme.el"))

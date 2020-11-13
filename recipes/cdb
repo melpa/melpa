@@ -1,0 +1,3 @@
+(cdb :repo "skk-dev/ddskk"
+     :fetcher github
+     :files ("cdb.el"))

@@ -1,2 +1,2 @@
-(google-maps :url "git://git.naquadah.org/google-maps.git" :fetcher git)
+(google-maps :fetcher github :repo "jd/google-maps.el")
 

@@ -2,16 +2,44 @@
 <section>
       <a name="installing"></a>
       <h2>Installing</h2>
-      <p>To add the repository put this before the call to <code>package-initialize</code> in your <code>init.el</code> file.</p>
+
+      <p>To use the MELPA repository, you'll need an Emacs with
+        <code>package.el</code> and TLS support, ie. Emacs 24.1 or
+        greater. To test TLS support you can visit a HTTPS URL, for
+        example with <code>M-x eww RET https://wikipedia.org RET</code>.
+      </p>
+
+      <p>
+        Enable installation of packages from MELPA by adding an entry
+        to <code>package-archives</code> after <code>(require
+        'package)</code> and before the call
+        to <code>package-initialize</code> in
+        your <code>init.el</code> or <code>.emacs</code> file:
+      </p>
 
       <pre><code>(require 'package)
-(add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)</code></pre>
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+;; and `package-pinned-packages`. Most users will not need or want to do this.
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(package-initialize)</code></pre>
 
-      <p>In Emacs &lt; 24, you'll also need to explicitly include the GNU
-        ELPA archive, which provides important compatibility libraries like <code>cl-lib</code>:</p>
-      <pre><code>(when (< emacs-major-version 24)
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))</code></pre>
+      <p>
+        Note that you'll need to run <code>M-x package-refresh-contents</code> or
+        <code>M-x package-list-packages</code> to ensure that Emacs has fetched
+        the MELPA package list before you can install packages with
+        <code>M-x package-install</code> or similar.
+      </p>
+
+      <p>
+        To use the <a href="https://stable.melpa.org" title="MELPA Stable">
+          stable package repository</a> instead of the default
+        “bleeding-edge” repository, use this instead
+        of <code>"melpa"</code>:
+      </p>
+
+      <pre><code>(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)</code></pre>
 
       <h3>Customizations</h3>
       <p>
@@ -19,20 +47,19 @@
         from MELPA, and the rest from Marmalade or elsewhere?
       </p>
       <p>
-        Only in the very latest Emacs snapshots is there a way to
-        exclude or include versions according to their source
-        (see <code>package-pinned-packages</code>). For all other
-        users, we provide a <code>melpa.el</code> package (available
-        in MELPA) that will allow you to enable only certain packages
-        or exclude certain packages.
-        You can install the package
-        manually by pasting this into your <code>*scratch*</code>
-        buffer and evaluating it.
+        In Emacs 24.4 and later, <code>package-pinned-packages</code>
+        allows you to exclude or include versions according to their
+        source. For users using older versions of Emacs, we provide
+        a <code>package-filter.el</code> package (available in MELPA)
+        that will allow you to enable only certain packages or exclude
+        certain packages.  You can install the package manually by
+        pasting this into your <code>*scratch*</code> buffer and
+        evaluating it.
       </p>
       <pre><code>(progn
   (switch-to-buffer
     (url-retrieve-synchronously
-      "https://raw.github.com/milkypostman/melpa/master/melpa.el"))
+      "https://raw.github.com/melpa/package-filter/master/package-filter.el"))
   (package-install-from-buffer  (package-buffer-info) 'single))</code></pre>
 
       <p>You can then customize two variables:</p>
@@ -74,10 +101,10 @@
       <h2>Known Issues</h2>
       <p>
         <strong>Note:</strong> <em>These fixes are included in
-        the <code>melpa.el</code> package.</em>
+        the <code>package-filter.el</code> package.</em>
       </p>
       <p>
-        There is a small bug in Emacs24’s <code>package.el</code> such
+        There is a small bug in Emacs 24’s <code>package.el</code> such
         that the dependency order comes out backwards. The problem is
         patched by some <em>advice</em>.
       </p>
@@ -92,8 +119,7 @@
       <a name="updating"></a>
       <h2>Updating Packages</h2>
       <p>
-        <code>package.el</code> now includes a mechanism to upgrade
-        packages. After running <code>package-list-packages</code>,
+        After running <code>package-list-packages</code>,
         type <em>U</em> (mark Upgradable packages) and then <em>x</em>
         (eXecute the installs and deletions). When it’s done
         installing all the packages it will ask if you want to delete
@@ -105,12 +131,21 @@
         and delete packages that are installed multiple times. This
         can happen when the install times out.
       </p>
+      <a name="adding"></a>
+      <h2>Adding a Package</h2>
+      <p>
+	In so many words, fork the project's source tree
+	and create a pull request with a recipe for your package.
+	The <a href="https://github.com/melpa/melpa/blob/master/README.md">README.md</a> file on GitHub has more details.
+      </p>
       <a name="development"></a>
       <h2>Development</h2>
-      <p><a href="https://github.com/milkypostman/melpa">https://github.com/milkypostman/melpa</a></p>
+      <p><a href="https://github.com/melpa/melpa">https://github.com/melpa/melpa</a></p>
       <p>
         Contributions are welcome. Currently, the builder supports
-        packages using git, subversion, mercurial, bzr, cvs, darcs and
-        emacswiki.
+        packages using Git, Mercurial, and EmacsWiki (deprecated
+        due to security concerns). Support for Bazaar, CVS, Darcs,
+        Fossil and Subversion has been removed due to very limited
+        use.
       </p>
     </section>

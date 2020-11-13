@@ -1,1 +1,1 @@
-(org-journal :fetcher github :repo "bastibe/emacs-journal")
+(org-journal :fetcher github :repo "bastibe/org-journal")

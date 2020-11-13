@@ -1,0 +1,1 @@
+(dts-mode :repo "bgamari/dts-mode" :fetcher github)

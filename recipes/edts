@@ -1,0 +1,31 @@
+(edts
+ :fetcher github
+ :repo   "sebastiw/edts"
+ :files  ("*.el"
+          "COPYING"
+          "COPYING.LESSER"
+          "Makefile"
+          "README.md"
+          "start"
+          "start.bat"
+          "rebar.config"
+          ("config"                     "config/*")
+
+          ("elisp/edts"                 "elisp/edts/*.el")
+          (:exclude                     "elisp/edts/*-test.el")
+
+          ("lib/edts/include"           "lib/edts/include/*")
+          ("lib/edts/priv"              "lib/edts/priv/dispatch.conf")
+          ("lib/edts/src"               "lib/edts/src/*")
+
+          ("lib/edts_debug"             "lib/edts_debug/*.el")
+          (:exclude                     "lib/edts_debug/*-test.el")
+          ("lib/edts_debug/src"         "lib/edts_debug/src/*")
+
+          ("lib/edts_dialyzer"          "lib/edts_dialyzer/*.el")
+          (:exclude                     "lib/edts_dialyzer/*-test.el")
+          ("lib/edts_dialyzer/src"      "lib/edts_dialyzer/src/*")
+
+          ("lib/edts_xref"              "lib/edts_xref/*.el")
+          (:exclude                     "lib/edts_xref/*-test.el")
+          ("lib/edts_xref/src"          "lib/edts_xref/src/*")))

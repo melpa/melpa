@@ -1,8 +1,12 @@
 body {
   padding-top: 60px;
+  padding-bottom: 200px;
 }
-h1 {
+h1, .navbar, .navbar .brand, .navbar a, .navbar .nav>li>a {
   color: #922793;
+}
+.stable h1, .stable .navbar, .stable .navbar .brand, .stable .navbar a, .stable .navbar .nav>li>a {
+  color: #3e999f;
 }
 .table .text-right {
   text-align: right;
@@ -10,13 +14,14 @@ h1 {
 header.navbar {
   background-color: #fafafa;
 }
+footer {
+  margin-top: 4em;
+}
 pre code { /* Match highlight.js styles to bootstrap */
   padding: 0;
   background: transparent;
 }
-.table-sort * {
-}
-.table-sort-indicator {
+#package-list th .glyphicon {
   padding-left: 1em;
 }
 #package-list th, #package-list td.version, #package-list td.recipe {
@@ -29,8 +34,8 @@ pre code { /* Match highlight.js styles to bootstrap */
   font-size: 18px;
   line-height: 30px;
 }
-.navbar, .navbar .brand, .navbar a, .navbar .nav>li>a {
-  color: #922793;
+a {
+  cursor: pointer;
 }
 a[name] { /* Stop navbar from hiding anchors */
   padding-top: 60px;
@@ -39,4 +44,7 @@ a[name] { /* Stop navbar from hiding anchors */
 }
 .muted {
   color: #999;
+}
+.sortable {
+  cursor: pointer;
 }

@@ -1,0 +1,1 @@
+(flycheck-posframe :fetcher github :repo "alexmurray/flycheck-posframe")

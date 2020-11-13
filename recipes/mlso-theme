@@ -1,0 +1,1 @@
+(mlso-theme :repo "Mulling/mlso-theme" :fetcher github)

@@ -1,0 +1,3 @@
+(general
+ :fetcher github
+ :repo "noctuid/general.el")

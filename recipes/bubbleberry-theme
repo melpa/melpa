@@ -1,0 +1,2 @@
+(bubbleberry-theme :fetcher github
+		   :repo "emacsfodder/emacs-bubbleberry-theme")

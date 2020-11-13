@@ -1,0 +1,2 @@
+(nnir-est :repo "kawabata/nnir-est"
+          :fetcher github)

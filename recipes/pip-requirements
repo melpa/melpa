@@ -1,0 +1,1 @@
+(pip-requirements :repo "Wilfred/pip-requirements.el" :fetcher github)

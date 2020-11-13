@@ -1,1 +1,1 @@
-(rcirc-notify :fetcher wiki)
+(rcirc-notify :fetcher github :repo "nicferrier/rcirc-notify")

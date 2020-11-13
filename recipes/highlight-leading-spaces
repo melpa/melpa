@@ -1,0 +1,3 @@
+(highlight-leading-spaces
+ :repo "mrBliss/highlight-leading-spaces"
+ :fetcher github)

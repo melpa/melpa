@@ -1,1 +1,1 @@
-(el-autoyas :fetcher github :repo "mlf176f2/el-autoyas.el")
+(el-autoyas :fetcher github :repo "mattfidler/el-autoyas.el")

@@ -1,4 +1,0 @@
-(melpa :repo "milkypostman/melpa"
-       :fetcher github
-       :files ("melpa.el"))
-

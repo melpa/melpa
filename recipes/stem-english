@@ -1,0 +1,1 @@
+(stem-english :fetcher github :repo "kawabata/stem-english")

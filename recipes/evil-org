@@ -1,0 +1,1 @@
+(evil-org :fetcher github :repo "Somelauw/evil-org-mode")

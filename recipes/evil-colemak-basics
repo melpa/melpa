@@ -1,0 +1,1 @@
+(evil-colemak-basics :repo "wbolster/evil-colemak-basics" :fetcher github)

@@ -1,0 +1,2 @@
+(ace-link :repo "abo-abo/ace-link"
+          :fetcher github)

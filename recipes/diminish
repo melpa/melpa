@@ -1,1 +1,1 @@
-(diminish :fetcher github :repo "emacsmirror/diminish")
+(diminish :fetcher github :repo "myrjola/diminish.el")

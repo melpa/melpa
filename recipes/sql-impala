@@ -1,0 +1,1 @@
+(sql-impala :fetcher github :repo "jterk/sql-impala")

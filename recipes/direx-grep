@@ -1,0 +1,2 @@
+(direx-grep :repo "aki2o/direx-grep"
+            :fetcher github)

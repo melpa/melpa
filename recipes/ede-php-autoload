@@ -1,0 +1,3 @@
+(ede-php-autoload :fetcher github
+                  :repo "emacs-php/ede-php-autoload"
+                  :files (:defaults "ede-php-autoload"))

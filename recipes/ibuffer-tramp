@@ -1,0 +1,1 @@
+(ibuffer-tramp :repo "svend/ibuffer-tramp" :fetcher github)

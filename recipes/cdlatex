@@ -1,0 +1,1 @@
+(cdlatex :fetcher github :repo "cdominik/cdlatex")

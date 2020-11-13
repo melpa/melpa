@@ -1,0 +1,1 @@
+(flycheck-ghcmod :fetcher github :repo "scturtle/flycheck-ghcmod")

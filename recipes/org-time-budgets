@@ -1,0 +1,3 @@
+(org-time-budgets
+ :fetcher github
+ :repo "leoc/org-time-budgets")

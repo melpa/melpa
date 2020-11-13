@@ -1,0 +1,3 @@
+(haskell-emacs :fetcher github
+               :repo "knupfer/haskell-emacs"
+               :files (:defaults "*.hs" "*.org" "Foreign"))

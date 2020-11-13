@@ -1,0 +1,3 @@
+(digitalocean-helm
+ :repo "olymk2/emacs-digitalocean-helm"
+ :fetcher gitlab)

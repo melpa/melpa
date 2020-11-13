@@ -1,0 +1,3 @@
+(popup-imenu
+ :repo "ancane/popup-imenu"
+ :fetcher github)

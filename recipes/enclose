@@ -1,2 +1,2 @@
-(enclose :repo "rejeep/enclose" :fetcher github)
+(enclose :repo "rejeep/enclose.el" :fetcher github)
 

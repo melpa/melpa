@@ -1,0 +1,1 @@
+(multi-project :fetcher hg :url "https://hg.osdn.net/view/multi-project/multi-project")

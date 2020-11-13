@@ -1,0 +1,1 @@
+(crm-custom :repo "DarwinAwardWinner/crm-custom" :fetcher github)

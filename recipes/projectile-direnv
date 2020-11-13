@@ -1,0 +1,2 @@
+(projectile-direnv :repo "christianromney/projectile-direnv" :fetcher github)
+

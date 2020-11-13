@@ -1,0 +1,3 @@
+(rcirc-groups :repo "dimitri/rcirc-groups"
+              :fetcher github
+              :files ("rcirc-groups.el"))

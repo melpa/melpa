@@ -1,0 +1,2 @@
+(ducpel :fetcher github :repo "alezost/ducpel"
+        :files ("*.el" "*.info" "dir" "levels"))

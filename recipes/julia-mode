@@ -1,0 +1,3 @@
+(julia-mode
+ :repo "JuliaEditorSupport/julia-emacs"
+ :fetcher github)

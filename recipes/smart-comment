@@ -1,0 +1,2 @@
+(smart-comment :repo "paldepind/smart-comment"
+               :fetcher github)

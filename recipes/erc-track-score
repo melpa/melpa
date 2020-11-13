@@ -1,1 +1,1 @@
-(erc-track-score :fetcher git :url "git://git.naquadah.org/erc-track-score.git")
+(erc-track-score :fetcher github :repo "jd/erc-track-score.el")

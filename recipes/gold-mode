@@ -1,0 +1,1 @@
+(gold-mode :repo "yuutayamada/gold-mode-el" :fetcher github)

@@ -1,0 +1,2 @@
+
+(org-easy-img-insert :fetcher github :repo "tashrifsanil/org-easy-img-insert" :old-names (auto-img-link-insert))

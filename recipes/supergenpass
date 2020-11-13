@@ -1,4 +1,3 @@
 (supergenpass
  :fetcher github
- :repo "ober/sgpass"
- :files ("supergenpass.el"))
+ :repo "ober/sgpass")

@@ -1,0 +1,1 @@
+(preproc-font-lock :repo "Lindydancer/preproc-font-lock" :fetcher github)

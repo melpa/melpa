@@ -1,0 +1,3 @@
+(groovy-imports
+ :fetcher github
+ :repo "mbezjak/emacs-groovy-imports")

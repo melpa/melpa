@@ -1,0 +1,5 @@
+(company-ngram
+ :fetcher github
+ :repo "kshramt/company-ngram"
+ :files (:defaults "ngram.py")
+ )

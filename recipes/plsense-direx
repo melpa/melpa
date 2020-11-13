@@ -1,0 +1,2 @@
+(plsense-direx :repo "aki2o/plsense-direx"
+               :fetcher github)

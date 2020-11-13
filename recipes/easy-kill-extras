@@ -1,0 +1,3 @@
+(easy-kill-extras
+ :fetcher github
+ :repo "knu/easy-kill-extras.el")

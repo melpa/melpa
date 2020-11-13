@@ -1,0 +1,3 @@
+(helm-idris
+ :fetcher github
+ :repo "david-christiansen/helm-idris")

@@ -1,2 +1,1 @@
-(textile-mode :repo "emacsmirror/textile-mode" :fetcher github)
-
+(textile-mode :repo "juba/textile-mode" :fetcher github)

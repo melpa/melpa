@@ -1,0 +1,1 @@
+(inherit-local :fetcher github :repo "shlevy/inherit-local")

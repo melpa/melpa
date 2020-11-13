@@ -1,0 +1,4 @@
+(pony-snippets
+ :repo "ponylang/pony-snippets"
+ :fetcher github
+ :files (:defaults "snippets"))

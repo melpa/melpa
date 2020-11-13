@@ -1,0 +1,3 @@
+(nim-mode :fetcher github
+          :repo "nim-lang/nim-mode"
+          :old-names (nimrod-mode))

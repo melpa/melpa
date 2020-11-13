@@ -1,2 +1,1 @@
-(fic-mode :fetcher wiki)
-
+(fic-mode :fetcher github :repo "lewang/fic-mode")

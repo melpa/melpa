@@ -1,0 +1,1 @@
+(go-add-tags :repo "emacsorphanage/go-add-tags" :fetcher github)

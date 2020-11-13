@@ -1,3 +1,4 @@
-(shimbun :repo "emacsmirror/w3m"
-	 :fetcher github
-	 :files ("shimbun/*.el"))
+(shimbun
+ :fetcher github
+ :repo "emacs-w3m/emacs-w3m"
+ :files ("shimbun/*.el"))

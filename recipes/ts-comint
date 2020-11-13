@@ -1,0 +1,2 @@
+(ts-comint
+ :fetcher github :repo "emacs-typescript/ts-comint")

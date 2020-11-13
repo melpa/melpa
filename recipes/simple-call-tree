@@ -1,1 +1,3 @@
-(simple-call-tree :fetcher wiki)
+(simple-call-tree :fetcher github
+                  :repo "vapniks/simple-call-tree"
+                  :old-names (simple-call-tree+))

@@ -1,1 +1,1 @@
-(base16-theme :repo "neil477/base16-emacs" :fetcher github)
+(base16-theme :repo "belak/base16-emacs" :fetcher github :files (:defaults "build/*.el"))

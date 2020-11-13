@@ -1,0 +1,2 @@
+(cp5022x :repo "awasira/cp5022x.el" :fetcher github)
+

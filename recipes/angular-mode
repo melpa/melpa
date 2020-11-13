@@ -1,0 +1,5 @@
+(angular-mode
+ :fetcher github
+ :repo "emacsattic/angular-mode"
+ :files (:defaults "snippets")
+ :old-names (angularjs-mode))

@@ -1,0 +1,1 @@
+(evil-multiedit :repo "hlissner/evil-multiedit" :fetcher github)

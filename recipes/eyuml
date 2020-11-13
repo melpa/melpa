@@ -1,0 +1,2 @@
+(eyuml :fetcher github
+             :repo "antham/eyuml")

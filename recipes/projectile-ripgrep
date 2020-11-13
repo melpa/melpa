@@ -1,0 +1,3 @@
+(projectile-ripgrep :repo "nlamirault/ripgrep.el"
+                 :fetcher github
+                 :files ("projectile-ripgrep.el"))

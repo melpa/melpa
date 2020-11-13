@@ -1,0 +1,1 @@
+(reveal-in-folder :repo "jcs-elpa/reveal-in-folder" :fetcher github)

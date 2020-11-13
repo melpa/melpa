@@ -1,0 +1,2 @@
+(minibuf-isearch :repo "knagano/minibuf-isearch"
+                 :fetcher github)

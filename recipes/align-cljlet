@@ -1,3 +1,1 @@
-(align-cljlet :repo "gstamp/align-cljlet"
-              :fetcher github
-              :files ("align-cljlet.el"))
+(align-cljlet :repo "gstamp/align-cljlet" :fetcher github)

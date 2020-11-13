@@ -1,2 +1,3 @@
-(company-go :repo "nsf/gocode" :fetcher github
-            :files ("emacs-company/company-go.el"))
+(company-go :repo "mdempsky/gocode" :fetcher github
+            :files ("emacs-company/company-go.el")
+            :version-regexp "v\\.\\(.*\\)")

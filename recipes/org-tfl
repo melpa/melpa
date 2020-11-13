@@ -1,0 +1,2 @@
+(org-tfl :repo "storax/org-tfl" :fetcher github
+	 :files (:defaults "*.svg"))

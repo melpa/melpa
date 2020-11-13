@@ -1,0 +1,2 @@
+(e2wm-term :repo "aki2o/e2wm-term"
+           :fetcher github)

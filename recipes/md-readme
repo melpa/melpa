@@ -1,0 +1,1 @@
+(md-readme :repo "thomas11/md-readme" :fetcher github :files (:defaults "bin"))

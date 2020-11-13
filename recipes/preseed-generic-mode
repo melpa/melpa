@@ -1,0 +1,1 @@
+(preseed-generic-mode :fetcher github :repo "suntong/preseed-generic-mode")

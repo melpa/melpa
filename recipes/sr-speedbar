@@ -1,1 +1,1 @@
-(sr-speedbar :fetcher wiki)
+(sr-speedbar :fetcher github :repo "emacsorphanage/sr-speedbar")

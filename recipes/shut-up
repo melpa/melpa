@@ -1,1 +1,1 @@
-(shut-up :fetcher github :repo "rejeep/shut-up.el")
+(shut-up :fetcher github :repo "cask/shut-up")

@@ -1,0 +1,1 @@
+(jscs :repo "papaeye/emacs-jscs" :fetcher github)

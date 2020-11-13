@@ -1,0 +1,1 @@
+(pixie-mode :repo "johnwalker/pixie-mode" :fetcher github)

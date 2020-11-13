@@ -1,0 +1,3 @@
+(stgit :fetcher github
+       :repo "stacked-git/stgit"
+       :files ("contrib/stgit.el"))

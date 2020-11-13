@@ -1,0 +1,4 @@
+(trr :fetcher github
+              :repo "kawabata/emacs-trr"
+              :files (:defaults "record" "text" "CONTENTS")
+              )

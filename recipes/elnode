@@ -1,5 +1,5 @@
 (elnode
  :fetcher github
- :repo "nicferrier/elnode"
- :commit "origin/melpa"
+ :repo "jcaw/elnode"
+ :branch "melpa"
  :files ("*"))

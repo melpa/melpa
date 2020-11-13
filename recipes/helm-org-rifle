@@ -1,0 +1,1 @@
+(helm-org-rifle :fetcher github :repo "alphapapa/org-rifle")

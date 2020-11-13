@@ -1,0 +1,1 @@
+(magit-org-todos :repo "danielma/magit-org-todos.el" :fetcher github)

@@ -1,0 +1,4 @@
+(go-rename
+ :repo "dominikh/go-mode.el"
+ :fetcher github
+ :files ("go-rename.el"))

@@ -1,0 +1,3 @@
+(copyit-pandoc :repo "zonuexe/emacs-copyit"
+               :fetcher github
+               :files ("copyit-pandoc.el"))

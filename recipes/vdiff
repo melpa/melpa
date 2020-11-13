@@ -1,0 +1,1 @@
+(vdiff :repo "justbur/emacs-vdiff" :fetcher github)

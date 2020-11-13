@@ -1,0 +1,2 @@
+(psc-ide :fetcher github
+         :repo "purescript-emacs/psc-ide-emacs")

@@ -1,1 +1,1 @@
-(html-to-markdown :repo "Bruce-Connor/html-to-markdown" :fetcher github)
+(html-to-markdown :repo "Malabarba/html-to-markdown" :fetcher github)

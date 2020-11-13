@@ -1,1 +1,2 @@
-(lorem-ipsum :fetcher wiki)
+(lorem-ipsum :fetcher github
+             :repo "jschaf/emacs-lorem-ipsum")

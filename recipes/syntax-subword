@@ -1,0 +1,3 @@
+(syntax-subword
+ :fetcher github
+ :repo "jpkotta/syntax-subword")

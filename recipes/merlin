@@ -1,0 +1,3 @@
+(merlin :fetcher github
+        :repo "ocaml/merlin"
+        :files ("emacs/*.el"))

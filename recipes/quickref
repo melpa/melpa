@@ -1,1 +1,1 @@
-(quickref :fetcher "github" :repo "pd/quickref.el")
+(quickref :fetcher github :repo "pd/quickref.el")

@@ -1,0 +1,1 @@
+(el-init-viewer :fetcher github :repo "HKey/el-init-viewer")

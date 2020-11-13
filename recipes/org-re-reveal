@@ -1,0 +1,3 @@
+(org-re-reveal
+ :repo "oer/org-re-reveal"
+ :fetcher gitlab)

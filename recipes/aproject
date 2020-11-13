@@ -1,0 +1,3 @@
+(aproject
+ :repo "vietor/aproject"
+ :fetcher github)

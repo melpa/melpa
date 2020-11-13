@@ -1,0 +1,1 @@
+(ox-epub :repo "ofosos/ox-epub" :fetcher github)

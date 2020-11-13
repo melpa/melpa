@@ -1,0 +1,1 @@
+(slime-company :fetcher github :repo "anwyn/slime-company" )

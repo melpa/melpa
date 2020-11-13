@@ -1,1 +1,1 @@
-(naquadah-theme :url "git://git.naquadah.org/naquadah-theme.git" :fetcher git)
+(naquadah-theme :fetcher github :repo "jd/naquadah-theme")

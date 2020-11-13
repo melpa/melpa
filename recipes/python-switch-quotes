@@ -1,0 +1,2 @@
+(python-switch-quotes :fetcher github
+                      :repo "vladimirlagunov/python-switch-quotes")

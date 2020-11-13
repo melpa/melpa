@@ -1,1 +1,1 @@
-(puppet-mode :fetcher github :repo "lunaryorn/puppet-mode")
+(puppet-mode :fetcher github :repo "voxpupuli/puppet-mode")

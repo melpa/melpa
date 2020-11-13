@@ -1,0 +1,3 @@
+(ppd-sr-speedbar :fetcher github
+                 :repo "rdallasgray/ppd-sr-speedbar"
+                 :files ("lib/*"))

@@ -1,0 +1,1 @@
+(counsel-osx-app :repo "d12frosted/counsel-osx-app" :fetcher github)

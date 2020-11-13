@@ -1,0 +1,5 @@
+(history
+ :fetcher github
+ :repo "boyw165/history"
+ :files (:defaults ("images" "images/*.xpm" "images/*.png")))
+

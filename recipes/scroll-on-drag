@@ -1,0 +1,3 @@
+(scroll-on-drag
+ :repo "ideasman42/emacs-scroll-on-drag"
+ :fetcher gitlab)

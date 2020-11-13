@@ -1,3 +1,4 @@
 (htmlize
- :url "http://fly.srk.fer.hr/~hniksic/emacs/htmlize.git"
- :fetcher git)
+ :repo "hniksic/emacs-htmlize"
+ :fetcher github
+ :version-regexp "release/\\(.*\\)")

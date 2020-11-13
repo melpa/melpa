@@ -1,0 +1,1 @@
+(merlin-eldoc :fetcher github :repo "Khady/merlin-eldoc")

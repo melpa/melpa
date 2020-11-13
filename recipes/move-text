@@ -1,1 +1,1 @@
-(move-text :fetcher wiki)
+(move-text :fetcher github :repo "emacsfodder/move-text")

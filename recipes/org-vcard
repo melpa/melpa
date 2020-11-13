@@ -1,0 +1,5 @@
+(org-vcard
+ :fetcher github
+ :repo "flexibeast/org-vcard"
+ :files ("org-vcard.el"
+         "styles"))

@@ -1,0 +1,4 @@
+(ox-impress-js :fetcher github
+               :repo "nullpofy/org-impress-js.el"
+               :files ("*.el" "resources")
+               :old-names (org-impress-js))

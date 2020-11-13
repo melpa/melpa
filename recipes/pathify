@@ -1,0 +1,1 @@
+(pathify :repo "alezost/pathify.el" :fetcher github)

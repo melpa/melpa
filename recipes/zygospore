@@ -1,0 +1,1 @@
+(zygospore :fetcher github :repo "LouisKottmann/zygospore.el")

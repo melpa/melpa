@@ -1,3 +1,0 @@
-(parenface
- :repo "emacsmirror/parenface"
- :fetcher github)

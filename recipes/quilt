@@ -1,0 +1,1 @@
+(quilt :fetcher github :repo "jstranik/emacs-quilt")

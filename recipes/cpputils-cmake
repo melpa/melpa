@@ -1,0 +1,2 @@
+(cpputils-cmake :fetcher github
+                :repo "redguardtoo/cpputils-cmake")

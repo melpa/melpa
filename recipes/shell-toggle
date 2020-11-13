@@ -1,0 +1,1 @@
+(shell-toggle :repo "knu/shell-toggle.el" :fetcher github)

@@ -1,0 +1,3 @@
+(gradle-mode
+ :fetcher github
+ :repo "jacobono/emacs-gradle-mode")

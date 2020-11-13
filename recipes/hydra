@@ -1,0 +1,3 @@
+(hydra :repo "abo-abo/hydra"
+       :fetcher github
+       :files (:defaults (:exclude "lv.el")))

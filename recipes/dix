@@ -1,0 +1,1 @@
+(dix :fetcher github :repo "unhammer/dix" :files ("dix.el" "schemas.xml" "local-schemas.xml"))

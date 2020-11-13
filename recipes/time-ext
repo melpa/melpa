@@ -1,1 +1,1 @@
-(time-ext :fetcher wiki)
+(time-ext :repo "rubikitch/time-ext" :fetcher github)

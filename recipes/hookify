@@ -1,0 +1,1 @@
+(hookify :fetcher github :repo "Silex/hookify")

@@ -1,0 +1,1 @@
+(forecast :fetcher github :repo "cadadr/elisp" :files ("forecast.el"))

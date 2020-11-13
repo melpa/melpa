@@ -1,1 +1,1 @@
-(ghc :fetcher github :repo "kazu-yamamoto/ghc-mod" :files ("elisp/*.el"))
+(ghc :fetcher github :repo "DanielG/ghc-mod" :files ("elisp/*.el"))

@@ -1,4 +1,1 @@
-(company-jedi
- :fetcher "github"
- :repo "proofit404/company-jedi"
- :files ("start_jedi" "company-jedi.el" "Makefile" "requirements.txt"))
+(company-jedi :fetcher github :repo "emacsorphanage/company-jedi")

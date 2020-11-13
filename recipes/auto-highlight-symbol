@@ -1,0 +1,2 @@
+(auto-highlight-symbol :repo "jcs-elpa/auto-highlight-symbol" :fetcher github)
+

@@ -1,0 +1,3 @@
+(rally-mode :repo "seanleblanc/rally-mode" :fetcher github)
+
+

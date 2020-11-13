@@ -1,0 +1,2 @@
+(ace-pinyin :repo "cute-jumper/ace-pinyin"
+            :fetcher github)

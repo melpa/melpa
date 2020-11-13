@@ -1,0 +1,4 @@
+(company-coq
+ :repo "cpitclaudel/company-coq"
+ :fetcher github
+ :files (:defaults "refman"))

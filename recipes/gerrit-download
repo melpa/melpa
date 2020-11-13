@@ -1,0 +1,1 @@
+(gerrit-download :repo "chmouel/gerrit-download.el" :fetcher github)

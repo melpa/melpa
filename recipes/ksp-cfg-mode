@@ -1,0 +1,3 @@
+(ksp-cfg-mode
+ :fetcher github
+ :repo "lashtear/ksp-cfg-mode")

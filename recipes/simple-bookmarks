@@ -1,0 +1,2 @@
+(simple-bookmarks :fetcher github
+                  :repo "jtkDvlp/simple-bookmarks")

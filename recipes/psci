@@ -1,0 +1,1 @@
+(psci :fetcher github :repo "purescript-emacs/emacs-psci")

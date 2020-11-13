@@ -1,0 +1,1 @@
+(cssh :fetcher github :repo "dimitri/cssh")

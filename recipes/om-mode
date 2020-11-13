@@ -1,0 +1,3 @@
+(om-mode
+ :fetcher github
+ :repo "danielsz/om-mode")

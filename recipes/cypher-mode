@@ -1,0 +1,1 @@
+(cypher-mode :repo "fxbois/cypher-mode" :fetcher github)

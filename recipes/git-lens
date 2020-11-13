@@ -1,0 +1,1 @@
+(git-lens :fetcher gitlab :repo "pidu/git-lens")

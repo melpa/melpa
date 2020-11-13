@@ -1,0 +1,2 @@
+(org-download :repo "abo-abo/org-download"
+              :fetcher github)

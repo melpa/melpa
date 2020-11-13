@@ -1,0 +1,1 @@
+(hexo :fetcher github :repo "kuanyui/hexo.el")

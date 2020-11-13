@@ -1,0 +1,3 @@
+(chinese-word-at-point :repo "xuchunyang/chinese-word-at-point.el"
+                       :fetcher github
+                       :files ("chinese-word-at-point.el"))

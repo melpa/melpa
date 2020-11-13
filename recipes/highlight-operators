@@ -1,0 +1,3 @@
+(highlight-operators
+ :fetcher github
+ :repo "jpkotta/highlight-operators")

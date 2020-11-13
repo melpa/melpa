@@ -1,0 +1,1 @@
+(grails :fetcher github :repo "lifeisfoo/emacs-grails")

@@ -1,0 +1,1 @@
+(prompt-text :repo "10sr/prompt-text-el" :fetcher github)

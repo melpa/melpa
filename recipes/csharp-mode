@@ -1,2 +1,2 @@
 (csharp-mode
- :fetcher wiki)
+ :fetcher github :repo "josteink/csharp-mode")

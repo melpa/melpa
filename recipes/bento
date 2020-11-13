@@ -1,0 +1,1 @@
+(bento :repo "returntocorp/bento-emacs" :fetcher github)

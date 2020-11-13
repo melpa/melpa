@@ -1,1 +1,1 @@
-(osx-plist :fetcher github :repo "emacsmirror/osx-plist")
+(osx-plist :fetcher github :repo "gonewest818/osx-plist")

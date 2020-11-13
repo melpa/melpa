@@ -1,0 +1,5 @@
+(sly-hello-world :fetcher github
+                 :repo "joaotavora/sly-hello-world"
+                 :files (:defaults
+                         "*.lisp"
+                         "*.asd"))

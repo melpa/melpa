@@ -1,3 +1,1 @@
-(keydef
- :repo "emacsmirror/keydef"
- :fetcher github)
+(keydef :fetcher github :repo "emacsorphanage/keydef")

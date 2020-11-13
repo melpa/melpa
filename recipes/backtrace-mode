@@ -1,1 +1,0 @@
-(backtrace-mode :fetcher github :repo "EricCrosson/backtrace-mode")

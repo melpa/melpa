@@ -1,0 +1,2 @@
+(pt :repo "bling/pt.el" :fetcher github)
+

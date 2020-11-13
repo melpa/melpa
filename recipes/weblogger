@@ -1,1 +1,3 @@
-(weblogger :fetcher bzr :url "lp:weblogger-el")
+(weblogger :fetcher github
+           :repo "hexmode/weblogger-el"
+           :version-regexp "REL\\(.*\\)")

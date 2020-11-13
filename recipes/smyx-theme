@@ -1,0 +1,2 @@
+(smyx-theme :fetcher github
+            :repo "tacit7/smyx")

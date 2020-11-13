@@ -1,0 +1,2 @@
+(aria2 :fetcher gitlab
+       :repo "ukaszg/aria2")

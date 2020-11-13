@@ -1,0 +1,1 @@
+(helm-firefox :repo "emacs-helm/helm-firefox" :fetcher github)

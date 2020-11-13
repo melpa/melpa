@@ -1,0 +1,2 @@
+(helm-bind-key :repo "myuhe/helm-bind-key.el"
+               :fetcher github)

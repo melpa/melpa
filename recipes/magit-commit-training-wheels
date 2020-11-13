@@ -1,1 +1,0 @@
-(magit-commit-training-wheels :repo "re5et/magit-commit-training-wheels" :fetcher github)

@@ -1,0 +1,1 @@
+(io-mode-inf :fetcher github :repo "slackorama/io-emacs")

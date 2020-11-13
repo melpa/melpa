@@ -1,1 +1,0 @@
-(elixir-mix :fetcher github :repo "tonini/elixir-mix.el")

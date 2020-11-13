@@ -1,0 +1,3 @@
+(helm-rubygems-org
+ :repo "neomantic/helm-rubygems-org"
+ :fetcher github)

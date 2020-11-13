@@ -1,0 +1,2 @@
+(editorconfig-custom-majormode :fetcher github
+                               :repo "10sr/editorconfig-custom-majormode-el")

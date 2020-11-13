@@ -1,0 +1,2 @@
+(zotxt :fetcher gitlab
+       :repo "egh/zotxt-emacs")

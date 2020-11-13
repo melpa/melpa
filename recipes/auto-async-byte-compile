@@ -1,1 +1,1 @@
-(auto-async-byte-compile :fetcher wiki)
+(auto-async-byte-compile :repo "rubikitch/auto-async-byte-compile" :fetcher github)

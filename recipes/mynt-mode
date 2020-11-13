@@ -1,0 +1,1 @@
+(mynt-mode :fetcher github :repo "cbrst/mynt-mode")

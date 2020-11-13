@@ -1,1 +1,3 @@
-(geben :fetcher svn :url "http://geben-on-emacs.googlecode.com/svn/trunk/")
+(geben
+ :repo "ahungry/geben"
+ :fetcher github)

@@ -1,1 +1,0 @@
-(lcs :repo "jorgenschaefer/circe" :fetcher github :files ("lisp/lcs.el"))

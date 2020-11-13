@@ -1,0 +1,4 @@
+(nu-mode
+ :fetcher github
+ :repo "pyluyten/emacs-nu"
+ :files ("nu-mode/nu-*.el" "doc/nu-mode.info"))

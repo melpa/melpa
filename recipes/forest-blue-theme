@@ -1,0 +1,3 @@
+(forest-blue-theme
+ :fetcher github
+ :repo "olkinn/forest-blue-emacs")

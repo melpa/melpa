@@ -1,0 +1,3 @@
+(prettify-greek
+ :fetcher gitlab
+ :repo "fommil/emacs-prettify-greek")

@@ -1,0 +1,2 @@
+(helm-ext :repo "cute-jumper/helm-ext"
+          :fetcher github)

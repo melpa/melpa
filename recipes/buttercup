@@ -1,0 +1,3 @@
+(buttercup :fetcher github
+           :repo "jorgenschaefer/emacs-buttercup"
+           :files (:defaults "bin"))

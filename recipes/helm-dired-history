@@ -1,0 +1,1 @@
+(helm-dired-history :repo "jixiuf/helm-dired-history" :fetcher github)

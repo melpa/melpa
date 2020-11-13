@@ -1,0 +1,1 @@
+(helm-gitlab :fetcher github :repo "nlamirault/emacs-gitlab" :files ("helm-gitlab.el"))

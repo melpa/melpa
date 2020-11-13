@@ -1,1 +1,0 @@
-(google-weather :fetcher git :url "git://git.naquadah.org/google-weather-el.git")

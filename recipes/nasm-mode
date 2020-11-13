@@ -1,0 +1,1 @@
+(nasm-mode :repo "skeeto/nasm-mode" :fetcher github)

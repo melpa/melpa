@@ -1,1 +1,1 @@
-(pkg-info :repo "lunaryorn/pkg-info.el" :fetcher github)
+(pkg-info :repo "emacsorphanage/pkg-info" :fetcher github)

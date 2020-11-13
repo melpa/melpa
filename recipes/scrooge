@@ -1,0 +1,1 @@
+(scrooge :fetcher github :repo "cosmicexplorer/emacs-scrooge")

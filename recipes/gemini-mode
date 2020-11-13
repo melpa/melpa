@@ -1,0 +1,3 @@
+(gemini-mode
+ :fetcher git
+ :url "https://git.carcosa.net/jmcbray/gemini.el.git")

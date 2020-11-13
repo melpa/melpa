@@ -1,0 +1,3 @@
+(intero :repo "chrisdone/intero"
+        :fetcher github
+        :files ("elisp/intero.el"))

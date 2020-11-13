@@ -1,0 +1,2 @@
+(helm-unicode :repo "bomgar/helm-unicode"
+              :fetcher github)

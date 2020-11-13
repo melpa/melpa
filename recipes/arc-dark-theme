@@ -1,0 +1,3 @@
+(arc-dark-theme
+ :repo "cfraz89/arc-dark-theme"
+ :fetcher github)

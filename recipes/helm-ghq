@@ -1,0 +1,1 @@
+(helm-ghq :repo "masutaka/emacs-helm-ghq" :fetcher github)

@@ -1,0 +1,1 @@
+(js2-highlight-vars :fetcher github :repo "unhammer/js2-highlight-vars.el")

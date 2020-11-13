@@ -1,0 +1,1 @@
+(org-clock-csv :repo "atheriel/org-clock-csv" :fetcher github)

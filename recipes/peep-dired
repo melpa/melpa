@@ -1,0 +1,3 @@
+(peep-dired
+ :repo "asok/peep-dired"
+ :fetcher github)

@@ -1,0 +1,3 @@
+(flyspell-correct-ivy :repo "d12frosted/flyspell-correct"
+                      :fetcher github
+                      :files ("flyspell-correct-ivy.el"))

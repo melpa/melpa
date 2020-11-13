@@ -1,1 +1,1 @@
-(fiplr :fetcher github :repo "d11wtq/fiplr")
+(fiplr :fetcher github :repo "grizzl/fiplr")

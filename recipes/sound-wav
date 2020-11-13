@@ -1,0 +1,1 @@
+(sound-wav :repo "emacsorphanage/sound-wav" :fetcher github)

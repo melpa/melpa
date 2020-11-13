@@ -1,0 +1,1 @@
+(mandoku :fetcher github :repo "mandoku/mandoku" :files ("lisp/*.el" "lisp/*.org"))

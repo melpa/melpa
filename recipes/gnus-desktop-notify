@@ -1,0 +1,2 @@
+(gnus-desktop-notify :repo "wavexx/gnus-desktop-notify.el"
+                     :fetcher gitlab)

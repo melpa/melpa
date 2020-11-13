@@ -1,0 +1,2 @@
+(engine-mode :repo "hrs/engine-mode"
+             :fetcher github)

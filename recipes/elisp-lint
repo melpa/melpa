@@ -1,0 +1,2 @@
+(elisp-lint :fetcher github :repo "gonewest818/elisp-lint")
+

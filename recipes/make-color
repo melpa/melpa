@@ -1,0 +1,1 @@
+(make-color :repo "alezost/make-color.el" :fetcher github)

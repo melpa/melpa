@@ -1,0 +1,1 @@
+(org-evil :fetcher github :repo "GuiltyDolphin/org-evil")

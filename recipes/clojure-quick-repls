@@ -1,0 +1,3 @@
+(clojure-quick-repls
+ :repo "symfrog/clojure-quick-repls"
+ :fetcher github)

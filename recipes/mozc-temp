@@ -1,0 +1,1 @@
+(mozc-temp :repo "HKey/mozc-temp" :fetcher github)

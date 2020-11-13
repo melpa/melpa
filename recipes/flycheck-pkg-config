@@ -1,0 +1,3 @@
+(flycheck-pkg-config
+ :repo "Wilfred/flycheck-pkg-config"
+ :fetcher github)

@@ -1,0 +1,2 @@
+(semi :repo "wanderlust/semi" 
+      :fetcher github)

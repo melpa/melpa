@@ -1,0 +1,2 @@
+(cython-mode :fetcher github :repo "cython/cython"
+             :files ("Tools/*.el"))

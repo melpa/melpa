@@ -1,0 +1,2 @@
+(worf :repo "abo-abo/worf"
+      :fetcher github)

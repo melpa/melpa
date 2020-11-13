@@ -1,0 +1,4 @@
+(helm-perldoc
+ :fetcher github
+ :repo "emacsorphanage/helm-perldoc"
+ :files (:defaults "*.pl"))

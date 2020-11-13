@@ -1,2 +1,2 @@
-(ansi :repo "rejeep/ansi" :fetcher github)
+(ansi :repo "rejeep/ansi.el" :fetcher github)
 

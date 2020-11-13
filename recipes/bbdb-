@@ -1,0 +1,2 @@
+(bbdb- :repo "aki2o/bbdb-"
+       :fetcher github)

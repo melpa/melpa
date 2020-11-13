@@ -1,3 +1,2 @@
 (yalinum :repo "tm8st/emacs-yalinum"
-             :fetcher github
-             :files ("yalinum.el"))
+         :fetcher github)

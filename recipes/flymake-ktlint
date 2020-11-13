@@ -1,0 +1,1 @@
+(flymake-ktlint :fetcher github :repo "jojojames/flymake-ktlint")

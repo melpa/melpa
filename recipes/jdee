@@ -1,0 +1,1 @@
+(jdee :fetcher github :repo "jdee-emacs/jdee" :files (:defaults "jdee-test.el"))

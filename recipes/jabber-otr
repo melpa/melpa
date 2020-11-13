@@ -1,0 +1,3 @@
+(jabber-otr
+ :fetcher github :repo "legoscia/emacs-jabber-otr"
+ :files (:defaults "emacs-otr.py"))

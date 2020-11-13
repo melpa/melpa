@@ -1,0 +1,1 @@
+(flycheck-dmd-dub :repo "atilaneves/flycheck-dmd-dub" :fetcher github)

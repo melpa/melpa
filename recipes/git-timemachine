@@ -1,0 +1,1 @@
+(git-timemachine :fetcher gitlab :repo "pidu/git-timemachine")

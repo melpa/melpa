@@ -1,0 +1,1 @@
+(flycheck-bashate :fetcher github :repo "alexmurray/flycheck-bashate")

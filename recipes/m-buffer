@@ -1,0 +1,5 @@
+(m-buffer :fetcher github :repo "phillord/m-buffer-el"
+          :files (:defaults
+                  "m-buffer-doc.org"
+                  "m-buffer-doc.css"))
+

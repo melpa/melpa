@@ -1,0 +1,3 @@
+(ninja-mode :fetcher github
+            :repo "ninja-build/ninja"
+            :files ("misc/*.el"))

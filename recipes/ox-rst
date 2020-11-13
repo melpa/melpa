@@ -1,0 +1,1 @@
+(ox-rst :fetcher github :repo "msnoigrs/ox-rst")

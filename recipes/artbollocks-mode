@@ -1,0 +1,2 @@
+(artbollocks-mode :repo "sachac/artbollocks-mode"
+                  :fetcher github)

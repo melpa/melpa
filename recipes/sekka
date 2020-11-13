@@ -1,0 +1,3 @@
+(sekka :repo "kiyoka/sekka"
+       :fetcher github
+       :files ("emacs/sekka.el"))

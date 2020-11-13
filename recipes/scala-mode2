@@ -1,3 +1,0 @@
-(scala-mode2
- :repo "hvesalai/scala-mode2"
- :fetcher github)

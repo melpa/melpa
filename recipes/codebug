@@ -1,0 +1,1 @@
+(codebug :fetcher github :repo "shano/emacs-codebug")

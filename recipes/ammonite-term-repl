@@ -1,0 +1,2 @@
+(ammonite-term-repl :fetcher github
+                    :repo "zwild/ammonite-term-repl")

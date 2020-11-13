@@ -1,1 +1,1 @@
-(mediawiki :url "lp:mediawiki-el" :fetcher bzr)
+(mediawiki :repo "hexmode/mediawiki-el" :fetcher github)

@@ -1,0 +1,3 @@
+(octo-mode
+ :fetcher github
+ :repo "cryon/octo-mode")

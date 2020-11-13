@@ -1,0 +1,1 @@
+(flycheck-perl6 :fetcher github :repo "hinrik/flycheck-perl6")

@@ -1,1 +1,1 @@
-(offlineimap :fetcher git :url "git://git.naquadah.org/offlineimap-el.git")
+(offlineimap :fetcher github :repo "jd/offlineimap.el")

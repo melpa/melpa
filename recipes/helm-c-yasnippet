@@ -1,2 +1,2 @@
-(helm-c-yasnippet :repo "emacs-helm/helm-c-yasnippet"
+(helm-c-yasnippet :repo "emacs-jp/helm-c-yasnippet"
                   :fetcher github)

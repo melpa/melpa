@@ -1,0 +1,1 @@
+(basic-theme :fetcher github :repo "fgeller/basic-theme.el")

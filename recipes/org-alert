@@ -1,0 +1,1 @@
+(org-alert :fetcher github :repo "spegoraro/org-alert")

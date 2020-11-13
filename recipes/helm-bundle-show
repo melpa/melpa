@@ -1,0 +1,1 @@
+(helm-bundle-show :repo "masutaka/emacs-helm-bundle-show" :fetcher github)

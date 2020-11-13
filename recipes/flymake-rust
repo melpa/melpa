@@ -1,1 +1,1 @@
-(flymake-rust :repo "joaoxsouls/flymake-rust" :fetcher github)
+(flymake-rust :repo "jxs/flymake-rust" :fetcher github)

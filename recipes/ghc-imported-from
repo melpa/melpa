@@ -1,0 +1,3 @@
+(ghc-imported-from
+ :fetcher github
+ :repo "david-christiansen/ghc-imported-from-el")

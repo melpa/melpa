@@ -1,4 +1,0 @@
-(emacs-eclim
- :fetcher github
- :repo "senny/emacs-eclim"
- :files ("*.el" "snippets"))

@@ -1,0 +1,4 @@
+(org-doing
+ :fetcher github
+ :repo "emacsattic/org-doing"
+ :files (:defaults "bin"))

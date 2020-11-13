@@ -1,0 +1,2 @@
+(company-qml :repo "cute-jumper/company-qml"
+             :fetcher github)

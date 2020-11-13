@@ -1,0 +1,1 @@
+(per-buffer-theme :fetcher hg :url "https://hg.serna.eu/emacs/per-buffer-theme")

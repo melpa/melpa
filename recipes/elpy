@@ -1,8 +1,7 @@
 (elpy
  :fetcher github
  :repo "jorgenschaefer/elpy"
- :commit "origin/release"
- :files ("elpy.el"
-         "elpy-refactor.el"
-         "elpy-pkg.el.in"
-         "snippets"))
+ :files ("*.el"
+         "NEWS.rst"
+         "snippets"
+         "elpy"))

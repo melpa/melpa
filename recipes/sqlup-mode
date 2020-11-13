@@ -1,0 +1,2 @@
+(sqlup-mode :fetcher github :repo "Trevoke/sqlup-mode.el")
+

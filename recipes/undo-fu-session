@@ -1,0 +1,3 @@
+(undo-fu-session
+ :repo "ideasman42/emacs-undo-fu-session"
+ :fetcher gitlab)

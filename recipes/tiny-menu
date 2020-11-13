@@ -1,0 +1,3 @@
+(tiny-menu
+ :fetcher github
+ :repo "aaronbieber/tiny-menu.el")

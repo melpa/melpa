@@ -1,0 +1,2 @@
+(sx :repo "vermiculus/sx.el"
+    :fetcher github)

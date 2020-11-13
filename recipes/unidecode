@@ -1,0 +1,3 @@
+(unidecode :fetcher github
+           :repo "sindikat/unidecode"
+           :files (:defaults "data"))

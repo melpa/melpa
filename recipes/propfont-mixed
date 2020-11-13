@@ -1,0 +1,3 @@
+(propfont-mixed
+ :fetcher github
+ :repo "ikirill/propfont-mixed")

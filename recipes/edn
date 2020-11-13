@@ -1,0 +1,1 @@
+(edn :fetcher github :repo "expez/edn.el")

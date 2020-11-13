@@ -1,0 +1,1 @@
+(serverspec :fetcher github :repo "k1LoW/emacs-serverspec" :files ("*.el" "snippets" "dict"))

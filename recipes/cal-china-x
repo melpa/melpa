@@ -1,0 +1,3 @@
+(cal-china-x :repo "xwl/cal-china-x" 
+ :fetcher github
+ :files (:defaults "jieqi.txt"))

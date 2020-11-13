@@ -1,0 +1,1 @@
+(ssh-agency :fetcher github :repo "magit/ssh-agency")

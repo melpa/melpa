@@ -1,0 +1,1 @@
+(rtm :repo "pmiddend/emacs-rtm" :fetcher github)

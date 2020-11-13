@@ -1,0 +1,2 @@
+(elf-mode :repo "abo-abo/elf-mode"
+          :fetcher github)

@@ -1,0 +1,2 @@
+(msvc :repo "yaruopooner/msvc" :fetcher github
+      :files (:defaults "*.cpp" "*.bat" "*.vcxproj"))

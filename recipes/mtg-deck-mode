@@ -1,0 +1,3 @@
+(mtg-deck-mode :fetcher github
+               :repo "mattiasb/mtg-deck-mode"
+               :files ( :defaults "formats" ))

@@ -1,0 +1,4 @@
+(aozora-view
+ :fetcher github :repo "kawabata/aozora-view"
+ :files (:defaults
+         "*.txt"))

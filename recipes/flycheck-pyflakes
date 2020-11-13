@@ -1,0 +1,1 @@
+(flycheck-pyflakes :repo "Wilfred/flycheck-pyflakes" :fetcher github)

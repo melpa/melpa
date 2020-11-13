@@ -1,0 +1,3 @@
+(narrowed-page-navigation
+ :fetcher github
+ :repo "david-christiansen/narrowed-page-navigation")

@@ -1,3 +1,0 @@
-(cider-tracing :repo "clojure-emacs/cider-tracing"
-               :fetcher github
-               :old-names (nrepl-tracing))

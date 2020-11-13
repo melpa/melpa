@@ -1,0 +1,3 @@
+(sphinx-doc 
+ :fetcher github 
+ :repo "naiquevin/sphinx-doc.el")

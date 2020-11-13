@@ -1,0 +1,2 @@
+(libmpdee :repo "andyetitmoves/libmpdee"
+          :fetcher github)

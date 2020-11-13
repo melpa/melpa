@@ -1,3 +1,0 @@
-(inform7-mode
- :url "https://github.com/fred-o/inform7-mode.git"
- :fetcher git)

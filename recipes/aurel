@@ -1,0 +1,1 @@
+(aurel :repo "alezost/aurel" :fetcher github)

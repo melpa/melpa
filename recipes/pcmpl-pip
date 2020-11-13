@@ -1,0 +1,1 @@
+(pcmpl-pip :fetcher github :repo "zwild/pcmpl-pip")

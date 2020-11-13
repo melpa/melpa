@@ -1,0 +1,1 @@
+(evil-text-object-python :repo "wbolster/evil-text-object-python" :fetcher github)

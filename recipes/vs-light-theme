@@ -1,0 +1,1 @@
+(vs-light-theme :repo "jcs-elpa/vs-light-theme" :fetcher github)

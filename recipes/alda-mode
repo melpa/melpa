@@ -1,0 +1,1 @@
+(alda-mode :fetcher gitlab :repo "jgkamat/alda-mode")

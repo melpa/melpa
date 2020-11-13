@@ -1,0 +1,1 @@
+(smart-region :repo "uk-ar/smart-region" :fetcher github)

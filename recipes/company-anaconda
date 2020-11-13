@@ -1,0 +1,3 @@
+(company-anaconda
+ :fetcher github
+ :repo "pythonic-emacs/company-anaconda")

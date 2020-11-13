@@ -1,0 +1,2 @@
+(powerline-evil :fetcher github
+                :repo "johnson-christopher/powerline-evil")

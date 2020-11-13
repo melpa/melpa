@@ -1,0 +1,1 @@
+(flycheck-xcode :fetcher github :repo "jojojames/flycheck-xcode")

@@ -1,0 +1,4 @@
+(markdown-preview-mode
+  :fetcher github
+  :repo "ancane/markdown-preview-mode"
+  :files (:defaults "preview.html" "favicon.ico"))

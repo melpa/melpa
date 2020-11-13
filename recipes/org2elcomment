@@ -1,0 +1,2 @@
+(org2elcomment :repo "cute-jumper/org2elcomment"
+               :fetcher github)

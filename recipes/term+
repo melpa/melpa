@@ -1,0 +1,1 @@
+(term+ :repo "tarao/term-plus-el" :fetcher github)

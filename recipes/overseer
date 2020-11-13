@@ -1,0 +1,3 @@
+(overseer
+ :fetcher github
+ :repo "tonini/overseer.el")

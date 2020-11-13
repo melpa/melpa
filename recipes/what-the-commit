@@ -1,0 +1,2 @@
+(what-the-commit :fetcher github
+         :repo "danbarbarito/what-the-commit.el")

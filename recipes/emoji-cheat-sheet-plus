@@ -1,0 +1,3 @@
+(emoji-cheat-sheet-plus :repo "syl20bnr/emacs-emoji-cheat-sheet-plus"
+                        :fetcher github
+                        :files (:defaults "emoji-cheat-sheet"))

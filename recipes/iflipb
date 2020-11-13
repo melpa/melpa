@@ -1,1 +1,1 @@
-(iflipb :url "http://hg.rosdahl.net/iflipb" :fetcher hg)
+(iflipb :repo "jrosdahl/iflipb" :fetcher github)

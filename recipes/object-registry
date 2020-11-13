@@ -1,1 +1,0 @@
-(object-registry :repo "emacsattic/object-registry" :fetcher github)

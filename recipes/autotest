@@ -1,0 +1,3 @@
+(autotest :fetcher github
+          :repo "zenspider/elisp"
+          :files ("autotest.el"))

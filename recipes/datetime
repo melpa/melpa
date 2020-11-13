@@ -1,0 +1,3 @@
+(datetime :repo "doublep/datetime"
+          :fetcher github
+          :files (:defaults "*.extmap"))

@@ -1,0 +1,3 @@
+(plim-mode
+ :repo "dongweiming/plim-mode"
+ :fetcher github)

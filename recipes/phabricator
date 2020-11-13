@@ -1,0 +1,1 @@
+(phabricator :fetcher github :repo "ajtulloch/phabricator.el")

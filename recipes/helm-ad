@@ -1,0 +1,3 @@
+(helm-ad
+ :fetcher github
+ :repo "tnoda/helm-ad")

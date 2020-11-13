@@ -1,0 +1,4 @@
+(sl
+ :fetcher github
+ :repo "xuchunyang/sl.el"
+ :files (:defaults "*.txt"))

@@ -1,0 +1,1 @@
+(rich-minority :repo "Malabarba/rich-minority" :fetcher github)

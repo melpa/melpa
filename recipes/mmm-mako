@@ -1,3 +1,0 @@
-(mmm-mako
- :url "https://bitbucket.org/pjenvey/mmm-mako"
- :fetcher hg)

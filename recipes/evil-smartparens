@@ -1,0 +1,1 @@
+(evil-smartparens :fetcher github :repo "expez/evil-smartparens")

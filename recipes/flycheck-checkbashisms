@@ -1,0 +1,1 @@
+(flycheck-checkbashisms :repo "cuonglm/flycheck-checkbashisms" :fetcher github)

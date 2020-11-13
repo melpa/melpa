@@ -1,0 +1,1 @@
+(font-lock-profiler :repo "Lindydancer/font-lock-profiler" :fetcher github)

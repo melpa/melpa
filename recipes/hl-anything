@@ -1,0 +1,5 @@
+(hl-anything
+ :fetcher github
+ :repo "hl-anything/hl-anything-emacs"
+ :files (:defaults ("images" "images/*.xpm" "images/*.png")))
+

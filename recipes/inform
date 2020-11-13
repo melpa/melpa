@@ -1,0 +1,3 @@
+(inform
+:fetcher github
+:repo "dieter-wilhelm/inform")

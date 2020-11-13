@@ -1,0 +1,1 @@
+(cpp-auto-include :fetcher github :repo "emacsorphanage/cpp-auto-include")

@@ -1,0 +1,1 @@
+(cider-hydra :fetcher github :repo "clojure-emacs/cider-hydra")

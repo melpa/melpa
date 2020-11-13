@@ -1,2 +1,2 @@
-(html-script-src :repo "rejeep/html-script-src" :fetcher github)
+(html-script-src :repo "rejeep/html-script-src.el" :fetcher github)
 

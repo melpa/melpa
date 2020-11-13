@@ -1,1 +1,1 @@
-(tango-2-theme :repo "2024464" :fetcher github)
+(tango-2-theme :url "https://gist.github.com/2024464.git" :fetcher git)

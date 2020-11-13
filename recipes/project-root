@@ -1,0 +1,3 @@
+(project-root :fetcher github
+              :repo "piranha/project-root"
+              :files ("project-root.el"))

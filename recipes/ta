@@ -1,0 +1,1 @@
+(ta :repo "kuanyui/ta.el" :fetcher github)

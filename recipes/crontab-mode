@@ -1,1 +1,1 @@
-(crontab-mode :fetcher github :repo "emacsmirror/crontab-mode")
+(crontab-mode :repo "emacs-pe/crontab-mode" :fetcher github)

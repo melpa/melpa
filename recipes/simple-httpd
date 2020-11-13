@@ -1,2 +1,2 @@
-(simple-httpd :repo "skeeto/emacs-http-server"
+(simple-httpd :repo "skeeto/emacs-web-server"
               :fetcher github)

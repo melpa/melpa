@@ -1,0 +1,3 @@
+(cask-mode
+ :repo "Wilfred/cask-mode"
+ :fetcher github)

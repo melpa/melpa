@@ -1,3 +1,0 @@
-(tup-mode
- :fetcher github
- :repo "ejmr/tup-mode")

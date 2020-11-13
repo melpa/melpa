@@ -1,0 +1,9 @@
+(matlab-mode
+ :fetcher git
+ :url "https://git.code.sf.net/p/matlab-emacs/src"
+ :files ("*.el" "*.m" ("toolbox" "toolbox/*.m")
+         ("toolbox/+emacs" "toolbox/+emacs/*.m")
+         ("toolbox/+emacs/@Breakpoints" "toolbox/+emacs/@Breakpoints/*.m")
+         ("toolbox/+emacs/@EmacsServer" "toolbox/+emacs/@EmacsServer/*.m")
+         ("toolbox/+emacs/@Stack" "toolbox/+emacs/@Stack/*.m")
+         ("templates" "templates/*.srt")))

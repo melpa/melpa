@@ -1,1 +1,2 @@
-(powershell :fetcher wiki :files ("Powershell.el"))
+(powershell :repo "jschaf/powershell.el"
+            :fetcher github)

@@ -1,0 +1,1 @@
+(grunt :fetcher github :repo "gempesaw/grunt.el")

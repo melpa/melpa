@@ -1,0 +1,1 @@
+(mvn :fetcher github :repo "apg/mvn-el")

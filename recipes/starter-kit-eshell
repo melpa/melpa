@@ -1,4 +1,0 @@
-(starter-kit-eshell :repo "technomancy/emacs-starter-kit"
-                    :fetcher github
-                    :commit "origin/v2"
-                    :files ("modules/starter-kit-eshell.el"))

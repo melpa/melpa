@@ -1,0 +1,2 @@
+(youdao-dictionary :repo "xuchunyang/youdao-dictionary.el"
+                   :fetcher github)

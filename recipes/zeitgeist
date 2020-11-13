@@ -1,1 +1,0 @@
-(zeitgeist :url "lp:zeitgeist-datasources" :fetcher bzr :files ("emacs/*.el"))

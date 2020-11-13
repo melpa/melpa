@@ -1,0 +1,1 @@
+(org-gtd :fetcher github :repo "Trevoke/org-gtd.el")

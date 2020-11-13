@@ -1,4 +1,4 @@
 (zmq
  :fetcher github
- :repo "dzop/emacs-zmq"
+ :repo "nnicandro/emacs-zmq"
  :files (:defaults "Makefile" "src"))

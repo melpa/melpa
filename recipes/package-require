@@ -1,0 +1,3 @@
+(package-require
+ :fetcher github
+ :repo "SpringHan/package-require")

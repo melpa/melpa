@@ -1,0 +1,2 @@
+(ll-debug :repo "black7375/ll-debug" :fetcher github)
+

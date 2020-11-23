@@ -1,3 +1,2 @@
 (svg-tag-mode :repo "rougier/svg-tag-mode"
-              :fetcher github
-              :files ("svg-tag-mode.el"))
+              :fetcher github)

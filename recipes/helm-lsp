@@ -1,0 +1,1 @@
+(helm-lsp :repo "emacs-lsp/helm-lsp" :fetcher github)

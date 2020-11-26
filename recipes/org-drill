@@ -1,0 +1,1 @@
+(org-drill :fetcher gitlab :repo "phillord/org-drill")

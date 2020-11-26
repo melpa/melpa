@@ -1,6 +1,6 @@
 ;;; package-recipe.el --- Package recipes as EIEIO objects  -*- lexical-binding: t -*-
 
-;; Copyright (C) 2018  Jonas Bernoulli
+;; Copyright (C) 2018-2020  Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 
@@ -51,11 +51,11 @@
    (old-names       :initarg :old-names      :initform nil))
   :abstract t)
 
-(defmethod package-recipe--working-tree ((rcp package-recipe))
+(cl-defmethod package-recipe--working-tree ((rcp package-recipe))
   (file-name-as-directory
    (expand-file-name (oref rcp name) package-build-working-dir)))
 
-(defmethod package-recipe--upstream-url ((rcp package-recipe))
+(cl-defmethod package-recipe--upstream-url ((rcp package-recipe))
   (or (oref rcp url)
       (format (oref rcp url-format)
               (oref rcp repo))))
@@ -81,10 +81,6 @@
   ((tag-regexp      :initform "\
 \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} \
 [0-9]\\{2\\}:[0-9]\\{2\\}\\( [+-][0-9]\\{4\\}\\)?\\)")))
-
-(defclass package-bitbucket-recipe (package-hg-recipe)
-  ((url-format      :initform "https://bitbucket.org/%s")
-   (repopage-format :initform "https://bitbucket.org/%s")))
 
 ;;; Interface
 
@@ -138,7 +134,7 @@ file is invalid, then raise an error."
           (cl-assert (memq thing all-keys) nil "Unknown keyword %S" thing)))
       (let ((fetcher (plist-get plist :fetcher)))
         (cl-assert fetcher nil ":fetcher is missing")
-        (if (memq fetcher '(github gitlab bitbucket))
+        (if (memq fetcher '(github gitlab))
             (progn
               (cl-assert (plist-get plist :repo) ":repo is missing")
               (cl-assert (not (plist-get plist :url)) ":url is redundant"))

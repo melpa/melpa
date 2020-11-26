@@ -15,7 +15,7 @@ function build_all {
 
     ## run the script
     cd "/mnt/store/melpa"
-    make -j4 $(grep --files-without-match ':fetcher\s*wiki' $(find recipes/ -type f -not -name python-info -and -not -name python3-info | sort)) &
+    make -j8 $(grep --files-without-match ':fetcher\s*wiki' $(find recipes/ -type f -not -name python-info -and -not -name python3-info | sort)) &
     wait
 
     # python-info and python3-info are too big to run while other are

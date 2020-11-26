@@ -1,1 +1,0 @@
-(lsp-vue :repo "emacs-lsp/lsp-vue" :fetcher github)

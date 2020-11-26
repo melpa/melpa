@@ -22,7 +22,8 @@ LISP_CONFIG ?= '(progn\
   (setq package-build-archive-dir "$(TOP)/$(PKGDIR)/")\
   (setq package-build-recipes-dir "$(TOP)/$(RCPDIR)/")\
   (setq package-build-stable $(STABLE))\
-  (setq package-build-write-melpa-badge-images t))'
+  (setq package-build-write-melpa-badge-images t)\
+  (setq package-build-timeout-secs (when (string= "linux" (symbol-name system-type)) 600)))'
 
 LOAD_PATH ?= $(TOP)/package-build
 
@@ -121,13 +122,15 @@ sandbox: packages/archive-contents
 	@$(EMACS_COMMAND) -Q \
 		--eval '(setq user-emacs-directory (file-truename "$(SANDBOX)"))' \
 		-l package \
-		--eval "(add-to-list 'package-archives '(\"gnu\" . \"http://elpa.gnu.org/packages/\") t)" \
+		--eval "(add-to-list 'package-archives '(\"gnu\" . \"https://elpa.gnu.org/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"melpa\" . \"https://melpa.org/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"sandbox\" . \"$(TOP)/$(PKGDIR)/\") t)" \
 		--eval "(package-refresh-contents)" \
 		--eval "(package-initialize)" \
 		--eval '(setq sandbox-install-package "$(INSTALL)")' \
-		--eval "(unless (string= \"\" sandbox-install-package) (package-install (intern sandbox-install-package)))"
+		--eval "(unless (string= \"\" sandbox-install-package) (package-install (intern sandbox-install-package)))" \
+		--eval "(when (get-buffer \"*Compile-Log*\") (display-buffer \"*Compile-Log*\"))"
+
 
 .PHONY: clean build index html json sandbox
 .FORCE:

@@ -1,1 +1,1 @@
-(eno :fetcher github :repo "enoson/eno.el")
+(eno :fetcher github :repo "emacsattic/eno")

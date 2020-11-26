@@ -1,1 +1,1 @@
-(kanban :fetcher bitbucket :repo "ArneBab/kanban.el")
+(kanban :fetcher hg :url "https://hg.sr.ht/~arnebab/kanban.el")

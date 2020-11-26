@@ -1,0 +1,3 @@
+(retrie
+ :fetcher github
+ :repo "Ailrun/emacs-retrie")

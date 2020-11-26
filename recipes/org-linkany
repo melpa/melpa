@@ -1,2 +1,0 @@
-(org-linkany :repo "aki2o/org-linkany"
-             :fetcher github)

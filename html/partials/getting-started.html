@@ -4,10 +4,9 @@
       <h2>Installing</h2>
 
       <p>To use the MELPA repository, you'll need an Emacs with
-        <code>package.el</code>. Emacs 24 has <code>package.el</code>
-        bundled with it, and there's also
-        a <a href="http://repo.or.cz/w/emacs.git/blob_plain/ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09:/lisp/emacs-lisp/package.el">version
-        you can use with Emacs 23</a>.
+        <code>package.el</code> and TLS support, ie. Emacs 24.1 or
+        greater. To test TLS support you can visit a HTTPS URL, for
+        example with <code>M-x eww RET https://wikipedia.org RET</code>.
       </p>
 
       <p>
@@ -19,17 +18,18 @@
       </p>
 
       <pre><code>(require 'package)
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                    (not (gnutls-available-p))))
-       (proto (if no-ssl "http" "https")))
-  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
-  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
-  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
-  (when (< emacs-major-version 24)
-    ;; For important compatibility libraries like cl-lib
-    (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
-(package-initialize)
-</code></pre>
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+;; and `package-pinned-packages`. Most users will not need or want to do this.
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(package-initialize)</code></pre>
+
+      <p>
+        Note that you'll need to run <code>M-x package-refresh-contents</code> or
+        <code>M-x package-list-packages</code> to ensure that Emacs has fetched
+        the MELPA package list before you can install packages with
+        <code>M-x package-install</code> or similar.
+      </p>
 
       <p>
         To use the <a href="https://stable.melpa.org" title="MELPA Stable">
@@ -41,13 +41,6 @@
       <pre><code>(add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)</code></pre>
 
-      <p>
-        <strong>Note:</strong> <em>There are some problems using the
-          <code>https</code> location with Emacs on Windows. There is
-          currently no know easy fix for this. You can still use MELPA
-          by using the non-SSL location by replacing <code>https</code>
-          with <code>http</code>.</em>
-      </p>
       <h3>Customizations</h3>
       <p>
         What if you only want some of your packages to be installed
@@ -143,8 +136,7 @@
       <p>
 	In so many words, fork the project's source tree
 	and create a pull request with a recipe for your package.
-	The <tt>README.md</tt> file on GitHub has more details.
-	See the next section for a link.
+	The <a href="https://github.com/melpa/melpa/blob/master/README.md">README.md</a> file on GitHub has more details.
       </p>
       <a name="development"></a>
       <h2>Development</h2>

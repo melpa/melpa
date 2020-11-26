@@ -1,0 +1,3 @@
+(jeison
+ :repo "SavchenkoValeriy/jeison"
+ :fetcher github)

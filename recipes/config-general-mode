@@ -1,2 +1,2 @@
-(config-general-mode :repo "tlinden/config-general-mode" :fetcher github)
+(config-general-mode :repo "TLINDEN/config-general-mode" :fetcher github)
 

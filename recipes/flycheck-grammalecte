@@ -1,0 +1,4 @@
+(flycheck-grammalecte
+ :fetcher git
+ :url "https://git.deparis.io/flycheck-grammalecte/"
+ :files (:defaults "flycheck-grammalecte.py" "conjugueur.py"))

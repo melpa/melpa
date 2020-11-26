@@ -1,0 +1,2 @@
+(soar-mode :repo "adeschamps/soar-mode"
+           :fetcher github)

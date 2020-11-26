@@ -1,0 +1,3 @@
+(fast-scroll
+  :repo "ahungry/fast-scroll"
+  :fetcher github)

@@ -1,0 +1,3 @@
+(flyspell-correct-avy-menu :repo "d12frosted/flyspell-correct"
+                           :fetcher github
+                           :files ("flyspell-correct-avy-menu.el"))

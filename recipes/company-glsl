@@ -1,2 +1,2 @@
 (company-glsl :fetcher github
-              :repo "GuidoSchmidt/company-glsl")
+              :repo "guidoschmidt/company-glsl")

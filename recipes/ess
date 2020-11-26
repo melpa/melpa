@@ -4,5 +4,5 @@
  :files ("*.el" "lisp/*.el"
          "doc/*.texi" "doc/info/dir"
          ("etc" "etc/*")
-         ("obsolete" "obsolete/*.el")
+         ("obsolete" "lisp/obsolete/*")
          (:exclude "etc/other")))

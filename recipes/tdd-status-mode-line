@@ -1,3 +1,0 @@
-(tdd-status-mode-line :fetcher github
-		      :repo "algernon/tdd-status-mode-line"
-		      :version-regexp "tdd-status-mode-line-\\(.*\\)")

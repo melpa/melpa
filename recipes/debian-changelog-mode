@@ -1,2 +1,0 @@
-(debian-changelog-mode :fetcher git :url "https://salsa.debian.org/debian/emacs-goodies-el.git"
-                       :files ("elisp/dpkg-dev-el/debian-changelog-mode.el"))

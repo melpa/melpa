@@ -1,0 +1,2 @@
+(torus :repo "chimay/torus"
+       :fetcher github)

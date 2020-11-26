@@ -1,0 +1,3 @@
+(helm-fish-completion
+ :repo "emacs-helm/helm-fish-completion"
+ :fetcher github)

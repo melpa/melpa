@@ -1,0 +1,3 @@
+(ess-r-insert-obj
+ :repo "ShuguangSun/ess-r-insert-obj"
+ :fetcher github)

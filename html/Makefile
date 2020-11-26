@@ -1,4 +1,4 @@
-SHELL  := /bin/bash
+SHELL  := bash
 
 .PHONY: all clean updates.rss
 all: updates.rss

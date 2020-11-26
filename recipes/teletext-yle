@@ -1,0 +1,1 @@
+(teletext-yle :fetcher github :repo "lassik/emacs-teletext-yle")

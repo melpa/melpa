@@ -1,0 +1,2 @@
+(org-id-cleanup :fetcher github
+		:repo "marcIhm/org-id-cleanup")

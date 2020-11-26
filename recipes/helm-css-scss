@@ -1,1 +1,1 @@
-(helm-css-scss :fetcher github :repo "ShingoFukuyama/helm-css-scss")
+(helm-css-scss :fetcher github :repo "emacsorphanage/helm-css-scss")

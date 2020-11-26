@@ -1,1 +1,1 @@
-(helm-org-rifle :fetcher github :repo "alphapapa/helm-org-rifle")
+(helm-org-rifle :fetcher github :repo "alphapapa/org-rifle")

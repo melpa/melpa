@@ -1,2 +1,2 @@
 (org-index :fetcher github
-	   :repo "marcihm/org-index")
+	   :repo "marcIhm/org-index")

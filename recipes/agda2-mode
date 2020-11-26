@@ -1,0 +1,2 @@
+(agda2-mode :fetcher github :repo "agda/agda"
+            :files ("src/data/emacs-mode/agda*.el"))

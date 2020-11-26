@@ -1,0 +1,1 @@
+(caddyfile-mode :fetcher github :repo "Schnouki/caddyfile-mode")

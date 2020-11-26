@@ -1,4 +1,0 @@
-(lsp-javascript-flow
- :fetcher github
- :repo "emacs-lsp/lsp-javascript"
- :files ("lsp-javascript-flow.el"))

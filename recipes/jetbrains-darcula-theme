@@ -1,0 +1,3 @@
+(jetbrains-darcula-theme
+ :fetcher github
+ :repo "ianpan870102/jetbrains-darcula-emacs-theme")

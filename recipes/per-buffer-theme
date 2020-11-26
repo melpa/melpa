@@ -1,1 +1,1 @@
-(per-buffer-theme :fetcher bitbucket :repo "inigoserna/per-buffer-theme.el")
+(per-buffer-theme :fetcher hg :url "https://hg.serna.eu/emacs/per-buffer-theme")

@@ -240,7 +240,9 @@ this process.
 MELPA maintainers spend a lot of time reviewing proposed packages and
 also have quite a lot of other non-MELPA-related activities. Please be
 patient as it might take a week (sometimes several) before one starts
-having a look at your pull request. 
+having a look at your pull request. Also be aware that the maintainers
+try to divide reviewing time fairly between authors; you can help them
+by limiting the number of pull requests you have open at once.
 
 If you were asked to make several changes, then you should explicitly
 mention everything that you have fixed, and possibly even link to the

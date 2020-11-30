@@ -1,0 +1,1 @@
+(modablist :repo "jcs-elpa/modablist" :fetcher github)

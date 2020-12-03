@@ -1,1 +1,1 @@
-(leo :repo "mtenders/emacs-leo" :fetcher github)
+(leo :repo "mtenders/emacs-leo" :fetcher github :branch "main")

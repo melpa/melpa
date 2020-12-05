@@ -1,0 +1,4 @@
+(marginalia
+ :repo "minad/marginalia"
+ :branch "main"
+ :fetcher github)

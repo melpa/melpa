@@ -1,0 +1,1 @@
+(blorg :fetcher github :repo "clarete/blorg")

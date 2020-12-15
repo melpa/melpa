@@ -1,0 +1,3 @@
+(tree-sitter-indent :fetcher git
+                    :url "https://codeberg.org/FelipeLema/tree-sitter-indent.el.git"
+                    :branch "main")

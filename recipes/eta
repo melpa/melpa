@@ -1,0 +1,1 @@
+(smex :repo "zcaudate/eta" :fetcher github)

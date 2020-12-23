@@ -1,0 +1,4 @@
+(counsel-ag-popup
+ :repo "gexplorer/ag-popup"
+ :fetcher github
+ :files ("ag-popup-core.el" "counsel-ag-popup.el"))

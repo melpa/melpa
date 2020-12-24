@@ -687,7 +687,9 @@ in `package-build-archive-dir'."
          (source (expand-file-name file source-dir))
          (target (expand-file-name (concat name "-" version ".el")
                                    package-build-archive-dir))
-         (desc (package-build--desc-from-library name version commit files)))
+         (desc (let ((default-directory source-dir))
+                 (package-build--desc-from-library
+                  name version commit files))))
     (unless (string-equal (downcase (concat name ".el"))
                           (downcase file))
       (error "Single file %s does not match package name %s" file name))

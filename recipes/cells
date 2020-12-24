@@ -1,0 +1,1 @@
+(cells :fetcher github :repo "astoff/cells.el")

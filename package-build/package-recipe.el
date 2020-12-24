@@ -60,6 +60,9 @@
       (format (oref rcp url-format)
               (oref rcp repo))))
 
+(cl-defmethod package-recipe--fetcher ((rcp package-recipe))
+  (substring (symbol-name (eieio-object-class rcp)) 8 -7))
+
 ;;;; Git
 
 (defclass package-git-recipe (package-recipe)

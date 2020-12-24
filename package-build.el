@@ -42,6 +42,7 @@
 
 (require 'cl-lib)
 (require 'pcase)
+(require 'subr-x)
 
 (require 'package)
 (require 'lisp-mnt)
@@ -482,7 +483,7 @@ still be renamed."
                         nil t)
                        (match-string-no-properties 1)))
                 "No description available.")
-            (when-let* ((require-lines (lm-header-multiline "package-requires")))
+            (when-let ((require-lines (lm-header-multiline "package-requires")))
               (package--prepare-dependencies
                (package-read-from-string (mapconcat #'identity require-lines " "))))
             :kind       (or type 'single)

@@ -42,6 +42,7 @@
 
 (require 'cl-lib)
 (require 'pcase)
+(require 'subr-x)
 
 (require 'package)
 (require 'lisp-mnt)

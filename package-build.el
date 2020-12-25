@@ -348,7 +348,7 @@ is used instead."
 (defun package-build--write-pkg-file (desc dir)
   (let ((name (package-desc-name desc)))
     (with-temp-file (expand-file-name (format "%s-pkg.el" name) dir)
-      (pp `(define-package ,name
+      (pp `(define-package ,(symbol-name name)
              ,(package-version-join (package-desc-version desc))
              ,(package-desc-summary desc)
              ',(mapcar (pcase-lambda (`(,pkg ,ver))

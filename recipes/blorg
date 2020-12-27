@@ -1,1 +1,1 @@
-(blorg :fetcher github :branch "main" :repo "emacs-love/blorg")
+(weblorg :fetcher github :repo "emacs-love/weblorg")

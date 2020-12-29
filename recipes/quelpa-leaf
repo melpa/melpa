@@ -1,1 +1,1 @@
-(quelpa-leaf :repo "jcs-elpa/quelpa-leaf" :fetcher github)
+(quelpa-leaf :repo "quelpa/quelpa-leaf" :fetcher github)

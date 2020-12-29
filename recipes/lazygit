@@ -1,0 +1,1 @@
+(lazygit :fetcher gitlab :repo "tspub/lisp/lazygit")

@@ -382,15 +382,17 @@ is used instead."
                           #'string<))
         (message "  %s" line)))))
 
-(defun package-build--write-pkg-readme (name &optional directory)
+(defun package-build--write-pkg-readme (name files directory)
   (when-let ((commentary
-              (let ((file (expand-file-name (concat name ".el") directory)))
+              (let* ((file (concat name ".el"))
+                     (file (or (car (rassoc file files)) file))
+                     (file (and file (expand-file-name file directory))))
                 (and (file-exists-p file)
                      (lm-commentary file)))))
     (with-temp-buffer
-      (if (>= emacs-major-version 26)
+      (if (>= emacs-major-version 27)
           (insert commentary)
-        ;; Taken from 26.1's `lm-commentary'.
+        ;; Taken from 27.1's `lm-commentary'.
         (insert
          (replace-regexp-in-string       ; Get rid of...
           "[[:blank:]]*$" ""             ; trailing white-space
@@ -702,7 +704,7 @@ in `package-build-archive-dir'."
         (package-build--ensure-ends-here-line source)
         (write-file target nil)
         (kill-buffer)))
-    (package-build--write-pkg-readme name source)
+    (package-build--write-pkg-readme name files source-dir)
     (package-build--write-archive-entry desc)))
 
 (defun package-build--build-multi-file-package (rcp version commit files source-dir)
@@ -719,7 +721,7 @@ in `package-build-archive-dir'."
           (package-build--write-pkg-file desc target)
           (package-build--generate-info-files files source-dir target)
           (package-build--create-tar name version tmp-dir)
-          (package-build--write-pkg-readme name target)
+          (package-build--write-pkg-readme name files source-dir)
           (package-build--write-archive-entry desc))
       (delete-directory tmp-dir t nil))))
 
@@ -864,12 +866,7 @@ line per entry."
 
 (defun package-build--pkg-info-for-json (info)
   "Convert INFO into a data structure which will serialize to JSON in the desired shape."
-  (let ((ver (elt info 0))
-        (deps (elt info 1))
-        (desc (elt info 2))
-        (type (elt info 3))
-        (props (and (> (length info) 4)
-                    (elt info 4))))
+  (pcase-let ((`(,ver ,deps ,desc ,type . (,props)) info))
     (list :ver ver
           :deps (cl-mapcan (lambda (dep)
                              (list (intern (format ":%s" (car dep)))

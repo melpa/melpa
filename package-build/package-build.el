@@ -418,19 +418,24 @@ Also create the info dir file.  Remove each original texinfo
 file.  The source and destination file paths are expanded in
 SOURCE-DIR and TARGET-DIR respectively."
   (pcase-dolist (`(,src . ,tmp) files)
-    (when (member (file-name-extension tmp) '("texi" "texinfo"))
-      (setq src (expand-file-name src source-dir))
-      (setq tmp (expand-file-name tmp target-dir))
-      (unwind-protect
-          (let ((info (concat (file-name-sans-extension tmp) ".info")))
-            (unless (file-exists-p info)
-              (ignore-errors
-                (package-build--run-process
-                 source-dir nil "makeinfo" src "-o" info)
-                (package-build--run-process
-                 target-dir nil "install-info" "--dir=dir" info)
-                (package-build--message "Created %s" info))))
-        (delete-file tmp)))))
+    (let ((extension (file-name-extension tmp)))
+      (when (member extension '("info" "texi" "texinfo"))
+        (setq src (expand-file-name src source-dir))
+        (setq tmp (expand-file-name tmp target-dir))
+        (let ((info tmp))
+          (when (member extension '("texi" "texinfo"))
+            (unwind-protect
+                (progn
+                  (setq info (concat (file-name-sans-extension tmp) ".info"))
+                  (unless (file-exists-p info)
+                    (with-demoted-errors "Error: %S"
+                      (package-build--run-process
+                       source-dir nil "makeinfo" src "-o" info))
+                    (package-build--message "Created %s" info)))
+              (delete-file tmp)))
+          (with-demoted-errors "Error: %S"
+            (package-build--run-process
+             target-dir nil "install-info" "--dir=dir" info)))))))
 
 ;;; Patch Libraries
 

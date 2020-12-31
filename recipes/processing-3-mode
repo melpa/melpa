@@ -1,1 +1,1 @@
-(arduino-cli-mode :fetcher github :repo "motform/processing-3-mode")
+(processing-3-mode :fetcher github :repo "motform/processing-3-mode")

@@ -1,0 +1,1 @@
+(screenshot :repo "tecosaur/screenshot" :fetcher github)

@@ -1,0 +1,2 @@
+(nsevil :repo "NicolasIriarte/nsevil"
+      :fetcher github)

@@ -248,7 +248,7 @@ If you were asked to make several changes, then you should explicitly
 mention everything that you have fixed, and possibly even link to the
 relevant commits. One way of doing that is to mention the MELPA pull
 request in every commit addressing one of the raised points: just
-write `melpa/melpa#N` in each commit message where `N` is the pull
+write ~melpa/melpa#N~ in each commit message where ~N~ is the pull
 request number.
 
 You can help MELPA maintainers take care of pull requests much faster

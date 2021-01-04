@@ -1,5 +1,4 @@
 (ado-mode
  :fetcher github
  :repo "louabill/ado-mode"
- :files ("lisp/*.el" "scripts" "syntax_testers" "templates"
-		 (:exclude ".DS_Store" "*/.DS_Store" "*/Scratch")))
+ :files ("lisp/*.el" "scripts" "templates"))

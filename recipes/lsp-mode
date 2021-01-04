@@ -1,4 +1,5 @@
 (lsp-mode :repo "emacs-lsp/lsp-mode"
           :fetcher github
           :files (:defaults
-                  "clients/*.el"))
+                  "clients/*.el"
+                  (:exclude ".dir-locals.el")))

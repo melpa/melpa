@@ -871,7 +871,7 @@ line per entry."
 
 (defun package-build--pkg-info-for-json (info)
   "Convert INFO into a data structure which will serialize to JSON in the desired shape."
-  (pcase-let ((`(,ver ,deps ,desc ,type . (,props)) info))
+  (pcase-let ((`(,ver ,deps ,desc ,type . (,props)) (append info nil)))
     (list :ver ver
           :deps (cl-mapcan (lambda (dep)
                              (list (intern (format ":%s" (car dep)))

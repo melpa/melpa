@@ -44,6 +44,7 @@
     }.bind(this));
     this._searchText = _([data.name, data.description, data.version].concat(data.searchExtra || []))
       .compact().valueOf().join(' ').toLowerCase();
+    this.logURL = "/packages/" + data.name + ".log";
     this.readmeURL = "/packages/" + data.name + "-readme.txt";
     this.badgeURL = "/packages/" + data.name + "-badge.svg";
     this.matchesTerm = function(term) {
@@ -382,6 +383,7 @@
       packageName: m.route.param("package"),
       package: m.prop(),
       readme: m.prop('No description available.'),
+      buildLog: m.prop('No build log available.'),
       neededBy: m.prop([]),
       downloadsPercentile: m.prop(0),
       archivename: new melpa.archivename.controller()
@@ -398,6 +400,10 @@
                  url: p.readmeURL,
                  deserialize: _.identity
                 }).then(ctrl.readme);
+      m.request({method: "GET",
+                 url: p.logURL,
+                 deserialize: _.identity
+                }).then(ctrl.buildLog);
     });
     return ctrl;
   };
@@ -471,7 +477,11 @@
             m("dt", "Org"),
             m("dd", m("pre", '[[' + fullURL + '][file:' + badgeURL + ']]'))
           ])
-        ]))
+        ])),
+      m("section", [
+        m("h4", "Build log"),
+        m("pre", ctrl.buildLog())
+      ])
     ]);
   };
 

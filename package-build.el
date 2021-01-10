@@ -1,8 +1,8 @@
 ;;; package-build.el --- Tools for assembling a package archive  -*- lexical-binding: t -*-
 
-;; Copyright (C) 2011-2020 Donald Ephraim Curtis <dcurtis@milkbox.net>
-;; Copyright (C) 2012-2020 Steve Purcell <steve@sanityinc.com>
-;; Copyright (C) 2016-2020 Jonas Bernoulli <jonas@bernoul.li>
+;; Copyright (C) 2011-2021 Donald Ephraim Curtis <dcurtis@milkbox.net>
+;; Copyright (C) 2012-2021 Steve Purcell <steve@sanityinc.com>
+;; Copyright (C) 2016-2021 Jonas Bernoulli <jonas@bernoul.li>
 ;; Copyright (C) 2009 Phil Hagelberg <technomancy@gmail.com>
 
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
@@ -707,7 +707,7 @@ in `package-build-archive-dir'."
                  (package-build--desc-from-library
                   name version commit files))))
     (unless (string-equal (downcase (concat name ".el"))
-                          (downcase file))
+                          (downcase (file-name-nondirectory file)))
       (error "Single file %s does not match package name %s" file name))
     (copy-file source target t)
     (let ((enable-local-variables nil)

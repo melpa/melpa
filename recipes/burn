@@ -1,1 +1,1 @@
-(smex :repo "tanrax/burn.el" :fetcher github)
+(burn :repo "tanrax/burn.el" :fetcher github)

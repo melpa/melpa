@@ -437,9 +437,13 @@ SOURCE-DIR and TARGET-DIR respectively."
                 (progn
                   (setq info (concat (file-name-sans-extension tmp) ".info"))
                   (unless (file-exists-p info)
+                    ;; If the info file is located in a subdirectory
+                    ;; and contains relative includes, then it is
+                    ;; necessary to run makeinfo in the subdirectory.
                     (with-demoted-errors "Error: %S"
                       (package-build--run-process
-                       source-dir nil "makeinfo" src "-o" info))
+                       (file-name-directory src) nil
+                       "makeinfo" src "-o" info))
                     (package-build--message "Created %s" info)))
               (delete-file tmp)))
           (with-demoted-errors "Error: %S"

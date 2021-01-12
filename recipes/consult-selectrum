@@ -1,4 +1,0 @@
-(consult-selectrum
- :repo "minad/consult"
- :fetcher github
- :files ("consult-selectrum.el"))

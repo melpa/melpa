@@ -383,7 +383,7 @@
       packageName: m.route.param("package"),
       package: m.prop(),
       readme: m.prop('No description available.'),
-      buildLog: m.prop('No build log available.'),
+      buildLog: m.prop(),
       neededBy: m.prop([]),
       downloadsPercentile: m.prop(0),
       archivename: new melpa.archivename.controller()
@@ -400,10 +400,13 @@
                  url: p.readmeURL,
                  deserialize: _.identity
                 }).then(ctrl.readme);
-      m.request({method: "GET",
-                 url: p.logURL,
-                 deserialize: _.identity
-                }).then(ctrl.buildLog);
+      ctrl.fetchBuildLog = function() {
+        ctrl.buildLog("Loading")
+        m.request({method: "GET",
+                   url: p.logURL,
+                   deserialize: _.identity
+                  }).then(ctrl.buildLog);
+      };
     });
     return ctrl;
   };
@@ -480,7 +483,7 @@
         ])),
       m("section", [
         m("h4", "Build log"),
-        m("pre", ctrl.buildLog())
+        (ctrl.buildLog() ?  m("pre", ctrl.buildLog()) : m("a.btn.btn-default", {onclick: ctrl.fetchBuildLog}, "Show"))
       ])
     ]);
   };

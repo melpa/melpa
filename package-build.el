@@ -414,8 +414,10 @@ is used instead."
                    "^;;[[:blank:]]*"     ; double semicolon prefix
                    "[[:blank:]\n]*\\'")  ; trailing new-lines
            "" commentary))))
-      (unless (= (char-before) ?\n)
+      (unless (or (bobp) (= (char-before) ?\n))
         (insert ?\n))
+      ;; We write the file even if it is empty, which is perhaps
+      ;; a questionable choice, but at least it's consistent.
       (let ((coding-system-for-write buffer-file-coding-system))
         (write-region nil nil
                       (expand-file-name (concat name "-readme.txt")

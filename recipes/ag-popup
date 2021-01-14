@@ -1,0 +1,3 @@
+(ag-popup
+ :repo "gexplorer/ag-popup"
+ :fetcher github)

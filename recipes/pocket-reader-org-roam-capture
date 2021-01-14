@@ -1,0 +1,2 @@
+(pocket-reader :fetcher github
+	       :repo "christofdamian/pocket-reader-org-roam-capture")

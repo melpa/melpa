@@ -1,0 +1,2 @@
+(org-auto-tangle :repo "yilkalargaw/org-auto-tangle" :fetcher github
+		 :files ("org-auto-tangle.el"))

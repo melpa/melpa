@@ -1,1 +1,1 @@
-(color-tools :fetcher github :repo "neeasade/color-tools.el")
+(ct :fetcher github :repo "neeasade/ct.el")

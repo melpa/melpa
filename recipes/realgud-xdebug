@@ -1,0 +1,5 @@
+(realgud-xdebug
+ :fetcher github
+ :repo "realgud/realgud-xdebug"
+ :files ("realgud-xdebug.el"
+         ("xdebug" "xdebug/*.el")))

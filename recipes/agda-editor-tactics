@@ -1,2 +1,1 @@
-    (agda-editor-tactics :fetcher github :repo "alhassy/
-next-700-module-systems")
+    (agda-editor-tactics :fetcher github :repo "alhassy/next-700-module-systems")

@@ -1,0 +1,7 @@
+(frontside-javascript
+ :fetcher github
+ :repo "thefrontside/frontmacs"
+ :branch "release"
+ :files ("packages/javascript/*.el"
+         "LICENSE"
+         (:exclude "packages/javascript/*-test.el")))

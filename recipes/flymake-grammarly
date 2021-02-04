@@ -1,1 +1,1 @@
-(flymake-grammarly :repo "jcs-elpa/flymake-grammarly" :fetcher github)
+(flymake-grammarly :repo "flymake/flymake-grammarly" :fetcher github)

@@ -1,0 +1,2 @@
+(hiddenquote :repo "mauroaranda/hiddenquote/hiddenquote" :fetcher gitlab
+             :files ("*.el" "puzzles"))

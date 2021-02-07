@@ -1,1 +1,1 @@
-(exwm-floatmode :fetcher gitlab :repo "mtekman/exwm-floatmode.el")
+(exwm-float :fetcher gitlab :repo "mtekman/exwm-float.el")

@@ -1,0 +1,1 @@
+(counsel-lsp-clj :fetcher github :repo "philjackson/counsel-lsp-clj")

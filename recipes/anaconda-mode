@@ -1,1 +1,4 @@
-(anaconda-mode :fetcher github :repo "pythonic-emacs/anaconda-mode")
+(anaconda-mode
+ :fetcher github
+ :repo "pythonic-emacs/anaconda-mode"
+ :files (:defaults "anaconda-mode.py"))

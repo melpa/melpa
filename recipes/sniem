@@ -1,1 +1,1 @@
-(sniem :fetcher github :repo "SpringHan/sniem" :files ("*.el"))
+(sniem :repo "SpringHan/sniem" :fetcher github)

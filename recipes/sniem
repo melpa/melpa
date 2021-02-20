@@ -1,1 +1,1 @@
-(sniem :repo "SpringHan/sniem" :fetcher github)
+(sniem :repo "SpringHan/sniem" :fetcher github :branch "master")

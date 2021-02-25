@@ -1,0 +1,1 @@
+(patch-melpa-requires :repo "dickmao/patch-melpa-requires" :fetcher github :files ("patch-melpa-requires.el"))

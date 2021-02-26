@@ -1,1 +1,1 @@
-(eyebrowse :fetcher github :repo "wasamasa/eyebrowse")
+(eyebrowse :fetcher git :url "https://depp.brause.cc/eyebrowse.git")

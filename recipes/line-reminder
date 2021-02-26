@@ -1,0 +1,1 @@
+(line-reminder :repo "jcs-elpa/line-reminder" :fetcher github)

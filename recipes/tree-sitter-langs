@@ -1,0 +1,4 @@
+(tree-sitter-langs :repo "ubolonton/tree-sitter-langs"
+                   :fetcher github
+                   :files (:defaults
+                           "queries"))

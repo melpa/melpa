@@ -1,0 +1,3 @@
+(jq-format
+ :fetcher github
+ :repo "wbolster/emacs-jq-format")

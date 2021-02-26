@@ -1,0 +1,3 @@
+(gnome-screencast
+ :fetcher github
+ :repo "juergenhoetzel/emacs-gnome-screencast")

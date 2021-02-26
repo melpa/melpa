@@ -3,4 +3,5 @@
  :repo "ThibautVerron/magma-mode"
  :files ("*.el"
          "snippets"
+         ("data" "data/magma_symbols.txt")
          ("bin" "bin/build_completion_table.sh")))

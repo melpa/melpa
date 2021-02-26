@@ -1,0 +1,1 @@
+(flycheck-ini-pyinilint :repo "danieljrmay/flycheck-ini-pyinilint" :fetcher gitlab)

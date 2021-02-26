@@ -1,1 +1,1 @@
-(fuo :repo "cosven/emacs-fuo" :fetcher github)
+(fuo :repo "feeluown/emacs-fuo" :fetcher github)

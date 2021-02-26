@@ -1,0 +1,3 @@
+(eradio
+ :fetcher github
+ :repo "fossegrim/eradio")

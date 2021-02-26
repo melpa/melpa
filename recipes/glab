@@ -1,3 +1,0 @@
-(glab :fetcher github
-      :repo "magit/ghub"
-      :files ("glab.el"))

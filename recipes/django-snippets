@@ -1,1 +1,4 @@
-(django-snippets :fetcher github :repo "myfreeweb/django-mode" :files ("django-snippets.el" "snippets"))
+(django-snippets
+ :fetcher github
+ :repo "unrelentingtech/django-mode"
+ :files ("django-snippets.el" "snippets"))

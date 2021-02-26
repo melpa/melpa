@@ -1,0 +1,3 @@
+(selectrum-prescient :fetcher github
+                     :repo "raxod502/prescient.el"
+                     :files ("selectrum-prescient.el"))

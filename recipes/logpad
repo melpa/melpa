@@ -1,0 +1,2 @@
+(logpad :fetcher github
+        :repo "dertuxmalwieder/logpad.el")

@@ -1,0 +1,3 @@
+(terraform-doc
+ :repo "TxGVNN/terraform-doc"
+ :fetcher github)

@@ -1,0 +1,2 @@
+(gcode-mode :repo "wavexx/gcode-mode.el"
+            :fetcher gitlab)

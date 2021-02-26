@@ -1,0 +1,2 @@
+(ll-debug :fetcher github
+          :repo "replrep/ll-debug")

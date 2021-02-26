@@ -4,6 +4,8 @@
 /.cask
 /.ecukes-failing-scenarios
 /config.mk
+/download_log_stable.db
+/download_log_stable.json.gz
 /download_log.db
 /download_log.json.gz
 /elpa
@@ -14,6 +16,12 @@
 /html/download_counts.json
 /html/recipes.json
 /html/updates.rss
+/html-stable/.last-build-duration
+/html-stable/archive.json
+/html-stable/build-status.json
+/html-stable/download_counts.json
+/html-stable/recipes.json
+/html-stable/updates.rss
 /packages-stable/*
 /packages/*
 /process_log.pid

@@ -1,1 +1,0 @@
-(lsp-php :repo "tszg/lsp-php" :fetcher github)

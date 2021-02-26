@@ -1,0 +1,1 @@
+(cljr-ivy :repo "wandersoncferreira/cljr-ivy" :fetcher github)

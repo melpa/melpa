@@ -1,1 +1,1 @@
-(pcmpl-homebrew :fetcher github :repo "hiddenlotus/pcmpl-homebrew")
+(pcmpl-homebrew :fetcher github :repo "zwild/pcmpl-homebrew")

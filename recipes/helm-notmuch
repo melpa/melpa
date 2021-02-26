@@ -1,2 +1,2 @@
 (helm-notmuch :fetcher github
-              :repo "xuchunyang/helm-notmuch")
+              :repo "emacs-helm/helm-notmuch")

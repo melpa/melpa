@@ -1,0 +1,3 @@
+(recomplete
+ :repo "ideasman42/emacs-recomplete"
+ :fetcher gitlab)

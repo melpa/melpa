@@ -1,1 +1,1 @@
-(dash :fetcher github :repo "magnars/dash.el" :files ("dash.el"))
+(dash :fetcher github :repo "magnars/dash.el" :files ("dash.el" "dash.texi"))

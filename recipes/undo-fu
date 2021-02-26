@@ -1,0 +1,3 @@
+(undo-fu
+ :repo "ideasman42/emacs-undo-fu"
+ :fetcher gitlab)

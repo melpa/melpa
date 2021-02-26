@@ -1,1 +1,1 @@
-(inf-mongo :fetcher github :repo "tobiassvn/inf-mongo")
+(inf-mongo :fetcher github :repo "endofunky/inf-mongo")

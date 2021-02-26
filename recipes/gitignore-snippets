@@ -1,0 +1,4 @@
+(gitignore-snippets
+ :fetcher github
+ :repo "sei40kr/gitignore-snippets"
+ :files (:defaults "snippets"))

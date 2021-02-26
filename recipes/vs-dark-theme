@@ -1,0 +1,1 @@
+(vs-dark-theme :repo "jcs-elpa/vs-dark-theme" :fetcher github)

@@ -1,1 +1,1 @@
-(ac-capf :fetcher github :repo "syohex/emacs-ac-capf")
+(ac-capf :fetcher github :repo "emacsorphanage/ac-capf")

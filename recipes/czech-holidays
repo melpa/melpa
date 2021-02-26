@@ -1,1 +1,1 @@
-(czech-holidays :fetcher github :repo "hydandata/czech-holidays")
+(czech-holidays :fetcher github :repo "chkhd/czech-holidays")

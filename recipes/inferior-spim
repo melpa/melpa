@@ -1,1 +1,0 @@
-(inferior-spim :repo "hiddenlotus/inferior-spim" :fetcher github)

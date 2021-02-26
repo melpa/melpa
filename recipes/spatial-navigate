@@ -1,0 +1,3 @@
+(spatial-navigate
+ :repo "ideasman42/emacs-spatial-navigate"
+ :fetcher gitlab)

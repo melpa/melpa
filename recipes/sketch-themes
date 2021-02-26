@@ -1,0 +1,2 @@
+(sketch-themes :repo "dawranliou/sketch-themes"
+               :fetcher github)

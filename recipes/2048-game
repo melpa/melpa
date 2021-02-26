@@ -1,1 +1,1 @@
-(2048-game :fetcher bitbucket :repo "zck/2048.el")
+(2048-game :fetcher hg :url "https://hg.sr.ht/~zck/game-2048")

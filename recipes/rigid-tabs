@@ -1,2 +1,2 @@
 (rigid-tabs :repo "wavexx/rigid-tabs.el"
-            :fetcher github)
+            :fetcher gitlab)

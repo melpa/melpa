@@ -1,0 +1,2 @@
+(gnus-notes :fetcher github
+              :repo "deusmax/gnus-notes")

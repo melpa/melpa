@@ -1,0 +1,1 @@
+(lsp-pyre :repo "jra3/lsp-pyre" :fetcher github)

@@ -1,0 +1,1 @@
+(ivy-searcher :repo "jcs-elpa/ivy-searcher" :fetcher github)

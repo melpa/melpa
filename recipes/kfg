@@ -1,2 +1,2 @@
 (kfg :fetcher github
-     :repo "abingham/kfg")
+     :repo "czipperz/kfg")

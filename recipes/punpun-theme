@@ -1,1 +1,1 @@
-(punpun-theme :fetcher github :repo "wasamasa/punpun-theme")
+(punpun-theme :fetcher git :url "https://depp.brause.cc/punpun-theme.git")

@@ -1,0 +1,4 @@
+(ewal-spacemacs-themes
+ :fetcher github
+ :repo "wurosh/ewal"
+ :files ("spacemacs-themes/*.el"))

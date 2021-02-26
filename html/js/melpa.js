@@ -2,12 +2,10 @@
 (function(m, document, _, moment, Cookies){
   "use strict";
 
-  // TODO Link to other MELPA in header, e.g. from MELPA to MELPA Stable
   // TODO Show compatible emacs versions for any package
   // TODO Google Analytics
   // TODO D3 visualisation for deps
   // TODO Voting / starring
-  // TODO Add header links from MELPA to MELPA Stable and vice-versa
 
   //////////////////////////////////////////////////////////////////////////////
   // Helpers
@@ -41,11 +39,12 @@
 
   melpa.Package = function(data) {
     ["name", "description", "version", "dependencies", "source", "commit",
-     "downloads", "fetcher", "recipeURL", "packageURL", "sourceURL", "oldNames"].map(function(p) {
+     "downloads", "fetcher", "recipeURL", "packageURL", "homeURL", "sourceURL", "oldNames"].map(function(p) {
       this[p] = data[p];
     }.bind(this));
     this._searchText = _([data.name, data.description, data.version].concat(data.searchExtra || []))
       .compact().valueOf().join(' ').toLowerCase();
+    this.logURL = "/packages/" + data.name + ".log";
     this.readmeURL = "/packages/" + data.name + "-readme.txt";
     this.badgeURL = "/packages/" + data.name + "-badge.svg";
     this.matchesTerm = function(term) {
@@ -138,7 +137,8 @@
                 urlMatch(/(gitlab\.com\/[^\/]+\/[^.]+)/, "https://") ||
                 urlMatch(/^lp:(.*)/, "https://launchpad.net/") ||
                 urlMatch(/^(https?:\/\/code\.google\.com\/p\/[^\/]+\/)/) ||
-                urlMatch(/^(https?:\/\/[^.]+\.googlecode\.com\/)/));
+                urlMatch(/^(https?:\/\/[^.]+\.googlecode\.com\/)/) ||
+                urlMatch(/^(https?:\/\/git\..*)/));
       }
       return null;
     };
@@ -154,6 +154,8 @@
       });
       var oldNames = recipe['old-names'] || [];
       var commit = props.commit;
+      var sourceURL = calculateSourceURL(name, recipe, commit);
+      var homeURL = props.url || calculateSourceURL(name, recipe, null);
 
       pkgs.push(new melpa.Package({
         name: name,
@@ -166,7 +168,8 @@
         fetcher: recipe.fetcher,
         recipeURL: "https://github.com/melpa/melpa/blob/master/recipes/" + name,
         packageURL: "packages/" + name + "-" + version + "." + (built.type == "single" ? "el" : "tar"),
-        sourceURL: calculateSourceURL(name, recipe, commit),
+        homeURL: homeURL,
+        sourceURL: sourceURL,
         oldNames: oldNames,
         searchExtra: [recipe.repo]
       }));
@@ -210,7 +213,7 @@
       }
     };
     this.maxPage = function() {
-      return Math.floor(getItemList().length / this.pageLength());
+      return Math.ceil(getItemList().length / this.pageLength());
     };
     this.prevPages = function() {
       return _.last(_.range(1, this.pageNumber()),
@@ -380,6 +383,7 @@
       packageName: m.route.param("package"),
       package: m.prop(),
       readme: m.prop('No description available.'),
+      buildLog: m.prop(),
       neededBy: m.prop([]),
       downloadsPercentile: m.prop(0),
       archivename: new melpa.archivename.controller()
@@ -396,6 +400,13 @@
                  url: p.readmeURL,
                  deserialize: _.identity
                 }).then(ctrl.readme);
+      ctrl.fetchBuildLog = function() {
+        ctrl.buildLog("Loading")
+        m.request({method: "GET",
+                   url: p.logURL,
+                   deserialize: _.identity
+                  }).then(ctrl.buildLog);
+      };
     });
     return ctrl;
   };
@@ -421,7 +432,8 @@
       m("p", [
         m("a.btn.btn-default", {href: pkg.recipeURL}, [glyphicon('cutlery'), " Recipe"]), ' ',
         m("a.btn.btn-default", {href: pkg.packageURL}, [glyphicon('download'), " Download"]), ' ',
-        (pkg.sourceURL ? m("a.btn.btn-default", {href: pkg.sourceURL}, [glyphicon('home'), " Homepage"]) : '')
+        (pkg.sourceURL ? m("a.btn.btn-default", {href: pkg.sourceURL}, [glyphicon('folder-open'), " Source code"]) : ''), ' ',
+        (pkg.homeURL ? m("a.btn.btn-default", {href: pkg.homeURL}, [glyphicon('home'), " Homepage"]) : '')
       ]),
       m("section", [
         m(".well", [
@@ -468,7 +480,11 @@
             m("dt", "Org"),
             m("dd", m("pre", '[[' + fullURL + '][file:' + badgeURL + ']]'))
           ])
-        ]))
+        ])),
+      m("section", [
+        m("h4", "Build log"),
+        (ctrl.buildLog() ?  m("pre", ctrl.buildLog()) : m("a.btn.btn-default", {onclick: ctrl.fetchBuildLog}, "Show"))
+      ])
     ]);
   };
 
@@ -501,7 +517,9 @@
       return t ? moment(t).fromNow() : "unknown";
     }
     function duration() {
-      return ctrl.duration() ? moment.duration(ctrl.duration(), 'seconds').humanize() : "unknown";
+      return ctrl.duration() ?
+        moment.duration(ctrl.duration(), 'seconds').humanize() :
+        "an unknown amount of time";
     }
     if (ctrl.running()) {
       return m(".alert.alert-warning", [
@@ -524,11 +542,17 @@
   // Changing the appearance of the MELPA Stable page
   //////////////////////////////////////////////////////////////////////////////
 
-  melpa.stable = m.prop(window.location.host === 'stable.melpa.org');
+  melpa.sites = {
+    unstable: { name: "MELPA", hosts: ["melpa.org"] },
+    stable: { name: "MELPA Stable", hosts: ["stable.melpa.org", "stable-test.melpa.org"] }
+  };
+
+  melpa.stable = m.prop(_.findIndex(melpa.sites.stable.hosts,
+                                    function(s) { return s == window.location.host.toLowerCase(); }) != -1);
   melpa.archivename = {};
   melpa.archivename.controller = function() {
     this.archiveName = function() {
-      return melpa.stable() ? "MELPA Stable" : "MELPA";
+      return melpa.stable() ? melpa.sites.stable.name : melpa.sites.unstable.name;
     };
   };
   melpa.archivename.view = function(ctrl) {
@@ -541,9 +565,17 @@
       // jshint unused: false
       m.mount(e, melpa.archivename);
     });
+
     if (melpa.stable()) {
       document.getElementsByTagName("html")[0].className += " stable";
     }
+
+    // Add a link to the other MELPA site
+    var otherSite = melpa.stable() ? melpa.sites.unstable : melpa.sites.stable;
+    var otherSiteLink = document.getElementsByClassName("other-melpa-link")[0];
+    otherSiteLink.href = "//" + otherSite.hosts[0];
+    otherSiteLink.textContent = otherSite.name;
+    otherSiteLink.classList.remove("hidden");
   });
 
   //////////////////////////////////////////////////////////////////////////////
@@ -593,14 +625,12 @@
               "<strong>Curated</strong> - no obsolete, renamed, forked or randomly hacked packages",
               "<strong>Comprehensive</strong> - more packages than any other archive",
               "<strong>Automatic updates</strong> - new commits result in new packages",
-              "<strong>Extensible</strong> - contribute recipes via github, and we'll build the packages"
+              "<strong>Extensible</strong> - contribute new recipes, and we'll build the packages"
             ].map(function(content) { return m("li", m.trust(content)); }))
           ])
         ]),
         m(".col-md-4", [
           melpa.buildstatus.view(ctrl.buildstatus),
-          m.trust('<a class="twitter-timeline" data-dnt="true" data-related="milkypostman,sanityinc" href="https://twitter.com/melpa_emacs" data-widget-id="311867756586864640">Tweets by @melpa_emacs</a>'),
-          m('script', {src: "//platform.twitter.com/widgets.js", type: "text/javascript"})
         ])
       ]),
       melpa.packagelist.view(ctrl.packagelist)

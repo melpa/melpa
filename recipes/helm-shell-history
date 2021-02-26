@@ -1,0 +1,1 @@
+(helm-shell-history :repo "anoopemacs/helm-shell-history" :fetcher github)

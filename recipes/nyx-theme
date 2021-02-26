@@ -1,1 +1,1 @@
-(nyx-theme :fetcher github :repo "GuidoSchmidt/emacs-nyx-theme")
+(nyx-theme :fetcher github :repo "guidoschmidt/emacs-nyx-theme")

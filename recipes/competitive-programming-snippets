@@ -1,0 +1,4 @@
+(competitive-programming-snippets
+ :repo "sei40kr/competitive-programming-snippets"
+ :fetcher github
+ :files (:defaults "snippets"))

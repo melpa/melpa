@@ -1,3 +1,1 @@
-(ghub :fetcher github
-      :repo "magit/ghub"
-      :files (:defaults (:exclude "glab.el")))
+(ghub :fetcher github :repo "magit/ghub")

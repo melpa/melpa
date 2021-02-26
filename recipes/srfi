@@ -1,0 +1,1 @@
+(srfi :fetcher github :repo "srfi-explorations/emacs-srfi")

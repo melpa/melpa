@@ -1,0 +1,1 @@
+(mybigword :repo "redguardtoo/mybigword" :fetcher github :files ("mybigword.el" "eng.zipf"))

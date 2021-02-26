@@ -1,1 +1,0 @@
-(ido-clever-match :repo "Bogdanp/ido-clever-match" :fetcher github)

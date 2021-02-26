@@ -1,0 +1,4 @@
+(ewal-evil-cursors
+ :fetcher github
+ :repo "wurosh/ewal"
+ :files ("evil-cursors/*.el"))

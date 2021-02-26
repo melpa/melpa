@@ -1,1 +1,1 @@
-(grandshell-theme :repo "steckerhalter/grandshell-theme" :fetcher github)
+(grandshell-theme :url "https://framagit.org/steckerhalter/grandshell-theme.git" :fetcher git)

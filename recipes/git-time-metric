@@ -1,0 +1,2 @@
+(git-time-metric :repo "c301/gtm-emacs-plugin"
+			:fetcher github)

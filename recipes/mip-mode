@@ -1,1 +1,1 @@
-(mip-mode :fetcher github :repo "gaudecker/mip-mode")
+(mip-mode :fetcher gitlab :repo "gaudecker/mip-mode")

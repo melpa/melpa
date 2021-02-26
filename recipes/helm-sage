@@ -1,1 +1,1 @@
-(helm-sage :fetcher github :repo "stakemori/helm-sage")
+(helm-sage :fetcher github :repo "sagemath/helm-sage")

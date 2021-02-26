@@ -1,7 +1,8 @@
-;;; package-recipe-mode.el --- Minor mode for editing package recipes
+;;; package-recipe-mode.el --- Minor mode for editing package recipes  -*- lexical-binding: t -*-
 
-;; Copyright (C) 2011-2013 Donald Ephraim Curtis <dcurtis@milkbox.net>
-;; Copyright (C) 2012-2014 Steve Purcell <steve@sanityinc.com>
+;; Copyright (C) 2011-2020 Donald Ephraim Curtis <dcurtis@milkbox.net>
+;; Copyright (C) 2012-2020 Steve Purcell <steve@sanityinc.com>
+;; Copyright (C) 2016-2020 Jonas Bernoulli <jonas@bernoul.li>
 ;; Copyright (C) 2009 Phil Hagelberg <technomancy@gmail.com>
 
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
@@ -55,8 +56,7 @@
   (interactive
    (list (read-string "Package name: ")
          (intern (completing-read "Fetcher: "
-                                  (list "git" "github" "gitlab"
-                                        "hg" "bitbucket")
+                                  (list "git" "github" "gitlab" "hg")
                                   nil t nil nil "github"))))
   (let ((recipe-file (expand-file-name name package-build-recipes-dir)))
     (when (file-exists-p recipe-file)
@@ -84,10 +84,8 @@
         (save-buffer)
       (error "Aborting")))
   (check-parens)
-  (package-build-reinitialize)
   (let ((name (file-name-nondirectory (buffer-file-name))))
-    (package-build-archive name)
-    (package-build-dump-archive-contents)
+    (package-build-archive name t)
     (let ((output-buffer-name "*package-build-result*"))
       (with-output-to-temp-buffer output-buffer-name
         (princ ";; Please check the following package descriptor.\n")
@@ -98,7 +96,9 @@
         (emacs-lisp-mode)
         (view-mode)))
     (when (yes-or-no-p "Install new package? ")
-      (package-install-file (package-build--find-package-file name)))))
+      (package-install-file
+       (package-build--artifact-file
+        (assq (intern name) (package-build-archive-alist)))))))
 
 (provide 'package-recipe-mode)
 

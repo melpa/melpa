@@ -1,0 +1,1 @@
+(turbo-log :repo "jcs-elpa/turbo-log" :fetcher github)

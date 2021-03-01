@@ -3,14 +3,14 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 2
     - name: Install dependencies
       run: |
-        sudo apt-get install emacs25
+        sudo apt-get install emacs=1:26.3+1-1ubuntu2
         sudo apt-get install git jq mercurial texinfo
 
         # Work around SSL-related failures, see

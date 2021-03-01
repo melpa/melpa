@@ -1,0 +1,1 @@
+(propcheck :repo "Wilfred/propcheck" :fetcher github)

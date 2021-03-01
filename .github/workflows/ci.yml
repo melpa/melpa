@@ -1,35 +1,89 @@
 name: ci
-on: [push, pull_request]
+
+on:
+  pull_request:
+    paths-ignore:
+    - '**.md'
+    - '**.rst'
+  push:
+    paths-ignore:
+    - '**.md'
+    - '**.rst'
+    branches-ignore:
+    - 'master'
+    - 'melpazoidberg'
+    - 'main'
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        emacs_version: [27.1]
+        python_version: [3.6]
+
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 2
+
+    - uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python_version }}
+
+    - uses: purcell/setup-emacs@master
+      with:
+        version: ${{ matrix.emacs_version }}
+
+    - uses: actions/cache@v1
+      with:
+        path: ~/local
+        key: local-001
+
+    - uses: actions/cache@v1
+      with:
+        path: ~/.emacs.d
+        key: emacs.d-001
+
+    - uses: actions/cache@v1
+      with:
+        path: ~/.cask
+        key: cask-001
+
+    - name: Paths
+      run: |
+        echo "$HOME/local/bin" >> $GITHUB_PATH
+        echo "$HOME/local/cask/bin" >> $GITHUB_PATH
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+        echo "LD_LIBRARY_PATH=$HOME/.local/lib" >> $GITHUB_ENV
+
     - name: Install dependencies
       run: |
-        sudo apt-get install emacs25
-        sudo apt-get install git jq mercurial texinfo
+        sudo apt-get -yq update
+        DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install git jq mercurial texinfo
 
         # Work around SSL-related failures, see
         # https://stackoverflow.com/questions/21477683/mercurial-https-clone-abort-error-wrong-version-number
         echo "[ui]\ntls = False" > $HOME/.hgrc
 
-        # Use cask to install development dependencies
-        curl -fsSkL https://raw.github.com/cask/cask/master/go | python
-    - name: Run cask
+    - name: Install cask
       run: |
-        ~/.cask/bin/cask
+        sh scripts/install-cask.sh
+        cask link list
+
     - name: Check changed recipes
       run: |
         [ "$GITHUB_EVENT_NAME" = "push" ] \
           && export CHANGED_FILES=$(git diff-tree --name-only --no-commit-id -r ${{ github.sha }})
 
         [ "$GITHUB_EVENT_NAME" = "pull_request" ] \
-          && export CHANGED_FILES=$(\
-            curl --silent https://api.github.com/repos/"$GITHUB_REPOSITORY"/pulls/${{ github.event.pull_request.number }}/files \
-              | jq -r '.[] | .filename')
+          && set -eo pipefail \
+          && export CHANGED_FILES=$(curl -sSL ${{ github.event.pull_request.url }}/files | jq -r ".[] | .filename")
 
         ./run-ci.sh
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: mz.artifact
+        path: /var/tmp/mz.artifact

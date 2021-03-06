@@ -1,2 +1,2 @@
-(rubocop :repo "rubocop-hq/rubocop-emacs"
+(rubocop :repo "rubocop/rubocop-emacs"
          :fetcher github)

@@ -1,0 +1,1 @@
+(just-mode :repo "leon-barrett/just-mode.el" :fetcher github)

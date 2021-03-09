@@ -1,0 +1,2 @@
+(dynamic-ring :repo "countvajhula/dynamic-ring"
+              :fetcher github)

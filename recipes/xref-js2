@@ -1,1 +1,1 @@
-(xref-js2 :fetcher github :repo "NicolasPetton/xref-js2")
+(xref-js2 :fetcher github :repo "js-emacs/xref-js2")

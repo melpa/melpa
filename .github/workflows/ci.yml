@@ -36,20 +36,20 @@ jobs:
       with:
         version: ${{ matrix.emacs_version }}
 
-    - uses: actions/cache@v1
+    - uses: actions/cache@v2
       with:
         path: ~/local
-        key: local-001
+        key: local-002
 
-    - uses: actions/cache@v1
+    - uses: actions/cache@v2
       with:
         path: ~/.emacs.d
-        key: emacs.d-001
+        key: emacs.d-002
 
-    - uses: actions/cache@v1
+    - uses: actions/cache@v2
       with:
         path: ~/.cask
-        key: cask-001
+        key: cask-002
 
     - name: Paths
       run: |

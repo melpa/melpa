@@ -1,0 +1,3 @@
+(anchor-theme-buffer-local :fetcher github
+			   :repo "GongYiLiao/anchor-theme-buffer-local"
+			   :files ("anchor-theme-buffer-local.el"))

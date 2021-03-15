@@ -1,4 +1,4 @@
 (zotero
  :fetcher gitlab
  :repo "fvdbeek/emacs-zotero"
- :files ("*.el" "img" (:exclude "*-test.el")))
+ :files (:defaults "img"))

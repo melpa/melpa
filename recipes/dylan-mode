@@ -1,4 +1,4 @@
 (dylan-mode
- :repo "dylan-lang/dylan-mode"
+ :repo "dylan-lang/dylan-emacs-support"
  :fetcher github
  :files ("*.el" "dtags" "etags.regex"))

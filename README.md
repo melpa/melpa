@@ -105,7 +105,7 @@ the following form (`[...]` denotes optional or conditional values),
  [:branch "branch"]
  [:version-regexp "<regexp>"]
  [:files ("<file1>" ...)]
- [:old-name (<old-name> ...)])
+ [:old-names (<old-name> ...)])
 ```
 
 - `package-name`

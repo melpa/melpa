@@ -104,7 +104,8 @@ the following form (`[...]` denotes optional or conditional values),
  [:commit "commit"]
  [:branch "branch"]
  [:version-regexp "<regexp>"]
- [:files ("<file1>" ...)])
+ [:files ("<file1>" ...)]
+ [:old-name (<old-name> ...)])
 ```
 
 - `package-name`
@@ -171,6 +172,9 @@ subdirectories to keep packaging simple.
 [github]: https://github.com/
 [gitlab]: https://gitlab.com/
 [hg]: https://www.mercurial-scm.org/
+
+- `:old-names` specifies former names of the package, if any.  The value is
+  a list of symbols.
 
 
 ### Example: Single File Repository

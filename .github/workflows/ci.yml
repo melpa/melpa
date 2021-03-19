@@ -11,7 +11,8 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get install emacs25
-        sudo apt-get install git jq mercurial texinfo
+        sudo apt-get install git jq mercurial python3 texinfo
+        sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 3
 
         # Work around SSL-related failures, see
         # https://stackoverflow.com/questions/21477683/mercurial-https-clone-abort-error-wrong-version-number

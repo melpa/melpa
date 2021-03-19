@@ -12,17 +12,18 @@ jobs:
       run: |
         sudo apt-get install emacs25
         sudo apt-get install git jq mercurial python3 texinfo
-        sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 3
 
         # Work around SSL-related failures, see
         # https://stackoverflow.com/questions/21477683/mercurial-https-clone-abort-error-wrong-version-number
         echo "[ui]\ntls = False" > $HOME/.hgrc
 
-        # Use cask to install development dependencies
-        curl -fsSkL https://raw.github.com/cask/cask/master/go | python
+        # Install Cask
+        git clone https://github.com/cask/cask $HOME/.cask
+        export "PATH=$HOME/.cask/bin:$PATH"
+        sed -i '' 's,^#!.*python.*,#! /usr/bin/env python3,' $HOME/.cask/bin/cask
     - name: Run cask
       run: |
-        ~/.cask/bin/cask
+        $HOME/.cask/bin/cask
     - name: Check changed recipes
       run: |
         [ "$GITHUB_EVENT_NAME" = "push" ] \

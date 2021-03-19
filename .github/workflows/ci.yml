@@ -19,10 +19,9 @@ jobs:
 
         # Install Cask
         git clone https://github.com/cask/cask $HOME/.cask
-        export "PATH=$HOME/.cask/bin:$PATH"
 
         # Ensure Cask uses Python 3, not Python 2.
-        sed -i 's,^#!.*python.*,#! /usr/bin/env python3,' $HOME/.cask/bin/cask
+        perl -i -pe 's,^#!.*python.*,#! /usr/bin/env python3,' $HOME/.cask/bin/cask
     - name: Run cask
       run: |
         $HOME/.cask/bin/cask

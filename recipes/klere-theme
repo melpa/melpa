@@ -1,1 +1,1 @@
-(klere-theme :repo "WammKD/emacs-klere-theme" :fetcher github)
+(klere-theme :fetcher git :url "https://codeberg.org/WammKD/emacs-klere-theme.git")

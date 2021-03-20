@@ -25,3 +25,5 @@ https://github.com/your/awesome_package
 - [ ] `M-x checkdoc` is happy with my docstrings
 - [ ] I've built and installed the package using the instructions in [CONTRIBUTING.org](https://github.com/melpa/melpa/blob/master/CONTRIBUTING.org)
 - [ ] I have confirmed some of these without doing them
+
+<!-- After submitting, please fix any problems the CI reports. -->

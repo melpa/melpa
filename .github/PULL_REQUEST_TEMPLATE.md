@@ -16,7 +16,7 @@ https://github.com/your/awesome_package
 
 ### Checklist
 
-Please confirm with `x`:
+<!-- Please confirm with `x`: -->
 
 - [ ] The package is released under a [GPL-Compatible Free Software License](https://www.gnu.org/licenses/license-list.en.html#GPLCompatibleLicenses)
 - [ ] I've read [CONTRIBUTING.org](https://github.com/melpa/melpa/blob/master/CONTRIBUTING.org)

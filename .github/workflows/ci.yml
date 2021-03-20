@@ -18,7 +18,8 @@ jobs:
         echo "[ui]\ntls = False" > $HOME/.hgrc
 
         # Use cask to install development dependencies
-        curl -fsSkL https://raw.github.com/cask/cask/master/go | python
+        curl https://codeload.github.com/cask/cask/tar.gz/refs/tags/v0.8.6 | tar -xzv
+        mv cask-0.8.6 ~/.cask
     - name: Run cask
       run: |
         ~/.cask/bin/cask

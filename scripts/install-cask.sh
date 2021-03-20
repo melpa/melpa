@@ -46,7 +46,7 @@ cask_install_or_reset() {
 
 # Bootstrap the cask tool and its dependencies
 if [ ! -d $CASKDIR ] ; then
-    git clone https://github.com/dickmao/cask.git $CASKDIR
+    git clone https://github.com/cask/cask.git $CASKDIR
 fi
 
 update_elpa_keys

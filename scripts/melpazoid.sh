@@ -3,8 +3,6 @@
 set -eux
 
 EMACS="${EMACS:-emacs}"
-PYTHON=$(which python3 || true)
-PYTHON="${PYTHON:-python}"
 ROOT=$(git rev-parse --show-toplevel)
 WORKING="${ROOT}/working"
 PACKAGES="${ROOT}/packages"
@@ -32,12 +30,6 @@ PKG_MAIN=$(find ${PKG_REPO} -name ${PKG_NAME}-pkg.el || true)
 if [ -s "${PKG_REPO}/LICENSE" ]; then
   cp -p "${PKG_REPO}/LICENSE" ${PKG_PATH}  #necessary anymore?
 fi
-
-cd melpazoid-master
-${PYTHON} -m pip install --user -U .
-sed -i -e 's/ -it / -i /' Makefile
-sed -i -e 's/ -ti / -i /' Makefile
-if [ ! -s ./python ]; then rm -f ./python ; ln -s ${PYTHON} ./python ; fi
 
 cd ${ROOT}
 CASK_PACKAGES=$(cask package-directory)

@@ -3,6 +3,7 @@ TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 -include ./config.mk
 
 SHELL         := bash
+CASK_COMMAND ?= cask
 EMACS_COMMAND ?= emacs
 
 PKGDIR  := packages
@@ -25,12 +26,12 @@ LISP_CONFIG ?= '(progn\
   (setq package-build-write-melpa-badge-images t)\
   (setq package-build-timeout-secs (when (string= "linux" (symbol-name system-type)) 600)))'
 
-LOAD_PATH ?= $(TOP)/package-build
+LOAD_PATH ?= /dev/null
 
-EVAL := $(EMACS_COMMAND) --no-site-file --batch \
+EVAL := $(CASK_COMMAND) $(EMACS_COMMAND) --no-site-file --batch \
 $(addprefix -L ,$(LOAD_PATH)) \
 --eval $(LISP_CONFIG) \
---load package-build.el \
+--load package-build \
 --eval
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
@@ -63,12 +64,6 @@ clean-sandbox:
 		rm -rfv '$(SANDBOX)/elpa'; \
 		rmdir '$(SANDBOX)'; \
 	fi
-
-pull-package-build:
-	git subtree pull --squash -P package-build package-build master
-
-add-package-build-remote:
-	git remote add package-build git@github.com:melpa/package-build.git
 
 clean: clean-working clean-packages clean-json clean-sandbox
 
@@ -120,7 +115,7 @@ $(RCPDIR)/%: .FORCE
 sandbox: packages/archive-contents
 	@echo " • Building sandbox ..."
 	@mkdir -p $(SANDBOX)
-	@$(EMACS_COMMAND) -Q \
+	@$(CASK_COMMAND) $(EMACS_COMMAND) -Q \
 		--eval '(setq user-emacs-directory (file-truename "$(SANDBOX)"))' \
 		-l package \
 		--eval "(add-to-list 'package-archives '(\"gnu\" . \"https://elpa.gnu.org/packages/\") t)" \

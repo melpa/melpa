@@ -3,25 +3,46 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 2
+
+    - uses: actions/cache@v2
+      id: cache-cask-packages
+      with:
+        path: .cask
+        key: cache-cask-packages-000
+
+    - uses: actions/cache@v2
+      id: cache-cask-executable
+      with:
+        path: ~/.cask
+        key: cache-cask-executable-000
+
     - name: Install dependencies
       run: |
-        sudo apt-get install emacs25
+        sudo apt-get install emacs
         sudo apt-get install git jq mercurial texinfo
 
         # Work around SSL-related failures, see
         # https://stackoverflow.com/questions/21477683/mercurial-https-clone-abort-error-wrong-version-number
         echo "[ui]\ntls = False" > $HOME/.hgrc
 
-        # Use cask to install development dependencies
-        curl -fsSkL https://raw.github.com/cask/cask/master/go | python
+    - name: Emacs version
+      run: emacs --version
+
+    - name: Install cask
+      if: steps.cache-cask-executable.outputs.cache-hit != 'true'
+      run: |
+        rm -rf ~/.cask
+        git clone https://github.com/cask/cask.git ~/.cask
+
     - name: Run cask
       run: |
         ~/.cask/bin/cask
+
     - name: Check changed recipes
       run: |
         [ "$GITHUB_EVENT_NAME" = "push" ] \

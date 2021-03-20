@@ -14,10 +14,12 @@ echo
 
 changed_recipes=$(echo "$CHANGED_FILES" | (grep -Po '(?<=^recipes/)[a-z0-9].*' || true))
 for recipe_name in $changed_recipes; do
-    if [ -f "./recipes/$recipe_name" ]; then
+    if [ -f "./recipes/${recipe_name}" ]; then
         echo "----------------------------------------------------"
-        echo "Building new/modified recipe: $recipe_name"
-        ~/.cask/bin/cask emacs --batch --eval "(progn (add-to-list 'load-path \"$PWD/package-build/\")(load-file \"package-build/package-build.el\")(package-build-archive \"$recipe_name\"))"
+        echo "Building new/modified recipe: ${recipe_name}"
+        ~/.cask/bin/cask emacs -Q --batch -l package-build \
+			 --eval "(dolist (what (split-string \"working archive recipes\")) (custom-set-default (intern (format \"package-build-%s-dir\" what)) (expand-file-name what default-directory)))" \
+			 --eval "(package-build-archive \"${recipe_name}\")"
     fi
 done
 

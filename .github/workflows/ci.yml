@@ -16,12 +16,6 @@ jobs:
         # Work around SSL-related failures, see
         # https://stackoverflow.com/questions/21477683/mercurial-https-clone-abort-error-wrong-version-number
         echo "[ui]\ntls = False" > $HOME/.hgrc
-
-        # Use cask to install development dependencies
-        curl -fsSkL https://raw.github.com/cask/cask/master/go | python
-    - name: Run cask
-      run: |
-        ~/.cask/bin/cask
     - name: Check changed recipes
       run: |
         [ "$GITHUB_EVENT_NAME" = "push" ] \

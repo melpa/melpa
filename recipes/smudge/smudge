@@ -1,0 +1,5 @@
+(smudge
+	:fetcher github
+	:repo "danielfm/smudge"
+	:branch "master"
+	:files ("*.el"))

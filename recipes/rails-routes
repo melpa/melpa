@@ -1,0 +1,3 @@
+(org-projectile :repo "otavioschwanck/rails-routes"
+                :fetcher github
+                :files ("rails-routes.el"))

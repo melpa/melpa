@@ -1,0 +1,1 @@
+(open-conf :repo "enisozgen/open-conf" :fetcher github)

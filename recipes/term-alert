@@ -1,1 +1,1 @@
-(term-alert :fetcher github :repo "CallumCameron/term-alert" :files (:defaults "setup"))
+(term-alert :fetcher github :repo "calliecameron/term-alert" :files (:defaults "setup"))

@@ -1,0 +1,1 @@
+(ox-beamer :fetcher github :repo "aartaka/ox-beamer")

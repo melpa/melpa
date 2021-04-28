@@ -22,7 +22,6 @@ function build_all {
     # running. Running these separately should speed up other builds and
     # make this package actually build.
     make recipes/python-info
-    make recipes/python3-info
 
     echo '{"completed":' "$(unix_timestamp)" '}' > html/build-status.json
 }

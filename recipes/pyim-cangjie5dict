@@ -1,3 +1,0 @@
-(pyim-cangjie5dict :repo "p1uxtar/pyim-cangjie5dict"
-                   :fetcher github
-                   :files (:defaults "*.pyim"))

@@ -1,0 +1,4 @@
+(theme-anchor :repo "GongYiLiao/theme-anchor"
+	      :fetcher github
+	      :files (:defaults "theme-anchor"))
+

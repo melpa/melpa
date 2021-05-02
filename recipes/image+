@@ -1,2 +1,1 @@
-(image+ :repo "mhayashi1120/Emacs-imagex"
-        :fetcher github)
+(image+ :fetcher github :repo "emacsorphanage/image-plus")

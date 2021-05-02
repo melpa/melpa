@@ -1,2 +1,2 @@
 (zenscript-mode :fetcher github
-                :repo "eutropius225/zenscript-mode")
+                :repo "eutro/zenscript-mode")

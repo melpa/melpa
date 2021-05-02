@@ -104,7 +104,8 @@ the following form (`[...]` denotes optional or conditional values),
  [:commit "commit"]
  [:branch "branch"]
  [:version-regexp "<regexp>"]
- [:files ("<file1>" ...)])
+ [:files ("<file1>" ...)]
+ [:old-names (<old-name> ...)])
 ```
 
 - `package-name`
@@ -131,7 +132,7 @@ the `git`-based fetchers.
 - `:branch`
 specifies the branch of the git repo to use. This is like `:commit`, but
 it adds the "origin/" prefix automatically. This must be specified when
-using a branch other than "master".
+using a branch other than the default branch.
 
 - `:version-regexp` is a regular expression for extracting a
   version-string from the repository tags.  The default matches
@@ -171,6 +172,9 @@ subdirectories to keep packaging simple.
 [github]: https://github.com/
 [gitlab]: https://gitlab.com/
 [hg]: https://www.mercurial-scm.org/
+
+- `:old-names` specifies former names of the package, if any.  The value is
+  a list of symbols.
 
 
 ### Example: Single File Repository

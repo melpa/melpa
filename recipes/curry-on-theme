@@ -1,0 +1,1 @@
+(curry-on-theme :repo "mvarela/Curry-On-theme" :fetcher github)

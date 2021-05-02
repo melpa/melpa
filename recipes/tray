@@ -1,0 +1,3 @@
+(tray
+ :fetcher git
+ :url "https://git.sr.ht/~tarsius/tray")

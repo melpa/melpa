@@ -16,12 +16,14 @@ https://github.com/your/awesome_package
 
 ### Checklist
 
-Please confirm with `x`:
+<!-- Please confirm with `x`: -->
 
-- [ ] The package is released under a [GPL-Compatible Free Software License](https://www.gnu.org/licenses/license-list.en.html#GPLCompatibleLicenses).
+- [ ] The package is released under a [GPL-Compatible Free Software License](https://www.gnu.org/licenses/license-list.en.html#GPLCompatibleLicenses)
 - [ ] I've read [CONTRIBUTING.org](https://github.com/melpa/melpa/blob/master/CONTRIBUTING.org)
 - [ ] I've used the latest version of [package-lint](https://github.com/purcell/package-lint) to check for packaging issues, and addressed its feedback
 - [ ] My elisp byte-compiles cleanly
 - [ ] `M-x checkdoc` is happy with my docstrings
 - [ ] I've built and installed the package using the instructions in [CONTRIBUTING.org](https://github.com/melpa/melpa/blob/master/CONTRIBUTING.org)
 - [ ] I have confirmed some of these without doing them
+
+<!-- After submitting, please fix any problems the CI reports. -->

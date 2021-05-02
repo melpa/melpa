@@ -130,7 +130,7 @@
       } else if (recipe.url) {
         var urlMatch = function(re, prefix) {
           var m = recipe.url.match(re);
-          return m !== null ? (prefix || '') + m[0] : null;
+          return m !== null ? (prefix || '') + m[1] : null;
         };
         return (urlMatch(/(bitbucket\.org\/[^\/]+\/[^\/\?]+)/, "https://") ||
                 urlMatch(/(gitorious\.org\/[^\/]+\/[^.]+)/, "https://") ||
@@ -138,6 +138,7 @@
                 urlMatch(/^lp:(.*)/, "https://launchpad.net/") ||
                 urlMatch(/^(https?:\/\/code\.google\.com\/p\/[^\/]+\/)/) ||
                 urlMatch(/^(https?:\/\/[^.]+\.googlecode\.com\/)/) ||
+                urlMatch(/^https:\/\/git\.code\.sf\.net\/p\/([^\/]+)/, "https://sourceforge.net/p/") ||
                 urlMatch(/^(https?:\/\/git\..*)/));
       }
       return null;
@@ -631,8 +632,6 @@
         ]),
         m(".col-md-4", [
           melpa.buildstatus.view(ctrl.buildstatus),
-          m.trust('<a class="twitter-timeline" data-height="250" data-dnt="true" href="https://twitter.com/melpa_emacs?ref_src=twsrc%5Etfw">Tweets by melpa_emacs</a>'),
-          m('script', {src: "//platform.twitter.com/widgets.js", type: "text/javascript"})
         ])
       ]),
       melpa.packagelist.view(ctrl.packagelist)

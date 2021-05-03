@@ -1,1 +1,1 @@
-(balance :fetcher github :repo "sergiruiztrepat/chembalance")
+(chembalance :fetcher github :repo "sergiruiztrepat/chembalance")

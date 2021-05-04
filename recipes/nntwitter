@@ -1,0 +1,3 @@
+(nntwitter :repo "dickmao/nntwitter"
+           :fetcher github
+           :files ("lisp/*.el"))

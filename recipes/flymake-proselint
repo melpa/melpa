@@ -1,0 +1,1 @@
+(flymake-proselint :repo "manuel-uberti/flymake-proselint" :fetcher github)

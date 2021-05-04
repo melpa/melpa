@@ -1,3 +1,0 @@
-(pyim-cangjie5dict :repo "HesperusArcher/pyim-cangjie5dict"
-                   :fetcher github
-                   :files (:defaults "*.pyim"))

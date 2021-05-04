@@ -15,14 +15,12 @@ function build_all {
 
     ## run the script
     cd "/mnt/store/melpa"
-    make -j8 $(grep --files-without-match ':fetcher\s*wiki' $(find recipes/ -type f -not -name python-info -and -not -name python3-info | sort)) &
-    wait
+    make -k -j8 $(find recipes/ -type f -not -name python-info | sort) || true
 
     # python-info and python3-info are too big to run while other are
     # running. Running these separately should speed up other builds and
     # make this package actually build.
-    make recipes/python-info
-    make recipes/python3-info
+    make recipes/python-info || true
 
     echo '{"completed":' "$(unix_timestamp)" '}' > html/build-status.json
 }

@@ -1,4 +1,0 @@
-(modus-operandi-theme
- :fetcher gitlab
- :repo "protesilaos/modus-themes"
- :files ("modus-operandi-theme.el"))

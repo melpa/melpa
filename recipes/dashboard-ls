@@ -1,1 +1,1 @@
-(dashboard-ls :repo "jcs-elpa/dashboard-ls" :fetcher github)
+(dashboard-ls :repo "emacs-dashboard/dashboard-ls" :fetcher github)

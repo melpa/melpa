@@ -1,3 +1,4 @@
 (highlight-parentheses
- :repo "tsdh/highlight-parentheses.el"
- :fetcher github)
+ :fetcher git
+ :url "https://git.sr.ht/~tsdh/highlight-parentheses.el"
+ :branch "main")

@@ -44,6 +44,7 @@
     }.bind(this));
     this._searchText = _([data.name, data.description, data.version].concat(data.searchExtra || []))
       .compact().valueOf().join(' ').toLowerCase();
+    this.logURL = "/packages/" + data.name + ".log";
     this.readmeURL = "/packages/" + data.name + "-readme.txt";
     this.badgeURL = "/packages/" + data.name + "-badge.svg";
     this.matchesTerm = function(term) {
@@ -129,7 +130,7 @@
       } else if (recipe.url) {
         var urlMatch = function(re, prefix) {
           var m = recipe.url.match(re);
-          return m !== null ? (prefix || '') + m[0] : null;
+          return m !== null ? (prefix || '') + m[1] : null;
         };
         return (urlMatch(/(bitbucket\.org\/[^\/]+\/[^\/\?]+)/, "https://") ||
                 urlMatch(/(gitorious\.org\/[^\/]+\/[^.]+)/, "https://") ||
@@ -137,6 +138,7 @@
                 urlMatch(/^lp:(.*)/, "https://launchpad.net/") ||
                 urlMatch(/^(https?:\/\/code\.google\.com\/p\/[^\/]+\/)/) ||
                 urlMatch(/^(https?:\/\/[^.]+\.googlecode\.com\/)/) ||
+                urlMatch(/^https:\/\/git\.code\.sf\.net\/p\/([^\/]+)/, "https://sourceforge.net/p/") ||
                 urlMatch(/^(https?:\/\/git\..*)/));
       }
       return null;
@@ -154,6 +156,7 @@
       var oldNames = recipe['old-names'] || [];
       var commit = props.commit;
       var sourceURL = calculateSourceURL(name, recipe, commit);
+      var homeURL = props.url || calculateSourceURL(name, recipe, null);
 
       pkgs.push(new melpa.Package({
         name: name,
@@ -166,7 +169,7 @@
         fetcher: recipe.fetcher,
         recipeURL: "https://github.com/melpa/melpa/blob/master/recipes/" + name,
         packageURL: "packages/" + name + "-" + version + "." + (built.type == "single" ? "el" : "tar"),
-        homeURL: props.url,
+        homeURL: homeURL,
         sourceURL: sourceURL,
         oldNames: oldNames,
         searchExtra: [recipe.repo]
@@ -211,7 +214,7 @@
       }
     };
     this.maxPage = function() {
-      return Math.floor(getItemList().length / this.pageLength());
+      return Math.ceil(getItemList().length / this.pageLength());
     };
     this.prevPages = function() {
       return _.last(_.range(1, this.pageNumber()),
@@ -381,6 +384,7 @@
       packageName: m.route.param("package"),
       package: m.prop(),
       readme: m.prop('No description available.'),
+      buildLog: m.prop(),
       neededBy: m.prop([]),
       downloadsPercentile: m.prop(0),
       archivename: new melpa.archivename.controller()
@@ -397,6 +401,13 @@
                  url: p.readmeURL,
                  deserialize: _.identity
                 }).then(ctrl.readme);
+      ctrl.fetchBuildLog = function() {
+        ctrl.buildLog("Loading")
+        m.request({method: "GET",
+                   url: p.logURL,
+                   deserialize: _.identity
+                  }).then(ctrl.buildLog);
+      };
     });
     return ctrl;
   };
@@ -470,7 +481,11 @@
             m("dt", "Org"),
             m("dd", m("pre", '[[' + fullURL + '][file:' + badgeURL + ']]'))
           ])
-        ]))
+        ])),
+      m("section", [
+        m("h4", "Build log"),
+        (ctrl.buildLog() ?  m("pre", ctrl.buildLog()) : m("a.btn.btn-default", {onclick: ctrl.fetchBuildLog}, "Show"))
+      ])
     ]);
   };
 
@@ -611,14 +626,12 @@
               "<strong>Curated</strong> - no obsolete, renamed, forked or randomly hacked packages",
               "<strong>Comprehensive</strong> - more packages than any other archive",
               "<strong>Automatic updates</strong> - new commits result in new packages",
-              "<strong>Extensible</strong> - contribute recipes via github, and we'll build the packages"
+              "<strong>Extensible</strong> - contribute new recipes, and we'll build the packages"
             ].map(function(content) { return m("li", m.trust(content)); }))
           ])
         ]),
         m(".col-md-4", [
           melpa.buildstatus.view(ctrl.buildstatus),
-          m.trust('<a class="twitter-timeline" data-height="250" data-dnt="true" href="https://twitter.com/melpa_emacs?ref_src=twsrc%5Etfw">Tweets by melpa_emacs</a>'),
-          m('script', {src: "//platform.twitter.com/widgets.js", type: "text/javascript"})
         ])
       ]),
       melpa.packagelist.view(ctrl.packagelist)

@@ -1,0 +1,2 @@
+(subsonic :url "https://git.sr.ht/~amk/subsonic.el"
+          :fetcher git)

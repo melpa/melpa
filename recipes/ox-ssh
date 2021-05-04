@@ -1,0 +1,1 @@
+(ox-ssh :fetcher github :repo "dantecatalfamo/ox-ssh" )

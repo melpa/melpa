@@ -1,0 +1,2 @@
+(svg-tag-mode :repo "rougier/svg-tag-mode"
+              :fetcher github)

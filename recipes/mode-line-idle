@@ -1,0 +1,3 @@
+(mode-line-idle
+ :repo "ideasman42/emacs-mode-line-idle"
+ :fetcher gitlab)

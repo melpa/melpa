@@ -1,0 +1,3 @@
+(pyim-cangjiedict :repo "p1uxtar/pyim-cangjiedict"
+                  :fetcher github
+                  :files (:defaults "*.pyim"))

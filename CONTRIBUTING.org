@@ -9,7 +9,7 @@ Three contributor roles are involved in the maintenance of MELPA :
 - MELPA maintainers :: They are responsible for reviewing new recipes
      and associated packages as well as keeping the system working.
 
-- Recipe authors :: They responsible for submitting good recipes and
+- Recipe authors :: They are responsible for submitting good recipes and
                     maintaining them when the package is changed
                     (e.g., renamed or deprecated).
 
@@ -240,13 +240,15 @@ this process.
 MELPA maintainers spend a lot of time reviewing proposed packages and
 also have quite a lot of other non-MELPA-related activities. Please be
 patient as it might take a week (sometimes several) before one starts
-having a look at your pull request. 
+having a look at your pull request. Also be aware that the maintainers
+try to divide reviewing time fairly between authors; you can help them
+by limiting the number of pull requests you have open at once.
 
 If you were asked to make several changes, then you should explicitly
 mention everything that you have fixed, and possibly even link to the
 relevant commits. One way of doing that is to mention the MELPA pull
 request in every commit addressing one of the raised points: just
-write `melpa/melpa#N` in each commit message where `N` is the pull
+write ~melpa/melpa#N~ in each commit message where ~N~ is the pull
 request number.
 
 You can help MELPA maintainers take care of pull requests much faster

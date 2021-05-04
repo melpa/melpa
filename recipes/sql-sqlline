@@ -1,4 +1,4 @@
 (sql-sqlline
  :fetcher gitlab
- :repo "matteo.redaelli/sql-sqlline"
+ :repo "matteoredaelli/sql-sqlline"
  :files ("artifacts/*.el"))

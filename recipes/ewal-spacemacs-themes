@@ -1,4 +1,4 @@
 (ewal-spacemacs-themes
- :fetcher gitlab
- :repo "jjzmajic/ewal"
+ :fetcher github
+ :repo "wurosh/ewal"
  :files ("spacemacs-themes/*.el"))

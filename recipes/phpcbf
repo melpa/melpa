@@ -1,3 +1,0 @@
-(phpcbf
- :repo "nishimaki10/emacs-phpcbf"
- :fetcher github)

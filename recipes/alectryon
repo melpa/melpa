@@ -1,0 +1,6 @@
+(alectryon
+ :fetcher github
+ :repo "cpitclaudel/alectryon"
+ :commit "55fc849cdb7a05bbaab6f9359386d8830bdcfb87"
+ :branch "master"
+ :files ("etc/elisp/alectryon.el"))

@@ -1,0 +1,1 @@
+(org-gamedb :fetcher github :repo "repelliuss/org-gamedb")

@@ -1,1 +1,0 @@
-(read-only-cf :fetcher github :repo "pfchen/read-only-cf")

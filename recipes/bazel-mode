@@ -1,2 +1,0 @@
-(bazel-mode :repo "bazelbuild/emacs-bazel-mode" :fetcher github
-  :files ("lisp/*.el" (:exclude "lisp/*-test.el")))

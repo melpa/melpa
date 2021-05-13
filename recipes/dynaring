@@ -1,2 +1,2 @@
-(dynamic-ring :repo "countvajhula/dynamic-ring"
-              :fetcher github)
+(dynaring :repo "countvajhula/dynaring"
+          :fetcher github)

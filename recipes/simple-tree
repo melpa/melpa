@@ -1,2 +1,1 @@
-(simple-tree :type git :repo "https://gitlab.com/sasanidas/simple-tree.el"
-	     :files ("simple-tree.el" ))
+(simple-tree :fetcher gitlab :repo  "sasanidas/simple-tree.el")

@@ -1,6 +1,6 @@
 # MELPA
 
-[![Build Status](https://github.com/melpa/melpa/workflows/ci/badge.svg)](https://github.com/melpa/melpa/actions)
+[![Build Status](https://github.com/melpa/melpa/workflows/CI/badge.svg)](https://github.com/melpa/melpa/actions)
 
 MELPA is a growing collection of `package.el`-compatible Emacs Lisp
 packages built automatically on our server from the upstream source

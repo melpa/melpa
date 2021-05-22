@@ -1,1 +1,1 @@
-(mix :fetcher github :repo "ayrat555/cargo-mode")
+(cargo-mode :fetcher github :repo "ayrat555/cargo-mode")

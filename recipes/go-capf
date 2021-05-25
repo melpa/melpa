@@ -1,1 +1,0 @@
-(go-capf :url "https://git.sr.ht/~zge/go-capf" :fetcher git)

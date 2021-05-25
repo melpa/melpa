@@ -1,0 +1,3 @@
+(lsp-docker+
+ :repo "y-kitamu/emacs-lsp-docker-plus"
+ :fetcher github)

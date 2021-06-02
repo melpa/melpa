@@ -1,0 +1,3 @@
+(consult-ghq
+ :repo "tomoya/consult-ghq"
+ :fetcher github)

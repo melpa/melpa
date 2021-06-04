@@ -1,6 +1,6 @@
 # MELPA
 
-[![Build Status](https://github.com/melpa/melpa/workflows/ci/badge.svg)](https://github.com/melpa/melpa/actions)
+[![Build Status](https://github.com/melpa/melpa/workflows/CI/badge.svg)](https://github.com/melpa/melpa/actions)
 
 MELPA is a growing collection of `package.el`-compatible Emacs Lisp
 packages built automatically on our server from the upstream source
@@ -151,22 +151,27 @@ it should usually be:
          "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
          (:exclude ".dir-locals.el" "test.el" "tests.el" "*-test.el" "*-tests.el"))
 
-    This option is necessary when there are multiple packages in the
-repository and thus the package should only be built from a subset of
-`.el` files. For example, elisp test files should not normally be
-packaged. *Any file specified at any path in the repository is copied
-to the root of the package.* More complex options are available,
-submit an [Issue](https://github.com/melpa/melpa/issues) if the
-specified package requires more complex file specification.
-
-    If the package merely requires some additional files, for example for
-bundling external dependencies, but is otherwise fine with the defaults, it's
-recommended to use `:defaults` as the very first element of this list, which
-causes the default value shown above to be prepended to the specified file list.
-
     Note that elisp in subdirectories is never included by default, so
-you might find it convenient to separate auxiliary files such as tests into
+you might find it convenient to keep your package's elisp in the root
+of your repository, and separate auxiliary files such as tests into
 subdirectories to keep packaging simple.
+
+    The elements of the `:files` list are glob-expanded and processed
+    from left to right to make a list of paths that will be copied
+    into the root of the new package, as if by using `cp -R [SRCPATHS]
+    DEST`. This means a directory like "foo/bar" would become "bar" in
+    the new package. To specify a destination subdirectory, use a list
+    element of the form `(SUBDIR SRCPATH ...)`. Likewise, to filter
+    out paths expanded earlier in the list, use `(:exclude SRCPATH
+    ...)`.
+
+    If your package requires some additional files, but is
+otherwise fine with the defaults, it's recommended to use the special
+element `:defaults` as the very first element of the `:files` list,
+which causes the default value shown above to be prepended to the
+specified file list. For example `:files (:defaults "snippets")` would
+cause the "snippets" subdir to be copied in addition to the defaults.
+
 
 [git]: http://git-scm.com/
 [github]: https://github.com/

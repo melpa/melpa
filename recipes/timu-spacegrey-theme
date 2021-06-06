@@ -1,1 +1,1 @@
-(timu-spacegrey-theme :repo "aimebertrand/timu-spacegrey-theme")
+(timu-spacegrey-theme :fetcher github :repo "aimebertrand/timu-spacegrey-theme")

@@ -1,3 +1,1 @@
-(timu-spacegrey-theme :repo "aimebertrand/timu-spacegrey-theme"
-                      :fetcher gitlab
-                      :files ("README.org" "timu-spacegrey-theme.el" "timu-spacegrey-theme.png"))
+(timu-spacegrey-theme :repo "aimebertrand/timu-spacegrey-theme")

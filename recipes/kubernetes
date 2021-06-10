@@ -1,4 +1,4 @@
-(kubernetes :repo "chrisbarrett/kubernetes-el"
+(kubernetes :repo "kubernetes-el/kubernetes-el"
             :fetcher github
             :files
             (:defaults

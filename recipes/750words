@@ -1,0 +1,3 @@
+(750words
+ :fetcher github
+ :repo "zzamboni/750words-client")

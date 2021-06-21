@@ -1,1 +1,1 @@
-(dired-rsync :repo "r-zip/rsync-mode" :fetcher github)
+(rsync-mode :repo "r-zip/rsync-mode" :fetcher github)

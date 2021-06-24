@@ -1,5 +1,5 @@
 (pippel
  :fetcher github
- :repo "brotzeit/pippel"
+ :repo "arifer612/pippel"
  :files (:defaults
          "pippel.py"))

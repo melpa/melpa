@@ -1,0 +1,1 @@
+(c-eval :fetcher github :repo "lassik/emacs-c-eval")

@@ -1,3 +1,3 @@
 (clang-capf :fetcher git
-            :url "https://git.sr.ht/~zge/clang-capf"
+            :url "https://git.sr.ht/~pkal/clang-capf"
             :old-names (cpp-capf))

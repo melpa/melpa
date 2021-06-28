@@ -1,1 +1,1 @@
-(0x0 :url "https://git.sr.ht/~pkal/nullpointer-emacs" :fetcher git)
+(0x0 :url "https://gitlab.com/willvaughn/emacs-0x0.git" :fetcher git)

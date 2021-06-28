@@ -1,1 +1,1 @@
-(0x0 :url "https://gitlab.com/willvaughn/emacs-0x0.git" :fetcher git)
+(0x0 :fetcher gitlab :repo "willvaughn/emacs-0x0")

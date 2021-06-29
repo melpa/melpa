@@ -1,3 +1,2 @@
 (seriestracker :fetcher github
-               :repo "MaximeWack/seriestracker"
-               :branch "develop")
+               :repo "MaximeWack/seriestracker")

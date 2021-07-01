@@ -1,0 +1,3 @@
+(helm-mypackage :repo "ashok-khanna/math-mode"
+                :fetcher github
+                :files ("math-mode.el"))

@@ -1,0 +1,2 @@
+
+(sse :url "https://github.com/clonex10100/sse.el" :fetcher git)

@@ -1,0 +1,1 @@
+(ox-yaow :repo "laurencewarne/ox-yaow.el" :fetcher github)

@@ -1,0 +1,5 @@
+(frontside-windowing
+ :fetcher github
+ :repo "thefrontside/frontmacs"
+ :files ("packages/windowing/*.el"
+         (:exclude "packages/windowing/*-test.el")))

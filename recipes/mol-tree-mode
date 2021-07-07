@@ -1,0 +1,1 @@
+(mol-tree-mode :fetcher github :repo "osv/mol-tree-mode")

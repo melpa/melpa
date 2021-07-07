@@ -272,7 +272,8 @@ is used instead."
       ;; We later checkout "origin/HEAD".  Sadly "git fetch" cannot
       ;; be told to keep it up-to-date, so we have to make a second
       ;; request.
-      (package-build--run-process dir nil "git" "remote" "set-head" "--auto"))
+      (package-build--run-process dir nil "git" "remote" "set-head"
+                                  "origin" "--auto"))
      (t
       (when (file-exists-p dir)
         (delete-directory dir t))

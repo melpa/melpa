@@ -1,0 +1,1 @@
+(org-pandoc-import :repo "tecosaur/org-pandoc-import" :fetcher github :files ("*.el" "filters/*" "preprocessors/*"))

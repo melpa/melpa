@@ -10,6 +10,12 @@
       </p>
 
       <p>
+	Consider using Emacs 26.3 or greater; otherwise you will have
+	to add a kludge to work around a bug
+	as <a href="%known-issues">described below</a>.
+      </p>
+
+      <p>
         Enable installation of packages from MELPA by adding an entry
         to <code>package-archives</code> after <code>(require
         'package)</code> and before the call
@@ -98,10 +104,18 @@
     <section>
       <a name="known-issues"></a>
       <h2>Known Issues</h2>
-      <p>
-        <strong>Note:</strong> <em>These fixes are included in
-        the <code>package-filter.el</code> package.</em>
+      <h3>Failed to download ‘MELPA’ archive</h3>
+      <p>This occationally happens when using Emacs &#60;= 26.2 or
+        with Gnutls &#62;= 3.6.  The recommended fix is to update to
+        Emacs 26.3 or greater.  Alternatively you can disable TLS1.3
+        by adding the following setting early in your init file.  For
+        more information
+        see <a href="https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341">Emacs
+        bug#34341</a>.
       </p>
+      <pre><code>(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")</code></pre>
+
+      <h3>Dependency order is reversed</h3>
       <p>
         There is a small bug in Emacs 24’s <code>package.el</code> such
         that the dependency order comes out backwards. The problem is
@@ -113,6 +127,11 @@
     "reverse the requirements"
     (setq requirements (reverse requirements))
     (print requirements))</code></pre>
+
+      <p>
+        <strong>Note:</strong> <em>This fix is included in
+        the <code>package-filter.el</code> package.</em>
+      </p>
     </section>
     <section>
       <a name="updating"></a>

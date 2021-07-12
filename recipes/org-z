@@ -1,0 +1,2 @@
+(org-z :fetcher github
+       :repo "landakram/org-z")

@@ -1,0 +1,3 @@
+(ivy-nixos-options :fetcher github
+                    :repo "travisbhartwell/nix-emacs"
+                    :files ("ivy-nixos-options.el"))

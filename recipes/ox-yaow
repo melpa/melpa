@@ -1,1 +1,1 @@
-(ox-yaow :repo "laurencewarne/ox-yaow.el" :fetcher github)
+(ox-yaow :repo "LaurenceWarne/ox-yaow.el" :fetcher github)

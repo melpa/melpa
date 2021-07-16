@@ -1,0 +1,1 @@
+(cell-mode :fetcher gitlab :repo "dto/cell-mode")

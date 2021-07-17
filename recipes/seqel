@@ -1,0 +1,3 @@
+(seqel :fetcher github
+       :repo "rnaer/seqel"
+       :files ("*.el"))

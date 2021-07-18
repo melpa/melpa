@@ -1,0 +1,1 @@
+(omni-theme :fetcher github :repo "getomni/emacs")

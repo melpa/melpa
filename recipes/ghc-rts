@@ -1,0 +1,6 @@
+(ghc-rts :repo "ilitzroth/ghc-rts.el"
+         :fetcher github
+         :files ("ghc-rts.el"
+                 "emacs-ghc-rts.cpp"
+                 "emacs-ghc-rts.hpp"
+                 "Makefile"))

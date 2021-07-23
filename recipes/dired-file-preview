@@ -1,0 +1,1 @@
+(dired-file-preview :repo "SpringHan/dired-file-preview" :fetcher github)

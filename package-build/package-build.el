@@ -156,6 +156,13 @@ The string in the capture group should be parsed as valid by `version-to-list'."
   :group 'package-build
   :type 'string)
 
+(defcustom package-build-allowed-git-protocols '("https" "file" "ssh")
+  "Protocols that can be used to fetch from upstream with git.
+By default insecure protocols, such as \"http\" or \"git\", are
+disallowed."
+  :group 'package-build
+  :type '(repeat string))
+
 ;;; Generic Utilities
 
 (defun package-build--message (format-string &rest args)
@@ -286,7 +293,10 @@ is used instead."
 
 (cl-defmethod package-build--checkout ((rcp package-git-recipe))
   (let ((dir (package-recipe--working-tree rcp))
-        (url (package-recipe--upstream-url rcp)))
+        (url (package-recipe--upstream-url rcp))
+        (protocol (package-recipe--upstream-protocol rcp)))
+    (unless (member protocol package-build-allowed-git-protocols)
+      (error "Fetching using the %s protocol is not allowed" protocol))
     (cond
      ((and (file-exists-p (expand-file-name ".git" dir))
            (string-equal (package-build--used-url rcp) url))

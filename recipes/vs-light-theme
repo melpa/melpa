@@ -1,1 +1,1 @@
-(vs-light-theme :repo "jcs-elpa/vs-light-theme" :fetcher github)
+(vs-light-theme :repo "emacs-vs/vs-light-theme" :fetcher github)

@@ -1,1 +1,1 @@
-(yandex-weather :fetcher github :repo "abstractionlayer/yandex-weather.el")
+(yandex-weather :fetcher github :repo "acme4j/yandex-weather.el")

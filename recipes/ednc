@@ -1,0 +1,1 @@
+(ednc :repo "sinic/ednc" :fetcher github)

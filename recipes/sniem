@@ -1,0 +1,1 @@
+(sniem :repo "SpringHan/sniem" :fetcher github)

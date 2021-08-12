@@ -1,0 +1,3 @@
+(counsel-ag-popup
+ :repo "gexplorer/counsel-ag-popup"
+ :fetcher github)

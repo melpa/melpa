@@ -1,0 +1,3 @@
+(eshell-syntax-highlighting
+ :fetcher github
+ :repo "akreisher/eshell-syntax-highlighting")

@@ -1,0 +1,3 @@
+(pyim-smzmdict :repo "p1uxtar/pyim-smzmdict"
+               :fetcher github
+               :files (:defaults "*.pyim"))

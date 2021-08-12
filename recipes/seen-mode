@@ -1,0 +1,3 @@
+(seen-mode
+ :fetcher git
+ :url "https://git.sr.ht/~shiorid/seen.el")

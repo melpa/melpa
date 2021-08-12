@@ -1,0 +1,1 @@
+(mimetypes :repo "cniles/emacs-mimetypes" :fetcher github)

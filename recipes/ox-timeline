@@ -1,0 +1,2 @@
+(ox-timeline :repo "jjuliano/org-simple-timeline" :fetcher github)
+

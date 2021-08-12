@@ -1,1 +1,1 @@
-(magit-p4 :repo "qoocku/magit-p4" :fetcher github)
+(magit-p4 :repo "emacsorphanage/magit-p4" :fetcher github)

@@ -1,0 +1,3 @@
+(zoxide
+ :fetcher gitlab
+ :repo "Vonfry/zoxide.el")

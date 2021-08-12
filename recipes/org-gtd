@@ -1,1 +1,1 @@
-(org-gtd :fetcher github :repo "trevoke/org-gtd.el")
+(org-gtd :fetcher github :repo "Trevoke/org-gtd.el")

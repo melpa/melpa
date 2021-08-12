@@ -1,4 +1,15 @@
 (git-commit :fetcher github
             :repo "magit/magit"
-            :files ("lisp/git-commit.el")
+            :files
+	    ("lisp/git-commit.el"
+	     ;; Melpa packages usually do not include this file and
+	     ;; the only reason why we include it in this case is that
+	     ;; doing so turns this package into a multi-file package,
+	     ;; which we want because then it uses information from
+	     ;; lisp/git-commit-pkg.el, which we want because then it
+	     ;; doesn't use the same dependency information as nonGNU
+	     ;; Elpa, which we want because the two package archives
+	     ;; do not (yet) use the same version scheme for snapshot
+	     ;; builds.
+	     "LICENSE")
             :old-names (git-commit-mode))

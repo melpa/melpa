@@ -1,1 +1,1 @@
-(autocrypt :url "https://git.sr.ht/~zge/autocrypt" :fetcher git)
+(autocrypt :url "https://git.sr.ht/~pkal/autocrypt" :fetcher git)

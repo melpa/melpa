@@ -1,0 +1,4 @@
+(modus-themes
+ :fetcher gitlab
+ :repo "protesilaos/modus-themes"
+ :branch "main")

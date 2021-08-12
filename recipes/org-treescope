@@ -1,1 +1,1 @@
-(org-treescope :fetcher github :repo "mtekman/org-treescope.el")
+(org-treescope :fetcher gitlab :repo "mtekman/org-treescope.el")

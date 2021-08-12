@@ -1,0 +1,1 @@
+(dune-format :fetcher github :repo "purcell/emacs-dune-format")

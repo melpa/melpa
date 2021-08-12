@@ -1,2 +1,1 @@
-(devdocs :fetcher github
-         :repo "xuchunyang/DevDocs.el")
+(devdocs :fetcher github :repo "astoff/devdocs.el")

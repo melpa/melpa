@@ -1,0 +1,1 @@
+(ligo-mode :fetcher gitlab :repo "ligolang/ligo" :files ("tools/emacs/ligo-mode.el"))

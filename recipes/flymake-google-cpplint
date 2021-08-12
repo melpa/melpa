@@ -1,1 +1,0 @@
-(flymake-google-cpplint :repo "senda-akiha/flymake-google-cpplint" :fetcher github)

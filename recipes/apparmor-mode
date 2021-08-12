@@ -1,0 +1,1 @@
+(apparmor-mode :fetcher github :repo "alexmurray/apparmor-mode")

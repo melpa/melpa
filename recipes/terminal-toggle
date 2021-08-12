@@ -1,1 +1,1 @@
-(terminal-toggle :fetcher github :repo "mtekman/terminal-toggle.el")
+(terminal-toggle :fetcher gitlab :repo "mtekman/terminal-toggle.el")

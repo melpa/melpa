@@ -1,0 +1,1 @@
+(auth-source-kwallet :fetcher github :repo "vaartis/auth-source-kwallet")

@@ -1,1 +1,1 @@
-(circe :repo "jorgenschaefer/circe" :fetcher github)
+(circe :repo "emacs-circe/circe" :fetcher github)

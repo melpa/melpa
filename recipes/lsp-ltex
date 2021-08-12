@@ -1,0 +1,1 @@
+(lsp-ltex :repo "emacs-languagetool/lsp-ltex" :fetcher github)

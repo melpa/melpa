@@ -1,2 +1,2 @@
 (gdscript-mode :fetcher github
-               :repo "GDQuest/emacs-gdscript-mode")
+               :repo "godotengine/emacs-gdscript-mode")

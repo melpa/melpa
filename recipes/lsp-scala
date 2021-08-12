@@ -1,1 +1,0 @@
-(lsp-scala :repo "rossabaker/lsp-scala" :fetcher github)

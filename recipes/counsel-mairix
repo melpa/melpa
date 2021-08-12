@@ -1,0 +1,3 @@
+(counsel-mairix
+ :fetcher git
+ :url "https://git.sr.ht/~ane/counsel-mairix")

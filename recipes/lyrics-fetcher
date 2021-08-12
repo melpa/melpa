@@ -1,0 +1,1 @@
+(lyrics-fetcher :repo "SqrtMinusOne/lyrics-fetcher.el" :fetcher github)

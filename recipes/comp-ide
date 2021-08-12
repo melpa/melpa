@@ -1,1 +1,1 @@
-(comp-ide :fetcher github :repo "SidharthArya/comp-ide.el") 
+(comp-ide :fetcher github :repo "SidharthArya/comp-ide.el")

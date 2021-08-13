@@ -1,0 +1,2 @@
+(helm-dogears :fetcher github :repo "alphapapa/dogears.el"
+              :files ("helm-dogears.el"))

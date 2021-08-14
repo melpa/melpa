@@ -1,0 +1,1 @@
+(consult-dir :fetcher github :repo "karthink/consult-dir")

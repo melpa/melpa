@@ -1,0 +1,4 @@
+(evil-textobj-treesitter
+  :fetcher github
+  :repo "meain/evil-textobj-treesitter"
+  :files (:defaults "queries"))

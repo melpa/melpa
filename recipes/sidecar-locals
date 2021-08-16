@@ -1,0 +1,3 @@
+(sidecar-locals
+ :repo "ideasman42/emacs-sidecar-locals"
+ :fetcher gitlab)

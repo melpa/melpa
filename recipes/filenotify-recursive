@@ -1,0 +1,1 @@
+(filenotify-recursive :fetcher github :repo "jethrokuan/filenotify-recursive")

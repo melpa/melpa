@@ -1,4 +1,0 @@
-(org-roam-server
- :repo "org-roam/org-roam-server"
- :fetcher github
- :files ("*.el" "index.html" "assets"))

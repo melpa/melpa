@@ -1,1 +1,0 @@
-(minibuffer-keypad-mode :fetcher github :repo "SpringHan/minibuffer-keypad-mode")

@@ -1,1 +1,1 @@
-(streamlink :repo "benediktbroich/streamlink" :fetcher github)
+(streamlink :repo "BenediktBroich/streamlink" :fetcher github)

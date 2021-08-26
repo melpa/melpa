@@ -1,2 +1,0 @@
-(firefox-controller :repo "cute-jumper/emacs-firefox-controller"
-                    :fetcher github)

@@ -1,1 +1,0 @@
-(reformatter :repo "purcell/emacs-reformatter" :fetcher github)

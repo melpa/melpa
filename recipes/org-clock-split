@@ -1,1 +1,0 @@
-(org-clock-split :repo "justintaft/org-clock-split" :fetcher github)

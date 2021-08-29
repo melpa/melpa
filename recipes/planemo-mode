@@ -1,1 +1,0 @@
-(planemo-mode :fetcher gitlab :repo "mtekman/planemo-mode.el")

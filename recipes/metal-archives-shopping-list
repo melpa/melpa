@@ -1,1 +1,0 @@
-(metal-archives-shopping-list :fetcher github :repo "seblemaguer/metal-archives.el" :files ("metal-archives-shopping-list.el"))

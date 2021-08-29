@@ -1,3 +1,0 @@
-(hl-fill-column
-  :fetcher github
-  :repo "laishulu/hl-fill-column")

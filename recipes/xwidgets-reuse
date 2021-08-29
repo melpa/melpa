@@ -1,1 +1,0 @@
-(xwidgets-reuse :fetcher github :repo "lordpretzel/xwidgets-reuse" :files ("xwidgets-reuse.el"))

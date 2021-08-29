@@ -1,2 +1,0 @@
-(org-latex-impatient :repo "yangsheng6810/org-latex-impatient"
-                           :fetcher github)

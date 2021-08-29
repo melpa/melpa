@@ -1,1 +1,0 @@
-(futhark-mode :repo "diku-dk/futhark-mode" :fetcher github)

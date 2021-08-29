@@ -1,1 +1,0 @@
-(go-playground :repo "grafov/go-playground" :fetcher github)

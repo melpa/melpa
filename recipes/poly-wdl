@@ -1,3 +1,0 @@
-(poly-wdl
- :fetcher github
- :repo "jmonlong/poly-wdl")

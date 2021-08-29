@@ -1,1 +1,0 @@
-(counsel-pydoc :repo "co-dh/pydoc_utils" :fetcher github)

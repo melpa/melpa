@@ -1,4 +1,0 @@
-(electric-spacing
- :fetcher github
- :repo "xwl/electric-spacing"
- :old-names (smart-operator))

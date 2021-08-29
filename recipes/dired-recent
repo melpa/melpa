@@ -1,3 +1,0 @@
-(dired-recent
- :fetcher github
- :repo "vifon/dired-recent.el")

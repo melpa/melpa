@@ -1,2 +1,0 @@
-(flame :fetcher github
-       :repo "mschuldt/flame")

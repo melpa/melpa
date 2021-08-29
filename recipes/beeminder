@@ -1,2 +1,0 @@
-(beeminder :repo "Sodaware/beeminder.el"
-					 :fetcher github)

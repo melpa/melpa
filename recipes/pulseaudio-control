@@ -1,1 +1,0 @@
-(pulseaudio-control :repo "flexibeast/pulseaudio-control" :fetcher github)

@@ -1,2 +1,0 @@
-(flycheck-psalm :fetcher github :repo "emacs-php/psalm.el"
-                :files ("flycheck-psalm.el"))

@@ -1,2 +1,0 @@
-(attrap :repo "jyp/attrap"
-        :fetcher github)

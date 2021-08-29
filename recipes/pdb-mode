@@ -1,1 +1,0 @@
-(pdb-mode :fetcher github :repo "sixpi/pdb-mode")

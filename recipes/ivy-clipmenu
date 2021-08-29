@@ -1,3 +1,0 @@
-(ivy-clipmenu
- :repo "wpcarro/ivy-clipmenu.el"
- :fetcher github)

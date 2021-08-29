@@ -1,2 +1,0 @@
-(ctags-update :repo "jixiuf/ctags-update"
-              :fetcher github)

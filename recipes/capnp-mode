@@ -1,4 +1,0 @@
-(capnp-mode
- :repo "capnproto/capnproto"
- :fetcher github
- :files ("highlighting/emacs/capnp-mode.el"))

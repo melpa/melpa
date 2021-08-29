@@ -1,5 +1,0 @@
-(realgud-rdb2
- :fetcher github
- :repo "realgud/realgud-ruby-debugger2"
- :files ("realgud-rdb2.el"
-         ("rdb2" "rdb2/*.el")))

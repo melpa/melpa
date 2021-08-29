@@ -1,1 +1,0 @@
-(lemon-mode :repo "mooz/lemon-mode" :fetcher github)

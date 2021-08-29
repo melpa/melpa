@@ -1,1 +1,0 @@
-(neuron-mode :fetcher github :repo "felko/neuron-mode")

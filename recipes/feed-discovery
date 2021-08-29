@@ -1,1 +1,0 @@
-(feed-discovery :fetcher github :repo "HKey/feed-discovery")

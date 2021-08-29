@@ -1,2 +1,0 @@
-(html-script-src :repo "rejeep/html-script-src.el" :fetcher github)
-

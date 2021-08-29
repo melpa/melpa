@@ -1,1 +1,0 @@
-(dashboard-ls :repo "emacs-dashboard/dashboard-ls" :fetcher github)

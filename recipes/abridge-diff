@@ -1,1 +1,0 @@
-(abridge-diff :repo "jdtsmith/abridge-diff" :fetcher github)

@@ -1,2 +1,0 @@
-(helm-wikipedia :fetcher github
-                :repo "emacs-helm/helm-wikipedia")

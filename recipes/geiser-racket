@@ -1,4 +1,0 @@
-(geiser-racket
- :fetcher gitlab
- :repo "emacs-geiser/racket"
- :files (:defaults ("src" "src/*" "bin" "bin/*")))

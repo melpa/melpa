@@ -1,2 +1,0 @@
-(minizinc-mode :repo "m00nlight/minizinc-mode"
-	       :fetcher github)

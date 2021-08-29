@@ -1,1 +1,0 @@
-(cpanfile-mode :repo "zakame/cpanfile-mode" :fetcher github)

@@ -1,4 +1,0 @@
-(bazel
- :repo "bazelbuild/emacs-bazel-mode"
- :fetcher github
- :old-names (bazel-mode))

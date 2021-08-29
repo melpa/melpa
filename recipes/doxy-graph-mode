@@ -1,1 +1,0 @@
-(doxy-graph-mode :repo "gustavopuche/doxy-graph-mode" :fetcher github)

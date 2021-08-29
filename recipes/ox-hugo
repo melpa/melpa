@@ -1,2 +1,0 @@
-(ox-hugo :fetcher github
-         :repo "kaushalmodi/ox-hugo")

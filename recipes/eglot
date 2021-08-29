@@ -1,1 +1,0 @@
-(eglot :repo "joaotavora/eglot" :fetcher github)

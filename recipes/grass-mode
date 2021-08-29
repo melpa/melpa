@@ -1,2 +1,0 @@
-(grass-mode :fetcher github
-            :repo "plantarum/grass-mode")

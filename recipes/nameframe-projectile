@@ -1,4 +1,0 @@
-(nameframe-projectile
- :fetcher github
- :repo "john2x/nameframe"
- :files ("nameframe-projectile.el"))

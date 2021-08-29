@@ -1,3 +1,0 @@
-(diff-at-point
- :repo "ideasman42/emacs-diff-at-point"
- :fetcher gitlab)

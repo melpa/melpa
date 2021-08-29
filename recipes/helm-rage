@@ -1,3 +1,0 @@
-(helm-rage :repo "bomgar/helm-rage"
-              :fetcher github
-              :files (:defaults "meme"))

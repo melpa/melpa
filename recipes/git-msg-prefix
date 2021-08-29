@@ -1,1 +1,0 @@
-(git-msg-prefix :repo "kidd/git-msg-prefix.el" :fetcher github)

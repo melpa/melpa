@@ -1,2 +1,0 @@
-(iter2 :repo "doublep/iter2"
-       :fetcher github)

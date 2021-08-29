@@ -1,4 +1,0 @@
-(edwina
- :fetcher github
- :repo "ajgrf/edwina"
- :old-names (edwin))

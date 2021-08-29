@@ -1,3 +1,0 @@
-(ayu-theme
- :repo "vutran1710/Ayu-Theme-Emacs"
- :fetcher github)

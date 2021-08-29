@@ -1,1 +1,0 @@
-(inf-mongo :fetcher github :repo "endofunky/inf-mongo")

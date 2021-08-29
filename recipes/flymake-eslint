@@ -1,1 +1,0 @@
-(flymake-eslint :repo "orzechowskid/flymake-eslint" :fetcher github)

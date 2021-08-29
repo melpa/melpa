@@ -1,1 +1,0 @@
-(ob-http :repo "zweifisch/ob-http" :fetcher github)

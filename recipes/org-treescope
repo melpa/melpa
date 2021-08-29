@@ -1,1 +1,0 @@
-(org-treescope :fetcher gitlab :repo "mtekman/org-treescope.el")

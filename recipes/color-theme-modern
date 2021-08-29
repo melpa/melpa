@@ -1,3 +1,0 @@
-(color-theme-modern
- :repo "emacs-jp/replace-colorthemes"
- :fetcher github)

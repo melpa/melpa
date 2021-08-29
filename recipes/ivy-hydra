@@ -1,3 +1,0 @@
-(ivy-hydra :repo "abo-abo/swiper"
-           :fetcher github
-           :files ("ivy-hydra.el"))

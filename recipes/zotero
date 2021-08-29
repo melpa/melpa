@@ -1,4 +1,0 @@
-(zotero
- :fetcher gitlab
- :repo "fvdbeek/emacs-zotero"
- :files (:defaults "img"))

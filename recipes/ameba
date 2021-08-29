@@ -1,1 +1,0 @@
-(ameba :fetcher github :repo "crystal-ameba/ameba.el" :files ("ameba.el"))

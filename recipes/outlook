@@ -1,3 +1,0 @@
-(outlook
- :fetcher github
- :repo "asavonic/outlook.el")

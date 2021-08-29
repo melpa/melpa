@@ -1,5 +1,0 @@
-(evil :repo "emacs-evil/evil"
-      :fetcher github
-      :files (:defaults
-              "doc/build/texinfo/evil.texi"
-              (:exclude "evil-test-helpers.el")))

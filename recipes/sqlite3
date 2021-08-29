@@ -1,7 +1,0 @@
-(sqlite3 :fetcher github
-         :repo "pekingduck/emacs-sqlite3-api"
-         :files (:defaults
-                 "Makefile"
-                 "consts.c"
-                 "emacs-module.h"
-                 "sqlite3-api.c"))

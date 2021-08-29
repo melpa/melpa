@@ -1,3 +1,0 @@
-(latex-pretty-symbols
- :repo "epa095/latex-pretty-symbols.el"
- :fetcher github)

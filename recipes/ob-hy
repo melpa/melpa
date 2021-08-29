@@ -1,2 +1,0 @@
-(ob-hy :repo "brantou/ob-hy"
-                 :fetcher github)

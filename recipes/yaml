@@ -1,2 +1,0 @@
-(yaml :repo "zkry/yaml.el"
-      :fetcher github)

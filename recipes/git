@@ -1,1 +1,0 @@
-(git :repo "rejeep/git.el" :fetcher github)

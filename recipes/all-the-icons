@@ -1,4 +1,0 @@
-(all-the-icons
- :repo "domtronn/all-the-icons.el"
- :fetcher github
- :files (:defaults "data"))

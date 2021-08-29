@@ -1,4 +1,0 @@
-(org-notifications
- :fetcher github
- :repo "doppelc/org-notifications"
- :files (:defaults "sounds"))

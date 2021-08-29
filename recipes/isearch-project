@@ -1,1 +1,0 @@
-(isearch-project :repo "jcs-elpa/isearch-project" :fetcher github)

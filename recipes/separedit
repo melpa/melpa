@@ -1,4 +1,0 @@
-(separedit
- :fetcher github
- :repo "twlz0ne/separedit.el"
- :files ("separedit.el"))

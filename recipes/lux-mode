@@ -1,3 +1,0 @@
-(lux-mode :repo "hawk/lux"
-          :fetcher github
-          :files ("emacs/lux-mode.el"))

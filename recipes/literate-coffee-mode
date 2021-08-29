@@ -1,1 +1,0 @@
-(literate-coffee-mode :fetcher github :repo "emacsorphanage/literate-coffee-mode")

@@ -1,1 +1,0 @@
-(db-pg :fetcher github :repo "nicferrier/emacs-db-pg")

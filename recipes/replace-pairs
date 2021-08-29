@@ -1,2 +1,0 @@
-(replace-pairs :repo "davidshepherd7/replace-pairs"
-               :fetcher github)

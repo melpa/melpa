@@ -1,1 +1,0 @@
-(counsel-org-capture-string :fetcher github :repo "akirak/counsel-org-capture-string")

@@ -1,1 +1,0 @@
-(literate-calc-mode :fetcher github :repo "sulami/literate-calc-mode.el")

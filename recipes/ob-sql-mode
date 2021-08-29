@@ -1,1 +1,0 @@
-(ob-sql-mode :repo "nikclayton/ob-sql-mode" :fetcher github)

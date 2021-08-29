@@ -1,1 +1,0 @@
-(flymake-gradle :fetcher github :repo "jojojames/flymake-gradle")

@@ -1,1 +1,0 @@
-(eldoc-box :repo "casouri/eldoc-box" :fetcher github)

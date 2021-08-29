@@ -1,1 +1,0 @@
-(crontab-mode :repo "emacs-pe/crontab-mode" :fetcher github)

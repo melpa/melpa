@@ -1,1 +1,0 @@
-(lsp-docker :repo "emacs-lsp/lsp-docker" :fetcher github)

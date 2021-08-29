@@ -1,5 +1,0 @@
-(theme-magic
- :fetcher github
- :repo "jcaw/theme-magic"
- ;; Must explicitly download the python scripts folder
- :files (:defaults "python"))

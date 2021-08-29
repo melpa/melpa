@@ -1,2 +1,0 @@
-(lsp-sourcekit :repo "emacs-lsp/lsp-sourcekit"
-               :fetcher github)

@@ -1,4 +1,0 @@
-(org-pdftools :fetcher github
-              :repo "fuxialexander/org-pdftools"
-              :files ("org-pdftools.el")
-              :old-names (org-pdfview))

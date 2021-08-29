@@ -1,1 +1,0 @@
-(vdf-mode :repo "plapadoo/vdf-mode" :fetcher github)

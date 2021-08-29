@@ -1,1 +1,0 @@
-(pug-mode :repo "hlissner/emacs-pug-mode" :fetcher github)

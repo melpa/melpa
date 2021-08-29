@@ -1,2 +1,0 @@
-(org-multi-wiki :fetcher github :repo "akirak/org-multi-wiki"
-                :files ("org-multi-wiki.el"))

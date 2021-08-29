@@ -1,4 +1,0 @@
-(distel-completion-lib
- :fetcher github
- :repo   "sebastiw/distel-completion"
- :files ("distel-completion-lib.el"))

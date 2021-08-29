@@ -1,3 +1,0 @@
-(svg-mode-line-themes
- :repo "sabof/svg-mode-line-themes"
- :fetcher github)

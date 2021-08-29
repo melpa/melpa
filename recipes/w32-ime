@@ -1,1 +1,0 @@
-(w32-ime :fetcher github :repo "trueroad/w32-ime.el")

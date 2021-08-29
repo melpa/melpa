@@ -1,2 +1,0 @@
-(solarized-theme :repo "bbatsov/solarized-emacs" :fetcher github)
-

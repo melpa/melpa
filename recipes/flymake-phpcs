@@ -1,1 +1,0 @@
-(flymake-phpcs :repo "flymake/flymake-phpcs" :fetcher github)

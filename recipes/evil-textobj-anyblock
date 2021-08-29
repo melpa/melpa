@@ -1,4 +1,0 @@
-(evil-textobj-anyblock
-  :fetcher github
-  :repo "noctuid/evil-textobj-anyblock")
-

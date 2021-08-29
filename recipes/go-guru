@@ -1,4 +1,0 @@
-(go-guru
- :repo "dominikh/go-mode.el"
- :fetcher github
- :files ("go-guru.el"))

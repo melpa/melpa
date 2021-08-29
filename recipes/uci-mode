@@ -1,3 +1,0 @@
-(uci-mode
- :fetcher github
- :repo "dwcoates/uci-mode")

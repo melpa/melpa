@@ -1,4 +1,0 @@
-(mallard-mode
- :repo "jhradilek/emacs-mallard-mode"
- :fetcher github
- :files ("mallard-mode.el" "schema"))

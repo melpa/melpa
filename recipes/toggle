@@ -1,3 +1,0 @@
-(toggle :fetcher github
-        :repo "zenspider/elisp"
-        :files ("toggle.el"))

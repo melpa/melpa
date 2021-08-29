@@ -1,3 +1,0 @@
-(docopt :fetcher github
-        :repo "r0man/docopt.el"
-        :files (:defaults "src/*.el"))

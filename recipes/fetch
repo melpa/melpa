@@ -1,1 +1,0 @@
-(fetch :fetcher github :repo "cbrst/fetch.el")

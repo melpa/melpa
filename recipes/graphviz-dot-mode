@@ -1,1 +1,0 @@
-(graphviz-dot-mode :repo "ppareit/graphviz-dot-mode" :fetcher github)

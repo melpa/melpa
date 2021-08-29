@@ -1,4 +1,0 @@
-(ahungry-theme
- :repo "ahungry/color-theme-ahungry"
- :files ("ahungry-theme.el")
- :fetcher github)

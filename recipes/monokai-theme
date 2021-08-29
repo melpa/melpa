@@ -1,3 +1,0 @@
-(monokai-theme
- :repo "oneKelvinSmith/monokai-emacs"
- :fetcher github)

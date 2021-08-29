@@ -1,2 +1,0 @@
-(dime :files ("dime*.el")
-      :fetcher github :repo "dylan-lang/dylan-emacs-support")

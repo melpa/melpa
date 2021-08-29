@@ -1,1 +1,0 @@
-(use-proxy :repo "rayw000/use-proxy" :fetcher github)

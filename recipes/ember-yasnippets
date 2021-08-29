@@ -1,4 +1,0 @@
-(ember-yasnippets
- :fetcher github
- :repo "ronco/ember-yasnippets.el"
- :files (:defaults "snippets"))

@@ -1,3 +1,0 @@
-(ytdl
- :repo "tuedachu/ytdl"
- :fetcher gitlab)

@@ -1,1 +1,0 @@
-(lsp-java :repo "emacs-lsp/lsp-java" :fetcher github :files (:defaults "icons"))

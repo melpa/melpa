@@ -1,3 +1,0 @@
-(buster-mode
- :repo "magnars/buster-mode"
- :fetcher github)

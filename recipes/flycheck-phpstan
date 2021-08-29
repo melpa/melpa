@@ -1,2 +1,0 @@
-(flycheck-phpstan :fetcher github :repo "emacs-php/phpstan.el"
-                  :files ("flycheck-phpstan.el"))

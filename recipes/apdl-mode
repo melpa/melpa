@@ -1,4 +1,0 @@
-(apdl-mode
-:fetcher github
-:repo "dieter-wilhelm/apdl-mode"
-:files (:defaults "matlib" "template"))

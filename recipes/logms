@@ -1,1 +1,0 @@
-(logms :repo "jcs-elpa/logms" :fetcher github)

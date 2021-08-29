@@ -1,2 +1,0 @@
-(habamax-theme :repo "habamax/habamax-theme"
-               :fetcher github)

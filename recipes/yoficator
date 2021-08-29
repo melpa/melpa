@@ -1,1 +1,0 @@
-(yoficator :fetcher gitlab :repo "alx.k/yoficator" :files (:defaults "yo.txt"))

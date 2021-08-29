@@ -1,1 +1,0 @@
-(easy-after-load :fetcher github :repo "pd/easy-after-load")

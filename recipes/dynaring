@@ -1,2 +1,0 @@
-(dynaring :repo "countvajhula/dynaring"
-          :fetcher github)

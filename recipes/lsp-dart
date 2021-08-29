@@ -1,1 +1,0 @@
-(lsp-dart :repo "emacs-lsp/lsp-dart" :fetcher github )

@@ -1,1 +1,0 @@
-(deadgrep :repo "Wilfred/deadgrep" :fetcher github)

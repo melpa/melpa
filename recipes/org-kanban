@@ -1,1 +1,0 @@
-(org-kanban :fetcher github :repo "gizmomogwai/org-kanban" :files ("org-kanban.el"))

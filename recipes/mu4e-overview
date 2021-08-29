@@ -1,2 +1,0 @@
-(mu4e-overview :fetcher github
-               :repo "mkcms/mu4e-overview")

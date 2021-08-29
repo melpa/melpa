@@ -1,1 +1,0 @@
-(hcl-mode :repo "purcell/emacs-hcl-mode" :fetcher github)

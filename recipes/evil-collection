@@ -1,3 +1,0 @@
-(evil-collection :fetcher github
-                 :repo "emacs-evil/evil-collection"
-                 :files (:defaults "modes"))

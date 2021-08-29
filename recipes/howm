@@ -1,5 +1,0 @@
-(howm  :fetcher git
-       :url "https://scm.osdn.net/gitroot/howm/howm.git"
-       :files
-       (:defaults
-        (:exclude "*.el.in")))

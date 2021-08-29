@@ -1,1 +1,0 @@
-(udev-mode :fetcher github :repo "benley/emacs-udev-mode")

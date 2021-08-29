@@ -1,2 +1,0 @@
-(flymake-cursor :repo "flymake/emacs-flymake-cursor" :fetcher github)
-

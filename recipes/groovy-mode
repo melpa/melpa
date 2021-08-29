@@ -1,1 +1,0 @@
-(groovy-mode :fetcher github :repo "Groovy-Emacs-Modes/groovy-emacs-modes" :files ("*groovy*.el"))

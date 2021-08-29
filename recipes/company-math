@@ -1,3 +1,0 @@
-(company-math
- :fetcher github
- :repo "vspinu/company-math")

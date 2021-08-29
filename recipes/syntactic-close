@@ -1,3 +1,0 @@
-(syntactic-close :fetcher github
-                 :repo "emacs-berlin/syntactic-close"
-                 :old-names (general-close))

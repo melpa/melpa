@@ -1,5 +1,0 @@
-(gams-mode
- :repo "ShiroTakeda/gams-mode"
- :fetcher github
- :files ("gams-mode.el" "gams-logo.xpm")
-)

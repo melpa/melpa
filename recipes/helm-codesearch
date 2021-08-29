@@ -1,1 +1,0 @@
-(helm-codesearch :fetcher github :repo "youngker/helm-codesearch.el")

@@ -1,1 +1,0 @@
-(flycheck-prospector :repo "chocoelho/flycheck-prospector" :fetcher github)

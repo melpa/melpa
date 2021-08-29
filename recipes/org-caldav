@@ -1,4 +1,0 @@
-(org-caldav
- :repo "dengste/org-caldav"
- :fetcher github
- :files ("org-caldav.el"))

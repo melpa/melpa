@@ -1,1 +1,0 @@
-(lsp-latex :repo "ROCKTAKEY/lsp-latex" :fetcher github)

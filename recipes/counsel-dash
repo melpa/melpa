@@ -1,3 +1,0 @@
-(counsel-dash
-  :repo "dash-docs-el/counsel-dash"
-  :fetcher github)

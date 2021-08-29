@@ -1,2 +1,0 @@
-(python-x :repo "wavexx/python-x.el"
-          :fetcher gitlab)

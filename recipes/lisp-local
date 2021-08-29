@@ -1,1 +1,0 @@
-(lisp-local :fetcher github :repo "lispunion/emacs-lisp-local")

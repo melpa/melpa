@@ -1,1 +1,0 @@
-(helm-ctest :fetcher github :repo "danlamanna/helm-ctest")

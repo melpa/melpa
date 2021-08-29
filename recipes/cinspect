@@ -1,3 +1,0 @@
-(cinspect
- :fetcher github
- :repo "inlinestyle/cinspect-mode")

@@ -1,1 +1,0 @@
-(auto-package-update :fetcher github :repo "rranelli/auto-package-update.el")

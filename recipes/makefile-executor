@@ -1,1 +1,0 @@
-(makefile-executor :repo "thiderman/makefile-executor.el" :fetcher github)

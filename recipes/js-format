@@ -1,3 +1,0 @@
-(js-format :fetcher github
-           :repo "futurist/js-format.el"
-           :files (:defaults "*.js" "*.json" "styles"))

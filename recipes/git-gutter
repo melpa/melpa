@@ -1,3 +1,0 @@
-(git-gutter
- :repo "emacsorphanage/git-gutter"
- :fetcher github)

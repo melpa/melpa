@@ -1,1 +1,0 @@
-(ag :repo "Wilfred/ag.el" :fetcher github)

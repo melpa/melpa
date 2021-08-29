@@ -1,1 +1,0 @@
-(go-impl :repo "emacsorphanage/go-impl" :fetcher github)

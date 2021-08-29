@@ -1,3 +1,0 @@
-(ispc-mode
- :fetcher github
- :repo "Munksgaard/ispc-mode")

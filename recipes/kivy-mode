@@ -1,1 +1,0 @@
-(kivy-mode :repo "kivy/kivy" :fetcher github :files ("kivy/tools/highlight/kivy-mode.el"))

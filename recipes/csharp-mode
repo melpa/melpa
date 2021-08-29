@@ -1,2 +1,0 @@
-(csharp-mode
- :fetcher github :repo "emacs-csharp/csharp-mode")

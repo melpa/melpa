@@ -1,1 +1,0 @@
-(go-expr-completion :repo "fujimisakari/emacs-go-expr-completion" :fetcher github)

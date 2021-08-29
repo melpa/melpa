@@ -1,1 +1,0 @@
-(flymake-gjshint :repo "yasuyk/flymake-gjshint-el" :fetcher github)

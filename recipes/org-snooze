@@ -1,3 +1,0 @@
-(org-snooze
- :repo "xueeinstein/org-snooze.el"
- :fetcher github)

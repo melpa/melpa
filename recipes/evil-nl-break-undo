@@ -1,3 +1,0 @@
-(evil-nl-break-undo
-  :fetcher github
-  :repo "VanLaser/evil-nl-break-undo")

@@ -1,1 +1,0 @@
-(test-simple :fetcher github :repo "rocky/emacs-test-simple")

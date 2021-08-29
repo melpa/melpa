@@ -1,3 +1,0 @@
-(oceanic-theme
- :repo "terry3/oceanic-theme"
- :fetcher github)

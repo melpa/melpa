@@ -1,1 +1,0 @@
-(goto-char-preview :repo "jcs-elpa/goto-char-preview" :fetcher github)

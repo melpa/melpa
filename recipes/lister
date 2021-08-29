@@ -1,2 +1,0 @@
-(lister :repo "publicimageltd/lister"
-	:fetcher github)

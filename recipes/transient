@@ -1,3 +1,0 @@
-(transient :fetcher github
-           :repo "magit/transient"
-           :files ("lisp/*.el" "docs/transient.texi"))

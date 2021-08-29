@@ -1,1 +1,0 @@
-(notmuch-transient :fetcher git :url "https://git.sr.ht/~tarsius/notmuch-transient")

@@ -1,1 +1,0 @@
-(bap-mode :fetcher github :repo "BinaryAnalysisPlatform/bap-mode")

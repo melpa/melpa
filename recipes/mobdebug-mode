@@ -1,1 +1,0 @@
-(mobdebug-mode :fetcher github :repo "deftsp/mobdebug-mode")

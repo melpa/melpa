@@ -1,3 +1,0 @@
-(xref-rst
- :repo "ideasman42/emacs-xref-rst"
- :fetcher gitlab)

@@ -1,3 +1,0 @@
-(poly-erb
- :fetcher github
- :repo "polymode/poly-erb")

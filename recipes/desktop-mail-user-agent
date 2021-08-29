@@ -1,2 +1,0 @@
-(desktop-mail-user-agent
- :fetcher github :repo "lassik/emacs-desktop-mail-user-agent")

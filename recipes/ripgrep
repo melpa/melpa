@@ -1,1 +1,0 @@
-(ripgrep :repo "nlamirault/ripgrep.el" :fetcher github :files ("ripgrep.el"))

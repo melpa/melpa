@@ -1,4 +1,0 @@
-(zero-input
- :fetcher git
- :url "https://gitlab.emacsos.com/sylecn/zero-el"
- :branch "pkg")

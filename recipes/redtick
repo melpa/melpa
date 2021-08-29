@@ -1,3 +1,0 @@
-(redtick :fetcher github
-         :repo "ferfebles/redtick"
-         :files (:defaults "resources"))

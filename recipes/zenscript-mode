@@ -1,2 +1,0 @@
-(zenscript-mode :fetcher github
-                :repo "eutro/zenscript-mode")

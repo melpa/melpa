@@ -1,3 +1,0 @@
-(latexdiff
- :fetcher github
- :repo "galaunay/latexdiff.el")

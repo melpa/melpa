@@ -1,3 +1,0 @@
-(ewmctrl
- :fetcher github
- :repo "flexibeast/ewmctrl")

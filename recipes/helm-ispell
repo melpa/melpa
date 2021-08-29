@@ -1,1 +1,0 @@
-(helm-ispell :repo "emacsorphanage/helm-ispell" :fetcher github)

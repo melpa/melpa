@@ -1,1 +1,0 @@
-(ob-clojurescript :repo "statonjr/ob-clojurescript" :fetcher gitlab)

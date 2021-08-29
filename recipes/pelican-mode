@@ -1,2 +1,0 @@
-(pelican-mode :fetcher git
-              :url "https://git.korewanetadesu.com/pelican-mode.git")

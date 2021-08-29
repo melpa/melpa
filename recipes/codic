@@ -1,4 +1,0 @@
-(codic
- :fetcher github
- :repo "emacsorphanage/codic"
- :files ("*.el" ("dict" "dict/*.csv")))

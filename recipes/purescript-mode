@@ -1,6 +1,0 @@
-(purescript-mode
- :repo "purescript-emacs/purescript-mode"
- :fetcher github
- :files (:defaults
-         "NEWS"
-         "snippets"))

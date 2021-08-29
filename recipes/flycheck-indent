@@ -1,2 +1,0 @@
-(flycheck-indent :fetcher github :repo "conao3/indent-lint.el"
-                 :files ("flycheck-indent.el"))

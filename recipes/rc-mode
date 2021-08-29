@@ -1,1 +1,0 @@
-(rc-mode :repo "mrhmouse/rc-mode.el" :fetcher github)

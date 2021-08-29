@@ -1,1 +1,0 @@
-(elfeed-autotag :repo "paulelms/elfeed-autotag" :fetcher github)

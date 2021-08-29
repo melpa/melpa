@@ -1,1 +1,0 @@
-(py-smart-operator :repo "rmuslimov/py-smart-operator" :fetcher github)

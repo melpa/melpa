@@ -1,2 +1,0 @@
-(java-snippets :fetcher github :repo "nekop/yasnippet-java-mode"
-               :files ("*.el" "snippets"))

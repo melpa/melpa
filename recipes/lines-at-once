@@ -1,1 +1,0 @@
-(lines-at-once :repo "jiahaowork/lines-at-once.el" :fetcher github)

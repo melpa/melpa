@@ -1,1 +1,0 @@
-(archive-region :repo "rubikitch/archive-region" :fetcher github)

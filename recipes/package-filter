@@ -1,4 +1,0 @@
-(package-filter :repo "milkypostman/package-filter"
-                :fetcher github
-                :files ("package-filter.el")
-                :old-names (package-filter))

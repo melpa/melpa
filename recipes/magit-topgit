@@ -1,1 +1,0 @@
-(magit-topgit :fetcher github :repo "greenrd/magit-topgit")

@@ -1,2 +1,0 @@
-(lcr :repo "jyp/lcr"
-     :fetcher github)

@@ -1,2 +1,0 @@
-(pophint :repo "aki2o/emacs-pophint"
-         :fetcher github)

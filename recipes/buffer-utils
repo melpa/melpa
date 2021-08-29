@@ -1,1 +1,0 @@
-(buffer-utils :repo "rolandwalker/buffer-utils" :fetcher github)

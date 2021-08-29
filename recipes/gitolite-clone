@@ -1,1 +1,0 @@
-(gitolite-clone :repo "IvanMalison/gitolite-clone" :fetcher github)

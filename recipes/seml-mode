@@ -1,1 +1,0 @@
-(seml-mode :fetcher github :repo "conao3/seml-mode.el")

@@ -1,1 +1,0 @@
-(salt-mode :repo "glynnforrest/salt-mode" :fetcher github)

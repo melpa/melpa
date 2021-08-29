@@ -1,4 +1,0 @@
-(pcre2el
- :fetcher github
- :repo "joddie/pcre2el"
- :files ("pcre2el.el"))

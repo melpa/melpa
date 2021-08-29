@@ -1,1 +1,0 @@
-(ivy-fuz :repo "Silex/ivy-fuz.el" :fetcher github)

@@ -1,2 +1,0 @@
-(terminal-here :repo "davidshepherd7/terminal-here"
-               :fetcher github)

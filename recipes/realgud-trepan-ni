@@ -1,5 +1,0 @@
-(realgud-trepan-ni
- :fetcher github
- :repo "realgud/realgud-trepan-ni"
- :files (:defaults
-         ("trepan-ni" "trepan-ni/*.el")))

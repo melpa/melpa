@@ -1,2 +1,0 @@
-(ptemplate-templates :fetcher github :repo "nbfalcon/ptemplate-templates"
-                     :files ("*.el" "rsc"))

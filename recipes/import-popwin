@@ -1,1 +1,0 @@
-(import-popwin :repo "emacsorphanage/import-popwin" :fetcher github)

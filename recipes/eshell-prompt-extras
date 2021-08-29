@@ -1,1 +1,0 @@
-(eshell-prompt-extras :fetcher github :repo "zwild/eshell-prompt-extras")

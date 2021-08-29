@@ -1,3 +1,0 @@
-(python-black
- :fetcher github
- :repo "wbolster/emacs-python-black")

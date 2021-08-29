@@ -1,1 +1,0 @@
-(remark-mode :fetcher github :repo "torgeir/remark-mode.el" :files (:defaults "remark.html" "server.js"))

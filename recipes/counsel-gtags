@@ -1,1 +1,0 @@
-(counsel-gtags :fetcher github :repo "FelipeLema/emacs-counsel-gtags")

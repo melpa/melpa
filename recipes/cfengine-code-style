@@ -1,2 +1,0 @@
-(cfengine-code-style :repo "cfengine/core" :fetcher github
-                     :files ("contrib/cfengine-code-style.el"))

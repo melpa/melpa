@@ -1,1 +1,0 @@
-(todoist :repo "abrochard/emacs-todoist" :fetcher github)

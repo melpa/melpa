@@ -1,3 +1,0 @@
-(chronometrist-goal
- :url "https://tildegit.org/contrapunctus/chronometrist-goal.git"
- :fetcher git)

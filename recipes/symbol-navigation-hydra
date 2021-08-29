@@ -1,3 +1,0 @@
-(symbol-navigation-hydra
- :fetcher github
- :repo "bgwines/symbol-navigation-hydra")

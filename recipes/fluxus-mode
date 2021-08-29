@@ -1,3 +1,0 @@
-(fluxus-mode
- :fetcher github
- :repo "defaultxr/fluxus-mode")

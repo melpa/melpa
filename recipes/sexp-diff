@@ -1,1 +1,0 @@
-(sexp-diff :fetcher github :repo "xuchunyang/sexp-diff.el")

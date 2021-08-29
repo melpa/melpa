@@ -1,1 +1,0 @@
-(flycheck-clangcheck :fetcher github :repo "kumar8600/flycheck-clangcheck")

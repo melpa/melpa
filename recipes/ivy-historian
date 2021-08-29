@@ -1,2 +1,0 @@
-(ivy-historian :fetcher github :repo "PythonNut/historian.el"
-               :files ("ivy-historian.el"))

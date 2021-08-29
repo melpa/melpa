@@ -1,1 +1,0 @@
-(git-grep :repo "tychoish/git-grep.el" :fetcher github)

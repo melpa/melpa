@@ -1,4 +1,0 @@
-(geiser-chez
- :fetcher gitlab
- :repo "emacs-geiser/chez"
- :files (:defaults ("src" "src/*")))

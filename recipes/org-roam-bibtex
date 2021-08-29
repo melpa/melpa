@@ -1,2 +1,0 @@
-(org-roam-bibtex :fetcher github
-                 :repo "org-roam/org-roam-bibtex")

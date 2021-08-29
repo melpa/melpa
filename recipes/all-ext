@@ -1,1 +1,0 @@
-(all-ext :repo "rubikitch/all-ext" :fetcher github)

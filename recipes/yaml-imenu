@@ -1,3 +1,0 @@
-(yaml-imenu :repo "knu/yaml-imenu.el"
-            :fetcher github
-            :files (:defaults "*.rb"))

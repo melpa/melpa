@@ -1,2 +1,0 @@
-(gdscript-mode :fetcher github
-               :repo "godotengine/emacs-gdscript-mode")

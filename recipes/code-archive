@@ -1,2 +1,0 @@
-(code-archive :fetcher github
-              :repo "mschuldt/code-archive")

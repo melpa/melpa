@@ -1,4 +1,0 @@
-(aws-snippets
- :repo "baron42bba/aws-snippets"
- :fetcher github
- :files (:defaults "snippets"))

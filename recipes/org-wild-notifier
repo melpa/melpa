@@ -1,1 +1,0 @@
-(org-wild-notifier :fetcher github :repo "akhramov/org-wild-notifier.el")

@@ -1,2 +1,0 @@
-(bing-dict :repo "cute-jumper/bing-dict.el"
-           :fetcher github)

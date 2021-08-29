@@ -1,1 +1,0 @@
-(bats-mode :repo "dougm/bats-mode" :fetcher github)

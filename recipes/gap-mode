@@ -1,4 +1,0 @@
-(gap-mode
- :fetcher gitlab
- :repo "gvol/gap-mode"
- :files (:defaults "emacs.gaprc"))

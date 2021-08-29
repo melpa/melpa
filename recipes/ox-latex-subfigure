@@ -1,1 +1,0 @@
-(ox-latex-subfigure :repo "linktohack/ox-latex-subfigure" :fetcher github)

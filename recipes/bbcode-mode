@@ -1,1 +1,0 @@
-(bbcode-mode :fetcher github :repo "lassik/emacs-bbcode-mode")

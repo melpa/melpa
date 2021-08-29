@@ -1,2 +1,0 @@
-(smithers :fetcher gitlab :repo "mtekman/smithers.el"
-          :files (:defaults "source.org"))

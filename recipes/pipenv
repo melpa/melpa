@@ -1,1 +1,0 @@
-(pipenv :repo "pwalsh/pipenv.el" :fetcher github)

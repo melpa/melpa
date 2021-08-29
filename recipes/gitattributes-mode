@@ -1,3 +1,0 @@
-(gitattributes-mode :repo "magit/git-modes"
-                    :fetcher github
-                    :files ("gitattributes-mode.el"))

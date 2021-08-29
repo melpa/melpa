@@ -1,1 +1,0 @@
-(ob-graphql :fetcher github :repo "jdormit/ob-graphql")

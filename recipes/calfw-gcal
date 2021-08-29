@@ -1,1 +1,0 @@
-(calfw-gcal :fetcher github :repo "myuhe/calfw-gcal.el" :files ("*.el" "*.py"))

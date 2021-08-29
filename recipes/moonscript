@@ -1,3 +1,0 @@
-(moonscript
- :fetcher github
- :repo "k2052/moonscript-mode")

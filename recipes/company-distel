@@ -1,4 +1,0 @@
-(company-distel
- :fetcher github
- :repo   "sebastiw/distel-completion"
- :files ("company-distel.el"))

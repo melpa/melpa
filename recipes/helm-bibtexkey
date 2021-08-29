@@ -1,1 +1,0 @@
-(helm-bibtexkey :fetcher github :repo "kenbeese/helm-bibtexkey" :files ("*.el" "*.py"))

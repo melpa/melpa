@@ -1,1 +1,0 @@
-(flymake-shellcheck :repo "federicotdn/flymake-shellcheck" :fetcher github)

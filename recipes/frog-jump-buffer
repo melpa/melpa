@@ -1,1 +1,0 @@
-(frog-jump-buffer :repo "waymondo/frog-jump-buffer" :fetcher github)

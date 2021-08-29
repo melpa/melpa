@@ -1,6 +1,0 @@
-(pygn-mode
- :fetcher github
- :repo "dwcoates/pygn-mode"
- :files (:defaults
-         "pygn_server.py"
-         "lib"))

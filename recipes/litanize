@@ -1,1 +1,0 @@
-(litanize :repo "zzkt/litanizer" :fetcher github)

@@ -1,1 +1,0 @@
-(apples-mode :fetcher github :repo "tequilasunset/apples-mode" :files ("*.el" "apples-mode"))

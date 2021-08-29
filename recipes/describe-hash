@@ -1,1 +1,0 @@
-(describe-hash :fetcher github :repo "Junker/describe-hash")

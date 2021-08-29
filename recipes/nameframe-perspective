@@ -1,4 +1,0 @@
-(nameframe-perspective
- :fetcher github
- :repo "john2x/nameframe"
- :files ("nameframe-perspective.el"))

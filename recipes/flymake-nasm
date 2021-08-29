@@ -1,3 +1,0 @@
-(flymake-nasm
- :fetcher github
- :repo "juergenhoetzel/flymake-nasm")

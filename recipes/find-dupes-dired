@@ -1,3 +1,0 @@
-(find-dupes-dired
- :repo "ShuguangSun/find-dupes-dired"
- :fetcher github)

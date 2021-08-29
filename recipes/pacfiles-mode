@@ -1,1 +1,0 @@
-(pacfiles-mode :repo "UndeadKernel/pacfiles-mode" :fetcher github)

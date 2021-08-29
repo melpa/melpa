@@ -1,1 +1,0 @@
-(writegood-mode :repo "bnbeckwith/writegood-mode" :fetcher github)

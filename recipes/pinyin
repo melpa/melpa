@@ -1,3 +1,0 @@
-(pinyin :fetcher github
-        :repo "xuchunyang/pinyin.el"
-        :files (:defaults ("pinyin-data" "pinyin-data/pinyin.txt")))

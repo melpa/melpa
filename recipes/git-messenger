@@ -1,1 +1,0 @@
-(git-messenger :repo "emacsorphanage/git-messenger" :fetcher github)

@@ -1,3 +1,0 @@
-(biblio-bibsonomy
- :fetcher github
- :repo "andreasjansson/biblio-bibsonomy.el")

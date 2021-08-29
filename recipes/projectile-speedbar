@@ -1,3 +1,0 @@
-(projectile-speedbar
- :fetcher github
- :repo "anshulverma/projectile-speedbar")

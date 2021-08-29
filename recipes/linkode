@@ -1,3 +1,0 @@
-(linkode
- :fetcher github
- :repo "erickgnavar/linkode.el")

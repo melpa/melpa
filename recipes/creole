@@ -1,1 +1,0 @@
-(creole :fetcher github :repo "nicferrier/elwikicreole" :files ("creole.el"))

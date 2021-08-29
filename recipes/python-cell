@@ -1,1 +1,0 @@
-(python-cell :fetcher github :repo "thisch/python-cell.el")

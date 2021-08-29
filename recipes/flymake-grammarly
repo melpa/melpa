@@ -1,1 +1,0 @@
-(flymake-grammarly :repo "emacs-grammarly/flymake-grammarly" :fetcher github)

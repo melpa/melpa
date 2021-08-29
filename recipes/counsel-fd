@@ -1,3 +1,0 @@
-(counsel-fd
-  :repo "CsBigDataHub/counsel-fd"
-  :fetcher github)

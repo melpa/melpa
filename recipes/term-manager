@@ -1,3 +1,0 @@
-(term-manager :fetcher github
-              :repo "IvanMalison/term-manager"
-              :files ("term-manager*.el"))

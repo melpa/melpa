@@ -1,3 +1,0 @@
-(nndiscourse :repo "dickmao/nndiscourse"
-	     :fetcher github
-	     :files ("nndiscourse.el" ("nndiscourse" "nndiscourse/Gemfile" "nndiscourse/Gemfile.lock" "nndiscourse/nndiscourse.gemspec" "nndiscourse/nndiscourse.thor" "nndiscourse/lib")))

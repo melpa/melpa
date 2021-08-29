@@ -1,4 +1,0 @@
-(merlin-ac
- :fetcher github
- :repo "ocaml/merlin"
- :files ("emacs/merlin-ac.el"))

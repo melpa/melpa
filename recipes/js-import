@@ -1,1 +1,0 @@
-(js-import :fetcher github :repo "jakoblind/js-import")

@@ -1,1 +1,0 @@
-(idle-require :fetcher github :repo "nschum/idle-require.el")

@@ -1,3 +1,0 @@
-(smart-tab
- :fetcher git
- :url "https://git.genehack.net/genehack/smart-tab.git")

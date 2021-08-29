@@ -1,4 +1,0 @@
-(counsel-test
- :repo "xmagpie/counsel-test"
- :fetcher github
- :files (:defaults "counsel-test.el"))

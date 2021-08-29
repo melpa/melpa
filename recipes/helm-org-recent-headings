@@ -1,2 +1,0 @@
-(helm-org-recent-headings :fetcher github :repo "alphapapa/org-recent-headings"
-                          :files ("helm-org-recent-headings.el"))

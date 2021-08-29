@@ -1,3 +1,0 @@
-(swift-helpful :repo "danielmartin/swift-helpful"
-               :fetcher github
-               :files ("*.el" "swift-info/*.info" ("images" "swift-info/images/*.png")))

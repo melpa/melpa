@@ -1,3 +1,0 @@
-(slim-mode
- :repo "slim-template/emacs-slim"
- :fetcher github)

@@ -1,1 +1,0 @@
-(rope-read-mode :fetcher gitlab :repo "marcowahl/rope-read-mode")

@@ -1,1 +1,0 @@
-(flymake-golangci :fetcher gitlab :repo "shackra/flymake-golangci")

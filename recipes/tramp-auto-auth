@@ -1,1 +1,0 @@
-(tramp-auto-auth :fetcher github :repo "oitofelix/tramp-auto-auth")

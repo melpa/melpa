@@ -1,4 +1,0 @@
-(lsp-mode :repo "emacs-lsp/lsp-mode"
-          :fetcher github
-          :files (:defaults
-                  "clients/*.el"))

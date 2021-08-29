@@ -1,1 +1,0 @@
-(helm-js-codemod :fetcher github :repo "torgeir/helm-js-codemod.el")

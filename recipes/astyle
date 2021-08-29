@@ -1,2 +1,0 @@
-(astyle :repo "storvik/emacs-astyle"
-        :fetcher github)

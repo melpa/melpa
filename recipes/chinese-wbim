@@ -1,2 +1,0 @@
-(chinese-wbim :fetcher github :repo "zilongshanren/chinese-wbim"
-              :files (:defaults "wb.txt" "wbpy.txt"))

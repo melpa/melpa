@@ -1,4 +1,0 @@
-(ewal
- :fetcher github
- :repo "wurosh/ewal"
- :files ("ewal.el" "palettes"))

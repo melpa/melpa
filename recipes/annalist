@@ -1,2 +1,0 @@
-(annalist :fetcher github
-          :repo "noctuid/annalist.el")

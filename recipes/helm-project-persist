@@ -1,1 +1,0 @@
-(helm-project-persist :fetcher github :repo "Sliim/helm-project-persist")

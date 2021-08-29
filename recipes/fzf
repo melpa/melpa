@@ -1,2 +1,0 @@
-(fzf :repo "bling/fzf.el" :fetcher github)
-

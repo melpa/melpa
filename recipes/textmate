@@ -1,1 +1,0 @@
-(textmate :repo "defunkt/textmate.el" :fetcher github)

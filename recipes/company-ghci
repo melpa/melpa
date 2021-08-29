@@ -1,1 +1,0 @@
-(company-ghci :fetcher github :repo "horellana/company-ghci")

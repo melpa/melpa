@@ -1,4 +1,0 @@
-(cubicle-mode
- :fetcher github
- :repo "cubicle-model-checker/cubicle"
- :files ("emacs/cubicle-mode.el"))

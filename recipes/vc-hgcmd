@@ -1,1 +1,0 @@
-(vc-hgcmd :fetcher github :repo "muffinmad/emacs-vc-hgcmd")

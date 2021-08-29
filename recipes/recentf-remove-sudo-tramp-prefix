@@ -1,1 +1,0 @@
-(recentf-remove-sudo-tramp-prefix :fetcher github :repo "ncaq/recentf-remove-sudo-tramp-prefix")

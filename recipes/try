@@ -1,3 +1,0 @@
-(try
- :fetcher github
- :repo "larstvei/Try")

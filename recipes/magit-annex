@@ -1,1 +1,0 @@
-(magit-annex :fetcher github :repo "magit/magit-annex")

@@ -1,3 +1,0 @@
-(math-symbol-lists
- :fetcher github
- :repo "vspinu/math-symbol-lists")

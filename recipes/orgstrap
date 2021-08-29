@@ -1,3 +1,0 @@
-(orgstrap :repo "tgbugs/orgstrap"
-          :fetcher github
-          :files ("orgstrap.el"))

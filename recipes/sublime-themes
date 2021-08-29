@@ -1,3 +1,0 @@
-(sublime-themes :fetcher github
-                :repo "owainlewis/emacs-color-themes"
-                :files ("themes/*.el"))

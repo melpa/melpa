@@ -1,3 +1,0 @@
-(erblint 
-   :repo "leodcs/erblint-emacs"
-   :fetcher github)

@@ -1,3 +1,0 @@
-(make-it-so :repo "abo-abo/make-it-so"
-            :fetcher github
-            :files ("make-it-so.el" "recipes"))

@@ -1,2 +1,0 @@
-(distinguished-theme :repo "Lokaltog/distinguished-theme"
-                     :fetcher github)

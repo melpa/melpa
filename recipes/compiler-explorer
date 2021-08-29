@@ -1,2 +1,0 @@
-(compiler-explorer :fetcher github
-                   :repo "mkcms/compiler-explorer.el")

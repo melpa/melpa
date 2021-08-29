@@ -1,1 +1,0 @@
-(nix-env-install :fetcher github :repo "akirak/nix-env-install")

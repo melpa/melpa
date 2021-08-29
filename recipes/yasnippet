@@ -1,3 +1,0 @@
-(yasnippet :repo "joaotavora/yasnippet"
-           :fetcher github
-           :files ("yasnippet.el" "snippets"))

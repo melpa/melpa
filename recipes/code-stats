@@ -1,2 +1,0 @@
-(code-stats :fetcher github
-            :repo "xuchunyang/code-stats-emacs")

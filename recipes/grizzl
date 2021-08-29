@@ -1,1 +1,0 @@
-(grizzl :repo "grizzl/grizzl" :fetcher github)

@@ -1,4 +1,0 @@
-(flycheck-grammalecte
- :fetcher git
- :url "https://git.umaneti.net/flycheck-grammalecte/"
- :files (:defaults "*.py" (:exclude "test-profile.el")))

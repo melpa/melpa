@@ -1,3 +1,0 @@
-(doom-modeline-now-playing
- :fetcher github
- :repo "elken/doom-modeline-now-playing") 

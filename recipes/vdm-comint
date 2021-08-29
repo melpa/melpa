@@ -1,4 +1,0 @@
-(vdm-comint
- :fetcher github
- :repo "peterwvj/vdm-mode"
- :files ("vdm-comint.el"))

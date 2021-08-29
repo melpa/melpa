@@ -1,2 +1,0 @@
-(idle-highlight-mode :repo "nonsequitur/idle-highlight-mode" :fetcher github)
-

@@ -1,6 +1,0 @@
-(stan-snippets
- :fetcher github
- :repo "stan-dev/stan-mode"
- :files ("stan-snippets/stan-snippets.el"
-	 ("snippets/stan-mode" "stan-snippets/snippets/stan-mode/*")
-         (:exclude "stan-snippets/test-*.el")))

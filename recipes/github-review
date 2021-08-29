@@ -1,1 +1,0 @@
-(github-review :repo "charignon/github-review" :fetcher github)

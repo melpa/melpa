@@ -1,1 +1,0 @@
-(eshell-toggle :repo "4DA/eshell-toggle" :fetcher github)

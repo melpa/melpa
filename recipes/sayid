@@ -1,3 +1,0 @@
-(sayid :fetcher github
-       :repo "clojure-emacs/sayid"
-       :files ("src/el/*.el"))

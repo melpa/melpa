@@ -1,3 +1,0 @@
-(firrtl-mode
-  :repo "IBM/firrtl-mode"
-  :fetcher github)

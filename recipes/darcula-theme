@@ -1,2 +1,0 @@
-(darcula-theme :fetcher gitlab
-               :repo "fommil/emacs-darcula-theme")

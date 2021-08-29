@@ -1,2 +1,0 @@
-(evil-leader :repo "cofi/evil-leader" :fetcher github)
-

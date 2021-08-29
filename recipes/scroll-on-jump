@@ -1,3 +1,0 @@
-(scroll-on-jump
- :repo "ideasman42/emacs-scroll-on-jump"
- :fetcher gitlab)

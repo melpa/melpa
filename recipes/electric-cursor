@@ -1,3 +1,0 @@
-(electric-cursor
- :fetcher github
- :repo "duckwork/electric-cursor")

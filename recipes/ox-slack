@@ -1,1 +1,0 @@
-(ox-slack :fetcher github :repo "titaniumbones/ox-slack")

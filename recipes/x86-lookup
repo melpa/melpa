@@ -1,1 +1,0 @@
-(x86-lookup :repo "skeeto/x86-lookup" :fetcher github)

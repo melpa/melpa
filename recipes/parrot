@@ -1,4 +1,0 @@
-(parrot
- :fetcher github
- :repo "dp12/parrot"
- :files (:defaults "img"))

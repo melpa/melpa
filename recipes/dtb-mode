@@ -1,2 +1,0 @@
-(dtb-mode :repo "schspa/dtb-mode"
-          :fetcher github)

@@ -1,3 +1,0 @@
-(ca65-mode
- :fetcher github
- :repo "wendelscardua/ca65-mode")

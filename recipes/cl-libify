@@ -1,1 +1,0 @@
-(cl-libify :fetcher github :repo "purcell/cl-libify")

@@ -1,1 +1,0 @@
-(calc-at-point :fetcher github :repo "walseb/calc-at-point")

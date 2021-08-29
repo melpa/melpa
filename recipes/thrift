@@ -1,1 +1,0 @@
-(thrift :fetcher github :repo "facebook/fbthrift" :files ("thrift/contrib/thrift.el"))

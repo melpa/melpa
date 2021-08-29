@@ -1,1 +1,0 @@
-(company-statistics :repo "company-mode/company-statistics" :fetcher github)

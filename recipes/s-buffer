@@ -1,1 +1,0 @@
-(s-buffer :fetcher github :repo "nicferrier/emacs-s-buffer" :files ("s-buffer.el"))

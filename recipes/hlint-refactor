@@ -1,1 +1,0 @@
-(hlint-refactor :fetcher github :repo "mpickering/hlint-refactor-mode")

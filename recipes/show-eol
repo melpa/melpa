@@ -1,1 +1,0 @@
-(show-eol :repo "jcs-elpa/show-eol" :fetcher github)

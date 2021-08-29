@@ -1,2 +1,0 @@
-(librera-sync :fetcher github
-              :repo "jumper047/librera-sync")

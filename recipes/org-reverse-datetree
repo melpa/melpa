@@ -1,1 +1,0 @@
-(org-reverse-datetree :fetcher github :repo "akirak/org-reverse-datetree")

@@ -1,4 +1,0 @@
-(ewal-doom-themes
- :fetcher github
- :repo "wurosh/ewal"
- :files ("doom-themes/*.el"))

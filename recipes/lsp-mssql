@@ -1,1 +1,0 @@
-(lsp-mssql :repo "emacs-lsp/lsp-mssql" :files (:defaults "images" "snippets") :fetcher github)

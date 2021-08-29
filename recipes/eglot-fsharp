@@ -1,3 +1,0 @@
-(eglot-fsharp :fetcher github
-	      :repo "fsharp/emacs-fsharp-mode"
-	      :files ("eglot-fsharp.el"))

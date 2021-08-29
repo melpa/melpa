@@ -1,1 +1,0 @@
-(elsa :fetcher github :repo "emacs-elsa/Elsa" :files (:defaults "bin"))

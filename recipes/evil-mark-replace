@@ -1,2 +1,0 @@
-(evil-mark-replace :fetcher github
-                :repo "redguardtoo/evil-mark-replace")

@@ -1,2 +1,0 @@
-(devdocs-browser :fetcher github
-                 :repo "blahgeek/emacs-devdocs-browser")

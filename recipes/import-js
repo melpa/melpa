@@ -1,3 +1,0 @@
-(import-js :repo "Galooshi/emacs-import-js"
-           :fetcher github
-           :files ("plugin/import-js.el"))

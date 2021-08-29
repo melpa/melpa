@@ -1,1 +1,0 @@
-(disaster :repo "jart/disaster" :fetcher github :files ("disaster.el"))

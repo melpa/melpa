@@ -1,3 +1,0 @@
-(vc-defer
- :repo "google/vc-defer"
- :fetcher github)

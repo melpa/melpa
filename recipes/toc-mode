@@ -1,3 +1,0 @@
-(toc-mode
- :fetcher github
- :repo "dalanicolai/toc-mode")

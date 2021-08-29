@@ -1,3 +1,0 @@
-(tern-auto-complete :fetcher github
-		    :repo "ternjs/tern"
-		    :files ("emacs/tern-auto-complete.el"))

@@ -1,1 +1,0 @@
-(ormolu :repo "vyorkin/ormolu.el" :fetcher github)

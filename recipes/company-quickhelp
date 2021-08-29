@@ -1,1 +1,0 @@
-(company-quickhelp :fetcher github :repo "company-mode/company-quickhelp")

@@ -1,4 +1,0 @@
-(treemacs-persp
- :fetcher github
- :repo "Alexander-Miller/treemacs"
- :files ("src/extra/treemacs-persp.el"))

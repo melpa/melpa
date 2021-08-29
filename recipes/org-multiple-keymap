@@ -1,1 +1,0 @@
-(org-multiple-keymap :fetcher github :repo "emacsattic/org-multiple-keymap")

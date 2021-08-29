@@ -1,1 +1,0 @@
-(point-pos :repo "alezost/point-pos.el" :fetcher github)

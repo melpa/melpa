@@ -1,4 +1,0 @@
-(helm-chrome-control
- :fetcher github
- :repo "xuchunyang/helm-chrome-control"
- :files (:defaults "*.js"))

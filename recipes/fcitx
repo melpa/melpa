@@ -1,2 +1,0 @@
-(fcitx :repo "cute-jumper/fcitx.el"
-       :fetcher github)

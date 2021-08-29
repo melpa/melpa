@@ -1,1 +1,0 @@
-(ob-typescript :repo "lurdan/ob-typescript" :fetcher github)

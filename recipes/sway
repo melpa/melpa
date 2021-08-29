@@ -1,1 +1,0 @@
-(sway :repo "thblt/sway.el" :fetcher github)

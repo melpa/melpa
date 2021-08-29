@@ -1,1 +1,0 @@
-(flymake-languagetool :repo "emacs-languagetool/flymake-languagetool" :fetcher github)

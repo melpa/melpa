@@ -1,3 +1,0 @@
-(better-defaults
- :fetcher git
- :url "https://git.sr.ht/~technomancy/better-defaults")

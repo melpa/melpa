@@ -1,5 +1,0 @@
-(realgud-node-debug
- :fetcher github
- :repo "realgud/realgud-node-debug"
- :files (:defaults
-         ("realgud-node-debug" "realgud-node-debug/*.el")))

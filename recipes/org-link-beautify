@@ -1,1 +1,0 @@
-(org-link-beautify :repo "stardiviner/org-link-beautify" :fetcher github)

@@ -1,3 +1,0 @@
-(abs-mode :repo "abstools/abs-mode"
-          :fetcher github
-          :files ("abs-mode.el"))

@@ -1,3 +1,0 @@
-(flower :repo "PositiveTechnologies/flower"
-        :files (:defaults "project.clj")
-        :fetcher github)

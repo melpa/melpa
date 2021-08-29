@@ -1,1 +1,0 @@
-(ffmpeg-player :repo "jcs-elpa/ffmpeg-player" :fetcher github)

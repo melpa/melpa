@@ -1,1 +1,0 @@
-(ace-jump-buffer :repo "waymondo/ace-jump-buffer" :fetcher github)

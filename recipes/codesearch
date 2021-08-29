@@ -1,3 +1,0 @@
-(codesearch :fetcher github
-            :repo "abingham/emacs-codesearch"
-            :files ("codesearch.el" "listing-codesearch.el"))

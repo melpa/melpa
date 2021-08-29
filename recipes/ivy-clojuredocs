@@ -1,1 +1,0 @@
-(ivy-clojuredocs :repo "wandersoncferreira/ivy-clojuredocs" :fetcher github)

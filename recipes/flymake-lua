@@ -1,1 +1,0 @@
-(flymake-lua :fetcher github :repo "sroccaserra/flymake-lua")

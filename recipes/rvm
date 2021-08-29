@@ -1,2 +1,0 @@
-(rvm :repo "senny/rvm.el" :fetcher github)
-

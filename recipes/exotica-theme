@@ -1,3 +1,0 @@
-(exotica-theme
- :repo "1bharat/exotica-theme"
- :fetcher github)

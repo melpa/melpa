@@ -1,4 +1,0 @@
-(fontawesome
- :fetcher github
- :repo "emacsorphanage/fontawesome"
- :old-names (emacs-fontawesome))

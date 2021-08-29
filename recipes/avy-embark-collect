@@ -1,3 +1,0 @@
-(avy-embark-collect :repo "oantolin/embark"
-                    :fetcher github
-                    :files ("avy-embark-collect.el"))

@@ -1,3 +1,0 @@
-(hl-prog-extra
- :repo "ideasman42/emacs-hl-prog-extra"
- :fetcher gitlab)

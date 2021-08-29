@@ -1,1 +1,0 @@
-(requirejs-mode :fetcher github :repo "moricard/requirejs-mode")

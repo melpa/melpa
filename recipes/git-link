@@ -1,3 +1,0 @@
-(git-link
- :fetcher github
- :repo "sshaw/git-link")

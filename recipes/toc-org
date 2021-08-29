@@ -1,2 +1,0 @@
-(toc-org :fetcher github :repo "snosov1/toc-org"
-         :old-names (org-toc))

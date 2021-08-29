@@ -1,3 +1,0 @@
-(unobtrusive-magit-theme
- :fetcher github
- :repo "tee3/unobtrusive-magit-theme")

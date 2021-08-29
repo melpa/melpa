@@ -1,1 +1,0 @@
-(lsp-jedi :repo "fredcamps/lsp-jedi" :fetcher github )

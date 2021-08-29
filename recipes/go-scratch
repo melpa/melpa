@@ -1,3 +1,0 @@
-(go-scratch
- :fetcher github
- :repo "shosti/go-scratch.el")

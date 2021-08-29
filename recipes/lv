@@ -1,3 +1,0 @@
-(lv :repo "abo-abo/hydra"
-    :fetcher github
-    :files ("lv.el"))

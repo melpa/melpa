@@ -1,4 +1,0 @@
-(burnt-toast
- :fetcher github
- :repo "cedarbaum/burnt-toast.el"
- :files (:defaults ("icons" "icons/*.png")))

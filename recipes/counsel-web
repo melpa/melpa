@@ -1,1 +1,0 @@
-(counsel-web :repo "mnewt/counsel-web" :fetcher github)

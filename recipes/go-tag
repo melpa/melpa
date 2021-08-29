@@ -1,3 +1,0 @@
-(go-tag
- :repo "brantou/emacs-go-tag"
- :fetcher github)

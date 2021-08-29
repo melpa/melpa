@@ -1,1 +1,0 @@
-(skype :fetcher github :repo "kiwanami/emacs-skype" :files("*.el" "*.py"))

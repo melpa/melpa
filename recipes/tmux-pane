@@ -1,3 +1,0 @@
-(tmux-pane
-  :fetcher github
-  :repo "laishulu/emacs-tmux-pane")

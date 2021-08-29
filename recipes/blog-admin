@@ -1,3 +1,0 @@
-(blog-admin
- :fetcher github
- :repo "xcodebuild/blog-admin")

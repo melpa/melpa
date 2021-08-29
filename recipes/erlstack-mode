@@ -1,2 +1,0 @@
-(erlstack-mode :repo "k32/erlstack-mode"
-               :fetcher github)

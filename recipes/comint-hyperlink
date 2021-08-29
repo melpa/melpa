@@ -1,1 +1,0 @@
-(comint-hyperlink :fetcher github :repo "matthewbauer/comint-hyperlink")

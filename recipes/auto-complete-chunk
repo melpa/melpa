@@ -1,2 +1,0 @@
-(auto-complete-chunk :fetcher github :repo "tkf/auto-complete-chunk"
-                     :files ("auto-complete-chunk.el"))

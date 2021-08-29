@@ -1,3 +1,0 @@
-(learn-ocaml
- :fetcher github
- :repo "pfitaxel/learn-ocaml.el")

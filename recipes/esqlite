@@ -1,4 +1,0 @@
-(esqlite
- :fetcher github
- :repo "mhayashi1120/Emacs-esqlite"
- :files ("esqlite.el"))

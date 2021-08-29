@@ -1,1 +1,0 @@
-(flymake-hlint :repo "purcell/flymake-hlint" :fetcher github)

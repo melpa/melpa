@@ -1,1 +1,0 @@
-(helm-sage :fetcher github :repo "sagemath/helm-sage")

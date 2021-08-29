@@ -1,3 +1,0 @@
-(rtags-xref :repo "Andersbakken/rtags"
-            :fetcher github
-            :files ("src/rtags-xref.el"))

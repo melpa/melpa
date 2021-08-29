@@ -1,4 +1,0 @@
-(tree-sitter-langs :repo "emacs-tree-sitter/tree-sitter-langs"
-                   :fetcher github
-                   :files (:defaults
-                           "queries"))

@@ -1,3 +1,0 @@
-(forth-mode :fetcher github
-            :repo "larsbrinkhoff/forth-mode"
-            :files (:defaults "backend" (:exclude "build.el")))

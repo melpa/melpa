@@ -1,2 +1,0 @@
-(markdown-toc :fetcher github
-              :repo "ardumont/markdown-toc")

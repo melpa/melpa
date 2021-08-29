@@ -1,4 +1,0 @@
-(biblio-core
- :repo "cpitclaudel/biblio.el"
- :fetcher github
- :files ("biblio-core.el"))

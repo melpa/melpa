@@ -1,3 +1,0 @@
-(rutils
- :repo "ShuguangSun/rutils.el"
- :fetcher github)

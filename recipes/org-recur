@@ -1,1 +1,0 @@
-(org-recur :fetcher github :repo "m-cat/org-recur")

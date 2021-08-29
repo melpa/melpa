@@ -1,1 +1,0 @@
-(org-make-toc :fetcher github :repo "alphapapa/org-make-toc")

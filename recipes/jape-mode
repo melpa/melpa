@@ -1,1 +1,0 @@
-(jape-mode :repo "tanzoniteblack/jape-mode" :fetcher github)

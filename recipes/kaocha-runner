@@ -1,1 +1,0 @@
-(kaocha-runner :fetcher github :repo "magnars/kaocha-runner.el")

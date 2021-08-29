@@ -1,1 +1,0 @@
-(auto-shell-command :repo "ongaeshi/auto-shell-command" :fetcher github)

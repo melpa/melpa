@@ -1,1 +1,0 @@
-(cwl-mode :repo "tom-tan/cwl-mode" :fetcher github)

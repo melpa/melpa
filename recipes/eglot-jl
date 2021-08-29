@@ -1,3 +1,0 @@
-(eglot-jl :fetcher github
-          :repo "non-Jedi/eglot-jl"
-          :files (:defaults "*.jl" "*.toml"))

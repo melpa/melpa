@@ -1,1 +1,0 @@
-(lsp-treemacs :repo "emacs-lsp/lsp-treemacs" :fetcher github :files (:defaults "icons"))

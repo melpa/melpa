@@ -1,1 +1,0 @@
-(ocp-indent :fetcher github :repo "OCamlPro/ocp-indent" :files ("tools/ocp-indent.el"))

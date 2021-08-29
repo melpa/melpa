@@ -1,1 +1,0 @@
-(elx :repo "emacscollective/elx" :fetcher github)

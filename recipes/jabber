@@ -1,4 +1,0 @@
-(jabber
- :repo "legoscia/emacs-jabber"
- :fetcher github
- :files ("*.el" "*.texi" ("jabber-fallback-lib" "jabber-fallback-lib/hexrgb.el")))

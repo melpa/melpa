@@ -1,2 +1,0 @@
-(psalm :fetcher github :repo "emacs-php/psalm.el"
-       :files ("psalm.el"))

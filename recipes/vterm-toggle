@@ -1,2 +1,0 @@
-(vterm-toggle :fetcher github
-	:repo "jixiuf/vterm-toggle")

@@ -1,1 +1,0 @@
-(company-dict :repo "hlissner/emacs-company-dict" :fetcher github)

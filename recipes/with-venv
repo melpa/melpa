@@ -1,1 +1,0 @@
-(with-venv :repo "10sr/with-venv-el" :fetcher github)

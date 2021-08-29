@@ -1,3 +1,0 @@
-(evil-textobj-entire
-  :fetcher github
-  :repo "supermomonga/evil-textobj-entire")

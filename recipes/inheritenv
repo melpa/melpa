@@ -1,1 +1,0 @@
-(inheritenv :fetcher github :repo "purcell/inheritenv")

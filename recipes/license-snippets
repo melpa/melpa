@@ -1,4 +1,0 @@
-(license-snippets
- :repo "sei40kr/license-snippets"
- :fetcher github
- :files (:defaults "snippets"))

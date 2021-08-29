@@ -1,3 +1,0 @@
-(elpher
- :url "https://thelambdalab.xyz/git/elpher.git"
- :fetcher git)

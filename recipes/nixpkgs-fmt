@@ -1,1 +1,0 @@
-(nixpkgs-fmt :fetcher github :repo "purcell/emacs-nixpkgs-fmt")

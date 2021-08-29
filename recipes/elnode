@@ -1,5 +1,0 @@
-(elnode
- :fetcher github
- :repo "jcaw/elnode"
- :branch "melpa"
- :files ("*"))

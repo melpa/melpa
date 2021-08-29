@@ -1,1 +1,0 @@
-(speedbar-git-respect :repo "ukari/speedbar-git-respect" :fetcher github :files ("speedbar-git-respect.el"))

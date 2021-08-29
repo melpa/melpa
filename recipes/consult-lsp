@@ -1,3 +1,0 @@
-(consult-lsp 
-  :fetcher github
-  :repo "gagbo/consult-lsp")

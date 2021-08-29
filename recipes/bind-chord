@@ -1,3 +1,0 @@
-(bind-chord :repo "jwiegley/use-package"
-            :fetcher github
-            :files ("bind-chord.el"))

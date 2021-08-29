@@ -1,1 +1,0 @@
-(keytar :repo "emacs-grammarly/keytar" :fetcher github)

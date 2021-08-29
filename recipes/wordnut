@@ -1,2 +1,0 @@
-(wordnut :repo "gromnitsky/wordnut"
-	:fetcher github)

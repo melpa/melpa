@@ -1,1 +1,0 @@
-(org-present-remote :fetcher gitlab :repo "duncan-bayne/org-present-remote")

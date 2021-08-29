@@ -1,3 +1,0 @@
-(orgtbl-aggregate
-  :fetcher github
-  :repo "tbanel/orgaggregate")

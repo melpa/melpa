@@ -1,2 +1,0 @@
-(org-scrum :repo "ianxm/emacs-scrum"
-           :fetcher github)

@@ -1,1 +1,0 @@
-(js2-refactor :repo "js-emacs/js2-refactor.el" :fetcher github)

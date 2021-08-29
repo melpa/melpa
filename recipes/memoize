@@ -1,2 +1,0 @@
-(memoize :repo "skeeto/emacs-memoize"
-         :fetcher github)

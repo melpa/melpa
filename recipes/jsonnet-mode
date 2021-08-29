@@ -1,1 +1,0 @@
-(jsonnet-mode :fetcher github :repo "tminor/jsonnet-mode")

@@ -1,3 +1,0 @@
-(github-explorer
- :repo "TxGVNN/github-explorer"
- :fetcher github)

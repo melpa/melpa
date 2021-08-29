@@ -1,1 +1,0 @@
-(pcache :repo "sigma/pcache" :fetcher github)

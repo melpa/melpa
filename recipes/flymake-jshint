@@ -1,1 +1,0 @@
-(flymake-jshint :repo "Wilfred/flymake-jshint.el" :fetcher github)

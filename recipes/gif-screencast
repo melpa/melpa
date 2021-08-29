@@ -1,3 +1,0 @@
-(gif-screencast
- :repo "Ambrevar/emacs-gif-screencast"
- :fetcher gitlab)

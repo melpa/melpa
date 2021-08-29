@@ -1,2 +1,0 @@
-(helm-org-ql :fetcher github :repo "alphapapa/org-ql"
-             :files ("helm-org-ql.el"))

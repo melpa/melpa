@@ -1,4 +1,0 @@
-(django-snippets
- :fetcher github
- :repo "unrelentingtech/django-mode"
- :files ("django-snippets.el" "snippets"))

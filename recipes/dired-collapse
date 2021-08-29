@@ -1,1 +1,0 @@
-(dired-collapse :fetcher github :repo "Fuco1/dired-hacks" :files ("dired-collapse.el"))

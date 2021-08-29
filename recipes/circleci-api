@@ -1,1 +1,0 @@
-(circleci-api :fetcher github :repo "sulami/circleci-api.el")

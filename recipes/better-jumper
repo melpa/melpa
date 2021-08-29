@@ -1,2 +1,0 @@
-(better-jumper :repo "gilbertw1/better-jumper"
-               :fetcher github)

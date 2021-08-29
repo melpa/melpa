@@ -1,2 +1,0 @@
-(multi-web-mode :repo "fgallina/multi-web-mode" :fetcher github)
-

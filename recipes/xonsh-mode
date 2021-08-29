@@ -1,2 +1,0 @@
-(xonsh-mode :repo "seanfarley/xonsh-mode"
-            :fetcher github)

@@ -1,4 +1,0 @@
-(tree-sitter :repo "emacs-tree-sitter/elisp-tree-sitter"
-             :fetcher github
-             :files ("lisp/*.el"
-                     (:exclude "lisp/tree-sitter-tests.el")))

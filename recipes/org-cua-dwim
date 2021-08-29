@@ -1,1 +1,0 @@
-(org-cua-dwim :fetcher github :repo "mattfidler/org-cua-dwim.el")

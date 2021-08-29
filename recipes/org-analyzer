@@ -1,4 +1,0 @@
-(org-analyzer :fetcher github
-              :repo "rksm/clj-org-analyzer"
-              :files ("org-analyzer-el/*.jar"
-                      "org-analyzer-el/*.el"))

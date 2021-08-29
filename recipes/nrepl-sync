@@ -1,4 +1,0 @@
-(nrepl-sync
-   :fetcher github
-   :repo "phillord/lein-sync"
-   :files ("emacs/nrepl-sync.el"))

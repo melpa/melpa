@@ -1,1 +1,0 @@
-(xwwp-follow-link-helm :fetcher github :repo "canatella/xwwp" :files ("xwwp-follow-link-helm.el"))

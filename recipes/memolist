@@ -1,1 +1,0 @@
-(memolist :repo "mikanfactory/memolist.el" :fetcher github)

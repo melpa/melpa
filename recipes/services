@@ -1,1 +1,0 @@
-(services :fetcher github :repo "davep/services.el")

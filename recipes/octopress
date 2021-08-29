@@ -1,3 +1,0 @@
-(octopress
- :fetcher github
- :repo "aaronbieber/octopress.el")

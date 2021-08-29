@@ -1,1 +1,0 @@
-(atomic-chrome :repo "alpha22jp/atomic-chrome" :fetcher github)

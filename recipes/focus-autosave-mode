@@ -1,3 +1,0 @@
-(focus-autosave-mode
- :fetcher github
- :repo "vifon/focus-autosave-mode.el")

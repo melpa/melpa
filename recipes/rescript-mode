@@ -1,3 +1,0 @@
-(rescript-mode
- :fetcher github
- :repo "jjlee/rescript-mode")

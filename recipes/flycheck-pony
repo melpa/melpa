@@ -1,1 +1,0 @@
-(flycheck-pony :fetcher github :repo "ponylang/flycheck-pony")

@@ -1,3 +1,0 @@
-(evil-textobj-syntax
-  :fetcher github
-  :repo "laishulu/evil-textobj-syntax")

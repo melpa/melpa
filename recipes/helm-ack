@@ -1,1 +1,0 @@
-(helm-ack :repo "emacsorphanage/helm-ack" :fetcher github)

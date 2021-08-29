@@ -1,1 +1,0 @@
-(doom :fetcher github :repo "kensanata/doom" :old-names (dom))

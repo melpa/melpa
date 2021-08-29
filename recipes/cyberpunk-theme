@@ -1,3 +1,0 @@
-(cyberpunk-theme
- :fetcher github
- :repo "n3mo/cyberpunk-theme.el")

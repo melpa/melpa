@@ -1,3 +1,0 @@
-(kite-mini
- :repo "tungd/kite-mini.el"
- :fetcher github)

@@ -1,3 +1,0 @@
-(loopy :fetcher github
-       :repo "okamsn/loopy"
-       :files (:defaults (:exclude "loopy-dash.el")))

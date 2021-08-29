@@ -1,2 +1,0 @@
-(detour	:repo "ska2342/detour"
-        :fetcher github)

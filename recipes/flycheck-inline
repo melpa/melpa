@@ -1,1 +1,0 @@
-(flycheck-inline :repo "flycheck/flycheck-inline" :fetcher github)

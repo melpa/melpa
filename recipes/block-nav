@@ -1,4 +1,0 @@
-(block-nav
- :fetcher github
- :repo "nixin72/block-nav.el")
-

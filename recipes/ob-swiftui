@@ -1,3 +1,0 @@
-(ob-swiftui
- :fetcher github
- :repo "xenodium/ob-swiftui")

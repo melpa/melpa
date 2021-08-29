@@ -1,5 +1,0 @@
-(lentic :fetcher github :repo "phillord/lentic"
-        :files (:defaults
-                "lenticular.org"
-                (:exclude "build.el" "noisy-change.el"))
-        :old-names (linked-buffer))

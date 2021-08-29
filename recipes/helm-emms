@@ -1,1 +1,0 @@
-(helm-emms :repo "emacs-helm/helm-emms" :fetcher github)

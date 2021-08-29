@@ -1,4 +1,0 @@
-(timecop
- :repo "emacs-php/emacs-datetime"
- :fetcher github
- :files ("timecop.el"))

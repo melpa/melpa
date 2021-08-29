@@ -1,3 +1,0 @@
-(molokai-theme :repo "alloy-d/color-theme-molokai"
-               :fetcher github
-               :files ("molokai-theme.el"))

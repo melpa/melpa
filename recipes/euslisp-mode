@@ -1,3 +1,0 @@
-(euslisp-mode :fetcher github
-              :repo "iory/euslisp-mode"
-              :files (:defaults "*.py"))

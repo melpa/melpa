@@ -1,1 +1,0 @@
-(shrink-whitespace :repo "jcpetkovich/shrink-whitespace.el" :fetcher gitlab)

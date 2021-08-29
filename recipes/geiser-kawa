@@ -1,7 +1,0 @@
-(geiser-kawa
- :fetcher gitlab
- :repo "emacs-geiser/kawa"
- :files ("elisp/*.el"
-         "pom.xml"
-         ".mvn" "mvnw" "mvnw.cmd"
-         "src"))

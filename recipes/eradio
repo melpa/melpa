@@ -1,3 +1,0 @@
-(eradio
- :fetcher github
- :repo "olavfosse/eradio")

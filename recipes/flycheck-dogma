@@ -1,1 +1,0 @@
-(flycheck-dogma :fetcher github :repo "aaronjensen/flycheck-dogma")

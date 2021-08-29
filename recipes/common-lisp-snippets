@@ -1,4 +1,0 @@
-(common-lisp-snippets
- :repo "mrkkrp/common-lisp-snippets"
- :fetcher github
- :files ("*.el" "snippets"))

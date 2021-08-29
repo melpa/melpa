@@ -1,4 +1,0 @@
-(live-py-mode
- :fetcher github
- :repo "donkirkby/live-py-plugin"
- :files ("emacs-live-py-mode/live-py-mode.el" "plugin/PySrc/*"))

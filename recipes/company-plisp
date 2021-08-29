@@ -1,1 +1,0 @@
-(company-plisp  :fetcher gitlab :repo "sasanidas/company-plisp" :files ("company-plisp.el" "company-plisp.l"))

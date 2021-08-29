@@ -1,4 +1,0 @@
-(searchq
- :fetcher github
- :repo "tcw165/searchq"
- :files (:defaults ("images" "images/*.xpm" "images/*.png")))

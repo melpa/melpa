@@ -1,3 +1,0 @@
-(julia-shell :fetcher github
-             :repo "dennisog/julia-shell-mode"
-             :files (:defaults "*.jl"))

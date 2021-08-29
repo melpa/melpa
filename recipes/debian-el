@@ -1,2 +1,0 @@
-(debian-el :fetcher git
-	   :url "https://salsa.debian.org/emacsen-team/debian-el.git")

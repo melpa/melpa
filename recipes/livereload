@@ -1,3 +1,0 @@
-(livereload :repo "joaotavora/emacs-livereload"
-	    :fetcher github
-	    :files (:defaults "livereload.js"))

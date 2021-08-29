@@ -1,1 +1,0 @@
-(svnwrapper :repo "Lindydancer/svnwrapper" :fetcher github :files (:defaults "bin"))

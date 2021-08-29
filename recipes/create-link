@@ -1,1 +1,0 @@
-(create-link :repo "kijimaD/create-link" :fetcher github)

@@ -1,1 +1,0 @@
-(elgrep :repo "TobiasZawada/elgrep" :fetcher github)

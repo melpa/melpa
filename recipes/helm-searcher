@@ -1,1 +1,0 @@
-(helm-searcher :repo "emacs-helm/helm-searcher" :fetcher github)

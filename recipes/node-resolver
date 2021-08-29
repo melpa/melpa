@@ -1,1 +1,0 @@
-(node-resolver :fetcher github :repo "meandavejustice/node-resolver.el")

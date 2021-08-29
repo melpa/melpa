@@ -1,4 +1,0 @@
-(restclient-test
- :fetcher github
- :repo "simenheg/restclient-test.el"
- :files ("restclient-test.el"))

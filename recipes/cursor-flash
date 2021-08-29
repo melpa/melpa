@@ -1,3 +1,0 @@
-(cursor-flash
- :fetcher github
- :repo "Boruch-Baum/emacs-cursor-flash")

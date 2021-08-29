@@ -1,3 +1,0 @@
-(nswbuff
- :fetcher github
- :repo "joostkremers/nswbuff")

@@ -1,4 +1,0 @@
-(ob-ess-julia
- :fetcher github
- :repo "frederic-santos/ob-ess-julia"
- :files ("*.el" "*.jl"))

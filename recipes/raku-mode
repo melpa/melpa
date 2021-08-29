@@ -1,4 +1,0 @@
-(raku-mode :fetcher github
-           :repo "Raku/raku-mode"
-           :files (:defaults (:exclude "nqp-mode.el"))
-           :old-names (perl6-mode))

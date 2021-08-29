@@ -1,4 +1,0 @@
-(fold-this
- :fetcher github
- :repo "magnars/fold-this.el"
- :files ("fold-this.el"))

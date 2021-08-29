@@ -1,1 +1,0 @@
-(helm-tail :fetcher github :repo "akirak/helm-tail")

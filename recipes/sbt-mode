@@ -1,2 +1,0 @@
-(sbt-mode :fetcher github
-          :repo "hvesalai/emacs-sbt-mode")

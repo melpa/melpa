@@ -1,3 +1,0 @@
-(quickrun
- :repo "emacsorphanage/quickrun"
- :fetcher github)

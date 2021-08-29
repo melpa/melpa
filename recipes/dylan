@@ -1,3 +1,0 @@
-(dylan :files ("dylan*.el")
-       :fetcher github :repo "dylan-lang/dylan-emacs-support"
-       :old-names (dylan-mode))

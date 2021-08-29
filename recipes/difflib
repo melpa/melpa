@@ -1,1 +1,0 @@
-(difflib :fetcher github :repo "dieggsy/difflib.el")

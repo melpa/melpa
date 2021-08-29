@@ -1,1 +1,0 @@
-(myrddin-mode :url "https://git.sr.ht/~jakob/myrddin-mode" :fetcher git)

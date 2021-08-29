@@ -1,1 +1,0 @@
-(comby :repo "s-kostyaev/comby.el" :fetcher github)

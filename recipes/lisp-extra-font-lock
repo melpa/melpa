@@ -1,1 +1,0 @@
-(lisp-extra-font-lock :repo "Lindydancer/lisp-extra-font-lock" :fetcher github)

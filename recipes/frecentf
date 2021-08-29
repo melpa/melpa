@@ -1,2 +1,0 @@
-(frecentf :fetcher git
-	  :url "https://git.launchpad.net/frecentf.el")

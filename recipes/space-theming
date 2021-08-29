@@ -1,2 +1,0 @@
-(space-theming :repo "p3r7/space-theming"
-               :fetcher github)

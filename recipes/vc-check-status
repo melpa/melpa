@@ -1,1 +1,0 @@
-(vc-check-status :fetcher github :repo "thisirs/vc-check-status")

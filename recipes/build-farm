@@ -1,1 +1,0 @@
-(build-farm :repo "alezost/build-farm.el" :fetcher github)

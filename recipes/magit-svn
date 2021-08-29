@@ -1,1 +1,0 @@
-(magit-svn :fetcher github :repo "emacsorphanage/magit-svn")

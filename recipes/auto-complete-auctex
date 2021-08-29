@@ -1,3 +1,0 @@
-(auto-complete-auctex
- :repo "monsanto/auto-complete-auctex"
- :fetcher github)

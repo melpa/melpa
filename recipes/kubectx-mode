@@ -1,3 +1,0 @@
-(kubectx-mode
- :fetcher github
- :repo "terjesannum/emacs-kubectx-mode")

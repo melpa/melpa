@@ -1,2 +1,0 @@
-(find-file-in-project :repo "redguardtoo/find-file-in-project" :fetcher github)
-

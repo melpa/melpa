@@ -1,1 +1,0 @@
-(smart-compile :fetcher github :repo "zenitani/elisp" :files ("smart-compile.el"))

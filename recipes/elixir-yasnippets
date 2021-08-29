@@ -1,4 +1,0 @@
-(elixir-yasnippets
- :repo "hisea/elixir-yasnippets"
- :fetcher github
- :files (:defaults "snippets"))

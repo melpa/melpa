@@ -1,1 +1,0 @@
-(gerrit :fetcher github :repo "thisch/gerrit.el")

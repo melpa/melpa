@@ -1,1 +1,0 @@
-(replace-with-inflections :repo "knu/replace-with-inflections.el" :fetcher github)

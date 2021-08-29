@@ -1,2 +1,0 @@
-(friendly-tramp-path :repo "p3r7/friendly-tramp-path"
-                     :fetcher github)

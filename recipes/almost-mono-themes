@@ -1,3 +1,0 @@
-(almost-mono-themes
- :repo "cryon/almost-mono-themes"
- :fetcher github)

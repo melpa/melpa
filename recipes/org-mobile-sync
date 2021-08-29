@@ -1,1 +1,0 @@
-(org-mobile-sync :url "https://framagit.org/steckerhalter/org-mobile-sync.git" :fetcher git)

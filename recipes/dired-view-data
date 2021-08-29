@@ -1,3 +1,0 @@
-(dired-view-data
- :repo "ShuguangSun/dired-view-data"
- :fetcher github)

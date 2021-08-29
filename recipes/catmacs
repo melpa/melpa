@@ -1,3 +1,0 @@
-(catmacs :url "https://bitbucket.org/pymaximus/catmacs"
-         :fetcher git )
-         

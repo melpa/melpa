@@ -1,1 +1,0 @@
-(company-php :repo "xcwen/ac-php" :fetcher github :files ( "company-php.el"))

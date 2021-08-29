@@ -1,2 +1,0 @@
-(image-archive :repo "mhayashi1120/Emacs-image-archive"
-               :fetcher github)

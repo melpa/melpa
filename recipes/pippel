@@ -1,5 +1,0 @@
-(pippel
- :fetcher github
- :repo "arifer612/pippel"
- :files (:defaults
-         "pippel.py"))

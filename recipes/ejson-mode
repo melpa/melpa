@@ -1,2 +1,0 @@
-(ejson-mode :repo "dantecatalfamo/ejson-mode"
-            :fetcher github)

@@ -1,2 +1,0 @@
-(lorem-ipsum :fetcher github
-             :repo "jschaf/emacs-lorem-ipsum")

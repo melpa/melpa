@@ -1,4 +1,0 @@
-(treemacs-all-the-icons
- :fetcher github
- :repo "Alexander-Miller/treemacs"
- :files ("src/extra/treemacs-all-the-icons.el"))

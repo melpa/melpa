@@ -1,1 +1,0 @@
-(ivy-mpdel :fetcher github :repo "mpdel/ivy-mpdel")

@@ -1,4 +1,0 @@
-(merlin-iedit
- :fetcher github
- :repo "ocaml/merlin"
- :files ("emacs/merlin-iedit.el"))

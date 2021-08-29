@@ -1,1 +1,0 @@
-(org-agenda-property :repo "Malabarba/org-agenda-property" :fetcher github)

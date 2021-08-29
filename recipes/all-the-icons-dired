@@ -1,3 +1,0 @@
-(all-the-icons-dired
- :repo "wyuenho/all-the-icons-dired"
- :fetcher github)

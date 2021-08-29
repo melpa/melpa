@@ -1,3 +1,0 @@
-(git-gutter-fringe
- :repo "emacsorphanage/git-gutter-fringe"
- :fetcher github)

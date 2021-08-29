@@ -1,3 +1,2 @@
-(ejc-sql :repo "kostafey/ejc-sql"
-         :files (:defaults "project.clj" "src" "snippets")
-         :fetcher github)
+(ejc-sql :fetcher github
+         :repo "josephmarbach/ejc-sql")

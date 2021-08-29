@@ -1,1 +1,0 @@
-(helm-osx-app :fetcher github :repo "xuchunyang/helm-osx-app")

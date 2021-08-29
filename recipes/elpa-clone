@@ -1,2 +1,0 @@
-(elpa-clone :fetcher github
-            :repo "dochang/elpa-clone")

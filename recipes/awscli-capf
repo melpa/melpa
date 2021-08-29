@@ -1,1 +1,0 @@
-(awscli-capf :repo "sebasmonia/awscli-capf" :fetcher github)

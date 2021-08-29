@@ -1,3 +1,0 @@
-(gn-mode
- :fetcher github
- :repo "lashtear/gn-mode")

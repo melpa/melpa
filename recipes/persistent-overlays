@@ -1,6 +1,0 @@
-(persistent-overlays
- :fetcher github
- :repo "mneilly/Emacs-Persistent-Overlays"
- :files ("persistent-overlays.el"
-	 "README.md"
-	 "LICENSE"))

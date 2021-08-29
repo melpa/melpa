@@ -1,3 +1,0 @@
-(consult
- :repo "minad/consult"
- :fetcher github)

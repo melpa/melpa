@@ -1,3 +1,0 @@
-(poly-ansible
- :fetcher gitlab
- :repo "mavit/poly-ansible")

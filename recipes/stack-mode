@@ -1,4 +1,0 @@
-(stack-mode
- :repo "commercialhaskell/stack-ide"
- :fetcher github
- :files ("stack-mode/*.el"))

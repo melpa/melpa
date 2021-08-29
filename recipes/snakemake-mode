@@ -1,2 +1,0 @@
-(snakemake-mode :fetcher github
-                :repo "kyleam/snakemake-mode")

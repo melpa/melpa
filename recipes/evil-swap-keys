@@ -1,1 +1,0 @@
-(evil-swap-keys :repo "wbolster/evil-swap-keys" :fetcher github)

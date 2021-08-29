@@ -1,1 +1,0 @@
-(wiki-nav :repo "rolandwalker/button-lock" :fetcher github :files ("wiki-nav.el"))

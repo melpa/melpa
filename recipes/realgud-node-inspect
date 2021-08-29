@@ -1,5 +1,0 @@
-(realgud-node-inspect
- :fetcher github
- :repo "realgud/realgud-node-inspect"
- :files (:defaults
-         ("realgud-node-inspect" "realgud-node-inspect/*.el")))

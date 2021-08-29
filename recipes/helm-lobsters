@@ -1,1 +1,0 @@
-(helm-lobsters :repo "julienXX/helm-lobste.rs" :fetcher github)

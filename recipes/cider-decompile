@@ -1,3 +1,0 @@
-(cider-decompile :repo "clojure-emacs/cider-decompile"
-                 :fetcher github
-                 :old-names (nrepl-decompile))

@@ -1,1 +1,0 @@
-(freeze-it :fetcher github :repo "rnkn/freeze-it")

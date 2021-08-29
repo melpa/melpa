@@ -1,2 +1,0 @@
-(celery :fetcher github
-        :repo "ardumont/emacs-celery")

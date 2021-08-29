@@ -1,3 +1,0 @@
-(python-isort
- :fetcher github
- :repo "wyuenho/emacs-python-isort")

@@ -1,1 +1,0 @@
-(dispwatch :repo "mnp/dispwatch" :fetcher github)

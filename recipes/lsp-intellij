@@ -1,1 +1,0 @@
-(lsp-intellij :repo "Ruin0x11/lsp-intellij" :fetcher github)

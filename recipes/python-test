@@ -1,4 +1,0 @@
-(python-test
- :fetcher github
- :repo "emacs-pe/python-test.el"
- :files ("python-test.el"))

@@ -1,1 +1,0 @@
-(lsp-metals :repo "emacs-lsp/lsp-metals" :fetcher github :files (:defaults "icons"))

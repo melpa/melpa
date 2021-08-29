@@ -1,1 +1,0 @@
-(vlc :fetcher github :repo "xuchunyang/vlc.el")

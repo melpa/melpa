@@ -1,4 +1,0 @@
-(processing-snippets
- :repo "ptrv/processing2-emacs"
- :fetcher github
- :files ("processing-snippets.el" "snippets"))

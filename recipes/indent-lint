@@ -1,2 +1,0 @@
-(indent-lint :fetcher github :repo "conao3/indent-lint.el"
-             :files (:defaults (:exclude "flycheck-indent.el")))

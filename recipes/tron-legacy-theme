@@ -1,3 +1,0 @@
-(tron-legacy-theme
- :fetcher github
- :repo "ianyepan/tron-legacy-emacs-theme")

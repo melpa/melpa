@@ -1,3 +1,0 @@
-(spacebar
- :repo "matthias-margush/spacebar"
- :fetcher github)

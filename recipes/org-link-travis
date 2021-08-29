@@ -1,2 +1,0 @@
-(org-link-travis :repo "aki2o/org-link-travis"
-                 :fetcher github)

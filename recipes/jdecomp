@@ -1,2 +1,0 @@
-(jdecomp :fetcher github
-         :repo "xiongtx/jdecomp")

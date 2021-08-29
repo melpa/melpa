@@ -1,1 +1,0 @@
-(metaweblog :fetcher github :repo "org2blog/org2blog" :files ("metaweblog.el"))

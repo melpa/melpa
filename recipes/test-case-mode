@@ -1,1 +1,0 @@
-(test-case-mode :fetcher github :repo "ieure/test-case-mode")

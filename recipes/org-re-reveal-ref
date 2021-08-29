@@ -1,4 +1,0 @@
-(org-re-reveal-ref
- :repo "oer/org-re-reveal-ref"
- :fetcher gitlab
- :files (:defaults "LICENSES" "README.org" "references.bib"))

@@ -1,1 +1,0 @@
-(org-tanglesync :fetcher gitlab :repo "mtekman/org-tanglesync.el")

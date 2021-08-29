@@ -1,1 +1,0 @@
-(flycheck-gradle :fetcher github :repo "jojojames/flycheck-gradle")

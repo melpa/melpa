@@ -1,1 +1,0 @@
-(term-cmd :fetcher github :repo "calliecameron/term-cmd" :files (:defaults "bin"))

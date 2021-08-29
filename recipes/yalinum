@@ -1,2 +1,0 @@
-(yalinum :repo "tm8st/emacs-yalinum"
-         :fetcher github)

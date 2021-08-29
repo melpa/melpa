@@ -1,1 +1,0 @@
-(perlbrew :fetcher github :repo "kentaro/perlbrew.el")

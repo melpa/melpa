@@ -1,3 +1,0 @@
-(company-maxima :repo "sasanidas/maxima"
-		:fetcher gitlab
-		:files ("company-maxima.el"))

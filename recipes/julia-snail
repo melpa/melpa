@@ -1,4 +1,0 @@
-(julia-snail
- :fetcher github
- :repo "gcv/julia-snail"
- :files (:defaults "*.jl" "*.toml"))

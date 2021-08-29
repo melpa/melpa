@@ -1,3 +1,0 @@
-(evil-textobj-line
- :fetcher github
- :repo "emacsorphanage/evil-textobj-line")

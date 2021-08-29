@@ -1,1 +1,0 @@
-(lfe-mode :fetcher github :repo "rvirding/lfe" :files ("emacs/inferior-lfe.el" "emacs/lfe-mode.el" "emacs/lfe-indent.el"))

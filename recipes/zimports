@@ -1,1 +1,0 @@
-(zimports :repo "schmir/zimports.el" :fetcher github)

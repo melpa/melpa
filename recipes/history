@@ -1,5 +1,0 @@
-(history
- :fetcher github
- :repo "tcw165/history"
- :files (:defaults ("images" "images/*.xpm" "images/*.png")))
-

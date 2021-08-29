@@ -1,2 +1,0 @@
-(ecukes :repo "ecukes/ecukes" :fetcher github
-        :files ("ecukes*" "templates" "bin" "reporters"))

@@ -1,1 +1,0 @@
-(flycheck-golangci-lint :repo "weijiangan/flycheck-golangci-lint" :fetcher github)

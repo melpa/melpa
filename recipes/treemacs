@@ -1,9 +1,0 @@
-(treemacs
- :fetcher github
- :repo "Alexander-Miller/treemacs"
- :files (:defaults
-         "Changelog.org"
-         "icons"
-         "src/elisp/treemacs*.el"
-         "src/scripts/treemacs*.py"
-         (:exclude "src/extra/*")))

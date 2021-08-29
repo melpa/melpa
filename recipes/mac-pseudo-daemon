@@ -1,2 +1,0 @@
-(mac-pseudo-daemon :repo "DarwinAwardWinner/mac-pseudo-daemon" :fetcher github
-                   :files ("mac-pseudo-daemon.el"))

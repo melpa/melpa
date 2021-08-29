@@ -1,3 +1,0 @@
-(org-projectile :repo "IvanMalison/org-projectile"
-                :fetcher github
-                :files ("org-projectile.el"))

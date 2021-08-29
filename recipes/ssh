@@ -1,1 +1,0 @@
-(ssh :fetcher github :repo "ieure/ssh-el")

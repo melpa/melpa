@@ -1,1 +1,0 @@
-(fold-dwim :fetcher github :repo "emacsattic/fold-dwim")

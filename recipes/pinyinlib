@@ -1,2 +1,0 @@
-(pinyinlib :repo "cute-jumper/pinyinlib.el"
-           :fetcher github)

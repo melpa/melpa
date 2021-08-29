@@ -1,1 +1,0 @@
-(curl-to-elisp :fetcher github :repo "xuchunyang/curl-to-elisp")

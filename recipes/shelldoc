@@ -1,4 +1,0 @@
-(shelldoc
- :fetcher github
- :repo "mhayashi1120/Emacs-shelldoc"
- :files ("shelldoc.el"))

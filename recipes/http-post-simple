@@ -1,1 +1,0 @@
-(http-post-simple :fetcher github :repo "emacsorphanage/http-post-simple")

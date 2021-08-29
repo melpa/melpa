@@ -1,1 +1,0 @@
-(counsel-org-clock :fetcher github :repo "akirak/counsel-org-clock")

@@ -1,1 +1,0 @@
-(company-emojify :repo "jcs-elpa/company-emojify" :fetcher github)

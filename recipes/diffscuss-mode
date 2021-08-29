@@ -1,3 +1,0 @@
-(diffscuss-mode :fetcher github
-		:repo "tomheon/diffscuss"
-		:files ("diffscuss-mode/*.el"))

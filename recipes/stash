@@ -1,2 +1,0 @@
-(stash :repo "vermiculus/stash.el"
-       :fetcher github)

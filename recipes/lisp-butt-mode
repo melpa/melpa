@@ -1,1 +1,0 @@
-(lisp-butt-mode :repo "marcowahl/lisp-butt-mode" :fetcher gitlab)

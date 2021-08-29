@@ -1,3 +1,0 @@
-(figlet
- :fetcher github
- :repo "jpkotta/figlet")

@@ -1,3 +1,0 @@
-(liberime :repo "merrickluo/liberime"
-          :files (:defaults "src" "emacs-module" "LICENSE" "Makefile" "README.org")
-          :fetcher github)

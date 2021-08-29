@@ -1,1 +1,0 @@
-(metronome :repo "jagrg/metronome" :fetcher gitlab :files (:defaults "sounds"))

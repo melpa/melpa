@@ -1,3 +1,0 @@
-(forge :fetcher github
-       :repo "magit/forge"
-       :files ("lisp/*.el" "docs/forge.texi"))

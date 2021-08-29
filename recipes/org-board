@@ -1,3 +1,0 @@
-(org-board
- :fetcher github
- :repo "scallywag/org-board")

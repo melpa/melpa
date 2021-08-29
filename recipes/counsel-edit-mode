@@ -1,1 +1,0 @@
-(counsel-edit-mode :fetcher github :repo "tyler-dodge/counsel-edit-mode")

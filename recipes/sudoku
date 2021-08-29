@@ -1,1 +1,0 @@
-(sudoku :fetcher github :repo "zevlg/sudoku.el")

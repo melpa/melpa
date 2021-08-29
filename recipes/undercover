@@ -1,1 +1,0 @@
-(undercover :fetcher github :repo "undercover-el/undercover.el")

@@ -1,3 +1,0 @@
-(slime-docker :repo "cl-docker-images/slime-docker"
-              :fetcher github
-              :files (:defaults "bin" "resources"))

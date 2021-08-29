@@ -1,3 +1,0 @@
-(ob-sagemath :repo "sagemath/ob-sagemath"
-             :fetcher github
-             :files ("ob-sagemath.el" "*.py"))

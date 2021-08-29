@@ -1,1 +1,0 @@
-(xah-reformat-code :repo "xahlee/xah-reformat-code" :fetcher github)

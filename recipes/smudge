@@ -1,3 +1,0 @@
-(smudge
-	:fetcher github
-	:repo "danielfm/smudge")

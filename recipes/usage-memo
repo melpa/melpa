@@ -1,2 +1,0 @@
-(usage-memo :fetcher github :repo "rubikitch/usage-memo"
-    	    :files (:defaults (:exclude "test-usage-memo.el")))

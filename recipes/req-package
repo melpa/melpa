@@ -1,3 +1,0 @@
-(req-package
-    :fetcher gitlab
-    :repo "edvorg/req-package")

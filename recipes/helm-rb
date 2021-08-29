@@ -1,4 +1,0 @@
-(helm-rb
- :repo "yuutayamada/helm-rb"
- :fetcher github
- :files ("helm-rb.el" "get_methods.rb"))

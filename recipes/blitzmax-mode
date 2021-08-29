@@ -1,2 +1,0 @@
-(blitzmax-mode :repo "Sodaware/blitzmax-mode"
-               :fetcher github)

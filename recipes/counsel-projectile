@@ -1,2 +1,0 @@
-(counsel-projectile :fetcher github
-                    :repo "ericdanan/counsel-projectile")

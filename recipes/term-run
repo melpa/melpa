@@ -1,1 +1,0 @@
-(term-run :repo "10sr/term-run-el" :fetcher github)

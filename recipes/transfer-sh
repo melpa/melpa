@@ -1,1 +1,0 @@
-(transfer-sh :fetcher gitlab :repo "tuedachu/transfer-sh.el")

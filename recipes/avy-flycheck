@@ -1,2 +1,0 @@
-(avy-flycheck :repo "magicdirac/avy-flycheck"
-              :fetcher github)

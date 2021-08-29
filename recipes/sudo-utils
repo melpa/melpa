@@ -1,2 +1,0 @@
-(sudo-utils :fetcher github
-            :repo "alpha-catharsis/sudo-utils")

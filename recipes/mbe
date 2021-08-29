@@ -1,1 +1,0 @@
-(mbe :fetcher github :repo "ijp/mbe.el" :files ("mbe.el"))

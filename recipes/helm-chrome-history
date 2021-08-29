@@ -1,1 +1,0 @@
-(helm-chrome-history :fetcher github :repo "xuchunyang/helm-chrome-history")

@@ -1,1 +1,0 @@
-(ol-notmuch :fetcher git :url "https://git.sr.ht/~tarsius/ol-notmuch")

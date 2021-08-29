@@ -1,2 +1,0 @@
-(hack-mode :repo "hhvm/hack-mode"
-           :fetcher github)

@@ -1,4 +1,0 @@
-(pyramid
- :repo "dakra/pyramid.el"
- :fetcher github
- :files (:defaults "snippets"))

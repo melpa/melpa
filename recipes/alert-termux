@@ -1,2 +1,0 @@
-(alert-termux :fetcher github
-              :repo "gergelypolonkai/alert-termux")

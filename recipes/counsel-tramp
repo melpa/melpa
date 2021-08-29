@@ -1,3 +1,0 @@
-(counsel-tramp
- :repo "masasam/emacs-counsel-tramp"
- :fetcher github)

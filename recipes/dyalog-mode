@@ -1,4 +1,0 @@
-(dyalog-mode
- :fetcher github
- :repo "harsman/dyalog-mode"
- :files (:defaults "Emacs.apl"))

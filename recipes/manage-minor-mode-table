@@ -1,1 +1,0 @@
-(manage-minor-mode-table :repo "jcs-elpa/manage-minor-mode-table" :fetcher github)

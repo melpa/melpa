@@ -1,2 +1,0 @@
-(helm-spotify-plus :repo "wandersoncferreira/helm-spotify-plus"
-                   :fetcher github)

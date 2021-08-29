@@ -1,3 +1,0 @@
-(counsel-jq
-  :repo "200ok-ch/counsel-jq"
-  :fetcher github)

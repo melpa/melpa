@@ -1,3 +1,0 @@
-(elfeed-score
- :fetcher github
- :repo "sp1ff/elfeed-score")

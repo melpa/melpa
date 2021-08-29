@@ -1,1 +1,0 @@
-(helm-lines :repo "torgeir/helm-lines.el" :fetcher github)

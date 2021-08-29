@@ -1,3 +1,0 @@
-(brightscript-mode
- :repo "viseztrance/brightscript-mode"
- :fetcher github)

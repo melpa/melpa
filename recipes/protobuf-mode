@@ -1,3 +1,0 @@
-(protobuf-mode :fetcher github
-               :repo "google/protobuf"
-               :files ("editors/protobuf-mode.el"))

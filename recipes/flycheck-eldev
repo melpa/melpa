@@ -1,2 +1,0 @@
-(flycheck-eldev :repo "flycheck/flycheck-eldev"
-                :fetcher github)

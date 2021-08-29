@@ -1,5 +1,0 @@
-(lambdapi-mode
- :fetcher github
- :repo "Deducteam/lambdapi"
- :files ("editors/emacs/*.el"
-         (:exclude "editors/emacs/lambdapi-site-file.el")))

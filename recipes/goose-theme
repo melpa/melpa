@@ -1,1 +1,0 @@
-(goose-theme :repo "tokenrove/goose-theme" :fetcher github)

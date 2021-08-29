@@ -1,1 +1,0 @@
-(rpm-spec-mode :fetcher github :repo "stigbjorlykke/rpm-spec-mode")

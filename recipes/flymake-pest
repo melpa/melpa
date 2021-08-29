@@ -1,3 +1,0 @@
-(flymake-pest :repo "ksqsf/pest-mode"
-              :fetcher github
-              :files ("flymake-pest.el"))

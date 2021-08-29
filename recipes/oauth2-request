@@ -1,1 +1,0 @@
-(oauth2-request :fetcher github :repo "conao3/oauth2-request.el")

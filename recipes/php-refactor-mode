@@ -1,1 +1,0 @@
-(php-refactor-mode :fetcher github :repo "keelerm84/php-refactor-mode.el")

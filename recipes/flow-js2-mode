@@ -1,1 +1,0 @@
-(flow-js2-mode :repo "Fuco1/flow-js2-mode" :fetcher github :files ("flow-js2-mode.el"))

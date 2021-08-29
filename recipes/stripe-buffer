@@ -1,1 +1,0 @@
-(stripe-buffer :fetcher github :repo "sabof/stripe-buffer")

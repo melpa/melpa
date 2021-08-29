@@ -1,4 +1,0 @@
-(solidity-flycheck
-    :fetcher github
-    :repo "ethereum/emacs-solidity"
-    :files ("solidity-flycheck.el"))

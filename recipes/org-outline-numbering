@@ -1,1 +1,0 @@
-(org-outline-numbering :repo "andersjohansson/org-outline-numbering" :fetcher gitlab)

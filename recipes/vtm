@@ -1,3 +1,0 @@
-(vtm
-  :fetcher github
-  :repo "laishulu/emacs-vterm-manager")

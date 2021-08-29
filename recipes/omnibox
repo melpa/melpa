@@ -1,3 +1,0 @@
-(omnibox
-  :repo "sebastiencs/omnibox"
-  :fetcher github)

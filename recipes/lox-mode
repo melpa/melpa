@@ -1,3 +1,0 @@
-(lox-mode
-  :repo "timmyjose-projects/lox-mode"
-  :fetcher github)

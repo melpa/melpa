@@ -1,3 +1,0 @@
-(org-anki
- :fetcher github
- :repo "eyeinsky/org-anki")

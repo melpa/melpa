@@ -1,3 +1,0 @@
-(ros
-  :repo "DerBeutlin/ros.el"
-  :fetcher github)

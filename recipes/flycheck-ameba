@@ -1,1 +1,0 @@
-(flycheck-ameba :fetcher github :repo "crystal-ameba/ameba.el" :files ("flycheck-ameba.el"))

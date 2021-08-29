@@ -1,1 +1,0 @@
-(ham-mode :repo "Malabarba/ham-mode" :fetcher github)

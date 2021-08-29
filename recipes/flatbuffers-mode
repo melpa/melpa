@@ -1,1 +1,0 @@
-(flatbuffers-mode :fetcher github :repo "Asalle/flatbuffers-mode")

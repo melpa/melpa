@@ -1,1 +1,0 @@
-(dyncloze :repo "ahyatt/emacs-dyncloze" :fetcher github)

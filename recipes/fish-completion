@@ -1,3 +1,0 @@
-(fish-completion
- :repo "Ambrevar/emacs-fish-completion"
- :fetcher gitlab)

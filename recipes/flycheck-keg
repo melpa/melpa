@@ -1,2 +1,0 @@
-(flycheck-keg :fetcher github :repo "conao3/keg.el"
-              :files ("flycheck-keg.el"))

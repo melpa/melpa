@@ -1,1 +1,0 @@
-(git-command :repo "10sr/git-command-el" :fetcher github)

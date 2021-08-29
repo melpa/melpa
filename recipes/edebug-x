@@ -1,2 +1,0 @@
-(edebug-x :fetcher github
-          :repo "ScottyB/edebug-x")

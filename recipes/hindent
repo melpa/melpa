@@ -1,1 +1,0 @@
-(hindent :fetcher github :repo "mihaimaruseac/hindent" :files ("elisp/*.el"))

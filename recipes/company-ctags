@@ -1,1 +1,0 @@
-(company-ctags :fetcher github :repo "redguardtoo/company-ctags")

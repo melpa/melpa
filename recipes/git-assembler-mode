@@ -1,2 +1,0 @@
-(git-assembler-mode :repo "wavexx/git-assembler-mode.el"
-                    :fetcher gitlab)

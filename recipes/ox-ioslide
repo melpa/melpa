@@ -1,1 +1,0 @@
-(ox-ioslide :fetcher github :repo "coldnew/org-ioslide" :files (:defaults "js" "theme" "images"))

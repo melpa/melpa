@@ -1,1 +1,0 @@
-(f :fetcher github :repo "rejeep/f.el" :files ("f.el"))

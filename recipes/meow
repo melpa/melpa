@@ -1,2 +1,0 @@
-(meow :repo "DogLooksGood/meow"
-      :fetcher github)

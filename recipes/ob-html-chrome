@@ -1,1 +1,0 @@
-(ob-html-chrome :repo "nikclayton/ob-html-chrome" :fetcher github)

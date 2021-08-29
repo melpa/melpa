@@ -1,3 +1,0 @@
-(major-mode-hydra :repo "jerrypnz/major-mode-hydra.el"
-                  :fetcher github
-                  :files ("major-mode-hydra.el"))

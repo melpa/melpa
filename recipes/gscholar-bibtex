@@ -1,2 +1,0 @@
-(gscholar-bibtex :repo "cute-jumper/gscholar-bibtex"
-                 :fetcher github)

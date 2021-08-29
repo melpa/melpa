@@ -1,4 +1,0 @@
-(libbcel
- :fetcher github
- :repo "DamienCassou/libbcel"
- :old-names (libbasecampel))

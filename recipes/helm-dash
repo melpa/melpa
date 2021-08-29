@@ -1,1 +1,0 @@
-(helm-dash :repo "dash-docs-el/helm-dash" :fetcher github)

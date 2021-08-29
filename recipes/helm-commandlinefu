@@ -1,1 +1,0 @@
-(helm-commandlinefu :repo "xuchunyang/helm-commandlinefu" :fetcher github)

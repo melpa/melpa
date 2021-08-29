@@ -1,1 +1,0 @@
-(basic-c-compile :repo "nick96/basic-c-compile" :fetcher github)

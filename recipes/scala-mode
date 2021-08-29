@@ -1,2 +1,0 @@
-(scala-mode :fetcher github
-            :repo "hvesalai/emacs-scala-mode")

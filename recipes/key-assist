@@ -1,3 +1,0 @@
-(key-assist
- :fetcher github
- :repo "Boruch-Baum/emacs-key-assist")

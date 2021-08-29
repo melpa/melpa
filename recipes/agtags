@@ -1,3 +1,0 @@
-(agtags
- :repo "vietor/agtags"
- :fetcher github)

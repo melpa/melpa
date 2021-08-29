@@ -1,2 +1,0 @@
-(egg-timer :fetcher github
-           :repo "wpcarro/egg-timer.el")

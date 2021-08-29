@@ -1,1 +1,0 @@
-(evil-ex-shell-command :fetcher github :repo "yqrashawn/evil-ex-shell-command")

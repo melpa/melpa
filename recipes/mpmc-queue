@@ -1,3 +1,0 @@
-(mpmc-queue
- :repo "smizoe/mpmc-queue"
- :fetcher github)

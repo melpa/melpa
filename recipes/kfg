@@ -1,2 +1,0 @@
-(kfg :fetcher github
-     :repo "czipperz/kfg")

@@ -1,1 +1,0 @@
-(company-fuzzy :repo "jcs-elpa/company-fuzzy" :fetcher github)

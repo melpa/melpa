@@ -1,1 +1,0 @@
-(fraktur-mode :repo "grettke/fraktur-mode" :fetcher github)

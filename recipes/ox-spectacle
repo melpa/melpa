@@ -1,2 +1,0 @@
-(ox-spectacle :fetcher github
-              :repo "lorniu/ox-spectacle")

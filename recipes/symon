@@ -1,4 +1,0 @@
-(symon
- :repo "zk-phi/symon"
- :fetcher github
- :files ("symon.el"))

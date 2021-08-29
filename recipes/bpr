@@ -1,1 +1,0 @@
-(bpr :repo "ilya-babanov/emacs-bpr" :fetcher github)

@@ -1,1 +1,0 @@
-(helm-css-scss :fetcher github :repo "emacsorphanage/helm-css-scss")

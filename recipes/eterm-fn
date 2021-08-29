@@ -1,1 +1,0 @@
-(eterm-fn :fetcher github :repo "oitofelix/eterm-fn" :files (:defaults "*.ti"))

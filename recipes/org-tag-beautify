@@ -1,1 +1,0 @@
-(org-tag-beautify :repo "stardiviner/org-tag-beautify" :fetcher github)

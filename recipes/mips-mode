@@ -1,1 +1,0 @@
-(mips-mode :repo "hlissner/emacs-mips-mode" :fetcher github)

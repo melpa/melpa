@@ -1,1 +1,0 @@
-(counsel-etags :fetcher github :repo "redguardtoo/counsel-etags")

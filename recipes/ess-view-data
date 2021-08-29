@@ -1,3 +1,0 @@
-(ess-view-data
- :repo "ShuguangSun/ess-view-data"
- :fetcher github)

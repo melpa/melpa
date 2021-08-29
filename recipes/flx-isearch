@@ -1,2 +1,0 @@
-(flx-isearch :repo "PythonNut/flx-isearch"
-             :fetcher github)

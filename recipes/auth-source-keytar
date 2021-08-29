@@ -1,1 +1,0 @@
-(auth-source-keytar :repo "emacs-grammarly/auth-source-keytar" :fetcher github)

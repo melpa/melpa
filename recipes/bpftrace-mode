@@ -1,1 +1,0 @@
-(bpftrace-mode :fetcher gitlab :repo "jgkamat/bpftrace-mode")

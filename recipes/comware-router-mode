@@ -1,1 +1,0 @@
-(comware-router-mode :repo "daviderestivo/comware-router-mode" :fetcher github)

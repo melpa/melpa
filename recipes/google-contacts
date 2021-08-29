@@ -1,1 +1,0 @@
-(google-contacts :fetcher github :repo "jd/google-contacts.el")

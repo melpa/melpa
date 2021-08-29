@@ -1,2 +1,0 @@
-(su :repo "PythonNut/su.el"
-    :fetcher github)

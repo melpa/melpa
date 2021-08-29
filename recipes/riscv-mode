@@ -1,1 +1,0 @@
-(riscv-mode :fetcher github :repo "AdamNiederer/riscv-mode")

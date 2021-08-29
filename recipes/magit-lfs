@@ -1,2 +1,0 @@
-(magit-lfs :fetcher github
-           :repo "Ailrun/magit-lfs")

@@ -1,3 +1,0 @@
-(osx-trash :fetcher github
-           :repo "emacsorphanage/osx-trash"
-           :files (:defaults "*.AppleScript"))

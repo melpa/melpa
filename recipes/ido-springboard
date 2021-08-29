@@ -1,1 +1,0 @@
-(ido-springboard :fetcher github :repo "jwiegley/springboard" :files ("ido-springboard.el"))

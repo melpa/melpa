@@ -1,1 +1,0 @@
-(el-mock :repo "rejeep/el-mock.el" :fetcher github)

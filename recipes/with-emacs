@@ -1,3 +1,0 @@
-(with-emacs
- :fetcher github
- :repo "twlz0ne/with-emacs.el")

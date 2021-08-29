@@ -1,2 +1,0 @@
-(semaphore :repo "webnf/semaphore.el" :fetcher github
-           :files ("semaphore.el"))

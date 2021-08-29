@@ -1,3 +1,0 @@
-(x-path-walker   :fetcher github
-                 :repo "Lompik/x-path-walker"
-                 :files (:defaults "xpathwalker"))

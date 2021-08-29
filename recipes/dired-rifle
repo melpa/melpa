@@ -1,3 +1,0 @@
-(dired-rifle
- :fetcher github
- :repo "vifon/dired-rifle.el")

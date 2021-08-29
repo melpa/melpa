@@ -1,1 +1,0 @@
-(isend-mode :fetcher github :repo "ffevotte/isend-mode.el" :files ("isend-mode.el"))

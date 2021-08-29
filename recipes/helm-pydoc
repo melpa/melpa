@@ -1,4 +1,0 @@
-(helm-pydoc
- :fetcher github
- :repo "emacsorphanage/helm-pydoc"
- :files (:defaults "*.py"))

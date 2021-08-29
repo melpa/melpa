@@ -1,1 +1,0 @@
-(test-kitchen :fetcher github :repo "jjasghar/test-kitchen-el")

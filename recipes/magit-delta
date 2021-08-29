@@ -1,1 +1,0 @@
-(magit-delta :fetcher github :repo "dandavison/magit-delta")

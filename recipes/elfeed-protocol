@@ -1,3 +1,0 @@
-(elfeed-protocol
-  :repo "fasheng/elfeed-protocol"
-  :fetcher github)

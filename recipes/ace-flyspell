@@ -1,2 +1,0 @@
-(ace-flyspell :repo "cute-jumper/ace-flyspell"
-              :fetcher github)

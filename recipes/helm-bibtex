@@ -1,1 +1,0 @@
-(helm-bibtex :fetcher github :repo "tmalsburg/helm-bibtex" :files ("helm-bibtex.el"))

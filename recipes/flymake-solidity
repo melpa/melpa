@@ -1,1 +1,0 @@
-(flymake-solidity :repo "kootenpv/flymake-solidity" :fetcher github)

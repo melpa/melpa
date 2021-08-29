@@ -1,2 +1,0 @@
-(helm-bufler :fetcher github :repo "alphapapa/bufler.el"
-             :files ("helm-bufler.el"))

@@ -1,2 +1,0 @@
-(sexp-move :repo "elzair/sexp-move"
-           :fetcher gitlab)

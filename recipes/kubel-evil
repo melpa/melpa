@@ -1,3 +1,0 @@
-(kubel-evil :repo "abrochard/kubel"
-            :fetcher github
-            :files ("kubel-evil.el"))

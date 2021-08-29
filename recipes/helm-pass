@@ -1,1 +1,0 @@
-(helm-pass :fetcher github :repo "emacs-helm/helm-pass")

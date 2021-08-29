@@ -1,1 +1,0 @@
-(php-cs-fixer :repo "OVYA/php-cs-fixer" :fetcher github)

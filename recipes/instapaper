@@ -1,3 +1,0 @@
-(instapaper
- :fetcher git
- :url "https://git.carcosa.net/jmcbray/emacs-instapaper.git")

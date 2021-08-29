@@ -1,2 +1,0 @@
-(bufler :fetcher github :repo "alphapapa/bufler.el"
-        :files (:defaults (:exclude "helm-bufler.el")))

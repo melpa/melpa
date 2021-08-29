@@ -1,4 +1,0 @@
-(treemacs-perspective
- :fetcher github
- :repo "Alexander-Miller/treemacs"
- :files ("src/extra/treemacs-perspective.el"))

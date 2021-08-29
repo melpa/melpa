@@ -1,3 +1,0 @@
-(night-owl-theme
- :repo "aaronjensen/night-owl-emacs"
- :fetcher github)

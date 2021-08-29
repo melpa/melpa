@@ -1,1 +1,0 @@
-(bind-map :repo "justbur/emacs-bind-map" :fetcher github)

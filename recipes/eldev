@@ -1,3 +1,0 @@
-(eldev :repo "doublep/eldev"
-       :fetcher github
-       :files (:defaults ("bin" "bin/*") (:exclude "bin/*.in" "bin/*.part")))

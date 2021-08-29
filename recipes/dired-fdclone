@@ -1,1 +1,0 @@
-(dired-fdclone :repo "knu/dired-fdclone.el" :fetcher github)

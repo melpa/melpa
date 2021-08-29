@@ -1,3 +1,0 @@
-(speechd-el
- :fetcher github
- :repo "brailcom/speechd-el")

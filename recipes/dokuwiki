@@ -1,3 +1,0 @@
-(dokuwiki
- :fetcher github
- :repo "accidentalrebel/emacs-dokuwiki")

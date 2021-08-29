@@ -1,1 +1,0 @@
-(cowsay :fetcher github :repo "lassik/emacs-cowsay")

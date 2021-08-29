@@ -1,4 +1,0 @@
-(poke-line
-  :fetcher github
-  :repo "RyanMillerC/poke-line"
-  :files (:defaults "img"))

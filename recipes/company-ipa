@@ -1,2 +1,0 @@
-(company-ipa :repo "mguzmann89/company-ipa"
-             :fetcher gitlab)

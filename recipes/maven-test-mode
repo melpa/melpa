@@ -1,1 +1,0 @@
-(maven-test-mode :fetcher github :repo "rranelli/maven-test-mode")

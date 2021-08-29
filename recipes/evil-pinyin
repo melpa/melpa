@@ -1,3 +1,0 @@
- 	(evil-pinyin
-	  :fetcher github
-	  :repo "laishulu/evil-pinyin")

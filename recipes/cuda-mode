@@ -1,1 +1,0 @@
-(cuda-mode :fetcher github :repo "chachi/cuda-mode")

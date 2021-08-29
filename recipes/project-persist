@@ -1,3 +1,0 @@
-(project-persist :fetcher github
-                 :repo "rdallasgray/project-persist"
-                 :files ("lib/*"))

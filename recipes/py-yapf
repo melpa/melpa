@@ -1,3 +1,0 @@
-(py-yapf
- :repo "paetzke/py-yapf.el"
- :fetcher github)

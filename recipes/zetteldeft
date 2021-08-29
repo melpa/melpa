@@ -1,1 +1,0 @@
-(zetteldeft :fetcher github :repo "EFLS/zetteldeft" :files (:defaults "zetteldeft.org"))

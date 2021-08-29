@@ -1,1 +1,0 @@
-(jump :repo "eschulte/jump.el" :fetcher github :files ("jump.el"))

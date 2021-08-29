@@ -1,1 +1,0 @@
-(enlive :repo "zweifisch/enlive" :fetcher github)

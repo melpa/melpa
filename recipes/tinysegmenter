@@ -1,2 +1,0 @@
-(tinysegmenter :repo "myuhe/tinysegmenter.el"
-               :fetcher github)

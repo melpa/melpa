@@ -1,1 +1,0 @@
-(searcher :repo "jcs-elpa/searcher" :fetcher github)

@@ -1,1 +1,0 @@
-(tramp-hdfs :fetcher github :repo "raghavgautam/tramp-hdfs")

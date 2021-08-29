@@ -1,2 +1,0 @@
-(horoscope :fetcher github
-           :repo "mschuldt/horoscope.el")

@@ -1,3 +1,0 @@
-(geiser-gauche :repo "emacs-geiser/gauche"
-	       :fetcher gitlab
-	       :files (:defaults "geiser-gauche.scm"))

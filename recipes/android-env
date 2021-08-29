@@ -1,3 +1,0 @@
-(android-env
- :fetcher github
- :repo "fernando-jascovich/android-env.el")

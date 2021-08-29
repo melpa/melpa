@@ -1,4 +1,0 @@
-(geiser-chicken
- :fetcher gitlab
- :repo "emacs-geiser/chicken"
- :files (:defaults ("src" "src/*")))

@@ -1,1 +1,0 @@
-(anki-connect :fetcher github :repo "lujun9972/anki-connect.el")

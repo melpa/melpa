@@ -1,2 +1,0 @@
-(magrant :repo "p3r7/magrant"
-         :fetcher github)

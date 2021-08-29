@@ -1,1 +1,0 @@
-(ccls :repo "MaskRay/emacs-ccls" :fetcher github)

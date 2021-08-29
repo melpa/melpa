@@ -1,3 +1,0 @@
-(date2name
-  :repo "DerBeutlin/date2name.el"
-  :fetcher github)

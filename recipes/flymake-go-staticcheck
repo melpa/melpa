@@ -1,1 +1,0 @@
-(flymake-go-staticcheck :repo "s-kostyaev/flymake-go-staticcheck" :fetcher github)

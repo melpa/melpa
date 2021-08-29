@@ -1,1 +1,0 @@
-(markdown-changelog :fetcher github :repo "plandes/markdown-changelog")

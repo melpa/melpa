@@ -1,1 +1,0 @@
-(irony-eldoc :fetcher github :repo "ikirill/irony-eldoc")

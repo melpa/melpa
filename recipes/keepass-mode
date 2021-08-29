@@ -1,1 +1,0 @@
-(keepass-mode :fetcher github :repo "ifosch/keepass-mode" :branch "melpa")

@@ -1,3 +1,0 @@
-(company-org-block
- :fetcher github
- :repo "xenodium/company-org-block")

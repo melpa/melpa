@@ -1,2 +1,0 @@
-
-(chinese-number :repo "zhcosin/chinese-number" :fetcher github)

@@ -1,4 +1,0 @@
-(flutter
- :repo "amake/flutter.el"
- :fetcher github
- :files ("flutter.el" "flutter-project.el" "flutter-l10n.el"))

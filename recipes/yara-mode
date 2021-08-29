@@ -1,3 +1,0 @@
-(yara-mode
- :fetcher github
- :repo "binjo/yara-mode")

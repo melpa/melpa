@@ -1,1 +1,0 @@
-(sackspace :repo "cofi/sackspace.el" :fetcher github)

@@ -1,3 +1,0 @@
-(flycheck-aspell :fetcher github 
-		 :repo "leotaku/flycheck-aspell"
-		 :files ("flycheck-aspell.el"))

@@ -1,4 +1,0 @@
-(treemacs-projectile
- :fetcher github
- :repo "Alexander-Miller/treemacs"
- :files ("src/extra/treemacs-projectile.el"))

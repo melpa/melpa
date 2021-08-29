@@ -1,1 +1,0 @@
-(flycheck-mmark :repo "mmark-md/flycheck-mmark" :fetcher github)

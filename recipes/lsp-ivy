@@ -1,1 +1,0 @@
-(lsp-ivy :repo "emacs-lsp/lsp-ivy" :fetcher github)

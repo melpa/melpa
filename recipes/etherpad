@@ -1,1 +1,0 @@
-(etherpad :repo "zzkt/ethermacs" :fetcher github)

@@ -1,2 +1,0 @@
-(counsel-codesearch :fetcher github
-                    :repo "abingham/emacs-counsel-codesearch")

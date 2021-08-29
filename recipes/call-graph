@@ -1,1 +1,0 @@
-(call-graph :repo "beacoder/call-graph" :fetcher github)

@@ -1,2 +1,0 @@
-(parinfer-rust-mode :repo "justinbarclay/parinfer-rust-mode"
-                    :fetcher github)

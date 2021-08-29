@@ -1,8 +1,0 @@
-(ess
- :repo "emacs-ess/ESS"
- :fetcher github
- :files ("*.el" "lisp/*.el"
-         "doc/ess.texi"
-         ("etc" "etc/*")
-         ("obsolete" "lisp/obsolete/*")
-         (:exclude "etc/other")))

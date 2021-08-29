@@ -1,4 +1,0 @@
-(ox-750words
- :fetcher github
- :repo "zzamboni/750words-client"
- :files ("ox-750words.el"))

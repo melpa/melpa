@@ -1,4 +1,0 @@
-(org-pomodoro
- :fetcher github
- :repo "marcinkoziej/org-pomodoro"
- :files (:defaults "resources"))

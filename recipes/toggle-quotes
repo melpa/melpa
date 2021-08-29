@@ -1,1 +1,0 @@
-(toggle-quotes :repo "toctan/toggle-quotes.el" :fetcher github)

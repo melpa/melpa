@@ -1,2 +1,0 @@
-(swap-regions :fetcher github
-              :repo "xuchunyang/swap-regions.el")

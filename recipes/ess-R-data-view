@@ -1,2 +1,0 @@
-(ess-R-data-view :repo "myuhe/ess-R-data-view.el" 
-                 :fetcher github)

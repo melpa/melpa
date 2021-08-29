@@ -1,3 +1,0 @@
-(e2wm-bookmark :repo "myuhe/e2wm-bookmark.el" 
-               :fetcher github 
-               :files ("e2wm-bookmark.el"))

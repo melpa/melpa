@@ -1,2 +1,0 @@
-(elegant-agenda-mode :repo "justinbarclay/elegant-agenda-mode"
-                     :fetcher github)

@@ -1,1 +1,0 @@
-(gnus-summary-ext :fetcher github :repo "vapniks/gnus-summary-ext")

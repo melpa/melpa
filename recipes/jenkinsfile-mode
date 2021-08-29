@@ -1,3 +1,0 @@
-(jenkinsfile-mode
- :repo "john2x/jenkinsfile-mode"
- :fetcher github)

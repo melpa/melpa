@@ -1,3 +1,0 @@
-(copy-as-format
- :repo "sshaw/copy-as-format"
- :fetcher github)

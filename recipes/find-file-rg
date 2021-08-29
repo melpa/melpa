@@ -1,1 +1,0 @@
-(find-file-rg :fetcher github :repo "muffinmad/emacs-find-file-rg")

@@ -1,3 +1,0 @@
-(karma
- :fetcher github
- :repo "tonini/karma.el")

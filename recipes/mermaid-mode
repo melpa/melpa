@@ -1,1 +1,0 @@
-(mermaid-mode :repo "abrochard/mermaid-mode" :fetcher github)

@@ -1,3 +1,0 @@
-(recompile-on-save
- :fetcher github
- :repo "maio/recompile-on-save.el")

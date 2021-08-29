@@ -1,1 +1,0 @@
-(xwwp :fetcher github :repo "canatella/xwwp" :files ("xwwp.el" "xwwp-follow-link.el" "xwwp-follow-link-ido.el"))

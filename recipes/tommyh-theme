@@ -1,2 +1,0 @@
-(tommyh-theme :repo "wglass/tommyh-theme"
-              :fetcher github)

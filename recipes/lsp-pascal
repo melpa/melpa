@@ -1,3 +1,0 @@
-(lsp-pascal
- :fetcher github
- :repo "arjanadriaanse/lsp-pascal")

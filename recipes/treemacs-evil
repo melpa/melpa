@@ -1,4 +1,0 @@
-(treemacs-evil
- :fetcher github
- :repo "Alexander-Miller/treemacs"
- :files ("src/extra/treemacs-evil.el"))

@@ -1,3 +1,0 @@
-(quick-shell-keybind
- :fetcher github
- :repo "eyeinsky/quick-shell-keybind")

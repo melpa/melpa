@@ -1,1 +1,0 @@
-(poet-client :repo "wailo/emacs-poet" :fetcher github)

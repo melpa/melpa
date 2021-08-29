@@ -1,3 +1,0 @@
-(recursion-indicator
- :repo "minad/recursion-indicator"
- :fetcher github)

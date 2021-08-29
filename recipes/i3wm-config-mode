@@ -1,3 +1,0 @@
-(i3wm-config-mode
- :repo "Alexander-Miller/i3wm-Config-Mode"
- :fetcher github)

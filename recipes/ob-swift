@@ -1,1 +1,0 @@
-(ob-swift :fetcher github :repo "zweifisch/ob-swift")

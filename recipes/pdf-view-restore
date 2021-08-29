@@ -1,1 +1,0 @@
-(pdf-view-restore :repo "007kevin/pdf-view-restore" :fetcher github)

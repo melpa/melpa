@@ -1,3 +1,0 @@
-(operate-on-number
- :fetcher github
- :repo "knu/operate-on-number.el")

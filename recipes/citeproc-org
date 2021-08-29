@@ -1,3 +1,0 @@
-(citeproc-org :repo "andras-simonyi/citeproc-org"
-	      :fetcher github
-	      :files (:defaults "chicago-author-date.csl" "locales-en-US.xml"))

@@ -1,2 +1,0 @@
-(pikchr-mode :fetcher github
-             :repo "kljohann/pikchr-mode")

@@ -1,2 +1,0 @@
-(lpy :repo "abo-abo/lpy"
-     :fetcher github)

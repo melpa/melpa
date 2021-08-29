@@ -1,1 +1,0 @@
-(org-auto-tangle :repo "yilkalargaw/org-auto-tangle" :fetcher github)

@@ -1,2 +1,0 @@
-(editorconfig-generate :fetcher github
-                       :repo "10sr/editorconfig-generate-el")

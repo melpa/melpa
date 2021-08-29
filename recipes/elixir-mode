@@ -1,3 +1,0 @@
-(elixir-mode
- :fetcher github
- :repo "elixir-editors/emacs-elixir")

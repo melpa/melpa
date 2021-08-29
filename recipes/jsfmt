@@ -1,3 +1,0 @@
-(jsfmt
- :repo "brettlangdon/jsfmt.el"
- :fetcher github)

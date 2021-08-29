@@ -1,1 +1,0 @@
-(go-noisegate :repo "go-noisegate/go-noisegate.el" :fetcher github)

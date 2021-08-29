@@ -1,1 +1,0 @@
-(gherkin-mode :fetcher github :repo "candera/gherkin-mode")

@@ -1,2 +1,0 @@
-(org-working-set :fetcher github
-	   :repo "marcIhm/org-working-set")

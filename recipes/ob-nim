@@ -1,2 +1,0 @@
-(ob-nim   :fetcher github
-          :repo "Lompik/ob-nim")

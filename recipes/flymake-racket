@@ -1,1 +1,0 @@
-(flymake-racket :fetcher github :repo "jojojames/flymake-racket")

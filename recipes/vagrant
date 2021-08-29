@@ -1,1 +1,0 @@
-(vagrant :fetcher github :repo "ottbot/vagrant.el")

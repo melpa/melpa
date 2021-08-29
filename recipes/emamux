@@ -1,3 +1,0 @@
-(emamux
- :repo "emacsorphanage/emamux"
- :fetcher github)

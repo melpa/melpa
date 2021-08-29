@@ -1,2 +1,0 @@
-(tr-ime :fetcher github :repo "trueroad/tr-emacs-ime-module"
-	:files ("lisp/*.el"))

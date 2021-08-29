@@ -1,3 +1,0 @@
-(consult-recoll
- :fetcher git
- :url "https://codeberg.org/jao/consult-recoll.git")

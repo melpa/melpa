@@ -1,3 +1,0 @@
-(go-fill-struct
- :repo "s-kostyaev/go-fill-struct"
- :fetcher github)

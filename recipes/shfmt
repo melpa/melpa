@@ -1,1 +1,0 @@
-(shfmt :fetcher github :repo "purcell/emacs-shfmt")

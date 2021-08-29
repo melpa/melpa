@@ -1,2 +1,3 @@
 (ejc-sql :fetcher github
+         :files (:defaults "project.clj" "src" "snippets")
          :repo "josephmarbach/ejc-sql")

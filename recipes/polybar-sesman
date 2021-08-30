@@ -1,0 +1,2 @@
+(polybar-sesman :fetcher github
+             :repo "markgdawson/polybar-sesman.el")

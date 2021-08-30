@@ -1,0 +1,2 @@
+(polybar-clj :fetcher github
+             :repo "markgdawson/polybar-clj-emacs")

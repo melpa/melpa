@@ -1,0 +1,1 @@
+(ssh-manager :repo "7ym0n/dotfairy-ssh-manager" :fetcher github)

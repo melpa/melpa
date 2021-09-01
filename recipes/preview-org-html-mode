@@ -1,1 +1,0 @@
-(preview-org-html-mode :repo "jakebox/preview-org-html-mode" :fetcher github)

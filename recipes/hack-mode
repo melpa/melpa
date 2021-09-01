@@ -1,2 +1,3 @@
 (hack-mode :repo "hhvm/hack-mode"
+           :branch "main"
            :fetcher github)

@@ -1,0 +1,1 @@
+(pardef :fetcher github :repo "FloatingLion/pardef.el")

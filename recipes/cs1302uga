@@ -1,0 +1,3 @@
+(cs1302uga
+ :repo "cs1302uga/cs1302-emacs-config"
+ :fetcher github)

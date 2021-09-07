@@ -1,0 +1,2 @@
+(magit-smerge :fetcher github
+              :repo "markgdawson/magit-smerge.el")

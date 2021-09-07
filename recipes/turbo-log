@@ -1,0 +1,1 @@
+(turbo-log :repo "artawower/turbo-log" :fetcher github)

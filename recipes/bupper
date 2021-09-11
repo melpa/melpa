@@ -1,0 +1,1 @@
+(bupper :repo "se7entyse7en/bupper" :fetcher github)

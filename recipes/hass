@@ -1,1 +1,1 @@
-(hass :version-regexp "v\\(.*\\)" :fetcher github :repo "purplg/hass")
+(hass :fetcher github :repo "purplg/hass")

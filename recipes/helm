@@ -3,7 +3,6 @@
       :files ("*.el"
               "emacs-helm.sh"
               (:exclude "helm.el"
-                        "helm-lib.el"
                         "helm-source.el"
                         "helm-multi-match.el"
                         "helm-core-pkg.el")))

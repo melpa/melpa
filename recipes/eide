@@ -1,1 +1,1 @@
-(eide :fetcher git :url "https://forge.tedomum.net/hjuvi/eide.git" :files ("src/*.el" "src/themes/*.el"))
+(eide :fetcher git :url "https://forge.chapril.org/hjuvi/eide.git" :files ("src/*.el" "src/themes/*.el"))

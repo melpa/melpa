@@ -1,2 +1,2 @@
-(ox-pandoc :repo "kawabata/ox-pandoc"
+(ox-pandoc :repo "a-fent/ox-pandoc"
            :fetcher github)

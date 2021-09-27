@@ -1,2 +1,3 @@
-(idle-highlight-mode :repo "nonsequitur/idle-highlight-mode" :fetcher github)
-
+(idle-highlight-mode
+ :repo "ideasman42/emacs-idle-highlight-mode"
+ :fetcher gitlab)

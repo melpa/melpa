@@ -1,0 +1,1 @@
+(dired-lsi :fetcher github :repo "conao3/dired-lsi.el")

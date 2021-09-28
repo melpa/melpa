@@ -1,0 +1,1 @@
+(numpydoc :fetcher github :repo "douglasdavis/numpydoc.el")

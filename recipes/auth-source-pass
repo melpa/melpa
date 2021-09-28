@@ -1,4 +1,0 @@
-(auth-source-pass
- :fetcher github
- :repo "DamienCassou/auth-password-store"
- :old-names (auth-password-store))

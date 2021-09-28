@@ -50,6 +50,7 @@ flux_capacitor() {
 
 }
 
+echo '>>>> STARTING UNSTABLE BUILD'
 unset STABLE
 
 BUILD_STATUS_JSON=${STATUS_JSON}
@@ -60,7 +61,7 @@ fi
 
 flux_capacitor
 
-# stable build
+echo '>>>> STARTING STABLE BUILD'
 export STABLE=t
 
 BUILD_STATUS_JSON=${STABLE_STATUS_JSON}

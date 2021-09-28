@@ -1,1 +1,1 @@
-(jsonnet-mode :fetcher github :repo "mgyucht/jsonnet-mode")
+(jsonnet-mode :fetcher github :repo "tminor/jsonnet-mode")

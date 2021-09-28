@@ -1,1 +1,1 @@
-(smart-mark :repo "zhangkaiyulw/smart-mark" :fetcher github)
+(smart-mark :repo "victorteokw/smart-mark" :fetcher github)

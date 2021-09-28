@@ -1,0 +1,3 @@
+(sweet-theme
+ :fetcher github
+ :repo "2bruh4me/sweet-theme")

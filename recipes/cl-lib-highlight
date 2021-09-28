@@ -1,2 +1,0 @@
-(cl-lib-highlight :repo "skeeto/cl-lib-highlight"
-                  :fetcher github)

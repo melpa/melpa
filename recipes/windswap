@@ -1,0 +1,1 @@
+(windswap :fetcher github :repo "purcell/windswap")

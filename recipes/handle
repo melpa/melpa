@@ -1,1 +1,1 @@
-(handle :fetcher gitlab :repo "jjzmajic/handle")
+(handle :fetcher github :repo "wurosh/handle")

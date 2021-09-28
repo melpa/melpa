@@ -1,3 +1,4 @@
 (sxiv
- :fetcher gitlab
- :repo "contrapunctus/sxiv.el")
+ :fetcher git
+ :branch "dev"
+ :url "https://tildegit.org/contrapunctus/sxiv")

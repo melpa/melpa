@@ -1,10 +1,3 @@
 (forge :fetcher github
        :repo "magit/forge"
-       :files ("lisp/*.el" "docs/forge.texi")
-       ;; Forge-0.1.0 is not compatible with Magit-2.90.x.  While it
-       ;; would theoretically be possible to use Forge-0.1.0 with a
-       ;; Magit snapshot doing so would not be reasonable because many
-       ;; bugs have been fixed in the Forge snapshot by now.  Once
-       ;; Magit-2.91.0 and then Forge-0.2.0 have been released this
-       ;; kludge has to be removed again.
-       :version-regexp "PREVENT-STABLE")
+       :files ("lisp/*.el" "docs/forge.texi"))

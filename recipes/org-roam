@@ -1,2 +1,3 @@
 (org-roam :fetcher github
-          :repo "org-roam/org-roam")
+          :repo "org-roam/org-roam"
+          :files (:defaults "extensions/*"))

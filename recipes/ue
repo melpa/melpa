@@ -1,0 +1,3 @@
+(ue :repo    "unrealemacs/ue.el"
+    :fetcher gitlab
+    :files   (:defaults "snippets"))

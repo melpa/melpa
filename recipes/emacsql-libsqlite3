@@ -1,0 +1,2 @@
+(emacsql-libsqlite3 :fetcher github
+                    :repo "emacscollective/emacsql-libsqlite3")

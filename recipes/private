@@ -1,1 +1,1 @@
-(private :repo "zhangkaiyulw/private" :fetcher github)
+(private :repo "victorteokw/private" :fetcher github)

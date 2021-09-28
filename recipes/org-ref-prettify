@@ -1,0 +1,1 @@
+(org-ref-prettify :fetcher github :repo "alezost/org-ref-prettify.el")

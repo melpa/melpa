@@ -1,0 +1,4 @@
+(ivy-spotify
+ :fetcher git
+ :url "https://codeberg.org/jao/espotify"
+ :files ("ivy-spotify.el"))

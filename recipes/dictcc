@@ -1,1 +1,1 @@
-(dictcc :repo "cqql/dictcc.el" :fetcher github)
+(dictcc :repo "martenlienen/dictcc.el" :fetcher github)

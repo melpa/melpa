@@ -1,0 +1,1 @@
+(ron-mode :fetcher git :url "https://codeberg.org/Hutzdog/ron-mode.git")

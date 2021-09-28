@@ -1,1 +1,4 @@
-(organize-imports-java :repo "jcs-elpa/organize-imports-java" :fetcher github)
+(organize-imports-java
+ :repo "jcs-elpa/organize-imports-java"
+ :fetcher github
+ :files (:defaults "sdk" "default"))

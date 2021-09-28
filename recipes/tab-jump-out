@@ -1,1 +1,1 @@
-(tab-jump-out :repo "zhangkaiyulw/tab-jump-out" :fetcher github)
+(tab-jump-out :repo "victorteokw/tab-jump-out" :fetcher github)

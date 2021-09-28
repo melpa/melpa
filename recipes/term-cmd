@@ -1,1 +1,1 @@
-(term-cmd :fetcher github :repo "CallumCameron/term-cmd" :files (:defaults "bin"))
+(term-cmd :fetcher github :repo "calliecameron/term-cmd" :files (:defaults "bin"))

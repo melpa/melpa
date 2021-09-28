@@ -1,0 +1,3 @@
+(gitlab-pipeline
+ :repo "TxGVNN/gitlab-pipeline"
+ :fetcher github)

@@ -1,0 +1,1 @@
+(slurm-mode :fetcher github :repo "ffevotte/slurm.el")

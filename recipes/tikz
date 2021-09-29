@@ -1,2 +1,2 @@
 (tikz :repo "emiliotorres/tikz" :fetcher github
-	  :files ("*.el" "templates"))
+	  :files (:defaults "templates"))

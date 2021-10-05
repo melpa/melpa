@@ -1,0 +1,1 @@
+(conventional-commit :fetcher github :repo "akirak/conventional-commit.el")

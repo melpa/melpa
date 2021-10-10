@@ -1,4 +1,4 @@
 (org-clock-reminder
  :fetcher github
  :repo "inickey/org-clock-reminder"
- :files ("*.el" "icons/*.png"))
+ :files (:defaults "icons/*.png"))

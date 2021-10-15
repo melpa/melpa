@@ -1,0 +1,4 @@
+(sublime-fuzzy
+ :repo "jcs-elpa/sublime-fuzzy"
+ :fetcher github
+ :files (:defaults "bin"))

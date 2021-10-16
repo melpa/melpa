@@ -1,168 +1,71 @@
-<h1>Getting started</h1>
-<section>
-      <a name="installing"></a>
-      <h2>Installing</h2>
-
-      <p>To use the MELPA repository, you'll need an Emacs with
-        <code>package.el</code> and TLS support, ie. Emacs 24.1 or
-        greater. To test TLS support you can visit a HTTPS URL, for
-        example with <code>M-x eww RET https://wikipedia.org RET</code>.
-      </p>
-
-      <p>
-	Consider using Emacs 26.3 or greater; otherwise you will have
-	to add a kludge to work around a bug described in *Known
-	Issues* below.
-      </p>
-
-      <p>
-        Enable installation of packages from MELPA by adding an entry
-        to <code>package-archives</code> after <code>(require
-        'package)</code> and before the call
-        to <code>package-initialize</code> in
-        your <code>init.el</code> or <code>.emacs</code> file:
-      </p>
-
-      <pre><code>(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
-;; and `package-pinned-packages`. Most users will not need or want to do this.
-;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(package-initialize)</code></pre>
-
-      <p>
-        Note that you'll need to run <code>M-x package-refresh-contents</code> or
-        <code>M-x package-list-packages</code> to ensure that Emacs has fetched
-        the MELPA package list before you can install packages with
-        <code>M-x package-install</code> or similar.
-      </p>
-
-      <p>
-        To use the <a href="https://stable.melpa.org" title="MELPA Stable">
-          stable package repository</a> instead of the default
-        “bleeding-edge” repository, use this instead
-        of <code>"melpa"</code>:
-      </p>
-
-      <pre><code>(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)</code></pre>
-
-      <h3>Customizations</h3>
-      <p>
-        What if you only want some of your packages to be installed
-        from MELPA, and the rest from Marmalade or elsewhere?
-      </p>
-      <p>
-        In Emacs 24.4 and later, <code>package-pinned-packages</code>
-        allows you to exclude or include versions according to their
-        source. For users using older versions of Emacs, we provide
-        a <code>package-filter.el</code> package (available in MELPA)
-        that will allow you to enable only certain packages or exclude
-        certain packages.  You can install the package manually by
-        pasting this into your <code>*scratch*</code> buffer and
-        evaluating it.
-      </p>
-      <pre><code>(progn
-  (switch-to-buffer
-    (url-retrieve-synchronously
-      "https://raw.github.com/melpa/package-filter/master/package-filter.el"))
-  (package-install-from-buffer  (package-buffer-info) 'single))</code></pre>
-
-      <p>You can then customize two variables:</p>
-      <dl>
-        <dt><code>package-archive-enable-alist</code></dt>
-        <dd>
-          <p>
-            Optional Alist of enabled packages used
-            by <code>package-filter</code>. The format
-            is <code>(ARCHIVE . PACKAGE ...)</code>,
-            where <code>ARCHIVE</code> is a string matching an archive
-            name in<code>package-archives</code>, <code>PACKAGE</code>
-            is a symbol of a package in <code>ARCHIVE</code> to
-            enable.
-          </p>
-          <p>
-            If no <code>ARCHIVE</code> exists in the alist, all
-            packages are enabled.
-          </p>
-        </dd>
-        <dt><code>package-archive-exclude-alist</code></dt>
-        <dd>
-          <p>
-            Alist of packages excluded by <code>package-filter</code>.
-            The format is <code>(ARCHIVE . PACKAGE ...)</code>, where
-            <code>ARCHIVE</code> is a string matching an archive name
-            in <code>package-archives</code>, <code>PACKAGE</code> is
-            a symbol of a package in that archive to exclude.</p>
-          <p>
-            Any specified package is excluded regardless of the value
-            of <code>package-archive-enable-alist</code>
-          </p>
-        </dd>
-      </dl>
-    </section>
-    <section>
-      <h2>Known Issues</h2>
-      <h3>Failed to download ‘MELPA’ archive</h3>
-      <p>This occationally happens when using Emacs &#60;= 26.2
-        with Gnutls &#62;= 3.6.  The recommended fix is to update to
-        Emacs 26.3 or greater.  Alternatively you can disable TLS1.3
-        by adding the following setting early in your init file.  For
-        more information
-        see <a href="https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341">Emacs
-        bug#34341</a>.
-      </p>
-      <pre><code>(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")</code></pre>
-
-      <h3>Dependency order is reversed</h3>
-      <p>
-        There is a small bug in Emacs 24’s <code>package.el</code> such
-        that the dependency order comes out backwards. The problem is
-        patched by some <em>advice</em>.
-      </p>
-
-      <pre><code> (defadvice package-compute-transaction
-  (before package-compute-transaction-reverse (package-list requirements) activate compile)
-    "reverse the requirements"
-    (setq requirements (reverse requirements))
-    (print requirements))</code></pre>
-
-      <p>
-        <strong>Note:</strong> <em>This fix is included in
-        the <code>package-filter.el</code> package.</em>
-      </p>
-    </section>
-    <section>
-      <a name="updating"></a>
-      <h2>Updating Packages</h2>
-      <p>
-        After running <code>package-list-packages</code>,
-        type <em>U</em> (mark Upgradable packages) and then <em>x</em>
-        (eXecute the installs and deletions). When it’s done
-        installing all the packages it will ask if you want to delete
-        the obsolete packages and so you can hit <em>y</em> (Yes).
-      </p>
-      <p>
-        If you run into a problem installing or upgrading, you may
-        need to go into your <code>~/.emacs.d/elpa/</code> directory
-        and delete packages that are installed multiple times. This
-        can happen when the install times out.
-      </p>
-      <a name="adding"></a>
-      <h2>Adding a Package</h2>
-      <p>
-	In so many words, fork the project's source tree
-	and create a pull request with a recipe for your package.
-	The <a href="https://github.com/melpa/melpa/blob/master/README.md">README.md</a> file on GitHub has more details.
-      </p>
-      <a name="development"></a>
-      <h2>Development</h2>
-      <p><a href="https://github.com/melpa/melpa">https://github.com/melpa/melpa</a></p>
-      <p>
-        Contributions are welcome. Currently, the builder supports
-        packages using Git, Mercurial, and EmacsWiki (deprecated
-        due to security concerns). Support for Bazaar, CVS, Darcs,
-        Fossil and Subversion has been removed due to very limited
-        use.
-      </p>
-    </section>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p3 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #000000; -webkit-text-stroke: #000000}
+    p.p6 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; color: #0000e9; -webkit-text-stroke: #0000e9}
+    span.s1 {font-kerning: none}
+    span.s2 {font: 12.0px Courier; font-kerning: none}
+    span.s3 {font: 12.0px Times; text-decoration: underline ; font-kerning: none; color: #0000e9; -webkit-text-stroke: 0px #0000e9}
+    span.s4 {text-decoration: underline ; font-kerning: none}
+  </style>
+</head>
+<body>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Getting started</b></span></h1>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Installing</b></span></h2>
+<p class="p3"><span class="s1">To use the MELPA repository, you'll need an Emacs with </span><span class="s2">package.el</span><span class="s1"> and TLS support, ie. Emacs 24.1 or greater. To test TLS support you can visit a HTTPS URL, for example with </span><span class="s2">M-x eww RET https://wikipedia.org RET</span><span class="s1">.<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s1">Consider using Emacs 26.3 or greater; otherwise you will have to add a kludge to work around a bug described in *Known Issues* below.<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s1">Enable installation of packages from MELPA by adding an entry to </span><span class="s2">package-archives</span><span class="s1"> after </span><span class="s2">(require 'package)</span><span class="s1"> and before the call to </span><span class="s2">package-initialize</span><span class="s1"> in your </span><span class="s2">init.el</span><span class="s1"> or </span><span class="s2">.emacs</span><span class="s1"> file:<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s1">(require 'package)</span></p>
+<p class="p4"><span class="s1">(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)</span></p>
+<p class="p4"><span class="s1">;; Comment/uncomment this line to enable MELPA Stable if desired.<span class="Apple-converted-space">  </span>See `package-archive-priorities`</span></p>
+<p class="p4"><span class="s1">;; and `package-pinned-packages`. Most users will not need or want to do this.</span></p>
+<p class="p4"><span class="s1">;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)</span></p>
+<p class="p4"><span class="s1">(package-initialize)</span></p>
+<p class="p3"><span class="s1">Note that you'll need to run </span><span class="s2">M-x package-refresh-contents</span><span class="s1"> or </span><span class="s2">M-x package-list-packages</span><span class="s1"> to ensure that Emacs has fetched the MELPA package list before you can install packages with </span><span class="s2">M-x package-install</span><span class="s1"> or similar.<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s1">To use the <a href="https://stable.melpa.org/"><span class="s3">stable package repository</span></a> instead of the default â€œbleeding-edgeâ€ repository, use this instead of </span><span class="s2">"melpa"</span><span class="s1">:<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s1">(add-to-list 'package-archives</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">             </span>'("melpa-stable" . "https://stable.melpa.org/packages/") t)</span></p>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Customizations</b></span></h3>
+<p class="p3"><span class="s1">What if you only want some of your packages to be installed from MELPA, and the rest from Marmalade or elsewhere?<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s1">In Emacs 24.4 and later, </span><span class="s2">package-pinned-packages</span><span class="s1"> allows you to exclude or include versions according to their source. For users using older versions of Emacs, we provide a </span><span class="s2">package-filter.el</span><span class="s1"> package (available in MELPA) that will allow you to enable only certain packages or exclude certain packages. You can install the package manually by pasting this into your </span><span class="s2">*scratch*</span><span class="s1"> buffer and evaluating it.<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s1">(progn</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>(switch-to-buffer</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>(url-retrieve-synchronously</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>"https://raw.github.com/melpa/package-filter/master/package-filter.el"))</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>(package-install-from-buffer<span class="Apple-converted-space">  </span>(package-buffer-info) 'single))</span></p>
+<p class="p3"><span class="s1">You can then customize two variables:</span></p>
+<p class="p4"><span class="s1">package-archive-enable-alist</span></p>
+<p class="p3"><span class="s1">Optional Alist of enabled packages used by </span><span class="s2">package-filter</span><span class="s1">. The format is </span><span class="s2">(ARCHIVE . PACKAGE ...)</span><span class="s1">, where </span><span class="s2">ARCHIVE</span><span class="s1"> is a string matching an archive name in</span><span class="s2">package-archives</span><span class="s1">, </span><span class="s2">PACKAGE</span><span class="s1"> is a symbol of a package in </span><span class="s2">ARCHIVE</span><span class="s1"> to enable.<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s1">If no </span><span class="s2">ARCHIVE</span><span class="s1"> exists in the alist, all packages are enabled.<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s1">package-archive-exclude-alist</span></p>
+<p class="p3"><span class="s1">Alist of packages excluded by </span><span class="s2">package-filter</span><span class="s1">. The format is </span><span class="s2">(ARCHIVE . PACKAGE ...)</span><span class="s1">, where </span><span class="s2">ARCHIVE</span><span class="s1"> is a string matching an archive name in </span><span class="s2">package-archives</span><span class="s1">, </span><span class="s2">PACKAGE</span><span class="s1"> is a symbol of a package in that archive to exclude.</span></p>
+<p class="p3"><span class="s1">Any specified package is excluded regardless of the value of </span><span class="s2">package-archive-enable-alist</span><span class="s1"><span class="Apple-converted-space"> </span></span></p>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Known Issues</b></span></h2>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Failed to download â€˜MELPAâ€™ archive</b></span></h3>
+<p class="p3"><span class="s1">This occationally happens when using Emacs &lt;= 26.2 with Gnutls &gt;= 3.6. The recommended fix is to update to Emacs 26.3 or greater. Alternatively you can disable TLS1.3 by adding the following setting early in your init file. For more information see <a href="https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341"><span class="s3">Emacs bug#34341</span></a>.<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s1">(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")</span></p>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Dependency order is reversed</b></span></h3>
+<p class="p3"><span class="s1">There is a small bug in Emacs 24â€™s </span><span class="s2">package.el</span><span class="s1"> such that the dependency order comes out backwards. The problem is patched by some <i>advice</i>.<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>(defadvice package-compute-transaction</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>(before package-compute-transaction-reverse (package-list requirements) activate compile)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>"reverse the requirements"</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>(setq requirements (reverse requirements))</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>(print requirements))</span></p>
+<p class="p3"><span class="s1"><b>Note:</b> <i>This fix is included in the </i></span><span class="s2"><i>package-filter.el</i></span><span class="s1"><i> package.</i><span class="Apple-converted-space"> </span></span></p>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Updating / Installing Packages</b></span></h2>
+<p class="p3"><span class="s1">First, run </span><span class="s2">M-x package-list-packages</span><span class="s1">. To install a new package, type “i” next to each package you want to have installed. Or, type <i>U</i> (mark Upgradable packages) and then <i>x</i> (eXecute the installs and deletions). When itâ€™s done installing all the packages it will ask if you want to delete the obsolete packages and so you can hit <i>y</i> (Yes).<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s1">If you run into a problem installing or upgrading, you may need to go into your </span><span class="s2">~/.emacs.d/elpa/</span><span class="s1"> directory and delete packages that are installed multiple times. This can happen when the install times out.<span class="Apple-converted-space"> </span></span></p>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Adding a Package</b></span></h2>
+<p class="p3"><span class="s1">In so many words, fork the project's source tree and create a pull request with a recipe for your package. The <a href="https://github.com/melpa/melpa/blob/master/README.md"><span class="s3">README.md</span></a> file on GitHub has more details.<span class="Apple-converted-space"> </span></span></p>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Development</b></span></h2>
+<p class="p6"><span class="s4"><a href="https://github.com/melpa/melpa">https://github.com/melpa/melpa</a></span></p>
+<p class="p3"><span class="s1">Contributions are welcome. Currently, the builder supports packages using Git, Mercurial, and EmacsWiki (deprecated due to security concerns). Support for Bazaar, CVS, Darcs, Fossil and Subversion has been removed due to very limited use.<span class="Apple-converted-space"> </span></span></p>
+</body>
+</html>

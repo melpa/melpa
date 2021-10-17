@@ -1,1 +1,0 @@
-(xah-get-thing :repo "xahlee/xah-get-thing-or-selection" :fetcher github)

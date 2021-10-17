@@ -1,3 +1,1 @@
-(req-package
-    :fetcher gitlab
-    :repo "edvorg/req-package")
+(req-package :fetcher github :repo "edvorg/req-package")

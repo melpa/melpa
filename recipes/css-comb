@@ -1,1 +1,1 @@
-(css-comb :fetcher github :repo "channikhabra/css-comb.el")
+(css-comb :fetcher github :repo "bitspook/css-comb.el")

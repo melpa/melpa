@@ -1,3 +1,3 @@
 (helm-img-tiqav
- :repo "l3msh0/helm-img-tiqav"
+ :repo "mtmtcode/helm-img-tiqav"
  :fetcher github)

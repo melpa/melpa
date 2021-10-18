@@ -1,1 +1,0 @@
-(tree-sitter-fold :repo "jcs090218/tree-sitter-fold" :fetcher github)

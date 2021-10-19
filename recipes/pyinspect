@@ -1,0 +1,4 @@
+(pyinspect
+ :fetcher github
+ :repo "it-is-wednesday/pyinspect.el"
+ :files ("pyinspect.el" "pyinspect.py"))

@@ -1,3 +1,4 @@
 (transient :fetcher github
            :repo "magit/transient"
+	   :branch "melpa" ; FIXME temporary kludge
            :files ("lisp/*.el" "docs/transient.texi"))

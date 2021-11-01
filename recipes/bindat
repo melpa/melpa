@@ -1,0 +1,1 @@
+(bindat :repo "jollm/bindat" :fetcher github :branch "focal")

@@ -1,0 +1,1 @@
+(blamer :repo "artawower/blamer.el" :fetcher github)

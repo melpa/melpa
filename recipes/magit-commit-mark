@@ -1,0 +1,3 @@
+(magit-commit-mark
+  :repo "ideasman42/emacs-magit-commit-mark"
+  :fetcher gitlab)

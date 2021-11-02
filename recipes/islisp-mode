@@ -1,7 +1,6 @@
 (islisp-mode :repo "sasanidas/islisp-mode"
 	     :fetcher gitlab
-	     :files ("inferior-islisp.el"
-		     "islisp-mode.el"
+	     :files ("islisp-mode.el"
 		     "islisp-hyperdraft.el"
 		     ("advance" "advance/*")
 		     ("implementations" "implementations/*")))

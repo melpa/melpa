@@ -1,0 +1,3 @@
+(org-roam-ui :fetcher github
+             :repo "org-roam/org-roam-ui"
+             :files (:defaults "out"))

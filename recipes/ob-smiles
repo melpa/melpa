@@ -1,0 +1,3 @@
+(ob-smiles
+ :fetcher github
+ :repo "stardiviner/ob-smiles")

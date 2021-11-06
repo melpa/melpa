@@ -1,1 +1,1 @@
-(ccls :repo "MaskRay/emacs-ccls" :fetcher github)
+(ccls :repo "emacs-lsp/emacs-ccls" :fetcher github)

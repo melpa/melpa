@@ -8,6 +8,10 @@
           "README.md"
           "start"
           "start.bat"
+          "edts-escript"
+          "edts-release.config"
+
+          ;; to be removed
           "rebar.config"
           ("config"                     "config/*")
 

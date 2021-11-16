@@ -1,0 +1,3 @@
+(github-dark-vscode-theme :repo "justintime50/github-dark-vscode-emacs-theme" 
+                          :fetcher github
+                          :files ("src/github-dark-vscode-theme.el"))

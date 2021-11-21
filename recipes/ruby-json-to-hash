@@ -1,0 +1,1 @@
+(ruby-json-to-hash :repo "otavioschwanck/ruby-json-to-hash.el" :fetcher github)

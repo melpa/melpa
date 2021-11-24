@@ -1,0 +1,3 @@
+(gh-notify :fetcher github
+           :repo "anticomputer/gh-notify"
+           :files ("gh-notify.el"))

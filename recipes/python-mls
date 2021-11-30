@@ -1,1 +1,1 @@
-(mlscroll :repo "jdtsmith/python-mls" :fetcher github)
+(python-mls :repo "jdtsmith/python-mls" :fetcher github)

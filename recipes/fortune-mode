@@ -1,0 +1,1 @@
+(fortune-mode :fetcher github :repo "lassik/emacs-fortune-mode")

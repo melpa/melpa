@@ -1,1 +1,1 @@
-(brutal-theme :fetcher github :repo "topikettunen/brutal-emacs")
+(tok-theme :fetcher github :repo "topikettunen/tok-theme" :old-names (brutal-theme))

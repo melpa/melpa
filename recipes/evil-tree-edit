@@ -1,0 +1,1 @@
+(evil-tree-edit :repo "ethan-leba/tree-edit" :fetcher github :files ("evil-tree-edit.el"))

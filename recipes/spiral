@@ -1,4 +1,4 @@
-(spiral :repo "Unrepl/spiral"
+(spiral :repo "volrath/spiral"
         :fetcher github
         :files (:defaults
                 "blob.clj"

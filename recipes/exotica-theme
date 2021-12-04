@@ -1,3 +1,3 @@
 (exotica-theme
- :repo "1bharat/exotica-theme"
+ :repo "zenobht/exotica-theme"
  :fetcher github)

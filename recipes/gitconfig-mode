@@ -1,3 +1,0 @@
-(gitconfig-mode :repo "magit/git-modes"
-                :fetcher github
-                :files ("gitconfig-mode.el"))

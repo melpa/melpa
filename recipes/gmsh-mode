@@ -1,0 +1,1 @@
+(gmsh-mode :repo "matsievskiysv/gmsh-mode" :fetcher gitlab)

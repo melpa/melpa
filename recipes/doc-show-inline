@@ -1,0 +1,3 @@
+(doc-show-inline
+  :repo "ideasman42/emacs-doc-show-inline"
+  :fetcher gitlab)

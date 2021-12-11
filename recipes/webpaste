@@ -1,1 +1,1 @@
-(webpaste :repo "etu/webpaste.el" :fetcher github)
+(webpaste :repo "etu/webpaste.el" :fetcher github :branch "main")

@@ -1,0 +1,5 @@
+(hyperbole
+ :url "https://git.savannah.gnu.org/git/hyperbole.git"
+ :fetcher git
+ :files (:defaults "kotl" "man" "HY-TALK" "test"))
+

@@ -1,0 +1,1 @@
+(eglot-java :repo "yveszoundi/eglot-java" :fetcher github)

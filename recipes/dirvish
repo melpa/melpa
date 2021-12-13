@@ -1,0 +1,1 @@
+(dirvish :repo "alexluigit/dirvish" :fetcher github)

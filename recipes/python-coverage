@@ -1,0 +1,3 @@
+(python-coverage
+ :fetcher github
+ :repo "wbolster/emacs-python-coverage")

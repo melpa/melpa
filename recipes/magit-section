@@ -2,4 +2,4 @@
                :repo "magit/magit"
                :files ("lisp/magit-section.el"
 		       "lisp/magit-section-pkg.el"
-                       "Documentation/magit-section.texi"))
+                       "docs/magit-section.texi"))

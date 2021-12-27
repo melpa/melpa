@@ -6,10 +6,10 @@ services:
     image: melpa/nginx:v1
     restart: unless-stopped
     volumes:
-      - /mnt/store/melpa:/mnt/store/melpa:ro
-      - /mnt/store/letsencrypt:/etc/letsencrypt
-      - /mnt/store/log:/mnt/store/log
-      - /mnt/store/log-stable:/mnt/store/log-stable
+      - /mnt/volume/melpa:/mnt/store/melpa:ro
+      - /mnt/volume/letsencrypt:/etc/letsencrypt
+      - /mnt/volume/log:/mnt/store/log
+      - /mnt/volume/log-stable:/mnt/store/log-stable
     ports:
       - "80:80"
       - "443:443"
@@ -22,22 +22,22 @@ services:
         limits:
           cpus: '0.8'
     volumes:
-      - /mnt/store/melpa:/mnt/store/melpa
+      - /mnt/volume/melpa:/mnt/store/melpa
   logprocessor:
     build: ./logprocessor
     image: melpa/logprocessor:v1
     restart: unless-stopped
     volumes:
-      - /mnt/db:/mnt/db
-      - /mnt/store/melpa:/mnt/store/melpa
-      - /mnt/store/log:/mnt/store/log:ro
-      - /mnt/store/log-stable:/mnt/store/log-stable:ro
+      - /mnt/volume/db:/mnt/db
+      - /mnt/volume/melpa:/mnt/store/melpa
+      - /mnt/volume/log:/mnt/store/log:ro
+      - /mnt/volume/log-stable:/mnt/store/log-stable:ro
   syncer:
     build: ./syncer
     image: melpa/syncer:v1
     restart: unless-stopped
     volumes:
-      - /mnt/store/melpa:/mnt/store/melpa
+      - /mnt/volume/melpa:/mnt/store/melpa
   rsyncd:
     build: ./rsyncd
     image: melpa/rsyncd:v1
@@ -45,5 +45,5 @@ services:
     ports:
       - "873:873"
     volumes:
-      - /mnt/store/melpa/packages:/packages:ro
-      - /mnt/store/melpa/packages-stable:/packages-stable:ro
+      - /mnt/volume/melpa/packages:/packages:ro
+      - /mnt/volume/melpa/packages-stable:/packages-stable:ro

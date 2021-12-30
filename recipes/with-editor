@@ -1,1 +1,4 @@
-(with-editor :fetcher github :repo "magit/with-editor")
+(with-editor :fetcher github
+	     :repo "magit/with-editor"
+	     :files ("with-editor.el" "with-editor.texi"
+		     "lisp/with-editor.el" "docs/with-editor.texi"))

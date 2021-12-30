@@ -1,0 +1,1 @@
+(vunit-mode :fetcher github :repo "embed-me/vunit-mode")

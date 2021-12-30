@@ -1,6 +1,5 @@
 (tree-sitter-langs :repo "emacs-tree-sitter/tree-sitter-langs"
                    :fetcher github
                    :branch "release"
-                   :version-regexp "melpa-stable/v\\(.*\\)"
                    :files (:defaults
                            "queries"))

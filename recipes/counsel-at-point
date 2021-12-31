@@ -1,0 +1,3 @@
+(counsel-at-point
+  :repo "ideasman42/emacs-counsel-at-point"
+  :fetcher gitlab)

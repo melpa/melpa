@@ -1,0 +1,3 @@
+(matrix-theme
+ :fetcher github
+ :repo "monkeyjunglejuice/matrix-emacs-theme")

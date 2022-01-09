@@ -1,0 +1,3 @@
+(numbex :repo "enricoflor/numbex"
+        :fetcher github
+        :branch "master")

@@ -1,4 +1,4 @@
 (flymake-rest
  :fetcher github
  :repo "mohkale/flymake-rest"
- :files ("*.el" "checkers/*.el"))
+ :files (:defaults "checkers/*.el"))

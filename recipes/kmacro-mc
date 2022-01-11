@@ -1,0 +1,3 @@
+(kmacro-mc
+ :fetcher github
+ :repo "vifon/kmacro-mc.el")

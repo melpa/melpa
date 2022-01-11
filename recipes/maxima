@@ -1,5 +1,5 @@
 (maxima :repo "sasanidas/maxima"
-	:fetcher gitlab
-	:files ("maxima.el"
-		"maxima-font-lock.el"
-		("keywords" "keywords/*")))
+        :fetcher gitlab
+        :files ("maxima.el"
+                "maxima-font-lock.el"
+                ("keywords" "keywords/*")))

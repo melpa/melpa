@@ -1,6 +1,6 @@
 (lsp-sonarlint
-	  :fetcher github
-	  :repo "emacs-lsp/lsp-sonarlint"
-	  :files ("lsp-sonarlint.el"
-		  ("languages" "languages/*/*.el")
-		  ("server" "server/*")))
+ :fetcher github
+ :repo "emacs-lsp/lsp-sonarlint"
+ :files ("lsp-sonarlint.el"
+         ("languages" "languages/*/*.el")
+         ("server" "server/*")))

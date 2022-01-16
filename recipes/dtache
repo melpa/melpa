@@ -1,0 +1,3 @@
+(dtache
+ :repo "niklaseklund/dtache"
+ :fetcher gitlab)

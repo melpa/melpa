@@ -1,0 +1,3 @@
+(asm-blox :fetcher github
+          :repo "zkry/asm-blox"
+          :files ("*.el" (:exclude "asm-blox-tests.el")))

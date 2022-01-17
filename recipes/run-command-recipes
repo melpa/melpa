@@ -1,5 +1,3 @@
 (run-command-recipes
  :repo "semenInRussia/emacs-run-command-recipes"
- :fetcher github
- :url "https://github.com/semenInRussia/emacs-run-command-recipes"
- :branch "main")
+ :fetcher github)

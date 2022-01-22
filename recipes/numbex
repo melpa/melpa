@@ -1,3 +1,1 @@
-(numbex :repo "enricoflor/numbex"
-        :fetcher github
-        :branch "master")
+(numbex :repo "enricoflor/numbex" :fetcher github)

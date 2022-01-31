@@ -1,0 +1,3 @@
+(hlsl-mode
+ :repo "jcaw/hlsl-mode"
+ :fetcher github)

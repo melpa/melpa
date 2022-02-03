@@ -1,2 +1,1 @@
-(beeminder :repo "Sodaware/beeminder.el"
-					 :fetcher github)
+(beeminder :repo "Sodaware/beeminder.el" :fetcher github)

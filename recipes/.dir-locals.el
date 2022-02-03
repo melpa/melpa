@@ -1,4 +1,5 @@
-((nil . ((eval . (when (and 
+((nil . ((indent-tabs-mode . nil)
+         (eval . (when (and
                         (buffer-file-name)
                         (not (file-directory-p (buffer-file-name)))
                         (string-match-p "^[^.]" (buffer-file-name)))

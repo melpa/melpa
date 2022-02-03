@@ -1,2 +1,2 @@
 (helm-describe-modes :fetcher github
-		     :repo "emacs-helm/helm-describe-modes")
+                     :repo "emacs-helm/helm-describe-modes")

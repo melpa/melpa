@@ -1,4 +1,3 @@
 (why-this
  :fetcher git
- :repo "https://codeberg.org/akib/emacs-why-this.git")
- 
+ :url "https://codeberg.org/akib/emacs-why-this.git")

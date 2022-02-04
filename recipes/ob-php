@@ -1,1 +1,1 @@
-(ob-php :fetcher github :repo "stardiviner/ob-php")
+(ob-php :fetcher github :repo "emacsmirror/ob-php")

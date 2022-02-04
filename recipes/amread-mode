@@ -1,1 +1,1 @@
-(amread-mode :repo "stardiviner/amread-mode" :fetcher github)
+(amread-mode :repo "emacsmirror/amread-mode" :fetcher github)

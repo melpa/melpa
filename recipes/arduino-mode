@@ -1,1 +1,1 @@
-(arduino-mode :fetcher github :repo "stardiviner/arduino-mode")
+(arduino-mode :fetcher github :repo "emacsmirror/arduino-mode")

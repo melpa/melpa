@@ -1,4 +1,4 @@
 (major-mode-icons :fetcher github
-                  :repo "stardiviner/major-mode-icons"
+                  :repo "emacsmirror/major-mode-icons"
                   :files (:defaults "icons")
                   )

@@ -1,1 +1,1 @@
-(ob-redis :fetcher github :repo "stardiviner/ob-redis")
+(ob-redis :fetcher github :repo "emacsmirror/ob-redis")

@@ -6,4 +6,4 @@
                         "helm-lib.el"
                         "helm-source.el"
                         "helm-multi-match.el"
-                        "helm-core-pkg.el")))
+                        "helm-core.el")))

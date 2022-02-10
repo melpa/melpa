@@ -1,0 +1,1 @@
+(edit-as-format :repo "etern/edit-as-format" :fetcher github :files (:defaults "filters"))

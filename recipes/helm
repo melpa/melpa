@@ -2,8 +2,7 @@
       :fetcher github
       :files ("*.el"
               "emacs-helm.sh"
-              (:exclude "helm.el"
-                        "helm-lib.el"
+              (:exclude "helm-lib.el"
                         "helm-source.el"
                         "helm-multi-match.el"
                         "helm-core.el")))

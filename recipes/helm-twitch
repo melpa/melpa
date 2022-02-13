@@ -1,0 +1,1 @@
+(helm-twitch :repo "benediktbroich/helm-twitch" :fetcher github)

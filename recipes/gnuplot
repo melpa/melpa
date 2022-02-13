@@ -1,4 +1,4 @@
 (gnuplot
- :repo "emacsorphanage/gnuplot"
+ :repo "emacs-gnuplot/gnuplot"
  :fetcher github
  :files ("gnuplot.el" "gnuplot-gui.el" "gnuplot-context.el"))

@@ -1,1 +1,1 @@
-(helm-twitch :repo "benediktbroich/helm-twitch" :fetcher github)
+(helm-twitch :re:repo "BenediktBroich/helm-twitch"o "benediktbroich/helm-twitch" :fetcher github)

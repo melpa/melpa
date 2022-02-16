@@ -1,0 +1,2 @@
+(consult-project-extra :fetcher github
+                 :repo "Qkessler/consult-project-extra")

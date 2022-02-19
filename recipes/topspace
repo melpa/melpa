@@ -1,0 +1,3 @@
+(topspace :fetcher github
+          :repo "trevorpogue/topspace"
+          :files ("topspace.el"))

@@ -1,3 +1,1 @@
-(topspace :fetcher github
-          :repo "trevorpogue/topspace"
-          :files ("topspace.el"))
+(topspace :fetcher github :repo "trevorpogue/topspace")

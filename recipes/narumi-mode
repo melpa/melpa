@@ -1,1 +1,0 @@
-(narumi-mode :repo "nryotaro/narumi" :fetcher github)

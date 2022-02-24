@@ -1,0 +1,3 @@
+(skerrick :repo "anonimitoraf/skerrick"
+          :fetcher github
+          :files ("skerrick.el"))

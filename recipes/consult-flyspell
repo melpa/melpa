@@ -1,0 +1,4 @@
+(consult-flyspell
+ :repo "OlMon/consult-flyspell"
+ :fetcher gitlab
+ :files ("consult-flyspell.el"))

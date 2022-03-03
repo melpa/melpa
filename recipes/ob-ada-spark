@@ -1,4 +1,1 @@
-(ob-ada-spark
- :fetcher github
- :repo "rocher/ob-ada-spark"
- :branch "package")
+(ob-ada-spark :fetcher github :repo "rocher/ob-ada-spark")

@@ -190,7 +190,7 @@ contains two files:
 * `README.markdown`
 * `smex.el`
 
-Since there is only one `.el` file, this package only needs the `:url`
+Since there is only one `.el` file, this package only needs the `:repo`
 and `:fetcher` specified,
 
 ```elisp

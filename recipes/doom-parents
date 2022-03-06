@@ -1,0 +1,3 @@
+(doom-parents
+ :fetcher github
+ :repo "tomekw/doom-parents")

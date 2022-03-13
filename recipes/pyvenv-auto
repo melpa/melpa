@@ -1,0 +1,1 @@
+(pyvenv-auto :repo "nryotaro/pyvenv-auto" :fetcher github)

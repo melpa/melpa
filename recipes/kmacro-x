@@ -1,0 +1,2 @@
+(kmacro-x :repo "vifon/kmacro-x.el" :fetcher github
+          :old-names (kmacro-mc))

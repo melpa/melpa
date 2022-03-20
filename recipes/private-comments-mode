@@ -1,0 +1,1 @@
+(private-comments-mode :fetcher github :repo "masukomi/private-comments-mode")

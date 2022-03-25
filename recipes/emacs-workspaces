@@ -1,0 +1,1 @@
+(emacs-workspaces :repo "mclear-tools/emacs-workspaces" :fetcher github)

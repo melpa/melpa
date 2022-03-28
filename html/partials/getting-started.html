@@ -1,7 +1,7 @@
 <h1>Getting started</h1>
 <section>
       <a name="installing"></a>
-      <h2>Installing</h2>
+      <h2>Installing Melpa</h2>
 
       <p>To use the MELPA repository, you'll need an Emacs with
         <code>package.el</code> and TLS support, ie. Emacs 24.1 or
@@ -37,6 +37,8 @@
         <code>M-x package-install</code> or similar.
       </p>
 
+      <h3>Installing Melpa Stable</h2>
+
       <p>
         To use the <a href="https://stable.melpa.org" title="MELPA Stable">
           stable package repository</a> instead of the default
@@ -46,6 +48,17 @@
 
       <pre><code>(add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)</code></pre>
+
+      <h3>Installing a package</h2>
+
+      <p>
+        To install a package run <code>M-x package-install</code>.
+        See <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html">
+        Package Installation</a> for details about that and
+        <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Packages.html">
+        Emacs Lisp Packages</a> for even more information about Emacs'
+        package manager.
+      </p>
 
       <h3>Customizations</h3>
       <p>

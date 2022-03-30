@@ -1,0 +1,3 @@
+(oblivion-theme
+ :repo "ideasman42/emacs-oblivion-theme"
+ :fetcher gitlab)

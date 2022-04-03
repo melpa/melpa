@@ -1,1 +1,1 @@
-(shanty-themes :fetcher github :repo "qhga/shanty-themes" :branch "melpa")
+(shanty-themes :fetcher github :repo "qhga/shanty-themes")

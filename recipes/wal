@@ -1,1 +1,0 @@
-(wal :repo "LucasKl/wal-major-mode" :fetcher github)

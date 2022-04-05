@@ -1,0 +1,1 @@
+(wordreference :fetcher git :url  "https://codeberg.org/martianh/wordreference.el" :files ("wordreference.el"))

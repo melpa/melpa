@@ -1,0 +1,3 @@
+(thesaurus
+ :repo "AnselmC/thesaurus.el"
+ :fetcher github)

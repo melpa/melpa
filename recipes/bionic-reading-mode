@@ -1,2 +1,0 @@
-(bionic-reading-mode :repo "wavexx/bionic-reading-mode.el"
-                     :fetcher gitlab)

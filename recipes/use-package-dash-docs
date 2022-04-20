@@ -1,0 +1,3 @@
+(use-package-dash-docs :repo "dash-docs-el/dash-docs"
+                       :fetcher github
+                       :files ("use-package-dash-docs.el"))

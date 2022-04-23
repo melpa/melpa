@@ -1,0 +1,2 @@
+(tal-mode :fetcher github
+          :repo "non/tal-mode")

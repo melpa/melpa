@@ -1,0 +1,8 @@
+(root-mode
+ :fetcher github
+ :url "https://github.com/jaypmorgan/root-mode"
+ :repo "jaypmorgan/root-mode"
+ :commit "1699a61b3a4490a048a4fd599a5a485d143b4b2a"
+ :branch "main"
+ :version-regexp "v\\([0-9.]+.*\\)"
+ :files ("*.el"))

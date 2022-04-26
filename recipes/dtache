@@ -1,3 +1,2 @@
 (dtache
- :repo "niklaseklund/dtache"
- :fetcher gitlab)
+ :fetcher "https://git.sr.ht/~niklaseklund/dtache")

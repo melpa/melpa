@@ -1,0 +1,4 @@
+(evm-mode
+    :fetcher github
+    :repo "taquangtrung/emacs-evm-mode"
+    :files ("evm-mode.el"))

@@ -1,0 +1,2 @@
+(tomelr :fetcher github
+        :repo "kaushalmodi/tomelr")

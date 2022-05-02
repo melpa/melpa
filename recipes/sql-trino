@@ -1,4 +1,1 @@
-(sql-trino
- :fetcher github
- :repo "regadas/sql-trino"
- :files ("sql-trino.el"))
+(sql-trino :fetcher github :repo "regadas/sql-trino")

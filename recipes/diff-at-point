@@ -1,3 +1,3 @@
 (diff-at-point
- :repo "ideasman42/emacs-diff-at-point"
- :fetcher gitlab)
+ :url "https://codeberg.org/ideasman42/emacs-diff-at-point.git"
+ :fetcher git)

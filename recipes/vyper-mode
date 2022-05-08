@@ -1,0 +1,3 @@
+(vyper-mode
+  :repo "ralexstokes/vyper-mode"
+  :fetcher github)

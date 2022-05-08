@@ -1,0 +1,3 @@
+(etc-sudoers-mode
+ :fetcher gitlab
+ :repo "mavit/etc-sudoers-mode")

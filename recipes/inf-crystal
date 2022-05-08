@@ -1,0 +1,1 @@
+(inf-crystal :repo "brantou/inf-crystal.el" :fetcher github)

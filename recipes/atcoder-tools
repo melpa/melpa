@@ -1,0 +1,1 @@
+(atcoder-tools :repo "sei40kr/emacs-atcoder-tools" :fetcher github)

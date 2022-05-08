@@ -1,0 +1,1 @@
+(gnus-select-account :fetcher github :repo "tumashu/gnus-select-account")

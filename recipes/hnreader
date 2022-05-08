@@ -1,0 +1,1 @@
+(hnreader :fetcher github :repo "thanhvg/emacs-hnreader")

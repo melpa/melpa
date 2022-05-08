@@ -1,1 +1,1 @@
-(backup-each-save :fetcher wiki)
+(backup-each-save :fetcher github :repo "conornash/backup-each-save")

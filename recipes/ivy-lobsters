@@ -1,0 +1,1 @@
+(ivy-lobsters :repo "julienXX/ivy-lobsters" :fetcher github)

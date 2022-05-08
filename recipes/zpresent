@@ -1,1 +1,1 @@
-(zpresent :fetcher bitbucket :repo "zck/zpresent.el")
+(zpresent :fetcher hg :url "https://hg.sr.ht/~zck/zpresent")

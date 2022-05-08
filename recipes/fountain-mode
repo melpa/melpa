@@ -1,1 +1,5 @@
-(fountain-mode :fetcher github :repo "rnkn/fountain-mode")
+(fountain-mode :fetcher github
+               :repo "rnkn/fountain-mode"
+               :files (:defaults
+                       "docs/fountain-mode.texi"
+                       "contrib/*"))

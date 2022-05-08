@@ -1,3 +1,2 @@
-(sbt-mode
- :repo "ensime/emacs-sbt-mode"
- :fetcher github)
+(sbt-mode :fetcher github
+          :repo "hvesalai/emacs-sbt-mode")

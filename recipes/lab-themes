@@ -1,0 +1,3 @@
+(lab-themes
+ :fetcher github
+ :repo "MetroWind/lab-theme")

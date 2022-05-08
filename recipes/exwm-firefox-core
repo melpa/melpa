@@ -1,0 +1,1 @@
+(exwm-firefox-core :fetcher github :repo "walseb/exwm-firefox-core")

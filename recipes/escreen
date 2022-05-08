@@ -1,1 +1,0 @@
-(escreen :repo "emacsmirror/escreen" :fetcher github)

@@ -1,0 +1,4 @@
+(consult-spotify
+ :fetcher git
+ :url "https://codeberg.org/jao/espotify"
+ :files ("consult-spotify.el"))

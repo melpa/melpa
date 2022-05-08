@@ -1,0 +1,1 @@
+(flycheck-clolyze :fetcher github :repo "DLaps/flycheck-clolyze")

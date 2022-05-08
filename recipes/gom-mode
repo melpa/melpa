@@ -1,1 +1,1 @@
-(gom-mode :fetcher github :repo "syohex/emacs-gom-mode")
+(gom-mode :fetcher github :repo "emacsorphanage/gom-mode")

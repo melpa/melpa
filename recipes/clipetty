@@ -1,0 +1,1 @@
+(clipetty :repo "spudlyo/clipetty" :fetcher github)

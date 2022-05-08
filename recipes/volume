@@ -1,1 +1,1 @@
-(volume :fetcher github :repo "dbrock/volume-el")
+(volume :fetcher github :repo "dbrock/volume.el")

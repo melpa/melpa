@@ -1,1 +1,1 @@
-(typescript-mode :fetcher github :repo "ananthakumaran/typescript.el")
+(typescript-mode :fetcher github :repo "emacs-typescript/typescript.el")

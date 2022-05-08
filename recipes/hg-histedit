@@ -1,0 +1,1 @@
+(hg-histedit :fetcher github :repo "jojojames/hg-histedit")

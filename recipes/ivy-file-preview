@@ -1,0 +1,1 @@
+(ivy-file-preview :repo "jcs-elpa/ivy-file-preview" :fetcher github)

@@ -1,4 +1,0 @@
-(ruby-dev
- :repo "Mon-Ouie/ruby-dev.el"
- :fetcher github
- :files ("*.el" "*.rb"))

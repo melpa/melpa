@@ -1,1 +1,1 @@
-(nikola :fetcher git :url "https://git.daemons.cf/drymer/nikola.el/")
+(nikola :fetcher gitlab :repo "drymerisnothere/nikola-el")

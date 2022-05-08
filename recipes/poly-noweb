@@ -1,0 +1,3 @@
+(poly-noweb
+ :fetcher github
+ :repo "polymode/poly-noweb")

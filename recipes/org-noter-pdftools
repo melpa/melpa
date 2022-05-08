@@ -1,0 +1,2 @@
+(org-noter-pdftools :repo "fuxialexander/org-pdftools" :fetcher github
+            :files ("org-noter-pdftools.el"))

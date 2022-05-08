@@ -1,0 +1,1 @@
+(vs-light-theme :repo "emacs-vs/vs-light-theme" :fetcher github)

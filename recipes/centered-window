@@ -1,0 +1,3 @@
+(centered-window :fetcher github
+                 :repo "anler/centered-window-mode"
+                 :old-names (centered-window-mode))

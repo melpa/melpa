@@ -1,0 +1,1 @@
+(ocamlformat :fetcher github :repo "ocaml-ppx/ocamlformat" :files ("emacs/ocamlformat.el"))

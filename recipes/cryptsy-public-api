@@ -1,2 +1,0 @@
-(cryptsy-public-api :repo "Sodaware/cryptsy-public-api.el"
-                    :fetcher github)

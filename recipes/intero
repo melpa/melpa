@@ -1,3 +1,0 @@
-(intero :repo "commercialhaskell/intero" 
-        :fetcher github
-        :files ("elisp/intero.el"))

@@ -1,0 +1,3 @@
+(comment-or-uncomment-sexp
+ :fetcher github
+ :repo "Malabarba/comment-or-uncomment-sexp")

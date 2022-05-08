@@ -1,3 +1,5 @@
-(realgud-pry :fetcher github :repo "rocky/realgud-pry"
-	 :files ("realgud-pry.el"
-		 ("pry" "pry/*.el")))
+(realgud-pry
+ :fetcher github
+ :repo "realgud/realgud-pry"
+ :files ("realgud-pry.el"
+         ("pry" "pry/*.el")))

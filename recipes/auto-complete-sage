@@ -1,1 +1,1 @@
-(auto-complete-sage :fetcher github :repo "stakemori/auto-complete-sage")
+(auto-complete-sage :fetcher github :repo "sagemath/auto-complete-sage")

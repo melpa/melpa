@@ -1,1 +1,1 @@
-(popwin :fetcher github :repo "m2ym/popwin-el")
+(popwin :fetcher github :repo "emacsorphanage/popwin")

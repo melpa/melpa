@@ -1,0 +1,3 @@
+(simple-modeline
+ :repo "gexplorer/simple-modeline"
+ :fetcher github)

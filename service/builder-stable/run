@@ -1,6 +1,0 @@
-#!/bin/bash -e
-
-SCRIPTPATH=$( cd "$(dirname "$0")" ; pwd -P )
-export STABLE=t
-
-. "$SCRIPTPATH/../builder/run"

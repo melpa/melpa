@@ -1,8 +1,15 @@
 (magit :fetcher github
        :repo "magit/magit"
-       :files ("lisp/magit*.el"
+       :files ("lisp/magit"
+               "lisp/magit*.el"
                "lisp/git-rebase.el"
+               "docs/magit.texi"
+               "docs/AUTHORS.md"
+               "LICENSE"
+               (:exclude "lisp/magit-libgit.el"
+                         "lisp/magit-libgit-pkg.el"
+                         "lisp/magit-section.el"
+                         "lisp/magit-section-pkg.el")
+               ;; temporarily for stable:
                "Documentation/magit.texi"
-               "Documentation/AUTHORS.md"
-               "COPYING"
-               (:exclude "lisp/magit-popup.el")))
+               "Documentation/AUTHORS.md"))

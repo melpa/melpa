@@ -1,3 +1,0 @@
-(mmm-mako
- :repo "pjenvey/mmm-mako"
- :fetcher bitbucket)

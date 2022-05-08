@@ -1,0 +1,2 @@
+(mxf-view :fetcher github
+          :repo "t-suwa/mxf-view")

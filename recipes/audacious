@@ -1,0 +1,3 @@
+(audacious
+ :repo "shishimaru/audacious.el"
+ :fetcher github)

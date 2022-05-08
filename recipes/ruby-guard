@@ -1,1 +1,0 @@
-(ruby-guard :repo "cheunghy/ruby-guard" :fetcher github)

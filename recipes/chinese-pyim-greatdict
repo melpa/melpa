@@ -1,3 +1,0 @@
-(chinese-pyim-greatdict :fetcher github
-                        :repo "tumashu/chinese-pyim-greatdict"
-                        :files (:defaults "*.pyim.gz"))

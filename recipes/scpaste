@@ -1,1 +1,3 @@
-(scpaste :fetcher github :repo "technomancy/scpaste")
+(scpaste
+ :fetcher git
+ :url "https://git.sr.ht/~technomancy/scpaste")

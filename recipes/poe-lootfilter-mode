@@ -1,0 +1,1 @@
+(poe-lootfilter-mode :fetcher github :repo "jdodds/poe-lootfilter-mode")

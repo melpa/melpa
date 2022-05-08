@@ -1,0 +1,3 @@
+(naysayer-theme
+ :repo "nickav/naysayer-theme.el"
+ :fetcher github)

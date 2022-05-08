@@ -1,0 +1,1 @@
+(clhs :repo "sam-s/clhs" :fetcher gitlab)

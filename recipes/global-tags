@@ -1,0 +1,2 @@
+(global-tags :fetcher git
+             :url "https://git.launchpad.net/global-tags.el")

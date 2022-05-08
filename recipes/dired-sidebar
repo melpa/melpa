@@ -1,0 +1,1 @@
+(dired-sidebar :fetcher github :repo "jojojames/dired-sidebar")

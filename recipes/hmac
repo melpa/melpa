@@ -1,0 +1,1 @@
+(hmac :fetcher github :repo "grimnebulin/emacs-hmac")

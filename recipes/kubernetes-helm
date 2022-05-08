@@ -1,0 +1,1 @@
+(kubernetes-helm :repo "abrochard/kubernetes-helm" :fetcher github)

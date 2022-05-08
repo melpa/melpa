@@ -1,0 +1,1 @@
+(json-par :repo "taku0/json-par" :fetcher github)

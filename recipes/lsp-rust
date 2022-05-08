@@ -1,1 +1,0 @@
-(lsp-rust :repo "emacs-lsp/lsp-rust" :fetcher github)

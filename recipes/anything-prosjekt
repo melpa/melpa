@@ -1,2 +1,0 @@
-(anything-prosjekt :fetcher github :repo "abingham/prosjekt"
-                   :files ("prosjekt/ext/anything/anything-prosjekt.el"))

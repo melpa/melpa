@@ -1,1 +1,1 @@
-(ac-emoji :fetcher github :repo "syohex/emacs-ac-emoji")
+(ac-emoji :fetcher github :repo "emacsorphanage/ac-emoji")

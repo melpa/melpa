@@ -1,1 +1,0 @@
-(el-x :fetcher github :repo "sigma/el-x" :files ("lisp/*.el"))

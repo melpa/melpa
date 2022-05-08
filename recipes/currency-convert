@@ -1,0 +1,1 @@
+(currency-convert :fetcher github :repo "lassik/emacs-currency-convert")

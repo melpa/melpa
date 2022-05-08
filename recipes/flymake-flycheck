@@ -1,0 +1,1 @@
+(flymake-flycheck :fetcher github :repo "purcell/flymake-flycheck")

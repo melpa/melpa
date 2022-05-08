@@ -1,1 +1,1 @@
-(rpm-spec-mode :fetcher github :repo "bjorlykke/rpm-spec-mode")
+(rpm-spec-mode :fetcher github :repo "stigbjorlykke/rpm-spec-mode")

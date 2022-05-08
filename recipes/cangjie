@@ -1,0 +1,1 @@
+(cangjie :repo "kisaragi-hiu/cangjie.el" :fetcher github)

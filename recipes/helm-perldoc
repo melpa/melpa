@@ -1,3 +1,4 @@
-(helm-perldoc :fetcher github
-	      :repo "syohex/emacs-helm-perldoc"
-              :files (:defaults "*.pl"))
+(helm-perldoc
+ :fetcher github
+ :repo "emacsorphanage/helm-perldoc"
+ :files (:defaults "*.pl"))

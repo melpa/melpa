@@ -1,0 +1,3 @@
+(xml-format
+ :fetcher github
+ :repo "wbolster/emacs-xml-format")

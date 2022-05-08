@@ -1,0 +1,3 @@
+(revert-buffer-all
+ :url "https://codeberg.org/ideasman42/emacs-revert-buffer-all.git"
+ :fetcher git)

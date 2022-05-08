@@ -1,0 +1,1 @@
+(slime-repl-ansi-color :fetcher gitlab :repo "augfab/slime-repl-ansi-color")

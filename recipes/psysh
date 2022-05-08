@@ -1,1 +1,1 @@
-(psysh :fetcher github :repo "zonuexe/psysh.el")
+(psysh :fetcher github :repo "emacs-php/psysh.el")

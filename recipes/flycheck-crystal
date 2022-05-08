@@ -1,0 +1,3 @@
+(flycheck-crystal :repo "crystal-lang-tools/emacs-crystal-mode"
+               :fetcher github
+               :files ("flycheck-crystal.el"))

@@ -1,1 +1,2 @@
-(helm-dired-recent-dirs :fetcher github :repo "akisute3/helm-dired-recent-dirs")
+(helm-dired-recent-dirs :fetcher github
+                        :repo "zonkyy/helm-dired-recent-dirs")

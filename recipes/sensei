@@ -1,0 +1,4 @@
+(sensei
+ :fetcher github
+ :repo "abailly/sensei"
+ :files ("elisp/sensei.el"))

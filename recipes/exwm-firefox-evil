@@ -1,0 +1,1 @@
+(exwm-firefox-evil :fetcher github :repo "walseb/exwm-firefox-evil")

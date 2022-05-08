@@ -1,2 +1,2 @@
 (magit-lfs :fetcher github
-           :repo "ailrun/magit-lfs")
+           :repo "Ailrun/magit-lfs")

@@ -1,1 +1,1 @@
-(ov :repo "ShingoFukuyama/ov.el" :fetcher github)
+(ov :fetcher github :repo "emacsorphanage/ov")

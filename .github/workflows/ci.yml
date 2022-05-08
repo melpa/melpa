@@ -1,0 +1,29 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
+    - name: Install dependencies
+      run: |
+        sudo apt-get install emacs25
+        sudo apt-get install git jq mercurial texinfo
+
+        # Work around SSL-related failures, see
+        # https://stackoverflow.com/questions/21477683/mercurial-https-clone-abort-error-wrong-version-number
+        echo "[ui]\ntls = False" > $HOME/.hgrc
+    - name: Check changed recipes
+      run: |
+        [ "$GITHUB_EVENT_NAME" = "push" ] \
+          && export CHANGED_FILES=$(git diff-tree --name-only --no-commit-id -r ${{ github.sha }})
+
+        [ "$GITHUB_EVENT_NAME" = "pull_request" ] \
+          && export CHANGED_FILES=$(\
+            curl --silent https://api.github.com/repos/"$GITHUB_REPOSITORY"/pulls/${{ github.event.pull_request.number }}/files \
+              | jq -r '.[] | .filename')
+
+        ./run-ci.sh

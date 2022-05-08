@@ -1,1 +1,1 @@
-(octicons :fetcher github :repo "syohex/emacs-octicons")
+(octicons :fetcher github :repo "emacsorphanage/octicons")

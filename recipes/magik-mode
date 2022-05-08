@@ -1,0 +1,2 @@
+(magik-mode :fetcher github
+	    :repo "roadrunner1776/magik")

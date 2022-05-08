@@ -1,0 +1,1 @@
+(walkman :repo "abrochard/walkman" :fetcher github)

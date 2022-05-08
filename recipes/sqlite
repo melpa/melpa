@@ -1,1 +1,1 @@
-(sqlite :fetcher github :repo "cnngimenez/sqlite.el")
+(sqlite :fetcher gitlab :repo "cnngimenez/sqlite.el")

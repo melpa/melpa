@@ -1,0 +1,1 @@
+(geolocation :fetcher github :repo "gonewest818/geolocation.el")

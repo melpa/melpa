@@ -1,1 +1,1 @@
-(jammer :fetcher github :repo "wasamasa/jammer")
+(jammer :fetcher git :url "https://depp.brause.cc/jammer.git")

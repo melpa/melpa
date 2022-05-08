@@ -1,0 +1,3 @@
+(frame-local
+ :fetcher github
+ :repo "sebastiencs/frame-local")

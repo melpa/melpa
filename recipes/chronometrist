@@ -1,0 +1,9 @@
+(chronometrist
+ :url "https://tildegit.org/contrapunctus/chronometrist.git"
+ :fetcher git
+ :branch "dev"
+ :files (:defaults
+         "elisp/*.el"
+         "elisp/*.org"
+         (:exclude "elisp/chronometrist-key-values*")
+         (:exclude "elisp/chronometrist-goal*")))

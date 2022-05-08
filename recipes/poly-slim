@@ -1,0 +1,3 @@
+(poly-slim
+ :fetcher github
+ :repo "polymode/poly-slim")

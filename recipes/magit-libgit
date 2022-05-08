@@ -1,0 +1,4 @@
+(magit-libgit :fetcher github
+              :repo "magit/magit"
+              :files ("lisp/magit-libgit.el"
+                      "lisp/magit-libgit-pkg.el"))

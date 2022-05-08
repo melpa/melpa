@@ -1,0 +1,3 @@
+(ebuku
+ :fetcher github
+ :repo "flexibeast/ebuku")

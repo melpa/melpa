@@ -1,4 +1,1 @@
-(cg
- :fetcher svn
- :url "https://beta.visl.sdu.dk/svn/visl/tools/vislcg3/trunk/emacs"
- :files ("cg.el"))
+(cg :fetcher github :repo "GrammarSoft/cg3" :files ("emacs/*.el"))

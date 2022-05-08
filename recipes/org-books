@@ -1,0 +1,1 @@
+(org-books :fetcher github :repo "lepisma/org-books")

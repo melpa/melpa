@@ -1,0 +1,2 @@
+(backlight :fetcher github
+           :repo "mschuldt/backlight.el")

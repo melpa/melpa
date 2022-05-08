@@ -1,0 +1,1 @@
+(kapacitor :repo "manojm321/kapacitor-el" :fetcher github)

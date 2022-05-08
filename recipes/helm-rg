@@ -1,0 +1,1 @@
+(helm-rg :fetcher github :repo "cosmicexplorer/helm-rg")

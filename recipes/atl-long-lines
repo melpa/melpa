@@ -1,0 +1,1 @@
+(atl-long-lines :repo "jcs-elpa/atl-long-lines" :fetcher github)

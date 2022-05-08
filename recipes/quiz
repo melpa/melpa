@@ -1,0 +1,1 @@
+(quiz :fetcher github :repo "davep/quiz.el")

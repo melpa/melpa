@@ -1,0 +1,4 @@
+(geiser-stklos
+ :fetcher gitlab
+ :repo "emacs-geiser/stklos"
+ :files (:defaults ("geiser.stk")))

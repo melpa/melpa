@@ -1,1 +1,1 @@
-(emr :fetcher github :repo "chrisbarrett/emacs-refactor")
+(emr :fetcher github :repo "Wilfred/emacs-refactor")

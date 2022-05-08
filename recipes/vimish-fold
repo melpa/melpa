@@ -1,1 +1,1 @@
-(vimish-fold :repo "mrkkrp/vimish-fold" :fetcher github)
+(vimish-fold :repo "matsievskiysv/vimish-fold" :fetcher github)

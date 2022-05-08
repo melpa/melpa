@@ -1,0 +1,49 @@
+# docker service create --name registry --publish 127.0.0.1:5000:5000 registry:2
+version: "3"
+services:
+  nginx:
+    build: ./nginx
+    image: melpa/nginx:v1
+    restart: unless-stopped
+    volumes:
+      - /mnt/volume/melpa:/mnt/store/melpa:ro
+      - /mnt/volume/letsencrypt:/etc/letsencrypt
+      - /mnt/volume/log:/mnt/store/log
+      - /mnt/volume/log-stable:/mnt/store/log-stable
+    ports:
+      - "80:80"
+      - "443:443"
+  builder:
+    build: ./builder
+    image: melpa/builder:v1
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.8'
+    volumes:
+      - /mnt/volume/melpa:/mnt/store/melpa
+  logprocessor:
+    build: ./logprocessor
+    image: melpa/logprocessor:v1
+    restart: unless-stopped
+    volumes:
+      - /mnt/volume/db:/mnt/db
+      - /mnt/volume/melpa:/mnt/store/melpa
+      - /mnt/volume/log:/mnt/store/log:ro
+      - /mnt/volume/log-stable:/mnt/store/log-stable:ro
+  syncer:
+    build: ./syncer
+    image: melpa/syncer:v1
+    restart: unless-stopped
+    volumes:
+      - /mnt/volume/melpa:/mnt/store/melpa
+  rsyncd:
+    build: ./rsyncd
+    image: melpa/rsyncd:v1
+    restart: unless-stopped
+    ports:
+      - "873:873"
+    volumes:
+      - /mnt/volume/melpa/packages:/packages:ro
+      - /mnt/volume/melpa/packages-stable:/packages-stable:ro

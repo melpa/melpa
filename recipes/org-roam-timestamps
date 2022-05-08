@@ -1,0 +1,2 @@
+(org-roam-timestamps :fetcher github
+                     :repo "ThomasFKJorna/org-roam-timestamps")

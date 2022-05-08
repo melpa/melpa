@@ -1,0 +1,1 @@
+(jump-tree :repo "yangwen0228/jump-tree" :fetcher github)

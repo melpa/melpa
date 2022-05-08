@@ -1,0 +1,1 @@
+(org-superstar :fetcher github :repo "integral-dw/org-superstar-mode")

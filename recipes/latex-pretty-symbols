@@ -1,3 +1,3 @@
 (latex-pretty-symbols
- :repo "mortiferus/latex-pretty-symbols.el"
- :fetcher bitbucket)
+ :repo "epa095/latex-pretty-symbols.el"
+ :fetcher github)

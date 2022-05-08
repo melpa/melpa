@@ -1,0 +1,3 @@
+(vale-mode
+ :fetcher github
+ :repo "jaybosamiya/vale-mode.el")

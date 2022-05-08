@@ -1,1 +1,0 @@
-(lsp-go :repo "emacs-lsp/lsp-go" :fetcher github)

@@ -1,1 +1,1 @@
-(challenger-deep-theme :fetcher github :repo "MaxSt/challenger-deep")
+(challenger-deep-theme :fetcher github :repo "challenger-deep-theme/emacs")

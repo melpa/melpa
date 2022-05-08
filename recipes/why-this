@@ -1,0 +1,3 @@
+(why-this
+ :fetcher git
+ :url "https://codeberg.org/akib/emacs-why-this.git")

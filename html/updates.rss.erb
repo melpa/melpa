@@ -39,7 +39,7 @@
     %>
       <item>
         <title><%= package.name %> (<%= package.version %>) --- <%= ERB::Util.html_escape package.description %></title>
-        <description>The <%= package.name %> package in MELPA has been updated to version <%= package.version %>.</description>
+        <description>The <%= package.name %> package has been updated to version <%= package.version %>.</description>
         <pubDate><%= package.build_time.rfc822 %></pubDate>
         <guid isPermaLink="true"><%= package.url %></guid>
         <link><%= package.info_url %></link>

@@ -1,0 +1,3 @@
+(mu4e-column-faces
+ :repo "Alexander-Miller/mu4e-column-faces"
+ :fetcher github)

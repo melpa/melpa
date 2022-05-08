@@ -1,0 +1,3 @@
+(keypress-multi-event
+ :fetcher github
+ :repo "Boruch-Baum/emacs-keypress-multi-event")

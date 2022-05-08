@@ -1,1 +1,1 @@
-(related :fetcher git :url "https://bitbucket.org/lyude/related")
+(related :fetcher github :repo "julien-montmartin/related")

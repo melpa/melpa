@@ -1,0 +1,3 @@
+(mw-thesaurus
+ :repo "agzam/mw-thesaurus.el"
+ :fetcher github)

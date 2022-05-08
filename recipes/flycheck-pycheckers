@@ -1,0 +1,2 @@
+(flycheck-pycheckers :fetcher github :repo "msherry/flycheck-pycheckers"
+                     :files (:defaults ("bin" "bin/pycheckers.py")))

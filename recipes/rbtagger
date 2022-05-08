@@ -1,0 +1,4 @@
+(rbtagger
+ :fetcher github
+ :repo "thiagoa/rbtagger"
+ :files (:defaults "bin"))

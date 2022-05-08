@@ -1,1 +1,1 @@
-(zoom-window :fetcher github :repo "syohex/emacs-zoom-window")
+(zoom-window :fetcher github :repo "emacsorphanage/zoom-window")

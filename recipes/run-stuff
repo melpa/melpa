@@ -1,0 +1,3 @@
+(run-stuff
+ :url "https://codeberg.org/ideasman42/emacs-run-stuff.git"
+ :fetcher git)

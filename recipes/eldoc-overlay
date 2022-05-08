@@ -1,0 +1,4 @@
+(eldoc-overlay
+  :fetcher git
+  :url "https://repo.or.cz/eldoc-overlay.git"
+  :old-names (eldoc-overlay-mode))

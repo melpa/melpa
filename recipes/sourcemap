@@ -1,1 +1,1 @@
-(sourcemap :fetcher github :repo "syohex/emacs-sourcemap")
+(sourcemap :fetcher github :repo "emacsorphanage/sourcemap")

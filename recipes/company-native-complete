@@ -1,0 +1,3 @@
+(company-native-complete :fetcher github
+                         :repo "CeleritasCelery/emacs-native-shell-complete"
+                         :files ("company-native-complete.el"))

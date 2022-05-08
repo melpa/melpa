@@ -1,1 +1,4 @@
-(with-editor :fetcher github :repo "magit/with-editor")
+(with-editor :fetcher github
+	     :repo "magit/with-editor"
+             :files ("lisp/with-editor.el" "docs/with-editor.texi"
+                     "with-editor.el" "with-editor.texi")) ; temporarilyy for stable

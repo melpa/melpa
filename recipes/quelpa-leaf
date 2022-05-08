@@ -1,0 +1,1 @@
+(quelpa-leaf :repo "quelpa/quelpa-leaf" :fetcher github)

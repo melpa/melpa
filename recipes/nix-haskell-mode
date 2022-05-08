@@ -1,0 +1,1 @@
+(nix-haskell-mode :fetcher github :repo "matthewbauer/nix-haskell-mode")

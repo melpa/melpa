@@ -1,1 +1,0 @@
-(github-issues :fetcher github :repo "inkel/github-issues.el")

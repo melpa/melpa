@@ -1,0 +1,4 @@
+(sql-sqlline
+ :fetcher gitlab
+ :repo "matteoredaelli/sql-sqlline"
+ :files ("artifacts/*.el"))

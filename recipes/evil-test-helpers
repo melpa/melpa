@@ -1,0 +1,3 @@
+(evil-test-helpers :repo "emacs-evil/evil"
+                   :fetcher github
+                   :files ("evil-test-helpers.el"))

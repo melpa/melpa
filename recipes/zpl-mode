@@ -1,0 +1,1 @@
+(zpl-mode :repo "ax487/zpl-mode" :fetcher github)

@@ -1,0 +1,2 @@
+(apt-sources-list :fetcher git
+                  :url "https://git.korewanetadesu.com/apt-sources-list.git")

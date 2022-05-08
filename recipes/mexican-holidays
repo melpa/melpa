@@ -1,1 +1,1 @@
-(mexican-holidays :fetcher github :repo "shopClerk/mexican-holidays")
+(mexican-holidays :fetcher github :repo "sggutier/mexican-holidays")

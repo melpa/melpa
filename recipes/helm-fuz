@@ -1,0 +1,2 @@
+(helm-fuz :repo "rustify-emacs/fuz.el" :fetcher github
+          :files ("helm-fuz.el"))

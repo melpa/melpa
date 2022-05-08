@@ -1,4 +1,0 @@
-(confluence
- :fetcher svn
- :url "https://svn.code.sf.net/p/confluence-el/code/trunk/"
- :files ("confluence*.el" "*.dtd" "*.xsl"))

@@ -1,1 +1,4 @@
-(ink-mode :repo "Kungsgeten/ink-mode" :fetcher github)
+(ink-mode
+ :repo "Kungsgeten/ink-mode"
+ :fetcher github
+ :files (:defaults "snippets"))

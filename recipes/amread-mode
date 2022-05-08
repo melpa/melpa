@@ -1,0 +1,1 @@
+(amread-mode :url "https://repo.or.cz/amread-mode.git" :fetcher git)

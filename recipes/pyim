@@ -1,0 +1,3 @@
+(pyim :fetcher github
+      :repo "tumashu/pyim"
+      :files ("pyim*.el"))

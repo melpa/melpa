@@ -1,0 +1,3 @@
+(company-prescient :fetcher github
+                   :repo "raxod502/prescient.el"
+                   :files ("company-prescient.el"))

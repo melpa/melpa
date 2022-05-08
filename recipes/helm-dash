@@ -1,1 +1,1 @@
-(helm-dash :repo "areina/helm-dash" :fetcher github)
+(helm-dash :repo "dash-docs-el/helm-dash" :fetcher github)

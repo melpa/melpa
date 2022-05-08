@@ -1,0 +1,3 @@
+(auth-source-xoauth2
+ :fetcher github
+ :repo "ccrusius/auth-source-xoauth2")

@@ -1,0 +1,1 @@
+(s3ed :fetcher github :repo "mattusifer/s3ed")

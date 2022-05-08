@@ -1,0 +1,3 @@
+(flymake-kondor
+ :repo "turbo-cafe/flymake-kondor"
+ :fetcher github)

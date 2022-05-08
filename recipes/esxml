@@ -1,1 +1,1 @@
-(esxml :fetcher github :repo "tali713/esxml" :files ("esxml.el"))
+(esxml :fetcher github :repo "tali713/esxml" :files ("esxml.el" "esxml-query.el"))

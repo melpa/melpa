@@ -1,0 +1,1 @@
+(lsp-tailwindcss :repo "merrickluo/lsp-tailwindcss" :fetcher github)

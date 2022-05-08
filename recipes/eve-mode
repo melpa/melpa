@@ -1,0 +1,1 @@
+(eve-mode :repo "witheve/emacs-eve-mode" :fetcher github)

@@ -1,2 +1,1 @@
-(quick-preview :repo "myuhe/quick-preview.el"
-               :fetcher github)
+(quick-preview :fetcher github :repo "emacsattic/quick-preview")

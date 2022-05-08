@@ -1,0 +1,3 @@
+(zen-mode
+  :repo "zenlang/zen-mode"
+  :fetcher github)

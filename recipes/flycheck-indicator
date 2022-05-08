@@ -1,0 +1,1 @@
+(flycheck-indicator :fetcher github :repo "gexplorer/flycheck-indicator")

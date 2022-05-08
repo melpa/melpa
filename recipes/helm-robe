@@ -1,1 +1,1 @@
-(helm-robe :fetcher github :repo "syohex/emacs-helm-robe")
+(helm-robe :fetcher github :repo "emacsorphanage/helm-robe")

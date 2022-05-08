@@ -1,1 +1,1 @@
-(system-packages :fetcher github :repo "jabranham/system-packages") 
+(system-packages :fetcher gitlab :repo "jabranham/system-packages")

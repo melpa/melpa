@@ -1,0 +1,2 @@
+(org-starter-swiper :fetcher github :repo "akirak/org-starter"
+                    :files ("org-starter-swiper.el"))

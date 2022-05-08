@@ -1,0 +1,3 @@
+(solo-jazz-theme
+ :fetcher github
+ :repo "cstby/solo-jazz-emacs-theme")

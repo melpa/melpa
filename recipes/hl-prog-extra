@@ -1,0 +1,3 @@
+(hl-prog-extra
+ :url "https://codeberg.org/ideasman42/emacs-hl-prog-extra.git"
+ :fetcher git)

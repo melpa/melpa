@@ -1,0 +1,2 @@
+(keg-mode :fetcher github :repo "conao3/keg.el"
+          :files ("keg-mode.el"))

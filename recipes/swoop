@@ -1,1 +1,1 @@
-(swoop :repo "ShingoFukuyama/emacs-swoop" :fetcher github)
+(swoop :fetcher github :repo "emacsorphanage/swoop")

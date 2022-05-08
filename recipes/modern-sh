@@ -1,0 +1,4 @@
+(modern-sh
+  :fetcher github
+  :repo "damon-kwok/modern-sh"
+  :files (:defaults "etc"))

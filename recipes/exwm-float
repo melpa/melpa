@@ -1,0 +1,1 @@
+(exwm-float :fetcher gitlab :repo "mtekman/exwm-float.el")

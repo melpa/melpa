@@ -1,0 +1,1 @@
+(envrc :fetcher github :repo "purcell/envrc")

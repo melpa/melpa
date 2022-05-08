@@ -1,1 +1,2 @@
-(osx-pseudo-daemon :repo "DarwinAwardWinner/osx-pseudo-daemon" :fetcher github)
+(osx-pseudo-daemon :repo "DarwinAwardWinner/mac-pseudo-daemon" :fetcher github
+                   :files ("osx-pseudo-daemon.el"))

@@ -1,0 +1,257 @@
+* Contributing a new recipe to MELPA
+
+MELPA consists of /recipes/, each describing one /package/ in a
+dedicated repository. This document describes how to propose a new
+package for inclusion into MELPA.
+
+Three contributor roles are involved in the maintenance of MELPA :
+
+- MELPA maintainers :: They are responsible for reviewing new recipes
+     and associated packages as well as keeping the system working.
+
+- Recipe authors :: They are responsible for submitting good recipes and
+                    maintaining them when the package is changed
+                    (e.g., renamed or deprecated).
+
+- Package author :: They are responsible for writing Emacs Lisp
+                    packages of good quality.
+
+We advise package authors to also take the recipe author role when
+possible.
+
+In the following, package and recipe authors will find guidelines to
+help them prepare a package and its recipe for inclusion into
+MELPA. Please follow the guidelines as closely as possible to speed up
+the inclusion process. Guidelines are not strict and evaluated on a
+case by case basis given proper justification.
+
+** What to know before opening a pull request
+
+New recipe submissions should adhere to the following guidelines:
+
+- Expect feedback :: Part of the review process is having a MELPA
+     maintainers look at your package to make sure it will work in
+     MELPA and the Emacs package system. Maintainers may provide
+     comments which may or may not be blockers for addition to MELPA.
+
+- One recipe per pull request :: If you have several packages to
+     submit, open several pull requests. If the packages are very
+     closely related and maintained in the same repository (see below
+     for why it might not be a good idea), you might open only
+     one pull request for them all; in this case, keep adding one
+     recipe per commit.
+
+- Reasonably innovative package :: MELPA provides a curated set of
+     Emacs Lisp packages, not an exhaustive list of every single Emacs
+     Lisp file ever created. By default, MELPA maintainers will reject
+     packages that duplicate functionality provided by existing
+     packages. Please try to improve existing packages instead of
+     creating new ones when possible.
+
+- Software Configuration Management (SCM) :: Upstream source must be
+     stored in an authoritative Git or Mercurial [[https://en.wikipedia.org/wiki/Software_configuration_management][SCM
+     repository]]. [[https://www.emacswiki.org/][EmacsWiki]] recipes are no longer accepted.
+
+- Official repository :: Packages should be built from the official
+     package repository.  Forks of the official repository will not be
+     accepted except in extreme circumstances.
+
+- Dedicated SCM repository :: Keep each package in its own SCM (e.g.,
+     git) repository. This makes it possible to have a different
+     version number for each package as MELPA stable looks at the
+     SCM's tags to assign version numbers to recipes.
+
+- Quality :: Because we care about the quality of packages that are
+             part of MELPA, MELPA maintainers review every recipe and
+             its associated package. Please read and follow the
+             guidelines below.
+
+- Contact package author :: If you are not the original author or
+     maintainer of the package you are submitting, please notify the
+     authors prior to submitting and include them in the pull request
+     process.
+     
+- Reasonably active maintainer :: Packages submitted should have a
+     reasonably committed and active maintainer (at least, at the time
+     they are submitted).  MELPA is not intended to be a place to
+     "dump" code, even if it works well at the time.  Users should be
+     able to expect that a package's maintainer will make reasonable
+     efforts to maintain it in the future.  (Of course, "life
+     happens," so this is not a guarantee, and sometimes packages are
+     transferred to new maintainers.)
+
+- Recipe maintenance :: If the package author moves the upstream
+     repository, then update the recipe too. If the package author
+     transfers ownership to someone else and both the old and new
+     location are on Github, then the package author should better use
+     Github's repository transfer mechanism to move the
+     repository. This makes it easier for MELPA maintainers to verify
+     that the move is legit. Otherwise, the package author should
+     update the README at the old location with a link to the new
+     location.
+
+- GPL compatible license :: The package is released under a 
+     [[https://www.gnu.org/licenses/license-list.en.html#GPLCompatibleLicenses][GPL-Compatible Free Software License]], preferably the
+     GNU General Public License (GPL) version 3.  The license
+     boilerplate should be applied above the  ~;;; Commentary~ of each
+     source file.  The repository should contain a LICENSE or COPYING
+     file, formatted so that it can be detected by [[https://github.com/licensee/licensee][common tooling]].
+
+** Making your package ready for inclusion
+
+MELPA maintainers control the quality of each recipe and associated
+package. Please spend time following guidelines below as not doing so
+will delay the process.
+
+- Coding style and conventions :: The Emacs Lisp files should follow
+     the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Tips.html][Emacs Lisp conventions]] and the [[https://github.com/bbatsov/emacs-lisp-style-guide][Emacs Lisp Style Guide]].
+
+- Package metadata :: Package descriptions should adhere to the
+     ~package.el~ format as specified by ~(info "(elisp) Packaging")~
+     [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Packaging.html#Packaging][documentation]]. More information on this format is provided by the
+     [[https://web.archive.org/web/20111120220609/http://marmalade-repo.org/doc-files/package.5.html][marmalade package manual]].
+
+- Use quality-checking tools :: Use [[https://melpa.org/#/flycheck][flycheck]], [[https://github.com/purcell/package-lint][package-lint]] and
+     [[https://github.com/purcell/flycheck-package][flycheck-package]] to help you identify common errors in your
+     package metadata. Use [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Tips.html][checkdoc]] to make sure that your package
+     follows the conventions for documentation strings.
+
+- Avoid long functions :: The longer a function the harder it is for a
+     MELPA maintainer to understand what is happening and to give
+     feedback. It is also much harder to point to a specific portion
+     of the code we believe could be improved. Please spend time
+     decomposing your long functions into smaller, well-named and
+     documented, ones.
+
+- Avoid change logs and readmes :: Files like these would only end up
+     in an obscure installation directory where a user would never know
+     to look when searching for information. Possible exceptions to this
+     policy are .info files since these are automatically added to Emacs'
+     info index and the presence of interactive commands that would
+     display the files.
+
+- (optional) Tag commits to release :: To have a stable version
+     generated for your package simply tag the SCM repository using a
+     naming compatible with the ~version-to-list~ function. The
+     repository's state of this tag will be used to generate the
+     stable package.
+
+*** Fixing typical problems
+
+Packages submitted to MELPA regularly suffer from the same problems,
+which delay review by several days or even weeks. Please double check
+this list before submitting your package:
+
+- Please run quality-checking tools specified above (really, do it!).
+- Please enable [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical binding]] by adding ~-*- lexical-binding: t;
+  -*-~ at the end of the first line of each Emacs Lisp file. If you
+  want to know more about why you should always do that, read [[https://nullprogram.com/tags/emacs/][Chris
+  Wellons Emacs' blog posts]] ([[https://nullprogram.com/blog/2016/12/22/][this post]] for example).
+- Please avoid defining a face that both ~:inherit~ another face and
+  also override their attributes (e.g. by making them bold, underlined
+  or inverse-video). The result could be really bad depending on user
+  customizations. The best approach here is to simply ~:inherit~ the
+  faces, and leave the user to customise the rest.
+- Prefix function names with #' (i.e., the special form ~function~)
+  instead of just ' (i.e., the special form ~quote~) to tell the
+  compiler this is [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Anonymous-Functions.html][a function reference]]. E.g., ~(seq-filter #'evenp
+  list)~.
+- MELPA *only* looks at the main ~.el~ file (or ~-pkg.el~ file, if
+  provided, though we discourage that).  If you have different
+  optional parts of a large package, each of which has different
+  dependencies, then these should really be published as *separate
+  packages*.
+
+** Preparing a pull request to MELPA
+
+To submit a pull request to MELPA, you first have to fork and clone
+the [[https://github.com/melpa/melpa][MELPA repository]]. Then, you need to create a recipe file and test
+your recipe.
+
+*** Create a recipe file
+
+Create a file under the directory specified by
+~package-build-recipes-dir~ (default: ~recipes/~ directory where
+~package-build~ was loaded). If you prefer, the interactive command
+~package-build-create-recipe~ in ~package-build/package-build.el~ will
+guide you through this process. The filename should match the name of
+the package's provided feature.
+
+See the [[file:README.md#recipe-format][recipe format]] section of the README for more information on
+the content of a recipe file. The package name must be the same as the
+filename.
+
+Recipes should try to minimize the size of the resulting package by
+specifying only files relevant to the package.
+
+*** Test your recipe
+
+Please test that the package builds properly by following the steps
+below.
+
+Let ~<NAME>~ denote the filename of the new recipe. Build the recipe
+via ~make recipes/<NAME>~, or through pressing ~C-c C-c~ in the recipe
+file buffer. Be sure that the ~emacs~ binary on your ~PATH~ is at
+least version 23, or set ~$EMACS_COMMAND~ to the location of a
+suitable binary.
+
+If the repository contains tags for releases, confirm that the correct
+version is detected by running ~STABLE=t make recipes/<NAME>~.  The
+version detection can be adjusted by specifying ~:version-regexp~ in
+the recipe (see [[file:README.md#recipe-format][recipe format]] in the README).
+
+Test that the package installs properly by running
+~package-install-file~ from within Emacs and specifying the newly
+built package in the directory specified by
+~package-build-archive-dir~ (default: ~packages/~ directory where
+~package-build~ was loaded). Entering "yes" when prompted after
+pressing ~C-c C-c~ in the recipe buffer also works.
+
+You can optionally run a sandboxed Emacs in which locally-built
+packages will be available for installation along with those already
+in MELPA:
+
+#+BEGIN_SRC shell
+EMACS_COMMAND=/path/to/emacs make sandbox INSTALL=<NAME>
+#+END_SRC
+
+From within Emacs, install and test your package as appropriate. This
+is a useful way to discover missing dependencies.
+
+** Opening a pull request
+
+Create a [[https://github.com/magit/magit/wiki/Dedicated-pull-request-branches][dedicated pull request branch]] in your clone of the [[https://github.com/melpa/melpa][MELPA
+repository]] and push this branch to your fork. Finally, go to the MELPA
+repository and open the pull request.
+
+Include the following information in the pull request description:
+
+- a brief summary of what the package does;
+- a direct link to the package repository;
+- your association with the package (e.g., are you the maintainer?
+  have you contributed? do you just like the package a lot?);
+- relevant communications with the upstream package maintainer (e.g.,
+  ~package.el~ compatibility changes that you have submitted).
+
+Consider the [[https://github.com/github/hub][hub]] command-line utility by [[http://chriswanstrath.com/][defunkt]] which helps simplify
+this process.
+** Waiting for reviews and taking feedback into account
+
+MELPA maintainers spend a lot of time reviewing proposed packages and
+also have quite a lot of other non-MELPA-related activities. Please be
+patient as it might take a week (sometimes several) before one starts
+having a look at your pull request. Also be aware that the maintainers
+try to divide reviewing time fairly between authors; you can help them
+by limiting the number of pull requests you have open at once.
+
+If you were asked to make several changes, then you should explicitly
+mention everything that you have fixed, and possibly even link to the
+relevant commits. One way of doing that is to mention the MELPA pull
+request in every commit addressing one of the raised points: just
+write ~melpa/melpa#N~ in each commit message where ~N~ is the pull
+request number.
+
+You can help MELPA maintainers take care of pull requests much faster
+by paying real attention to the quality of your package (see above for
+some quality checks and links). If you feel for it, you can also take
+another pull request and give feedback to the author.

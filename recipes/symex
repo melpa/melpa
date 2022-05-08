@@ -1,0 +1,2 @@
+(symex :repo "countvajhula/symex.el"
+       :fetcher github)

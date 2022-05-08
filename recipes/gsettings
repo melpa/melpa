@@ -1,0 +1,3 @@
+(gsettings
+ :fetcher github
+ :repo "wbolster/emacs-gsettings")

@@ -1,0 +1,1 @@
+(lxd-tramp :repo "onixie/lxd-tramp" :fetcher github)

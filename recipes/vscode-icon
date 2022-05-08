@@ -1,0 +1,5 @@
+(vscode-icon
+ :fetcher github
+ :repo "jojojames/vscode-icon-emacs"
+ :files (:defaults
+         "icons"))

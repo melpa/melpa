@@ -1,0 +1,1 @@
+(ibuffer-project :fetcher github :repo "muffinmad/emacs-ibuffer-project")

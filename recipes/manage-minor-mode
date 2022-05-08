@@ -1,1 +1,1 @@
-(manage-minor-mode :repo "ShingoFukuyama/manage-minor-mode" :fetcher github)
+(manage-minor-mode :fetcher github :repo "emacsorphanage/manage-minor-mode")

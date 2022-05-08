@@ -1,1 +1,1 @@
-(gruvbox-theme :fetcher github :repo "Greduan/emacs-theme-gruvbox")
+(gruvbox-theme :fetcher github :repo "greduan/emacs-theme-gruvbox")

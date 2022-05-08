@@ -1,0 +1,1 @@
+(rib-mode :fetcher github :repo "blezek/rib-mode")

@@ -5,7 +5,8 @@
                "swank"
                "*.lisp"
                "*.asd"
-               ("contrib" "contrib/*" (:exclude "contrib/test"))
+               ("contrib" "contrib/*")
+               (:exclude "contrib/test" "contrib/Makefile")
                "doc/slime.texi"
                "doc/slime.info"
                "doc/dir"

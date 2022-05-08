@@ -1,1 +1,1 @@
-(ox-rst :fetcher github :repo "masayuko/ox-rst")
+(ox-rst :fetcher github :repo "msnoigrs/ox-rst")

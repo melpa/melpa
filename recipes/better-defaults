@@ -1,1 +1,3 @@
-(better-defaults :fetcher github :repo "technomancy/better-defaults")
+(better-defaults
+ :fetcher git
+ :url "https://git.sr.ht/~technomancy/better-defaults")

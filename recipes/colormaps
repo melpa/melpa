@@ -1,0 +1,1 @@
+(colormaps :fetcher github :repo "lepisma/colormaps.el")

@@ -1,0 +1,1 @@
+(total-lines :repo "hinrik/total-lines" :fetcher github)

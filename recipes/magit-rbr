@@ -1,0 +1,1 @@
+(magit-rbr :fetcher github :repo "fanatoly/magit-rbr")

@@ -1,0 +1,3 @@
+(proced-narrow
+ :repo "travisjeffery/proced-narrow"
+ :fetcher github)

@@ -1,0 +1,3 @@
+(digitalocean
+ :repo "olymk2/emacs-digitalocean"
+ :fetcher gitlab)

@@ -1,0 +1,2 @@
+(helm-selector :fetcher github
+               :repo "emacs-helm/helm-selector")

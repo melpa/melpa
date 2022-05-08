@@ -1,0 +1,1 @@
+(wdl-mode :repo "zhanxw/wdl-mode" :fetcher github)

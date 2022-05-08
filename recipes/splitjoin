@@ -1,1 +1,1 @@
-(splitjoin :fetcher github :repo "syohex/emacs-splitjoin")
+(splitjoin :fetcher github :repo "emacsorphanage/splitjoin")

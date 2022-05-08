@@ -1,1 +1,1 @@
-(caml :fetcher svn :url "https://caml.inria.fr/svn/ocaml/trunk/emacs/")
+(caml :repo "ocaml/caml-mode" :fetcher github)

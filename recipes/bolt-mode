@@ -1,0 +1,3 @@
+(bolt-mode
+ :repo "mpontus/bolt-mode"
+ :fetcher github)

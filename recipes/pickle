@@ -1,0 +1,3 @@
+(pickle
+ :repo "ahungry/pickle-mode"
+ :fetcher github)

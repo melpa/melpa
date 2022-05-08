@@ -1,0 +1,2 @@
+(helm-switch-to-repl :fetcher github
+                     :repo "emacs-helm/helm-switch-to-repl")

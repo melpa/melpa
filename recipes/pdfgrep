@@ -1,0 +1,1 @@
+(pdfgrep :repo "jeremy-compostella/pdfgrep" :fetcher github)

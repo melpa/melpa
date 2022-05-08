@@ -1,0 +1,3 @@
+(embark-consult :repo "oantolin/embark"
+                :fetcher github
+                :files ("embark-consult.el"))

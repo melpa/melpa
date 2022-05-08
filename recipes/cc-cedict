@@ -1,0 +1,1 @@
+(cc-cedict :fetcher github :repo "xuchunyang/cc-cedict.el")

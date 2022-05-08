@@ -1,0 +1,3 @@
+(pynt :repo "ebanner/pynt" 
+      :fetcher github
+      :files ("pynt/*"))

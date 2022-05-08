@@ -1,0 +1,4 @@
+(ox-gemini
+ :fetcher git
+ :url "https://git.sr.ht/~abrahms/ox-gemini"
+ )

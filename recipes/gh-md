@@ -1,1 +1,1 @@
-(gh-md :fetcher github :repo "emacs-pe/gh-md.el")
+(gh-md :fetcher github :repo "emacsorphanage/gh-md")

@@ -1,1 +1,1 @@
-(go-eldoc :repo "syohex/emacs-go-eldoc" :fetcher github)
+(go-eldoc :repo "emacsorphanage/go-eldoc" :fetcher github)

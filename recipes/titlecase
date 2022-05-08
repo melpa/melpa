@@ -1,0 +1,3 @@
+(titlecase
+ :fetcher github
+ :repo "duckwork/titlecase.el")

@@ -1,0 +1,3 @@
+(nz-holidays
+  :repo "techquila/nz-holidays"
+  :fetcher github)

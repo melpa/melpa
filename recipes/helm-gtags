@@ -1,3 +1,3 @@
 (helm-gtags
- :repo "syohex/emacs-helm-gtags"
+ :repo "emacsorphanage/helm-gtags"
  :fetcher github)

@@ -1,1 +1,1 @@
-(flycheck-checkbashisms :repo "Gnouc/flycheck-checkbashisms" :fetcher github)
+(flycheck-checkbashisms :repo "cuonglm/flycheck-checkbashisms" :fetcher github)

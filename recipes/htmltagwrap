@@ -1,0 +1,1 @@
+(htmltagwrap :repo "jcs-elpa/htmltagwrap" :fetcher github)

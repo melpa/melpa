@@ -1,0 +1,3 @@
+(graphql :fetcher github
+	 :repo "vermiculus/graphql.el"
+	 :files ("graphql.el"))

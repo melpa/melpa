@@ -1,0 +1,2 @@
+(ynab :repo "janders223/ynab.el"
+        :fetcher github)

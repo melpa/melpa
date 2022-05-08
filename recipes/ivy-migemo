@@ -1,0 +1,1 @@
+(ivy-migemo :repo "ROCKTAKEY/ivy-migemo" :fetcher github)

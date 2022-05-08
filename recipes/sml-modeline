@@ -1,3 +1,1 @@
-(sml-modeline :fetcher bzr
-              :url "lp:~nxhtml/nxhtml/main"
-              :files ("util/sml-modeline.el"))
+(sml-modeline :fetcher github :repo "emacsorphanage/sml-modeline")

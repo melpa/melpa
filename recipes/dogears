@@ -1,0 +1,2 @@
+(dogears :fetcher github :repo "alphapapa/dogears.el"
+         :files (:defaults (:exclude "helm-dogears.el")))

@@ -1,0 +1,1 @@
+(flycheck-swiftx :fetcher github :repo "nhojb/flycheck-swiftx")

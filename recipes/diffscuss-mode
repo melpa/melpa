@@ -1,1 +1,3 @@
-(diffscuss-mode :fetcher github :repo "hut8labs/diffscuss" :files ("diffscuss-mode/*.el"))
+(diffscuss-mode :fetcher github
+                :repo "tomheon/diffscuss"
+                :files ("diffscuss-mode/*.el"))

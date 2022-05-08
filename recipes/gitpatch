@@ -1,0 +1,1 @@
+(gitpatch :fetcher github :repo "tumashu/gitpatch")

@@ -1,0 +1,1 @@
+(lms :fetcher hg :url "https://hg.serna.eu/emacs/lms")

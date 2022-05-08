@@ -1,1 +1,1 @@
-(fetch :fetcher github :repo "crshd/fetch.el")
+(fetch :fetcher github :repo "cbrst/fetch.el")

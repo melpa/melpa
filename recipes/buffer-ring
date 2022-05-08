@@ -1,0 +1,2 @@
+(buffer-ring :repo "countvajhula/buffer-ring"
+             :fetcher github)

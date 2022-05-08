@@ -1,0 +1,1 @@
+(one-themes :repo "balajisivaraman/emacs-one-themes" :fetcher github)

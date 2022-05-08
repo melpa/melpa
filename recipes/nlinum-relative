@@ -1,1 +1,1 @@
-(nlinum-relative :repo "CodeFalling/nlinum-relative" :fetcher github)
+(nlinum-relative :repo "xcodebuild/nlinum-relative" :fetcher github)

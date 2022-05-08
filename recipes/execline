@@ -1,0 +1,1 @@
+(execline :fetcher gitlab :repo "KAction/emacs-execline")

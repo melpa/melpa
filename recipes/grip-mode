@@ -1,0 +1,1 @@
+(grip-mode :repo "seagle0128/grip-mode" :fetcher github)

@@ -1,0 +1,3 @@
+(ob-svgbob
+  :fetcher github
+  :repo "mgxm/ob-svgbob")

@@ -1,0 +1,3 @@
+(mpdmacs
+ :fetcher github
+ :repo "sp1ff/mpdmacs")

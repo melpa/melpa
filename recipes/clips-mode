@@ -1,1 +1,1 @@
-(clips-mode :fetcher github :repo "grettke/clips-mode")
+(clips-mode :fetcher github :repo "clips-mode/clips-mode")

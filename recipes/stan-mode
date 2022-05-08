@@ -1,4 +1,5 @@
 (stan-mode
  :fetcher github
  :repo "stan-dev/stan-mode"
- :files ("stan-mode/*.el"))
+ :files ("stan-mode/*.el"
+         (:exclude "stan-mode/test-*.el")))

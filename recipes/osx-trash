@@ -1,2 +1,3 @@
-(osx-trash :fetcher github :repo "lunaryorn/osx-trash.el"
+(osx-trash :fetcher github
+           :repo "emacsorphanage/osx-trash"
            :files (:defaults "*.AppleScript"))

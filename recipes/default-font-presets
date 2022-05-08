@@ -1,0 +1,3 @@
+(default-font-presets
+ :url "https://codeberg.org/ideasman42/emacs-default-font-presets.git"
+ :fetcher git)

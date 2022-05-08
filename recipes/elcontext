@@ -1,0 +1,2 @@
+(elcontext :repo "rollacaster/elcontext"
+           :fetcher github)

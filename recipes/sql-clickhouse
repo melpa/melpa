@@ -1,0 +1,1 @@
+(sql-clickhouse :fetcher github :repo "rschwarz/sql-clickhouse")

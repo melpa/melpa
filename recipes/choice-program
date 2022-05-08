@@ -1,1 +1,1 @@
-(choice-program :fetcher github :repo "plandes/choice-program" :files ("lisp/*.el"))
+(choice-program :fetcher github :repo "plandes/choice-program")

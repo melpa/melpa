@@ -1,0 +1,3 @@
+(exotica-theme
+ :repo "zenobht/exotica-theme"
+ :fetcher github)

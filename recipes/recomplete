@@ -1,0 +1,3 @@
+(recomplete
+ :url "https://codeberg.org/ideasman42/emacs-recomplete.git"
+ :fetcher git)

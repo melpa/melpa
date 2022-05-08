@@ -1,1 +1,1 @@
-(minesweeper :fetcher bitbucket :repo "zck/minesweeper.el")
+(minesweeper :fetcher hg :url "https://hg.sr.ht/~zck/minesweeper")

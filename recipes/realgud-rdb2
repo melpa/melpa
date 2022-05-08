@@ -1,3 +1,5 @@
-(realgud-rdb2 :fetcher github :repo "rocky/realgud-ruby-debugger2"
-	 :files ("realgud-rdb2.el"
-		 ("rdb2" "rdb2/*.el")))
+(realgud-rdb2
+ :fetcher github
+ :repo "realgud/realgud-ruby-debugger2"
+ :files ("realgud-rdb2.el"
+         ("rdb2" "rdb2/*.el")))

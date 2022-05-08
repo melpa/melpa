@@ -1,0 +1,1 @@
+(evil-ex-fasd :fetcher github :repo "yqrashawn/evil-ex-fasd")

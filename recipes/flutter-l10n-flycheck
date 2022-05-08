@@ -1,0 +1,4 @@
+(flutter-l10n-flycheck
+ :repo "amake/flutter.el"
+ :fetcher github
+ :files ("flutter-l10n-flycheck.el"))

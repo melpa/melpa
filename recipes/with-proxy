@@ -1,0 +1,3 @@
+(with-proxy
+ :fetcher github
+ :repo "twlz0ne/with-proxy.el")

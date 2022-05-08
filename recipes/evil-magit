@@ -1,1 +1,0 @@
-(evil-magit :repo "emacs-evil/evil-magit" :fetcher github)

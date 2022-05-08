@@ -1,1 +1,1 @@
-(sound-wav :repo "syohex/emacs-sound-wav" :fetcher github)
+(sound-wav :repo "emacsorphanage/sound-wav" :fetcher github)

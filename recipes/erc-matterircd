@@ -1,0 +1,1 @@
+(erc-matterircd :fetcher github :repo "alexmurray/erc-matterircd")

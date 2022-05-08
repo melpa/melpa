@@ -1,1 +1,3 @@
-(ido-complete-space-or-hyphen :repo "doitian/ido-complete-space-or-hyphen" :fetcher github)
+(ido-complete-space-or-hyphen
+ :fetcher github
+ :repo "DarwinAwardWinner/ido-complete-space-or-hyphen")

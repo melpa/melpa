@@ -1,0 +1,3 @@
+(org-kindle :fetcher git
+            :url "https://repo.or.cz/org-kindle.git"
+            :old-names (org-send-ebook))

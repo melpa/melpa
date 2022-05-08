@@ -1,0 +1,3 @@
+(rum-mode
+ :repo "rumlang/rum-mode"
+ :fetcher github)

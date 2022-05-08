@@ -1,0 +1,1 @@
+(helm-bitbucket :fetcher github :repo "dragonwasrobot/helm-bitbucket")

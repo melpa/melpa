@@ -1,0 +1,3 @@
+(python-pytest
+ :fetcher github
+ :repo "wbolster/emacs-python-pytest")

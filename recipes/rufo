@@ -1,0 +1,1 @@
+(rufo :repo "danielma/rufo.el" :fetcher github)

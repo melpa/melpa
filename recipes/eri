@@ -1,0 +1,1 @@
+(eri :fetcher github :repo "agda/agda" :files ("src/data/emacs-mode/eri.el"))

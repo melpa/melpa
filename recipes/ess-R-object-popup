@@ -1,2 +1,0 @@
-(ess-R-object-popup :repo "myuhe/ess-R-object-popup.el"
-         :fetcher github)

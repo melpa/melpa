@@ -1,0 +1,3 @@
+(crossword
+ :fetcher github
+ :repo "Boruch-Baum/emacs-crossword")

@@ -1,4 +1,1 @@
-(ox-clip
- :fetcher github
- :repo "jkitchin/scimax"
- :files ("ox-clip.el"))
+(ox-clip :fetcher github :repo "jkitchin/ox-clip")

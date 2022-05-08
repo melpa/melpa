@@ -1,1 +1,1 @@
-(emacsshot :fetcher github :repo "marcowahl/emacsshot")
+(emacsshot :fetcher gitlab :repo "marcowahl/emacsshot")

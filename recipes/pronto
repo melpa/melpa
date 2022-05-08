@@ -1,0 +1,1 @@
+(pronto :repo "julianrubisch/pronto.el" :fetcher github)

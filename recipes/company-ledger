@@ -1,0 +1,1 @@
+(company-ledger :fetcher github :repo "debanjum/company-ledger")

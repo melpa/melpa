@@ -1,0 +1,1 @@
+(company-terraform :fetcher github :repo "rafalcieslak/emacs-company-terraform")

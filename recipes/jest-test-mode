@@ -1,0 +1,1 @@
+(jest-test-mode :repo "rymndhng/jest-test-mode" :fetcher github)

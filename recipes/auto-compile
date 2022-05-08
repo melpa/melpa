@@ -1,1 +1,1 @@
-(auto-compile :repo "tarsius/auto-compile" :fetcher github)
+(auto-compile :repo "emacscollective/auto-compile" :fetcher github)

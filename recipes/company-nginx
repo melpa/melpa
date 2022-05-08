@@ -1,0 +1,1 @@
+(company-nginx :fetcher git :url "https://repo.or.cz/company-nginx.git")

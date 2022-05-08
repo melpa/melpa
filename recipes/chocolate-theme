@@ -1,0 +1,3 @@
+(chocolate-theme
+ :repo "SavchenkoValeriy/emacs-chocolate-theme"
+ :fetcher github)

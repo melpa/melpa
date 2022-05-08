@@ -1,2 +1,1 @@
-(futhark-mode :repo "HIPERFIT/futhark" :fetcher github
-              :files ("tools/futhark-mode.el"))
+(futhark-mode :repo "diku-dk/futhark-mode" :fetcher github)

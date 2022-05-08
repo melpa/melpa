@@ -1,4 +1,0 @@
-(smali-mode
- :fetcher github
- :repo "strazzere/Emacs-Smali"
- )

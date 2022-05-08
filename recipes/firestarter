@@ -1,1 +1,1 @@
-(firestarter :fetcher github :repo "wasamasa/firestarter")
+(firestarter :fetcher git :url "https://depp.brause.cc/firestarter.git")

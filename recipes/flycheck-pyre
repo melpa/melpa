@@ -1,0 +1,2 @@
+(flycheck-pyre :fetcher github :repo "linnik/flycheck-pyre"
+               :files (:defaults "bin"))

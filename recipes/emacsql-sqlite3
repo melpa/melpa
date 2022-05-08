@@ -1,0 +1,1 @@
+(emacsql-sqlite3 :repo "cireu/emacsql-sqlite3" :fetcher github)

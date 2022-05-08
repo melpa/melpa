@@ -1,0 +1,1 @@
+(flycheck-hledger :fetcher github :repo "DamienCassou/flycheck-hledger")

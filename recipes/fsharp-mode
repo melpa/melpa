@@ -1,8 +1,4 @@
 (fsharp-mode
  :fetcher github
- :repo "rneatherway/emacs-fsharp-mode-bin"
- :files ("*.el"
-         ("bin"
-          "*.exe"
-          "*.exe.config"
-          "*.dll")))
+ :repo "fsharp/emacs-fsharp-mode"
+ :files (:defaults (:exclude "eglot-fsharp.el")))

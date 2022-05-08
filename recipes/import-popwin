@@ -1,1 +1,1 @@
-(import-popwin :repo "syohex/emacs-import-popwin" :fetcher github)
+(import-popwin :repo "emacsorphanage/import-popwin" :fetcher github)

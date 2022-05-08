@@ -1,2 +1,1 @@
 (wordsmith-mode :repo "istib/wordsmith-mode" :fetcher github)
-

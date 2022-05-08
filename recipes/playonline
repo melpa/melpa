@@ -1,0 +1,3 @@
+(playonline
+ :fetcher github
+ :repo "twlz0ne/playonline.el")

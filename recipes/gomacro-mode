@@ -1,0 +1,2 @@
+(gomacro-mode :repo "storvik/gomacro-mode"
+        :fetcher github)

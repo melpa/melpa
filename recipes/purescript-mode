@@ -1,8 +1,6 @@
 (purescript-mode
- :repo "dysinger/purescript-mode"
+ :repo "purescript-emacs/purescript-mode"
  :fetcher github
- :files ("*.el"
-         "purescript-mode.texi"
+ :files (:defaults
          "NEWS"
-         "snippets"
-         "logo.svg"))
+         "snippets"))

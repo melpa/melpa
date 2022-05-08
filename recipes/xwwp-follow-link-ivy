@@ -1,0 +1,1 @@
+(xwwp-follow-link-ivy :fetcher github :repo "canatella/xwwp" :files ("xwwp-follow-link-ivy.el"))

@@ -1,0 +1,3 @@
+(rego-mode
+ :repo "psibi/rego-mode"
+ :fetcher github)

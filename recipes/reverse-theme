@@ -1,1 +1,1 @@
-(reverse-theme :fetcher github :repo "syohex/emacs-reverse-theme")
+(reverse-theme :fetcher github :repo "emacsorphanage/reverse-theme")

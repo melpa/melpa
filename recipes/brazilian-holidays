@@ -1,0 +1,3 @@
+(brazilian-holidays
+ :repo "jadler/brazilian-holidays"
+ :fetcher github)

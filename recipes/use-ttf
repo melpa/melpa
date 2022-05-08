@@ -1,0 +1,1 @@
+(use-ttf :repo "jcs-elpa/use-ttf" :fetcher github)

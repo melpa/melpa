@@ -1,0 +1,3 @@
+(elm-test-runner
+ :fetcher github
+ :repo "juanedi/elm-test-runner")

@@ -1,0 +1,3 @@
+(poly-markdown
+ :fetcher github
+ :repo "polymode/poly-markdown")

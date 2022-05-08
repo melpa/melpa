@@ -1,1 +1,1 @@
-(vline :fetcher wiki)
+(vline :fetcher github :repo "buzztaiki/vline")

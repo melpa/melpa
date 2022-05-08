@@ -1,6 +1,6 @@
 (pdf-tools
  :fetcher github
- :repo "politza/pdf-tools"
+ :repo "vedang/pdf-tools"
  :files ("lisp/*.el"
          "README"
          ("build" "Makefile")

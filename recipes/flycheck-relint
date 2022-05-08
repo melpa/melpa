@@ -1,0 +1,1 @@
+(flycheck-relint :fetcher github :repo "purcell/flycheck-relint")

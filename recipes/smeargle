@@ -1,1 +1,1 @@
-(smeargle :repo "syohex/emacs-smeargle" :fetcher github)
+(smeargle :repo "emacsorphanage/smeargle" :fetcher github)

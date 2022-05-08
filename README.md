@@ -1,6 +1,6 @@
 # MELPA
 
-[![Build Status](https://travis-ci.org/melpa/melpa.png?branch=master)](https://travis-ci.org/melpa/melpa)
+[![Build Status](https://github.com/melpa/melpa/workflows/CI/badge.svg)](https://github.com/melpa/melpa/actions)
 
 MELPA is a growing collection of `package.el`-compatible Emacs Lisp
 packages built automatically on our server from the upstream source
@@ -29,59 +29,54 @@ read on for details.
 
 ## Usage
 
-To use the MELPA repository, you'll need an Emacs with
-`package.el`. Emacs 24 has `package.el` bundled with it, and there's
-also a
-[version you can use with Emacs 23](http://repo.or.cz/w/emacs.git/blob_plain/ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09:/lisp/emacs-lisp/package.el).
+To use the MELPA repository, you'll need an Emacs with `package.el`,
+ie. Emacs 24.1 or greater. To test TLS support you can visit a HTTPS
+URL, for example with `M-x eww RET https://wikipedia.org RET`.
 
 Enable installation of packages from MELPA by adding an entry to
 `package-archives` after `(require 'package)` and before the call to
 `package-initialize` in your `init.el` or `.emacs` file:
 
-```lisp
+```elisp
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+;; and `package-pinned-packages`. Most users will not need or want to do this.
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 ```
 
 Then just use `M-x package-list-packages` to browse and install
 packages from MELPA and elsewhere.
 
-**Note:** Packages from the default “bleeding-edge” repository will
-always have higher versions than those from other archives like
-Marmalade, so if you decide you need non-MELPA versions of specific
-packages for some reason, extra configuration will be required:
+Note that you'll need to run `M-x package-refresh-contents` or `M-x
+package-list-packages` to ensure that Emacs has fetched the MELPA
+package list before you can install packages with `M-x
+package-install` or similar.
 
-* If your Emacs has the variable `package-pinned-packages` (available
-  in 24.4 and later), you can customize or modify that variable as
-  needed.
+### MELPA Stable
+
+Packages in MELPA are built directly from the latest package source
+code in the upstream repositories, but we also build and publish
+packages corresponding to the latest tagged code in those
+repositories, where version tags exist. These packages are published
+in a separate package archive called [MELPA
+Stable](https://stable.melpa.org). Most users should prefer MELPA over
+MELPA Stable.
+
+Some notes:
+
+* If you leave the original MELPA server in your `package-archives`
+  then by default you will get the *development* versions of packages
+  and not the stable ones, because the development versions are higher.
+
+* If your Emacs has the variables `package-pinned-packages` (available
+  in 24.4 and later) and/or `package-archive-priorities`, you can
+  customize or modify those variables as needed.
 
 * You can use the
   [package-filter.el](https://github.com/milkypostman/package-filter)
   package which we provide.
-
-* You can use MELPA Stable.
-
-### MELPA Stable
-
-By default, MELPA provides the very latest revisions of packages.  If
-you prefer to only receive updates for tagged releases, use
-[MELPA Stable](https://stable.melpa.org) instead:
-
-```lisp
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-```
-
-*Versions for packages on the original MELPA server are based on the date of the last commit and will likely be higher than any version on the stable server.* Keep the following things in mind,
-
-* If you leave the original MELPA server in your `package-archives`
-  then by default you will get the *development* versions of packages
-  and not the stable ones.
 
 * You will probably want to remove all packages and then reinstall
   them. Any packages you already have installed from MELPA will never
@@ -93,7 +88,7 @@ and do not particularly recommend its use.
 
 ## Contributing
 
-See the [CONTRIBUTING.md](CONTRIBUTING.md) document.
+See the [CONTRIBUTING.org](CONTRIBUTING.org) document.
 
 ## Recipe Format
 
@@ -101,47 +96,31 @@ Packages are specified by files in the `recipes` directory.  You can
 contribute a new package by adding a new file under `recipes` using
 the following form (`[...]` denotes optional or conditional values),
 
-```lisp
+```elisp
 (<package-name>
- :fetcher [git|github|gitlab|bitbucket|bzr|hg|darcs|fossil|svn|cvs|wiki]
+ :fetcher [git|github|gitlab|hg]
  [:url "<repo url>"]
- [:repo "github-gitlab-or-bitbucket-user/repo-name"]
+ [:repo "github-or-gitlab-user/repo-name"]
+ [:commit "commit"]
+ [:branch "branch"]
  [:version-regexp "<regexp>"]
- [:module "cvs-module"]
- [:files ("<file1>" ...)])
+ [:files ("<file1>" ...)]
+ [:old-names (<old-name> ...)])
 ```
 
 - `package-name`
 a lisp symbol that has the same name as the package being specified.
 
-- `:fetcher` (one of `git, github, gitlab, bitbucket, bzr, hg, darcs,
-fossil, svn, cvs, wiki`) specifies the type of repository that `:url`
-points to. Right now package-build supports [git][git],
-[github][github], [gitlab][gitlab], [bitbucket][bitbucket],
-[bazaar (bzr)][bzr], [mercurial (hg)][hg], [subversion (svn)][svn],
-[cvs][cvs], [darcs][darcs], [fossil][fossil], and
-[EmacsWiki (deprecated)][emacswiki] as possible mechanisms for checking out
-the repository. (Note: `bitbucket` assumes `hg`: `git` repos hosted on
-bitbucket should use the `git` fetcher.)
-
-    *package-build* uses
-the corresponding application to update files before building the
-package. In the case of the `github`
-fetcher, use `:repo` instead of `:url`; the git URL will then be
-deduced.
-
-    The Emacs Wiki fetcher gets the latest version of the package
-from `http://www.emacswiki.org/emacs/download/<NAME>.el` where `NAME`
-is the package name. Note that the `:url` property is not needed for
-the `wiki` engine unless the name of the package file on the EmacsWiki
-differs from the package name being built.
+- `:fetcher` specifies the type of repository that `:url` or `:repo`
+  points to.  MELPA supports [`git`][git], [`github`][github],
+  [`gitlab`][gitlab], and [`hg`][hg] (Mercurial).
 
 - `:url`
 specifies the URL of the version control repository. *required for
-the `git`, `bzr`, `hg`, `darcs`, `fossil`, `svn` and `cvs` fetchers.*
+the `git`, and `hg` fetchers.*
 
-- `:repo` specifies the github/gitlab/bitbucket repository and is of the form
-`user/repo-name`. *required for the `github`, `gitlab`, and `bitbucket` fetchers*.
+- `:repo` specifies the github or gitlab repository and is of the form
+  `user/repo-name`. *required for the `github` and `gitlab` fetchers*.
 
 - `:commit`
 specifies the commit of the git repo to checkout. The value
@@ -152,7 +131,8 @@ the `git`-based fetchers.
 
 - `:branch`
 specifies the branch of the git repo to use. This is like `:commit`, but
-it adds the "origin/" prefix automatically.
+it adds the "origin/" prefix automatically. This must be specified when
+using a branch other than the default branch.
 
 - `:version-regexp` is a regular expression for extracting a
   version-string from the repository tags.  The default matches
@@ -161,10 +141,6 @@ it adds the "origin/" prefix automatically.
   "OTP-18.1.5", we might add `:version-regexp "[^0-9]*\\(.*\\)"` to
   strip the "OTP-" prefix.  The captured portion of the regexp must be
   parseable by Emacs' `version-to-list` function.
-
-- `:module`
-specifies the module of a CVS repository to check out.  Defaults to to
-`package-name`.  Only used with `:fetcher cvs`, and otherwise ignored.
 
 - `:files` optional property specifying the elisp and info files used to build the
 package. Please do not override this if the default value (below) is adequate, which
@@ -175,34 +151,35 @@ it should usually be:
          "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
          (:exclude ".dir-locals.el" "test.el" "tests.el" "*-test.el" "*-tests.el"))
 
-    This option is necessary when there are multiple packages in the
-repository and thus the package should only be built from a subset of
-`.el` files. For example, elisp test files should not normally be
-packaged. *Any file specified at any path in the repository is copied
-to the root of the package.* More complex options are available,
-submit an [Issue](https://github.com/melpa/melpa/issues) if the
-specified package requires more complex file specification.
-
-    If the the package merely requires some additional files, for example for
-bundling external dependencies, but is otherwise fine with the defaults, it's
-recommended to use `:defaults` as the very first element of this list, which
-causes the default value shown above to be prepended to the specified file list.
-
     Note that elisp in subdirectories is never included by default, so
-you might find it convenient to separate auxiliiary files such as tests into
+you might find it convenient to keep your package's elisp in the root
+of your repository, and separate auxiliary files such as tests into
 subdirectories to keep packaging simple.
+
+    The elements of the `:files` list are glob-expanded and processed
+    from left to right to make a list of paths that will be copied
+    into the root of the new package, as if by using `cp -R [SRCPATHS]
+    DEST`. This means a directory like "foo/bar" would become "bar" in
+    the new package. To specify a destination subdirectory, use a list
+    element of the form `(SUBDIR SRCPATH ...)`. Likewise, to filter
+    out paths expanded earlier in the list, use `(:exclude SRCPATH
+    ...)`.
+
+    If your package requires some additional files, but is
+otherwise fine with the defaults, it's recommended to use the special
+element `:defaults` as the very first element of the `:files` list,
+which causes the default value shown above to be prepended to the
+specified file list. For example `:files (:defaults "snippets")` would
+cause the "snippets" subdir to be copied in addition to the defaults.
+
 
 [git]: http://git-scm.com/
 [github]: https://github.com/
 [gitlab]: https://gitlab.com/
-[bitbucket]: https://bitbucket.org/
-[bzr]: http://bazaar.canonical.com/en/
 [hg]: https://www.mercurial-scm.org/
-[svn]: http://subversion.apache.org/
-[cvs]: http://www.nongnu.org/cvs/
-[darcs]: http://darcs.net/
-[fossil]: http://www.fossil-scm.org/
-[emacswiki]: http://www.emacswiki.org/
+
+- `:old-names` specifies former names of the package, if any.  The value is
+  a list of symbols.
 
 
 ### Example: Single File Repository
@@ -213,10 +190,10 @@ contains two files:
 * `README.markdown`
 * `smex.el`
 
-Since there is only one `.el` file, this package only needs the `:url`
+Since there is only one `.el` file, this package only needs the `:repo`
 and `:fetcher` specified,
 
-```lisp
+```elisp
 (smex :repo "nonsequitur/smex" :fetcher github)
 ```
 
@@ -233,22 +210,22 @@ The three packages have to be declared in three separate files
 `recipes/mypackage`, `recipes/helm-mypackage`, and
 `recipes/persp-mypackage`:
 
-```lisp
+```elisp
 (mypackage :repo "someuser/mypackage"
-            :fetcher github
-            :files ("mypackage.el"))
+           :fetcher github
+           :files ("mypackage.el"))
 ```
 
-```lisp
+```elisp
 (helm-mypackage :repo "someuser/mypackage"
-                 :fetcher github
-                 :files ("helm-mypackage.el"))
+                :fetcher github
+                :files ("helm-mypackage.el"))
 ```
 
-```lisp
+```elisp
 (persp-mypackage :repo "someuser/mypackage"
-                  :fetcher github
-                  :files ("persp-mypackage.el"))
+                 :fetcher github
+                 :files ("persp-mypackage.el"))
 ```
 
 ### Example: Multiple Files in Multiple Directories
@@ -259,7 +236,7 @@ sub-directories need to be explicitly set.
 
 Consider the `flymake-perlcritic` recipe,
 
-```lisp
+```elisp
 (flymake-perlcritic :repo "illusori/emacs-flymake-perlcritic"
                     :fetcher github
                     :files ("*.el" ("bin" "bin/flymake_perlcritic")))
@@ -279,7 +256,7 @@ Notice that specifying an entry in `:files` that is a list takes the
 first element to be the destination directory.  These can be embedded
 further, such as the following---hypothetical---entry for `:files`,
 
-```lisp
+```elisp
 ("*.el" ("snippets"
          ("html-mode" "snippets/html-mode/*")
          ("python-mode" "snippets/python-mode/*")))
@@ -303,7 +280,7 @@ But a better solution, given that we probably want to copy the
 *entire* `snippets` directory to the root of the package, we could
 just specify that directory.  Consider the `pony-mode` recipe,
 
-```lisp
+```elisp
 (pony-mode
  :repo "davidmiller/pony-mode"
  :fetcher github
@@ -348,8 +325,8 @@ accepted by the `Makefile`.
 
 * `recipes/<NAME>` -- Build individual recipe `<NAME>`. Built packages
 are put in the `packages/` folder with version corresponding to the
-newest HEAD revision available; given according to the `%Y%m%d`
-format.
+date of the latest commit that modified at least one of the files
+specified by the recipe; given according to the `%Y%m%d` format.
 
 * `json` -- build all JSON files.
 
@@ -369,7 +346,7 @@ format.
 
  Note that these scripts require an Emacs with `package.el` installed,
  such as Emacs 24. If you have an older version of Emacs, you can get a
- suitable `package.el` [here](http://bit.ly/pkg-el23).
+ suitable `package.el` [here](https://git.savannah.gnu.org/gitweb/?p=emacs.git;a=blob_plain;hb=ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09;f=lisp/emacs-lisp/package.el).
 
 [melpa]: https://melpa.org
 
@@ -421,9 +398,6 @@ This can be configured using the `package-build-working-dir` variable.
 
 ## Mirrors
 
-_We are not responsible for the contents of any unofficial mirror of
-our packages._
-
 Official mirrors are available (with many thanks to mirrorservice.org)
 so that if melpa.org is down, packages can still be installed.  The
 following are the HTTP/HTTPS URLs to use in `package-archives` for
@@ -435,6 +409,9 @@ MELPA and MELPA Stable respectively:
 * [https://www.mirrorservice.org/sites/stable.melpa.org/packages/](https://www.mirrorservice.org/sites/stable.melpa.org/packages/)
 
 Only the packages are mirrored, not the web site front-end itself.
+
+_We are NOT responsible for the contents of any UNOFFICIAL mirror of
+our packages._
 
 ## About
 

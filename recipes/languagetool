@@ -1,0 +1,3 @@
+(languagetool
+ :repo "PillFall/languagetool.el"
+ :fetcher github)

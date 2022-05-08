@@ -1,1 +1,1 @@
-(git-messenger :repo "syohex/emacs-git-messenger" :fetcher github)
+(git-messenger :repo "emacsorphanage/git-messenger" :fetcher github)

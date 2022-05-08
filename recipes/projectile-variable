@@ -1,1 +1,1 @@
-(projectile-variable :fetcher github :repo "zonuexe/projectile-variable")
+(projectile-variable :fetcher github :repo "emacs-php/projectile-variable")

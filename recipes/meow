@@ -1,0 +1,2 @@
+(meow :repo "meow-edit/meow"
+      :fetcher github)

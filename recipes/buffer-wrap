@@ -1,0 +1,1 @@
+(buffer-wrap :repo "jcs-elpa/buffer-wrap" :fetcher github)

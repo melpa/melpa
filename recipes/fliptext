@@ -1,1 +1,1 @@
-(fliptext :fetcher wiki)
+(fliptext :fetcher github :repo "andre-r/fliptext.el")

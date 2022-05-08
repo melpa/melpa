@@ -1,0 +1,1 @@
+(letterbox-mode :repo "pacha64/letterbox-mode" :fetcher github)

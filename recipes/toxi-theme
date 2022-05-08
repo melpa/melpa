@@ -1,1 +1,1 @@
-(toxi-theme :fetcher bitbucket :repo "postspectacular/toxi-theme")
+(toxi-theme :fetcher github :repo "postspectacular/toxi-theme")

@@ -1,0 +1,1 @@
+(ob-deno :repo "taiju/ob-deno" :fetcher github)

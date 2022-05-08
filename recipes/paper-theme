@@ -1,1 +1,1 @@
-(paper-theme :fetcher github :repo "cadadr/paper-theme")
+(paper-theme :fetcher github :repo "cadadr/elisp" :files ("paper-theme.el"))

@@ -1,1 +1,1 @@
-(dart-mode :fetcher github :repo "nex3/dart-mode")
+(dart-mode :fetcher github :repo "bradyt/dart-mode")

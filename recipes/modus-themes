@@ -1,0 +1,4 @@
+(modus-themes
+ :fetcher git
+ :url "https://git.sr.ht/~protesilaos/modus-themes"
+ :branch "main")

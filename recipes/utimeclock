@@ -1,0 +1,3 @@
+(utimeclock
+ :url "https://codeberg.org/ideasman42/emacs-utimeclock.git"
+ :fetcher git)

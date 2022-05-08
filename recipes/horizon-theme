@@ -1,0 +1,1 @@
+(horizon-theme :repo "aodhneine/horizon-theme.el" :fetcher github)

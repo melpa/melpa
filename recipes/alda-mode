@@ -1,1 +1,1 @@
-(alda-mode :fetcher github :repo "jgkamat/alda-mode")
+(alda-mode :fetcher gitlab :repo "jgkamat/alda-mode")

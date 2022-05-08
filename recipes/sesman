@@ -1,0 +1,1 @@
+(sesman :repo "vspinu/sesman" :fetcher github)

@@ -1,0 +1,3 @@
+(goggles
+ :repo "minad/goggles"
+ :fetcher github)

@@ -1,0 +1,2 @@
+(dune :fetcher github :repo "ocaml/dune"
+      :files ("editor-integration/emacs/*.el"))

@@ -1,0 +1,1 @@
+(carbon-now-sh :repo "veelenga/carbon-now-sh.el" :fetcher github)

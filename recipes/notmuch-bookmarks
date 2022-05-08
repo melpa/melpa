@@ -1,0 +1,2 @@
+(notmuch-bookmarks :repo "publicimageltd/notmuch-bookmarks"
+                   :fetcher github)

@@ -1,4 +1,0 @@
-(nyan-prompt
- :fetcher github
- :repo "PuercoPop/nyan-prompt"
- :files ("nyan-prompt.el" "img"))

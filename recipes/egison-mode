@@ -1,4 +1,4 @@
 (egison-mode
  :fetcher github
- :repo "egisatoshi/egison3"
+ :repo "egison/egison"
  :files ("elisp/*.el"))

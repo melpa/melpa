@@ -1,0 +1,1 @@
+(vcsh :fetcher gitlab :repo "stepnem/vcsh-el")

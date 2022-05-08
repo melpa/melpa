@@ -1,1 +1,1 @@
-(achievements :fetcher bitbucket :repo "gvol/emacs-achievements")
+(achievements :fetcher gitlab :repo "gvol/emacs-achievements")

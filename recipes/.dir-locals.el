@@ -3,7 +3,7 @@
                         (buffer-file-name)
                         (not (file-directory-p (buffer-file-name)))
                         (string-match-p "^[^.]" (buffer-file-name)))
-                   (unless (featurep 'package-recipe-mode)
+                   (unless (require 'package-recipe-mode nil t)
                      (let ((load-path (cons "../package-build" load-path)))
                        (require 'package-recipe-mode)))
                    (unless (derived-mode-p 'emacs-lisp-mode)

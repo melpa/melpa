@@ -1,1 +1,0 @@
-(sane-term :repo "adamrt/sane-term" :fetcher github)

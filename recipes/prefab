@@ -1,0 +1,1 @@
+(prefab :repo "LaurenceWarne/prefab.el" :fetcher github)

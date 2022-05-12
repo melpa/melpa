@@ -1,0 +1,1 @@
+(cue-mode :fetcher github :repo "russell/cue-mode")

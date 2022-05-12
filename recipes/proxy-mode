@@ -1,1 +1,1 @@
-(proxy-mode :fetcher github :repo "stardiviner/proxy-mode")
+(proxy-mode :fetcher git :url "https://repo.or.cz/proxy-mode.git")

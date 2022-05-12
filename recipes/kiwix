@@ -1,1 +1,1 @@
-(kiwix :fetcher github :repo "stardiviner/kiwix.el")
+(kiwix :fetcher git :url "https://repo.or.cz/kiwix.el.git")

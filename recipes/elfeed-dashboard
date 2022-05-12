@@ -1,1 +1,1 @@
-(elfeed-dashboard :repo "Manoj321/elfeed-dashboard" :fetcher github)
+(elfeed-dashboard :repo "manojm321/elfeed-dashboard" :fetcher github)

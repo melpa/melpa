@@ -1,0 +1,3 @@
+(diff-ansi
+ :url "https://codeberg.org/ideasman42/emacs-diff-ansi.git"
+ :fetcher git)

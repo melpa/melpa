@@ -1,0 +1,1 @@
+(ob-solidity :fetcher github :repo "hrkrshnn/ob-solidity")

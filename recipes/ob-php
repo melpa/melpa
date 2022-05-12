@@ -1,1 +1,1 @@
-(ob-php :fetcher github :repo "stardiviner/ob-php")
+(ob-php :fetcher git :url "https://repo.or.cz/ob-php.git")

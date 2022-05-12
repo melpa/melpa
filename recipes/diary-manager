@@ -1,2 +1,2 @@
 (diary-manager :fetcher github
-               :repo "raxod502/diary-manager")
+               :repo "radian-software/diary-manager")

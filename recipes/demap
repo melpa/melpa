@@ -1,0 +1,1 @@
+(demap :fetcher gitlab :repo "sawyerjgardner/demap.el")

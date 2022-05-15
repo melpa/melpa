@@ -1,4 +1,4 @@
 (frimacs :repo "pdo/frimacs"
          :fetcher github
-         :files ("*.el" ("data" "data/*.el")
+         :files ("*.el" ("data" "data/*.dat")
                  (:exclude "frimacs-build-utils.el")))

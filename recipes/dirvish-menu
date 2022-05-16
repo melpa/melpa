@@ -1,0 +1,1 @@
+(dirvish-menu :fetcher github :repo "alexluigit/dirvish" :files ("extensions/dirvish-menu.el"))

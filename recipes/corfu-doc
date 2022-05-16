@@ -1,0 +1,1 @@
+(corfu-doc :fetcher github :repo "galeo/corfu-doc")

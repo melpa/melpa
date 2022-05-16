@@ -1,2 +1,3 @@
 (elfeed :repo "skeeto/elfeed"
-        :fetcher github)
+        :fetcher github
+        :files (:defaults "README.md"))

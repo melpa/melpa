@@ -1,1 +1,1 @@
-(el-fly-indent-mode :repo "jiahaowork/el-fly-indent-mode.el" :fetcher github)
+(el-fly-indent-mode :repo "jiahaoli95/el-fly-indent-mode.el" :fetcher github)

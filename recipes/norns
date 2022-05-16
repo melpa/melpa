@@ -1,0 +1,2 @@
+(norns :repo "p3r7/norns.el"
+       :fetcher github)

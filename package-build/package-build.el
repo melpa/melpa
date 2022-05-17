@@ -828,6 +828,9 @@ in `package-build-archive-dir'."
           (package-build--copy-package-files files source-dir target)
           (package-build--write-pkg-file desc target)
           (package-build--generate-info-files files source-dir target)
+          (package-build--run-process tmp-dir nil
+                                      "find" "." "-exec" "touch" "-t"
+                                      "197001010000" "\{\}" "\;")
           (package-build--create-tar name version tmp-dir)
           (package-build--write-pkg-readme name files source-dir)
           (package-build--write-archive-entry desc))

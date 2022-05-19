@@ -142,14 +142,20 @@ using a branch other than the default branch.
   strip the "OTP-" prefix.  The captured portion of the regexp must be
   parseable by Emacs' `version-to-list` function.
 
-- `:files` optional property specifying the elisp and info files used to build the
-package. Please do not override this if the default value (below) is adequate, which
-it should usually be:
+- `:files` optional property specifying the elisp and info files used to build
+  the package. Please do not override this if the default value (below) is
+  adequate, which it should usually be:
 
-        ("*.el" "*.el.in" "dir"
-         "*.info" "*.texi" "*.texinfo"
-         "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
-         (:exclude ".dir-locals.el" "test.el" "tests.el" "*-test.el" "*-tests.el"))
+  ```elisp
+  '("*.el" "lisp/*.el"
+    "dir" "*.info" "*.texi" "*.texinfo"
+    "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
+    "docs/dir" "docs/*.info" "docs/*.texi" "docs/*.texinfo"
+    (:exclude
+     ".dir-locals.el" "lisp/.dir-locals.el"
+     "test.el" "tests.el" "*-test.el" "*-tests.el"
+     "lisp/test.el" "lisp/tests.el" "lisp/*-test.el" "lisp/*-tests.el"))
+  ```
 
     Note that elisp in subdirectories is never included by default, so
 you might find it convenient to keep your package's elisp in the root

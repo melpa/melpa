@@ -1,8 +1,7 @@
 (pdf-tools
  :fetcher github
  :repo "vedang/pdf-tools"
- :files ("lisp/*.el"
+ :files (:defaults
          "README"
          ("build" "Makefile")
-         ("build" "server")
-         (:exclude "lisp/tablist.el" "lisp/tablist-filter.el")))
+         ("build" "server")))

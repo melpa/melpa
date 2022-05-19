@@ -1,1 +1,1 @@
-(passmm :fetcher github :repo "pjones/passmm" :files ("lisp/*.el"))
+(passmm :fetcher github :repo "pjones/passmm")

@@ -1,4 +1,1 @@
-(ghub :fetcher github
-      :repo "magit/ghub"
-      :files ("lisp/*.el" "docs/ghub.texi"
-              "*.el" "*.texi")) ; temporarily for stable
+(ghub :fetcher github :repo "magit/ghub")

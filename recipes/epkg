@@ -1,4 +1,1 @@
-(epkg :fetcher github
-      :repo "emacscollective/epkg"
-      :files ("lisp/*.el" "docs/epkg.texi"
-              "*.el" "*.texi")) ; temporarily for stable
+(epkg :fetcher github :repo "emacscollective/epkg")

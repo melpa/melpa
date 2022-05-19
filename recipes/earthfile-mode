@@ -1,1 +1,1 @@
-(earthfile-mode :fetcher github :repo "earthly/earthly-emacs" :files ("earthfile-mode.el"))
+(earthfile-mode :fetcher github :repo "earthly/earthly-emacs")

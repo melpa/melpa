@@ -1,3 +1,1 @@
-(helm-org :fetcher github
-          :repo "emacs-helm/helm-org"
-          :files ("helm-org.el"))
+(helm-org :fetcher github :repo "emacs-helm/helm-org")

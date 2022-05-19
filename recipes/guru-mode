@@ -1,3 +1,1 @@
-(guru-mode :repo "bbatsov/guru-mode"
-           :fetcher github
-           :files ("guru-mode.el"))
+(guru-mode :fetcher github :repo "bbatsov/guru-mode")

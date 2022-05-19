@@ -1,1 +1,1 @@
-(erefactor :repo "mhayashi1120/Emacs-erefactor" :fetcher github :files ("erefactor.el"))
+(erefactor :repo "mhayashi1120/Emacs-erefactor" :fetcher github)

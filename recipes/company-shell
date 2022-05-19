@@ -1,1 +1,1 @@
-(company-shell :repo "Alexander-Miller/company-shell" :fetcher github :files ("company-shell.el"))
+(company-shell :repo "Alexander-Miller/company-shell" :fetcher github)

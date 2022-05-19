@@ -1,5 +1,1 @@
-(ruby-refactor :fetcher github
-               :repo "ajvargo/ruby-refactor"
-               :files ("ruby-refactor.el"))
-
- 
+(ruby-refactor :fetcher github :repo "ajvargo/ruby-refactor")

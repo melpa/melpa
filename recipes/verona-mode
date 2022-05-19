@@ -1,4 +1,1 @@
-(verona-mode
-  :fetcher github
-  :repo "damon-kwok/verona-mode"
-  :files (:defaults "etc"))
+(verona-mode :fetcher github :repo "damon-kwok/verona-mode")

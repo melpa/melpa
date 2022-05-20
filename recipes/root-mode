@@ -1,5 +1,0 @@
-(root-mode
- :fetcher github
- :repo "jaypmorgan/root-mode"
- :branch "main"
- :version-regexp "v\\([0-9.]+.*\\)")

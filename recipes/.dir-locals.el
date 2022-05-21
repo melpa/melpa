@@ -1,10 +1,11 @@
-((nil . ((eval . (when (and 
+((nil . ((indent-tabs-mode . nil)
+         (eval . (when (and
                         (buffer-file-name)
                         (not (file-directory-p (buffer-file-name)))
                         (string-match-p "^[^.]" (buffer-file-name)))
-                   (unless (featurep 'package-build)
+                   (unless (require 'package-recipe-mode nil t)
                      (let ((load-path (cons "../package-build" load-path)))
-                       (require 'package-build)))
+                       (require 'package-recipe-mode)))
                    (unless (derived-mode-p 'emacs-lisp-mode)
                      (emacs-lisp-mode))
                    (package-build-minor-mode)

@@ -85,6 +85,10 @@
   ((url-format      :initform "https://gitlab.com/%s.git")
    (repopage-format :initform "https://gitlab.com/%s")))
 
+(defclass package-codeberg-recipe (package-git-recipe)
+  ((url-format      :initform "https://codeberg.org/%s.git")
+   (repopage-format :initform "https://codeberg.org/%s")))
+
 ;;;; Mercurial
 
 (defclass package-hg-recipe (package-recipe)
@@ -144,7 +148,7 @@ file is invalid, then raise an error."
           (cl-assert (memq thing all-keys) nil "Unknown keyword %S" thing)))
       (let ((fetcher (plist-get plist :fetcher)))
         (cl-assert fetcher nil ":fetcher is missing")
-        (if (memq fetcher '(github gitlab))
+        (if (memq fetcher '(github gitlab codeberg))
             (progn
               (cl-assert (plist-get plist :repo) ":repo is missing")
               (cl-assert (not (plist-get plist :url)) ":url is redundant"))

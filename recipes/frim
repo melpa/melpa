@@ -1,0 +1,3 @@
+(frim
+ :repo "OlMon/frim"
+ :fetcher gitlab)

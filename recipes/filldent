@@ -1,3 +1,4 @@
 (filldent
- :fetcher github
- :repo "duckwork/filldent.el")
+ :url "https://codeberg.org/acdw/filldent.el"
+ :fetcher git
+ :branch "main")

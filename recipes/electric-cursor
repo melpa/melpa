@@ -1,3 +1,4 @@
 (electric-cursor
- :fetcher github
- :repo "duckwork/electric-cursor")
+ :url "https://codeberg.org/acdw/electric-cursor.el"
+ :fetcher git
+ :branch "main")

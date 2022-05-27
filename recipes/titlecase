@@ -1,4 +1,3 @@
 (titlecase
  :url "https://codeberg.org/acdw/titlecase.el"
- :fetcher git
- :branch "main")
+ :fetcher git)

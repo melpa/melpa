@@ -1,0 +1,3 @@
+(company-frimacs :repo "pdo/frimacs"
+                 :fetcher github
+                 :files ("extras/company-frimacs.el"))

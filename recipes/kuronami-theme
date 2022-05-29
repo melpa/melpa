@@ -1,2 +1,2 @@
-(kuronami-theme :repo "super3ggo/kuronami"
+(kuronami-theme :repo "inj0h/kuronami"
                 :fetcher github)

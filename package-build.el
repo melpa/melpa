@@ -856,7 +856,7 @@ in `package-build-archive-dir'."
                             name version commit files 'tar)
                            (error "%s[-pkg].el matching package name is missing"
                                   name))))
-               (mtime (cadr (package-build--get-timestamp rcp commit))))
+               (mtime (package-build--get-timestamp rcp commit)))
           (package-build--copy-package-files files source-dir target)
           (package-build--write-pkg-file desc target)
           (package-build--generate-info-files files source-dir target)

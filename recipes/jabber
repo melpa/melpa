@@ -1,4 +1,5 @@
 (jabber
- :repo "legoscia/emacs-jabber"
- :fetcher github
- :files ("*.el" "*.texi" ("jabber-fallback-lib" "jabber-fallback-lib/hexrgb.el")))
+ :fetcher git
+ :url     "https://codeberg.org/emacs-jabber/emacs-jabber.git"
+ :branch  "production"
+ :files   ("*.org" "*.el" "*.texi" ("jabber-fallback-lib" "jabber-fallback-lib/hexrgb.el")))

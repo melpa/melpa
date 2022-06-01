@@ -1,0 +1,1 @@
+(jack-mode :repo "nverno/jack-mode" :fetcher github)

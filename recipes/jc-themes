@@ -1,0 +1,1 @@
+(jc-themes :repo "andreoss/jc-themes" :fetcher gitlab)

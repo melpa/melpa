@@ -1,0 +1,1 @@
+(minimal-mistakes-theme :fetcher github :repo "minimal-mistakes/emacs")

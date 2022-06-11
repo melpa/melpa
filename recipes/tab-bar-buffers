@@ -1,1 +1,1 @@
-(org-gcal :fetcher github :repo "arosen/tab-bar-buffers")
+(org-gcal :fetcher github :repo "ajrosen/tab-bar-buffers")

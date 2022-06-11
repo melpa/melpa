@@ -1,1 +1,4 @@
-(rgb :fetcher gitlab :repo "cwpitts/rgb.el")
+(rgb
+ :fetcher gitlab
+ :repo "cwpitts/rgb.el"
+ :files ("rgb.el"))

@@ -1,0 +1,1 @@
+(sideline-flycheck :repo "jcs-elpa/sideline-flycheck" :fetcher github)

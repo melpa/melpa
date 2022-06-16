@@ -1,6 +1,8 @@
 name: CI
 on: [push, pull_request]
 
+# Explicitly set workflow permissions to avoid additional permissions being added from 
+# the Github UI.
 permissions:
   contents: read
 

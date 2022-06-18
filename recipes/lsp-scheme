@@ -1,4 +1,4 @@
 (lsp-scheme :fetcher git
             :url "https://codeberg.org/rgherdt/emacs-lsp-scheme"
-            :commit "66a24fc55789a2ce88dbc36a077a8d8c90943745"
+            :commit "9fa2ec12d04452ec412cb15115a570cc7b7f258f"
             :files ("*.el" ("scripts" "*.scm")))

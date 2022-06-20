@@ -1,1 +1,1 @@
-(goto-line-preview :repo "jcs-elpa/goto-line-preview" :fetcher github)
+(goto-line-preview :repo "emacs-vs/goto-line-preview" :fetcher github)

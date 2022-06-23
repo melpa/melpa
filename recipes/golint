@@ -1,1 +1,4 @@
-(golint :fetcher github :repo "golang/lint" :files ("misc/emacs/*.el"))
+(golint
+ :fetcher github
+ :repo "golang/lint"
+ :files ("misc/emacs/*.el"))

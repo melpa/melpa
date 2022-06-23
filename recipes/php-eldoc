@@ -1,4 +1,4 @@
 (php-eldoc
- :repo "sabof/php-eldoc"
  :fetcher github
+ :repo "sabof/php-eldoc"
  :files ("*.el" "*.php"))

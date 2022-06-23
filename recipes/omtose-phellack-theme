@@ -1,1 +1,4 @@
-(omtose-phellack-theme :fetcher github :repo "franksn/omtose-phellack-theme" :files ("variants/*.el"))
+(omtose-phellack-theme
+ :fetcher github
+ :repo "franksn/omtose-phellack-theme"
+ :files ("variants/*.el"))

@@ -1,2 +1,4 @@
-(auto-complete-rst :fetcher github :repo "tkf/auto-complete-rst"
-                   :files ("*.el" "*.py"))
+(auto-complete-rst
+ :fetcher github
+ :repo "tkf/auto-complete-rst"
+ :files ("*.el" "*.py"))

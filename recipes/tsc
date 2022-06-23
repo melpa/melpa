@@ -1,7 +1,8 @@
-(tsc :repo "emacs-tree-sitter/elisp-tree-sitter"
-     :fetcher github
-     :branch "release"
-     :files ("core/*.el"
-             "core/Cargo.toml"
-             "core/Cargo.lock"
-             "core/src"))
+(tsc
+ :fetcher github
+ :repo "emacs-tree-sitter/elisp-tree-sitter"
+ :branch "release"
+ :files ("core/*.el"
+         "core/Cargo.toml"
+         "core/Cargo.lock"
+         "core/src"))

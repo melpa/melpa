@@ -1,1 +1,4 @@
-(xterm-keybinder :repo "yuutayamada/xterm-keybinder-el" :fetcher github :files ("*.el" "xterm-option" "emacs-urxvt-client"))
+(xterm-keybinder
+ :fetcher github
+ :repo "yuutayamada/xterm-keybinder-el"
+ :files ("*.el" "xterm-option" "emacs-urxvt-client"))

@@ -1,0 +1,1 @@
+(mindre-theme :fetcher github :repo "erikbackman/mindre-theme" :files ("mindre-theme.el"))

@@ -1,0 +1,4 @@
+(lean4-mode
+ :repo "leanprover/lean4-mode"
+ :fetcher github
+ :files ("lean-*.el"))

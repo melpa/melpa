@@ -1,3 +1,2 @@
 (tree-sitter-ess-r :fetcher git
-               :url "https://github.com/ShuguangSun/tree-sitter-ess-r.git"
-               )
+                   :url "https://github.com/ShuguangSun/tree-sitter-ess-r.git")

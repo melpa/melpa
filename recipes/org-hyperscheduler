@@ -1,4 +1,4 @@
 (org-hyperscheduler :repo "dmitrym0/org-hyperscheduler"
                     :fetcher github
-                    :files ("org-hyperscheduler.el" "LICENSE"
+                    :files (:defaults
                            ("calendar" "calendar/index.html" "calendar/index.js" "calendar/org-hs.css")))

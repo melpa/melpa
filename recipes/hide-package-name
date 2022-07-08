@@ -1,0 +1,3 @@
+(hide-package-name
+ :fetcher gitlab
+ :repo "hraban/hide-package-name-el")

@@ -1,0 +1,4 @@
+(cbor
+ :fetcher github
+ :repo "Titan-C/cardano.el"
+ :files ("cbor.el"))

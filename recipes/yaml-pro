@@ -1,3 +1,1 @@
-(yaml-pro :fetcher github
-          :repo "zkry/yaml-pro"
-          :files ("*.el"))
+(yaml-pro :repo "zkry/yaml-pro" :fetcher github)

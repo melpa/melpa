@@ -1,4 +1,5 @@
 (rgb
  :fetcher gitlab
  :repo "cwpitts/rgb.el"
- :files ("rgb.el"))
+ :files (:defaults
+         (:exclude "el-mock.el" "ert-expectations.el"))

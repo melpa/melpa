@@ -1,0 +1,1 @@
+(yaml-pro :repo "zkry/yaml-pro" :fetcher github)

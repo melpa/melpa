@@ -1,0 +1,3 @@
+(pipewire
+ :fetcher git
+ :url "https://git.zamazal.org/pdm/pipewire-0")

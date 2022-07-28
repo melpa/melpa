@@ -1,1 +1,1 @@
-(git-timemachine :fetcher git :url "https://codeberg.org/pidu/git-timemachine.git")
+(git-timemachine :fetcher git :url "https://codeberg.org/pidu/git-timemachine")

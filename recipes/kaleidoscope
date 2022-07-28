@@ -1,3 +1,4 @@
-(kaleidoscope :repo "nil/kaleidoscope"
-              :fetcher git
-              :files ("kaleidoscope.el"))
+(kaleidoscope
+ :fetcher git
+ :url "https://git.madhouse-project.org/algernon/kaleidoscope.el"
+ :files ("kaleidoscope.el"))

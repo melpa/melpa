@@ -5,13 +5,12 @@
 MELPA is a growing collection of `package.el`-compatible Emacs Lisp
 packages built automatically on our server from the upstream source
 code using simple recipes. (Think of it as a server-side version of
-[el-get](https://github.com/dimitri/el-get), or even
-[Homebrew](https://github.com/Homebrew/homebrew).)
+[`el-get`], or even [Homebrew].)
 
 Packages are updated at intervals throughout the day.
 
 To browse available packages, check out the
-[archive index page](https://melpa.org/).
+[archive index page][MELPA].
 
 Adding packages is as simple as submitting a new recipe as a pull
 request; read on for details.
@@ -61,9 +60,8 @@ Packages in MELPA are built directly from the latest package source
 code in the upstream repositories, but we also build and publish
 packages corresponding to the latest tagged code in those
 repositories, where version tags exist. These packages are published
-in a separate package archive called [MELPA
-Stable](https://stable.melpa.org). Most users should prefer MELPA over
-MELPA Stable.
+in a separate package archive called [MELPA Stable]. Most users should
+prefer MELPA over MELPA Stable.
 
 Some notes:
 
@@ -75,9 +73,7 @@ Some notes:
   in 24.4 and later) and/or `package-archive-priorities`, you can
   customize or modify those variables as needed.
 
-* You can use the
-  [package-filter.el](https://github.com/milkypostman/package-filter)
-  package which we provide.
+* You can use the [`package-filter`] package which we provide.
 
 * You will probably want to remove all packages and then reinstall
   them. Any packages you already have installed from MELPA will never
@@ -89,7 +85,7 @@ and do not particularly recommend its use.
 
 ## Contributing
 
-See the [CONTRIBUTING.org](CONTRIBUTING.org) document.
+See the [CONTRIBUTING.org] document.
 
 ## Recipe Format
 
@@ -113,8 +109,8 @@ the following form (`[...]` denotes optional or conditional values),
   being specified.
 
 * `:fetcher` specifies the type of repository that `:url` or `:repo`
-  points to.  MELPA supports [`git`][git], [`github`][github],
-  [`gitlab`][gitlab], and [`hg`][hg] (Mercurial).
+  points to.  MELPA supports [`git`], [`github`], [`gitlab`], and
+  [`hg`] (Mercurial).
 
 * `:url` specifies the URL of the version control repository.
   *required for the `git`, and `hg` fetchers.*
@@ -176,18 +172,12 @@ the following form (`[...]` denotes optional or conditional values),
   would cause the "snippets" subdir to be copied in addition to the
   defaults.
 
-[git]: http://git-scm.com/
-[github]: https://github.com/
-[gitlab]: https://gitlab.com/
-[hg]: https://www.mercurial-scm.org/
-
 * `:old-names` specifies former names of the package, if any.  The
   value is a list of symbols.
 
 ### Example: Single File Repository
 
-[smex](https://github.com/nonsequitur/smex) is a repository that
-contains two files:
+`smex` is a repository that contains two files:
 
 * `README.markdown`
 * `smex.el`
@@ -323,7 +313,7 @@ the root repository directory. Described below are the actions that
 accepted by the `Makefile`.
 
 * `all` — build all packages under the `recipes/` directory and
-  compiles the `index.html` file for the [melpa] website.
+  compiles the `index.html` file for the [MELPA] website.
 
 * `recipes/<NAME>` — build individual recipe `<NAME>`. Built packages
   are put in the `packages/` folder with version corresponding to the
@@ -352,16 +342,14 @@ accepted by the `Makefile`.
 
 Note that these scripts require an Emacs with `package.el` installed,
 such as Emacs 24. If you have an older version of Emacs, you can get a
-suitable `package.el` [here](https://git.savannah.gnu.org/gitweb/?p=emacs.git;a=blob_plain;hb=ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09;f=lisp/emacs-lisp/package.el).
-
-[melpa]: https://melpa.org
+suitable `package.el` [here][package-old].
 
 ## API
 
 All repository code is contained in the file
 `package-build/package-build.el`.  That code is maintained in a
-[separate repository](https://github.com/melpa/package-build): the version
-in the MELPA repository is imported using `git subtree`.
+[separate repository][`package-build`]: the version in the MELPA
+repository is imported using `git subtree`.
 
 ### Functions
 
@@ -407,10 +395,10 @@ so that if melpa.org is down, packages can still be installed.  The
 following are the HTTP/HTTPS URLs to use in `package-archives` for
 MELPA and MELPA Stable respectively:
 
-* [http://www.mirrorservice.org/sites/melpa.org/packages/](http://www.mirrorservice.org/sites/melpa.org/packages/)
-* [https://www.mirrorservice.org/sites/melpa.org/packages/](https://www.mirrorservice.org/sites/melpa.org/packages/)
-* [http://www.mirrorservice.org/sites/stable.melpa.org/packages/](http://www.mirrorservice.org/sites/stable.melpa.org/packages/)
-* [https://www.mirrorservice.org/sites/stable.melpa.org/packages/](https://www.mirrorservice.org/sites/stable.melpa.org/packages/)
+* http://www.mirrorservice.org/sites/melpa.org/packages/
+* https://www.mirrorservice.org/sites/melpa.org/packages/
+* http://www.mirrorservice.org/sites/stable.melpa.org/packages/
+* https://www.mirrorservice.org/sites/stable.melpa.org/packages/
 
 Only the packages are mirrored, not the web site front-end itself.
 
@@ -421,3 +409,17 @@ our packages._
 
 *MELPA* is *Milkypostman's ELPA* or *Milkypostman's Experimental Lisp
 Package Archive* if you're not into the whole brevity thing.
+
+[CONTRIBUTING.org]: CONTRIBUTING.org
+[MELPA]:            https://melpa.org/
+[MELPA Stable]:     https://stable.melpa.org/
+[`package-build`]:  https://github.com/melpa/package-build/
+
+[`el-get`]:         https://github.com/dimitri/el-get/
+[Homebrew]:         https://github.com/Homebrew/homebrew/
+[`git`]:            http://git-scm.com/
+[`github`]:         https://github.com/
+[`gitlab`]:         https://gitlab.com/
+[`hg`]:             https://www.mercurial-scm.org/
+[`package-filter`]: https://github.com/milkypostman/package-filter/
+[package-old]:      https://git.savannah.gnu.org/gitweb/?p=emacs.git;a=blob_plain;hb=ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09;f=lisp/emacs-lisp/package.el

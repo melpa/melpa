@@ -22,6 +22,7 @@ request; read on for details.
 * [Recipe Format](#recipe-format)
 * [Build Scripts](#build-scripts)
 * [API](#api)
+* [Configuration](#configuration)
 * [Mirrors](#mirrors)
 * [About](#about)
 

@@ -158,6 +158,13 @@ the following form (`[...]` denotes optional or conditional values),
   Likewise `NAME-pkg.el` isn't a library, so you might want to place
   it in the root directory, even when libraries reside in `lisp/`.
 
+  Please do not track any third-party libraries and test utilities in
+  your repository. If you absolutely must do it, then place these
+  files in a directory dedicated to that purpose, alongside a file
+  named `.nosearch`. The latter prevents various tools from adding the
+  containing directory to the `load-path` or from otherwise getting
+  confused.
+
   The elements of the `:files` list are glob-expanded and processed
   from left to right to make a list of paths that will be copied into
   the root of the new package, as if by using `cp -R [SRCPATHS]

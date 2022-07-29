@@ -417,7 +417,7 @@ Package Archive* if you're not into the whole brevity thing.
 [`package-build`]:  https://github.com/melpa/package-build/
 
 [`el-get`]:         https://github.com/dimitri/el-get/
-[Homebrew]:         https://github.com/Homebrew/homebrew/
+[Homebrew]:         https://brew.sh/
 [`git`]:            http://git-scm.com/
 [`github`]:         https://github.com/
 [`gitlab`]:         https://gitlab.com/

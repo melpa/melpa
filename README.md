@@ -90,7 +90,7 @@ See the [CONTRIBUTING.org] document.
 
 ## Recipe Format
 
-Packages are specified by files in the `recipes` directory.  You can
+Packages are specified by files in the `recipes` directory. You can
 contribute a new package by adding a new file under `recipes` using
 the following form (`[...]` denotes optional or conditional values),
 
@@ -110,7 +110,7 @@ the following form (`[...]` denotes optional or conditional values),
   being specified.
 
 * `:fetcher` specifies the type of repository that `:url` or `:repo`
-  points to.  MELPA supports [`git`], [`github`], [`gitlab`], and
+  points to. MELPA supports [`git`], [`github`], [`gitlab`], and
   [`hg`] (Mercurial).
 
 * `:url` specifies the URL of the version control repository.
@@ -130,12 +130,12 @@ the following form (`[...]` denotes optional or conditional values),
   be specified when using a branch other than the default branch.
 
 * `:version-regexp` is a regular expression for extracting a
-  version-string from the repository tags.  The default matches
-  typical version tags such as `1.0`, `R16` or `v4.3.5`, so you should
-  not override it unless necessary.  For an unusual tag like
-  "OTP-18.1.5", we might add `:version-regexp "[^0-9]*\\(.*\\)"` to
-  strip the "OTP-" prefix.  The captured portion of the regexp must be
-  parseable by Emacs' `version-to-list` function.
+  version-string from the repository tags. The default matches typical
+  version tags such as `1.0`, `R16` or `v4.3.5`, so you should not
+  override it unless necessary. For an unusual tag like "OTP-18.1.5",
+  we might add `:version-regexp "[^0-9]*\\(.*\\)"` to strip the "OTP-"
+  prefix. The captured portion of the regexp must be parseable by
+  Emacs' `version-to-list` function.
 
 * `:files` optional property specifying the Emacs Lisp libraries and
   info files used to build the package. Please do not override this if
@@ -153,7 +153,7 @@ the following form (`[...]` denotes optional or conditional values),
   ```
 
   Note that you should place Emacs Lisp libraries in the root of the
-  repository or in the `lisp/` directory.  Test files should be placed
+  repository or in the `lisp/` directory. Test files should be placed
   in the `test/` directory and they should not provide a feature.
   Likewise `NAME-pkg.el` isn't a library, so you might want to place
   it in the root directory, even when libraries reside in `lisp/`.
@@ -181,7 +181,7 @@ the following form (`[...]` denotes optional or conditional values),
   would cause the "snippets" subdir to be copied in addition to the
   defaults.
 
-* `:old-names` specifies former names of the package, if any.  The
+* `:old-names` specifies former names of the package, if any. The
   value is a list of symbols.
 
 ### Example: Single File Repository
@@ -201,10 +201,10 @@ Since there is only one `.el` file, this package only needs the
 ### Example: Multiple Packages in one Repository
 
 Assume we have a repository containing three libraries `mypackage.el`,
-`helm-mypackage.el`, and `persp-mypackage.el`.  The latter two
+`helm-mypackage.el`, and `persp-mypackage.el`. The latter two
 libraries are optional and users who don't want to use the packages
 `helm` and/or `perspective` should not be forced to install them just
-so they can install `mypackage`.  These libraries should therefore be
+so they can install `mypackage`. These libraries should therefore be
 distributed as separate packages.
 
 The three packages have to be declared in three separate files
@@ -254,7 +254,7 @@ flymake-perlcritic-YYYMMDD
 ```
 
 Notice that specifying an entry in `:files` that is a list takes the
-first element to be the destination directory.  These can be embedded
+first element to be the destination directory. These can be embedded
 further, such as the following---hypothetical---entry for `:files`,
 
 ```elisp
@@ -279,7 +279,7 @@ package-YYYYMMDD
 
 But a better solution, given that we probably want to copy the
 *entire* `snippets` directory to the root of the package, we could
-just specify that directory.  Consider the `pony-mode` recipe,
+just specify that directory. Consider the `pony-mode` recipe,
 
 ```elisp
 (pony-mode
@@ -356,7 +356,7 @@ suitable `package.el` [here][package-old].
 ## API
 
 All repository code is contained in the file
-`package-build/package-build.el`.  That code is maintained in a
+`package-build/package-build.el`. That code is maintained in a
 [separate repository][`package-build`]: the version in the MELPA
 repository is imported using `git subtree`.
 
@@ -386,7 +386,7 @@ repository is imported using `git subtree`.
   and any built packages.
 
 * `package-build-recipes-dir` — Directory containing MELPA compatible
-  recipes.  See [Recipe Format](#recipe-format) section for more
+  recipes. See [Recipe Format](#recipe-format) section for more
   details.
 
 ## Configuration
@@ -400,7 +400,7 @@ This can be configured using the `package-build-working-dir` variable.
 ## Mirrors
 
 Official mirrors are available (with many thanks to mirrorservice.org)
-so that if melpa.org is down, packages can still be installed.  The
+so that if melpa.org is down, packages can still be installed. The
 following are the HTTP/HTTPS URLs to use in `package-archives` for
 MELPA and MELPA Stable respectively:
 

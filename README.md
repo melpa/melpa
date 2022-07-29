@@ -152,15 +152,16 @@ the following form (`[...]` denotes optional or conditional values),
      "lisp/test.el" "lisp/tests.el" "lisp/*-test.el" "lisp/*-tests.el"))
   ```
 
-  Note that elisp in subdirectories is never included by default, so
-  you might find it convenient to keep your package's Emacs Lisp
-  libraries in the root of your repository, and separate auxiliary
-  files such as tests into subdirectories to keep packaging simple.
+  Note that you should place Emacs Lisp libraries in the root of the
+  repository or in the `lisp/` directory.  Test files should be placed
+  in the `test/` directory and they should not provide a feature.
+  Likewise `NAME-pkg.el` isn't a library, so you might want to place
+  it in the root directory, even when libraries reside in `lisp/`.
 
   The elements of the `:files` list are glob-expanded and processed
   from left to right to make a list of paths that will be copied into
   the root of the new package, as if by using `cp -R [SRCPATHS]
-  DEST`. This means a directory like "foo/bar" would become "bar" in
+  DEST`. This means a directory like `foo/bar` would become `bar` in
   the new package. To specify a destination subdirectory, use a list
   element of the form `(SUBDIR SRCPATH ...)`. Likewise, to filter out
   paths expanded earlier in the list, use `(:exclude SRCPATH ...)`.

@@ -29,7 +29,7 @@ request; read on for details.
 ## Usage
 
 To use the MELPA repository, you'll need an Emacs with `package.el`,
-ie. Emacs 24.1 or greater. To test TLS support you can visit a HTTPS
+i.e., Emacs 24.1 or greater. To test TLS support you can visit a HTTPS
 URL, for example with `M-x eww RET https://wikipedia.org RET`.
 
 Enable installation of packages from MELPA by adding an entry to

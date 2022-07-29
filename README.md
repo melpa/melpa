@@ -13,8 +13,8 @@ Packages are updated at intervals throughout the day.
 To browse available packages, check out the
 [archive index page](https://melpa.org/).
 
-Adding packages is as simple as submitting a new recipe as a pull request;
-read on for details.
+Adding packages is as simple as submitting a new recipe as a pull
+request; read on for details.
 
 ## Table of Contents
 
@@ -25,7 +25,6 @@ read on for details.
 * [API](#api)
 * [Mirrors](#mirrors)
 * [About](#about)
-
 
 ## Usage
 
@@ -40,9 +39,11 @@ Enable installation of packages from MELPA by adding an entry to
 ```elisp
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
-;; and `package-pinned-packages`. Most users will not need or want to do this.
-;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.
+;; See `package-archive-priorities` and `package-pinned-packages`.
+;; Most users will not need or want to do this.
+;; (add-to-list 'package-archives
+;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 ```
 
@@ -108,33 +109,30 @@ the following form (`[...]` denotes optional or conditional values),
  [:old-names (<old-name> ...)])
 ```
 
-- `package-name`
-a lisp symbol that has the same name as the package being specified.
+* `package-name` a lisp symbol that has the same name as the package
+  being specified.
 
-- `:fetcher` specifies the type of repository that `:url` or `:repo`
+* `:fetcher` specifies the type of repository that `:url` or `:repo`
   points to.  MELPA supports [`git`][git], [`github`][github],
   [`gitlab`][gitlab], and [`hg`][hg] (Mercurial).
 
-- `:url`
-specifies the URL of the version control repository. *required for
-the `git`, and `hg` fetchers.*
+* `:url` specifies the URL of the version control repository.
+  *required for the `git`, and `hg` fetchers.*
 
-- `:repo` specifies the github or gitlab repository and is of the form
+* `:repo` specifies the github or gitlab repository and is of the form
   `user/repo-name`. *required for the `github` and `gitlab` fetchers*.
 
-- `:commit`
-specifies the commit of the git repo to checkout. The value
-will be passed to `git reset` in a repo where `upstream` is the
-original repository. Can therefore be either a SHA, if pointing at a
-specific commit, or a full ref prefixed with "origin/". Only used by
-the `git`-based fetchers.
+* `:commit` specifies the commit of the git repo to checkout. The
+  value will be passed to `git reset` in a repo where `upstream` is
+  the original repository. Can therefore be either a SHA, if pointing
+  at a specific commit, or a full ref prefixed with "origin/". Only
+  used by the `git`-based fetchers.
 
-- `:branch`
-specifies the branch of the git repo to use. This is like `:commit`, but
-it adds the "origin/" prefix automatically. This must be specified when
-using a branch other than the default branch.
+* `:branch` specifies the branch of the git repo to use. This is like
+  `:commit`, but it adds the "origin/" prefix automatically. This must
+  be specified when using a branch other than the default branch.
 
-- `:version-regexp` is a regular expression for extracting a
+* `:version-regexp` is a regular expression for extracting a
   version-string from the repository tags.  The default matches
   typical version tags such as `1.0`, `R16` or `v4.3.5`, so you should
   not override it unless necessary.  For an unusual tag like
@@ -142,9 +140,9 @@ using a branch other than the default branch.
   strip the "OTP-" prefix.  The captured portion of the regexp must be
   parseable by Emacs' `version-to-list` function.
 
-- `:files` optional property specifying the elisp and info files used to build
-  the package. Please do not override this if the default value (below) is
-  adequate, which it should usually be:
+* `:files` optional property specifying the elisp and info files used
+  to build the package. Please do not override this if the default
+  value (below) is adequate, which it should usually be:
 
   ```elisp
   '("*.el" "lisp/*.el"
@@ -157,36 +155,34 @@ using a branch other than the default branch.
      "lisp/test.el" "lisp/tests.el" "lisp/*-test.el" "lisp/*-tests.el"))
   ```
 
-    Note that elisp in subdirectories is never included by default, so
-you might find it convenient to keep your package's elisp in the root
-of your repository, and separate auxiliary files such as tests into
-subdirectories to keep packaging simple.
+  Note that elisp in subdirectories is never included by default, so
+  you might find it convenient to keep your package's elisp in the
+  root of your repository, and separate auxiliary files such as tests
+  into subdirectories to keep packaging simple.
 
-    The elements of the `:files` list are glob-expanded and processed
-    from left to right to make a list of paths that will be copied
-    into the root of the new package, as if by using `cp -R [SRCPATHS]
-    DEST`. This means a directory like "foo/bar" would become "bar" in
-    the new package. To specify a destination subdirectory, use a list
-    element of the form `(SUBDIR SRCPATH ...)`. Likewise, to filter
-    out paths expanded earlier in the list, use `(:exclude SRCPATH
-    ...)`.
+  The elements of the `:files` list are glob-expanded and processed
+  from left to right to make a list of paths that will be copied into
+  the root of the new package, as if by using `cp -R [SRCPATHS]
+  DEST`. This means a directory like "foo/bar" would become "bar" in
+  the new package. To specify a destination subdirectory, use a list
+  element of the form `(SUBDIR SRCPATH ...)`. Likewise, to filter out
+  paths expanded earlier in the list, use `(:exclude SRCPATH ...)`.
 
-    If your package requires some additional files, but is
-otherwise fine with the defaults, it's recommended to use the special
-element `:defaults` as the very first element of the `:files` list,
-which causes the default value shown above to be prepended to the
-specified file list. For example `:files (:defaults "snippets")` would
-cause the "snippets" subdir to be copied in addition to the defaults.
-
+  If your package requires some additional files, but is otherwise
+  fine with the defaults, it's recommended to use the special element
+  `:defaults` as the very first element of the `:files` list, which
+  causes the default value shown above to be prepended to the
+  specified file list. For example `:files (:defaults "snippets")`
+  would cause the "snippets" subdir to be copied in addition to the
+  defaults.
 
 [git]: http://git-scm.com/
 [github]: https://github.com/
 [gitlab]: https://gitlab.com/
 [hg]: https://www.mercurial-scm.org/
 
-- `:old-names` specifies former names of the package, if any.  The value is
-  a list of symbols.
-
+* `:old-names` specifies former names of the package, if any.  The
+  value is a list of symbols.
 
 ### Example: Single File Repository
 
@@ -196,8 +192,8 @@ contains two files:
 * `README.markdown`
 * `smex.el`
 
-Since there is only one `.el` file, this package only needs the `:repo`
-and `:fetcher` specified,
+Since there is only one `.el` file, this package only needs the
+`:repo` and `:fetcher` specified,
 
 ```elisp
 (smex :repo "nonsequitur/smex" :fetcher github)
@@ -320,42 +316,45 @@ pony-mode-YYYYMMDD
         `-- view
 ```
 
-
 ## Build Scripts
 
 Building MELPA is all based around using the `Makefile` included in
 the root repository directory. Described below are the actions that
 accepted by the `Makefile`.
 
-* `all` -- Builds all packages under the `recipes/` directory and compiles the `index.html` file for the [melpa] website.
+* `all` — build all packages under the `recipes/` directory and
+  compiles the `index.html` file for the [melpa] website.
 
-* `recipes/<NAME>` -- Build individual recipe `<NAME>`. Built packages
-are put in the `packages/` folder with version corresponding to the
-date of the latest commit that modified at least one of the files
-specified by the recipe; given according to the `%Y%m%d` format.
+* `recipes/<NAME>` — build individual recipe `<NAME>`. Built packages
+  are put in the `packages/` folder with version corresponding to the
+  date of the latest commit that modified at least one of the files
+  specified by the recipe; given according to the `%Y%m%d` format.
 
-* `json` -- build all JSON files.
+* `json` — build all JSON files.
 
-* `archive.json` -- construct the `archive.json` file that will contain a JSON object of all compiled packages.
+* `archive.json` — construct the `archive.json` file that will
+  contain a JSON object of all compiled packages.
 
-* `recipes.json` -- construct the `recipes.json` file containing a JSON object of all packages available for building.
+* `recipes.json` — construct the `recipes.json` file containing a
+  JSON object of all packages available for building.
 
-* `clean` -- clean everything.
+* `clean` — clean everything.
 
-* `html` -- build `index.html`.
+* `html` — build `index.html`.
 
-* `clean-working` -- remove all repositories that have been checked out to the `working/` directory.
+* `clean-working` — remove all repositories that have been checked
+  out to the `working/` directory.
 
-* `clean-packages` -- remove all compiled packages from the `packages` directory.
+* `clean-packages` — remove all compiled packages from the `packages`
+  directory.
 
-* `clean-json` -- remove all JSON files.
+* `clean-json` — remove all JSON files.
 
- Note that these scripts require an Emacs with `package.el` installed,
- such as Emacs 24. If you have an older version of Emacs, you can get a
- suitable `package.el` [here](https://git.savannah.gnu.org/gitweb/?p=emacs.git;a=blob_plain;hb=ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09;f=lisp/emacs-lisp/package.el).
+Note that these scripts require an Emacs with `package.el` installed,
+such as Emacs 24. If you have an older version of Emacs, you can get a
+suitable `package.el` [here](https://git.savannah.gnu.org/gitweb/?p=emacs.git;a=blob_plain;hb=ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09;f=lisp/emacs-lisp/package.el).
 
 [melpa]: https://melpa.org
-
 
 ## API
 
@@ -366,33 +365,32 @@ in the MELPA repository is imported using `git subtree`.
 
 ### Functions
 
-- `(package-build-all)` : build packages for all recipes in the
-directory specified by `package-build-recipes-dir`.
+* `(package-build-all)` — build packages for all recipes in the
+  directory specified by `package-build-recipes-dir`.
 
-
-- `(package-build-archive NAME)` : interactive elisp function to build
-a single archive. NAME is a symbol for the package to be built.
-Packages are staged in the directory specified by
-`package-build-working-dir` and built packages are placed in the
-directory specified by `package-build-archive-dir`. Packages are
-versioned based on the most recent commit date to package files based
-on commits to upstream package repository. For multi-file packages,
-the file `<NAME>-pkg.el` is automatically generated and contains
-*description*, *version*, and *requires* information determined by
-searching `<NAME>-pkg.el`, `<NAME>.el`, and `<NAME>-pkg.el.in`, if
-they exist in the repository.
+* `(package-build-archive NAME)` — interactive elisp function to build
+  a single archive. NAME is a symbol for the package to be built.
+  Packages are staged in the directory specified by
+  `package-build-working-dir` and built packages are placed in the
+  directory specified by `package-build-archive-dir`. Packages are
+  versioned based on the most recent commit date to package files
+  based on commits to upstream package repository. For multi-file
+  packages, the file `<NAME>-pkg.el` is automatically generated and
+  contains *description*, *version*, and *requires* information
+  determined by searching `<NAME>-pkg.el`, `<NAME>.el`, and
+  `<NAME>-pkg.el.in`, if they exist in the repository.
 
 ### Variables
 
-- `package-build-working-dir` : Staging area containing package
-repositories and package directories being built.
+* `package-build-working-dir` — Staging area containing package
+  repositories and package directories being built.
 
-- `package-build-archive-dir` : Location to store `archive-contents` and
-any built packages.
+* `package-build-archive-dir` — Location to store `archive-contents`
+  and any built packages.
 
-- `package-build-recipes-dir` : Directory containing MELPA compatible
-recipes.  See [Recipe Format](#recipe-format) section for more details.
-
+* `package-build-recipes-dir` — Directory containing MELPA compatible
+  recipes.  See [Recipe Format](#recipe-format) section for more
+  details.
 
 ## Configuration
 
@@ -422,4 +420,4 @@ our packages._
 ## About
 
 *MELPA* is *Milkypostman's ELPA* or *Milkypostman's Experimental Lisp
- Package Archive* if you're not into the whole brevity thing.
+Package Archive* if you're not into the whole brevity thing.

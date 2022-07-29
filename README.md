@@ -137,9 +137,9 @@ the following form (`[...]` denotes optional or conditional values),
   strip the "OTP-" prefix.  The captured portion of the regexp must be
   parseable by Emacs' `version-to-list` function.
 
-* `:files` optional property specifying the elisp and info files used
-  to build the package. Please do not override this if the default
-  value (below) is adequate, which it should usually be:
+* `:files` optional property specifying the Emacs Lisp libraries and
+  info files used to build the package. Please do not override this if
+  the default value (below) is adequate, which it should usually be:
 
   ```elisp
   '("*.el" "lisp/*.el"
@@ -153,9 +153,9 @@ the following form (`[...]` denotes optional or conditional values),
   ```
 
   Note that elisp in subdirectories is never included by default, so
-  you might find it convenient to keep your package's elisp in the
-  root of your repository, and separate auxiliary files such as tests
-  into subdirectories to keep packaging simple.
+  you might find it convenient to keep your package's Emacs Lisp
+  libraries in the root of your repository, and separate auxiliary
+  files such as tests into subdirectories to keep packaging simple.
 
   The elements of the `:files` list are glob-expanded and processed
   from left to right to make a list of paths that will be copied into
@@ -357,9 +357,9 @@ repository is imported using `git subtree`.
 * `(package-build-all)` — build packages for all recipes in the
   directory specified by `package-build-recipes-dir`.
 
-* `(package-build-archive NAME)` — interactive elisp function to build
-  a single archive. NAME is a symbol for the package to be built.
-  Packages are staged in the directory specified by
+* `(package-build-archive NAME)` — interactive Emacs Lisp function
+  to build a single archive. NAME is a symbol for the package to
+  be built. Packages are staged in the directory specified by
   `package-build-working-dir` and built packages are placed in the
   directory specified by `package-build-archive-dir`. Packages are
   versioned based on the most recent commit date to package files

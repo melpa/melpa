@@ -1,1 +1,3 @@
-(org-present-remote :fetcher git :repo "duncan-bayne/org-present-remote")
+(org-present-remote
+ :fetcher git
+ :url "https://git.sr.ht/~duncan-bayne/org-present-remote")

@@ -1,0 +1,1 @@
+(sideline-flymake :repo "emacs-sideline/sideline-flymake" :fetcher github)

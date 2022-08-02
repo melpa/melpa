@@ -1,1 +1,1 @@
-(disaster :repo "jart/disaster" :fetcher github)
+(disaster :repo "abougouffa/disaster" :fetcher github)

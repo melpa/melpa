@@ -1,1 +1,1 @@
-(apheleia :fetcher github :repo "raxod502/apheleia")
+(apheleia :fetcher github :repo "radian-software/apheleia")

@@ -1,3 +1,3 @@
 (undo-fu
- :repo "ideasman42/emacs-undo-fu"
- :fetcher gitlab)
+ :url "https://codeberg.org/ideasman42/emacs-undo-fu.git"
+ :fetcher git)

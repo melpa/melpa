@@ -1,0 +1,1 @@
+(whiley-mode :repo "Whiley/WhileyEmacsMode" :fetcher github)

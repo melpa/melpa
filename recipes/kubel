@@ -1,4 +1,3 @@
-(kubel :repo "abrochard/kubel" :fetcher github
-       :files
-       (:defaults
-        (:exclude "kubel-evil.el")))
+(kubel :fetcher github
+       :repo "abrochard/kubel"
+       :files (:defaults (:exclude "kubel-evil.el")))

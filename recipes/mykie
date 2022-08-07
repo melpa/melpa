@@ -1,4 +1,1 @@
-(mykie
- :repo "yuutayamada/mykie-el"
- :fetcher github
- :files ("lisp/*.el"))
+(mykie :fetcher github :repo "yuutayamada/mykie-el")

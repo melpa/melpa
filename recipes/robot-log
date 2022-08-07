@@ -1,0 +1,3 @@
+(robot-log
+ :fetcher git
+ :url "https://git.sr.ht/~apteryx/emacs-robot-log")

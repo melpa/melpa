@@ -1,1 +1,1 @@
-(google-this :repo "Malabarba/emacs-google-this" :fetcher github :files ("google-this.el"))
+(google-this :repo "Malabarba/emacs-google-this" :fetcher github)

@@ -1,4 +1,4 @@
 (sxiv
  :fetcher git
  :branch "dev"
- :url "https://tildegit.org/contrapunctus/sxiv")
+ :url "https://codeberg.org/contrapunctus/sxiv.el.git")

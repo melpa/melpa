@@ -1,0 +1,3 @@
+(fancy-compilation
+ :url "https://codeberg.org/ideasman42/emacs-fancy-compilation.git"
+ :fetcher git)

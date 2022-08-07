@@ -1,0 +1,1 @@
+(flymake-hadolint :repo "buzztaiki/flymake-hadolint" :fetcher github)

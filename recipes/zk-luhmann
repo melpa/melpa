@@ -1,0 +1,2 @@
+(zk-luhmann :repo "localauthor/zk-luhmann"
+            :fetcher github)

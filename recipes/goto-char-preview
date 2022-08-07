@@ -1,1 +1,1 @@
-(goto-char-preview :repo "jcs-elpa/goto-char-preview" :fetcher github)
+(goto-char-preview :repo "emacs-vs/goto-char-preview" :fetcher github)

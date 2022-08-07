@@ -1,1 +1,1 @@
-(blackout :fetcher github :repo "raxod502/blackout")
+(blackout :fetcher github :repo "radian-software/blackout")

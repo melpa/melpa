@@ -1,5 +1,6 @@
 (solidity-mode
-    :fetcher github
-    :repo "ethereum/emacs-solidity"
-    :files (:defaults (:exclude "company-solidity.el"
-                                "solidity-flycheck.el")))
+ :fetcher github
+ :repo "ethereum/emacs-solidity"
+ :files (:defaults
+         (:exclude "company-solidity.el"
+                   "solidity-flycheck.el")))

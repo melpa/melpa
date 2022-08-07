@@ -1,1 +1,3 @@
-(tree-edit :repo "ethan-leba/tree-edit" :fetcher github :files (:defaults (:exclude "evil-tree-edit*.el")))
+(tree-edit :fetcher github
+           :repo "ethan-leba/tree-edit"
+           :files (:defaults (:exclude "evil-tree-edit*.el")))

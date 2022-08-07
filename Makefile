@@ -111,7 +111,7 @@ $(RCPDIR)/%: .FORCE
 	@exec 2>&1; exec &> >(tee $(PKGDIR)/$(@F).log); \
 	  $(TIMEOUT) $(EVAL) "(package-build-archive \"$(@F)\")" \
 	  && echo " ✓ Success:" \
-	  && ls -lsh $(PKGDIR)/$(@F)-*
+	  && ls -lsh $(PKGDIR)/$(@F)-[0-9]*
 	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." && sleep $(SLEEP) || true
 	@echo
 

@@ -1,6 +1,8 @@
-(erlang :repo "erlang/otp"
-  :fetcher github
-  ;; Requiring one dot in the version-string to weed out the old
-  ;; "erl_1252" tags
-  :version-regexp "[^0-9]*\\([0-9]*\\..*\\)"
-  :files ("lib/tools/emacs/*.el" (:exclude "lib/tools/emacs/erlang_appwiz.el")))
+(erlang
+ :fetcher github
+ :repo "erlang/otp"
+ ;; Requiring one dot in the version-string to weed out the old
+ ;; "erl_1252" tags
+ :version-regexp "[^0-9]*\\([0-9]*\\..*\\)"
+ :files ("lib/tools/emacs/*.el"
+         (:exclude "lib/tools/emacs/erlang_appwiz.el")))

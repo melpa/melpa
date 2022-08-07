@@ -1,3 +1,1 @@
-(ghub :fetcher github
-      :repo "magit/ghub"
-      :files ("lisp/*.el" "docs/ghub.texi"))
+(ghub :fetcher github :repo "magit/ghub")

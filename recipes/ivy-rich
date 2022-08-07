@@ -1,2 +1,1 @@
-(ivy-rich :repo "Yevgnen/ivy-rich" :fetcher github :files
-               ("*.el"))
+(ivy-rich :repo "Yevgnen/ivy-rich" :fetcher github)

@@ -1,0 +1,3 @@
+(tangonov-theme
+ :fetcher github
+ :repo "trev-dev/tangonov-theme")

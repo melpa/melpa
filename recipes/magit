@@ -6,6 +6,8 @@
                "docs/magit.texi"
                "docs/AUTHORS.md"
                "LICENSE"
+               "Documentation/magit.texi" ; temporarily for stable
+               "Documentation/AUTHORS.md" ; temporarily for stable
                (:exclude "lisp/magit-libgit.el"
                          "lisp/magit-libgit-pkg.el"
                          "lisp/magit-section.el"

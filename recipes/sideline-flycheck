@@ -1,0 +1,1 @@
+(sideline-flycheck :repo "emacs-sideline/sideline-flycheck" :fetcher github)

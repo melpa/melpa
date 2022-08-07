@@ -1,2 +1,1 @@
-(factlog :repo "tkf/factlog" :fetcher github
-         :files ("lisp/*"))
+(factlog :repo "tkf/factlog" :fetcher github)

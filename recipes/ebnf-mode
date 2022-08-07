@@ -1,0 +1,1 @@
+(ebnf-mode :repo "nverno/ebnf-mode" :fetcher github)

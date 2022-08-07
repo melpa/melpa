@@ -1,4 +1,3 @@
 (ess-smart-underscore
- :repo "mattfidler/ess-smart-underscore.el"
  :fetcher github
- :files ("ess-smart-underscore.el" "dir" "ess-smart-underscore.info"))
+ :repo "mattfidler/ess-smart-underscore.el")

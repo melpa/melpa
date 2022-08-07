@@ -1,1 +1,4 @@
-(dirvish :repo "alexluigit/dirvish" :fetcher github)
+(dirvish
+ :fetcher github
+ :repo "alexluigit/dirvish"
+ :files (:defaults "extensions/*.el"))

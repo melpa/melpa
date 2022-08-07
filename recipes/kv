@@ -1,1 +1,1 @@
-(kv :fetcher github :repo "nicferrier/emacs-kv" :files ("kv.el"))
+(kv :fetcher github :repo "nicferrier/emacs-kv")

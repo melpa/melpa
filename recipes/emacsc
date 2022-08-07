@@ -1,4 +1,4 @@
 (emacsc
  :fetcher github
  :repo "knu/emacsc"
- :files ("lisp/*.el" "bin"))
+ :files (:defaults "bin"))

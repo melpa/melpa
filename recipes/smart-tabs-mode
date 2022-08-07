@@ -1,3 +1,1 @@
-(smart-tabs-mode :repo "jcsalomon/smarttabs"
-		 :fetcher github
-		 :files ("smart-tabs-mode.el"))
+(smart-tabs-mode :fetcher github :repo "jcsalomon/smarttabs")

@@ -1,0 +1,1 @@
+(org-view-mode :repo "amno1/org-view-mode" :fetcher github)

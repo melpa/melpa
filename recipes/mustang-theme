@@ -1,1 +1,1 @@
-(mustang-theme :repo "mswift42/mustang-theme" :fetcher github :files ("mustang-theme.el"))
+(mustang-theme :repo "mswift42/mustang-theme" :fetcher github)

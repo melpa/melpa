@@ -1,3 +1,3 @@
 (sidecar-locals
- :repo "ideasman42/emacs-sidecar-locals"
- :fetcher gitlab)
+ :url "https://codeberg.org/ideasman42/emacs-sidecar-locals.git"
+ :fetcher git)

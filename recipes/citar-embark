@@ -1,0 +1,3 @@
+(citar-embark :repo "emacs-citar/citar"
+       :fetcher github
+       :files ("citar-embark.el"))

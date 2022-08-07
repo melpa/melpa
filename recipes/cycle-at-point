@@ -1,0 +1,3 @@
+(cycle-at-point
+ :url "https://codeberg.org/ideasman42/emacs-cycle-at-point.git"
+ :fetcher git)

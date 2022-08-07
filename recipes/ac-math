@@ -1,1 +1,1 @@
-(ac-math :repo "vspinu/ac-math" :fetcher github :files ("ac-math.el"))
+(ac-math :repo "vspinu/ac-math" :fetcher github)

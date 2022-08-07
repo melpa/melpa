@@ -1,0 +1,3 @@
+(run-command-recipes
+ :repo "semenInRussia/emacs-run-command-recipes"
+ :fetcher github)

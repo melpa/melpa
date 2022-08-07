@@ -1,0 +1,1 @@
+(forex :repo "md-arif-shaikh/forex" :fetcher github)

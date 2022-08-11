@@ -1,0 +1,1 @@
+(citar :repo "emacs-citar/citar-org-roam" :fetcher github)

@@ -1,1 +1,1 @@
-(citar :repo "emacs-citar/citar-org-roam" :fetcher github)
+(citar-org-roam :repo "emacs-citar/citar-org-roam" :fetcher github)

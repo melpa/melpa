@@ -1,1 +1,1 @@
-(darktooth-theme :fetcher github :repo "emacsfodder/emacs-theme-darktooth")
+(sakura-theme :fetcher github :repo "emacsfodder/emacs-theme-sakura")

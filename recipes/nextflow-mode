@@ -1,0 +1,2 @@
+(nextflow-mode :fetcher github
+                :repo "Emiller88/nextflow-mode")

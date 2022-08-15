@@ -1,2 +1,2 @@
-(calc-prog :fetcher github
-           :repo "Jesse-Millwood/calc-prog")
+(calc-prog-utils :fetcher github
+                 :repo "Jesse-Millwood/calc-prog-utils")

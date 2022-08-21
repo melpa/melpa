@@ -1,5 +1,4 @@
 (jabber
  :fetcher git
  :url     "https://codeberg.org/emacs-jabber/emacs-jabber.git"
- :branch  "production"
  :files   (:defaults "*.org" ("jabber-fallback-lib" "jabber-fallback-lib/hexrgb.el")))

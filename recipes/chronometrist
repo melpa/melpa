@@ -1,7 +1,6 @@
 (chronometrist
  :url "https://codeberg.org/contrapunctus/chronometrist.git"
  :fetcher git
- :branch "dev"
  :files (:defaults
          "elisp/*.el"
          "elisp/*.org"

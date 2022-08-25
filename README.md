@@ -96,9 +96,9 @@ the following form (`[...]` denotes optional or conditional values),
 
 ```elisp
 (<package-name>
- :fetcher [git|github|gitlab|hg]
+ :fetcher [git|github|gitlab|codeberg|sourcehut|hg]
  [:url "<repo url>"]
- [:repo "github-or-gitlab-user/repo-name"]
+ [:repo "user-name/repo-name"]
  [:commit "commit"]
  [:branch "branch"]
  [:version-regexp "<regexp>"]
@@ -109,25 +109,45 @@ the following form (`[...]` denotes optional or conditional values),
 * `package-name` a lisp symbol that has the same name as the package
   being specified.
 
-* `:fetcher` specifies the type of repository that `:url` or `:repo`
-  points to. MELPA supports [`git`], [`github`], [`gitlab`], and
-  [`hg`] (Mercurial).
+* `:fetcher` specifies the type of repository the package is being
+  maintained in.
 
-* `:url` specifies the URL of the version control repository.
-  *required for the `git`, and `hg` fetchers.*
+  Melpa supports the Git and Mercurial version control systems and
+  provides generic fetcher types for them: `git` and `hg`. When you
+  use one of these fetchers, you most specify the `:url` property.
 
-* `:repo` specifies the github or gitlab repository and is of the form
-  `user/repo-name`. *required for the `github` and `gitlab` fetchers*.
+  Melpa also provides dedicate fetchers for certain Git forges (aka
+  "Git repository hosting platforms"), which should always be
+  preferred over the generic `git` fetcher. When using a dedicated
+  fetcher, you must specify `:repo`, not `:url`. Currently the these
+  Git forge fetchers exist: [`github`], [`gitlab`], [`codeberg`] and
+  [`sourcehut`].
 
-* `:commit` specifies the commit of the git repo to checkout. The
-  value will be passed to `git reset` in a repo where `upstream` is
+  There are no dedicated fetchers for Mercurial. When a forge
+  supports both Git and Mercurial, then the respective fetcher can
+  only be used for Git repositories.  For Mercurial repositories
+  always use the `hg` fetcher.
+
+* `:url` specifies the URL of the version control repository. It is
+  required for the generic `git` and `hg` fetchers and is invalid for
+  forge-specific fetchers.
+
+* `:repo` specifies the repository used by forge-specific fetchers
+  and is of the form `user-name/repo-name`. It is required for
+  forge-specific fetchers and is invalid for the generic fetchers.
+
+  Note that user names in Sourcehut URLs are prefixed with `~`, that
+  has to be omitted in the value of this property.
+
+* `:commit` specifies the commit of the Git repository to checkout.
+  The value will be passed to `git reset` in a repo where `upstream` is
   the original repository. Can therefore be either a SHA, if pointing
   at a specific commit, or a full ref prefixed with "origin/". Only
   used by the `git`-based fetchers.
 
-* `:branch` specifies the branch of the git repo to use. This is like
-  `:commit`, but it adds the "origin/" prefix automatically. This must
-  be specified when using a branch other than the default branch.
+* `:branch` specifies the branch of the Git repository to use. This is
+  like `:commit`, but it adds the "origin/" prefix automatically. This
+  must be specified when using a branch other than the default branch.
 
 * `:version-regexp` is a regular expression for extracting a
   version-string from the repository tags. The default matches typical
@@ -426,9 +446,11 @@ Package Archive* if you're not into the whole brevity thing.
 
 [`el-get`]:         https://github.com/dimitri/el-get/
 [Homebrew]:         https://brew.sh/
-[`git`]:            http://git-scm.com/
+[`git`]:            https://git-scm.com/
 [`github`]:         https://github.com/
 [`gitlab`]:         https://gitlab.com/
+[`codeberg`]:       https://codeberg.org/
+[`sourcehut`]:      https://git.sr.ht/
 [`hg`]:             https://www.mercurial-scm.org/
 [`package-filter`]: https://github.com/milkypostman/package-filter/
 [package-old]:      https://git.savannah.gnu.org/gitweb/?p=emacs.git;a=blob_plain;hb=ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09;f=lisp/emacs-lisp/package.el

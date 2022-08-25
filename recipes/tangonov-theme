@@ -1,3 +1,1 @@
-(tangonov-theme
- :fetcher git
- :url "https://git.sr.ht/~trevdev/tangonov-theme")
+(tangonov-theme :fetcher sourcehut :repo "trevdev/tangonov-theme")

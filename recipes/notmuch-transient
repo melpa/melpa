@@ -1,1 +1,1 @@
-(notmuch-transient :fetcher git :url "https://git.sr.ht/~tarsius/notmuch-transient")
+(notmuch-transient :fetcher sourcehut :repo "tarsius/notmuch-transient")

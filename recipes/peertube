@@ -1,1 +1,1 @@
-(peertube :fetcher git :url "https://git.sr.ht/~yoctocell/peertube")
+(peertube :fetcher sourcehut :repo "yoctocell/peertube")

@@ -1,3 +1,1 @@
-(modus-themes
- :fetcher git
- :url "https://git.sr.ht/~protesilaos/modus-themes")
+(modus-themes :fetcher sourcehut :repo "protesilaos/modus-themes")

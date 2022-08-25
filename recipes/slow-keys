@@ -1,1 +1,1 @@
-(slow-keys :fetcher git :url "https://git.sr.ht/~gitmux/slow-keys")
+(slow-keys :fetcher sourcehut :repo "gitmux/slow-keys")

@@ -1,1 +1,1 @@
-(time-block :fetcher git :url "https://git.sr.ht/~swflint/time-block-command")
+(time-block :fetcher sourcehut :repo "swflint/time-block-command")

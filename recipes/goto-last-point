@@ -1,1 +1,1 @@
-(goto-last-point :fetcher git :url "https://git.sr.ht/~gitmux/goto-last-point")
+(goto-last-point :fetcher sourcehut :repo "gitmux/goto-last-point")

@@ -1,2 +1,1 @@
-(fennel-mode :url "https://git.sr.ht/~technomancy/fennel-mode"
-             :fetcher git)
+(fennel-mode :fetcher sourcehut :repo "technomancy/fennel-mode")

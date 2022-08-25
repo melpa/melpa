@@ -1,3 +1,4 @@
 (run-command-recipes
  :repo "semenInRussia/emacs-run-command-recipes"
- :fetcher github)
+ :fetcher github
+ :files (:defaults "run-command-recipes-template.txt"))

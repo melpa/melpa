@@ -1,4 +1,1 @@
-(popup :repo "auto-complete/popup-el"
-       :fetcher github
-       :files ("popup.el"))
-
+(popup :fetcher github :repo "auto-complete/popup-el")

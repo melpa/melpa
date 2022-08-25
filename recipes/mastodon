@@ -1,1 +1,1 @@
-(mastodon :fetcher git :url "https://codeberg.org/martianh/mastodon.el" :files ("lisp/*.el"))
+(mastodon :fetcher codeberg :repo "martianh/mastodon.el")

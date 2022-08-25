@@ -1,4 +1,1 @@
-(consult-flycheck
- :repo "minad/consult-flycheck"
- :fetcher github
- :files ("consult-flycheck.el"))
+(consult-flycheck :fetcher github :repo "minad/consult-flycheck")

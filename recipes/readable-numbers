@@ -1,0 +1,4 @@
+(readable-numbers
+ :fetcher github
+ :repo "Titan-C/cardano.el"
+ :files ("readable-numbers.el"))

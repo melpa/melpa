@@ -1,3 +1,3 @@
 (bookmark-in-project
- :repo "ideasman42/emacs-bookmark-in-project"
- :fetcher gitlab)
+ :fetcher codeberg
+ :repo "ideasman42/emacs-bookmark-in-project")

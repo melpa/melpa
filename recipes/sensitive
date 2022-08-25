@@ -1,2 +1,1 @@
-(sensitive :repo "timvisher/sensitive.el" :fetcher github :files ("sensitive.el"))
-
+(sensitive :repo "timvisher/sensitive.el" :fetcher github)

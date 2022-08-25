@@ -1,0 +1,3 @@
+(tree-sitter-ess-r
+  :repo "ShuguangSun/tree-sitter-ess-r"
+  :fetcher github)

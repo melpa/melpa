@@ -1,0 +1,1 @@
+(clockodo :repo "santifa/clockodo-el" :fetcher github)

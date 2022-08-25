@@ -1,3 +1,1 @@
-(titlecase
- :fetcher github
- :repo "duckwork/titlecase.el")
+(titlecase :fetcher codeberg :repo "acdw/titlecase.el")

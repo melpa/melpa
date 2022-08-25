@@ -1,3 +1,1 @@
-(electric-cursor
- :fetcher github
- :repo "duckwork/electric-cursor")
+(electric-cursor :fetcher codeberg :repo "acdw/electric-cursor.el")

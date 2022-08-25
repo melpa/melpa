@@ -1,1 +1,1 @@
-(slow-keys :fetcher github :repo "manuel-uberti/slow-keys")
+(slow-keys :fetcher sourcehut :repo "gitmux/slow-keys")

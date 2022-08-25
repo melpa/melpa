@@ -1,4 +1,1 @@
-(json-rpc
- :fetcher github
- :repo "skeeto/elisp-json-rpc"
- :files ("json-rpc.el"))
+(json-rpc :fetcher github :repo "skeeto/elisp-json-rpc")

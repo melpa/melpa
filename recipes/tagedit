@@ -1,1 +1,1 @@
-(tagedit :fetcher github :repo "magnars/tagedit" :files ("tagedit.el"))
+(tagedit :fetcher github :repo "magnars/tagedit")

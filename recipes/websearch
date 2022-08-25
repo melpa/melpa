@@ -1,0 +1,1 @@
+(websearch :fetcher gitlab :repo "xgqt/emacs-websearch")

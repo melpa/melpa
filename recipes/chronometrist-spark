@@ -1,5 +1,5 @@
 (chronometrist-spark
- :url "https://tildegit.org/contrapunctus/chronometrist.git"
- :fetcher git
+ :fetcher codeberg
+ :repo "contrapunctus/chronometrist"
  :branch "dev"
  :files ("elisp/chronometrist-spark.el" "elisp/chronometrist-spark.org"))

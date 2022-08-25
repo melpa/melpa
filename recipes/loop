@@ -1,1 +1,1 @@
-(loop :repo "Wilfred/loop.el" :fetcher github :files ("loop.el"))
+(loop :repo "Wilfred/loop.el" :fetcher github)

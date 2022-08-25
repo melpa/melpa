@@ -1,3 +1,1 @@
-(bpe :repo "yuutayamada/bpe"
-     :fetcher github
-     :files ("bpe.el"))
+(bpe :fetcher github :repo "yuutayamada/bpe")

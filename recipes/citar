@@ -1,3 +1,4 @@
-(citar :repo "bdarcus/citar"
+(citar :repo "emacs-citar/citar"
        :fetcher github
+       :files (:defaults (:exclude "citar-embark.el"))
        :old-names (bibtex-actions))

@@ -1,3 +1,1 @@
-(filldent
- :fetcher github
- :repo "duckwork/filldent.el")
+(filldent :fetcher codeberg :repo "acdw/filldent.el")

@@ -1,0 +1,3 @@
+(cljstyle-format
+ :fetcher github
+ :repo "dpassen/cljstyle-format")

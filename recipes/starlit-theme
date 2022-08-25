@@ -1,0 +1,1 @@
+(starlit-theme :repo "SFTtech/starlit-emacs" :fetcher github)

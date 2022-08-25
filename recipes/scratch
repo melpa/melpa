@@ -1,1 +1,4 @@
-(scratch :fetcher github :repo "ieure/scratch-el" :files ("scratch.el"))
+(scratch
+ :fetcher codeberg
+ :repo "emacs-weirdware/scratch"
+ :files ("scratch.el"))

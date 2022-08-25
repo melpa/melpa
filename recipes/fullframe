@@ -1,1 +1,1 @@
-(fullframe :url "https://git.sr.ht/~tomterl/fullframe" :fetcher git)
+(fullframe :fetcher sourcehut :repo "tomterl/fullframe")

@@ -1,1 +1,1 @@
-(el-patch :fetcher github :repo "raxod502/el-patch")
+(el-patch :fetcher github :repo "radian-software/el-patch")

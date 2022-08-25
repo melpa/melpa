@@ -1,2 +1,2 @@
-(org-seek :fetcher github
-          :repo "stardiviner/org-seek.el")
+(org-seek :fetcher git
+          :url "https://repo.or.cz/org-seek.el.git")

@@ -1,1 +1,4 @@
-(tok-theme :fetcher github :repo "topikettunen/tok-theme" :old-names (brutal-theme))
+(tok-theme
+ :fetcher sourcehut
+ :repo "tok/tok-theme"
+ :old-names (brutal-theme))

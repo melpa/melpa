@@ -1,4 +1,4 @@
 (async-backup
- :fetcher git
- :url "https://tildegit.org/contrapunctus/async-backup.git"
+ :fetcher codeberg
+ :repo "contrapunctus/async-backup"
  :branch "development")

@@ -1,2 +1,1 @@
-(julia-formatter :fetcher git
-                 :url "https://codeberg.org/FelipeLema/julia-formatter.el.git")
+(julia-formatter :fetcher codeberg :repo "FelipeLema/julia-formatter.el")

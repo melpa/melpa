@@ -1,1 +1,1 @@
-(exwm-mff :fetcher git :url "https://codeberg.org/emacs-weirdware/exwm-mff")
+(exwm-mff :fetcher codeberg :repo "emacs-weirdware/exwm-mff")

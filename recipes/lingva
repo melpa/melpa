@@ -1,1 +1,1 @@
-(lingva :url "https://codeberg.org/martianh/lingva.el.git" :fetcher git)
+(lingva :fetcher codeberg :repo "martianh/lingva.el")

@@ -1,1 +1,3 @@
-(test-case-mode :fetcher git :url "https://codeberg.org/emacs-weirdware-abandoned/test-case-mode")
+(test-case-mode
+ :fetcher codeberg
+ :repo "emacs-weirdware-abandoned/test-case-mode")

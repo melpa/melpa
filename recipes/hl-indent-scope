@@ -1,3 +1,3 @@
 (hl-indent-scope
- :url "https://codeberg.org/ideasman42/emacs-hl-indent-scope.git"
- :fetcher git)
+ :fetcher codeberg
+ :repo "ideasman42/emacs-hl-indent-scope")

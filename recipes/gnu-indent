@@ -1,3 +1,1 @@
-(gnu-indent
- :fetcher git
- :url "https://codeberg.org/akib/emacs-gnu-indent.git")
+(gnu-indent :fetcher codeberg :repo "akib/emacs-gnu-indent")

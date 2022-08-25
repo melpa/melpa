@@ -1,3 +1,3 @@
 (recomplete
- :url "https://codeberg.org/ideasman42/emacs-recomplete.git"
- :fetcher git)
+ :fetcher codeberg
+ :repo "ideasman42/emacs-recomplete")

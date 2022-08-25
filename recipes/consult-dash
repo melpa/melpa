@@ -1,3 +1,1 @@
-(consult-dash
- :fetcher git
- :url "https://codeberg.org/ravi/consult-dash.git")
+(consult-dash :fetcher codeberg :repo "ravi/consult-dash")

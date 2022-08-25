@@ -1,3 +1,1 @@
-(spell-fu
- :url "https://codeberg.org/ideasman42/emacs-spell-fu.git"
- :fetcher git)
+(spell-fu :fetcher codeberg :repo "ideasman42/emacs-spell-fu")

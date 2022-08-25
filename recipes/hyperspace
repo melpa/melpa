@@ -1,1 +1,1 @@
-(hyperspace :fetcher git :url "https://codeberg.org/emacs-weirdware/hyperspace")
+(hyperspace :fetcher codeberg :repo "emacs-weirdware/hyperspace")

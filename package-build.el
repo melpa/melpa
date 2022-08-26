@@ -171,6 +171,12 @@ disallowed."
                  (car (process-lines "hg" "config" "extensions.purge")))))
     (and value (not (string-prefix-p "!" value)))))
 
+(defvar package-build--inhibit-fetch nil
+  "Whether to inhibit fetching.  Useful for testing purposes.")
+
+(defvar package-build--inhibit-checkout nil
+  "Whether to inhibit checkout.  Useful for testing purposes.")
+
 ;;; Generic Utilities
 
 (defun package-build--message (format-string &rest args)
@@ -273,10 +279,6 @@ is used instead."
   (package-build--message "Fetcher: %s" (package-recipe--fetcher rcp))
   (package-build--message "Source:  %s\n" (package-recipe--upstream-url rcp)))
 
-(cl-defmethod package-build--checkout-1 :before ((_rcp package-recipe) rev)
-  (when rev
-    (package-build--message "Checking out %s" rev)))
-
 ;;;; Git
 
 (cl-defmethod package-build--checkout ((rcp package-git-recipe))
@@ -288,13 +290,14 @@ is used instead."
     (cond
      ((and (file-exists-p (expand-file-name ".git" dir))
            (string-equal (package-build--used-url rcp) url))
-      (package-build--message "Updating %s" dir)
-      (package-build--run-process dir nil "git" "fetch" "-f" "--all" "--tags")
-      ;; We might later checkout "origin/HEAD". Sadly "git fetch"
-      ;; cannot be told to keep it up-to-date, so we have to make
-      ;; a second request.
-      (package-build--run-process dir nil "git" "remote" "set-head"
-                                  "origin" "--auto"))
+      (unless package-build--inhibit-fetch
+        (package-build--message "Updating %s" dir)
+        (package-build--run-process dir nil "git" "fetch" "-f" "--all" "--tags")
+        ;; We might later checkout "origin/HEAD". Sadly "git fetch"
+        ;; cannot be told to keep it up-to-date, so we have to make
+        ;; a second request.
+        (package-build--run-process dir nil "git" "remote" "set-head"
+                                    "origin" "--auto")))
      (t
       (when (file-exists-p dir)
         (delete-directory dir t))
@@ -313,11 +316,10 @@ is used instead."
       version)))
 
 (cl-defmethod package-build--checkout-1 ((rcp package-git-recipe) rev)
-  (let ((dir (package-recipe--working-tree rcp)))
-    (package-build--run-process dir nil "git" "reset" "--hard" rev)
-    (package-build--run-process dir nil "git" "submodule" "sync" "--recursive")
-    (package-build--run-process dir nil "git" "submodule" "update"
-                                "--init" "--recursive")))
+  (unless package-build--inhibit-checkout
+    (package-build--message "Checking out %s" rev)
+    (let ((dir (package-recipe--working-tree rcp)))
+      (package-build--run-process dir nil "git" "reset" "--hard" rev))))
 
 (cl-defmethod package-build--list-tags ((rcp package-git-recipe))
   (let ((default-directory (package-recipe--working-tree rcp)))
@@ -363,9 +365,10 @@ is used instead."
     (cond
      ((and (file-exists-p (expand-file-name ".hg" dir))
            (string-equal (package-build--used-url rcp) url))
-      (package-build--message "Updating %s" dir)
-      (package-build--run-process dir nil "hg" "pull")
-      (package-build--run-process dir nil "hg" "update"))
+      (unless package-build--inhibit-fetch
+        (package-build--message "Updating %s" dir)
+        (package-build--run-process dir nil "hg" "pull")
+        (package-build--run-process dir nil "hg" "update")))
      (t
       (when (file-exists-p dir)
         (delete-directory dir t))
@@ -377,7 +380,8 @@ is used instead."
       version)))
 
 (cl-defmethod package-build--checkout-1 ((rcp package-hg-recipe) rev)
-  (when rev
+  (when (and (not package-build--inhibit-checkout) rev)
+    (package-build--message "Checking out %s" rev)
     (package-build--run-process (package-recipe--working-tree rcp)
                                 nil "hg" "update" rev)))
 

@@ -223,7 +223,7 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
         (with-current-buffer
             (cond ((eq destination t) (current-buffer))
                   (destination)
-                  ((setq temp-buffer (generate-new-buffer " *temp*" t))))
+                  ((setq temp-buffer (generate-new-buffer " *temp*"))))
           (unless destination
             (setq default-directory directory))
           (let ((default-directory directory)

@@ -1,6 +1,5 @@
-(apel :repo "wanderlust/apel"
-      :branch "apel-wl"
-      :fetcher github
+(apel :fetcher github
+      :repo "wanderlust/apel"
       :files ("alist.el"
               "apel-ver.el"
               "apel-pkg.el"

@@ -1,3 +1,1 @@
-(visible-mark
- :url "https://git.sr.ht/~iank/visible-mark"
- :fetcher git)
+(visible-mark :fetcher sourcehut :repo "iank/visible-mark")

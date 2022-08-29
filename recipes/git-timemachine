@@ -1,1 +1,1 @@
-(git-timemachine :fetcher gitlab :repo "pidu/git-timemachine")
+(git-timemachine :fetcher codeberg :repo "pidu/git-timemachine")

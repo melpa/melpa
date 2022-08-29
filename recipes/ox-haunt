@@ -1,1 +1,1 @@
-(ox-haunt :url "https://git.sr.ht/~jakob/ox-haunt" :fetcher git)
+(ox-haunt :fetcher sourcehut :repo "jakob/ox-haunt")

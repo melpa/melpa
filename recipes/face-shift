@@ -1,1 +1,1 @@
-(face-shift :url "https://git.sr.ht/~pkal/face-shift" :fetcher git)
+(face-shift :fetcher sourcehut :repo "pkal/face-shift")

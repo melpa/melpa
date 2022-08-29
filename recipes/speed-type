@@ -1,1 +1,1 @@
-(speed-type :fetcher github :repo "parkouss/speed-type")
+(speed-type :fetcher github :repo "dakra/speed-type")

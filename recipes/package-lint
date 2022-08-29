@@ -1,1 +1,3 @@
-(package-lint :fetcher github :repo "purcell/package-lint" :files (:defaults "data" (:exclude "*flymake.el")))
+(package-lint :fetcher github
+              :repo "purcell/package-lint"
+              :files (:defaults "data" (:exclude "*flymake.el")))

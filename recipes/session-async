@@ -1,2 +1,1 @@
-(session-async :fetcher git
-               :url "https://codeberg.org/FelipeLema/session-async.el.git")
+(session-async :fetcher codeberg :repo "FelipeLema/session-async.el")

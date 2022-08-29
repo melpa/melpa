@@ -1,1 +1,1 @@
-(autocrypt :url "https://git.sr.ht/~pkal/autocrypt" :fetcher git)
+(autocrypt :fetcher sourcehut :repo "pkal/autocrypt")

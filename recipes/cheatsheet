@@ -1,2 +1,2 @@
-(cheatsheet :repo "darksmile/cheatsheet" :fetcher github)
+(cheatsheet :repo "mykyta-shyrin/cheatsheet" :fetcher github)
 

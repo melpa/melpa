@@ -1,1 +1,3 @@
-(org-present-remote :fetcher gitlab :repo "duncan-bayne/org-present-remote")
+(org-present-remote
+ :fetcher sourcehut
+ :repo "duncan-bayne/org-present-remote")

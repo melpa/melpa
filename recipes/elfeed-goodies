@@ -1,2 +1,2 @@
-(elfeed-goodies :repo "algernon/elfeed-goodies"
+(elfeed-goodies :repo "jeetelongname/elfeed-goodies"
                 :fetcher github)

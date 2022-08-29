@@ -1,0 +1,1 @@
+(external-dict :fetcher git :url "https://repo.or.cz/external-dict.el.git")

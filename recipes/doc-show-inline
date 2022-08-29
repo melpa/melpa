@@ -1,3 +1,3 @@
 (doc-show-inline
-  :url "https://codeberg.org/ideasman42/emacs-doc-show-inline.git"
-  :fetcher git)
+ :fetcher codeberg
+ :repo "ideasman42/emacs-doc-show-inline")

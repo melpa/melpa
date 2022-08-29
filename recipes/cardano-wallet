@@ -1,0 +1,4 @@
+(cardano-wallet
+ :fetcher github
+ :repo "Titan-C/cardano.el"
+ :files ("cardano-wallet.el"))

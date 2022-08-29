@@ -1,0 +1,3 @@
+(zuul
+ :fetcher sourcehut
+ :repo "niklaseklund/zuul.el")

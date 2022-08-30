@@ -191,19 +191,22 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
   (let ((regexp (or (oref rcp version-regexp) package-build-version-regexp))
         (tag nil)
         (version '(0)))
-      (dolist (n (package-build--list-tags rcp))
-        (let ((v (ignore-errors
-                   (version-to-list (and (string-match regexp n)
-                                         (match-string 1 n))))))
-          (when (and v (version-list-<= version v))
-            (if (cl-typep rcp 'package-git-recipe)
-                (setq tag (concat "refs/tags/" n))
-              (setq tag n))
-            (setq version v))))
-      (unless tag
-        (error "No valid stable versions found for %s" (oref rcp name)))
-      (cons (package-build--get-commit rcp tag)
-            (package-version-join version))))
+    (dolist (n (let ((default-directory (package-recipe--working-tree rcp)))
+                 (cl-etypecase rcp
+                   (package-git-recipe (process-lines "git" "tag" "--list"))
+                   (package-hg-recipe  (process-lines "hg" "tags" "--quiet")))))
+      (let ((v (ignore-errors
+                 (version-to-list (and (string-match regexp n)
+                                       (match-string 1 n))))))
+        (when (and v (version-list-<= version v))
+          (if (cl-typep rcp 'package-git-recipe)
+              (setq tag (concat "refs/tags/" n))
+            (setq tag n))
+          (setq version v))))
+    (unless tag
+      (error "No valid stable versions found for %s" (oref rcp name)))
+    (cons (package-build--get-commit rcp tag)
+          (package-version-join version))))
 
 (defun package-build-get-timestamp-version (rcp)
   (pcase-let ((`(,hash . ,time) (package-build--get-timestamp rcp)))
@@ -265,7 +268,9 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
       (error "Fetching using the %s protocol is not allowed" protocol))
     (cond
      ((and (file-exists-p (expand-file-name ".git" dir))
-           (string-equal (package-build--used-url rcp) url))
+           (let ((default-directory dir))
+             (string= (car (process-lines "git" "config" "remote.origin.url"))
+                      url)))
       (unless package-build--inhibit-fetch
         (package-build--message "Updating %s" dir)
         (package-build--run-process dir nil "git" "fetch" "-f" "--all" "--tags")
@@ -297,10 +302,6 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
     (package-build--run-process (package-recipe--working-tree rcp)
                                 nil "git" "reset" "--hard" rev)))
 
-(cl-defmethod package-build--list-tags ((rcp package-git-recipe))
-  (let ((default-directory (package-recipe--working-tree rcp)))
-    (process-lines "git" "tag")))
-
 (cl-defmethod package-build--get-timestamp ((rcp package-git-recipe))
   (pcase-let*
       ((default-directory (package-recipe--working-tree rcp))
@@ -325,10 +326,6 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
      (car (process-lines "git" "log" "-n1" "--first-parent"
                          "--pretty=format:%cd" "--date=unix" rev)))))
 
-(cl-defmethod package-build--used-url ((rcp package-git-recipe))
-  (let ((default-directory (package-recipe--working-tree rcp)))
-    (car (process-lines "git" "config" "remote.origin.url"))))
-
 (cl-defmethod package-build--get-commit ((rcp package-git-recipe) &optional rev)
   (let ((default-directory (package-recipe--working-tree rcp)))
     (car (process-lines "git" "rev-parse" (or rev "HEAD")))))
@@ -340,7 +337,8 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
         (url (package-recipe--upstream-url rcp)))
     (cond
      ((and (file-exists-p (expand-file-name ".hg" dir))
-           (string-equal (package-build--used-url rcp) url))
+           (let ((default-directory dir))
+             (string= (car (process-lines "hg" "paths" "default")) url)))
       (unless package-build--inhibit-fetch
         (package-build--message "Updating %s" dir)
         (package-build--run-process dir nil "hg" "pull")
@@ -360,14 +358,6 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
     (package-build--message "Checking out %s" rev)
     (package-build--run-process (package-recipe--working-tree rcp)
                                 nil "hg" "update" rev)))
-
-(cl-defmethod package-build--list-tags ((rcp package-hg-recipe))
-  (let ((default-directory (package-recipe--working-tree rcp)))
-    (mapcar (lambda (line)
-              ;; Remove space and rev that follow ref.
-              (and (string-match "\\`[^ ]+" line)
-                   (match-string 0 line)))
-            (process-lines "hg" "tags"))))
 
 (cl-defmethod package-build--get-timestamp ((rcp package-hg-recipe))
   (pcase-let*
@@ -391,10 +381,6 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
                                "--template" "{date|hgdate}\n"
                                "--rev" rev))
            " ")))))
-
-(cl-defmethod package-build--used-url ((rcp package-hg-recipe))
-  (let ((default-directory (package-recipe--working-tree rcp)))
-    (car (process-lines "hg" "paths" "default"))))
 
 (cl-defmethod package-build--get-commit ((rcp package-hg-recipe) &optional rev)
   (let ((default-directory (package-recipe--working-tree rcp)))

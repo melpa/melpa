@@ -1,0 +1,1 @@
+(mybuild-mode :fetcher github :repo "easimonenko/mybuild-mode")

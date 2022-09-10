@@ -1,0 +1,4 @@
+(inspector
+ :fetcher github
+ :repo "mmontone/emacs-inspector"
+ :files ("inspector.el"))

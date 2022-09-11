@@ -1,0 +1,1 @@
+(yul-mode :repo "taquangtrung/emacs-yul-mode" :fetcher github)

@@ -1,0 +1,4 @@
+(ob-gnuplot
+:fetcher git
+:url "https://git.ravaglia.xyz/lorenzo/ob-gnuplot.git"
+:branch "master")

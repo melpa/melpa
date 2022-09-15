@@ -1,5 +1,5 @@
 (emacsql :fetcher github
-         :repo "skeeto/emacsql"
+         :repo "magit/emacsql"
          :files ("emacsql.el"
                  "emacsql-compiler.el"
                  ;; While this file doesn't exist on "master" anymore,

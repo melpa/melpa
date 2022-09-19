@@ -1,5 +1,1 @@
-(ob-ffuf
- :repo "daniel-ts/ob-ffuf"
- :fetcher github
- :files ("*.el"
-         (:exclude "*-test.el" "README.org" ".gitignore")))
+(ob-ffuf :repo "daniel-ts/ob-ffuf" :fetcher github)

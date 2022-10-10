@@ -1,3 +1,3 @@
 (emacsql-psql :fetcher github
               :repo "magit/emacsql"
-              :files ("emacsql-psql.el" "emacsql-pg.el"))
+              :files ("emacsql-psql.el"))

@@ -1,4 +1,5 @@
 (emacsql-sqlite-builtin
  :fetcher github
- :repo "emacscollective/emacsql-sqlite-builtin"
+ :repo "magit/emacsql"
+ :branch "next"
  :files ("emacsql-sqlite-builtin.el"))

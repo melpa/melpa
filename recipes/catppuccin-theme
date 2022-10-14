@@ -1,1 +1,2 @@
-(catppuccin-theme :fetcher github :repo "catppuccin/emacs")
+(catppuccin-theme :fetcher github :repo "catppuccin/emacs" :files("catppuccin-mocha-theme.el" "
+catppuccin-macchiato-theme.el" "catppuccin-frappe-theme.el" "catppuccin-latte-theme.el" "catppuccin-theme.el"))

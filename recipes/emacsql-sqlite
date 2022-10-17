@@ -1,3 +1,4 @@
-(emacsql-sqlite :repo "skeeto/emacsql"
-                :fetcher github
-                :files ("emacsql-sqlite.el" "sqlite"))
+(emacsql-sqlite
+ :fetcher github
+ :repo "magit/emacsql"
+ :files ("emacsql-sqlite.el" "sqlite"))

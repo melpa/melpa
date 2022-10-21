@@ -1,2 +1,2 @@
-(mmm-mode :repo "purcell/mmm-mode" :fetcher github)
+(mmm-mode :repo "dgutov/mmm-mode" :fetcher github)
 

@@ -1,1 +1,3 @@
-(which-key-posframe :fetcher github :repo "yanghaoxie/which-key-posframe")
+(which-key-posframe
+ :fetcher github
+ :repo "emacsorphanage/which-key-posframe")

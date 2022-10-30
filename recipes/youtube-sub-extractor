@@ -1,1 +1,1 @@
-(youtube-sub-extractor :fetcher github :repo "agzam/youtube-sub-extractor.el" :files ("*.el"))
+(youtube-sub-extractor :repo "agzam/youtube-sub-extractor.el" :fetcher github)

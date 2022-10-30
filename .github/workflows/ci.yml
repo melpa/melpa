@@ -20,7 +20,9 @@ jobs:
 
         # Work around SSL-related failures, see
         # https://stackoverflow.com/questions/21477683/mercurial-https-clone-abort-error-wrong-version-number
-        echo "[ui]\ntls = False" > $HOME/.hgrc
+        echo -e "[ui]\ntls = False" >> $HOME/.hgrc
+        # enable mercurial's purge extension:
+        echo -e "[extensions]\npurge =" >> $HOME/.hgrc
     - name: Check changed recipes
       run: |
         [ "$GITHUB_EVENT_NAME" = "push" ] \

@@ -13,6 +13,9 @@ echo "EMACS = $EMACS"
 echo
 
 changed_recipes=$(echo "$CHANGED_FILES" | (grep -Po '(?<=^recipes/)[a-z0-9].*' || true))
+# if changed_recipes is empty/not-set, test a couple of "interesting" recipes:
+changed_recipes=${changed_recipes:-"kanban magit"}
+
 for recipe_name in $changed_recipes; do
     if [ -f "./recipes/$recipe_name" ]; then
         echo "----------------------------------------------------"

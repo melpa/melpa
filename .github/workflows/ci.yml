@@ -23,7 +23,7 @@ jobs:
         echo -e "[ui]\ntls = False" >> $HOME/.hgrc
         # enable mercurial's purge extension:
         echo -e "[extensions]\npurge =" >> $HOME/.hgrc
-    - name: Check changed recipes
+    - name: Run CI script
       run: |
         [ "$GITHUB_EVENT_NAME" = "push" ] \
           && export CHANGED_FILES=$(git diff-tree --name-only --no-commit-id -r ${{ github.sha }})

@@ -1,4 +1,4 @@
 (mint-mode
  :fetcher github
  :repo "creatorrr/emacs-mint-mode"
- :files ("mint-mode.el" "tokens"))
+ :files (:defaults "tokens"))

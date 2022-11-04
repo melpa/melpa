@@ -1,5 +1,4 @@
 (mint-mode
  :fetcher github
  :repo "creatorrr/emacs-mint-mode"
- :version-regexp "0\\.5\\..+"
  :files ("mint-mode.el" "tokens"))

@@ -1,1 +1,1 @@
-(bubbles :repo "hajovonta/bubbles" :fetcher sourcehut)
+(bubbles :repo "hajovonta/glue" :fetcher sourcehut)

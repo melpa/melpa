@@ -1,1 +1,3 @@
-(gpt :fetcher github :repo "stuhlmueller/gpt.el")
+(gpt :fetcher github
+     :repo "stuhlmueller/gpt.el"
+     :files ("gpt.el" "gpt.py"))

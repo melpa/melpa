@@ -1,0 +1,1 @@
+(consult-git-log-grep :fetcher github :repo "ghosty141/consult-git-log-grep")

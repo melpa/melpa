@@ -24,7 +24,7 @@ done
 # if the tooling in ./package-build changed test a couple 'interesting' recipes:
 changed_tooling=$(echo "$CHANGED_FILES" | (grep -Po '(?<=^package-build/)[a-z0-9].*' || true))
 if [ -n "$changed_tooling" ]; then
-    for recipe_name in "kanban" "magit"; do
+    for recipe_name in "evil" "kanban" "magit"; do
         echo "----------------------------------------------------"
         echo "Building recipe to test build tooling: $recipe_name"
         emacs --batch --eval "(let ((debug-on-error t)) (add-to-list 'load-path \"$PWD/package-build/\")(load-file \"package-build/package-build.el\")(package-build-archive \"$recipe_name\"))"

@@ -1,0 +1,4 @@
+(beans
+ :fetcher github
+ :repo "TheBlackBeans/emacs-beans"
+ :branch "release")

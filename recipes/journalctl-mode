@@ -1,0 +1,1 @@
+(journalctl-mode :fetcher github :repo "SebastianMeisel/journalctl-mode")

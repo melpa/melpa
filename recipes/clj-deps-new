@@ -1,0 +1,2 @@
+(clj-deps-new :fetcher github
+          :repo "jpe90/emacs-clj-deps-new")

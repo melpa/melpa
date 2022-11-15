@@ -1,3 +1,0 @@
-(hasky-extensions
- :repo "hasky-mode/hasky-extensions"
- :fetcher github)

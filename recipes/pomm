@@ -1,0 +1,1 @@
+(pomm :repo "SqrtMinusOne/pomm.el" :fetcher github :files (:defaults "resources"))

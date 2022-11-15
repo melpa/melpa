@@ -1,1 +1,0 @@
-(yandex-weather :fetcher github :repo "acme4j/yandex-weather.el")

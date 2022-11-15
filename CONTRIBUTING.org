@@ -190,7 +190,7 @@ Please test that the package builds properly by following the steps
 below.
 
 Let ~<NAME>~ denote the filename of the new recipe. Build the recipe
-via ~make recipes/<NAME>~, or through pressing ~C-c C-c~ in the recipe
+via ~make recipes/<NAME>~, or with ~C-c C-c~ (~M-x package-build-current-recipe~) in the recipe
 file buffer. Be sure that the ~emacs~ binary on your ~PATH~ is at
 least version 23, or set ~$EMACS_COMMAND~ to the location of a
 suitable binary.
@@ -222,16 +222,9 @@ is a useful way to discover missing dependencies.
 
 Create a [[https://github.com/magit/magit/wiki/Dedicated-pull-request-branches][dedicated pull request branch]] in your clone of the [[https://github.com/melpa/melpa][MELPA
 repository]] and push this branch to your fork. Finally, go to the MELPA
-repository and open the pull request.
-
-Include the following information in the pull request description:
-
-- a brief summary of what the package does;
-- a direct link to the package repository;
-- your association with the package (e.g., are you the maintainer?
-  have you contributed? do you just like the package a lot?);
-- relevant communications with the upstream package maintainer (e.g.,
-  ~package.el~ compatibility changes that you have submitted).
+repository and open the pull request.  The pull request description
+will contain a [[file:.github/PULL_REQUEST_TEMPLATE.md][template]] to help guide you through any other details
+you must provide.
 
 Consider the [[https://github.com/github/hub][hub]] command-line utility by [[http://chriswanstrath.com/][defunkt]] which helps simplify
 this process.

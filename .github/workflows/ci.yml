@@ -1,22 +1,29 @@
 name: CI
 on: [push, pull_request]
 
+# Explicitly set workflow permissions to avoid additional permissions being added from 
+# the Github UI.
+permissions:
+  contents: read
+
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 2
     - name: Install dependencies
       run: |
-        sudo apt-get install emacs25
+        sudo apt-get install emacs # emacs 26 on ubuntu 20
         sudo apt-get install git jq mercurial texinfo
 
         # Work around SSL-related failures, see
         # https://stackoverflow.com/questions/21477683/mercurial-https-clone-abort-error-wrong-version-number
-        echo "[ui]\ntls = False" > $HOME/.hgrc
-    - name: Check changed recipes
+        echo -e "[ui]\ntls = False" >> $HOME/.hgrc
+        # enable mercurial's purge extension:
+        echo -e "[extensions]\npurge =" >> $HOME/.hgrc
+    - name: Run CI script
       run: |
         [ "$GITHUB_EVENT_NAME" = "push" ] \
           && export CHANGED_FILES=$(git diff-tree --name-only --no-commit-id -r ${{ github.sha }})

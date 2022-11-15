@@ -1,0 +1,1 @@
+(clingo-mode :fetcher github :repo "llaisdy/clingo-mode")

@@ -1,0 +1,2 @@
+(org-roam-timestamps :fetcher github
+                     :repo "tefkah/org-roam-timestamps")

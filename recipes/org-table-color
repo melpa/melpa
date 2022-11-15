@@ -1,0 +1,1 @@
+(org-table-color :fetcher github :repo "fosskers/org-table-color")

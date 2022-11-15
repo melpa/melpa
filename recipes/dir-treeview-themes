@@ -1,0 +1,4 @@
+(dir-treeview-themes
+ :repo "tilmanrassy/emacs-dir-treeview-themes"
+ :fetcher github
+ :files (:defaults "icons"))

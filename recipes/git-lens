@@ -1,1 +1,1 @@
-(git-lens :fetcher gitlab :repo "pidu/git-lens")
+(git-lens :fetcher codeberg :repo "pidu/git-lens")

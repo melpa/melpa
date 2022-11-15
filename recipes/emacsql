@@ -1,8 +1,4 @@
-(emacsql :fetcher github
-         :repo "skeeto/emacsql"
-         :files ("emacsql.el"
-                 "emacsql-compiler.el"
-                 ;; While this file doesn't exist on "master" anymore,
-                 ;; it is still part of the latest release (2.0.3).
-                 "emacsql-system.el"
-                 "README.md"))
+(emacsql
+ :fetcher github
+ :repo "magit/emacsql"
+ :files ("emacsql.el" "emacsql-compiler.el" "README.md"))

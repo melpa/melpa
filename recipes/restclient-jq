@@ -1,0 +1,3 @@
+(restclient-jq :repo "pashky/restclient.el"
+               :fetcher github
+               :files ("restclient-jq.el"))

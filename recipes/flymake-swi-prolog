@@ -1,0 +1,1 @@
+(flymake-swi-prolog :fetcher sourcehut :repo "eshel/flymake-swi-prolog")

@@ -1,0 +1,3 @@
+(opam-switch-mode
+ :fetcher github
+ :repo "ProofGeneral/opam-switch-mode")

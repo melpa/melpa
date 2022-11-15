@@ -1,1 +1,1 @@
-(docstr :repo "jcs-elpa/docstr" :fetcher github :files (:defaults "langs/*.el"))
+(docstr :repo "emacs-vs/docstr" :fetcher github :files (:defaults "langs/*.el"))

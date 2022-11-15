@@ -1,4 +1,1 @@
-(real-auto-save
- :fetcher github
- :repo "ChillarAnand/real-auto-save"
- :files ("real-auto-save.el"))
+(real-auto-save :fetcher github :repo "ChillarAnand/real-auto-save")

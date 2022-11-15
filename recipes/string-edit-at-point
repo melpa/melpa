@@ -1,0 +1,4 @@
+(string-edit-at-point
+ :fetcher github
+ :repo "magnars/string-edit.el"
+ :old-names (string-edit))

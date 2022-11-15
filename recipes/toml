@@ -1,1 +1,1 @@
-(toml :fetcher github :repo "gongo/emacs-toml" :files ("toml.el"))
+(toml :fetcher github :repo "gongo/emacs-toml")

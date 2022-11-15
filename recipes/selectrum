@@ -1,1 +1,1 @@
-(selectrum :fetcher github :repo "raxod502/selectrum")
+(selectrum :fetcher github :repo "radian-software/selectrum")

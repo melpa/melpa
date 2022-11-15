@@ -1,0 +1,1 @@
+(perspective-exwm :repo "SqrtMinusOne/perspective-exwm.el" :fetcher github)

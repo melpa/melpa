@@ -1,0 +1,1 @@
+(math-tex-convert :repo "enricoflor/math-tex-convert" :fetcher github)

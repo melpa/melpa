@@ -1,0 +1,1 @@
+(flymake-markdownlint :fetcher github :repo "shaohme/flymake-markdownlint")

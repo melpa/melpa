@@ -1,0 +1,3 @@
+(ob-fricas :repo "pdo/frimacs"
+           :fetcher github
+           :files ("extras/ob-fricas.el"))

@@ -1,0 +1,1 @@
+(hammy :fetcher github :repo "alphapapa/hammy.el")

@@ -1,3 +1,1 @@
-(insfactor :fetcher github
-           :repo "duelinmarkers/insfactor.el"
-           :branch "release")
+(insfactor :fetcher github :repo "duelinmarkers/insfactor.el")

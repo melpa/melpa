@@ -1,4 +1,1 @@
-(leuven-theme
- :fetcher github
- :repo "fniessen/emacs-leuven-theme"
- :files ("lisp/*.el"))
+(leuven-theme :fetcher github :repo "fniessen/emacs-leuven-theme")

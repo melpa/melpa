@@ -1,0 +1,3 @@
+(pkg-overview
+ :fetcher github
+ :repo "Boruch-Baum/emacs-pkg-overview")

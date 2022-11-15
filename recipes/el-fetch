@@ -1,0 +1,1 @@
+(el-fetch :fetcher gitlab :repo "xgqt/emacs-el-fetch" :files ("src/el-fetch/*"))

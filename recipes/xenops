@@ -1,3 +1,1 @@
-(xenops :fetcher github
-        :repo "dandavison/xenops"
-        :files ("lisp/*.el"))
+(xenops :fetcher github :repo "dandavison/xenops")

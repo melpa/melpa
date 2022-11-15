@@ -1,3 +1,1 @@
-(window-layout :repo "kiwanami/emacs-window-layout"
-      :fetcher github
-      :files ("window-layout.el"))
+(window-layout :fetcher github :repo "kiwanami/emacs-window-layout")

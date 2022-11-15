@@ -1,3 +1,1 @@
-(ein :repo "millejoh/emacs-ipython-notebook" :fetcher github
-     :files ("lisp/*" (:exclude "lisp/zeroein.el")))
-
+(ein :repo "millejoh/emacs-ipython-notebook" :fetcher github)

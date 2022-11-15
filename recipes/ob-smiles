@@ -1,0 +1,3 @@
+(ob-smiles
+ :fetcher git
+ :url "https://repo.or.cz/ob-smiles.git")

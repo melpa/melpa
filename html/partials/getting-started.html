@@ -1,7 +1,7 @@
 <h1>Getting started</h1>
 <section>
       <a name="installing"></a>
-      <h2>Installing</h2>
+      <h2>Installing Melpa</h2>
 
       <p>To use the MELPA repository, you'll need an Emacs with
         <code>package.el</code> and TLS support, ie. Emacs 24.1 or
@@ -10,9 +10,9 @@
       </p>
 
       <p>
-	Consider using Emacs 26.3 or greater; otherwise you will have
-	to add a kludge to work around a bug described in *Known
-	Issues* below.
+        Consider using Emacs 26.3 or greater; otherwise you will have
+        to add a kludge to work around a bug described in
+        <a href="#knownIssues">Known Issues</a> below.
       </p>
 
       <p>
@@ -37,6 +37,8 @@
         <code>M-x package-install</code> or similar.
       </p>
 
+      <h3>Installing Melpa Stable</h2>
+
       <p>
         To use the <a href="https://stable.melpa.org" title="MELPA Stable">
           stable package repository</a> instead of the default
@@ -46,6 +48,17 @@
 
       <pre><code>(add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)</code></pre>
+
+      <h3>Installing a package</h2>
+
+      <p>
+        To install a package run <code>M-x package-install</code>.
+        See <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html">
+        Package Installation</a> for details about that and
+        <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Packages.html">
+        Emacs Lisp Packages</a> for even more information about Emacs'
+        package manager.
+      </p>
 
       <h3>Customizations</h3>
       <p>
@@ -102,9 +115,9 @@
       </dl>
     </section>
     <section>
-      <h2>Known Issues</h2>
+      <h2 id="knownIssues">Known Issues</h2>
       <h3>Failed to download ‘MELPA’ archive</h3>
-      <p>This occationally happens when using Emacs &#60;= 26.2
+      <p>This occasionally happens when using Emacs &#60;= 26.2
         with Gnutls &#62;= 3.6.  The recommended fix is to update to
         Emacs 26.3 or greater.  Alternatively you can disable TLS1.3
         by adding the following setting early in your init file.  For
@@ -151,9 +164,10 @@
       <a name="adding"></a>
       <h2>Adding a Package</h2>
       <p>
-	In so many words, fork the project's source tree
-	and create a pull request with a recipe for your package.
-	The <a href="https://github.com/melpa/melpa/blob/master/README.md">README.md</a> file on GitHub has more details.
+        In so many words, fork the project's source tree and create a
+        pull request with a recipe for your package.
+        The <a href="https://github.com/melpa/melpa/blob/master/README.md">README.md</a>
+        file on GitHub has more details.
       </p>
       <a name="development"></a>
       <h2>Development</h2>

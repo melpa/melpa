@@ -1,1 +1,1 @@
-(walkclj :repo "plexus/walkclj" :fetcher github)
+(walkclj :repo "corgi-emacs/walkclj" :fetcher github)

@@ -1,1 +1,1 @@
-(l :fetcher git :url "https://git.sr.ht/~tarsius/l")
+(l :fetcher sourcehut :repo "tarsius/l")

@@ -1,1 +1,0 @@
-(mouse-slider-mode :fetcher github :repo "skeeto/mouse-slider-mode" :files ("mouse-slider-mode.el"))

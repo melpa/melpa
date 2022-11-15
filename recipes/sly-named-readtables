@@ -1,5 +1,5 @@
 (sly-named-readtables :fetcher github
-		      :repo "joaotavora/sly-named-readtables"
-		      :files (:defaults
-			      "*.lisp"
-			      "*.asd"))
+                      :repo "joaotavora/sly-named-readtables"
+                      :files (:defaults
+                              "*.lisp"
+                              "*.asd"))

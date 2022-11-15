@@ -1,0 +1,1 @@
+(sideline-lsp :repo "emacs-sideline/sideline-lsp" :fetcher github)

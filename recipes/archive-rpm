@@ -1,1 +1,1 @@
-(archive-rpm :repo "legoscia/archive-rpm" :fetcher github)
+(archive-rpm :repo "nbarrientos/archive-rpm" :fetcher github)

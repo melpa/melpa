@@ -1,4 +1,1 @@
-(flatland-theme :repo "gchp/flatland-emacs"
-               :fetcher github
-               :files ("flatland-theme.el"))
-
+(flatland-theme :fetcher github :repo "gchp/flatland-emacs")

@@ -1,0 +1,3 @@
+(inferior-islisp :repo "sasanidas/islisp-mode"
+                 :fetcher gitlab
+                 :files ("inferior-islisp.el"))

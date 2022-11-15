@@ -2,9 +2,9 @@
 
 PKG = package-build
 
-ELS   = $(PKG).el
+ELS   = package-recipe.el
 ELS  += package-build-badges.el
-ELS  += package-recipe.el
+ELS  += $(PKG).el
 ELS  += package-recipe-mode.el
 ELCS  = $(ELS:.el=.elc)
 
@@ -23,50 +23,35 @@ help:
 	$(info make clean        - remove generated files)
 	@printf "\n"
 
-lisp: $(ELCS) loaddefs
+lisp: $(ELCS) loaddefs check-declare
 
 loaddefs: $(PKG)-autoloads.el
 
 %.elc: %.el
 	@printf "Compiling $<\n"
-	@$(EMACS) -Q --batch \
-	--load eieio \
-	--eval "(put 'object-class-fast 'byte-obsolete-info nil)" \
-	--load eieio-compat \
-	--eval "(put 'defmethod 'byte-obsolete-info nil)" \
-	--eval "(put 'defgeneric 'byte-obsolete-info nil)" \
-	$(EMACS_ARGS) $(LOAD_PATH) -f batch-byte-compile $<
+	@$(EMACS) -Q --batch $(EMACS_ARGS) $(LOAD_PATH) -f batch-byte-compile $<
+
+check-declare:
+	@printf " Checking function declarations\n"
+	@$(EMACS) -Q --batch $(EMACS_ARGS) $(LOAD_PATH) \
+	--eval "(check-declare-directory default-directory)"
 
 CLEAN  = $(ELCS) $(PKG)-autoloads.el
 
 clean:
-	@printf "Cleaning...\n"
+	@printf " Cleaning...\n"
 	@rm -rf $(CLEAN)
 
-define LOADDEFS_TMPL
-;;; $(PKG)-autoloads.el --- automatically extracted autoloads
-;;
-;;; Code:
-(add-to-list 'load-path (directory-file-name \
-(or (file-name-directory #$$) (car load-path))))
-
-;; Local Variables:
-;; version-control: never
-;; no-byte-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; $(PKG)-autoloads.el ends here
-endef
-export LOADDEFS_TMPL
-#'
-
 $(PKG)-autoloads.el: $(ELS)
-	@printf "Generating $@\n"
-	@printf "%s" "$$LOADDEFS_TMPL" > $@
-	@$(EMACS) -Q --batch --eval "(progn\
-	(setq make-backup-files nil)\
-	(setq vc-handled-backends nil)\
-	(setq default-directory (file-truename default-directory))\
-	(setq generated-autoload-file (expand-file-name \"$@\"))\
-	(setq find-file-visit-truename t)\
-	(update-directory-autoloads default-directory))"
+	@printf " Creating $@\n"
+	@$(EMACS) -Q --batch -l autoload -l cl-lib --eval "\
+(let ((file (expand-file-name \"$@\"))\
+      (autoload-timestamps nil) \
+      (backup-inhibited t)\
+      (version-control 'never)\
+      (coding-system-for-write 'utf-8-emacs-unix))\
+  (write-region (autoload-rubric file \"package\" nil) nil file nil 'silent)\
+  (cl-letf (((symbol-function 'progress-reporter-do-update) (lambda (&rest _)))\
+            ((symbol-function 'progress-reporter-done) (lambda (_))))\
+    (let ((generated-autoload-file file))\
+      (update-directory-autoloads default-directory))))"

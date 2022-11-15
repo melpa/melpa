@@ -1,3 +1,1 @@
-(omnisharp :repo "OmniSharp/omnisharp-emacs"
-           :fetcher github
-           :branch "master")
+(omnisharp :fetcher github :repo "OmniSharp/omnisharp-emacs")

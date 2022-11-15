@@ -1,1 +1,1 @@
-(ivy-file-preview :repo "jcs-elpa/ivy-file-preview" :fetcher github)
+(ivy-file-preview :repo "jcs-legacy/ivy-file-preview" :fetcher github)

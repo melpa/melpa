@@ -1,4 +1,1 @@
-(pkgbuild-mode :repo "juergenhoetzel/pkgbuild-mode"
-               :fetcher github
-               :files ("pkgbuild-mode.el"))
-
+(pkgbuild-mode :fetcher github :repo "juergenhoetzel/pkgbuild-mode")

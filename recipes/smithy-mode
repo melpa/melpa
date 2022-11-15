@@ -1,0 +1,1 @@
+(smithy-mode :repo "mnemitz/smithy-mode" :fetcher github)

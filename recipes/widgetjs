@@ -1,1 +1,0 @@
-(widgetjs :fetcher github :repo "foretagsplatsen/emacs-js" :files ("widgetjs/widgetjs.el"))

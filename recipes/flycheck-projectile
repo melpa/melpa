@@ -1,3 +1,1 @@
-(flycheck-projectile :repo "nbfalcon/flycheck-projectile"
-                     :fetcher github
-                     :files ("flycheck-projectile.el"))
+(flycheck-projectile :fetcher github :repo "nbfalcon/flycheck-projectile")

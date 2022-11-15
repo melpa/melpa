@@ -1,0 +1,1 @@
+(ob-redis :fetcher git :url "https://repo.or.cz/ob-redis.git")

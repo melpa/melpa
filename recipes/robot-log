@@ -1,0 +1,3 @@
+(robot-log
+ :fetcher sourcehut
+ :repo "apteryx/emacs-robot-log")

@@ -1,4 +1,4 @@
-(major-mode-icons :fetcher github
-                  :repo "stardiviner/major-mode-icons"
+(major-mode-icons :fetcher git
+                  :url "https://repo.or.cz/major-mode-icons.git"
                   :files (:defaults "icons")
                   )

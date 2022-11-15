@@ -1,0 +1,3 @@
+(bookmark-in-project
+ :fetcher codeberg
+ :repo "ideasman42/emacs-bookmark-in-project")

@@ -1,0 +1,3 @@
+(helm-find-project-files
+ :repo "shishimaru/helm-find-project-files.el"
+ :fetcher github)

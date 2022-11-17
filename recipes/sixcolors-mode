@@ -1,4 +1,1 @@
-(sixcolors-mode
- :fetcher github
- :repo "mastro35/sixcolors-mode"
- :files ("sixcolors-mode.el"))
+(sixcolors-mode :repo "mastro35/sixcolors-mode" :fetcher github)

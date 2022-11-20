@@ -1,1 +1,3 @@
-(qt-pro-mode :fetcher github :repo "EricCrosson/qt-pro-mode")
+(qt-pro-mode
+ :fetcher github
+ :repo "emacsorphanage/qt-pro-mode")

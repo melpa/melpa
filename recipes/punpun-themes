@@ -1,4 +1,4 @@
 (punpun-themes
  :fetcher git
- :url "https://depp.brause.cc/punpun-theme.git"
+ :url "https://depp.brause.cc/punpun-themes.git"
  :old-names (punpun-theme))

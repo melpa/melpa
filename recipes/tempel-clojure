@@ -1,0 +1,4 @@
+(tempel-clojure
+ :repo "mpenet/tempel-clojure"
+ :fetcher github
+ :files ("*.el" "templates"))

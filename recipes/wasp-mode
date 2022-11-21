@@ -1,0 +1,1 @@
+(wasp-mode :repo "thechampagne/wasp-mode" :fetcher github)

@@ -1,4 +1,4 @@
 (eziam-themes
  :fetcher github
  :repo "thblt/eziam-theme-emacs"
- :old-name (eziam-theme))
+ :old-names (eziam-theme))

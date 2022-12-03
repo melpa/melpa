@@ -1,0 +1,3 @@
+(kill-file
+ :repo "chyla/kill-file"
+ :fetcher github)

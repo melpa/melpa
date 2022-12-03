@@ -1,0 +1,3 @@
+(material-ocean-themes
+ :fetcher github
+ :repo "Patrick-Poitras/emacs-material-ocean")

@@ -212,10 +212,10 @@ the following form (`[...]` denotes optional or conditional values),
 * `smex.el`
 
 Since there is only one `.el` file, this package only needs the
-`:repo` and `:fetcher` specified,
+`:fetcher` and `:repo` specified,
 
 ```elisp
-(smex :repo "nonsequitur/smex" :fetcher github)
+(smex :fetcher github :repo "nonsequitur/smex")
 ```
 
 ### Example: Multiple Packages in one Repository
@@ -232,21 +232,24 @@ The three packages have to be declared in three separate files
 `recipes/persp-mypackage`:
 
 ```elisp
-(mypackage :repo "someuser/mypackage"
-           :fetcher github
-           :files ("mypackage.el"))
+(mypackage
+ :fetcher github
+ :repo "someuser/mypackage"
+ :files ("mypackage.el"))
 ```
 
 ```elisp
-(helm-mypackage :repo "someuser/mypackage"
-                :fetcher github
-                :files ("helm-mypackage.el"))
+(helm-mypackage
+ :fetcher github
+ :repo "someuser/mypackage"
+ :files ("helm-mypackage.el"))
 ```
 
 ```elisp
-(persp-mypackage :repo "someuser/mypackage"
-                 :fetcher github
-                 :files ("persp-mypackage.el"))
+(persp-mypackage
+ :fetcher github
+ :repo "someuser/mypackage"
+ :files ("persp-mypackage.el"))
 ```
 
 ### Example: Multiple Files in Multiple Directories
@@ -258,9 +261,10 @@ sub-directories need to be explicitly set.
 Consider the `flymake-perlcritic` recipe,
 
 ```elisp
-(flymake-perlcritic :repo "illusori/emacs-flymake-perlcritic"
-                    :fetcher github
-                    :files ("*.el" ("bin" "bin/flymake_perlcritic")))
+(flymake-perlcritic
+ :fetcher github
+ :repo "illusori/emacs-flymake-perlcritic"
+ :files ("*.el" ("bin" "bin/flymake_perlcritic")))
 ```
 
 which will result in a package structure of,
@@ -303,8 +307,8 @@ just specify that directory. Consider the `pony-mode` recipe,
 
 ```elisp
 (pony-mode
- :repo "davidmiller/pony-mode"
  :fetcher github
+ :repo "davidmiller/pony-mode"
  :files ("src/*.el" "snippets"))
 ```
 

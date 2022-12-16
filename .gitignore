@@ -22,8 +22,8 @@
 /html-stable/download_counts.json
 /html-stable/recipes.json
 /html-stable/updates.rss
-/packages-stable/*
-/packages/*
+/packages-stable/
+/packages/
 /process_log.pid
 /recipes/.dirstamp
 /sandbox
@@ -31,4 +31,4 @@
 /service/*/supervise
 /service/*/log
 /sync
-/working/*
+/working/

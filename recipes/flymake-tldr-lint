@@ -1,0 +1,3 @@
+(flymake-tldr-lint
+ :fetcher github
+ :repo "tldr-pages/tldr-emacs-extension")

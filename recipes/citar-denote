@@ -1,5 +1,2 @@
-(citar-denote
- :fetcher github
- :repo "pprevos/citar-denote"
- :files ("citar-denote.el"))
+(citar-denote :repo "pprevos/citar-denote" :fetcher github)
 

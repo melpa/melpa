@@ -1,0 +1,1 @@
+(define-scratch :fetcher github :repo "lassik/emacs-define-scratch")

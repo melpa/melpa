@@ -1,0 +1,2 @@
+(citar-denote :repo "pprevos/citar-denote" :fetcher github)
+

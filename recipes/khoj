@@ -1,0 +1,4 @@
+(khoj
+ :fetcher github
+ :repo "debanjum/khoj"
+ :files ("src/interface/emacs/*.el"))

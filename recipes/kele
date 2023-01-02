@@ -1,1 +1,1 @@
-(kele :repo "jinnovation/kele.el" :fetcher github :files (:defaults))
+(kele :repo "jinnovation/kele.el" :fetcher github)

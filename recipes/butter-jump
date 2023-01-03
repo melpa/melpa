@@ -1,0 +1,2 @@
+(butter-jump :fetcher github
+           :repo "viocost/butter-jump")

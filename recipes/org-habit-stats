@@ -1,0 +1,3 @@
+(org-habit-stats :repo "ml729/org-habit-stats"
+                 :fetcher github
+                 :files ("org-habit-stats.el"))

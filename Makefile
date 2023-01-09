@@ -123,6 +123,7 @@ sandbox: packages/archive-contents
 	@mkdir -p $(SANDBOX)
 	@$(EMACS_COMMAND) -Q \
 		--eval '(setq user-emacs-directory (file-truename "$(SANDBOX)"))' \
+		--eval '(setq package-user-dir (locate-user-emacs-file "elpa"))' \
 		-l package \
 		--eval "(add-to-list 'package-archives '(\"gnu\" . \"https://elpa.gnu.org/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"melpa\" . \"https://melpa.org/packages/\") t)" \

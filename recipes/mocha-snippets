@@ -1,4 +1,4 @@
 (mocha-snippets
- :repo "cowboyd/mocha-snippets.el"
  :fetcher github
+ :repo "cowboyd/mocha-snippets.el"
  :files ("*.el" "snippets"))

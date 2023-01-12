@@ -1,0 +1,2 @@
+(ligature-pragmatapro :repo "wavexx/ligature-pragmatapro.el"
+                      :fetcher gitlab)

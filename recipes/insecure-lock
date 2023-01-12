@@ -1,0 +1,1 @@
+(insecure-lock :repo "BlueFlo0d/insecure-lock" :fetcher github)

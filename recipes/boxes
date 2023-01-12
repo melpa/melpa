@@ -1,0 +1,4 @@
+(boxes
+ :fetcher github
+ :repo "ascii-boxes/boxes"
+ :files ("doc/*.el"))

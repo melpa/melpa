@@ -1,1 +1,4 @@
-(eterm-fn :fetcher github :repo "oitofelix/eterm-fn" :files (:defaults "*.ti"))
+(eterm-fn
+ :fetcher github
+ :repo "oitofelix/eterm-fn"
+ :files (:defaults "*.ti"))

@@ -1,0 +1,4 @@
+(elisp-autofmt
+  :fetcher codeberg
+  :repo "ideasman42/emacs-elisp-autofmt"
+  :files (:defaults "elisp-autofmt.py" "elisp-autofmt.overrides.json"))

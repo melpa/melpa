@@ -1,1 +1,4 @@
-(gvpr-mode :fetcher github :repo "rodw/gvpr-lib" :files ("extra/*.el"))
+(gvpr-mode
+ :fetcher github
+ :repo "rodw/gvpr-lib"
+ :files ("extra/*.el"))

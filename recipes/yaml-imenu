@@ -1,3 +1,4 @@
-(yaml-imenu :repo "knu/yaml-imenu.el"
-            :fetcher github
-            :files (:defaults "*.rb"))
+(yaml-imenu
+ :fetcher github
+ :repo "knu/yaml-imenu.el"
+ :files (:defaults "*.rb"))

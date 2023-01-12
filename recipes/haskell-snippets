@@ -1,4 +1,4 @@
 (haskell-snippets
- :repo "haskell/haskell-snippets"
  :fetcher github
+ :repo "haskell/haskell-snippets"
  :files ("*.el" "snippets"))

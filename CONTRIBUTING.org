@@ -190,7 +190,7 @@ Please test that the package builds properly by following the steps
 below.
 
 Let ~<NAME>~ denote the filename of the new recipe. Build the recipe
-via ~make recipes/<NAME>~, or through pressing ~C-c C-c~ in the recipe
+via ~make recipes/<NAME>~, or with ~C-c C-c~ (~M-x package-build-current-recipe~) in the recipe
 file buffer. Be sure that the ~emacs~ binary on your ~PATH~ is at
 least version 23, or set ~$EMACS_COMMAND~ to the location of a
 suitable binary.

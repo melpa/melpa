@@ -1,1 +1,3 @@
-(emacsql-sqlite3 :repo "cireu/emacsql-sqlite3" :fetcher github)
+(emacsql-sqlite3
+ :fetcher github
+ :repo "cireu/emacsql-sqlite3")

@@ -1,3 +1,4 @@
-(org-page :repo "emacsorphanage/org-page"
-          :fetcher github
-          :files ("*.el" "doc" "themes"))
+(org-page
+ :fetcher github
+ :repo "emacsorphanage/org-page"
+ :files ("*.el" "doc" "themes"))

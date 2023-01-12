@@ -1,1 +1,4 @@
-(mew :fetcher github :repo "kazu-yamamoto/Mew" :files ("*.el" "etc" "info/*.info*"))
+(mew
+ :fetcher github
+ :repo "kazu-yamamoto/Mew"
+ :files ("*.el" "etc" "info/*.info*"))

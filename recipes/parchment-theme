@@ -1,3 +1,3 @@
 (parchment-theme
- :fetcher github
+ :fetcher gitlab
  :repo "ajgrf/parchment")

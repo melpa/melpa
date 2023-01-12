@@ -1,0 +1,1 @@
+(pyconf :fetcher github :repo "andcarnivorous/pyconf")

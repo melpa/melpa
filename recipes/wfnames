@@ -1,0 +1,3 @@
+(wfnames
+ :fetcher github
+ :repo "thierryvolpiatto/wfnames")

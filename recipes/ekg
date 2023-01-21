@@ -1,0 +1,4 @@
+(ekg
+ :fetcher github
+ :repo "ahyatt/ekg"
+ :files ("ekg.el"))

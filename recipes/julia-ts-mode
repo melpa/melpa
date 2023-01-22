@@ -1,0 +1,2 @@
+(julia-ts-mode :repo "ronisbr/julia-ts-mode"
+               :fetcher github)

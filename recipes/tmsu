@@ -1,0 +1,1 @@
+(tmsu :repo "vifon/tmsu.el" :fetcher github)

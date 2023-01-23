@@ -1,1 +1,1 @@
-(ox-rss :fetcher github :repo "benedicthw/ox-rss")
+(ox-rss :fetcher github :repo "BenedictHW/ox-rss")

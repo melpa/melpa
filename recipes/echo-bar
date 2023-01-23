@@ -1,1 +1,1 @@
-(echo-bar :fetcher github :repo "qaiviq/echo-bar.el")
+(echo-bar :fetcher github :repo "benzanol/echo-bar.el")

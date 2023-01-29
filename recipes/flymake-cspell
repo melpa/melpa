@@ -1,0 +1,1 @@
+(flymake-cspell :fetcher github :repo "fritzgrabo/flymake-cspell")

@@ -1,0 +1,1 @@
+(flycheck-eglot :fetcher github :repo "intramurz/flycheck-eglot")

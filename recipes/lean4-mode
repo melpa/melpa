@@ -1,3 +1,2 @@
-(lean4-mode
- :repo "leanprover/lean4-mode"
- :fetcher github)
+(lean4-mode :fetcher github :repo "leanprover/lean4-mode"
+            :files (:defaults ("data" "data/*.json")))

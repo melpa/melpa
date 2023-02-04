@@ -1,1 +1,1 @@
-(all-the-icons-nerd-fonts :host github :repo "mohkale/all-the-icons-nerd-fonts")
+(all-the-icons-nerd-fonts :fetcher github :repo "mohkale/all-the-icons-nerd-fonts")

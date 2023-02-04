@@ -1,2 +1,2 @@
-(aria2 :fetcher gitlab
+(aria2 :fetcher github
        :repo "ukaszg/aria2")

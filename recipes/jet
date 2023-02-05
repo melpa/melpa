@@ -1,0 +1,1 @@
+(jet :repo "ericdallo/jet.el" :fetcher github)

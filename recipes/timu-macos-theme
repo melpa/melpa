@@ -1,0 +1,3 @@
+(timu-macos-theme
+ :repo "aimebertrand/timu-macos-theme"
+ :fetcher gitlab)

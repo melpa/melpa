@@ -18,6 +18,7 @@ HTMLDIR := html-stable
 endif
 
 LISP_CONFIG ?= '(progn\
+  (setq package-build--melpa-base "$(TOP)/")\
   (setq package-build-working-dir "$(TOP)/$(WORKDIR)/")\
   (setq package-build-archive-dir "$(TOP)/$(PKGDIR)/")\
   (setq package-build-recipes-dir "$(TOP)/$(RCPDIR)/")\

@@ -3,6 +3,7 @@
 .#*
 /.cask
 /.ecukes-failing-scenarios
+/config.el
 /config.mk
 /download_log_stable.db
 /download_log_stable.json.gz

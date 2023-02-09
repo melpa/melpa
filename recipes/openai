@@ -1,4 +1,4 @@
 (openai
     :fetcher github
     :repo "antonhibl/openai"
-    :files "openai.el")
+    :files ("openai.el"))

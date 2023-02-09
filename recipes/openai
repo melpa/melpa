@@ -1,1 +1,4 @@
-(openai :fetcher github :repo "antonhibl/openai")
+(openai
+    :fetcher github
+    :repo "antonhibl/openai"
+    :files "openai.el")

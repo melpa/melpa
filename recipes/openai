@@ -1,5 +1,4 @@
 (openai
-    :fetcher git
-    :url "https://github.com/antonhibl/openai.git"
+    :fetcher github
     :repo "antonhibl/openai"
     :files ("openai.el"))

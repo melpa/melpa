@@ -116,7 +116,7 @@ the following form (`[...]` denotes optional or conditional values),
   provides generic fetcher types for them: `git` and `hg`. When you
   use one of these fetchers, you most specify the `:url` property.
 
-  Melpa also provides dedicate fetchers for certain Git forges (aka
+  Melpa also provides dedicated fetchers for certain Git forges (aka
   "Git repository hosting platforms"), which should always be
   preferred over the generic `git` fetcher. When using a dedicated
   fetcher, you must specify `:repo`, not `:url`. Currently the these

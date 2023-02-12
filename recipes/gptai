@@ -1,1 +1,1 @@
-(gptai :repo "antonhibl/openai" :fetcher github)
+(gptai :repo "antonhibl/gptai" :fetcher github)

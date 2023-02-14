@@ -1,1 +1,1 @@
-(flycheck-deno :repo "jcs-elpa/flycheck-deno" :fetcher github)
+(flycheck-deno :repo "flycheck/flycheck-deno" :fetcher github)

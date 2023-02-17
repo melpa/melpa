@@ -1,4 +1,3 @@
 (emacsql
  :fetcher github
- :repo "magit/emacsql"
- :files ("emacsql.el" "emacsql-compiler.el" "README.md"))
+ :repo "magit/emacsql")

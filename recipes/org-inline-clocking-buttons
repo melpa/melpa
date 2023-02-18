@@ -1,0 +1,2 @@
+(org-inline-clocking-buttons :repo "ParetoOptimalDev/org-inline-clocking-buttons" :fetcher github)
+

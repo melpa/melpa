@@ -1,0 +1,1 @@
+(beef-mode :repo "thechampagne/beef-mode" :fetcher github)

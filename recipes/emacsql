@@ -1,3 +1,4 @@
 (emacsql
  :fetcher github
- :repo "magit/emacsql")
+ :repo "magit/emacsql"
+ :files (:defaults "sqlite"))

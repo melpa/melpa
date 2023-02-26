@@ -1,0 +1,1 @@
+(squirrel-mode :repo "thechampagne/squirrel-mode" :fetcher github)

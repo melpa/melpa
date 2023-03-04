@@ -1,0 +1,2 @@
+(sway-mode :repo "hhamud/sway-mode"
+           :fetcher github)

@@ -1,4 +1,0 @@
-(scion
- :fetcher github
- :repo "nominolo/scion"
- :files ("emacs/*.el"))

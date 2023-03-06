@@ -1,1 +1,1 @@
-(dired-single :fetcher github :repo "crocket/dired-single")
+(dired-single :fetcher codeberg :repo "amano.kenji/dired-single")

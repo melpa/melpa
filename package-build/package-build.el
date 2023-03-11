@@ -1030,6 +1030,24 @@ line per entry."
     (setq entries (sort entries (lambda (a b)
                                   (string< (symbol-name (car a))
                                            (symbol-name (car b))))))
+    (when (>= emacs-major-version 29)
+      (with-temp-file
+          (expand-file-name "elpa-packages.eld" package-build-archive-dir)
+        (let ((print-level nil)
+              (print-length nil))
+          (if pretty-print
+              (pp entries (current-buffer))
+            (insert "((")
+            (dolist (entry entries)
+              (let* ((name (car entry))
+                     (recipe (package-recipe-lookup (symbol-name name)))
+                     (url (package-recipe--upstream-url recipe))
+                     (branch (oref recipe :branch)))
+                (insert
+                 (format
+                  "%S " (cl-remove-if #'null (append  `(,name :url ,url) (when branch `(:branch ,branch))))))))
+            (delete-char -1)
+            (insert ") :version 1 :default-vc Git)")))))
     (with-temp-file
         (or file
             (expand-file-name "archive-contents" package-build-archive-dir))

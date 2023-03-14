@@ -1,5 +1,6 @@
 (magit :fetcher github
        :repo "magit/magit"
+       :branch "main"
        :files ("lisp/magit"
                "lisp/magit*.el"
                "lisp/git-rebase.el"

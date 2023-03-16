@@ -237,9 +237,10 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
                      ;; "hgdate" because that makes it easier to discard
                      ;; the time zone offset, which doesn't interest us.
                      "hg" "log" "--limit" "1"
-                     "--template" "{node} {date|hgdate}\n" "--rev" rev
-                     (and (not exact)
-                          (cons "--" (package-build--spec-globs rcp)))))
+                     "--template" "{node} {date|hgdate}\n"
+                     (or (and rev (list "--rev" rev))
+                         (and (not exact)
+                              (cons "--" (package-build--spec-globs rcp))))))
          " ")))
     (list hash (string-to-number time))))
 
@@ -298,9 +299,9 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
       (list rev-hash rev-time))))
 
 (cl-defmethod package-build--get-timestamp-version ((rcp package-hg-recipe))
-  ;; TODO Respect commit and branch properties.
-  ;; TODO Use latest release if appropriate.
-  (package-build--select-commit rcp "." nil))
+  ;; TODO Respect branch property.
+  (let ((commit (oref rcp commit)))
+    (package-build--select-commit rcp commit nil)))
 
 ;;; Run Process
 

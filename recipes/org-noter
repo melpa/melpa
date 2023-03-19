@@ -1,5 +1,4 @@
 (org-noter :fetcher github
            :repo "org-noter/org-noter"
-           :branch "master"
            :files ("*.el" "modules"
                   (:exclude "*-test-utils.el" "*-devel.el")))

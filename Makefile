@@ -66,7 +66,8 @@ clean-sandbox:
 	fi
 
 pull-package-build:
-	git subtree pull --squash -P package-build package-build master
+	git -c "commit.gpgSign=true" subtree pull \
+	--squash -P package-build package-build master
 
 add-package-build-remote:
 	git remote add package-build git@github.com:melpa/package-build.git

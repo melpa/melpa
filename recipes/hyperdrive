@@ -1,0 +1,1 @@
+(hyperdrive :fetcher sourcehut :repo "ushin/hyperdrive.el")

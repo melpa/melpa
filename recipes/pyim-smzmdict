@@ -1,4 +1,4 @@
 (pyim-smzmdict
  :fetcher github
- :repo "p1uxtar/pyim-smzmdict"
+ :repo "ba11aStone/pyim-smzmdict"
  :files (:defaults "*.pyim"))

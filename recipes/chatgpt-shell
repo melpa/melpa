@@ -1,0 +1,1 @@
+(chatgpt-shell :repo "xenodium/chatgpt-shell" :fetcher github)

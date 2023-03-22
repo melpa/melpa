@@ -1,0 +1,4 @@
+(projection
+ :fetcher github
+ :repo "mohkale/projection"
+ :files (:defaults "src/*.el"))

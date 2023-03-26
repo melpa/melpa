@@ -1,3 +1,3 @@
-(lurk-mode :repo "lurk-lang/lurk-emacs"
+(lurk-mode :repo "lurk-lab/lurk-emacs"
            :fetcher github
            :files ("lurk-mode.el"))

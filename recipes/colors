@@ -1,1 +1,1 @@
-(colors :fetcher github :repo "galdor/colors")
+(chroma :fetcher github :repo "galdor/chroma")

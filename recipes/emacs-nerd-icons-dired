@@ -1,0 +1,3 @@
+(emacs-nerd-icons-dired
+ :repo "rainstormstudio/emacs-nerd-icons-dired"
+ :fetcher github)

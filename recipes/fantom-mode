@@ -1,0 +1,1 @@
+(fantom-mode :repo "thechampagne/fantom-mode" :fetcher github)

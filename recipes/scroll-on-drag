@@ -1,3 +1,3 @@
 (scroll-on-drag
- :url "https://codeberg.org/ideasman42/emacs-scroll-on-drag.git"
- :fetcher git)
+ :fetcher codeberg
+ :repo "ideasman42/emacs-scroll-on-drag")

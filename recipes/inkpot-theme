@@ -1,3 +1,1 @@
-(inkpot-theme
- :url "https://codeberg.org/ideasman42/emacs-theme-inkpot.git"
- :fetcher git)
+(inkpot-theme :fetcher codeberg :repo "ideasman42/emacs-theme-inkpot")

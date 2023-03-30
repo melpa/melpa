@@ -1,1 +1,0 @@
-(midje-mode :fetcher github :repo "dnaumov/midje-mode")

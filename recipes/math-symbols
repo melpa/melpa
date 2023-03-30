@@ -1,3 +1,4 @@
-(math-symbols :repo "kawabata/math-symbols"
-              :fetcher github
-              :files ("math-symbols*.el" "unimathsymbols.txt"))
+(math-symbols
+ :fetcher github
+ :repo "kawabata/math-symbols"
+ :files ("math-symbols*.el" "unimathsymbols.txt"))

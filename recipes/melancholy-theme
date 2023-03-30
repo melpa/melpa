@@ -1,1 +1,1 @@
-(melancholy-theme :repo "techquila/melancholy-theme" :fetcher github)
+(melancholy-theme :repo "baaash/melancholy-theme" :fetcher gitlab)

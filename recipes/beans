@@ -1,0 +1,3 @@
+(beans
+ :fetcher github
+ :repo "jthulhu/emacs-beans")

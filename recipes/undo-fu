@@ -1,3 +1,1 @@
-(undo-fu
- :url "https://codeberg.org/ideasman42/emacs-undo-fu.git"
- :fetcher git)
+(undo-fu :fetcher codeberg :repo "ideasman42/emacs-undo-fu")

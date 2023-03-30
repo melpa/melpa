@@ -1,1 +1,1 @@
-(nord-theme :fetcher github :repo "arcticicestudio/nord-emacs")
+(nord-theme :fetcher github :repo "nordtheme/emacs")

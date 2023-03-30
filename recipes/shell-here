@@ -1,1 +1,1 @@
-(shell-here :fetcher github :repo "ieure/shell-here")
+(shell-here :fetcher codeberg :repo "emacs-weirdware/shell-here")

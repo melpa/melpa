@@ -1,1 +1,1 @@
-(ivy-searcher :repo "jcs-elpa/ivy-searcher" :fetcher github)
+(ivy-searcher :repo "jcs-legacy/ivy-searcher" :fetcher github)

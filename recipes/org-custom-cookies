@@ -1,0 +1,2 @@
+(org-custom-cookies :repo "gsingh93/org-custom-cookies"
+                    :fetcher github)

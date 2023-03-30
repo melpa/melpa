@@ -1,0 +1,2 @@
+(power-mode :fetcher github
+            :repo "elizagamedev/power-mode.el")

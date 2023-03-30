@@ -1,0 +1,1 @@
+(encrypt-region :repo "cgshep/encrypt-region" :fetcher github)

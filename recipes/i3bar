@@ -1,0 +1,1 @@
+(i3bar :fetcher github :repo "Stebalien/i3bar.el")

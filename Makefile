@@ -18,6 +18,7 @@ HTMLDIR := html-stable
 endif
 
 LISP_CONFIG ?= '(progn\
+  (setq package-build--melpa-base "$(TOP)/")\
   (setq package-build-working-dir "$(TOP)/$(WORKDIR)/")\
   (setq package-build-archive-dir "$(TOP)/$(PKGDIR)/")\
   (setq package-build-recipes-dir "$(TOP)/$(RCPDIR)/")\
@@ -65,7 +66,10 @@ clean-sandbox:
 	fi
 
 pull-package-build:
-	git subtree pull --squash -P package-build package-build master
+	git fetch package-build
+	git -c "commit.gpgSign=true" subtree merge \
+	-m "Merge Package-Build $(shell git describe package-build/master)" \
+	--squash -P package-build package-build/master
 
 add-package-build-remote:
 	git remote add package-build git@github.com:melpa/package-build.git
@@ -122,6 +126,7 @@ sandbox: packages/archive-contents
 	@mkdir -p $(SANDBOX)
 	@$(EMACS_COMMAND) -Q \
 		--eval '(setq user-emacs-directory (file-truename "$(SANDBOX)"))' \
+		--eval '(setq package-user-dir (locate-user-emacs-file "elpa"))' \
 		-l package \
 		--eval "(add-to-list 'package-archives '(\"gnu\" . \"https://elpa.gnu.org/packages/\") t)" \
 		--eval "(add-to-list 'package-archives '(\"melpa\" . \"https://melpa.org/packages/\") t)" \

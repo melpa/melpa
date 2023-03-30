@@ -1,0 +1,2 @@
+(ol-tmsu :repo "vifon/tmsu.el" :fetcher github
+         :files ("ol-tmsu.el"))

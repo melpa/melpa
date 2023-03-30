@@ -1,1 +1,0 @@
-(pyenv-mode-auto :repo "ssbb/pyenv-mode-auto" :fetcher github)

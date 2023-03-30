@@ -1,6 +1,6 @@
 (chronometrist-key-values
- :url "https://codeberg.org/contrapunctus/chronometrist.git"
- :fetcher git
+ :fetcher codeberg
+ :repo "contrapunctus/chronometrist"
  :branch "dev"
  :files (:defaults
          "elisp/*.el"

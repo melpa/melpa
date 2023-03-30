@@ -1,1 +1,1 @@
-(closql :fetcher github :repo "emacscollective/closql")
+(closql :fetcher github :repo "magit/closql")

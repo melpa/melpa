@@ -1,0 +1,3 @@
+(corfu-prescient :fetcher github
+                 :repo "radian-software/prescient.el"
+                 :files ("corfu-prescient.el"))

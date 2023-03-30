@@ -1,0 +1,3 @@
+(cern-ldap
+ :fetcher sourcehut
+ :repo "nbarrientos/cern-ldap.el")

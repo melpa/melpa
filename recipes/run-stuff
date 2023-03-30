@@ -1,3 +1,1 @@
-(run-stuff
- :url "https://codeberg.org/ideasman42/emacs-run-stuff.git"
- :fetcher git)
+(run-stuff :fetcher codeberg :repo "ideasman42/emacs-run-stuff")

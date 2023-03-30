@@ -1,0 +1,3 @@
+(flymake-ruff
+  :fetcher github
+  :repo "erickgnavar/flymake-ruff")

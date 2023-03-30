@@ -1,1 +1,1 @@
-(macrostep :fetcher github :repo "joddie/macrostep")
+(macrostep :fetcher github :repo "emacsorphanage/macrostep")

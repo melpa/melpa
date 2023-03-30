@@ -1,0 +1,1 @@
+(ffmpeg-utils :fetcher git :url "https://repo.or.cz/ffmpeg-utils.git")

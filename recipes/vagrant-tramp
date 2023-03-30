@@ -1,1 +1,4 @@
-(vagrant-tramp :repo "dougm/vagrant-tramp" :fetcher github :files ("*.el" "bin"))
+(vagrant-tramp
+ :fetcher github
+ :repo "dougm/vagrant-tramp"
+ :files ("*.el" "bin"))

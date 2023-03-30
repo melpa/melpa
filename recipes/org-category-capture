@@ -1,3 +1,4 @@
-(org-category-capture :repo "IvanMalison/org-projectile"
-                      :fetcher github
-                      :files ("org-category-capture*.el"))
+(org-category-capture
+ :fetcher github
+ :repo "IvanMalison/org-projectile"
+ :files ("org-category-capture*.el"))

@@ -1,3 +1,1 @@
-(dired-duplicates
- :url "https://codeberg.org/hjudt/dired-duplicates.git"
- :fetcher git)
+(dired-duplicates :fetcher codeberg :repo "hjudt/dired-duplicates")

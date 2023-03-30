@@ -1,5 +1,0 @@
-(swift-playground-mode :repo "michael.sanders/swift-playground-mode"
-                       :fetcher gitlab
-                       :files (:defaults
-                               "SwiftPlayground.vim/runner.sh"
-                               "SwiftPlayground.vim/*.swift"))

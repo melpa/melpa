@@ -1,0 +1,2 @@
+(director :fetcher github
+          :repo "bard/emacs-director")

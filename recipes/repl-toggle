@@ -1,1 +1,1 @@
-(repl-toggle :url "https://git.sr.ht/~tomterl/repl-toggle" :fetcher git)
+(repl-toggle :fetcher sourcehut :repo "tomterl/repl-toggle")

@@ -1,2 +1,1 @@
-(cython-mode :fetcher github :repo "cython/cython"
-             :files ("Tools/*.el"))
+(cython-mode :fetcher github :repo "cython/emacs-cython-mode")

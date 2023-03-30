@@ -1,0 +1,1 @@
+(for :fetcher github :repo "usaoc/elisp-for")

@@ -1,1 +1,4 @@
-(osa :repo "atomontage/osa" :fetcher github :files (:defaults ("scripts" "scripts/*.js" "scripts/*.applescript")))
+(osa
+ :fetcher github
+ :repo "atomontage/osa"
+ :files (:defaults ("scripts" "scripts/*.js" "scripts/*.applescript")))

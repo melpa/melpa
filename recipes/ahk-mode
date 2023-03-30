@@ -1,2 +1,2 @@
 (ahk-mode :fetcher github
-          :repo "ralesi/ahk-mode")
+          :repo "punassuming/ahk-mode")

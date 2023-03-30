@@ -1,1 +1,1 @@
-(notmuch-maildir :fetcher git :url "https://git.sr.ht/~tarsius/notmuch-maildir")
+(notmuch-maildir :fetcher sourcehut :repo "tarsius/notmuch-maildir")

@@ -1,3 +1,1 @@
-(tangonov-theme
- :fetcher github
- :repo "trev-dev/tangonov-theme")
+(tangonov-theme :fetcher sourcehut :repo "trevdev/tangonov-theme")

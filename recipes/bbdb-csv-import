@@ -1,3 +1,1 @@
-(bbdb-csv-import
- :url "https://git.sr.ht/~iank/bbdb-csv-import"
- :fetcher git)
+(bbdb-csv-import :fetcher sourcehut :repo "iank/bbdb-csv-import")

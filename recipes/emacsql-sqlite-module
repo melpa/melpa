@@ -1,5 +1,5 @@
 (emacsql-sqlite-module
  :fetcher github
- :repo "emacscollective/emacsql-sqlite-builtin"
+ :repo "magit/emacsql"
  :files ("emacsql-sqlite-module.el")
  :old-names (emacsql-libsqlite3))

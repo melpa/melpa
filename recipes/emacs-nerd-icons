@@ -1,0 +1,4 @@
+(emacs-nerd-icons
+ :repo "rainstormstudio/emacs-nerd-icons"
+ :fetcher github
+ :files (:defaults "data"))

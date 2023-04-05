@@ -302,9 +302,11 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
       (list rev-hash rev-time))))
 
 (cl-defmethod package-build--get-timestamp-version ((rcp package-hg-recipe))
-  ;; TODO Respect commit and branch properties.
-  ;; TODO Use latest release if appropriate.
-  (package-build--select-commit rcp "." nil))
+  (let* ((commit (oref rcp commit))
+         (branch (or (oref rcp branch) "default"))
+         (rev (format "sort(ancestors(%s), -rev)"
+                      (or commit (format "max(branch(%s))" branch)))))
+    (package-build--select-commit rcp rev nil)))
 
 ;;; Run Process
 

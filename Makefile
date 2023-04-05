@@ -82,6 +82,10 @@ packages/archive-contents: .FORCE
 	@echo " • Updating $@ ..."
 	@$(EVAL) '(package-build-dump-archive-contents)'
 
+packages-stable/archive-contents: .FORCE
+	@echo " • Updating $@ ..."
+	@$(EVAL) '(package-build-dump-archive-contents)'
+
 cleanup:
 	@$(EVAL) '(package-build-cleanup)'
 

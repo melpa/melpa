@@ -38,9 +38,12 @@ $(addprefix -L ,$(LOAD_PATH)) \
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
 
-all: packages packages/archive-contents json index
-
 ## General rules
+
+.PHONY: clean build index html json sandbox
+.FORCE:
+
+all: packages packages/archive-contents json index
 
 html: index
 index: json
@@ -144,10 +147,6 @@ sandbox: packages/archive-contents
 		--eval '(setq sandbox-install-package "$(INSTALL)")' \
 		--eval "(unless (string= \"\" sandbox-install-package) (package-install (intern sandbox-install-package)))" \
 		--eval "(when (get-buffer \"*Compile-Log*\") (display-buffer \"*Compile-Log*\"))"
-
-
-.PHONY: clean build index html json sandbox
-.FORCE:
 
 # Local Variables:
 # outline-regexp: "#\\(#+\\)"

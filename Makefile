@@ -1,3 +1,5 @@
+## Settings
+
 TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 
 -include ./config.mk
@@ -39,13 +41,14 @@ TIMEOUT := $(shell which timeout && echo "-k 60 600")
 all: packages packages/archive-contents json index
 
 ## General rules
+
 html: index
 index: json
 	@echo " • Building html index ..."
 	$(MAKE) -C $(HTMLDIR)
 
-
 ## Cleanup rules
+
 clean-working:
 	@echo " • Removing package sources ..."
 	@git clean -dffX $(WORKDIR)/.
@@ -90,6 +93,7 @@ cleanup:
 	@$(EVAL) '(package-build-cleanup)'
 
 ## Json rules
+
 html/archive.json: $(PKGDIR)/archive-contents
 	@echo " • Building $@ ..."
 	@$(EVAL) '(package-build-archive-alist-as-json "html/archive.json")'
@@ -112,8 +116,8 @@ $(RCPDIR)/.dirstamp: .FORCE
 	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] \
 	&& touch $@ || exit 0
 
-
 ## Recipe rules
+
 $(RCPDIR)/%: .FORCE
 	@echo " • Building package $(@F) ..."
 	@exec 2>&1; exec &> >(tee $(PKGDIR)/$(@F).log); \
@@ -123,8 +127,8 @@ $(RCPDIR)/%: .FORCE
 	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." && sleep $(SLEEP) || true
 	@echo
 
-
 ## Sandbox
+
 sandbox: packages/archive-contents
 	@echo " • Building sandbox ..."
 	@mkdir -p $(SANDBOX)
@@ -144,3 +148,8 @@ sandbox: packages/archive-contents
 
 .PHONY: clean build index html json sandbox
 .FORCE:
+
+# Local Variables:
+# outline-regexp: "#\\(#+\\)"
+# eval: (outline-minor-mode)
+# End:

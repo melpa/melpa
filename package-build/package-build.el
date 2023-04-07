@@ -1042,7 +1042,7 @@ If optional PRETTY-PRINT is non-nil, then pretty-print
                       (read (current-buffer))))
              (symbol (car entry))
              (name (symbol-name symbol))
-             (outdated (eq (caar entries) symbol)))
+             (outdated (assq symbol entries)))
         (cond
          ((not (file-exists-p (expand-file-name name package-build-recipes-dir)))
           ;; Recipe corresponding to this entry no longer exists.

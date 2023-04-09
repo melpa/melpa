@@ -1,4 +1,4 @@
-(awk-snippets
+(awk-yasnippets
  :fetcher github
  :repo "uberkael/awk-yasnippets"
- :files ("*.el" "awk-mode"))
+ :files (:defaults "awk-mode"))

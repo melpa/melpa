@@ -1066,10 +1066,7 @@ If optional PRETTY-PRINT is non-nil, then pretty-print
                ,@(and (cl-typep recipe 'package-hg-recipe)
                       (list :vc-backend 'Hg))
                ,@(when-let* ((branch (oref recipe branch)))
-                   (list :branch branch))
-               ,@(when-let* ((maintainer
-                              (cdr (assq :maintainer (aref (cdr entry) 4)))))
-                   (list :maintainer maintainer)))
+                   (list :branch branch)))
              vc-pkgs))))))
     (setq entries (cl-sort entries #'string<
                            :key (lambda (e) (symbol-name (car e)))))
@@ -1094,7 +1091,7 @@ If optional PRETTY-PRINT is non-nil, then pretty-print
           (newline)
           (insert "  ")
           (prin1 entry (current-buffer)))
-        (insert ")\n :version 1 :default-vc 'Git)\n")))
+        (insert ")\n :version 1 :default-vc Git)\n")))
     entries))
 
 (defun package-build--remove-archive-files (archive-entry)

@@ -1,0 +1,1 @@
+(dired-gitignore :fetcher github :repo "johannes-mueller/dired-gitignore.el")

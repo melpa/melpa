@@ -1,1 +1,9 @@
-(sentex :fetcher codeberg :repo "martianh/sentex")
+(sentex :fetcher codeberg :repo "martianh/sentex"
+        :files '("*.el" "*.eld" "lisp/*.el"
+                 "dir" "*.info" "*.texi" "*.texinfo"
+                 "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
+                 "docs/dir" "docs/*.info" "docs/*.texi" "docs/*.texinfo"
+                 (:exclude
+                  ".dir-locals.el" "lisp/.dir-locals.el"
+                  "test.el" "tests.el" "*-test.el" "*-tests.el"
+                  "lisp/test.el" "lisp/tests.el" "lisp/*-test.el" "lisp/*-tests.el")))

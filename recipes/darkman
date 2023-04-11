@@ -1,1 +1,1 @@
-(darkman :fetcher github :repo "grtcdr/darkman.el")
+(darkman :fetcher sourcehut :repo "grtcdr/darkman.el")

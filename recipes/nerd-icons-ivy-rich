@@ -1,0 +1,3 @@
+(nerd-icons-ivy-rich
+ :fetcher github
+ :repo "seagle0128/nerd-icons-ivy-rich")

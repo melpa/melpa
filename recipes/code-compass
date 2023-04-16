@@ -1,0 +1,2 @@
+(code-compass :fetcher github
+          :repo "ag91/code-compass")

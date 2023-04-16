@@ -1,0 +1,1 @@
+(async-job-queue :repo "owinebar/emacs-async-job-queue" :fetcher github)

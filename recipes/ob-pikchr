@@ -1,0 +1,1 @@
+(ob-pikchr :fetcher github :repo "jaw0/ob-pikchr")

@@ -43,6 +43,7 @@ while true; do
         --expand \
         -d melpa.org \
         -d stable.melpa.org \
+        -d snapshots.melpa.org \
         -d test.melpa.org \
         -d stable-test.melpa.org \
         -d www.melpa.org

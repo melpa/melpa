@@ -1,4 +1,4 @@
-(chatgpt-shell
+(shell-maker
  :fetcher github
  :repo "xenodium/chatgpt-shell"
- :files ("chatgpt-shell.el"))
+ :files ("shell-maker.el"))

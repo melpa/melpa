@@ -1,1 +1,0 @@
-(rewriting-pcase :repo "owinebar/emacs-rewriting-pcase" :fetcher github)

@@ -1,0 +1,1 @@
+(bind :fetcher github :repo "repelliuss/bind")

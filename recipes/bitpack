@@ -1,3 +1,1 @@
-(bitpack :fetcher github
-         :repo "skeeto/bitpack"
-         :files ("bitpack.el" "README.md" "UNLICENSE"))
+(bitpack :fetcher github :repo "skeeto/bitpack")

@@ -114,7 +114,7 @@ will delay the process.
 - Use quality-checking tools :: Use [[https://melpa.org/#/flycheck][flycheck]], [[https://github.com/purcell/package-lint][package-lint]] and
      [[https://github.com/purcell/flycheck-package][flycheck-package]] to help you identify common errors in your
      package metadata. Use [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Tips.html][checkdoc]] to make sure that your package
-     follows the conventions for documentation strings.
+     follows the conventions for documentation strings, within reason.
 
 - Avoid long functions :: The longer a function the harder it is for a
      MELPA maintainer to understand what is happening and to give

@@ -105,7 +105,9 @@ choosen by the function, TIME is its commit date, and VERSION is
 the version string choosen for COMMIT."
   :group 'package-build
   :set-after '(package-build-stable)
-  :type 'function)
+  :type '(radio (function-item package-build-get-tag-version)
+                (function-item package-build-get-timestamp-version)
+                function))
 
 (defcustom package-build-predicate-function nil
   "Predicate used by `package-build-all' to determine which packages to build.
@@ -260,12 +262,12 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
 ;;;; Release
 
 (defun package-build-get-tag-version (rcp)
+  "Determine version corresponding to largest version tag for RCP.
+Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING)."
   (let ((regexp (or (oref rcp version-regexp) package-build-version-regexp))
         (tag nil)
         (version '(0)))
-    (dolist (n (cl-etypecase rcp
-                 (package-git-recipe (process-lines "git" "tag" "--list"))
-                 (package-hg-recipe  (process-lines "hg" "tags" "--quiet"))))
+    (dolist (n (package-build--list-tags rcp))
       (let ((v (ignore-errors
                  (version-to-list (and (string-match regexp n)
                                        (match-string 1 n))))))
@@ -278,9 +280,18 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
          (pcase-let ((`(,hash ,time) (package-build--select-commit rcp tag t)))
            (list hash time (package-version-join version))))))
 
-;;;; Snapshot
+(cl-defmethod package-build--list-tags ((_rcp package-git-recipe))
+  (process-lines "git" "tag" "--list"))
+
+(cl-defmethod package-build--list-tags ((_rcp package-hg-recipe))
+  (process-lines "hg" "tags" "--quiet"))
+
+;;;; Timestamp
 
 (defun package-build-get-timestamp-version (rcp)
+  "Determine timestamp version corresponding to latest relevant commit for RCP.
+Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING), where
+VERSION-STRING has the format \"%Y%m%d.%H%M\"."
   (pcase-let ((`(,hash ,time) (package-build--get-timestamp-version rcp)))
     (list hash time
           ;; We remove zero-padding of the HH portion, as
@@ -1196,10 +1207,17 @@ a package."
                        (let* ((info (cdr entry))
                               (extra (aref info 4))
                               (maintainer (assq :maintainer extra))
+                              (maintainers (assq :maintainers extra))
                               (authors (assq :authors extra)))
                          (when maintainer
                            (setcdr maintainer
                                    (format-person (cdr maintainer))))
+                         (when maintainers
+                           (if (cl-every #'listp (cdr maintainers))
+                               (setcdr maintainers
+                                       (mapcar #'format-person
+                                               (cdr maintainers)))
+                             (assq-delete-all :maintainers extra)))
                          (when authors
                            (if (cl-every #'listp (cdr authors))
                                (setcdr authors

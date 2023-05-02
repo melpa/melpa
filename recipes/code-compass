@@ -1,4 +1,4 @@
 (code-compass
  :fetcher github
  :repo "ag91/code-compass"
- :files ("*.el" "scripts" "pages"))
+ :files (:defaults "scripts" "pages"))

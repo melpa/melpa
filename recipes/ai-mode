@@ -1,0 +1,3 @@
+(ai-mode
+ :fetcher github
+ :repo "ai-mode/ai-mode")

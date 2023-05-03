@@ -1,0 +1,1 @@
+(opensub :repo "danielfleischer/opensub" :fetcher github)

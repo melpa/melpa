@@ -105,7 +105,9 @@ choosen by the function, TIME is its commit date, and VERSION is
 the version string choosen for COMMIT."
   :group 'package-build
   :set-after '(package-build-stable)
-  :type 'function)
+  :type '(radio (function-item package-build-get-tag-version)
+                (function-item package-build-get-timestamp-version)
+                function))
 
 (defcustom package-build-predicate-function nil
   "Predicate used by `package-build-all' to determine which packages to build.
@@ -175,9 +177,19 @@ These batches can, for example, be used on GitHub pages."
   :group 'package-build
   :type 'boolean)
 
-(defcustom package-build-version-regexp "^[rRvV]?\\(.*\\)$"
-  "Default pattern for matching valid version-strings within repository tags.
-The string in the capture group should be parsed as valid by `version-to-list'."
+(defcustom package-build-version-regexp "\\`[rRvV]?\\(?1:.+\\)\\'"
+  "Regexp used to match valid version-strings.
+
+The string matched by the first capture group must be valid
+according to `version-to-list'.  The optional part before the
+capture group should match prefixes commonly used when naming
+version tags.  It is not part of the version string as such
+and thus not passed to `version-to-list'.  Individual package
+recipes can override this using the `:version-regexp' property.
+
+To match only releases but no pre-releases, and to support only
+\".\" as separator, use \
+\"\\\\`[rRvV]?\\\\([0-9]+\\\\(\\\\.[0-9]+\\\\)\\\\)\\\\'\"."
   :group 'package-build
   :type 'string)
 
@@ -250,12 +262,12 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
 ;;;; Release
 
 (defun package-build-get-tag-version (rcp)
+  "Determine version corresponding to largest version tag for RCP.
+Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING)."
   (let ((regexp (or (oref rcp version-regexp) package-build-version-regexp))
         (tag nil)
         (version '(0)))
-    (dolist (n (cl-etypecase rcp
-                 (package-git-recipe (process-lines "git" "tag" "--list"))
-                 (package-hg-recipe  (process-lines "hg" "tags" "--quiet"))))
+    (dolist (n (package-build--list-tags rcp))
       (let ((v (ignore-errors
                  (version-to-list (and (string-match regexp n)
                                        (match-string 1 n))))))
@@ -268,9 +280,18 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
          (pcase-let ((`(,hash ,time) (package-build--select-commit rcp tag t)))
            (list hash time (package-version-join version))))))
 
-;;;; Snapshot
+(cl-defmethod package-build--list-tags ((_rcp package-git-recipe))
+  (process-lines "git" "tag" "--list"))
+
+(cl-defmethod package-build--list-tags ((_rcp package-hg-recipe))
+  (process-lines "hg" "tags" "--quiet"))
+
+;;;; Timestamp
 
 (defun package-build-get-timestamp-version (rcp)
+  "Determine timestamp version corresponding to latest relevant commit for RCP.
+Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING), where
+VERSION-STRING has the format \"%Y%m%d.%H%M\"."
   (pcase-let ((`(,hash ,time) (package-build--get-timestamp-version rcp)))
     (list hash time
           ;; We remove zero-padding of the HH portion, as
@@ -603,10 +624,17 @@ value specified in the file \"NAME.el\"."
          (version (oref rcp version))
          (commit (oref rcp commit))
          (file (concat name ".el"))
-         (file (or (car (rassoc file files)) file)))
+         (file (or (car (rassoc file files)) file))
+         (maintainers nil))
     (and (file-exists-p file)
          (with-temp-buffer
            (insert-file-contents file)
+           (setq maintainers
+                 (if (fboundp 'lm-maintainers)
+                     (lm-maintainers)
+                   (with-no-warnings
+                     (when-let ((maintainer (lm-maintainer)))
+                       (list maintainer)))))
            (package-desc-from-define
             name version
             (or (save-excursion
@@ -622,12 +650,15 @@ value specified in the file \"NAME.el\"."
             :kind       (or kind 'single)
             :url        (lm-homepage)
             :keywords   (lm-keywords-list)
-            :maintainer (if (fboundp 'lm-maintainers)
-                            (car (lm-maintainers))
-                          (with-no-warnings
-                            (lm-maintainer)))
-            :authors    (lm-authors)
-            :commit     commit)))))
+            ;; Since 4e6f98cd505, if there are multiple maintainers,
+            ;; `package-buffer-info' stores them all in `:maintainer'.
+            ;; That is not backward compatible, so we use `:maintainers'
+            ;; instead.  I am working on getting this fixed in `package'
+            ;; as well.
+            :maintainer  (car maintainers)
+            :maintainers maintainers
+            :authors     (lm-authors)
+            :commit      commit)))))
 
 (defun package-build--desc-from-package (rcp files)
   "Return the package description for RCP.
@@ -1160,6 +1191,7 @@ a package."
           :type type
           :props props)))
 
+;; TODO handle multiple maintainers
 (defun package-build--archive-alist-for-json ()
   "Return the archive alist in a form suitable for JSON encoding."
   (cl-flet ((format-person
@@ -1175,10 +1207,17 @@ a package."
                        (let* ((info (cdr entry))
                               (extra (aref info 4))
                               (maintainer (assq :maintainer extra))
+                              (maintainers (assq :maintainers extra))
                               (authors (assq :authors extra)))
                          (when maintainer
                            (setcdr maintainer
                                    (format-person (cdr maintainer))))
+                         (when maintainers
+                           (if (cl-every #'listp (cdr maintainers))
+                               (setcdr maintainers
+                                       (mapcar #'format-person
+                                               (cdr maintainers)))
+                             (assq-delete-all :maintainers extra)))
                          (when authors
                            (if (cl-every #'listp (cdr authors))
                                (setcdr authors

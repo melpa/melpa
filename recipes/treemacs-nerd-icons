@@ -1,0 +1,3 @@
+(treemacs-nerd-icons
+ :fetcher github
+ :repo "rainstormstudio/treemacs-nerd-icons")

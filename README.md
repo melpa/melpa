@@ -436,6 +436,13 @@ Only the packages are mirrored, not the web site front-end itself.
 _We are NOT responsible for the contents of any UNOFFICIAL mirror of
 our packages._
 
+Use `rsync` to get started with your own mirror:
+
+```
+rsync -avz --delete rsync://melpa.org/packages/ snapshots/
+rsync -avz --delete rsync://melpa.org/packages-stable/ releases/
+```
+
 ## About
 
 *MELPA* is *Milkypostman's ELPA* or *Milkypostman's Experimental Lisp

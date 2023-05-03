@@ -1,0 +1,3 @@
+(python-view-data
+ :repo "ShuguangSun/python-view-data"
+ :fetcher github)

@@ -1,0 +1,3 @@
+(ob-ai
+ :fetcher github
+ :repo "ai-mode/ob-ai")

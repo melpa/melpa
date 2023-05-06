@@ -44,7 +44,7 @@ TIMEOUT := $(shell which timeout && echo "-k 60 600")
 .PHONY: clean build index html json sandbox
 .FORCE:
 
-all: packages packages/archive-contents json index
+all: packages archive-contents json index
 
 html: index
 index: json
@@ -85,16 +85,8 @@ clean: clean-working clean-packages clean-json clean-sandbox
 
 packages: $(RCPDIR)/*
 
-packages/archive-contents: .FORCE
-	@echo " • Updating $@ ..."
+archive-contents: .FORCE
 	@$(EVAL) '(package-build-dump-archive-contents)'
-
-packages-stable/archive-contents: .FORCE
-	@echo " • Updating $@ ..."
-	@$(EVAL) '(package-build-dump-archive-contents)'
-
-cleanup:
-	@$(EVAL) '(package-build-cleanup)'
 
 ## Json rules
 
@@ -134,10 +126,11 @@ $(RCPDIR)/%: .FORCE
 
 ## Sandbox
 
-sandbox: packages/archive-contents
+sandbox: .FORCE
 	@echo " • Building sandbox ..."
 	@mkdir -p $(SANDBOX)
 	@$(EMACS_COMMAND) -Q \
+	  --eval '(package-build-dump-archive-contents)' \
 	  --eval '(setq user-emacs-directory (file-truename "$(SANDBOX)"))' \
 	  --eval '(setq package-user-dir (locate-user-emacs-file "elpa"))' \
 	  -l package \

@@ -5,13 +5,11 @@ cd "${MELPA_REPO}"
 
 unset STABLE
 
-make cleanup
-make html
+make archive-contents json html
 
 export STABLE=t
 
-make cleanup
-make html
+make archive-contents json html
 
 # Sync every 5 minutes.
 sleep 5m

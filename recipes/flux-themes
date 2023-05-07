@@ -1,3 +1,0 @@
-(flux-themes
- :repo "convict-real/Flux-Themes"
- :fetcher github)

@@ -1,3 +1,4 @@
 (welcome-dashboard 
   :fetcher github 
-  :repo "konrad1977/welcome-dashboard")
+  :repo "konrad1977/welcome-dashboard"
+  :files ("welcome.el"))

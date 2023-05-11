@@ -72,15 +72,6 @@ clean-sandbox:
 	  rmdir '$(SANDBOX)'; \
 	fi
 
-pull-package-build:
-	git fetch package-build
-	git -c "commit.gpgSign=true" subtree merge \
-	-m "Merge Package-Build $$(git describe package-build/master)" \
-	--squash -P package-build package-build/master
-
-add-package-build-remote:
-	git remote add package-build git@github.com:melpa/package-build.git
-
 clean: clean-working clean-packages clean-json clean-sandbox
 
 packages: $(RCPDIR)/*
@@ -108,6 +99,17 @@ $(RCPDIR)/%: .FORCE
 	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." \
 	  && sleep $(SLEEP) || true
 	@echo
+
+## Update package-build
+
+pull-package-build:
+	git fetch package-build
+	git -c "commit.gpgSign=true" subtree merge \
+	-m "Merge Package-Build $$(git describe package-build/master)" \
+	--squash -P package-build package-build/master
+
+add-package-build-remote:
+	git remote add package-build "git@github.com:melpa/package-build.git"
 
 ## Sandbox
 

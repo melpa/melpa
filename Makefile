@@ -41,15 +41,10 @@ TIMEOUT := $(shell which timeout && echo "-k 60 600")
 
 ## General rules
 
-.PHONY: clean build index html json sandbox
+.PHONY: clean build json html sandbox
 .FORCE:
 
-all: packages archive-contents json index
-
-html: index
-index: json
-	@echo " • Building html index ..."
-	$(MAKE) -C $(HTMLDIR)
+all: packages archive-contents json html
 
 ## Cleanup rules
 
@@ -83,6 +78,10 @@ json: .FORCE
 	@echo " • Building json indexes ..."
 	@$(EVAL) '(package-build-archive-alist-as-json "$(HTMLDIR)/archive.json")'
 	@$(EVAL) '(package-build-recipe-alist-as-json "$(HTMLDIR)/recipes.json")'
+
+html: json
+	@echo " • Building html index ..."
+	$(MAKE) -C $(HTMLDIR)
 
 $(RCPDIR)/.dirstamp: .FORCE
 	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] \

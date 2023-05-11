@@ -39,12 +39,24 @@ $(addprefix -L ,$(LOAD_PATH)) \
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
 
-## General rules
-
 .PHONY: clean build json html sandbox
 .FORCE:
 
-all: packages archive-contents json html
+all: build archive-contents json html
+
+## Build
+
+build: $(RCPDIR)/*
+
+$(RCPDIR)/%: .FORCE
+	@echo " • Building package $(@F) ..."
+	@exec 2>&1; exec &> >(tee $(PKGDIR)/$(@F).log); \
+	  $(TIMEOUT) $(EVAL) "(package-build-archive \"$(@F)\")" \
+	  && echo " ✓ Success:" \
+	  && ls -lsh $(PKGDIR)/$(@F)-[0-9]*
+	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." \
+	  && sleep $(SLEEP) || true
+	@echo
 
 ## Cleanup rules
 
@@ -69,7 +81,7 @@ clean-sandbox:
 
 clean: clean-working clean-packages clean-json clean-sandbox
 
-packages: $(RCPDIR)/*
+## Metadata
 
 archive-contents: .FORCE
 	@$(EVAL) '(package-build-dump-archive-contents)'
@@ -86,18 +98,6 @@ html: json
 $(RCPDIR)/.dirstamp: .FORCE
 	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] \
 	&& touch $@ || exit 0
-
-## Recipe rules
-
-$(RCPDIR)/%: .FORCE
-	@echo " • Building package $(@F) ..."
-	@exec 2>&1; exec &> >(tee $(PKGDIR)/$(@F).log); \
-	  $(TIMEOUT) $(EVAL) "(package-build-archive \"$(@F)\")" \
-	  && echo " ✓ Success:" \
-	  && ls -lsh $(PKGDIR)/$(@F)-[0-9]*
-	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." \
-	  && sleep $(SLEEP) || true
-	@echo
 
 ## Update package-build
 

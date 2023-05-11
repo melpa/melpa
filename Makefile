@@ -88,25 +88,10 @@ packages: $(RCPDIR)/*
 archive-contents: .FORCE
 	@$(EVAL) '(package-build-dump-archive-contents)'
 
-## Json rules
-
-html/archive.json: $(PKGDIR)/archive-contents
-	@echo " • Building $@ ..."
-	@$(EVAL) '(package-build-archive-alist-as-json "html/archive.json")'
-
-html/recipes.json: $(RCPDIR)/.dirstamp
-	@echo " • Building $@ ..."
-	@$(EVAL) '(package-build-recipe-alist-as-json "html/recipes.json")'
-
-html-stable/archive.json: $(PKGDIR)/archive-contents
-	@echo " • Building $@ ..."
-	@$(EVAL) '(package-build-archive-alist-as-json "html-stable/archive.json")'
-
-html-stable/recipes.json: $(RCPDIR)/.dirstamp
-	@echo " • Building $@ ..."
-	@$(EVAL) '(package-build-recipe-alist-as-json "html-stable/recipes.json")'
-
-json: $(HTMLDIR)/archive.json $(HTMLDIR)/recipes.json
+json: .FORCE
+	@echo " • Building json indexes ..."
+	@$(EVAL) '(package-build-archive-alist-as-json "$(HTMLDIR)/archive.json")'
+	@$(EVAL) '(package-build-recipe-alist-as-json "$(HTMLDIR)/recipes.json")'
 
 $(RCPDIR)/.dirstamp: .FORCE
 	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] \

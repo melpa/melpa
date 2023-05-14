@@ -1,7 +1,7 @@
 (clede :repo "sasanidas/clede"
-                 :fetcher gitlab
-                 :files ("clede.el"
-		 	("cl-integration" "cl-integration/*")
-		 	("el-integration" "el-integration/*")
-		 	("semantic" "semantic/*")
-		 	("utilities" "utilities/*")))
+       :fetcher gitlab
+       :files ("clede.el"
+              ("cl-integration" "cl-integration/*")
+              ("el-integration" "el-integration/*")
+              ("semantic" "semantic/*")
+              ("utilities" "utilities/*")))

@@ -1,4 +1,1 @@
-(hippo-themes
- :fetcher github
- :repo "kimim/emacs-hippo-theme"
- :files ("*.el"))
+(hippo-themes :repo "kimim/emacs-hippo-theme" :fetcher github)

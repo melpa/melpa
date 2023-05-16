@@ -1,0 +1,1 @@
+(elfeed-webkit :fetcher github :repo "fritzgrabo/elfeed-webkit")

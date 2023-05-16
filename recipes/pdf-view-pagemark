@@ -1,1 +1,1 @@
-(pdf-view-restore :repo "kimim/pdf-view-pagemark" :fetcher github)
+(pdf-view-pagemark :repo "kimim/pdf-view-pagemark" :fetcher github)

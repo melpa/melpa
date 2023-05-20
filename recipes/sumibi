@@ -1,0 +1,4 @@
+(sumibi
+ :fetcher github
+ :repo "kiyoka/Sumibi"
+ :files ("emacs/sumibi.el"))

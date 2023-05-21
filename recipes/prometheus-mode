@@ -1,0 +1,2 @@
+(prometheus-mode :repo "peterhoeg/prometheus-mode" :fetcher gitlab)
+

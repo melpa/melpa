@@ -1,0 +1,3 @@
+(blackjack
+ :fetcher github
+ :repo "gdonald/blackjack-el")

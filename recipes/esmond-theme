@@ -1,0 +1,2 @@
+(esmond-theme :repo "xcatalyst/esmond-theme"
+              :fetcher github)

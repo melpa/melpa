@@ -1,0 +1,4 @@
+(gpr-yasnippets
+ :fetcher github
+ :repo "brownts/gpr-yasnippets"
+ :files (:defaults "snippets"))

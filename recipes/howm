@@ -1,4 +1,4 @@
 (howm
- :fetcher git
- :url "https://scm.osdn.net/gitroot/howm/howm.git"
+ :fetcher github
+ :repo "kaorahi/howm"
  :files (:defaults (:exclude "*.el.in")))

@@ -2,7 +2,7 @@
 :;exec emacs --script "$0" "$@"
 
 (defun missing-packages (recipes packages)
-  "Show elements of RECIPES that are no in PACKAGES."
+  "Show elements of RECIPES that are not in PACKAGES."
   (let (missing)
     (while recipes
       (let ((recipe (car recipes))

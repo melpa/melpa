@@ -1,0 +1,4 @@
+(orgreadme-fy
+ :fetcher sourcehut
+ :repo "flandrew/orgreadme-fy"
+ :files (:defaults "README.org" "README.org.license" "templates" "LICENSES"))

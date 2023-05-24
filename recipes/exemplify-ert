@@ -1,0 +1,4 @@
+(exemplify-ert
+ :fetcher sourcehut
+ :repo "flandrew/exemplify-ert"
+ :files (:defaults "README.org" "README.org.license" "LICENSES"))

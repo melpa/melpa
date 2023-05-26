@@ -1,0 +1,3 @@
+(ob-sdml :fetcher github
+         :repo "johnstonskj/emacs-sdml-mode"
+         :files ("ob-sdml.el"))

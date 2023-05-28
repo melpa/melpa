@@ -3,26 +3,26 @@ require 'json'
 require 'time'
 require 'ostruct'
 
-package = JSON.parse(File.read("packages/#{pname}.json"), {object_class: OpenStruct})
+package = JSON.parse(File.read("packages/#{@pname}.json"), {object_class: OpenStruct})
 recipes = JSON.parse(File.read("recipes.json"))
-readme = "packages/#{pname}-readme.txt"
+readme = "packages/#{@pname}-readme.txt"
 %>
 <section>
   <h1>
-    <%= pname %>
+    <%= @pname %>
     <small><%= package.version %></small>
   </h1>
   <p class="lead"><%= package.description %></p>
   <p>
     <a
-      href="https://github.com/melpa/melpa/blob/master/recipes/<%= pname %>"
+      href="https://github.com/melpa/melpa/blob/master/recipes/<%= @pname %>"
       class="btn btn-default"
     >
       <span class="glyphicon glyphicon-cutlery"></span>
       Recipe
     </a>
     <a
-      href="<%= "#{pname}-#{package.version}.#{package.extension}" %>"
+      href="<%= "#{@pname}-#{package.version}.#{package.extension}" %>"
       class="btn btn-default"
       >
       <span class="glyphicon glyphicon-download"></span>
@@ -83,8 +83,8 @@ readme = "packages/#{pname}-readme.txt"
         <dt>Preview
         </dt>
         <dd>
-          <a href="/packages/<%= pname %>.html">
-            <img alt="MELPA" src="<%= pname %>-badge.svg">
+          <a href="/packages/<%= @pname %>.html">
+            <img alt="MELPA" src="<%= @pname %>-badge.svg">
           </a>
         </dd>
       </dl>
@@ -92,17 +92,17 @@ readme = "packages/#{pname}-readme.txt"
         <dt>HTML
         </dt>
         <dd>
-          <pre>&lt;a href="https://melpa.org/packages/<%= pname %>.html"&gt;&lt;img alt="MELPA" src="https://melpa.org/packages/<%= pname %>-badge.svg"/&gt;&lt;/a&gt;</pre>
+          <pre>&lt;a href="https://melpa.org/packages/<%= @pname %>.html"&gt;&lt;img alt="MELPA" src="https://melpa.org/packages/<%= @pname %>-badge.svg"/&gt;&lt;/a&gt;</pre>
         </dd>
         <dt>Markdown
         </dt>
         <dd>
-          <pre>[![MELPA](https://melpa.org/packages/<%= pname %>-badge.svg)](https://melpa.org/packages/<%= pname %>.html)</pre>
+          <pre>[![MELPA](https://melpa.org/packages/<%= @pname %>-badge.svg)](https://melpa.org/packages/<%= @pname %>.html)</pre>
         </dd>
         <dt>Org
         </dt>
         <dd>
-          <pre>[[https://melpa.org/packages/<%= pname %>.html][file:https://melpa.org/packages/<%= pname %>-badge.svg]]</pre>
+          <pre>[[https://melpa.org/packages/<%= @pname %>.html][file:https://melpa.org/packages/<%= @pname %>-badge.svg]]</pre>
         </dd>
       </dl>
     </div>
@@ -112,8 +112,8 @@ readme = "packages/#{pname}-readme.txt"
     </h4>
     <details>
       <summary class="btn btn-default">Show</summary>
-      <% if File.exist?("packages/#{pname}.log") %>
-        <pre><%= File.read("packages/#{pname}.log") %></pre>
+      <% if File.exist?("packages/#{@pname}.log") %>
+        <pre><%= File.read("packages/#{@pname}.log") %></pre>
       <% else %>
         <div class="div alert alert-warning">Build log is missing</div>
       <% end %>

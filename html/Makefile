@@ -9,19 +9,19 @@ all: updates.rss pages packages
 
 updates.rss: templates/updates.rss.erb packages.json
 	@echo "$(htmldir) • Rendering $@ ..."
-	@erb templates/updates.rss.erb > updates.rss.tmp && mv updates.rss.tmp updates.rss
+	@./erubi templates/updates.rss.erb > updates.rss.tmp && mv updates.rss.tmp updates.rss
 
 %.html: templates/pages/%.html templates/layout.html.erb
 	@echo "$(htmldir) • Rendering $@ ..."
-	@erb content_template=$< templates/layout.html.erb > $@.tmp && mv $@.tmp $@
+	@./erubi content_template=$< templates/layout.html.erb > $@.tmp && mv $@.tmp $@
 
 index.html: templates/pages/index.html templates/layout.html.erb total_downloads.json packages.json
 	@echo "$(htmldir) • Rendering $@ ..."
-	@erb content_template=$< templates/layout.html.erb > $@.tmp && mv $@.tmp $@
+	@./erubi content_template=$< templates/layout.html.erb > $@.tmp && mv $@.tmp $@
 
 packages/%.html: packages/%.json templates/package.html.erb templates/layout.html.erb
 	@echo "$(htmldir) • Rendering $@ ..."
-	@erb pname=$* content_template=templates/package.html.erb templates/layout.html.erb > $@.tmp && mv $@.tmp $@
+	@./erubi pname=$* content_template=templates/package.html.erb templates/layout.html.erb > $@.tmp && mv $@.tmp $@
 
 packages/%.json: packages.json
 

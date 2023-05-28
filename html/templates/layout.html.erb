@@ -1,4 +1,5 @@
 <%
+require 'erubi'
 stable = File.absolute_path(__FILE__).include? "html-stable"
 
 if stable
@@ -48,7 +49,7 @@ end
     </div>
   </header>
   <main class="container" id="content">
-    <%= ERB.new(File.new(content_template).read, eoutvar: "_contentout").result(binding) %>
+    <%== eval Erubi::Engine.new(File.new(@content_template).read, ensure: true).src %>
   </main>
   <footer class="container">
     <small>

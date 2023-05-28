@@ -1,0 +1,19 @@
+#! /usr/bin/env ruby
+require 'erubi'
+
+input_filename = ""
+ARGV.each do |arg|
+  if arg.include? "="
+  then
+    var, val = arg.split("=")
+    instance_variable_set("@#{var}", val)
+  else
+    input_filename = arg
+  end
+end
+
+puts eval(Erubi::Engine.new(File.read(input_filename), {
+                              :escape => true,
+                              :chain_appends => true,
+                              :filename => input_filename,
+                            }).src)

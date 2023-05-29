@@ -1,0 +1,4 @@
+(media-progress-dired
+ :repo "jumper047/media-progress"
+ :fetcher github
+ :files ("media-progress-dired.el"))

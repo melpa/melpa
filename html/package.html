@@ -1,0 +1,128 @@
+{{ $path :=  trimSuffix ".html" .OriginalReq.URL.Path }}
+{{ $jsonPath := printf "./%s.json" $path }}
+{{ $package := (include $jsonPath | fromJson) }}
+{{ $recipes := (include "recipes.json" | fromJson) }}
+{{ with $package }}
+{{ include "partials/header.html" (printf "%s - MELPA" .name) }}
+  {{ $recipe := get $recipes .name }}
+    <main class="container" id="content">
+      <section>
+        <h1>
+          {{ .name }}
+          <small>{{ .version }}</small>
+        </h1>
+        <p class="lead">{{ .description }}</p>
+        <p>
+          <a
+            href="https://github.com/melpa/melpa/blob/master/recipes/{{ .name }}"
+            class="btn btn-default"
+          >
+            <span class="glyphicon glyphicon-cutlery"></span>
+            Recipe
+          </a>
+          <a
+            href="{{ printf "./%s-%s.%s" .name .version .extension }}"
+            class="btn btn-default"
+          >
+            <span class="glyphicon glyphicon-download"></span>
+            Download
+          </a>
+          <a href="{{ .recipe.source }}" class="btn btn-default">
+            <span class="glyphicon glyphicon-folder-open"></span>
+            Source code
+          </a>
+          <a href="{{ .props.url }}" class="btn btn-default">
+            <span class="glyphicon glyphicon-home"></span>
+            Homepage
+          </a>
+        </p>
+        <section>
+          <div class="well">
+            <dl class="dl-horizontal">
+              <dt>Downloads</dt>
+              <dd>{{ printf "%.f" .downloads }}
+                <span class="muted">(all versions)</span>, percentile: {{ printf "%.2f" .percentile }}
+              </dd>
+              <dt>Source</dt>
+              <dd>
+                <a href="{{ .source }}">{{ .recipe.fetcher }}</a>
+                <span class="muted">
+                  (commit {{ trunc 6 .props.commit }})
+                </span>
+              </dd>
+              <dt>Dependencies</dt>
+              <dd>
+                {{- $first := true }}
+                {{ range $dep, $ver := .deps }}
+                  {{- if $first }}
+                    {{- $first = false }}
+                  {{- else }} / {{ end }}
+                  {{ if hasKey $recipes $dep -}}
+                    <a href="/packages/{{ $dep }}">{{ $dep }} {{ $ver }}</a>
+                  {{- else -}}
+                    {{ $dep }} {{ $ver }}
+                  {{- end -}}
+                {{ end }}
+              </dd>
+              <dt>Needed by</dt>
+              <dd>
+                {{- $first := true }}
+                {{ range .rdeps }}
+                  {{- if $first }}
+                    {{- $first = false }}
+                  {{- else }} / {{ end }}
+                  <a href="/packages/{{ . }}">{{ . }}</a>
+                {{ end }}
+              </dd>
+            </dl>
+          </div>
+        </section>
+        <section>
+          <h4>Description
+          </h4>
+          <pre>{{ include (printf "packages/%s-readme.txt" .name) }}</pre>
+        </section>
+        <section>
+          <h4>Badge code
+          </h4>
+          <div class="well">
+            <dl>
+              <dt>Preview
+              </dt>
+              <dd>
+                <a href="/./{{ .name }}">
+                  <img alt="MELPA" src="{{ .name }}-badge.svg">
+                </a>
+              </dd>
+            </dl>
+            <dl>
+              <dt>HTML
+              </dt>
+              <dd>
+                <pre>&lt;a href="https://melpa.org/./{{ .name }}"&gt;&lt;img alt="MELPA" src="https://melpa.org/./{{ .name }}-badge.svg"/&gt;&lt;/a&gt;</pre>
+              </dd>
+              <dt>Markdown
+              </dt>
+              <dd>
+                <pre>!MELPA(https://melpa.org/./{{ .name }}-badge.svg)(https://melpa.org/./{{ .name }})</pre>
+              </dd>
+              <dt>Org
+              </dt>
+              <dd>
+                <pre>[[https://melpa.org/./{{ .name }}][file:https://melpa.org/./{{ .name }}-badge.svg]]</pre>
+              </dd>
+            </dl>
+          </div>
+        </section>
+        <section>
+          <h4>Build log
+          </h4>
+          <details>
+            <summary class="btn btn-default">Show</summary>
+            <pre>{{ include (printf "packages/%s.log" .name) }}</pre>
+          </details>
+        </section>
+      </section>
+    </main>
+{{ include "partials/footer.html" }}
+{{ end }}

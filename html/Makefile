@@ -1,11 +1,11 @@
 SHELL  := bash
 dyn_json := recipes.json archive.json download_counts.json build-status.json
 
-.PHONY: all clean packages $(dyn_json)
-all: updates.rss
+all: updates.rss packages.json total_downloads.json downloads.json $(dyn_json)
 
 updates.rss: updates.rss.erb packages.json
-	erb updates.rss.erb > updates.rss.tmp && mv updates.rss.tmp updates.rss
+	@echo "$(htmldir) • Rendering $@ ..."
+	@erb updates.rss.erb > updates.rss.tmp && mv updates.rss.tmp updates.rss
 
 packages/%.json: packages.json
 
@@ -23,7 +23,4 @@ $(dyn_json):
 
 livejson: $(dyn_json)
 
-clean:
-	-rm -v updates.rss
-
-.dummy: livejson
+.PHONY: livejson

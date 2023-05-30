@@ -1,3 +1,8 @@
+<%
+require 'json'
+require 'ostruct'
+require 'time'
+%>
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -20,30 +25,11 @@
     <ttl>40</ttl>
     <description>News about package updates</description>
     <%
-      require 'json'
-      require 'time'
-      require 'ostruct'
-      packages = JSON.parse(File.read("archive.json")).map do |pkgname, info|
-        versions = info["ver"]
-        deps = info["deps"]
-        descr = info["desc"]
-        pkgtype = info["type"]
-        version = versions.join('.')
-        package = OpenStruct.new
-        package.name = pkgname
-        package.version = version
-        package.description = descr.gsub(/ \[source:.*$/, '')
-        begin
-        hour_portion = versions[1] ? sprintf("%04d", versions[1]) : "0000"
-        package.build_time = Time.new(version[0..3].to_i, version[4..5].to_i, version[6..7].to_i, hour_portion[0..1].to_i, hour_portion[2..3].to_i)
-        rescue ArgumentError
-        package.build_time = Time.now()
-        end
-        package.url = "#{base_url}/packages/#{pkgname}-#{version}." + (pkgtype == "single" ? "el" : "tar")
-        package.info_url = "#{base_url}/#/#{pkgname}"
-        package
-      end
-      packages.sort_by { |p| p.version }.reverse[0..200].each do |package|
+    @packages = JSON.parse(File.read("packages.json"), { object_class: OpenStruct })
+    @packages.sort_by { |p| p.version }.reverse[0..200].each do |package|
+        package.url = "#{base_url}/packages/#{package.name}-#{package.version}.#{package.extension}"
+        package.info_url = "#{base_url}/packages/#{package.name}"
+        package.build_time = Time.parse(package.build_time)
     %>
       <item>
         <title><%= package.name %> (<%= package.version %>) --- <%= ERB::Util.html_escape package.description %></title>

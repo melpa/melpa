@@ -1,4 +1,4 @@
 (listenbrainz
  :repo "zzkt/metabrainz"
  :fetcher github
- :files ("listenbrainz.el" "README.org" "LICENSE"))
+ :files ("listenbrainz.el"))

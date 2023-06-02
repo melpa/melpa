@@ -75,7 +75,7 @@ clean-sandbox:
 pull-package-build:
 	git fetch package-build
 	git -c "commit.gpgSign=true" subtree merge \
-	-m "Merge Package-Build $(shell git describe package-build/master)" \
+	-m "Merge Package-Build $$(git describe package-build/master)" \
 	--squash -P package-build package-build/master
 
 add-package-build-remote:

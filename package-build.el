@@ -171,7 +171,7 @@ similar, which will provide the GNU timeout program as
   "Type of `package-build-tar-executable'.
 Can be `gnu' or `bsd'; nil means the type is not decided yet.")
 
-(define-obsolete-variable-alias 'package-build-write-badge-images
+(define-obsolete-variable-alias 'package-build-write-melpa-badge-images
   'package-build-write-badge-images "Package-Build 5.0.0")
 
 (defcustom package-build-write-badge-images nil

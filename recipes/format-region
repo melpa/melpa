@@ -1,0 +1,3 @@
+(dired-rsync :repo "tanrax/format-region.el"
+             :fetcher github
+             :files ("format-region.el"))

@@ -79,7 +79,7 @@ clean-sandbox:
 	  rmdir '$(SANDBOX)'; \
 	fi
 
-clean: clean-working clean-packages clean-json clean-sandbox
+clean: clean-packages clean-json clean-sandbox
 
 ## Metadata
 

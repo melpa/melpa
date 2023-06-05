@@ -58,6 +58,24 @@ $(RCPDIR)/%: .FORCE
 	  && sleep $(SLEEP) || true
 	@echo
 
+## Metadata
+
+archive-contents: .FORCE
+	@$(EVAL) '(package-build-dump-archive-contents)'
+
+json: .FORCE
+	@echo " • Building json indexes ..."
+	@$(EVAL) '(package-build-archive-alist-as-json "$(HTMLDIR)/archive.json")'
+	@$(EVAL) '(package-build-recipe-alist-as-json "$(HTMLDIR)/recipes.json")'
+
+html: json
+	@echo " • Building html index ..."
+	$(MAKE) -C $(HTMLDIR)
+
+$(RCPDIR)/.dirstamp: .FORCE
+	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] \
+	&& touch $@ || exit 0
+
 ## Cleanup rules
 
 clean-working:
@@ -80,24 +98,6 @@ clean-sandbox:
 	fi
 
 clean: clean-packages clean-json clean-sandbox
-
-## Metadata
-
-archive-contents: .FORCE
-	@$(EVAL) '(package-build-dump-archive-contents)'
-
-json: .FORCE
-	@echo " • Building json indexes ..."
-	@$(EVAL) '(package-build-archive-alist-as-json "$(HTMLDIR)/archive.json")'
-	@$(EVAL) '(package-build-recipe-alist-as-json "$(HTMLDIR)/recipes.json")'
-
-html: json
-	@echo " • Building html index ..."
-	$(MAKE) -C $(HTMLDIR)
-
-$(RCPDIR)/.dirstamp: .FORCE
-	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] \
-	&& touch $@ || exit 0
 
 ## Update package-build
 

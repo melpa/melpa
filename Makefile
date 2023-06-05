@@ -4,6 +4,8 @@ TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 
 -include ./config.mk
 
+SLEEP ?= 0
+
 SHELL         := bash
 EMACS_COMMAND ?= emacs
 
@@ -11,7 +13,6 @@ PKGDIR  := packages
 RCPDIR  := recipes
 HTMLDIR := html
 WORKDIR := working
-SLEEP   ?= 0
 SANDBOX := sandbox
 STABLE  ?= nil
 ifneq ($(STABLE), nil)

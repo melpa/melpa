@@ -65,11 +65,11 @@ clean-working:
 	@git clean -dffX $(WORKDIR)/.
 
 clean-packages:
-	@echo " • Removing packages ..."
+	@echo " • Removing $(PKGDIR)/* ..."
 	@git clean -dffX $(PKGDIR)/.
 
 clean-json:
-	@echo " • Removing json files ..."
+	@echo " • Removing $(HTMLDIR)/*.json ..."
 	@-rm -vf $(HTMLDIR)/archive.json $(HTMLDIR)/recipes.json
 
 clean-sandbox:

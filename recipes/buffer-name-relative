@@ -1,0 +1,3 @@
+(buffer-name-relative
+  :fetcher codeberg
+  :repo "ideasman42/emacs-buffer-name-relative")

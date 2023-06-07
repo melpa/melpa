@@ -4,6 +4,8 @@ TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 
 -include ./config.mk
 
+SLEEP ?= 0
+
 SHELL         := bash
 EMACS_COMMAND ?= emacs
 
@@ -11,7 +13,6 @@ PKGDIR  := packages
 RCPDIR  := recipes
 HTMLDIR := html
 WORKDIR := working
-SLEEP   ?= 0
 SANDBOX := sandbox
 STABLE  ?= nil
 ifneq ($(STABLE), nil)
@@ -39,88 +40,14 @@ $(addprefix -L ,$(LOAD_PATH)) \
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
 
-## General rules
-
-.PHONY: clean build index html json sandbox
+.PHONY: clean build json html sandbox
 .FORCE:
 
-all: packages packages/archive-contents json index
+all: build archive-contents json html
 
-html: index
-index: json
-	@echo " • Building html index ..."
-	$(MAKE) -C $(HTMLDIR)
+## Build
 
-## Cleanup rules
-
-clean-working:
-	@echo " • Removing package sources ..."
-	@git clean -dffX $(WORKDIR)/.
-
-clean-packages:
-	@echo " • Removing packages ..."
-	@git clean -dffX $(PKGDIR)/.
-
-clean-json:
-	@echo " • Removing json files ..."
-	@-rm -vf $(HTMLDIR)/archive.json $(HTMLDIR)/recipes.json
-
-clean-sandbox:
-	@echo " • Removing sandbox files ..."
-	@if [ -d '$(SANDBOX)' ]; then \
-	  rm -rfv '$(SANDBOX)/elpa'; \
-	  rmdir '$(SANDBOX)'; \
-	fi
-
-pull-package-build:
-	git fetch package-build
-	git -c "commit.gpgSign=true" subtree merge \
-	-m "Merge Package-Build $$(git describe package-build/master)" \
-	--squash -P package-build package-build/master
-
-add-package-build-remote:
-	git remote add package-build git@github.com:melpa/package-build.git
-
-clean: clean-working clean-packages clean-json clean-sandbox
-
-packages: $(RCPDIR)/*
-
-packages/archive-contents: .FORCE
-	@echo " • Updating $@ ..."
-	@$(EVAL) '(package-build-dump-archive-contents)'
-
-packages-stable/archive-contents: .FORCE
-	@echo " • Updating $@ ..."
-	@$(EVAL) '(package-build-dump-archive-contents)'
-
-cleanup:
-	@$(EVAL) '(package-build-cleanup)'
-
-## Json rules
-
-html/archive.json: $(PKGDIR)/archive-contents
-	@echo " • Building $@ ..."
-	@$(EVAL) '(package-build-archive-alist-as-json "html/archive.json")'
-
-html/recipes.json: $(RCPDIR)/.dirstamp
-	@echo " • Building $@ ..."
-	@$(EVAL) '(package-build-recipe-alist-as-json "html/recipes.json")'
-
-html-stable/archive.json: $(PKGDIR)/archive-contents
-	@echo " • Building $@ ..."
-	@$(EVAL) '(package-build-archive-alist-as-json "html-stable/archive.json")'
-
-html-stable/recipes.json: $(RCPDIR)/.dirstamp
-	@echo " • Building $@ ..."
-	@$(EVAL) '(package-build-recipe-alist-as-json "html-stable/recipes.json")'
-
-json: $(HTMLDIR)/archive.json $(HTMLDIR)/recipes.json
-
-$(RCPDIR)/.dirstamp: .FORCE
-	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] \
-	&& touch $@ || exit 0
-
-## Recipe rules
+build: $(RCPDIR)/*
 
 $(RCPDIR)/%: .FORCE
 	@echo " • Building package $(@F) ..."
@@ -132,12 +59,65 @@ $(RCPDIR)/%: .FORCE
 	  && sleep $(SLEEP) || true
 	@echo
 
+## Metadata
+
+archive-contents: .FORCE
+	@$(EVAL) '(package-build-dump-archive-contents)'
+
+json: .FORCE
+	@echo " • Building json indexes ..."
+	@$(EVAL) '(package-build-archive-alist-as-json "$(HTMLDIR)/archive.json")'
+	@$(EVAL) '(package-build-recipe-alist-as-json "$(HTMLDIR)/recipes.json")'
+
+html: json
+	@echo " • Building html index ..."
+	$(MAKE) -C $(HTMLDIR)
+
+$(RCPDIR)/.dirstamp: .FORCE
+	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] \
+	&& touch $@ || exit 0
+
+## Cleanup rules
+
+clean-working:
+	@echo " • Removing package sources ..."
+	@git clean -dffX $(WORKDIR)/.
+
+clean-packages:
+	@echo " • Removing $(PKGDIR)/* ..."
+	@git clean -dffX $(PKGDIR)/.
+
+clean-json:
+	@echo " • Removing $(HTMLDIR)/*.json ..."
+	@-rm -vf $(HTMLDIR)/archive.json $(HTMLDIR)/recipes.json
+
+clean-sandbox:
+	@echo " • Removing sandbox files ..."
+	@if [ -d '$(SANDBOX)' ]; then \
+	  rm -rfv '$(SANDBOX)/elpa'; \
+	  rmdir '$(SANDBOX)'; \
+	fi
+
+clean: clean-packages clean-json clean-sandbox
+
+## Update package-build
+
+pull-package-build:
+	git fetch package-build
+	git -c "commit.gpgSign=true" subtree merge \
+	-m "Merge Package-Build $$(git describe package-build/master)" \
+	--squash -P package-build package-build/master
+
+add-package-build-remote:
+	git remote add package-build "git@github.com:melpa/package-build.git"
+
 ## Sandbox
 
-sandbox: packages/archive-contents
+sandbox: .FORCE
 	@echo " • Building sandbox ..."
 	@mkdir -p $(SANDBOX)
 	@$(EMACS_COMMAND) -Q \
+	  --eval '(package-build-dump-archive-contents)' \
 	  --eval '(setq user-emacs-directory (file-truename "$(SANDBOX)"))' \
 	  --eval '(setq package-user-dir (locate-user-emacs-file "elpa"))' \
 	  -l package \

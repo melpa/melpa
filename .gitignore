@@ -31,7 +31,7 @@
 /html/packages.json
 /html/recipes.json
 /html/updates.rss
-/html/index.html
+/html/*.html
 /html-stable/.last-build-duration
 /html-stable/archive.json
 /html-stable/build-status.json

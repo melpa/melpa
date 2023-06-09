@@ -1,0 +1,121 @@
+<%
+require 'json'
+require 'ostruct'
+
+@packages = JSON.parse(File.read("packages.json"), { object_class: OpenStruct })
+@build = JSON.parse(File.read("build-status.json"))
+@total_downloads = JSON.parse(File.read("total_downloads.json"))["total"]
+%>
+<div>
+  <section class="page-header">
+    <h1>
+      <span>MELPA</span>
+      <small>(Milkypostman's Emacs Lisp Package Archive)</small>
+    </h1>
+  </section>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <section class="jumbotron">
+      <ul>
+        <li>
+          <strong>Up-to-date packages built on our servers from upstream source</strong>
+        </li>
+        <li>
+          <strong>Installable in any Emacs with 'package.el'</strong> - no local version-control tools needed
+        </li>
+        <li>
+          <strong>Curated</strong> - no obsolete, renamed, forked or randomly hacked packages
+        </li>
+        <li>
+          <strong>Comprehensive</strong> - more packages than any other archive
+        </li>
+        <li>
+          <strong>Automatic updates</strong> - new commits result in new packages
+        </li>
+        <li>
+          <strong>Extensible</strong> - contribute new recipes, and we'll build the packages
+        </li>
+      </ul>
+    </section>
+  </div>
+  <div class="col-md-4">
+    <% if @build["completed"] %>
+      <div class="alert alert-success">
+        <strong>Next Build: </strong>
+        <span><%= Time.at(@build["next"]) %></span>
+      </div>
+    <% else %>
+      <div class="alert alert-warning">
+        <strong>Current build started: </strong>
+        <span><%= Time.at(@build["started"]) %></span>
+        <span>, last took <%= @build["duration"] %></span>
+      </div>
+    <% end %>
+  </div>
+</div>
+<section id="packages">
+  <h2>
+    Current List of <%= @packages.count %> packages
+    <small>
+      <%= @total_downloads %> downloads to date
+    </small>
+  </h2>
+  <table id="package-list" class="table table-bordered table-responsive table-hover">
+    <thead>
+      <tr>
+        <th>
+          Package
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Version
+          <span>
+        </th>
+        <th>Recipe</th>
+        <th>
+          Source
+        </th>
+        <th>
+          DLs
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @packages.first(50).each do |package| %>
+        <tr>
+          <td>
+            <a href="/packages/<%= package.name %>.html">
+              <%= package.name %>
+            </a>
+          </td>
+          <td>
+            <a href="/packages/<%= package.name %>.html">
+              <%= package.description %>
+            </a>
+          </td>
+          <td class="version">
+            <a href="<%= "packages/#{package.name}-#{package.version}.el" %>">
+              <%= package.version %>
+              <span class="glyphicon glyphicon-download"></span>
+            </a>
+          </td>
+          <td class="recipe">
+            <a href="<%= "https://github.com/melpa/melpa/blob/master/recipes/#{package.name}" %>">
+              <span class="glyphicon glyphicon-cutlery"></span>
+            </a>
+          </td>
+          <td class="source">
+            <a href="<%= package.source %>">
+              <%= package.recipe.fetcher %>
+            </a>
+          </td>
+          <td><%= package.downloads %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

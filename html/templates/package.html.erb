@@ -1,0 +1,122 @@
+<%
+require 'json'
+require 'time'
+require 'ostruct'
+
+package = JSON.parse(File.read("packages/#{pname}.json"), {object_class: OpenStruct})
+recipes = JSON.parse(File.read("recipes.json"))
+readme = "packages/#{pname}-readme.txt"
+%>
+<section>
+  <h1>
+    <%= pname %>
+    <small><%= package.version %></small>
+  </h1>
+  <p class="lead"><%= package.description %></p>
+  <p>
+    <a
+      href="https://github.com/melpa/melpa/blob/master/recipes/<%= pname %>"
+      class="btn btn-default"
+    >
+      <span class="glyphicon glyphicon-cutlery"></span>
+      Recipe
+    </a>
+    <a
+      href="<%= "#{pname}-#{package.version}.#{package.extension}" %>"
+      class="btn btn-default"
+      >
+      <span class="glyphicon glyphicon-download"></span>
+      Download
+    </a>
+    <a href="<%= package.source %>" class="btn btn-default">
+      <span class="glyphicon glyphicon-folder-open"></span>
+      Source code
+    </a>
+    <a href="<%= package.props.url %>" class="btn btn-default">
+      <span class="glyphicon glyphicon-home"></span>
+      Homepage
+    </a>
+  </p>
+  <section>
+    <div class="well">
+      <dl class="dl-horizontal">
+        <dt>Downloads</dt>
+        <dd><%= package.downloads %>
+          <span class="muted">(all versions)</span>, percentile: <%= "%.2f" % (package.percentile || 0.0) %>
+        </dd>
+        <dt>Source</dt>
+        <dd>
+          <a href="<%= package.source %>">
+            <%= package.recipe.fetcher %>
+          </a>
+          <span class="muted">
+            (commit <%= package.props.commit[0,6] %>)
+          </span>
+        </dd>
+        <dt>Dependencies</dt>
+        <dd><%= package.deps&.each_pair.to_a.map { |dep,ver|
+            if recipes[dep.to_s]
+            "<a href=\"/packages/#{dep}.html\">#{dep} #{ver}</a>"
+            else
+            "#{dep} #{ver}"
+            end
+            }.join " / " %></dd>
+        <dt>Needed by</dt>
+        <dd><%= package.rdeps&.map { |dep| "<a href=\"/packages/#{dep}.html\">#{dep}</a>" }&.join " / " %></dd>
+      </dl>
+    </div>
+  </section>
+  <section>
+    <h4>Description
+    </h4>
+    <% if File.exists?(readme) %>
+      <pre><%= File.read(readme) %></pre>
+    <% else %>
+      <div class="alert alert-warning">Couldn't open readme for package</div>
+    <% end %>
+  </section>
+  <section>
+    <h4>Badge code
+    </h4>
+    <div class="well">
+      <dl>
+        <dt>Preview
+        </dt>
+        <dd>
+          <a href="/packages/<%= pname %>.html">
+            <img alt="MELPA" src="<%= pname %>-badge.svg">
+          </a>
+        </dd>
+      </dl>
+      <dl>
+        <dt>HTML
+        </dt>
+        <dd>
+          <pre>&lt;a href="https://melpa.org/packages/<%= pname %>.html"&gt;&lt;img alt="MELPA" src="https://melpa.org/packages/<%= pname %>-badge.svg"/&gt;&lt;/a&gt;</pre>
+        </dd>
+        <dt>Markdown
+        </dt>
+        <dd>
+          <pre>[![MELPA](https://melpa.org/packages/<%= pname %>-badge.svg)](https://melpa.org/packages/<%= pname %>.html)</pre>
+        </dd>
+        <dt>Org
+        </dt>
+        <dd>
+          <pre>[[https://melpa.org/packages/<%= pname %>.html][file:https://melpa.org/packages/<%= pname %>-badge.svg]]</pre>
+        </dd>
+      </dl>
+    </div>
+  </section>
+  <section>
+    <h4>Build log
+    </h4>
+    <details>
+      <summary class="btn btn-default">Show</summary>
+      <% if File.exist?("packages/#{pname}.log") %>
+        <pre><%= File.read("packages/#{pname}.log") %></pre>
+      <% else %>
+        <div class="div alert alert-warning">Build log is missing</div>
+      <% end %>
+    </details>
+  </section>
+</section>

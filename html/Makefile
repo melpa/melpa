@@ -1,22 +1,44 @@
 SHELL  := bash
 dyn_json := recipes.json archive.json download_counts.json build-status.json
+pages  := $(notdir $(wildcard templates/pages/*.html))
+p_json := $(wildcard packages/*.json)
+p_html := $(p_json:.json=.html)
+htmldir := $(notdir $(CURDIR))
 
-.PHONY: all clean packages $(dyn_json)
-all: updates.rss
+all: updates.rss pages packages
 
-updates.rss: updates.rss.erb packages.json
-	erb updates.rss.erb > updates.rss.tmp && mv updates.rss.tmp updates.rss
+updates.rss: templates/updates.rss.erb packages.json
+	@echo "$(htmldir) • Rendering $@ ..."
+	@erb templates/updates.rss.erb > updates.rss.tmp && mv updates.rss.tmp updates.rss
+
+%.html: templates/pages/%.html templates/layout.html.erb
+	@echo "$(htmldir) • Rendering $@ ..."
+	@erb content_template=$< templates/layout.html.erb > $@.tmp && mv $@.tmp $@
+
+index.html: templates/pages/index.html templates/layout.html.erb total_downloads.json packages.json
+	@echo "$(htmldir) • Rendering $@ ..."
+	@erb content_template=$< templates/layout.html.erb > $@.tmp && mv $@.tmp $@
+
+packages/%.html: packages/%.json templates/package.html.erb templates/layout.html.erb
+	@echo "$(htmldir) • Rendering $@ ..."
+	@erb pname=$* content_template=templates/package.html.erb templates/layout.html.erb > $@.tmp && mv $@.tmp $@
 
 packages/%.json: packages.json
 
 packages.json: archive.json downloads.json generate-packages-json.sh
-	./generate-packages-json.sh < $< > $@.tmp && mv $@.tmp $@
+	@echo "$(htmldir) • Generating $@ ..."
+	@./generate-packages-json.sh < $< > $@.tmp && mv $@.tmp $@
 
 total_downloads.json: download_counts.json
-	jq '{ total: add }' $< > $@.tmp && mv $@.tmp $@
+	@echo "$(htmldir) • Generating $@ ..."
+	@jq '{ total: add }' $< > $@.tmp && mv $@.tmp $@
 
 downloads.json: download_counts.json ./generate-download-percentile.sh
-	./generate-download-percentile.sh < $< > $@.tmp && mv $@.tmp $@
+	@echo "$(htmldir) • Generating $@ ..."
+	@./generate-download-percentile.sh < $< > $@.tmp && mv $@.tmp $@
+
+pages: $(pages)
+packages: $(p_html)
 
 $(dyn_json):
 	curl -sS https://melpa.org/$@ > $@
@@ -24,6 +46,8 @@ $(dyn_json):
 livejson: $(dyn_json)
 
 clean:
-	-rm -v updates.rss
+	-rm -v *.tmp
+	-rm -v $(p_html)
 
 .dummy: livejson
+.PHONY: all clean packages livejson

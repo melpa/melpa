@@ -4,6 +4,16 @@ TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 
 -include ./config.mk
 
+# Users should usually prefer this over other *_CONFIG variables.
+# We recommend that the value is set in the included "config.mk".
+USER_CONFIG ?= '()'
+
+# Only intended for "docker/builder/run.sh" and similar scripts.
+# That is also why we add extra quoting when setting EVAL below,
+# instead of here.  Not doing it like that would complicate the
+# quoting needed in scripts.
+BUILD_CONFIG ?= ()
+
 SLEEP ?= 0
 
 SHELL         := bash
@@ -20,21 +30,20 @@ PKGDIR  := packages-stable
 HTMLDIR := html-stable
 endif
 
-LISP_CONFIG ?= '(progn\
+# You probably don't want to change this.
+LOCATION_CONFIG ?= '(progn\
   (setq package-build--melpa-base "$(TOP)/")\
   (setq package-build-working-dir "$(TOP)/$(WORKDIR)/")\
   (setq package-build-archive-dir "$(TOP)/$(PKGDIR)/")\
-  (setq package-build-recipes-dir "$(TOP)/$(RCPDIR)/")\
-  (setq package-build-stable $(STABLE))\
-  (setq package-build-write-melpa-badge-images t)\
-  (setq package-build-timeout-secs \
-        (and (string= "linux" (symbol-name system-type)) 600)))'
+  (setq package-build-recipes-dir "$(TOP)/$(RCPDIR)/"))'
 
 LOAD_PATH ?= $(TOP)/package-build
 
 EVAL := $(EMACS_COMMAND) --no-site-file --batch \
 $(addprefix -L ,$(LOAD_PATH)) \
---eval $(LISP_CONFIG) \
+--eval $(LOCATION_CONFIG) \
+--eval "$(BUILD_CONFIG)" \
+--eval $(USER_CONFIG) \
 --load package-build.el \
 --eval
 

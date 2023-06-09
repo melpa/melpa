@@ -1,5 +1,13 @@
 #!/bin/bash -e
 
+# Break taken between runs, in seconds.
+BUILD_DELAY=3600
+
+# A timeout is only needed for unattended builds, so we set this
+# here instead of forcing it on everyone in the Makefile or even
+# by giving the lisp variable a non-nil default value.
+LISP_CONFIG="(setq package-build-timeout-secs 600)"
+
 MELPA_REPO=/mnt/store/melpa
 cd "${MELPA_REPO}"
 MELPA_BRANCH=$( git rev-parse --abbrev-ref HEAD )
@@ -52,6 +60,7 @@ flux_capacitor() {
 
 echo '>>>> STARTING UNSTABLE BUILD'
 unset STABLE
+export BUILD_CONFIG="$LISP_CONFIG"
 
 BUILD_STATUS_JSON=${STATUS_JSON}
 BUILD_LAST_DURATION_FILE=${LAST_DURATION_FILE}
@@ -63,6 +72,7 @@ flux_capacitor
 
 echo '>>>> STARTING STABLE BUILD'
 export STABLE=t
+export BUILD_CONFIG="$LISP_CONFIG"
 
 BUILD_STATUS_JSON=${STABLE_STATUS_JSON}
 BUILD_LAST_DURATION_FILE=${STABLE_LAST_DURATION_FILE}
@@ -72,4 +82,4 @@ fi
 
 flux_capacitor
 
-sleep 3600  # give the server an hour break. it's working hard.
+sleep $BUILD_DELAY

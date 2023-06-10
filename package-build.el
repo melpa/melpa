@@ -965,7 +965,7 @@ in `package-build-archive-dir'."
              ((= (length files) 0)
               (error "Unable to find files matching recipe patterns"))
              (package-build-build-function
-              (funcall package-build-build-function))
+              (funcall package-build-build-function rcp files))
              ((= (length files) 1)
               (package-build--build-single-file-package rcp files))
              (t

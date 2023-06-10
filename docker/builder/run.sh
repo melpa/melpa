@@ -27,7 +27,7 @@ record_build_status() {
   "started": $BUILD_STARTED,
   "completed": ${BUILD_COMPLETED-null},
   "duration": ${BUILD_DURATION-null},
-  "next": ${BUILD_NEXT-null},
+  "next": ${BUILD_NEXT-null}
 }
 EOF
     cat "$BUILD_STATUS_FILE"
@@ -38,7 +38,7 @@ EOF
 }
 
 # Indicate that the build is in progress
-BUILD_DURATION=$(jq ".duration" ${BUILD_STATUS_FILE)
+BUILD_DURATION=$(jq ".duration" ${BUILD_STATUS_FILE} || true)
 BUILD_STARTED=$(date "+%s")
 record_build_status
 

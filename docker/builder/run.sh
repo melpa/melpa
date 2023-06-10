@@ -37,6 +37,7 @@ EOF
 }
 
 # Indicate that the build is in progress
+BUILD_DURATION=$(jq ".duration" build-status.json)
 BUILD_STARTED=$(date "+%s")
 record_build_status
 

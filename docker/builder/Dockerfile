@@ -1,4 +1,4 @@
-FROM debian:stable-20230227-slim
+FROM debian:bullseye
 
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get --yes install curl emacs-nox git make mercurial ruby texinfo imagemagick jq && \

@@ -13,6 +13,8 @@ cd "${MELPA_REPO}"
 
 BUILD_STATUS_FILE="${MELPA_REPO}/html/build-status.json"
 
+git config --global safe.directory "*"
+
 echo ">>> Pulling MELPA repository"
 MELPA_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 git fetch origin

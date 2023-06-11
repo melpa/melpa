@@ -27,7 +27,7 @@ fi
 
 record_build_status() {
     echo "Recording build status in $BUILD_STATUS_FILE"
-    cat <<EOF > $BUILD_STATUS_FILE
+    cat <<EOF | tee $BUILD_STATUS_FILE
 {
   "started": $BUILD_STARTED,
   "completed": ${BUILD_COMPLETED-null},
@@ -35,11 +35,6 @@ record_build_status() {
   "next": ${BUILD_NEXT-null}
 }
 EOF
-    cat "$BUILD_STATUS_FILE"
-    # FIXME "melpa.js" expects this file in a channel-specific
-    # location, but we no longer record this per channel.  For
-    # now just duplicate the file.
-    cp "$BUILD_STATUS_FILE" "${MELPA_REPO}/html-stable/build-status.json"
 }
 
 # Indicate that the build is in progress

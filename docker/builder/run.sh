@@ -15,12 +15,15 @@ BUILD_STATUS_FILE="${MELPA_REPO}/html/build-status.json"
 
 git config --global safe.directory "*"
 
-echo ">>> Pulling MELPA repository"
-MELPA_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-git fetch origin
-git reset --hard "origin/${MELPA_BRANCH}"
-git pull origin "${MELPA_BRANCH}"
-echo
+if [ -z "$INHIBIT_MELPA_PULL" ]
+then
+    echo ">>> Pulling MELPA repository"
+    MELPA_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    git fetch origin
+    git reset --hard "origin/${MELPA_BRANCH}"
+    git pull origin "${MELPA_BRANCH}"
+    echo
+fi
 
 record_build_status() {
     echo "Recording build status in $BUILD_STATUS_FILE"

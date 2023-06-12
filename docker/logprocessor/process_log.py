@@ -11,6 +11,7 @@ import sys
 import time
 import sqlite3
 from operator import or_
+from functools import reduce
 
 LOGREGEX = r'^(?P<ip>[\d.]+) [ -]+ \[(?P<date>[\w/: +-]+)\] ' \
            r'"GET /+packages/+(?P<package>[^ ]+)-(?P<version>[0-9.]+).(?:el|tar) ' \
@@ -31,11 +32,11 @@ def json_dump(data, jsonfile, indent=None):
     """
     jsonify `data`
     """
-    return json.dump(data, jsonfile, default=json_handler, indent=indent, encoding='utf-8')
+    return json.dump(data, jsonfile, default=json_handler, indent=indent)
 
 
 def datetime_parser(dct):
-    for key, val in dct.items():
+    for key, val in list(dct.items()):
         if isinstance(val, list):
             dct[key] = set(val)
     return dct
@@ -117,7 +118,7 @@ def main():
     parser = argparse.ArgumentParser(description='MELPA Log File Parser')
     parser.add_argument('--jsondir', help='JSON output directory (default: working directory)', default=".")
     parser.add_argument('--db', help='Database file (default: download_log.db)', default="download_log.db")
-    parser.add_argument('logs', metavar="logs", type=unicode, nargs="+",
+    parser.add_argument('logs', metavar="logs", type=str, nargs="+",
                         help="HTTP access log files to parse.")
     args = parser.parse_args()
 
@@ -151,10 +152,10 @@ def main():
 
     # parse each parameter
     for logfile in args.logs:
-        print("Processing logfile {0}".format(logfile))
+        print(("Processing logfile {0}".format(logfile)))
         start = timer()
         count = parse_logfile(logfile, curs)
-        print("-> {0} records processed in {1}s".format(count, timer() - start))
+        print(("-> {0} records processed in {1}s".format(count, timer() - start)))
         conn.commit()
 
     # calculate current package totals
@@ -163,7 +164,7 @@ def main():
     start = timer()
     pkgcount = {p: c for p, c in curs.execute(
         "SELECT package, count FROM download_totals")}
-    print("-> Done in {}s".format(timer() - start))
+    print(("-> Done in {}s".format(timer() - start)))
 
     json_dump(pkgcount, open(args.jsondir + "/download_counts.json", 'w'), indent=1)
 

@@ -1,0 +1,1 @@
+(hippo-themes :repo "kimim/emacs-hippo-theme" :fetcher github)

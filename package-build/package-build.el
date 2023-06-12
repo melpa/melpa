@@ -93,8 +93,8 @@
 
 (defcustom package-build-get-version-function
   (if package-build-stable
-      'package-build-get-tag-version
-    'package-build-get-timestamp-version)
+      'package-build-tag-version
+    'package-build-timestamp-version)
   "The function used to determine the commit and version of a package.
 
 The default depends on the value of option `package-build-stable'.
@@ -105,8 +105,8 @@ choosen by the function, TIME is its commit date, and VERSION is
 the version string choosen for COMMIT."
   :group 'package-build
   :set-after '(package-build-stable)
-  :type '(radio (function-item package-build-get-tag-version)
-                (function-item package-build-get-timestamp-version)
+  :type '(radio (function-item package-build-tag-version)
+                (function-item package-build-timestamp-version)
                 function))
 
 (defcustom package-build-predicate-function nil
@@ -117,15 +117,16 @@ If nil (the default), then all packages are build."
   :group 'package-build
   :type '(choice (const :tag "build all") function))
 
-(defcustom package-build-build-function nil
+(defcustom package-build-build-function
+  #'package-build--build-multi-file-package
   "Low-level function used to build a package.
-If nil (the default) then the funcion used depends on whether the
-package consists of more than one file or not.  One possible value
-is `package-build--build-multi-file-package', which would force
-building a tarball, even for packages that consist of a single
-file."
+By default a tarball is used for all packages, including those
+consisting of a single file.  It this is nil, then single-file
+packages are distributed without using tarballs."
   :group 'package-build
-  :type '(choice (const :tag "default, depending on number of files")
+  :type '(choice (const :tag "use tarball for all packages"
+                        package-build--build-multi-file-package)
+                 (const :tag "only use tarball for multi-file packages" nil)
                  function))
 
 ;; NOTE that these hooks are still experimental.  Let me know if these
@@ -171,25 +172,42 @@ similar, which will provide the GNU timeout program as
   "Type of `package-build-tar-executable'.
 Can be `gnu' or `bsd'; nil means the type is not decided yet.")
 
-(defcustom package-build-write-melpa-badge-images nil
-  "When non-nil, write MELPA badge images alongside packages.
-These batches can, for example, be used on GitHub pages."
+(define-obsolete-variable-alias 'package-build-write-melpa-badge-images
+  'package-build-write-badge-images "Package-Build 5.0.0")
+
+(defcustom package-build-write-badge-images nil
+  "When non-nil, write badge images alongside packages.
+These badges can, for example, be used on GitHub pages."
   :group 'package-build
   :type 'boolean)
 
-(defcustom package-build-version-regexp "\\`[rRvV]?\\(?1:.+\\)\\'"
+(defcustom package-build-badge-data
+  (if package-build-stable
+      (list "melpa stable" "#3e999f")
+    (list "melpa" "#922793"))
+  "Data used when generating badge images.
+The default value is set based on `package-build-stable'.
+`package-build-write-badge-images' controls whether images
+are generated."
+  :group 'package-build
+  :type '(list (string :tag "Archive name") color))
+
+(defcustom package-build-version-regexp
+  "\\`[rRvV]?\\(?1:[0-9]+\\(\\.[0-9]+\\)*\\)\\'"
   "Regexp used to match valid version-strings.
 
-The string matched by the first capture group must be valid
-according to `version-to-list'.  The optional part before the
-capture group should match prefixes commonly used when naming
-version tags.  It is not part of the version string as such
-and thus not passed to `version-to-list'.  Individual package
-recipes can override this using the `:version-regexp' property.
+The first capture is used to extract the actual version string.
+Strings matched by that group must be valid according to
+`version-to-list', but the used regexp can be more strict.  The
+default value supports only releases but no pre-releases.  It
+also intentionally ignores cedrtain unfortunate version strings
+such as \"1A\" or \".5\", and only supports \".\" as separator.
 
-To match only releases but no pre-releases, and to support only
-\".\" as separator, use \
-\"\\\\`[rRvV]?\\\\([0-9]+\\\\(\\\\.[0-9]+\\\\)\\\\)\\\\'\"."
+The part before the first capture group should match prefixes
+commonly used in version tags.
+
+Note that this variable can be overriden in a package's recipe,
+using the `:version-regexp' slot."
   :group 'package-build
   :type 'string)
 
@@ -208,6 +226,9 @@ disallowed."
 
 (defvar package-build--inhibit-checkout nil
   "Whether to inhibit checkout.  Useful for testing purposes.")
+
+(defvar package-build--inhibit-build nil
+  "Whether to inhibit building.  Useful for testing purposes.")
 
 ;;; Generic Utilities
 
@@ -235,7 +256,7 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
       ((`(,hash ,time)
         (split-string
          (car (apply #'process-lines
-                     "git" "log" "-n1" "--first-parent"
+                     "git" "log" "-n1" "--first-parent" "--no-show-signature"
                      "--pretty=format:%H %cd" "--date=unix" rev
                      (and (not exact)
                           (cons "--" (package-build--spec-globs rcp)))))
@@ -261,7 +282,7 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
 
 ;;;; Release
 
-(defun package-build-get-tag-version (rcp)
+(defun package-build-tag-version (rcp)
   "Determine version corresponding to largest version tag for RCP.
 Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING)."
   (let ((regexp (or (oref rcp version-regexp) package-build-version-regexp))
@@ -286,13 +307,16 @@ Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING)."
 (cl-defmethod package-build--list-tags ((_rcp package-hg-recipe))
   (process-lines "hg" "tags" "--quiet"))
 
+(define-obsolete-function-alias 'package-build-get-tag-version
+  'package-build-tag-version "Package-Build 5.0.0")
+
 ;;;; Timestamp
 
-(defun package-build-get-timestamp-version (rcp)
+(defun package-build-timestamp-version (rcp)
   "Determine timestamp version corresponding to latest relevant commit for RCP.
 Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING), where
 VERSION-STRING has the format \"%Y%m%d.%H%M\"."
-  (pcase-let ((`(,hash ,time) (package-build--get-timestamp-version rcp)))
+  (pcase-let ((`(,hash ,time) (package-build--timestamp-version rcp)))
     (list hash time
           ;; We remove zero-padding of the HH portion, as
           ;; that is lost when stored in archive-contents.
@@ -300,14 +324,14 @@ VERSION-STRING has the format \"%Y%m%d.%H%M\"."
                   (format "%d" (string-to-number
                                 (format-time-string "%H%M" time t)))))))
 
-(cl-defmethod package-build--get-timestamp-version ((rcp package-git-recipe))
+(cl-defmethod package-build--timestamp-version ((rcp package-git-recipe))
   (pcase-let*
       ((commit (oref rcp commit))
        (branch (oref rcp branch))
        (branch (and branch (concat "origin/" branch)))
        (rev (or commit branch "origin/HEAD"))
        (`(,rev-hash ,rev-time) (package-build--select-commit rcp rev commit))
-       (`(,tag-hash ,tag-time) (package-build-get-tag-version rcp)))
+       (`(,tag-hash ,tag-time) (package-build-tag-version rcp)))
     ;; If the latest commit that touches a relevant file is an ancestor of
     ;; the latest tagged release and the tag is reachable from origin/HEAD
     ;; (i.e., it isn't on a separate release branch) then use the tagged
@@ -322,12 +346,15 @@ VERSION-STRING has the format \"%Y%m%d.%H%M\"."
         (list tag-hash tag-time)
       (list rev-hash rev-time))))
 
-(cl-defmethod package-build--get-timestamp-version ((rcp package-hg-recipe))
+(cl-defmethod package-build--timestamp-version ((rcp package-hg-recipe))
   (let* ((commit (oref rcp commit))
          (branch (or (oref rcp branch) "default"))
          (rev (format "sort(ancestors(%s), -rev)"
                       (or commit (format "max(branch(%s))" branch)))))
     (package-build--select-commit rcp rev nil)))
+
+(define-obsolete-function-alias 'package-build-get-snapshot-version
+  'package-build-snapshot-version "Package-Build 5.0.0")
 
 ;;; Run Process
 
@@ -393,6 +420,7 @@ with a timeout so that no command can block the build process."
       (when (file-exists-p dir)
         (delete-directory dir t))
       (package-build--message "Cloning %s to %s" url dir)
+      (make-directory package-build-working-dir t)
       (let ((default-directory package-build-working-dir))
         (apply #'package-build--run-process "git" "clone" url dir
                ;; This can dramatically reduce the size of large repos.
@@ -400,7 +428,7 @@ with a timeout so that no command can block the build process."
                ;; that is known not to require a checkout and history.
                ;; See #52.
                (and (eq package-build-get-version-function
-                        #'package-build-get-tag-version)
+                        #'package-build-tag-version)
                     (list "--filter=blob:none" "--no-checkout"))))))))
 
 (cl-defmethod package-build--fetch ((rcp package-hg-recipe))
@@ -419,6 +447,7 @@ with a timeout so that no command can block the build process."
       (when (file-exists-p dir)
         (delete-directory dir t))
       (package-build--message "Cloning %s to %s" url dir)
+      (make-directory package-build-working-dir t)
       (let ((default-directory package-build-working-dir))
         (package-build--run-process "hg" "clone" url dir))))))
 
@@ -639,22 +668,27 @@ value specified in the file \"NAME.el\"."
             name version
             (or (save-excursion
                   (goto-char (point-min))
-                  (and (re-search-forward
-                        "^;;; [^ ]*\\.el ---[ \t]*\\(.*?\\)[ \t]*\\(-\\*-.*-\\*-[ \t]*\\)?$"
-                        nil t)
+                  (and (re-search-forward "\
+^;;; [^ ]*\\.el ---[ \t]*\\(.*?\\)[ \t]*\\(-\\*-.*-\\*-[ \t]*\\)?$" nil t)
                        (match-string-no-properties 1)))
                 "No description available.")
             (when-let ((require-lines (lm-header-multiline "package-requires")))
               (package--prepare-dependencies
-               (package-read-from-string (mapconcat #'identity require-lines " "))))
+               (package-read-from-string
+                (mapconcat #'identity require-lines " "))))
+            ;; `:kind' and `:archive' are handled separately.
             :kind       (or kind 'single)
+            ;; The other keyword arguments are appended to the alist
+            ;; stored in the `extras' slot.  Make sure `:commit', which
+            ;; always exists and never has to be removed, comes first in
+            ;; the end result, so we can post-process the returned data
+            ;; by side-effect, e.g., to remove somewhat broken maintainer
+            ;; information, that cannot easily be encoded as json (see
+            ;; `package-build--archive-alist-for-json').
             :url        (lm-homepage)
             :keywords   (lm-keywords-list)
-            ;; Since 4e6f98cd505, if there are multiple maintainers,
-            ;; `package-buffer-info' stores them all in `:maintainer'.
-            ;; That is not backward compatible, so we use `:maintainers'
-            ;; instead.  I am working on getting this fixed in `package'
-            ;; as well.
+            ;; Newer `package.el' versions support both `:maintainers' and
+            ;; `:maintainer', while older versions only support the latter.
             :maintainer  (car maintainers)
             :maintainers maintainers
             :authors     (lm-authors)
@@ -912,10 +946,11 @@ are subsequently dumped."
            (message "Fetcher: %s" fetcher)
            (message "Source:  %s\n" url)))
     (funcall package-build-fetch-function rcp)
-    (package-build--select-version rcp)
-    (package-build--package rcp)
-    (when dump-archive-contents
-      (package-build-dump-archive-contents))
+    (unless package-build--inhibit-build
+      (package-build--select-version rcp)
+      (package-build--package rcp)
+      (when dump-archive-contents
+        (package-build-dump-archive-contents)))
     (message "Built %s in %.3fs, finished at %s" name
              (float-time (time-since start-time))
              (format-time-string "%FT%T%z" nil t))))
@@ -934,13 +969,13 @@ in `package-build-archive-dir'."
              ((= (length files) 0)
               (error "Unable to find files matching recipe patterns"))
              (package-build-build-function
-              (funcall package-build-build-function))
+              (funcall package-build-build-function rcp files))
              ((= (length files) 1)
               (package-build--build-single-file-package rcp files))
              (t
               (package-build--build-multi-file-package rcp files)))
-            (when package-build-write-melpa-badge-images
-              (package-build--write-melpa-badge-image
+            (when package-build-write-badge-images
+              (package-build--write-badge-image
                (oref rcp name) (oref rcp version) package-build-archive-dir))))
       (funcall package-build-cleanup-function rcp))))
 
@@ -1191,7 +1226,6 @@ a package."
           :type type
           :props props)))
 
-;; TODO handle multiple maintainers
 (defun package-build--archive-alist-for-json ()
   "Return the archive alist in a form suitable for JSON encoding."
   (cl-flet ((format-person
@@ -1217,12 +1251,14 @@ a package."
                                (setcdr maintainers
                                        (mapcar #'format-person
                                                (cdr maintainers)))
-                             (assq-delete-all :maintainers extra)))
+                             (setq maintainers ; silence >= 30 compiler
+                                   (assq-delete-all :maintainers extra))))
                          (when authors
                            (if (cl-every #'listp (cdr authors))
                                (setcdr authors
                                        (mapcar #'format-person (cdr authors)))
-                             (assq-delete-all :authors extra)))
+                             (setq authors ; silence >= 30 compiler
+                                   (assq-delete-all :authors extra))))
                          (package-build--pkg-info-for-json info))))
                (package-build-archive-alist))))
 

@@ -498,8 +498,8 @@
   melpa.buildstatus.controller = function() {
     this.started = m.prop();
     this.completed = m.prop();
-    this.next = m.prop();
     this.duration = m.prop();
+    this.next = m.prop();
     this.running = function() { return !this.completed(); }.bind(this);
 
     m.request({method: 'GET', url: "/build-status.json", background: true})

@@ -119,7 +119,7 @@ the following form (`[...]` denotes optional or conditional values),
   Melpa also provides dedicated fetchers for certain Git forges (aka
   "Git repository hosting platforms"), which should always be
   preferred over the generic `git` fetcher. When using a dedicated
-  fetcher, you must specify `:repo`, not `:url`. Currently the these
+  fetcher, you must specify `:repo`, not `:url`. Currently these
   Git forge fetchers exist: [`github`], [`gitlab`], [`codeberg`] and
   [`sourcehut`].
 
@@ -212,7 +212,7 @@ the following form (`[...]` denotes optional or conditional values),
   *library* (as opposed to a file implementing tests) ends with `-test.el`,
   then `:defaults` cannot be used.
 
-  **Warning:** Once the appropiate commit has been determined
+  **Warning:** Once the appropriate commit has been determined
   `file-expand-wildcards` is used to determine the files matched by
   each glob. Unfortunately (unlike in a shell) a glob that begins with
   `*` may also match filenames that begin with `.`, so you might have
@@ -289,7 +289,7 @@ Consider the `flymake-perlcritic` recipe,
 which will result in a package structure of,
 
 ```
-flymake-perlcritic-YYYMMDD
+flymake-perlcritic-YYYYMMDD
 |-- bin
 |   `-- flymake_perlcritic
 |-- flymake-perlcritic-pkg.el

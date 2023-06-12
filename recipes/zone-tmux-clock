@@ -1,0 +1,1 @@
+(zone-tmux-clock :fetcher git :url "https://depp.brause.cc/zone-tmux-clock.git")

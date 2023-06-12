@@ -1,9 +1,9 @@
 # docker service create --name registry --publish 127.0.0.1:5000:5000 registry:2
 version: "3"
 services:
-  nginx:
-    build: ./nginx
-    image: melpa/nginx:v1
+  caddy:
+    build: ./caddy
+    image: melpa/caddy:v1
     restart: unless-stopped
     volumes:
       - /mnt/volume/melpa:/mnt/store/melpa:ro

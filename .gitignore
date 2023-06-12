@@ -15,13 +15,17 @@
 /html/archive.json
 /html/build-status.json
 /html/download_counts.json
+/html/packages.json
 /html/recipes.json
 /html/updates.rss
+/html/index.html
 /html-stable/.last-build-duration
 /html-stable/archive.json
 /html-stable/build-status.json
 /html-stable/download_counts.json
 /html-stable/recipes.json
+/html-stable/packages.json
+/html-stable/downloads.json
 /html-stable/updates.rss
 /packages-stable/
 /packages/
@@ -33,3 +37,5 @@
 /service/*/log
 /sync
 /working/
+/html/total_downloads.json
+/html/downloads.json

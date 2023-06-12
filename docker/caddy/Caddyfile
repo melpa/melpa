@@ -1,0 +1,65 @@
+{
+	auto_https off
+	order cache before rewrite
+	cache {
+		default_cache_control max-age=150
+		key {
+			disable_query true
+		}
+		ttl 5m
+	}
+	log default {
+		output stderr
+		format console
+	}
+}
+
+(log_combined) {
+	format transform `{request>remote_ip} - {request>user_id} [{ts}] "{request>method} {request>uri} {request>proto}" {status} {size} "{request>headers>Referer>[0]}" "{request>headers>User-Agent>[0]}"` {
+		time_format "02/Jan/2006:15:04:05 -0700"
+	}
+}
+
+(melpa) {
+	cache
+
+	redir /packages/*.html /packages/{file.base}
+	redir /index.html /
+	redir /search /packages/{http.request.uri.query.package}
+
+	# match packages/* where *.json exists
+	@package {
+		path /packages/*
+		file {path}.json
+	}
+	rewrite @package /package.html
+
+	try_files {path} {path}.html
+
+	# header /packages/*.el content-type text/plain;
+	header /packages/*.svg cache-control no-cache;
+
+	templates {
+		mime text/html application/rss+xml text/plain
+	}
+
+	file_server
+}
+
+http://melpa.org, http://test.melpa.org {
+	root * /mnt/store/melpa/html/
+	import melpa
+	log {
+		output file /mnt/store/log/melpa.access.log
+		import log_combined
+	}
+}
+
+http://stable.melpa.org, http://stable-test.melpa.org {
+	root * /mnt/store/melpa/html-stable/
+	import melpa
+	log {
+		output file /mnt/store/log-stable/melpa.access.log
+		import log_combined
+	}
+}

@@ -1,0 +1,3 @@
+(astro-ts-mode
+ :fetcher github
+ :repo "Sorixelle/astro-ts-mode")

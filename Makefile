@@ -107,7 +107,9 @@ clean-sandbox:
 	  rmdir '$(SANDBOX)'; \
 	fi
 
-clean: clean-packages clean-json clean-sandbox
+clean: .FORCE
+	STABLE = nil make clean-packages clean-json clean-sandbox
+	STABLE = t   make clean-packages clean-json clean-sandbox
 
 ## Update package-build
 

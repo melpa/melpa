@@ -12,13 +12,11 @@
 /download_log_stable.json.gz
 /elpa
 /epkgs
-/html-stable/.last-build-duration
 /html-stable/archive.json
 /html-stable/build-status.json
 /html-stable/download_counts.json
 /html-stable/recipes.json
 /html-stable/updates.rss
-/html/.last-build-duration
 /html/archive.json
 /html/build-status.json
 /html/download_counts.json

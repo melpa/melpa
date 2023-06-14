@@ -113,14 +113,13 @@ clean: .FORCE
 
 ## Update package-build
 
-pull-package-build:
-	git fetch package-build
-	git -c "commit.gpgSign=true" subtree merge \
-	-m "Merge Package-Build $$(git describe package-build/master)" \
-	--squash -P package-build package-build/master
+PACKAGE_BUILD_REPO ?= "https://github.com/melpa/package-build"
 
-add-package-build-remote:
-	git remote add package-build "git@github.com:melpa/package-build.git"
+pull-package-build:
+	git fetch $(PACKAGE_BUILD_REPO)
+	git -c "commit.gpgSign=true" subtree merge \
+	-m "Merge Package-Build $$(git describe FETCH_HEAD)" \
+	--squash -P package-build FETCH_HEAD
 
 ## Sandbox
 

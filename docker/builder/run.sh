@@ -43,13 +43,13 @@ BUILD_STARTED=$(date "+%s")
 record_build_status
 
 echo ">>> Starting UNSTABLE build"
-unset STABLE
+export MELPA_CHANNEL=unstable
 export BUILD_CONFIG="$LISP_CONFIG"
 docker/builder/parallel_build_all
 
 echo ">>> Starting STABLE build"
-export STABLE=t
-export BUILD_CONFIG="(progn $LISP_CONFIG
+export MELPA_CHANNEL=stable
+export BUILD_CONFIG="(progn $LISP_CONFIG\
   (setq package-build-fetch-function 'ignore))"
 docker/builder/parallel_build_all
 

@@ -6,7 +6,7 @@ TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 
 # Users should usually prefer this over other *_CONFIG variables.
 # We recommend that the value is set in the included "config.mk".
-USER_CONFIG ?= '()'
+USER_CONFIG ?= "()"
 
 # Only intended for "docker/builder/run.sh" and similar scripts.
 # That is also why we add extra quoting when setting EVAL below,
@@ -19,15 +19,32 @@ SLEEP ?= 0
 SHELL         := bash
 EMACS_COMMAND ?= emacs
 
-PKGDIR  := packages
 RCPDIR  := recipes
-HTMLDIR := html
 WORKDIR := working
 SANDBOX := sandbox
-STABLE  ?= nil
-ifneq ($(STABLE), nil)
+
+ifndef MELPA_CHANNEL
+PKGDIR  := packages
+HTMLDIR := html
+CHANNEL_CONFIG := "()"
+
+else ifeq ($(MELPA_CHANNEL), unstable)
+PKGDIR  := packages
+HTMLDIR := html
+CHANNEL_CONFIG := "(progn\
+  (setq package-build-stable nil)\
+  (setq package-build-snapshot-version-functions\
+        '(package-build-timestamp-version))\
+  (setq package-build-badge-data '(\"melpa\" \"\#3e999f\")))"
+
+else ifeq ($(MELPA_CHANNEL), stable)
 PKGDIR  := packages-stable
 HTMLDIR := html-stable
+CHANNEL_CONFIG := "(progn\
+  (setq package-build-stable t)\
+  (setq package-build-release-version-functions\
+        '(package-build-tag-version))\
+  (setq package-build-badge-data '(\"melpa stable\" \"\#922793\")))"
 endif
 
 # You probably don't want to change this.
@@ -41,6 +58,7 @@ LOAD_PATH ?= $(TOP)/package-build
 
 EVAL := $(EMACS_COMMAND) --no-site-file --batch \
 $(addprefix -L ,$(LOAD_PATH)) \
+--eval $(CHANNEL_CONFIG) \
 --eval $(LOCATION_CONFIG) \
 --eval "$(BUILD_CONFIG)" \
 --eval $(USER_CONFIG) \
@@ -108,8 +126,8 @@ clean-sandbox:
 	fi
 
 clean: .FORCE
-	STABLE = nil make clean-packages clean-json clean-sandbox
-	STABLE = t   make clean-packages clean-json clean-sandbox
+	MELPA_CHANNEL=unstable make clean-packages clean-json clean-sandbox
+	MELPA_CHANNEL=stable   make clean-packages clean-json clean-sandbox
 
 ## Update package-build
 

@@ -1,0 +1,1 @@
+(helm-app-launcher :fetcher github :repo "bdc34/helm-app-launcher")

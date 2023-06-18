@@ -35,7 +35,7 @@ CHANNEL_CONFIG := "(progn\
   (setq package-build-stable nil)\
   (setq package-build-snapshot-version-functions\
         '(package-build-timestamp-version))\
-  (setq package-build-badge-data '(\"melpa\" \"\#3e999f\")))"
+  (setq package-build-badge-data '(\"melpa\" \"\#922793\")))"
 
 else ifeq ($(MELPA_CHANNEL), stable)
 PKGDIR  := packages-stable
@@ -44,7 +44,7 @@ CHANNEL_CONFIG := "(progn\
   (setq package-build-stable t)\
   (setq package-build-release-version-functions\
         '(package-build-tag-version))\
-  (setq package-build-badge-data '(\"melpa stable\" \"\#922793\")))"
+  (setq package-build-badge-data '(\"melpa stable\" \"\#3e999f\")))"
 endif
 
 # You probably don't want to change this.

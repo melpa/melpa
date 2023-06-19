@@ -1,0 +1,1 @@
+(dotenv :fetcher github :repo "amodelbello/dotenv.el")

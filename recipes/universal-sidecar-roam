@@ -1,0 +1,4 @@
+(universal-sidecar-roam
+ :fetcher sourcehut
+ :repo "swflint/universal-sidecar"
+ :files ("universal-sidecar-roam.el"))

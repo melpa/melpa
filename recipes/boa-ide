@@ -1,0 +1,4 @@
+(boa-ide
+ :fetcher github
+ :repo "boalang/syntax-highlight"
+ :files ("boa-sc.el" "boa-ide.el" "boa-study-config.el"))

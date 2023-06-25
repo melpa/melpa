@@ -1,1 +1,1 @@
-(mexican-holidays :fetcher gitlab :repo "gnuhack/spanish-holidays")
+(spanish-holidays :fetcher gitlab :repo "gnuhack/spanish-holidays")

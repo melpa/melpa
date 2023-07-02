@@ -149,11 +149,9 @@ pull-package-build:
 sandbox: .FORCE
 	@echo " • Building sandbox ..."
 	@mkdir -p $(SANDBOX)
-	@$(EMACS) -Q \
-	  --eval '(package-build-dump-archive-contents)' \
+	@$(EVAL) '(package-build-dump-archive-contents)' \
 	  --eval '(setq user-emacs-directory (file-truename "$(SANDBOX)"))' \
 	  --eval '(setq package-user-dir (locate-user-emacs-file "elpa"))' \
-	  -l package \
 	  --eval "(add-to-list 'package-archives \
 	            '(\"gnu\" . \"https://elpa.gnu.org/packages/\") t)" \
 	  --eval "(add-to-list 'package-archives \

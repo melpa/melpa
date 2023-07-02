@@ -53,11 +53,11 @@ CHANNEL_CONFIG := "(progn\
 endif
 
 # You probably don't want to change this.
-LOCATION_CONFIG ?= '(progn\
-  (setq package-build--melpa-base "$(TOP)/")\
-  (setq package-build-working-dir "$(TOP)/$(WORKDIR)/")\
-  (setq package-build-archive-dir "$(TOP)/$(PKGDIR)/")\
-  (setq package-build-recipes-dir "$(TOP)/$(RCPDIR)/"))'
+LOCATION_CONFIG ?= "(progn\
+  (setq package-build--melpa-base \"$(TOP)/\")\
+  (setq package-build-working-dir \"$(TOP)/$(WORKDIR)/\")\
+  (setq package-build-archive-dir \"$(TOP)/$(PKGDIR)/\")\
+  (setq package-build-recipes-dir \"$(TOP)/$(RCPDIR)/\"))"
 
 LOAD_PATH ?= $(TOP)/package-build
 
@@ -94,12 +94,12 @@ $(RCPDIR)/%: .FORCE
 ## Metadata
 
 archive-contents: .FORCE
-	@$(EVAL) '(package-build-dump-archive-contents)'
+	@$(EVAL) "(package-build-dump-archive-contents)"
 
 json: .FORCE
 	@echo " • Building json indexes ..."
-	@$(EVAL) '(package-build-archive-alist-as-json "$(HTMLDIR)/archive.json")'
-	@$(EVAL) '(package-build-recipe-alist-as-json "$(HTMLDIR)/recipes.json")'
+	@$(EVAL) "(package-build-archive-alist-as-json \"$(HTMLDIR)/archive.json\")"
+	@$(EVAL) "(package-build-recipe-alist-as-json \"$(HTMLDIR)/recipes.json\")"
 
 html: json
 	@echo " • Building html index ..."
@@ -125,9 +125,9 @@ clean-json:
 
 clean-sandbox:
 	@echo " • Removing sandbox files ..."
-	@if [ -d '$(SANDBOX)' ]; then \
-	  rm -rfv '$(SANDBOX)/elpa'; \
-	  rmdir '$(SANDBOX)'; \
+	@if [ -d "$(SANDBOX)" ]; then \
+	  rm -rfv "$(SANDBOX)/elpa"; \
+	  rmdir "$(SANDBOX)"; \
 	fi
 
 clean: .FORCE

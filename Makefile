@@ -16,8 +16,13 @@ BUILD_CONFIG ?= ()
 
 SLEEP ?= 0
 
-SHELL         := bash
-EMACS_COMMAND ?= emacs
+SHELL := bash
+
+ifdef EMACS_COMMAND
+EMACS := $(EMACS_COMMAND)
+else
+EMACS ?= emacs
+endif
 
 RCPDIR  := recipes
 WORKDIR := working
@@ -56,7 +61,7 @@ LOCATION_CONFIG ?= '(progn\
 
 LOAD_PATH ?= $(TOP)/package-build
 
-EVAL := $(EMACS_COMMAND) --no-site-file --batch \
+EVAL := $(EMACS) --no-site-file --batch \
 $(addprefix -L ,$(LOAD_PATH)) \
 --eval $(CHANNEL_CONFIG) \
 --eval $(LOCATION_CONFIG) \
@@ -144,7 +149,7 @@ pull-package-build:
 sandbox: .FORCE
 	@echo " • Building sandbox ..."
 	@mkdir -p $(SANDBOX)
-	@$(EMACS_COMMAND) -Q \
+	@$(EMACS) -Q \
 	  --eval '(package-build-dump-archive-contents)' \
 	  --eval '(setq user-emacs-directory (file-truename "$(SANDBOX)"))' \
 	  --eval '(setq package-user-dir (locate-user-emacs-file "elpa"))' \

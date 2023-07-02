@@ -1,1 +1,1 @@
-(hyperdrive :fetcher sourcehut :repo "ushin/ushin-shapes.el")
+(ushin-shapes :fetcher sourcehut :repo "ushin/ushin-shapes.el")

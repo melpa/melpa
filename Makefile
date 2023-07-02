@@ -149,22 +149,20 @@ pull-package-build:
 sandbox: .FORCE
 	@echo " • Building sandbox ..."
 	@mkdir -p $(SANDBOX)
-	@$(EVAL) '(package-build-dump-archive-contents)' \
-	  --eval '(setq user-emacs-directory (file-truename "$(SANDBOX)"))' \
-	  --eval '(setq package-user-dir (locate-user-emacs-file "elpa"))' \
-	  --eval "(add-to-list 'package-archives \
-	            '(\"gnu\" . \"https://elpa.gnu.org/packages/\") t)" \
-	  --eval "(add-to-list 'package-archives \
-	            '(\"melpa\" . \"https://melpa.org/packages/\") t)" \
-	  --eval "(add-to-list 'package-archives \
-	            '(\"sandbox\" . \"$(TOP)/$(PKGDIR)/\") t)" \
-	  --eval "(package-refresh-contents)" \
-	  --eval "(package-initialize)" \
-	  --eval '(setq sandbox-install-package "$(INSTALL)")' \
-	  --eval "(unless (string= \"\" sandbox-install-package) \
-	            (package-install (intern sandbox-install-package)))" \
-	  --eval "(when (get-buffer \"*Compile-Log*\") \
-	            (display-buffer \"*Compile-Log*\"))"
+	@$(EVAL) "(progn\
+  (package-build-dump-archive-contents)\
+  (setq user-emacs-directory (file-truename \"$(SANDBOX)\"))\
+  (setq package-user-dir (locate-user-emacs-file \"elpa\"))\
+  (add-to-list 'package-archives '(\"gnu\" . \"https://elpa.gnu.org/packages/\") t)\
+  (add-to-list 'package-archives '(\"melpa\" . \"https://melpa.org/packages/\") t)\
+  (add-to-list 'package-archives '(\"sandbox\" . \"$(TOP)/$(PKGDIR)/\") t)\
+  (package-refresh-contents)\
+  (package-initialize)\
+  (setq sandbox-install-package \"$(INSTALL)\")\
+  (unless (equal sandbox-install-package \"\")\
+    (package-install (intern sandbox-install-package)))\
+  (when (get-buffer \"*Compile-Log*\")\
+    (display-buffer \"*Compile-Log*\")))"
 
 # Local Variables:
 # outline-regexp: "#\\(#+\\)"

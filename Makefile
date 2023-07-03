@@ -16,8 +16,13 @@ BUILD_CONFIG ?= ()
 
 SLEEP ?= 0
 
-SHELL         := bash
-EMACS_COMMAND ?= emacs
+SHELL := bash
+
+ifdef EMACS_COMMAND
+EMACS := $(EMACS_COMMAND)
+else
+EMACS ?= emacs
+endif
 
 RCPDIR  := recipes
 WORKDIR := working
@@ -48,15 +53,15 @@ CHANNEL_CONFIG := "(progn\
 endif
 
 # You probably don't want to change this.
-LOCATION_CONFIG ?= '(progn\
-  (setq package-build--melpa-base "$(TOP)/")\
-  (setq package-build-working-dir "$(TOP)/$(WORKDIR)/")\
-  (setq package-build-archive-dir "$(TOP)/$(PKGDIR)/")\
-  (setq package-build-recipes-dir "$(TOP)/$(RCPDIR)/"))'
+LOCATION_CONFIG ?= "(progn\
+  (setq package-build--melpa-base \"$(TOP)/\")\
+  (setq package-build-working-dir \"$(TOP)/$(WORKDIR)/\")\
+  (setq package-build-archive-dir \"$(TOP)/$(PKGDIR)/\")\
+  (setq package-build-recipes-dir \"$(TOP)/$(RCPDIR)/\"))"
 
 LOAD_PATH ?= $(TOP)/package-build
 
-EVAL := $(EMACS_COMMAND) --no-site-file --batch \
+EVAL := $(EMACS) --no-site-file --batch \
 $(addprefix -L ,$(LOAD_PATH)) \
 --eval $(CHANNEL_CONFIG) \
 --eval $(LOCATION_CONFIG) \
@@ -89,12 +94,12 @@ $(RCPDIR)/%: .FORCE
 ## Metadata
 
 archive-contents: .FORCE
-	@$(EVAL) '(package-build-dump-archive-contents)'
+	@$(EVAL) "(package-build-dump-archive-contents)"
 
 json: .FORCE
 	@echo " • Building json indexes ..."
-	@$(EVAL) '(package-build-archive-alist-as-json "$(HTMLDIR)/archive.json")'
-	@$(EVAL) '(package-build-recipe-alist-as-json "$(HTMLDIR)/recipes.json")'
+	@$(EVAL) "(package-build-archive-alist-as-json \"$(HTMLDIR)/archive.json\")"
+	@$(EVAL) "(package-build-recipe-alist-as-json \"$(HTMLDIR)/recipes.json\")"
 
 html: json
 	@echo " • Building html index ..."
@@ -120,9 +125,9 @@ clean-json:
 
 clean-sandbox:
 	@echo " • Removing sandbox files ..."
-	@if [ -d '$(SANDBOX)' ]; then \
-	  rm -rfv '$(SANDBOX)/elpa'; \
-	  rmdir '$(SANDBOX)'; \
+	@if [ -d "$(SANDBOX)" ]; then \
+	  rm -rfv "$(SANDBOX)/elpa"; \
+	  rmdir "$(SANDBOX)"; \
 	fi
 
 clean: .FORCE
@@ -144,24 +149,20 @@ pull-package-build:
 sandbox: .FORCE
 	@echo " • Building sandbox ..."
 	@mkdir -p $(SANDBOX)
-	@$(EMACS_COMMAND) -Q \
-	  --eval '(package-build-dump-archive-contents)' \
-	  --eval '(setq user-emacs-directory (file-truename "$(SANDBOX)"))' \
-	  --eval '(setq package-user-dir (locate-user-emacs-file "elpa"))' \
-	  -l package \
-	  --eval "(add-to-list 'package-archives \
-	            '(\"gnu\" . \"https://elpa.gnu.org/packages/\") t)" \
-	  --eval "(add-to-list 'package-archives \
-	            '(\"melpa\" . \"https://melpa.org/packages/\") t)" \
-	  --eval "(add-to-list 'package-archives \
-	            '(\"sandbox\" . \"$(TOP)/$(PKGDIR)/\") t)" \
-	  --eval "(package-refresh-contents)" \
-	  --eval "(package-initialize)" \
-	  --eval '(setq sandbox-install-package "$(INSTALL)")' \
-	  --eval "(unless (string= \"\" sandbox-install-package) \
-	            (package-install (intern sandbox-install-package)))" \
-	  --eval "(when (get-buffer \"*Compile-Log*\") \
-	            (display-buffer \"*Compile-Log*\"))"
+	@$(EVAL) "(progn\
+  (package-build-dump-archive-contents)\
+  (setq user-emacs-directory (file-truename \"$(SANDBOX)\"))\
+  (setq package-user-dir (locate-user-emacs-file \"elpa\"))\
+  (add-to-list 'package-archives '(\"gnu\" . \"https://elpa.gnu.org/packages/\") t)\
+  (add-to-list 'package-archives '(\"melpa\" . \"https://melpa.org/packages/\") t)\
+  (add-to-list 'package-archives '(\"sandbox\" . \"$(TOP)/$(PKGDIR)/\") t)\
+  (package-refresh-contents)\
+  (package-initialize)\
+  (setq sandbox-install-package \"$(INSTALL)\")\
+  (unless (equal sandbox-install-package \"\")\
+    (package-install (intern sandbox-install-package)))\
+  (when (get-buffer \"*Compile-Log*\")\
+    (display-buffer \"*Compile-Log*\")))"
 
 # Local Variables:
 # outline-regexp: "#\\(#+\\)"

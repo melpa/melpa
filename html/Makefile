@@ -1,8 +1,8 @@
 SHELL  := bash
 dyn_json := recipes.json archive.json download_counts.json build-status.json
 pages  := $(notdir $(wildcard templates/pages/*.html))
-p_json := $(wildcard packages/*.json)
-p_html := $(p_json:.json=.html)
+packages_json := $(wildcard packages/*.json)
+packages_html := $(packages_json:.json=.html)
 htmldir := $(notdir $(CURDIR))
 
 all: updates.rss pages packages
@@ -38,7 +38,7 @@ downloads.json: download_counts.json ./generate-download-percentile.sh
 	@./generate-download-percentile.sh < $< > $@.tmp && mv $@.tmp $@
 
 pages: $(pages)
-packages: $(p_html)
+packages: $(packages_html)
 
 $(dyn_json):
 	curl -sS https://melpa.org/$@ > $@
@@ -47,7 +47,7 @@ livejson: $(dyn_json)
 
 clean:
 	-rm -v *.tmp
-	-rm -v $(p_html)
+	-rm -v $(packages_html)
 
 .dummy: livejson
 .PHONY: all clean packages livejson

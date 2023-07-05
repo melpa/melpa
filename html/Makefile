@@ -11,14 +11,17 @@ updates.rss: templates/updates.rss.erb packages.json
 	@echo "$(htmldir) • Rendering $@ ..."
 	@./erubi templates/updates.rss.erb > updates.rss.tmp && mv updates.rss.tmp updates.rss
 
+# Build static pages with content in templates/pages
 %.html: templates/pages/%.html templates/layout.html.erb
 	@echo "$(htmldir) • Rendering $@ ..."
 	@./erubi content_template=$< templates/layout.html.erb > $@.tmp && mv $@.tmp $@
 
+# Homepage needs to be updated when the JSON files change
 index.html: templates/pages/index.html templates/layout.html.erb total_downloads.json packages.json
 	@echo "$(htmldir) • Rendering $@ ..."
 	@./erubi content_template=$< templates/layout.html.erb > $@.tmp && mv $@.tmp $@
 
+# One HTML file for every package with a JSON file
 packages/%.html: packages/%.json templates/package.html.erb templates/layout.html.erb
 	@echo "$(htmldir) • Rendering $@ ..."
 	@./erubi pname=$* content_template=templates/package.html.erb templates/layout.html.erb > $@.tmp && mv $@.tmp $@

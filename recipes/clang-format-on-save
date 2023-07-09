@@ -1,0 +1,3 @@
+(clang-format-on-save
+  :fetcher codeberg
+  :repo "ideasman42/emacs-clang-format-on-save")

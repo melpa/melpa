@@ -236,7 +236,7 @@ such as \"1A\" or \".5\", and only supports \".\" as separator.
 The part before the first capture group should match prefixes
 commonly used in version tags.
 
-Note that this variable can be overriden in a package's recipe,
+Note that this variable can be overridden in a package's recipe,
 using the `:version-regexp' slot."
   :group 'package-build
   :type 'string)
@@ -435,9 +435,13 @@ Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING)."
             (save-excursion
               (package-build--insert-pkgfile rcp c file))
             (when-let* ((n (ignore-errors (nth 2 (read (current-buffer)))))
-                        (v (ignore-errors (version-to-list
-                                           (and (string-match regexp n)
-                                                (match-string 1 n))))))
+                        (v (ignore-errors
+                             (version-to-list
+                              (and (string-match regexp n)
+                                   ;; Use match-group 0, not 1, because in
+                                   ;; this file a version string without a
+                                   ;; prefix is expected.
+                                   (match-string 0 n))))))
               (when (and version (not (equal v version)))
                 (throw 'before-latest nil))
               (setq commit c)
@@ -665,7 +669,7 @@ Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING).
               (pop pcount))
             (when pcount
               ;; This snapshot is based on the same tag as the previous
-              ;; snapshot and, due to history rewritting, the count did
+              ;; snapshot and, due to history rewriting, the count did
               ;; not increase.
               (setq count (nreverse (cons (car count) pcount))))))
         count)
@@ -689,6 +693,33 @@ Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING).
                          (if since
                              (format "only(%s, %s)" rev since)
                            (format "ancestors(%s)" rev)))))
+
+;;;; Fallback-Count
+
+(defun package-build-fallback-count-version (rcp)
+  "Determine version string in the \"0.0.0.COUNT\" format for RCP.
+
+*Experimental* This function is still subject to change.
+
+This function implements a fallback that can be used on the
+release channel, for packages that don't do releases.  It should
+be the last element of `package-build-release-version-functions',
+and at the same time `package-build-snapshot-version-functions'
+should contain only `package-build-release+count-version'.
+
+The result of such a configuration is that, for packages that
+don't do releases, the release and snapshot channels provide
+the same \"0.0.0.COUNT\" snapshot.  That way, all packages are
+available on the release channel, which makes that channel more
+attractive to users, which might encourage maintainers to release
+more often.  In other words, this might help overcome the release
+channel's chicken and egg problem."
+  (let ((package-build-release-version-functions
+         (list (lambda (rcp)
+                 (pcase-let ((`(,scommit ,stime ,_)
+                              (package-build-timestamp-version rcp)))
+                   (list scommit stime (list 0 0)))))))
+    (package-build-release+count-version rcp)))
 
 ;;; Run Process
 
@@ -850,7 +881,7 @@ that is put in the tarball."
        (get-buffer-create "*package-build-checkout*") nil
        "-cf" tar dir
        ;; Arguments that are need to strip metadata that
-       ;; prevent a reproducable tarball as described at
+       ;; prevent a reproducible tarball as described at
        ;; https://reproducible-builds.org/docs/archives.
        "--sort=name"
        (format "--mtime=@%d" time)
@@ -1266,7 +1297,9 @@ are subsequently dumped."
          (repo (oref rcp repo))
          (fetcher (package-recipe--fetcher rcp)))
     (cond ((not noninteractive)
-           (message " • Building package %s (from %s)..." name
+           (message " • %s package %s (from %s)..."
+                    (if package-build--inhibit-build "Fetching" "Building")
+                    name
                     (if repo (format "%s:%s" fetcher repo) url)))
           (package-build-verbose
            (message "Package: %s" name)
@@ -1278,7 +1311,9 @@ are subsequently dumped."
       (package-build--package rcp)
       (when dump-archive-contents
         (package-build-dump-archive-contents)))
-    (message "Built %s in %.3fs, finished at %s" name
+    (message "%s %s in %.3fs, finished at %s"
+             (if package-build--inhibit-build "Fetched" "Built")
+             name
              (float-time (time-since start-time))
              (format-time-string "%FT%T%z" nil t))))
 

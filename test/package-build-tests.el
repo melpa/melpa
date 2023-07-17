@@ -226,7 +226,7 @@ merge-base is the last common ancestor of two commits."
     (run "1.0.0.0.2" "3ce2b15e048169dcc4193c18b5589bc90c60a32b")))
 
 (ert-deftest package-build-test-006-merge-base-required ()
-  "Due to extremely sloppy history rewritting, it is possible that
+  "Due to extremely sloppy history rewriting, it is possible that
 tags share no history at all with the branches that still exist
 in the repository.  This is the result of an upstream mistake,
 and it is not our job to fix it.  Again, we have to draw the line

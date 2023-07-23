@@ -35,11 +35,9 @@ New recipe submissions should adhere to the following guidelines:
      comments which may or may not be blockers for addition to MELPA.
 
 - One recipe per pull request :: If you have several packages to
-     submit, open several pull requests. If the packages are very
-     closely related and maintained in the same repository (see below
-     for why it might not be a good idea), you might open only
-     one pull request for them all; in this case, keep adding one
-     recipe per commit.
+     submit, open several pull requests.  If one of your packages is a
+     dependency of the others, open the pull request for that one
+     first.  Avoid circular dependencies.
 
 - Reasonably innovative package :: MELPA provides a curated set of
      Emacs Lisp packages, not an exhaustive list of every single Emacs

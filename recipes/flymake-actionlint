@@ -1,0 +1,1 @@
+(flymake-actionlint :fetcher github :repo "ROCKTAKEY/flymake-actionlint")

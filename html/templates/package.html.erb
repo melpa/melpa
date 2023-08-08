@@ -3,7 +3,7 @@ require 'json'
 require 'time'
 require 'ostruct'
 
-package = JSON.parse(File.read("packages/#{@pname}.json"), {object_class: OpenStruct})
+package = JSON.parse(File.read("packages/#{@pname}.json"), {object_class: OpenStruct})[0]
 recipes = JSON.parse(File.read("recipes.json"))
 readme = "packages/#{@pname}-readme.txt"
 %>

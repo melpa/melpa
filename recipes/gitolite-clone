@@ -1,1 +1,1 @@
-(gitolite-clone :repo "IvanMalison/gitolite-clone" :fetcher github)
+(gitolite-clone :repo "colonelpanic8/gitolite-clone" :fetcher github)

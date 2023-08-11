@@ -1,0 +1,4 @@
+(ibrowse-core
+ :fetcher sourcehut
+ :repo "ngraves/ibrowse.el"
+ :files ("ibrowse-core.el"))

@@ -1,2 +1,3 @@
 (chezmoi :fetcher github
-         :repo "tuh8888/chezmoi.el")
+         :repo "tuh8888/chezmoi.el"
+         :files ("*.el" "extensions"))

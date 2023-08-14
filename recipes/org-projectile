@@ -1,3 +1,5 @@
-(org-projectile :repo "colonelpanic8/org-projectile"
-                :fetcher github
-                :files ("org-projectile.el"))
+(org-projectile
+ :repo "colonelpanic8/org-project-capture"
+ :fetcher github
+ :files ("org-projectile.el" "org-project-capture.el"
+         "org-project-capture-backend.el"))

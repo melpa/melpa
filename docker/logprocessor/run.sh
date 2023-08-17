@@ -11,6 +11,6 @@ cd "${MELPA_REPO}"
 
 # Stable
 /usr/bin/python3 ${MELPA_REPO}/docker/logprocessor/process_log.py \
-   --db /mnt/db/download_log_stable_full.db \
-   --jsondir html-stable \
-   /mnt/store/log-stable/melpa.access.log
+  --db /mnt/db/download_log_stable_full.db \
+  --jsondir html-stable \
+  /mnt/store/log-stable/melpa.access.log

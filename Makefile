@@ -86,9 +86,7 @@ build: $(RCPDIR)/*
 $(RCPDIR)/%: .FORCE
 	@echo " • Building package $(@F) ..."
 	@exec 2>&1; exec &> >(tee $(PKGDIR)/$(@F).log); \
-	  $(TIMEOUT) $(EVAL) "(package-build-archive \"$(@F)\")" \
-	  && echo " ✓ Success:" \
-	  && ls -lsh $(PKGDIR)/$(@F)-[0-9]*
+	  $(TIMEOUT) $(EVAL) "(package-build-archive \"$(@F)\")"
 	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." \
 	  && sleep $(SLEEP) || true
 	@echo

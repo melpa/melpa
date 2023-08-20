@@ -1461,11 +1461,17 @@ in `package-build-archive-dir'."
       (delete-directory tmp-dir t nil))))
 
 (defun package-build--cleanup (rcp)
-  (cond
-   ((cl-typep rcp 'package-git-recipe)
-    (package-build--call-process rcp "git" "clean" "-f" "-d" "-x"))
-   ((cl-typep rcp 'package-hg-recipe)
-    (package-build--call-process rcp "hg" "purge" "--all" "--noninteractive"))))
+  (cond ((cl-typep rcp 'package-git-recipe)
+         (package-build--call-process rcp "git" "clean" "-f" "-d" "-x"))
+        ((cl-typep rcp 'package-hg-recipe)
+         ;; Mercurial's interface is so much better than Git's, they said.
+         (with-temp-buffer
+           (process-file "hg" nil t nil "status" "--no-status" "--unknown" "-0")
+           (mapc #'delete-file (split-string (buffer-string) "\0" t)))
+         (with-temp-buffer
+           (process-file "hg" nil t nil "status" "--no-status" "--ignored" "-0")
+           (mapc #'delete-file (split-string (buffer-string) "\0" t)))
+         (package-build--call-process rcp "hg" "purge"))))
 
 ;;;###autoload
 (defun package-build-all ()

@@ -1465,7 +1465,7 @@ in `package-build-archive-dir'."
    ((cl-typep rcp 'package-git-recipe)
     (package-build--call-process rcp "git" "clean" "-f" "-d" "-x"))
    ((cl-typep rcp 'package-hg-recipe)
-    (package-build--call-process rcp "hg" "purge" "--all" "--interactive"))))
+    (package-build--call-process rcp "hg" "purge" "--all" "--noninteractive"))))
 
 ;;;###autoload
 (defun package-build-all ()

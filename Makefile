@@ -144,6 +144,11 @@ pull-package-build:
 	-m "Merge Package-Build $$(git describe FETCH_HEAD)" \
 	--squash -P package-build FETCH_HEAD
 
+## Docker support
+
+get-pkgdir: .FORCE
+	@echo $(PKGDIR)
+
 ## Sandbox
 
 sandbox: .FORCE

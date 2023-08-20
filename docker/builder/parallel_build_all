@@ -9,6 +9,11 @@ function build_all {
     PATH=$HOME/.cabal/bin:$HOME/usr/bin:$HOME/bin:$PATH
 
     cd "/mnt/store/melpa"
+
+    PKGDIR=$(make get-pkgdir)
+    [ -e $PKGDIR/errors.log ] &&
+        mv $PKGDIR/errors.log $PKGDIR/errors-previous.log
+
     make -k -j8 $(find recipes/ -type f | sort) || true
 }
 

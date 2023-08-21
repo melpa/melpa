@@ -52,6 +52,9 @@ CHANNEL_CONFIG := "(progn\
   (setq package-build-release-version-functions\
         '(package-build-tag-version))\
   (setq package-build-badge-data '(\"melpa stable\" \"\#3e999f\")))"
+
+else
+$(error Unknown MELPA_CHANNEL: $(MELPA_CHANNEL))
 endif
 
 # You probably don't want to change this.

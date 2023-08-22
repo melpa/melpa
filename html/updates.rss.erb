@@ -41,6 +41,7 @@
         end
         package.url = "#{base_url}/packages/#{pkgname}-#{version}." + (pkgtype == "single" ? "el" : "tar")
         package.info_url = "#{base_url}/#/#{pkgname}"
+        package.homepage = info["props"]["url"]
         package
       end
       packages.sort_by { |p| p.version }.reverse[0..200].each do |package|
@@ -51,6 +52,7 @@
         <pubDate><%= package.build_time.rfc822 %></pubDate>
         <guid isPermaLink="true"><%= package.url %></guid>
         <link><%= package.info_url %></link>
+        <homepage><%= package.homepage %></homepage>
       </item>
     <% end %>
   </channel>

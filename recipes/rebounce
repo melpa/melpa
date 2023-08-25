@@ -1,0 +1,3 @@
+(rebounce
+ :fetcher github
+ :repo "liuyinz/rebounce.el")

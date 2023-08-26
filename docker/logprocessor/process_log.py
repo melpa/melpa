@@ -88,7 +88,9 @@ def parse_logfile(logfilename, conn):
 
             count += 1
         temp_csv.flush()
-        conn.execute("INSERT OR IGNORE INTO downloads SELECT DISTINCT * FROM read_csv_auto('{}', header=true, nullstr=null)".format(temp_csv.name))
+        # force_not_null doesn't seem to be available in this duckdb version, contrary to the docs, so we work around with nullstr
+        # to make sure empty strings aren't interpreted as nulls
+        conn.execute("INSERT OR IGNORE INTO downloads SELECT DISTINCT * FROM read_csv_auto('{}', header=true, nullstr='&&&&&&&')".format(temp_csv.name))
 
     return count
 

@@ -10,6 +10,8 @@ import re
 import sys
 import socket
 import struct
+import tempfile
+import csv
 
 # Installed packages
 import duckdb
@@ -55,7 +57,7 @@ def parse_log_datetime(s):
 
 EPOCH = datetime(1970,1,1)
 
-def parse_logfile(logfilename, curs):
+def parse_logfile(logfilename, conn):
     """
     """
     if logfilename.endswith("gz"):
@@ -66,21 +68,27 @@ def parse_logfile(logfilename, curs):
     logre = re.compile(LOGREGEX)
     count = 0
 
-    for line in logfile:
-        match = logre.match(line)
+    with tempfile.NamedTemporaryFile('wt') as temp_csv:
+        writer = csv.writer(temp_csv, quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(["package", "version", "date", "ip", "agent"])
+        for line in logfile:
+            match = logre.match(line)
 
-        if match is None:
-            continue
+            if match is None:
+                continue
 
-        # Convert ips to four character strings.
-        ip = ip2int(match.group('ip'))
-        pkg = match.group('package')
-        date = parse_log_datetime(match.group('date'))
-        version = match.group('version')
-        agent = match.group('agent')
+            # Convert ips to four character strings.
+            ip = ip2int(match.group('ip'))
+            pkg = match.group('package')
+            date = parse_log_datetime(match.group('date'))
+            version = match.group('version')
+            agent = match.group('agent')
 
-        curs.execute("INSERT OR IGNORE INTO downloads VALUES (?, ?, ?, ?, ?)", (pkg, version, date, ip, agent))
-        count += 1
+            writer.writerow([pkg, version, date.isoformat(), ip, agent])
+
+            count += 1
+        temp_csv.flush()
+        conn.execute("INSERT OR IGNORE INTO downloads SELECT DISTINCT * FROM read_csv_auto('{}', header=true)".format(temp_csv.name))
 
     return count
 
@@ -96,7 +104,6 @@ def main():
     args = parser.parse_args()
 
     conn = duckdb.connect(args.db)
-    curs = conn.cursor()
 
     print("Ensuring database setup")
     # We normalise common strings into separate tables along semantic lines
@@ -111,7 +118,7 @@ def main():
     # Distinct IPs              1.75M        3.5M
     # Distinct (IP, Agent):      2.2M        4.7M
     # Downloads:                174M         337M
-    curs.execute('''CREATE TABLE IF NOT EXISTS downloads
+    conn.execute('''CREATE TABLE IF NOT EXISTS downloads
                       ( package TEXT NOT NULL
                       , version TEXT NOT NULL
                       , date TIMESTAMPTZ NOT NULL
@@ -124,7 +131,7 @@ def main():
     for logfile in args.logs:
         print(("Processing logfile {0}".format(logfile)))
         start = timer()
-        count = parse_logfile(logfile, curs)
+        count = parse_logfile(logfile, conn)
         print(("-> {0} records processed in {1}s".format(count, timer() - start)))
         conn.commit()
 
@@ -132,7 +139,7 @@ def main():
 
     print("Querying totals")
     start = timer()
-    pkgcount = {p: c for p, c in curs.execute(
+    pkgcount = {p: c for p, c in conn.execute(
         "SELECT package, count(1) AS count FROM downloads GROUP by package").fetchall()}
     print(("-> Done in {}s".format(timer() - start)))
 

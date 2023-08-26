@@ -88,7 +88,7 @@ def parse_logfile(logfilename, conn):
 
             count += 1
         temp_csv.flush()
-        conn.execute("INSERT OR IGNORE INTO downloads SELECT DISTINCT * FROM read_csv_auto('{}', header=true, force_not_null=true)".format(temp_csv.name))
+        conn.execute("INSERT OR IGNORE INTO downloads SELECT DISTINCT * FROM read_csv_auto('{}', header=true, nullstr=null)".format(temp_csv.name))
 
     return count
 

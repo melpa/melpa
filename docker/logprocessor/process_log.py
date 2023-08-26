@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-
+# Standard libraries
 import argparse
 from datetime import datetime, timedelta
 from timeit import default_timer as timer
@@ -8,10 +8,13 @@ import gzip
 import json
 import re
 import sys
-import time
-import sqlite3
-from operator import or_
-from functools import reduce
+import socket
+import struct
+import tempfile
+import csv
+
+# Installed packages
+import duckdb
 
 LOGREGEX = r'^(?P<ip>[\d.]+) [ -]+ \[(?P<date>[\w/: +-]+)\] ' \
            r'"GET /+packages/+(?P<package>[^ ]+)-(?P<version>[0-9.]+).(?:el|tar) ' \
@@ -34,28 +37,8 @@ def json_dump(data, jsonfile, indent=None):
     """
     return json.dump(data, jsonfile, default=json_handler, indent=indent)
 
-
-def datetime_parser(dct):
-    for key, val in list(dct.items()):
-        if isinstance(val, list):
-            dct[key] = set(val)
-    return dct
-
-
-def json_load(jsonfile):
-    return json.load(jsonfile, object_hook=datetime_parser)
-
-
-def parse_val(val):
-    try:
-        return datetime.strptime(val, "%Y-%m-%dT%H:%M:%S")
-    except ValueError:
-        return val
-
-
-def ip_to_number(ip):
-    return reduce(or_, ((int(n) << (i*8)) for i, n in enumerate(
-        reversed(ip.split('.')))), 0)
+def ip2int(addr):
+    return struct.unpack("!I", socket.inet_aton(addr))[0]
 
 # In Python 2.7, strptime doesn't understand "%z", so we have to work around it
 OFFSET_RE = re.compile(" ([-+])([01]\d)([0-5]\d)$")
@@ -74,40 +57,40 @@ def parse_log_datetime(s):
 
 EPOCH = datetime(1970,1,1)
 
-def parse_logfile(logfilename, curs):
+def parse_logfile(logfilename, conn):
     """
     """
     if logfilename.endswith("gz"):
-        logfile = gzip.open(logfilename, 'r')
+        logfile = gzip.open(logfilename, 'rt', encoding='ascii')
     else:
         logfile = open(logfilename, 'r')
 
     logre = re.compile(LOGREGEX)
     count = 0
 
-    for line in logfile:
-        match = logre.match(line)
+    with tempfile.NamedTemporaryFile('wt') as temp_csv:
+        writer = csv.writer(temp_csv, quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(["package", "version", "date", "ip", "agent"])
+        for line in logfile:
+            match = logre.match(line)
 
-        if match is None:
-            continue
+            if match is None:
+                continue
 
-        # Convert ips to four character strings.
-        ip = match.group('ip')
-        pkg = match.group('package')
-        date = int((parse_log_datetime(match.group('date')) - EPOCH).total_seconds())
-        version = match.group('version')
-        agent = match.group('agent')
+            # Convert ips to four character strings.
+            ip = ip2int(match.group('ip'))
+            pkg = match.group('package')
+            date = parse_log_datetime(match.group('date'))
+            version = match.group('version')
+            agent = match.group('agent')
 
-        curs.execute("INSERT OR IGNORE INTO packages VALUES (?)", (pkg,))
-        package_id, = curs.execute("SELECT rowid FROM packages WHERE name = ?", (pkg,)).fetchone()
-        curs.execute("INSERT OR IGNORE INTO versions VALUES (?)", (version,))
-        version_id, = curs.execute("SELECT rowid FROM versions WHERE version = ?", (version,)).fetchone()
-        curs.execute("INSERT OR IGNORE INTO agents VALUES (?)", (agent,))
-        agent_id, = curs.execute("SELECT rowid FROM agents WHERE agent = ?;", (agent,)).fetchone()
-        curs.execute("INSERT OR IGNORE INTO clients VALUES (?, ?)", (ip, agent_id))
-        client_id, = curs.execute("SELECT rowid FROM clients WHERE ip = ? AND agent_id = ?", (ip, agent_id)).fetchone()
-        curs.execute("INSERT OR IGNORE INTO downloads VALUES (?, ?, ?, ?)", (package_id, version_id, date, client_id))
-        count += 1
+            writer.writerow([pkg, version, date.isoformat(), ip, agent])
+
+            count += 1
+        temp_csv.flush()
+        # force_not_null doesn't seem to be available in this duckdb version, contrary to the docs, so we work around with nullstr
+        # to make sure empty strings aren't interpreted as nulls
+        conn.execute("INSERT OR IGNORE INTO downloads SELECT DISTINCT * FROM read_csv_auto('{}', header=true, nullstr='&&&&&&&')".format(temp_csv.name))
 
     return count
 
@@ -122,39 +105,35 @@ def main():
                         help="HTTP access log files to parse.")
     args = parser.parse_args()
 
-    conn = sqlite3.connect(args.db)
-    curs = conn.cursor()
+    conn = duckdb.connect(args.db)
 
     print("Ensuring database setup")
     # We normalise common strings into separate tables along semantic lines
     # so that the "downloads" table is a compact set of ints.
     #
-    # As of end Jan 2020, the approximate cardinality of data is as follows:
+    # The approximate cardinality of data is as follows:
     #
-    # Packages: 4950
-    # Distinct agents: 12.5k
-    # Distinct version strings: 74k
-    # Distinct IPs 1.75M
-    # Distinct clients: 2.2M
-    # Downloads: 174M
-    curs.execute("CREATE TABLE IF NOT EXISTS versions (version TEXT, PRIMARY KEY (version))")
-    curs.execute("CREATE TABLE IF NOT EXISTS packages (name TEXT, PRIMARY KEY (name))")
-    curs.execute("CREATE TABLE IF NOT EXISTS agents (agent TEXT, PRIMARY KEY (agent))")
-    curs.execute("CREATE TABLE IF NOT EXISTS clients (ip TEXT, agent_id INT, PRIMARY KEY (ip, agent_id))")
-    curs.execute("CREATE TABLE IF NOT EXISTS downloads (pkg_id INT, version_id INT, date INT, client_id INT, PRIMARY KEY (pkg_id, version_id, date, client_id)) WITHOUT ROWID")
-    curs.execute('''
-      CREATE VIEW IF NOT EXISTS download_totals AS
-        SELECT p.name AS package, counts.count
-         FROM (SELECT pkg_id, COUNT(1) AS count FROM downloads GROUP BY pkg_id) counts
-         JOIN packages p ON p.rowid = pkg_id
-    ''')
+    #                           Jan 2020     Aug 2023
+    # Packages:                 4950         6302
+    # Distinct agents:          12.5k        21k
+    # Distinct version strings: 74k          117k
+    # Distinct IPs              1.75M        3.5M
+    # Distinct (IP, Agent):      2.2M        4.7M
+    # Downloads:                174M         337M
+    conn.execute('''CREATE TABLE IF NOT EXISTS downloads
+                      ( package TEXT NOT NULL
+                      , version TEXT NOT NULL
+                      , date TIMESTAMPTZ NOT NULL
+                      , ip UINTEGER NOT NULL
+                      , agent TEXT NOT NULL
+                      , PRIMARY KEY (package, version, date, ip, agent))''')
     conn.commit()
 
     # parse each parameter
     for logfile in args.logs:
         print(("Processing logfile {0}".format(logfile)))
         start = timer()
-        count = parse_logfile(logfile, curs)
+        count = parse_logfile(logfile, conn)
         print(("-> {0} records processed in {1}s".format(count, timer() - start)))
         conn.commit()
 
@@ -162,8 +141,8 @@ def main():
 
     print("Querying totals")
     start = timer()
-    pkgcount = {p: c for p, c in curs.execute(
-        "SELECT package, count FROM download_totals")}
+    pkgcount = {p: c for p, c in conn.execute(
+        "SELECT package, count(1) AS count FROM downloads GROUP by package").fetchall()}
     print(("-> Done in {}s".format(timer() - start)))
 
     json_dump(pkgcount, open(args.jsondir + "/download_counts.json", 'w'), indent=1)

@@ -1,0 +1,3 @@
+(verilog-ts-mode :fetcher github
+                 :repo "gmlarumbe/verilog-ext"
+                 :files ("ts-mode/verilog-ts-*.el"))

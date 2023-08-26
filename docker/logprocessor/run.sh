@@ -4,13 +4,13 @@ MELPA_REPO=/mnt/store/melpa
 cd "${MELPA_REPO}"
 
 # Unstable
-/usr/bin/python ${MELPA_REPO}/docker/logprocessor/process_log.py \
-  --db /mnt/db/download_log_full.db \
+/usr/bin/python3 ${MELPA_REPO}/docker/logprocessor/process_log.py \
+  --db /mnt/db/download_log_full.duckdb \
   --jsondir html \
   /mnt/store/log/melpa.access.log
 
 # Stable
-/usr/bin/python ${MELPA_REPO}/docker/logprocessor/process_log.py \
-   --db /mnt/db/download_log_stable_full.db \
+/usr/bin/python3 ${MELPA_REPO}/docker/logprocessor/process_log.py \
+   --db /mnt/db/download_log_stable_full.duckdb \
    --jsondir html-stable \
    /mnt/store/log-stable/melpa.access.log

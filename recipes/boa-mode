@@ -1,0 +1,4 @@
+(boa-mode
+ :fetcher github
+ :repo "boalang/syntax-highlight"
+ :files ("boa-mode.el" "boa-doc.el" "emacs-snippets"))

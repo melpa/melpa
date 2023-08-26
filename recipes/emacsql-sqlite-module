@@ -2,4 +2,8 @@
  :fetcher github
  :repo "magit/emacsql"
  :files ("emacsql-sqlite-module.el")
- :old-names (emacsql-libsqlite3))
+ :old-names (emacsql-libsqlite3)
+ ;; Starting with the next release, this library won't be distributed
+ ;; as a separate package anymore.  It's complicated, see 4872ef038db.
+ ;; Meanwhile, this kludge is need to deal with #8692.
+ :version-regexp "no-version")

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-
+# Standard libraries
 import argparse
 from datetime import datetime, timedelta
 from timeit import default_timer as timer
@@ -8,10 +8,11 @@ import gzip
 import json
 import re
 import sys
-import time
-import sqlite3
-from operator import or_
-from functools import reduce
+import socket
+import struct
+
+# Installed packages
+import duckdb
 
 LOGREGEX = r'^(?P<ip>[\d.]+) [ -]+ \[(?P<date>[\w/: +-]+)\] ' \
            r'"GET /+packages/+(?P<package>[^ ]+)-(?P<version>[0-9.]+).(?:el|tar) ' \
@@ -34,28 +35,8 @@ def json_dump(data, jsonfile, indent=None):
     """
     return json.dump(data, jsonfile, default=json_handler, indent=indent)
 
-
-def datetime_parser(dct):
-    for key, val in list(dct.items()):
-        if isinstance(val, list):
-            dct[key] = set(val)
-    return dct
-
-
-def json_load(jsonfile):
-    return json.load(jsonfile, object_hook=datetime_parser)
-
-
-def parse_val(val):
-    try:
-        return datetime.strptime(val, "%Y-%m-%dT%H:%M:%S")
-    except ValueError:
-        return val
-
-
-def ip_to_number(ip):
-    return reduce(or_, ((int(n) << (i*8)) for i, n in enumerate(
-        reversed(ip.split('.')))), 0)
+def ip2int(addr):
+    return struct.unpack("!I", socket.inet_aton(addr))[0]
 
 # In Python 2.7, strptime doesn't understand "%z", so we have to work around it
 OFFSET_RE = re.compile(" ([-+])([01]\d)([0-5]\d)$")
@@ -78,7 +59,7 @@ def parse_logfile(logfilename, curs):
     """
     """
     if logfilename.endswith("gz"):
-        logfile = gzip.open(logfilename, 'r')
+        logfile = gzip.open(logfilename, 'rt', encoding='ascii')
     else:
         logfile = open(logfilename, 'r')
 
@@ -92,21 +73,13 @@ def parse_logfile(logfilename, curs):
             continue
 
         # Convert ips to four character strings.
-        ip = match.group('ip')
+        ip = ip2int(match.group('ip'))
         pkg = match.group('package')
-        date = int((parse_log_datetime(match.group('date')) - EPOCH).total_seconds())
+        date = parse_log_datetime(match.group('date'))
         version = match.group('version')
         agent = match.group('agent')
 
-        curs.execute("INSERT OR IGNORE INTO packages VALUES (?)", (pkg,))
-        package_id, = curs.execute("SELECT rowid FROM packages WHERE name = ?", (pkg,)).fetchone()
-        curs.execute("INSERT OR IGNORE INTO versions VALUES (?)", (version,))
-        version_id, = curs.execute("SELECT rowid FROM versions WHERE version = ?", (version,)).fetchone()
-        curs.execute("INSERT OR IGNORE INTO agents VALUES (?)", (agent,))
-        agent_id, = curs.execute("SELECT rowid FROM agents WHERE agent = ?;", (agent,)).fetchone()
-        curs.execute("INSERT OR IGNORE INTO clients VALUES (?, ?)", (ip, agent_id))
-        client_id, = curs.execute("SELECT rowid FROM clients WHERE ip = ? AND agent_id = ?", (ip, agent_id)).fetchone()
-        curs.execute("INSERT OR IGNORE INTO downloads VALUES (?, ?, ?, ?)", (package_id, version_id, date, client_id))
+        curs.execute("INSERT OR IGNORE INTO downloads VALUES (?, ?, ?, ?, ?)", (pkg, version, date, ip, agent))
         count += 1
 
     return count
@@ -122,32 +95,29 @@ def main():
                         help="HTTP access log files to parse.")
     args = parser.parse_args()
 
-    conn = sqlite3.connect(args.db)
+    conn = duckdb.connect(args.db)
     curs = conn.cursor()
 
     print("Ensuring database setup")
     # We normalise common strings into separate tables along semantic lines
     # so that the "downloads" table is a compact set of ints.
     #
-    # As of end Jan 2020, the approximate cardinality of data is as follows:
+    # The approximate cardinality of data is as follows:
     #
-    # Packages: 4950
-    # Distinct agents: 12.5k
-    # Distinct version strings: 74k
-    # Distinct IPs 1.75M
-    # Distinct clients: 2.2M
-    # Downloads: 174M
-    curs.execute("CREATE TABLE IF NOT EXISTS versions (version TEXT, PRIMARY KEY (version))")
-    curs.execute("CREATE TABLE IF NOT EXISTS packages (name TEXT, PRIMARY KEY (name))")
-    curs.execute("CREATE TABLE IF NOT EXISTS agents (agent TEXT, PRIMARY KEY (agent))")
-    curs.execute("CREATE TABLE IF NOT EXISTS clients (ip TEXT, agent_id INT, PRIMARY KEY (ip, agent_id))")
-    curs.execute("CREATE TABLE IF NOT EXISTS downloads (pkg_id INT, version_id INT, date INT, client_id INT, PRIMARY KEY (pkg_id, version_id, date, client_id)) WITHOUT ROWID")
-    curs.execute('''
-      CREATE VIEW IF NOT EXISTS download_totals AS
-        SELECT p.name AS package, counts.count
-         FROM (SELECT pkg_id, COUNT(1) AS count FROM downloads GROUP BY pkg_id) counts
-         JOIN packages p ON p.rowid = pkg_id
-    ''')
+    #                           Jan 2020     Aug 2023
+    # Packages:                 4950         6302
+    # Distinct agents:          12.5k        21k
+    # Distinct version strings: 74k          117k
+    # Distinct IPs              1.75M        3.5M
+    # Distinct (IP, Agent):      2.2M        4.7M
+    # Downloads:                174M         337M
+    curs.execute('''CREATE TABLE IF NOT EXISTS downloads
+                      ( package TEXT NOT NULL
+                      , version TEXT NOT NULL
+                      , date TIMESTAMPTZ NOT NULL
+                      , ip UINTEGER NOT NULL
+                      , agent TEXT NOT NULL
+                      , PRIMARY KEY (package, version, date, ip, agent))''')
     conn.commit()
 
     # parse each parameter
@@ -163,7 +133,7 @@ def main():
     print("Querying totals")
     start = timer()
     pkgcount = {p: c for p, c in curs.execute(
-        "SELECT package, count FROM download_totals")}
+        "SELECT package, count(1) AS count FROM downloads GROUP by package").fetchall()}
     print(("-> Done in {}s".format(timer() - start)))
 
     json_dump(pkgcount, open(args.jsondir + "/download_counts.json", 'w'), indent=1)

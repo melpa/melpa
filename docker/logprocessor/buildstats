@@ -2,9 +2,11 @@
 
 THIS_DIR=$(dirname "$0")
 logdir="$1"
+shift
+parquetdir="$1"
 
-if [ -z "$logdir" ]; then
-    echo "usage: $0 logdir" >&2
+if [ -z "$logdir" ] || [ -z "$parquetdir" ]; then
+    echo "usage: $0 logdir parquetdir" >&2
     exit 1
 fi
 
@@ -21,17 +23,16 @@ function refresh_parquet() {
     echo "Checking for stale or missing parquet files..." >&2
     local logfiles=("$logdir"/**melpa.access.log*);
     for f in "${logfiles[@]}"; do
-        if [ "${f##*.}" != "parquet" ]; then
-            parquet_file="$f.parquet"
-            if ! [ "$parquet_file" -nt "$f" ]; then
-                echo "Building $parquet_file" >&2
-                p=$(mktemp)
-                logcat "$f" | "$THIS_DIR"/log_to_parquet.py > "$p"
-                mv "$p" "$parquet_file"
-            fi
+        parquet_file="$parquetdir/$(basename "$f").parquet"
+        if ! [ "$parquet_file" -nt "$f" ]; then
+            echo "Building $parquet_file" >&2
+            p=$(mktemp)
+            logcat "$f" | "$THIS_DIR"/log_to_parquet.py > "$p"
+            mv "$p" "$parquet_file"
         fi
     done
 }
 
+mkdir -p "$parquetdir"
 refresh_parquet
-"$THIS_DIR/summarise" "$logdir"
+"$THIS_DIR/summarise" "$parquetdir"

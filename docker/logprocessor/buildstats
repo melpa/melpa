@@ -13,7 +13,7 @@ fi
 logcat() {
     local logfile="$1"
     if [ "${logfile##*.}" = "gz" ]; then
-        gzcat "$logfile"
+        gunzip -c "$logfile"
     else
         cat "$logfile"
     fi

@@ -6,6 +6,7 @@ import sys
 import socket
 import struct
 import tempfile
+import csv
 
 # Installed packages
 import duckdb
@@ -18,7 +19,7 @@ def ip2int(addr):
     return struct.unpack("!I", socket.inet_aton(addr))[0]
 
 def parse_logfile():
-    duckdb.execute('''CREATE TABLE IF NOT EXISTS downloads
+    duckdb.execute('''CREATE TEMP TABLE IF NOT EXISTS downloads
                       ( package TEXT NOT NULL
                       , version TEXT NOT NULL
                       , date TIMESTAMPTZ NOT NULL
@@ -26,17 +27,23 @@ def parse_logfile():
                       , agent TEXT NOT NULL)''')
     logre = re.compile(LOGREGEX)
     count = 0
-    for line in sys.stdin:
-        match = logre.match(line)
-        if match is None:
-            continue
-        ip = ip2int(match.group('ip'))
-        pkg = match.group('package')
-        date = match.group('date')
-        version = match.group('version')
-        agent = match.group('agent')
-        duckdb.execute("INSERT INTO downloads VALUES (?, ?, strptime(?, '%d/%b/%Y:%H:%M:%S %z'), ?, ?)", (pkg, version, date, ip, agent))
-        count += 1
+    with tempfile.NamedTemporaryFile('w', suffix='.csv') as csvfile:
+        rows = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
+        rows.writerow(["package", "version", "date", "ip", "agent"])
+        for line in sys.stdin:
+            match = logre.match(line)
+            if match is None:
+                continue
+            ip = ip2int(match.group('ip'))
+            package = match.group('package')
+            date = match.group('date')
+            version = match.group('version')
+            agent = match.group('agent')
+            rows.writerow([package, version, date, ip, agent])
+            count += 1
+
+        csvfile.flush()
+        duckdb.execute(f"INSERT INTO downloads SELECT package, version, strptime(date, '%d/%b/%Y:%H:%M:%S %z'), ip, agent from read_csv_auto('{csvfile.name}', nullstr='&&&&&')")
 
     duckdb.execute("COPY downloads TO '/dev/stdout' (FORMAT PARQUET, COMPRESSION 'zstd')")
     print(f"Processed {count} downloads", file=sys.stderr)

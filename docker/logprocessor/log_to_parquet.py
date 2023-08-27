@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 
 # Standard libraries
-from datetime import datetime, timedelta
-from timeit import default_timer as timer
-import gzip
 import re
 import sys
 import socket

@@ -1,16 +1,9 @@
 #!/bin/bash -e
 
-MELPA_REPO=/mnt/store/melpa
-cd "${MELPA_REPO}"
+THIS_DIR=$(dirname "$0")
 
 # Unstable
-/usr/bin/python3 ${MELPA_REPO}/docker/logprocessor/process_log.py \
-  --db /mnt/db/download_log_full.duckdb \
-  --jsondir html \
-  /mnt/store/log/melpa.access.log
+"$THIS_DIR/buildstats" /mnt/store/log > html/download_counts_new.json
 
 # Stable
-/usr/bin/python3 ${MELPA_REPO}/docker/logprocessor/process_log.py \
-   --db /mnt/db/download_log_stable_full.duckdb \
-   --jsondir html-stable \
-   /mnt/store/log-stable/melpa.access.log
+"$THIS_DIR/buildstats" /mnt/store/log-stable > html-stable/download_counts_new.json

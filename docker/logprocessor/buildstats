@@ -1,0 +1,37 @@
+#!/bin/bash -e
+
+THIS_DIR=$(dirname "$0")
+logdir="$1"
+
+if [ -z "$logdir" ]; then
+    echo "usage: $0 logdir" >&2
+    exit 1
+fi
+
+logcat() {
+    local logfile="$1"
+    if [ "${logfile##*.}" = "gz" ]; then
+        gzcat "$logfile"
+    else
+        cat "$logfile"
+    fi
+}
+shopt -s extglob
+function refresh_parquet() {
+    echo "Checking for stale or missing parquet files..." >&2
+    local logfiles=("$logdir"/**melpa.access.log*);
+    for f in "${logfiles[@]}"; do
+        if [ "${f##*.}" != "parquet" ]; then
+            parquet_file="$f.parquet"
+            if ! [ "$parquet_file" -nt "$f" ]; then
+                echo "Building $parquet_file" >&2
+                p=$(mktemp)
+                logcat "$f" | "$THIS_DIR"/log_to_parquet.py > "$p"
+                mv "$p" "$parquet_file"
+            fi
+        fi
+    done
+}
+
+refresh_parquet
+"$THIS_DIR/summarise" "$logdir"

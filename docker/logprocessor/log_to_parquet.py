@@ -43,11 +43,5 @@ def parse_logfile():
     return count
 
 
-def main():
-    """main function"""
-    parse_logfile()
-    return 0
-
-
 if __name__ == '__main__':
-    sys.exit(main())
+    parse_logfile()

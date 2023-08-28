@@ -11,7 +11,7 @@ import csv
 # Installed packages
 import duckdb
 
-LOGREGEX = r'^(?P<ip>[\d.]+) [ -]+ \[(?P<date>[\w/: +-]+)\] ' \
+LOGREGEX = r'^(?P<ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) [ -]+ \[(?P<date>[\w/: +-]+)\] ' \
            r'"GET /+packages/+(?P<package>[^ ]+)-(?P<version>[0-9.]+).(?:el|tar) ' \
            r'HTTP/\d.\d" 200 \d+ "[^"]*?" "(?P<agent>[^"]*)'
 

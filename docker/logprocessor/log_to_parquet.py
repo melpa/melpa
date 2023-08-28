@@ -43,7 +43,7 @@ def parse_logfile():
             count += 1
 
         csvfile.flush()
-        duckdb.execute(f"INSERT INTO downloads SELECT package, version, strptime(date, '%d/%b/%Y:%H:%M:%S %z'), ip, agent from read_csv_auto('{csvfile.name}', nullstr='&&&&&')")
+        duckdb.execute(f"INSERT INTO downloads SELECT package, version, strptime(date, '%d/%b/%Y:%H:%M:%S %z'), ip, agent from read_csv_auto('{csvfile.name}', header=true, nullstr='&&&&&')")
 
     duckdb.execute("COPY downloads TO '/dev/stdout' (FORMAT PARQUET, COMPRESSION 'zstd')")
     print(f"Processed {count} downloads", file=sys.stderr)

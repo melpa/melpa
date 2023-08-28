@@ -6,9 +6,11 @@ THIS_DIR=$(dirname "$0")
 logdir="$1"
 shift
 parquetdir="$1"
+shift
+jsonfile="$1"
 
-if [ -z "$logdir" ] || [ -z "$parquetdir" ]; then
-    echo "usage: $0 logdir parquetdir" >&2
+if [ -z "$logdir" ] || [ -z "$parquetdir" ] || [ -z "$jsonfile" ]; then
+    echo "usage: $0 logdir parquetdir jsonfile" >&2
     exit 1
 fi
 
@@ -38,4 +40,4 @@ function refresh_parquet() {
 
 mkdir -p "$parquetdir"
 refresh_parquet
-"$THIS_DIR/summarise" "$parquetdir"
+"$THIS_DIR/summarise" "$parquetdir" "$jsonfile"

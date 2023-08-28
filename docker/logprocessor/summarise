@@ -9,6 +9,7 @@ from timeit import default_timer as timer
 def main():
     parser = argparse.ArgumentParser(description='MELPA Log File Parser')
     parser.add_argument('parquetdir', help='Directory of parquet files from logs')
+    parser.add_argument('jsonfile', help='Path for json summary file')
     args = parser.parse_args()
 
     print("Querying totals", file=sys.stderr)
@@ -20,7 +21,9 @@ def main():
     ''').fetchall()}
     print(("-> Done in {}s".format(timer() - start)), file=sys.stderr)
 
-    json.dump(pkgcount, sys.stdout, indent=1)
+    with open(args.jsonfile, 'w') as json_stream:
+        json.dump(pkgcount, json_stream, indent=1)
+    print(f"-> Wrote {args.jsonfile}", file=sys.stderr)
     return 0
 
 if __name__ == "__main__":

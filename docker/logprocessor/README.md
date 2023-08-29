@@ -17,7 +17,7 @@ directory.
 ### Sqlite
 
 For a while we incrementally parsed and deduplicated these logs via a
-singly Python script into a 7.6GB sqlite database, which was carefully
+single Python script into a 7.6GB sqlite database, which was carefully
 normalised and optimised.
 
 The database stored package names, versions, download timestamp,
@@ -29,16 +29,16 @@ day.
 
 ### Parquet
 
-In Aug 2023 this scheme was converted so that each server log file is
-instead summarised into a corresponding
+In Aug 2023 Steve decided to tinker, and so there appeared a new scheme in which
+each server log file is instead summarised into a corresponding
 [parquet](https://parquet.apache.org/) file, each containing an
 unnormalised list of individual downloads with the above fields. This
 resulted in 3500+ parquet files totalling only 1.9GB, since the data
 is efficiently stored in a compressed columnar format.
 
-Using [duckdb](https://duckdb.org), this tree of parquet files can be
-queried en-masse (in around 12 seconds on an M2 Macbook Air) to
-produce the download totals.
+Using [duckdb](https://duckdb.org), a tree of parquet files can be trivially
+queried en-masse to produce the download totals, which took around 12 seconds
+on an M2 Macbook Air, but longer on the server.
 
 In this scheme, the single parquet file for the current log is
 regenerated from scratch regularly, so no deduplication is

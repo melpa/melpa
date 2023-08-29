@@ -56,7 +56,7 @@ downloads. This uses vastly less storage (56MB) and fits the
 bill perfectly well.
 
 Parquet + duckdb is still convenient for totalling up all these
-numbers, at the expense needing to install `duckdb` using `pip`, but
+numbers, at the expense of needing to install `duckdb` using `pip`, but
 obviously at this stage we could simply write JSON files and total
 them up ourselves with Python. That's really what we should have
 done in the first place.

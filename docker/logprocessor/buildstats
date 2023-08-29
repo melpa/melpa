@@ -36,8 +36,19 @@ function refresh_parquet() {
     done
 }
 
-# TODO: remove parquet files that no longer have corresponding log files
+# Remove parquet files that no longer have corresponding log files
+function flush_parquet() {
+    find "$parquetdir" -type f -name '*access.log*.parquet' -print0 | while IFS= read -r -d $'\0' f; do
+        log_file="$logdir/$(realpath --relative-to "$parquetdir" "${f%.*}")"
+       # echo "looking for $log_file"
+        if ! [ -f "$log_file" ]; then
+            echo "Removing defunct parquet file: $f" >&2
+            rm "$f"
+        fi
+    done
+}
 
 mkdir -p "$parquetdir"
 refresh_parquet
+flush_parquet
 "$THIS_DIR/summarise" "$parquetdir" "$jsonfile"

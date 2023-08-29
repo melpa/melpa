@@ -15,11 +15,11 @@ def main():
     print("Querying totals", file=sys.stderr)
     start = timer()
     pkgcount = {p: c for p, c in duckdb.execute(f'''
-      WITH downloads AS (SELECT * FROM read_parquet('{args.parquetdir}/**/*.parquet'))
-      SELECT package, count(1) AS count FROM downloads
+      WITH stats AS (SELECT * FROM read_parquet('{args.parquetdir}/**/*.parquet'))
+      SELECT package, SUM(count) AS count FROM stats
       GROUP BY package;
     ''').fetchall()}
-    print(("-> Done in {}s".format(timer() - start)), file=sys.stderr)
+    print("-> Done in {}s".format(timer() - start), file=sys.stderr)
 
     with open(args.jsonfile, 'w') as json_stream:
         json.dump(pkgcount, json_stream, indent=1)

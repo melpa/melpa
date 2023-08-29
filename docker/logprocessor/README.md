@@ -52,11 +52,11 @@ per-package download totals, which need to be exported into the
 
 So after doing the fancy stuff above, we switched to just recording
 the totals in each parquet file, rather than the full list of
-downloads. This uses vastly less storage (perhaps 100M) and fits the
+downloads. This uses vastly less storage (56MB) and fits the
 bill perfectly well.
 
 Parquet + duckdb is still convenient for totalling up all these
 numbers, at the expense needing to install `duckdb` using `pip`, but
 obviously at this stage we could simply write JSON files and total
-them up ourselves with Python. That's probably what we should have
+them up ourselves with Python. That's really what we should have
 done in the first place.

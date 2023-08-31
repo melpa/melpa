@@ -1,4 +1,4 @@
 (cider :fetcher github
        :repo "clojure-emacs/cider"
-       :files ("*.el" "clojure.sh" (:exclude ".dir-locals.el"))
+       :files ("*.el" "clojure.sh" "lein.sh" (:exclude ".dir-locals.el"))
        :old-names (nrepl))

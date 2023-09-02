@@ -1,4 +1,5 @@
 (llm-openai
  :fetcher github
  :repo "ahyatt/llm"
+ :branch "melpa"
  :files ("llm-openai.el"))

@@ -1,4 +1,5 @@
 (llm-vertex
  :fetcher github
  :repo "ahyatt/llm"
+ :branch "melpa"
  :files ("llm-vertex.el"))

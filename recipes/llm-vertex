@@ -1,0 +1,4 @@
+(llm-vertex
+ :fetcher github
+ :repo "ahyatt/llm"
+ :files ("llm-vertex.el"))

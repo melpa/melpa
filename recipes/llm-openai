@@ -1,0 +1,4 @@
+(llm-openai
+ :fetcher github
+ :repo "ahyatt/llm"
+ :files ("llm-openai.el"))

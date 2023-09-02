@@ -1,0 +1,4 @@
+(llm
+ :fetcher github
+ :repo "ahyatt/llm"
+ :files ("llm.el" "llm-fake.el"))

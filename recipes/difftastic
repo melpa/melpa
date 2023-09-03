@@ -1,1 +1,1 @@
-(difft :fetcher github :repo "pkryger/difftastic.el")
+(difftastic :fetcher github :repo "pkryger/difftastic.el")

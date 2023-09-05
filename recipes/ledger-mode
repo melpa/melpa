@@ -1,5 +1,4 @@
 (ledger-mode
  :fetcher github
  :repo "ledger/ledger-mode"
- :files ("ledger*.el")
  :old-names (ldg-mode))

@@ -1,3 +1,3 @@
 (zoxide
- :fetcher gitlab
- :repo "Vonfry/zoxide.el")
+ :fetcher sourcehut
+ :repo "vonfry/zoxide.el")

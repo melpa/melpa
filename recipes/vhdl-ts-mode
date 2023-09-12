@@ -1,3 +1,1 @@
-(vhdl-ts-mode :fetcher github
-              :repo "gmlarumbe/vhdl-ext"
-              :files ("ts-mode/vhdl-ts-*.el"))
+(vhdl-ts-mode :repo "gmlarumbe/vhdl-ts-mode" :fetcher github)

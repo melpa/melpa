@@ -1,0 +1,1 @@
+(aiken-mode :fetcher github :repo "ch1bo/aiken-mode")

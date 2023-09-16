@@ -1,0 +1,4 @@
+(org-timeblock
+ :fetcher github
+ :repo "ichernyshovvv/org-timeblock"
+ :branch "master")

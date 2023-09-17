@@ -52,7 +52,7 @@
         <pubDate><%= package.build_time.rfc822 %></pubDate>
         <guid isPermaLink="true"><%= package.url %></guid>
         <link><%= package.info_url %></link>
-        <homepage><%= package.homepage %></homepage>
+        <source url="<%= package.homepage %>">Homepage</source>
       </item>
     <% end %>
   </channel>

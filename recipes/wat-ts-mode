@@ -1,0 +1,1 @@
+(wat-ts-mode :repo "nverno/wat-ts-mode" :fetcher github)

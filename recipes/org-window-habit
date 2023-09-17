@@ -1,1 +1,1 @@
-(org-window-habit :fetcher github :repo "colonelpanic8/org-window-habit.el")
+(org-window-habit :fetcher github :repo "colonelpanic8/org-window-habit")

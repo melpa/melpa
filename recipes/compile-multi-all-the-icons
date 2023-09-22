@@ -1,0 +1,3 @@
+(compile-multi-all-the-icons
+ :fetcher github :repo "mohkale/compile-multi"
+ :files ("extensions/compile-multi-all-the-icons/*.el"))

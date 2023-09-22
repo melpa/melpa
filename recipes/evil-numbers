@@ -1,2 +1,2 @@
-(evil-numbers :repo "cofi/evil-numbers" :fetcher github)
+(evil-numbers :repo "juliapath/evil-numbers" :fetcher github)
 

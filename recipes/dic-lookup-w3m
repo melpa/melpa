@@ -1,1 +1,3 @@
-(dic-lookup-w3m :fetcher github :repo "emacsorphanage/dic-lookup-w3m")
+(dic-lookup-w3m
+ :fetcher github
+ :repo "emacsattic/dic-lookup-w3m")

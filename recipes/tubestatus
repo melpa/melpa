@@ -1,0 +1,1 @@
+(tubestatus :repo "smallwat3r/tubestatus.el" :fetcher github)

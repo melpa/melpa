@@ -1,0 +1,1 @@
+(orgmdb :fetcher github :repo "isamert/orgmdb.el")

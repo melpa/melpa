@@ -1,0 +1,4 @@
+(jinx
+ :repo "minad/jinx"
+ :files (:defaults "jinx-mod.c" "emacs-module.h")
+ :fetcher github)

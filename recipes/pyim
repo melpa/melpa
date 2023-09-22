@@ -1,3 +1,1 @@
-(pyim :fetcher github
-      :repo "tumashu/pyim"
-      :files ("pyim*.el"))
+(pyim :fetcher github :repo "tumashu/pyim")

@@ -1,2 +1,0 @@
-(scalariform :fetcher github
-             :repo "zwild/scalariform")

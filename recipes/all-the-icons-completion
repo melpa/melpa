@@ -1,0 +1,2 @@
+(all-the-icons-completion :repo "iyefrat/all-the-icons-completion"
+                   :fetcher github)

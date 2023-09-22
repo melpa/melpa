@@ -1,1 +1,1 @@
-(cg :fetcher github :repo "emacsmirror/cg")
+(cg :fetcher github :repo "GrammarSoft/cg3" :files ("emacs/*.el"))

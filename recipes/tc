@@ -1,2 +1,4 @@
-(tc :repo "kanchoku/tc" :fetcher github :files
-               ("*.el" "tcode")) 
+(tc
+ :fetcher github
+ :repo "kanchoku/tc"
+ :files ("*.el" "tcode"))

@@ -1,0 +1,4 @@
+(majapahit-themes
+ :fetcher github
+ :repo "emacsmirror/majapahit-themes"
+ :old-names (majapahit-theme))

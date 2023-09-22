@@ -1,5 +1,13 @@
-(vterm :fetcher github
-	:repo "akermu/emacs-libvterm"
-    :files ("*"
-        (:exclude ".dir-locals.el" ".gitignore" ".clang-format" ".travis.yml"))
-    )
+(vterm
+ :fetcher github
+ :repo "akermu/emacs-libvterm"
+ :files ("CMakeLists.txt"
+         "elisp.c"
+         "elisp.h"
+         "emacs-module.h"
+         "etc"
+         "utf8.c"
+         "utf8.h"
+         "vterm.el"
+         "vterm-module.c"
+         "vterm-module.h"))

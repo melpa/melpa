@@ -1,3 +1,1 @@
-(e2wm-bookmark :repo "myuhe/e2wm-bookmark.el" 
-               :fetcher github 
-               :files ("e2wm-bookmark.el"))
+(e2wm-bookmark :fetcher github :repo "myuhe/e2wm-bookmark.el")

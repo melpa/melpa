@@ -1,75 +1,88 @@
-;;; package-recipe-mode.el --- Minor mode for editing package recipes  -*- lexical-binding: t -*-
+;;; package-recipe-mode.el --- Major-mode for editing package recipes  -*- lexical-binding:t; coding:utf-8 -*-
 
-;; Copyright (C) 2011-2020 Donald Ephraim Curtis <dcurtis@milkbox.net>
-;; Copyright (C) 2012-2020 Steve Purcell <steve@sanityinc.com>
-;; Copyright (C) 2016-2020 Jonas Bernoulli <jonas@bernoul.li>
-;; Copyright (C) 2009 Phil Hagelberg <technomancy@gmail.com>
+;; Copyright (C) 2011-2023 Donald Ephraim Curtis
+;; Copyright (C) 2012-2023 Steve Purcell
+;; Copyright (C) 2016-2023 Jonas Bernoulli
+;; Copyright (C) 2009 Phil Hagelberg
 
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
-;; Keywords: tools
+;; Homepage: https://github.com/melpa/package-build
+;; Keywords: maint tools
 
-;; This file is not (yet) part of GNU Emacs.
-;; However, it is distributed under the same license.
+;; SPDX-License-Identifier: GPL-3.0-or-later
 
-;; GNU Emacs is free software; you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 3, or (at your option)
-;; any later version.
-
-;; GNU Emacs is distributed in the hope that it will be useful,
+;; This file is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published
+;; by the Free Software Foundation, either version 3 of the License,
+;; or (at your option) any later version.
+;;
+;; This file is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
-
+;;
 ;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
-;; This library defines the minor mode `package-build-minor-mode',
-;; which will likely be replaced with the `emacs-lisp-mode' derived
-;; `package-recipe-mode' eventually.
+;; This library defines the major-mode `package-recipe-mode', which is
+;; used for Melpa package recipe files.
 
 ;;; Code:
 
 (require 'package-build)
 
-(defvar package-build-minor-mode-map
-  (let ((m (make-sparse-keymap)))
-    (define-key m (kbd "C-c C-c") 'package-build-current-recipe)
-    m)
-  "Keymap for `package-build-minor-mode'.")
+(defvar flycheck-checkers)
 
-(define-minor-mode package-build-minor-mode
-  "Helpful functionality for building packages."
-  nil
-  " PBuild"
-  package-build-minor-mode-map
-  (when package-build-minor-mode
-    (message "Use C-c C-c to build this recipe.")))
+;;;###autoload
+(defvar package-recipe-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-c C-c") 'package-build-current-recipe)
+    (define-key map (kbd "C-c C-n") 'package-build-create-recipe)
+    map)
+  "Keymap for `package-recipe-mode'.")
+
+;;;###autoload
+(if (fboundp 'lisp-data-mode) ; Since Emacs 28.1.
+    (define-derived-mode package-recipe-mode lisp-data-mode "Melpa-Recipe"
+      "Major mode for buffers holding Melpa package recipes."
+      :group 'package-build
+      (package-recipe-mode--enable))
+  (define-derived-mode package-recipe-mode emacs-lisp-mode "Melpa-Recipe"
+    "Major mode for buffers holding Melpa package recipes."
+    :group 'package-build
+    (package-recipe-mode--enable)))
+
+(defun package-recipe-mode--enable ()
+  (setq-local package-build-recipes-dir default-directory)
+  (setq-local package-build-working-dir (expand-file-name "../working/"))
+  (setq-local package-build-archive-dir (expand-file-name "../packages/"))
+  (setq-local flycheck-checkers nil)
+  (setq-local indent-tabs-mode nil)
+  (setq-local require-final-newline t)
+  (add-hook 'before-save-hook #'whitespace-cleanup nil t)
+  (message "%s" (substitute-command-keys "\
+Use \\[package-build-current-recipe] to build this recipe, \
+\\[package-build-create-recipe] to create a new recipe")))
 
 ;;;###autoload
 (defun package-build-create-recipe (name fetcher)
   "Create a new recipe for the package named NAME using FETCHER."
   (interactive
    (list (read-string "Package name: ")
-         (intern (completing-read "Fetcher: "
-                                  (list "git" "github" "gitlab" "hg")
+         (intern (completing-read "Fetcher: " package-recipe--fetchers
                                   nil t nil nil "github"))))
   (let ((recipe-file (expand-file-name name package-build-recipes-dir)))
     (when (file-exists-p recipe-file)
       (error "Recipe already exists"))
-    (find-file recipe-file)
-    (insert (pp-to-string `(,(intern name)
-                            :fetcher ,fetcher
-                            ,@(cl-case fetcher
-                                (github (list :repo "USER/REPO"))
-                                (t (list :url "SCM_URL_HERE"))))))
-    (emacs-lisp-mode)
-    (package-build-minor-mode)
-    (goto-char (point-min))))
+    (with-current-buffer (find-file recipe-file)
+      (save-excursion
+        (insert (format "(%s\n" name)
+                (format " :fetcher %s\n" fetcher)
+                (if (memq fetcher package-recipe--forge-fetchers)
+                    " :repo \"USER/REPO\")\n"
+                  " :url \"https://TODO\")\n"))))))
 
 ;;;###autoload
 (defun package-build-current-recipe ()
@@ -86,25 +99,19 @@
   (check-parens)
   (let ((name (file-name-nondirectory (buffer-file-name))))
     (package-build-archive name t)
-    (let ((output-buffer-name "*package-build-result*"))
+    (let ((entry (assq (intern name) (package-build-archive-alist)))
+          (output-buffer-name "*package-build-archive-entry*"))
       (with-output-to-temp-buffer output-buffer-name
         (princ ";; Please check the following package descriptor.\n")
         (princ ";; If the correct package description or dependencies are missing,\n")
         (princ ";; then the source .el file is likely malformed, and should be fixed.\n")
-        (pp (assoc (intern name) (package-build-archive-alist))))
+        (pp entry))
       (with-current-buffer output-buffer-name
-        (emacs-lisp-mode)
-        (view-mode)))
-    (when (yes-or-no-p "Install new package? ")
-      (package-install-file
-       (package-build--artifact-file
-        (assq (intern name) (package-build-archive-alist)))))))
+        (if (fboundp 'lisp-data-mode) (lisp-data-mode) (emacs-lisp-mode))
+        (view-mode))
+      (when (y-or-n-p "Install new package? ")
+        (package-install-file (package-build--artifact-file entry))
+        (pop-to-buffer (get-buffer byte-compile-log-buffer))))))
 
 (provide 'package-recipe-mode)
-
-;; Local Variables:
-;; coding: utf-8
-;; checkdoc-minor-mode: 1
-;; indent-tabs-mode: nil
-;; End:
 ;;; package-recipe-mode.el ends here

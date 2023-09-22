@@ -1,1 +1,6 @@
-(auto-indent-mode :fetcher github :repo "mattfidler/auto-indent-mode.el")
+(auto-indent-mode
+ :fetcher github
+ :repo "mattfidler/auto-indent-mode.el"
+ ;; Building the manual fails, so don't try, removing some noise that
+ ;; makes it harder to focus on issues we actually have control over.
+ :files (:defaults (:exclude "*.texi")))

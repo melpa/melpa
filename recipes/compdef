@@ -1,1 +1,1 @@
-(compdef :fetcher github :repo "wurosh/compdef")
+(compdef :fetcher github :repo "cyruseuros/compdef")

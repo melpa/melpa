@@ -1,3 +1,0 @@
-(hasky-stack
- :repo "hasky-mode/hasky-stack"
- :fetcher github)

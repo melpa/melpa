@@ -1,2 +1,1 @@
-(eslint-fix :repo "codesuki/eslint-fix"
-			:fetcher github)
+(eslint-fix :repo "codesuki/eslint-fix" :fetcher github)

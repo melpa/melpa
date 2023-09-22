@@ -1,1 +1,1 @@
-(inline-docs :fetcher github :repo "stardiviner/inline-docs.el")
+(inline-docs :fetcher git :url "https://repo.or.cz/inline-docs.git")

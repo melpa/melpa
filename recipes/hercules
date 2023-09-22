@@ -1,1 +1,1 @@
-(hercules :repo "wurosh/hercules" :fetcher github)
+(hercules :repo "cyruseuros/hercules" :fetcher github)

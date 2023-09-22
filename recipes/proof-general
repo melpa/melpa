@@ -1,9 +1,8 @@
 (proof-general
  :fetcher github
  :repo "ProofGeneral/PG"
- :branch "master"
  :files (:defaults "CHANGES" "AUTHORS" "COPYING"
                    "generic" "images" "lib"
                    ("coq" "coq/*.el")
-                   "easycrypt" "phox"
+                   "easycrypt" "phox" "qrhl"
                    "pghaskell" "pgocaml" "pgshell"))

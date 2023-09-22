@@ -1,0 +1,1 @@
+(autoscratch :repo "TLINDEN/autoscratch" :fetcher github)

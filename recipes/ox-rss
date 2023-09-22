@@ -1,0 +1,1 @@
+(ox-rss :fetcher github :repo "BenedictHW/ox-rss")

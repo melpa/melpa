@@ -1,3 +1,4 @@
-(snitch :repo "mrmekon/snitch-el"
-        :fetcher github
-        :version-regexp "snitch-\\(.*\\)")
+(snitch
+ :fetcher github
+ :repo "mrmekon/snitch-el"
+ :version-regexp "snitch-\\(.*\\)")

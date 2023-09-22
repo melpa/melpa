@@ -1,4 +1,3 @@
 (scad-mode
-	:repo "openscad/openscad"
-	:fetcher github
-	:files ("contrib/scad-mode.el"))
+ :repo "openscad/emacs-scad-mode"
+ :fetcher github)

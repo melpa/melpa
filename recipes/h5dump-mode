@@ -1,0 +1,1 @@
+(h5dump-mode :fetcher github :repo "berquist/h5dump-mode")

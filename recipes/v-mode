@@ -1,4 +1,1 @@
-(v-mode
-  :fetcher github
-  :repo "damon-kwok/v-mode"
-  :files (:defaults "etc"))
+(v-mode :fetcher github :repo "damon-kwok/v-mode")

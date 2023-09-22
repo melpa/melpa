@@ -1,4 +1,5 @@
 (wgrep-pt
  :fetcher github
  :repo "mhayashi1120/Emacs-wgrep"
- :files ("wgrep-pt.el"))
+ :files ("wgrep-pt.el")
+ :version-regexp "\\`pt-\\(.*\\)")

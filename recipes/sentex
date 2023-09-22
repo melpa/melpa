@@ -1,0 +1,2 @@
+(sentex :fetcher codeberg :repo "martianh/sentex"
+        :files (:defaults "*.eld"))

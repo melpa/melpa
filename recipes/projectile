@@ -1,4 +1,1 @@
-(projectile :repo "bbatsov/projectile"
-            :fetcher github
-            :files ("projectile.el"))
-
+(projectile :fetcher github :repo "bbatsov/projectile")

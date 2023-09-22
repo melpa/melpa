@@ -1,0 +1,1 @@
+(session-async :fetcher codeberg :repo "FelipeLema/session-async.el")

@@ -1,1 +1,1 @@
-(vcsh :fetcher gitlab :repo "stepnem/vcsh-el")
+(vcsh :fetcher git :url "https://git.smrk.net/vcsh.el")

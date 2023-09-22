@@ -1,0 +1,3 @@
+(flycheck-falco-rules
+ :fetcher github
+ :repo "falcosecurity/flycheck-falco-rules")

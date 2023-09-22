@@ -1,3 +1,1 @@
-(tray
- :fetcher git
- :url "https://git.sr.ht/~tarsius/tray")
+(tray :fetcher sourcehut :repo "tarsius/tray")

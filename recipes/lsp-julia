@@ -1,3 +1,3 @@
 (lsp-julia :fetcher github
-           :repo "non-Jedi/lsp-julia"
+           :repo "gdkrmr/lsp-julia"
            :files (:defaults "languageserver"))

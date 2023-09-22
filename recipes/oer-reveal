@@ -1,4 +1,4 @@
 (oer-reveal
- :repo "oer/oer-reveal"
  :fetcher gitlab
+ :repo "oer/oer-reveal"
  :files (:defaults "README*" "LICENSE*" "org" "css" "title-slide" "examples"))

@@ -1,1 +1,1 @@
-(reformatter :repo "purcell/reformatter.el" :fetcher github)
+(reformatter :repo "purcell/emacs-reformatter" :fetcher github)

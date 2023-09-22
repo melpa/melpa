@@ -1,4 +1,4 @@
 (buster-snippets
- :repo "magnars/buster-snippets.el"
  :fetcher github
+ :repo "magnars/buster-snippets.el"
  :files ("*.el" "snippets"))

@@ -1,0 +1,9 @@
+(chronometrist-key-values
+ :fetcher codeberg
+ :repo "contrapunctus/chronometrist"
+ :branch "dev"
+ :files (:defaults
+         "elisp/*.el"
+         "elisp/*.org"
+         (:exclude "elisp/chronometrist.*"
+                   "elisp/chronometrist-goal*")))

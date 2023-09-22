@@ -1,1 +1,1 @@
-(expand-line :repo "zhangkaiyulw/expand-line" :fetcher github)
+(expand-line :repo "victorteokw/expand-line" :fetcher github)

@@ -1,4 +1,5 @@
 (friendly-shell :repo "p3r7/friendly-shell"
                 :fetcher github
                 :files (:defaults
-                        (:exclude "friendly-shell-command.el" "friendly-remote-shell.el")))
+                        (:exclude "friendly-shell-command.el"
+                                  "friendly-remote-shell.el")))

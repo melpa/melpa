@@ -1,0 +1,3 @@
+(affe
+ :repo "minad/affe"
+ :fetcher github)

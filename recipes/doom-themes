@@ -1,1 +1,7 @@
-(doom-themes :repo "hlissner/emacs-doom-themes" :fetcher github :files (:defaults "themes/*.el"))
+(doom-themes 
+ :fetcher github 
+ :repo "doomemacs/themes"
+ :files (:defaults 
+         "themes/*.el"
+         "themes/*/*.el"
+         "extensions/*.el"))

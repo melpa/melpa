@@ -1,0 +1,4 @@
+(langtool-ignore-fonts
+ :fetcher github
+ :repo "cjl8zf/langtool-ignore-fonts"
+ :files (:defaults (:exclude "doc/*")))

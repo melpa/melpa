@@ -1,0 +1,2 @@
+(gitstatus :repo "igorepst/gitstatus-el"
+           :fetcher github)

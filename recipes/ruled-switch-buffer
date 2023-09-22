@@ -1,0 +1,1 @@
+(ruled-switch-buffer :repo "kzkn/ruled-switch-buffer" :fetcher github)

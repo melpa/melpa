@@ -1,4 +1,3 @@
-(bbdb
- :url "https://git.savannah.nongnu.org/git/bbdb.git"
- :fetcher git
- :files ("lisp/*.el*" "doc/*.texi"))
+(bbdb :fetcher git
+      :url "https://git.savannah.nongnu.org/git/bbdb.git"
+      :files (:defaults "lisp/bbdb-site.el.in"))

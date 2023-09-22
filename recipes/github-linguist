@@ -1,0 +1,1 @@
+(github-linguist :fetcher github :repo "akirak/github-linguist.el")

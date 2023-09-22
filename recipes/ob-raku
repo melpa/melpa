@@ -1,0 +1,2 @@
+(ob-raku :fetcher github :repo "masukomi/ob-raku")
+

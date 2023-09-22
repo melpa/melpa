@@ -1,1 +1,1 @@
-(s :fetcher github :repo "magnars/s.el" :files ("s.el"))
+(s :fetcher github :repo "magnars/s.el")

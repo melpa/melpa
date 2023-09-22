@@ -1,0 +1,2 @@
+(ox-gist :repo "punchagan/ox-gist"
+         :fetcher github)

@@ -1,1 +1,1 @@
-(parse-it :repo "jcs-elpa/parse-it" :fetcher github)
+(parse-it :repo "jcs-elpa/parse-it" :fetcher github :files (:defaults "langs/*.el"))

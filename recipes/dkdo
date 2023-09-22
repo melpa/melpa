@@ -1,1 +1,4 @@
-(dkdo :fetcher github :repo "davidkeegan/dkdo" :files ("*.el" "*.texi" "dir" "*.do"))
+(dkdo
+ :fetcher github
+ :repo "davidkeegan/dkdo"
+ :files ("*.el" "*.texi" "dir" "*.do"))

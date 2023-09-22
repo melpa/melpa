@@ -1,0 +1,4 @@
+(pyim-smzmdict
+ :fetcher github
+ :repo "ba11aStone/pyim-smzmdict"
+ :files (:defaults "*.pyim"))

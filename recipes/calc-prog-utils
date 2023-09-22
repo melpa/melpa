@@ -1,0 +1,2 @@
+(calc-prog-utils :fetcher github
+                 :repo "Jesse-Millwood/calc-prog-utils")

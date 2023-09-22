@@ -1,12 +1,18 @@
 <h1>Getting started</h1>
 <section>
       <a name="installing"></a>
-      <h2>Installing</h2>
+      <h2>Installing Melpa</h2>
 
       <p>To use the MELPA repository, you'll need an Emacs with
         <code>package.el</code> and TLS support, ie. Emacs 24.1 or
         greater. To test TLS support you can visit a HTTPS URL, for
         example with <code>M-x eww RET https://wikipedia.org RET</code>.
+      </p>
+
+      <p>
+        Consider using Emacs 26.3 or greater; otherwise you will have
+        to add a kludge to work around a bug described in
+        <a href="#knownIssues">Known Issues</a> below.
       </p>
 
       <p>
@@ -31,6 +37,8 @@
         <code>M-x package-install</code> or similar.
       </p>
 
+      <h3>Installing Melpa Stable</h2>
+
       <p>
         To use the <a href="https://stable.melpa.org" title="MELPA Stable">
           stable package repository</a> instead of the default
@@ -40,6 +48,17 @@
 
       <pre><code>(add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)</code></pre>
+
+      <h3>Installing a package</h2>
+
+      <p>
+        To install a package run <code>M-x package-install</code>.
+        See <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html">
+        Package Installation</a> for details about that and
+        <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Packages.html">
+        Emacs Lisp Packages</a> for even more information about Emacs'
+        package manager.
+      </p>
 
       <h3>Customizations</h3>
       <p>
@@ -83,11 +102,10 @@
         <dt><code>package-archive-exclude-alist</code></dt>
         <dd>
           <p>
-            Alist of packages excluded by <code> package-filter
-            </code>. The format is <code>(ARCHIVE . PACKAGE
-            ...)</code>, where <code>ARCHIVE</code> is a string
-            matching an archive name
-            in</code>package-archives</code>, <code>PACKAGE</code> is
+            Alist of packages excluded by <code>package-filter</code>.
+            The format is <code>(ARCHIVE . PACKAGE ...)</code>, where
+            <code>ARCHIVE</code> is a string matching an archive name
+            in <code>package-archives</code>, <code>PACKAGE</code> is
             a symbol of a package in that archive to exclude.</p>
           <p>
             Any specified package is excluded regardless of the value
@@ -97,23 +115,35 @@
       </dl>
     </section>
     <section>
-      <a name="known-issues"></a>
-      <h2>Known Issues</h2>
-      <p>
-        <strong>Note:</strong> <em>These fixes are included in
-        the <code>package-filter.el</code> package.</em>
+      <h2 id="knownIssues">Known Issues</h2>
+      <h3>Failed to download ‘MELPA’ archive</h3>
+      <p>This occasionally happens when using Emacs &#60;= 26.2
+        with Gnutls &#62;= 3.6.  The recommended fix is to update to
+        Emacs 26.3 or greater.  Alternatively you can disable TLS1.3
+        by adding the following setting early in your init file.  For
+        more information
+        see <a href="https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341">Emacs
+        bug#34341</a>.
       </p>
+      <pre><code>(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")</code></pre>
+
+      <h3>Dependency order is reversed</h3>
       <p>
         There is a small bug in Emacs 24’s <code>package.el</code> such
         that the dependency order comes out backwards. The problem is
         patched by some <em>advice</em>.
       </p>
 
-      <pre><code> (defadvice package-compute-transaction
-  (before package-compute-transaction-reverse (package-list requirements) activate compile)
-    "reverse the requirements"
-    (setq requirements (reverse requirements))
-    (print requirements))</code></pre>
+      <pre><code>(defadvice package-compute-transaction
+    (around package-compute-transaction-fix activate)
+  "Fix order of requirements."
+  (let ((package-list (ad-get-arg 0)))
+    (let (package-list)
+      (ad-set-args 0 (list nil  (ad-get-arg 1)))
+      ad-do-it)
+    (dolist (elt (nreverse ad-return-value))
+      (setq package-list (cons elt (delq elt package-list))))
+    (setq ad-return-value package-list)))</code></pre>
     </section>
     <section>
       <a name="updating"></a>
@@ -134,9 +164,10 @@
       <a name="adding"></a>
       <h2>Adding a Package</h2>
       <p>
-	In so many words, fork the project's source tree
-	and create a pull request with a recipe for your package.
-	The <a href="https://github.com/melpa/melpa/blob/master/README.md">README.md</a> file on GitHub has more details.
+        In so many words, fork the project's source tree and create a
+        pull request with a recipe for your package.
+        The <a href="https://github.com/melpa/melpa/blob/master/README.md">README.md</a>
+        file on GitHub has more details.
       </p>
       <a name="development"></a>
       <h2>Development</h2>

@@ -1,0 +1,3 @@
+(kkp
+ :fetcher github
+ :repo "benjaminor/kkp")

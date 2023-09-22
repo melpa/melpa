@@ -1,0 +1,1 @@
+(consult-hatena-bookmark :fetcher github :repo "Nyoho/consult-hatena-bookmark")

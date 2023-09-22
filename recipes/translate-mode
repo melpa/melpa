@@ -1,0 +1,1 @@
+(translate-mode :repo "rayw000/translate-mode" :fetcher github)

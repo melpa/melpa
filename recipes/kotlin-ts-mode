@@ -1,0 +1,1 @@
+(kotlin-ts-mode :fetcher gitlab :repo "bricka/emacs-kotlin-ts-mode")

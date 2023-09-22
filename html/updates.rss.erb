@@ -3,11 +3,19 @@
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/"
    xmlns:atom="http://www.w3.org/2005/Atom">
-<% base_url = "https://melpa.org/" %>
+  <%
+    repo_title = "MELPA"
+    base_url = "https://melpa.org"
+
+    if File.absolute_path(__FILE__).include? "html-stable"
+      repo_title = "MELPA Stable"
+      base_url = "https://stable.melpa.org"
+    end
+  %>
   <channel>
-    <title>MELPA package updates</title>
-    <link>https://melpa.org</link>
-    <atom:link href="<%= base_url %>updates.rss" rel="self" type="application/rss+xml" />
+    <title><%= repo_title %> package updates</title>
+    <link><%= base_url %></link>
+    <atom:link href="<%= base_url %>/updates.rss" rel="self" type="application/rss+xml" />
     <language>en-us</language>
     <ttl>40</ttl>
     <description>News about package updates</description>
@@ -31,8 +39,8 @@
         rescue ArgumentError
         package.build_time = Time.now()
         end
-        package.url = "#{base_url}packages/#{pkgname}-#{version}." + (pkgtype == "single" ? "el" : "tar")
-        package.info_url = "#{base_url}#/#{pkgname}"
+        package.url = "#{base_url}/packages/#{pkgname}-#{version}." + (pkgtype == "single" ? "el" : "tar")
+        package.info_url = "#{base_url}/#/#{pkgname}"
         package
       end
       packages.sort_by { |p| p.version }.reverse[0..200].each do |package|

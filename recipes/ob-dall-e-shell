@@ -1,0 +1,4 @@
+(ob-dall-e-shell
+ :fetcher github
+ :repo "xenodium/chatgpt-shell"
+ :files ("ob-dall-e-shell.el"))

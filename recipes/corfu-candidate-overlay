@@ -1,0 +1,2 @@
+(corfu-candidate-overlay :url "https://code.bsdgeek.org/adam/corfu-candidate-overlay"
+                         :fetcher git)

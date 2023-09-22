@@ -1,1 +1,1 @@
-(magit-vcsh :fetcher gitlab :repo "stepnem/magit-vcsh-el")
+(magit-vcsh :fetcher git :url "https://git.smrk.net/magit-vcsh.el")

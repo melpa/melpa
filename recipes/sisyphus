@@ -1,0 +1,1 @@
+(sisyphus :fetcher github :repo "magit/sisyphus")

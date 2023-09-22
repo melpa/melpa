@@ -1,0 +1,2 @@
+(fb2-reader :fetcher github
+              :repo "jumper047/fb2-reader")

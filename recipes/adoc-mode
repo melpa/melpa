@@ -1,1 +1,1 @@
-(adoc-mode :fetcher github :repo "sensorflo/adoc-mode" :files ("adoc-mode.el"))
+(adoc-mode :fetcher github :repo "bbatsov/adoc-mode")

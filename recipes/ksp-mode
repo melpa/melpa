@@ -1,0 +1,1 @@
+(ksp-mode :fetcher github :repo "youngker/ksp-mode.el")

@@ -1,0 +1,1 @@
+(insecure-lock :repo "kchanqvq/insecure-lock" :fetcher github)

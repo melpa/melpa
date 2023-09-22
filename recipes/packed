@@ -1,1 +1,1 @@
-(packed :repo "emacscollective/packed" :fetcher github :files ("packed.el"))
+(packed :fetcher github :repo "emacsorphanage/packed")

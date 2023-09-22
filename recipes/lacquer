@@ -1,0 +1,1 @@
+(lacquer :repo "zakudriver/lacquer" :fetcher github)

@@ -1,4 +1,1 @@
-(elmine
-  :repo "leoc/elmine"
-  :fetcher github
-  :files ("elmine.el"))
+(elmine :fetcher github :repo "leoc/elmine")

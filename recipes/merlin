@@ -1,3 +1,6 @@
 (merlin :fetcher github
         :repo "ocaml/merlin"
-        :files ("emacs/*.el"))
+        :files ("emacs/*.el"
+                (:exclude "emacs/merlin-ac.el"
+                          "emacs/merlin-company.el"
+                          "emacs/merlin-iedit.el")))

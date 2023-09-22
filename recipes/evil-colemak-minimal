@@ -1,4 +1,2 @@
-(evil-colemak-minimal
- :repo "bmallred/evil-colemak-minimal"
- :fetcher github
- :files ("evil-colemak-minimal.el"))
+(evil-colemak-minimal :fetcher github
+                      :repo "bmallred/evil-colemak-minimal")

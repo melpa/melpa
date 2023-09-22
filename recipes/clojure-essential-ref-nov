@@ -1,4 +1,4 @@
-(clojure-essential-ref-nov :repo "p3r7/clojure-essential-ref"
-                           :fetcher github
-                           :files (:defaults
-                                   (:exclude "clojure-essential-ref.el")))
+(clojure-essential-ref-nov
+ :fetcher github
+ :repo "p3r7/clojure-essential-ref"
+ :files (:defaults (:exclude "clojure-essential-ref.el")))

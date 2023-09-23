@@ -1,2 +1,2 @@
-(elune-theme :repo "xcatalyst/elune-theme"
+(elune-theme :repo "hsnovel/elune-theme"
               :fetcher github)

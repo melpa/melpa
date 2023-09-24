@@ -1,0 +1,4 @@
+(mermaid-docker-mode
+ :fetcher github
+ :repo "keyweeusr/mermaid-docker-mode"
+ :commit "6e74d7d651f1a6131a19b14889eb7e81ad332a96")

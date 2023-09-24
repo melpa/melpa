@@ -1,0 +1,4 @@
+(decor
+ :fetcher github
+ :repo "keyweeusr/decor"
+ :commit "b06f779df72bcc8f3005b51383485c42e544cffb")

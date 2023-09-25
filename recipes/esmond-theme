@@ -1,2 +1,2 @@
-(esmond-theme :repo "xcatalyst/esmond-theme"
+(esmond-theme :repo "hsnovel/esmond-theme"
               :fetcher github)

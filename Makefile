@@ -77,10 +77,12 @@ $(addprefix -L ,$(LOAD_PATH)) \
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
 
-.PHONY: clean build json html sandbox
+.PHONY: clean build summarise json html sandbox
 .FORCE:
 
-all: build archive-contents json html
+all: build summarise
+
+summarise: archive-contents json html
 
 ## Build
 

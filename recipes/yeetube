@@ -1,1 +1,1 @@
-(yeetube :fetcher sourcehut :repo "thanosapollo/yeetube.el")
+(yeetube :fetcher git :url "https://git.thanosapollo.com/yeetube")

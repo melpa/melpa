@@ -1,4 +1,1 @@
-(aangit
- :fetcher github
- :repo "stephenwithav/aangit"
- :files ("aangit.el"))
+(aangit :fetcher github :repo "stephenwithav/aangit")

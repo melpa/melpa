@@ -210,7 +210,7 @@ applied.  This setting requires
 
 (defcustom package-build-tar-executable "tar"
   "Path to a (preferably GNU) tar command.
-Certain package names (e.g. \"@\") may not work properly with a BSD tar.
+Certain package names (e.g., \"@\") may not work properly with a BSD tar.
 
 On MacOS it is possible to install coreutils using Homebrew or
 similar, which will provide the GNU timeout program as
@@ -1578,8 +1578,7 @@ If optional PRETTY-PRINT is non-nil, then pretty-print
                ,@(when-let* ((branch (oref recipe branch)))
                    (list :branch branch)))
              vc-pkgs))))))
-    (setq entries (cl-sort entries #'string<
-                           :key (lambda (e) (symbol-name (car e)))))
+    (setq entries (cl-sort entries #'string< :key #'car))
     (with-temp-file (or file (expand-file-name "archive-contents"))
       (let ((print-level nil)
             (print-length nil))
@@ -1591,6 +1590,7 @@ If optional PRETTY-PRINT is non-nil, then pretty-print
             (insert " ")
             (prin1 entry (current-buffer)))
           (insert ")\n"))))
+    (setq vc-pkgs (cl-sort vc-pkgs #'string< :key #'car))
     (with-temp-file (expand-file-name "elpa-packages.eld"
                                       (and file (file-name-nondirectory file)))
       (let ((print-level nil)

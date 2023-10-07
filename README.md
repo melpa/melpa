@@ -114,7 +114,7 @@ the following form (`[...]` denotes optional or conditional values),
 
   Melpa supports the Git and Mercurial version control systems and
   provides generic fetcher types for them: `git` and `hg`. When you
-  use one of these fetchers, you most specify the `:url` property.
+  use one of these fetchers, you must specify the `:url` property.
 
   Melpa also provides dedicated fetchers for certain Git forges (aka
   "Git repository hosting platforms"), which should always be

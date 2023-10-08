@@ -1,0 +1,3 @@
+(org-newtab :fetcher github
+            :repo "Zweihander-Main/org-newtab"
+            :files ("lisp/org-newtab*.el"))

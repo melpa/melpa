@@ -1,0 +1,4 @@
+(go-mode
+ :fetcher github
+ :repo "ccqpein/code-it-later-mode"
+ :files ("*.el"))

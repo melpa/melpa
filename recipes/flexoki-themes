@@ -1,3 +1,2 @@
 (flexoki-themes :fetcher github
-                :repo "crmsnbleyd/flexoki-emacs-theme"
-                :branch "trunk")
+                :repo "crmsnbleyd/flexoki-emacs-theme")

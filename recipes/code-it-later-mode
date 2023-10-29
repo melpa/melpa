@@ -1,4 +1,3 @@
 (code-it-later-mode
  :fetcher github
- :repo "ccqpein/code-it-later-mode"
- :files ("*.el"))
+ :repo "ccqpein/code-it-later-mode")

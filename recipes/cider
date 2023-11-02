@@ -1,7 +1,7 @@
 (cider :fetcher github
        :repo "clojure-emacs/cider"
        :files (;; new code layout:
-               "lisp/*.el" "script/*.sh"
+               "lisp/*.el" "bin/*.sh"
                ;; old code layout - will be kept for a while during the transition:
                "*.el" "clojure.sh" "lein.sh" (:exclude ".dir-locals.el"))
        :old-names (nrepl))

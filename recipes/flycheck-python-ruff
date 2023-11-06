@@ -1,0 +1,1 @@
+(flycheck-python-ruff :repo "v4n6/flycheck-python-ruff" :fetcher github)

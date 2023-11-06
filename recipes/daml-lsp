@@ -1,0 +1,2 @@
+(daml-lsp :repo "bartfailt/daml-lsp"
+          :fetcher github)

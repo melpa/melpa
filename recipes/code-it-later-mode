@@ -1,3 +1,0 @@
-(code-it-later-mode
- :fetcher github
- :repo "ccqpein/code-it-later-mode")

@@ -1,1 +1,4 @@
-(dtext-mode :fetcher github :repo "JohnDevlopment/dtext-mode.el")
+(dtext-mode
+ :fetcher github
+ :repo "JohnDevlopment/dtext-mode.el"
+ :version-regexp "[^0-9]*\\(.*\\(?:\\(?:\\(?:alph\\|bet\\)a\\)\\)?\\)")

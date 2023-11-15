@@ -1,0 +1,1 @@
+(onlyonce :repo "Kyure-A/onlyonce.el" :fetcher github)

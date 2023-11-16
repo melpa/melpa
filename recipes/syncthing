@@ -1,4 +1,4 @@
 (syncthing
  :fetcher github
  :repo "keyweeusr/emacs-syncthing"
- :commit "fa4ccdab2799857f2a6a25b87fa70e583bc7fb31")
+ :commit "214fcee3c87d6a8d8ee5cd3cf290fa59b273ff14")

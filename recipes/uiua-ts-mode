@@ -1,1 +1,1 @@
-(uiua-ts-mode :fetcher github :repo "crmsnbleyd/uiua-mode" :files ("uiua-ts-mode.el"))
+(uiua-ts-mode :fetcher github :repo "crmsnbleyd/uiua-ts-mode")

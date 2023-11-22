@@ -1,4 +1,3 @@
 (typewriter-roll-mode
  :fetcher github
- :repo "KeyWeeUsr/typewriter-roll-mode"
- :commit "3114d05731517d40972e2ed896806b25bdc0d8c2")
+ :repo "KeyWeeUsr/typewriter-roll-mode")

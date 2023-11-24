@@ -1,1 +1,1 @@
-{lambda-line :fetcher github :repo "Lambda-Emacs/lambda-line"}
+(lambda-line :fetcher github :repo "Lambda-Emacs/lambda-line")

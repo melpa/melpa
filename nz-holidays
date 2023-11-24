@@ -1,0 +1,5 @@
+(nz-holidays
+  :fetcher github
+  :repo "oscarfono/nz-holidays"
+  :files "nz-holidays.el"
+)

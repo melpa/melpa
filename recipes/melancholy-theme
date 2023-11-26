@@ -1,1 +1,5 @@
-(melancholy-theme :repo "baaash/melancholy-theme" :fetcher gitlab)
+(melancholy-theme
+  :fetcher github
+  :repo "oscarfono/melancholy-theme"
+  :files "melancholy-theme.el"
+)

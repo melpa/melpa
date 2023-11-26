@@ -1,0 +1,1 @@
+(lsp-shader :repo "shader-ls/lsp-shader" :fetcher github)

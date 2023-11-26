@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block content %}
+<div>
+  <section class="page-header">
+    <h1><span>MELPA</span> <small>(Milkypostman’s Emacs Lisp
+    Package Archive)</small></h1>
+  </section>
+  <div class="row">
+    <div class="col-md-8">
+      <section class="jumbotron">
+        <ul>
+          <li><strong>Up-to-date packages built on our servers from upstream source</strong></li>
+          <li><strong>Installable in any Emacs with 'package.el'</strong> - no local version-control tools needed</li>
+          <li><strong>Curated</strong> - no obsolete, renamed, forked or randomly hacked packages</li>
+          <li><strong>Comprehensive</strong> - more packages than any other archive</li>
+          <li><strong>Automatic updates</strong> - new commits result in new packages</li>
+          <li><strong>Extensible</strong> - contribute new recipes, and we'll build the packages</li>
+        </ul>
+      </section>
+    </div>
+    <div class="col-md-4">
+      <div class="alert alert-warning">
+        <strong>Current build started:</strong> <span>an hour
+        ago</span><span>, last took 2 hours</span>
+      </div>
+    </div>
+  </div>
+  <section id="packages">
+    <form method="get">
+    <h2>Current List of {{ total_packages }} Packages <small>{{ downloads }} downloads to date</small></h2>
+    <p><input type="search" placeholder="Enter search terms"
+    autofocus="" class="form-control" name="q" value="{{ q }}"><span class=
+    "help-block">{{ match_count }} matching package(s)</span></p>
+    <table id="package-list" class=
+    "table table-bordered table-responsive table-hover">
+      <thead>
+        <tr>
+          <th class="sortable">Package<span class="glyphicon glyphicon-chevron-down"></span></th>
+          <th class="sortable">Description<span class="glyphicon glyphicon-minus"></span></th>
+          <th class="sortable">Version<span class="glyphicon glyphicon-minus"></span></th>
+          <th>Recipe</th>
+          <th class="sortable">Source<span class="glyphicon glyphicon-minus"></span></th>
+          <th class="sortable">DLs<span class="glyphicon glyphicon-minus"></span></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for package in packages %}
+        <tr>
+          <td>
+            <a href="/p/{{package.name}}">{{package.name}}</a>
+          </td>
+          <td>
+            <a href="/p/{{package.name}}">{{package.description}}</a>
+          </td>
+          <td class="version">
+            <a href=
+            "{{package.download_url}}">{{package.version}}
+            <span class=
+            "glyphicon glyphicon-download"></span></a>
+          </td>
+          <td class="recipe">
+            <a href=
+            "{{package.recipe_url}}">
+            <span class=
+            "glyphicon glyphicon-cutlery"></span></a>
+          </td>
+          <td class="source">
+            <a href=
+            "{{package.source_url}}">
+            {{package.fetcher}}</a>
+          </td>
+          <td>{{package.downloads}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </form>
+  </section>
+</div>
+{% endblock %}

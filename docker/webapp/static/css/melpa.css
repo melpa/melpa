@@ -1,0 +1,50 @@
+body {
+  padding-top: 60px;
+  padding-bottom: 200px;
+}
+h1, .navbar, .navbar .brand, .navbar a, .navbar .nav>li>a {
+  color: #922793;
+}
+.stable h1, .stable .navbar, .stable .navbar .brand, .stable .navbar a, .stable .navbar .nav>li>a {
+  color: #3e999f;
+}
+.table .text-right {
+  text-align: right;
+}
+header.navbar {
+  background-color: #fafafa;
+}
+footer {
+  margin-top: 4em;
+}
+pre code { /* Match highlight.js styles to bootstrap */
+  padding: 0;
+  background: transparent;
+}
+#package-list th .glyphicon {
+  padding-left: 1em;
+}
+#package-list th, #package-list td.version, #package-list td.recipe {
+  white-space: nowrap;
+}
+#package-list td a:link {
+  display: block;
+}
+.jumbotron {
+  font-size: 18px;
+  line-height: 30px;
+}
+a {
+  cursor: pointer;
+}
+a[name] { /* Stop navbar from hiding anchors */
+  padding-top: 60px;
+  margin-top: -60px;
+  display: inline-block; /* required for webkit browsers */
+}
+.muted {
+  color: #999;
+}
+.sortable {
+  cursor: pointer;
+}

@@ -38,3 +38,5 @@
 /service/caddy/.caddy
 /sync
 /working/
+/**/.direnv
+/**/__pycache__

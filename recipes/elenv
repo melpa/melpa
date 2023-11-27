@@ -1,0 +1,1 @@
+(elenv :repo "jcs-elpa/elenv" :fetcher github)

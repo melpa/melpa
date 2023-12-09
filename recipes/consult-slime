@@ -1,0 +1,1 @@
+(consult-slime :repo "Junker/consult-slime" :fetcher github)

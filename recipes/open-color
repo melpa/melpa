@@ -1,1 +1,1 @@
-(open-color :repo "a13/open-color.el" :fetcher github :files "open-color.el")
+(open-color :repo "a13/open-color.el" :fetcher github)

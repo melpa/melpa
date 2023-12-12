@@ -1,0 +1,3 @@
+(completing-read-sly
+ :fetcher github
+ :repo "enzuru/completing-read-sly")

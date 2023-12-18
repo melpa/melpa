@@ -1,1 +1,1 @@
-(jiroscope :fetcher github :repo "Duckonaut/jiroscope" :files ("jiroscope/*.el"))
+(jirascope :fetcher github :repo "Duckonaut/jirascope" :files ("jirascope/*.el"))

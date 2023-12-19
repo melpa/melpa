@@ -1,1 +1,1 @@
-(jmespath :fetcher github :repo "UnresolvedCold/jmespath" :files ("*.el"))
+(jmespath :repo "UnresolvedCold/jmespath" :fetcher github)

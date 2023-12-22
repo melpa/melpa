@@ -1,0 +1,1 @@
+(youdotcom :repo "SamuelVanie/youdotcom.el" :fetcher github)

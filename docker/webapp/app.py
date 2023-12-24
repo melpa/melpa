@@ -9,9 +9,11 @@
 #  - entity-quote package URLs containing +
 #  - case-insensitive search
 #  - gist recipes
-from flask import Flask
-from flask import render_template
-from flask import request
+
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 import json
 import os
 import datetime
@@ -63,7 +65,6 @@ def calculate_source_url(recipe, commit):
                       url_match(r'^(https?:\/\/[^.]+\.googlecode\.com\/)') or
                       url_match(r'^https:\/\/git\.code\.sf\.net\/p\/([^\/]+)', "https://sourceforge.net/p/") or
                       url_match(r'^(https?:\/\/git\..*)'));
-
 
 class PackageDescriptor:
     def __init__(self, name, entry, recipe, download_counts):
@@ -134,33 +135,36 @@ def load_package_data():
 # Flask app
 ##############################################################################
 
-app = Flask(__name__)
+app = FastAPI()
 
-@app.route("/")
-def index():
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/", response_class=HTMLResponse)
+async def index(request: Request, q='', sort='', asc=''):
     data = load_package_data()
-    match_count=100,
-    q, =request.args.get('q', ''),
-    sort, =request.args.get('sort', 'package'),
-    asc, =request.args.get('asc', 'true'),
+    asc = bool(asc)
 
     packages = data.packages
     search_terms = [t.strip() for t in q.lower().split(' ')]
     if search_terms:
         packages = [
-            p for p in data.packages if packages.
+            p for p in data.packages if all(p.search_text().find(term) >= 0 for term in search_terms)
         ]
+    match_count = len(packages)
 
-    return render_template('index.html',
-                           total_packages=len(data.packages),
-                           last_build=data.last_build,
-                           match_count=match_count,
-                           packages = packages,
-                           q=q,
-                           sort=sort,
-                           asc=asc,
-                           downloads=data.total_downloads)
+    return templates.TemplateResponse("index.html", {
+        "request": request,
+        "total_packages": len(data.packages),
+        "last_build": data.last_build,
+        "match_count": match_count,
+        "packages": packages,
+        "q": q,
+        "sort": sort,
+        "asc": asc,
+        "downloads": data.total_downloads
+    })
 
-@app.route("/getting-started")
-def getting_started():
-    return render_template('getting-started.html')
+@app.get("/getting-started", response_class=HTMLResponse)
+def getting_started(request: Request):
+    return templates.TemplateResponse('getting-started.html', { "request": request})

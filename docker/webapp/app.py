@@ -14,6 +14,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from starlette.datastructures import URL
 import json
 import os
 import datetime
@@ -70,7 +71,8 @@ class PackageDescriptor:
     def __init__(self, name, entry, recipe, download_counts):
         self.name = name
         self.description = entry["desc"]
-        self.version = ".".join(str(v) for v in entry["ver"])
+        self.version_parts = entry["ver"]
+        self.version = ".".join(str(v) for v in self.version_parts)
         self.old_names = recipe.get("old-names", [])
         self.downloads =  sum(download_counts.get(p, 0) for p in (self.old_names + [name]))
         self.fetcher = recipe["fetcher"]
@@ -139,11 +141,12 @@ app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
+templates.env.globals['URL'] = URL
 
 @app.get("/", response_class=HTMLResponse)
-async def index(request: Request, q='', sort='', asc=''):
+async def index(request: Request, q='', sort='package', asc='true'):
     data = load_package_data()
-    asc = bool(asc)
+    asc = asc.lower() == 'true'
 
     packages = data.packages
     search_terms = [t.strip() for t in q.lower().split(' ')]
@@ -152,6 +155,13 @@ async def index(request: Request, q='', sort='', asc=''):
             p for p in data.packages if all(p.search_text().find(term) >= 0 for term in search_terms)
         ]
     match_count = len(packages)
+
+    match sort:
+        case 'version': packages = sorted(packages, key=lambda p: p.version_parts, reverse=not asc)
+        case 'fetcher': packages = sorted(packages, key=lambda p: p.fetcher, reverse=not asc)
+        case 'downloads': packages = sorted(packages, key=lambda p: p.downloads, reverse=not asc)
+        case 'package':
+            if not asc: packages = reversed(packages)
 
     return templates.TemplateResponse("index.html", {
         "request": request,

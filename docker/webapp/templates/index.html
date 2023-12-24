@@ -35,12 +35,22 @@
     "table table-bordered table-responsive table-hover">
       <thead>
         <tr>
-          <th class="sortable">Package<span class="glyphicon glyphicon-chevron-down"></span></th>
-          <th class="sortable">Description<span class="glyphicon glyphicon-minus"></span></th>
-          <th class="sortable">Version<span class="glyphicon glyphicon-minus"></span></th>
-          <th>Recipe</th>
-          <th class="sortable">Source<span class="glyphicon glyphicon-minus"></span></th>
-          <th class="sortable">DLs<span class="glyphicon glyphicon-minus"></span></th>
+          {% for title, sort_key in [["Package", "package"], ["Description", None], ["Version", "version"], ["Recipe", None], ["Source", "source"], ["DLs", "downloads"]] %}
+          {% if sort_key %}
+          <th class="sortable"
+              {% if sort == sort_key %}
+              aria-sort="{{ asc and "ascending" or "descending" }}"
+              {% endif %}>
+              <a href="{{ request.url.include_query_params(sort=sort_key, asc=(not asc if sort == sort_key else True)) }}">{{title}}
+                {% if sort == sort_key %}
+                  <span class="glyphicon {{ asc and "glyphicon-chevron-down" or "glyphicon-chevron-up" }}"></span>
+                {% endif %}
+              </a>
+          </th>
+          {% else %}
+            <th>{{title}}</th>
+          {% endif %}
+          {% endfor %}
         </tr>
       </thead>
       <tbody>

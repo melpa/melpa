@@ -9,8 +9,9 @@
 #  - entity-quote package URLs containing +
 #  - case-insensitive search
 #  - gist recipes
+#  - escaping chars in description etc.
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -26,7 +27,7 @@ import itertools
 # Data models
 ##############################################################################
 
-JSON_DIR="../../html"
+HTML_DIR="../../html"
 
 BuildStatus = namedtuple("BuildStatus", ['started_at', 'completed_at', 'next_at', 'duration'])
 
@@ -54,6 +55,7 @@ def calculate_source_url(recipe, commit):
               elif branch: extra = "/branch/" + branch
               return f"https://bitbucket.com/{repo}{extra}"
           case _:
+              if not url: return None
               def url_match(pat, rep=''):
                   new_url = re.sub(pat, rep, url)
                   if new_url != url: return new_url
@@ -78,12 +80,12 @@ class PackageDescriptor:
         self.fetcher = recipe["fetcher"]
         self.recipe_url = f"https://github.com/melpa/melpa/blob/master/recipes/{name}"
         self.download_url = f"/packages/{name}-{self.version}." + (entry["type"] == 'single' and "el" or "tar")
-        self.commit = entry.get("commit")
+        props = entry.get("props", {})
+        self.commit = props.get("commit")
         self.dependencies = entry["deps"]
-        self.home_url = entry["deps"]
         self._search_extra = recipe.get("repo")
-        self.home_url = recipe.get("url")
         self.source_url = calculate_source_url(recipe, self.commit)
+        self.home_url = props.get("url", self.source_url)
         self.readme_url = f"/packages/{name}-readme.txt"
         self.badge_url = f"/packages/{name}-badge.svg"
         self.log_url = f"/packages/{name}.log"
@@ -100,22 +102,23 @@ def maybe_duration(t):
 class PackageData:
     def __init__(self):
         # Load raw data
-        with open(os.path.join(JSON_DIR, "recipes.json"), 'r') as f:
+        with open(os.path.join(HTML_DIR, "recipes.json"), 'r') as f:
             _recipes = json.load(f)
-        with open(os.path.join(JSON_DIR, "archive.json"), 'r') as f:
+        with open(os.path.join(HTML_DIR, "archive.json"), 'r') as f:
             _archive = json.load(f)
-        with open(os.path.join(JSON_DIR, "download_counts.json"), 'r') as f:
+        with open(os.path.join(HTML_DIR, "download_counts.json"), 'r') as f:
             _download_counts = json.load(f)
-        with open(os.path.join(JSON_DIR, "build-status.json"), 'r') as f:
+        with open(os.path.join(HTML_DIR, "build-status.json"), 'r') as f:
             _build_status = json.load(f)
 
         # Assemble package info
-        self.packages = sorted([
-            PackageDescriptor(name, entry=entry,
+        self.packages_by_name = {name: PackageDescriptor(name, entry=entry,
                               recipe=_recipes[name],
                               download_counts=_download_counts)
-            for (name, entry) in _archive.items()
-        ], key=lambda p: p.name) # Pre-sort by the default case
+            for (name, entry) in _archive.items()}
+
+        self.packages = sorted(self.packages_by_name.values(),
+                               key=lambda p: p.name) # Pre-sort by the default case
 
         self.total_downloads = sum(_download_counts.values())
         self.last_build = BuildStatus(started_at=maybe_timestamp(_build_status["started"]),
@@ -140,6 +143,7 @@ def load_package_data():
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/packages", StaticFiles(directory=os.path.join(HTML_DIR, "packages")), name="packages")
 templates = Jinja2Templates(directory="templates")
 templates.env.globals['URL'] = URL
 
@@ -175,6 +179,28 @@ async def index(request: Request, q='', sort='package', asc='true'):
         "downloads": data.total_downloads
     })
 
+@app.get("/p/{name}", response_class=HTMLResponse)
+async def package(name, request: Request):
+    data = load_package_data()
+    package = data.packages_by_name.get(name)
+    if not package:
+        raise HTTPException(status_code=404, detail="Package not found")
+
+    downloads_percentile = len([p for p in data.packages if p is not package and p.downloads < package.downloads]) * 100.0 / len(data.packages)
+
+    readme_text = ''
+    readme_path = os.path.join(HTML_DIR, f"packages/{package.name}-readme.txt")
+    if os.path.isfile(readme_path):
+        with open(readme_path, 'rt') as f: readme_text = f.read()
+
+    return templates.TemplateResponse('package.html', {
+        "request": request,
+        "package": package,
+        "readme_text": readme_text,
+        "downloads_percentile": downloads_percentile
+    })
+
+
 @app.get("/getting-started", response_class=HTMLResponse)
-def getting_started(request: Request):
+async def getting_started(request: Request):
     return templates.TemplateResponse('getting-started.html', { "request": request})

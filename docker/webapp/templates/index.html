@@ -85,4 +85,14 @@
       </form>
     </section>
   </div>
+  <script language="javascript">
+    // Redirect old URLs
+    var m = window.location.hash.match("^#(/getting-started|/\\?.*)");
+    if (m) {
+      window.location.href = m[1];
+    } else {
+      var m2 = window.location.hash.match("^#(/[a-z0-9\-]+)");
+      if (m2) { window.location.href = "/package" + m2[1]; }
+    }
+  </script>
 {% endblock %}

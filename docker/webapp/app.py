@@ -4,7 +4,6 @@
 #  - unify static files
 #  - toggle stable vs. non-stable
 #  - build timestamps
-#  - detect old-style URLs and redirect (in JS)
 #  - page titles
 #  - entity-quote package URLs containing +
 #  - case-insensitive search

@@ -44,6 +44,12 @@
           <a href="/#/cider">cider</a>/
           <a href="/#/polybar-sesman">polybar-sesman</a>
         </dd>
+        {% if package.old_names %}
+        <dt>Renamed from</dt>
+        {% for name in package.old_names %}
+        <dd>{{name}}</dd>
+        {% endfor %}
+        {% endif %}
       </dl>
     </div>
   </section>

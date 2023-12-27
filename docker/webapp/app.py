@@ -12,7 +12,7 @@
 #  - escaping chars in description etc.
 
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.datastructures import URL
@@ -184,7 +184,11 @@ async def package(name, request: Request):
     data = load_package_data()
     package = data.packages_by_name.get(name)
     if not package:
-        raise HTTPException(status_code=404, detail="Package not found")
+        package = next(p for p in data.packages if name in p.old_names)
+        if package:
+            return RedirectResponse(url=f"/p/{package.name}")
+        else:
+            raise HTTPException(status_code=404, detail="Package not found")
 
     downloads_percentile = len([p for p in data.packages if p is not package and p.downloads < package.downloads]) * 100.0 / len(data.packages)
 

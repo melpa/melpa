@@ -1,0 +1,1 @@
+(nyxt :repo "migalmoreno/nyxt.el" :fetcher github)

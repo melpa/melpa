@@ -69,12 +69,17 @@ def calculate_source_url(recipe, commit):
                       url_match(r'^https:\/\/git\.code\.sf\.net\/p\/([^\/]+)', "https://sourceforge.net/p/") or
                       url_match(r'^(https?:\/\/git\..*)'));
 
+Dependency = namedtuple("Dependency", ['name', 'version'])
+
+def version_string(parts):
+    return ".".join(str(v) for v in parts)
+
 class PackageDescriptor:
     def __init__(self, name, entry, recipe, download_counts):
         self.name = name
         self.description = entry["desc"]
         self.version_parts = entry["ver"]
-        self.version = ".".join(str(v) for v in self.version_parts)
+        self.version = version_string(self.version_parts)
         self.old_names = recipe.get("old-names", [])
         self.downloads =  sum(download_counts.get(p, 0) for p in (self.old_names + [name]))
         self.fetcher = recipe["fetcher"]
@@ -82,7 +87,7 @@ class PackageDescriptor:
         self.download_url = f"/packages/{name}-{self.version}." + (entry["type"] == 'single' and "el" or "tar")
         props = entry.get("props", {})
         self.commit = props.get("commit")
-        self.dependencies = entry["deps"]
+        self.dependencies = [Dependency(name, version_string(ver)) for (name, ver) in (entry["deps"] or {}).items()]
         self._search_extra = recipe.get("repo")
         self.source_url = calculate_source_url(recipe, self.commit)
         self.home_url = props.get("url", self.source_url)
@@ -197,11 +202,15 @@ async def package(name, request: Request):
     if os.path.isfile(readme_path):
         with open(readme_path, 'rt') as f: readme_text = f.read()
 
+    needed_by = [p for p in data.packages if any([d.name == package.name for d in p.dependencies])]
+
     return templates.TemplateResponse('package.html', {
         "request": request,
         "package": package,
         "readme_text": readme_text,
-        "downloads_percentile": downloads_percentile
+        "downloads_percentile": downloads_percentile,
+        "packages_by_name": data.packages_by_name,
+        "needed_by": needed_by
     })
 
 

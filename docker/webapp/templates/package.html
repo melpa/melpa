@@ -1,86 +1,99 @@
 {% extends "layout.html" %}
 {% block content %}
-<section>
-  <h1>{{package.name}}
-  <small>{{package.version}}</small></h1>
-  <p class="lead">{{package.description}}</p>
-  <p>
-    <a href="{{package.recipe_url}}" class="btn btn-default">
-      <span class="glyphicon glyphicon-cutlery"></span>
-      Recipe
-    </a>
-    <a href="{{package.download_url}}" class="btn btn-default">
-      <span class="glyphicon glyphicon-download"></span>
-      Download
-    </a>
-    <a href="{{package.source_url}}" class="btn btn-default">
-      <span class="glyphicon glyphicon-folder-open"></span>
-      Source code
-    </a>
-    <a href="{{package.home_url}}" class="btn btn-default">
-      <span class="glyphicon glyphicon-home"></span>
-      Homepage
-    </a>
-  </p>
   <section>
+    <h1>{{package.name}}
+      <small>{{package.version}}</small></h1>
+    <p class="lead">{{package.description}}</p>
+    <p>
+      <a href="{{package.recipe_url}}" class="btn btn-default">
+        <span class="glyphicon glyphicon-cutlery"></span>
+        Recipe
+      </a>
+      <a href="{{package.download_url}}" class="btn btn-default">
+        <span class="glyphicon glyphicon-download"></span>
+        Download
+      </a>
+      <a href="{{package.source_url}}" class="btn btn-default">
+        <span class="glyphicon glyphicon-folder-open"></span>
+        Source code
+      </a>
+      <a href="{{package.home_url}}" class="btn btn-default">
+        <span class="glyphicon glyphicon-home"></span>
+        Homepage
+      </a>
+    </p>
+    <section>
+      <div class="well">
+        <dl class="dl-horizontal package-props">
+          <dt>Downloads</dt>
+          <dd>{{package.downloads}}
+            <span class="muted">(all versions)</span>,
+            percentile: {{"%.2f" % downloads_percentile}}
+          </dd>
+          <dt>Source</dt>
+          <dd>
+            <a href="{{package.source_url}}">
+              {{package.fetcher}}</a>
+              <span class="muted">(commit {{package.commit}})</span>
+          </dd>
+          <dt>Dependencies</dt>
+          <dd>
+            {% for dep in package.dependencies %}
+              {% if dep.name in packages_by_name %}
+                <a href="/p/{{dep.name}}">{{dep.name}} {{dep.version}}</a>
+              {% else %}
+                {{dep.name}} {{dep.version}}
+              {% endif %}
+              {% if not loop.last %}/{% endif %}
+            {% endfor %}
+          </dd>
+          <dt>Needed by</dt>
+          <dd>
+          {% for dependent in needed_by %}
+            <a href="/p/{{dependent.name}}">{{dependent.name}}</a>
+            {% if not loop.last %}/{% endif %}
+          {% endfor %}
+          </dd>
+          {% if package.old_names %}
+            <dt>Renamed from</dt>
+            <dd>
+            {% for name in package.old_names %}
+              {{name}}
+              {% if not loop.last %}/{% endif %}
+              {% endfor %}
+            </dd>
+          {% endif %}
+        </dl>
+      </div>
+    </section>
+    <section>
+      <h4>Description</h4>
+      <pre>
+        {{ readme_text }}
+      </pre>
+    </section>
+  </section>
+  <section>
+    <h4>Badge code</h4>
     <div class="well">
-      <dl class="dl-horizontal">
-        <dt>Downloads</dt>
-        <dd>{{package.downloads}}
-          <span class="muted">(all versions)</span>,
-          percentile: {{"%.2f" % downloads_percentile}}
-        </dd>
-        <dt>Source</dt>
-        <dd>
-          <a href="{{package.source_url}}">
-          {{fetcher}}</a>
-          <span class="muted">(commit {{package.commit}})</span>
-        </dd>
-        <dt>Dependencies</dt>
-        <dd>xxxxx   emacs 25</dd>
-        <dt>Needed by</dt>
-        <dd>
-          xxxxx
-          <a href="/#/cider">cider</a>/
-          <a href="/#/polybar-sesman">polybar-sesman</a>
-        </dd>
-        {% if package.old_names %}
-        <dt>Renamed from</dt>
-        {% for name in package.old_names %}
-        <dd>{{name}}</dd>
-        {% endfor %}
-        {% endif %}
+      <dl>
+        <dt>Preview</dt>
+        <dd><a href="/#/sesman"><img alt="MELPA" src="{{package.badge_url}}"></a></dd>
+      </dl>
+      <dl>
+        <dt>HTML</dt>
+        <dd><pre>&lt;a href="{{ request.url }}"&gt;&lt;img alt="MELPA" src="{{package.badge_url}}"/&gt;&lt;/a&gt;</pre></dd>
+
+        <dt>Markdown</dt>
+        <dd><pre>[![MELPA]({{ package.badge_url }})]({{request.url}})</pre></dd>
+
+        <dt>Org</dt>
+        <dd><pre>[[{{request.url}}][file:{{package.badge_url}}]]</pre></dd>
       </dl>
     </div>
   </section>
-  <section>
-    <h4>Description</h4>
-    <pre>
-{{ readme_text }}
-    </pre>
+
+  <section><h4>Build log</h4>
+    <a class="btn btn-default" href="{{package.log_url}}">Show</a>
   </section>
-</section>
-<section>
-  <h4>Badge code</h4>
-  <div class="well">
-    <dl>
-      <dt>Preview</dt>
-      <dd><a href="/#/sesman"><img alt="MELPA" src="{{package.badge_url}}"></a></dd>
-    </dl>
-    <dl>
-      <dt>HTML</dt>
-      <dd><pre>&lt;a href="{{ request.url }}"&gt;&lt;img alt="MELPA" src="{{package.badge_url}}"/&gt;&lt;/a&gt;</pre></dd>
-
-      <dt>Markdown</dt>
-      <dd><pre>[![MELPA]({{ package.badge_url }})]({{request.url}})</pre></dd>
-
-      <dt>Org</dt>
-      <dd><pre>[[{{request.url}}][file:{{package.badge_url}}]]</pre></dd>
-    </dl>
-  </div>
-</section>
-
-<section><h4>Build log</h4>
-  <a class="btn btn-default" href="{{package.log_url}}">Show</a>
-</section>
 {% endblock %}

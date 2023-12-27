@@ -20,7 +20,7 @@ import os
 import datetime
 from collections import namedtuple
 import re
-import itertools
+from itertools import groupby
 
 ##############################################################################
 # Data models
@@ -124,6 +124,15 @@ class PackageData:
         self.packages = sorted(self.packages_by_name.values(),
                                key=lambda p: p.name) # Pre-sort by the default case
 
+        # Pre-calculate download percentiles
+        by_downloads = sorted(self.packages, key=lambda p: p.downloads)
+        percentile = 0
+        self.download_percentiles = {}
+        for (_, cohort) in groupby(by_downloads, lambda p: p.downloads):
+            cohort = list(cohort)
+            self.download_percentiles.update({ p.name: percentile / len(by_downloads) for p in cohort })
+            percentile += len(cohort) * 100
+
         self.total_downloads = sum(_download_counts.values())
         self.last_build = BuildStatus(started_at=maybe_timestamp(_build_status["started"]),
                                       completed_at=maybe_timestamp(_build_status["completed"]),
@@ -183,18 +192,14 @@ async def index(request: Request, q='', sort='package', asc='true'):
         "downloads": data.total_downloads
     })
 
-@app.get("/p/{name}", response_class=HTMLResponse)
+@app.get("/package/{name}", response_class=HTMLResponse)
 async def package(name, request: Request):
     data = load_package_data()
     package = data.packages_by_name.get(name)
     if not package:
         package = next(p for p in data.packages if name in p.old_names)
-        if package:
-            return RedirectResponse(url=f"/p/{package.name}")
-        else:
-            raise HTTPException(status_code=404, detail="Package not found")
-
-    downloads_percentile = len([p for p in data.packages if p is not package and p.downloads < package.downloads]) * 100.0 / len(data.packages)
+        if package: return RedirectResponse(url=f"/package/{package.name}")
+        raise HTTPException(status_code=404, detail="Package not found")
 
     readme_text = ''
     readme_path = os.path.join(HTML_DIR, f"packages/{package.name}-readme.txt")
@@ -207,7 +212,7 @@ async def package(name, request: Request):
         "request": request,
         "package": package,
         "readme_text": readme_text,
-        "downloads_percentile": downloads_percentile,
+        "downloads_percentile": data.download_percentiles[package.name],
         "packages_by_name": data.packages_by_name,
         "needed_by": needed_by
     })

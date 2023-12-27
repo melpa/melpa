@@ -40,7 +40,7 @@
           <dd>
             {% for dep in package.dependencies %}
               {% if dep.name in packages_by_name %}
-                <a href="/p/{{dep.name}}">{{dep.name}} {{dep.version}}</a>
+                <a href="/package/{{dep.name}}">{{dep.name}} {{dep.version}}</a>
               {% else %}
                 {{dep.name}} {{dep.version}}
               {% endif %}
@@ -50,7 +50,7 @@
           <dt>Needed by</dt>
           <dd>
           {% for dependent in needed_by %}
-            <a href="/p/{{dependent.name}}">{{dependent.name}}</a>
+            <a href="/package/{{dependent.name}}">{{dependent.name}}</a>
             {% if not loop.last %}/{% endif %}
           {% endfor %}
           </dd>

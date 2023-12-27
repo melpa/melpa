@@ -39,15 +39,15 @@ def calculate_source_url(recipe, commit):
           case 'github':
               ref = commit or branch
               extra = ref and f"/tree/{ref}" or ""
-              return f"https://github.com/{repo}/{extra}"
+              return f"https://github.com/{repo}{extra}"
           case "gitlab":
               ref = commit or branch
               extra = ref and f"/tree/{ref}" or ""
-              return f"https://gitlab.com/{repo}/{extra}"
+              return f"https://gitlab.com/{repo}{extra}"
           case "sourcehut":
               ref = commit or branch
               extra = ref and f"/tree/{ref}" or ""
-              return f"https://git.sr.ht/~{repo}/{extra}"
+              return f"https://git.sr.ht/~{repo}{extra}"
           case "bitbucket":
               extra = ""
               if commit: extra = "/src/" + commit

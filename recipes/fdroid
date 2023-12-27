@@ -1,0 +1,1 @@
+(fdroid :repo "migalmoreno/fdroid.el" :fetcher github)

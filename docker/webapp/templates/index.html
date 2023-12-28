@@ -27,6 +27,7 @@
     </div>
     <section id="packages">
       <form method="get">
+        <input type="hidden" name="page" value="1">
         <h2>Current List of {{ total_packages }} Packages <small>{{ downloads }} downloads to date</small></h2>
         <p>
           <input type="search" placeholder="Enter search terms" autofocus="" class="form-control" name="q" value="{{ q }}">
@@ -41,7 +42,7 @@
                       {% if sort == sort_key %}
                         aria-sort="{{ asc and "ascending" or "descending" }}"
                       {% endif %}>
-                      <a href="{{ request.url.include_query_params(sort=sort_key, asc=(not asc if sort == sort_key else True)) }}">{{title}}
+                      <a href="{{ request.url.include_query_params(sort=sort_key, asc=(not asc if sort == sort_key else True), page=1) }}">{{title}}
                         {% if sort == sort_key %}
                           <span class="glyphicon {{ asc and "glyphicon-chevron-down" or "glyphicon-chevron-up" }}"></span>
                         {% endif %}
@@ -54,7 +55,7 @@
             </tr>
           </thead>
           <tbody>
-            {% for package in packages %}
+            {% for package in pages.page_items %}
               <tr>
                 <td>
                   <a href="/package/{{package.name}}">{{package.name}}</a>
@@ -83,6 +84,40 @@
           </tbody>
         </table>
       </form>
+      <nav>
+        <ul class="pagination">
+          {% if pages.page_number != 1 %}
+            <li>
+              <a href="{{ request.url.include_query_params(page=(pages.page_number - 1)) }}">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+          {% endif %}
+          {% for page in pages.page_numbers %}
+            {% if page == pages.page_number %}
+              <li class="active">
+                <span>{{ pages.page_number }}
+                  <span class="sr-only">(current)</span>
+                </span>
+              </li>
+            {% else %}
+              <li>
+                <a href="{{ request.url.include_query_params(page=page) }}">
+                  <span>{{page}}</span>
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          {% if pages.page_number != pages.last_page %}
+            <li>
+              <a href="{{ request.url.include_query_params(page=(pages.page_number + 1)) }}"<span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
     </section>
   </div>
   <script language="javascript">

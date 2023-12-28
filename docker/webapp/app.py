@@ -21,6 +21,7 @@ import datetime
 from collections import namedtuple
 import re
 from itertools import groupby
+from math import ceil
 
 ##############################################################################
 # Data models
@@ -148,6 +149,22 @@ def load_package_data():
         package_data = PackageData()
     return package_data
 
+##############################################################################
+# Pagination
+##############################################################################
+class Paginator:
+    def __init__(self, items, page_size, page):
+        items = list(items)
+        self.page_size = page_size
+        self.first_page = 1
+        self.last_page = ceil(len(items) / page_size)
+        self.page_numbers = range(max(page - 5, 1), min(page + 5, self.last_page))
+
+        if page < self.first_page or page > self.last_page:
+            raise IndexError("No such page")
+        start = (page - 1) * page_size
+        self.page_items = items[start:start+self.page_size]
+        self.page_number = page
 
 ##############################################################################
 # Flask app
@@ -161,9 +178,9 @@ templates = Jinja2Templates(directory="templates")
 templates.env.globals['URL'] = URL
 
 @app.get("/", response_class=HTMLResponse)
-async def index(request: Request, q='', sort='package', asc='true'):
+async def index(request: Request, q='', sort='package', asc: bool = True, page: int = 1):
     data = load_package_data()
-    asc = asc.lower() == 'true'
+    page = int(page)
 
     packages = data.packages
     search_terms = [t.strip() for t in q.lower().split(' ')]
@@ -180,12 +197,17 @@ async def index(request: Request, q='', sort='package', asc='true'):
         case 'package':
             if not asc: packages = reversed(packages)
 
+    try:
+        pages = Paginator(packages, 100, page)
+    except IndexError:
+        raise HTTPException(status_code=404, detail="Page not found")
+
     return templates.TemplateResponse("index.html", {
         "request": request,
         "total_packages": len(data.packages),
         "last_build": data.last_build,
         "match_count": match_count,
-        "packages": packages,
+        "pages": pages,
         "q": q,
         "sort": sort,
         "asc": asc,

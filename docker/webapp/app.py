@@ -11,10 +11,12 @@
 #  - escaping chars in description etc.
 
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.datastructures import URL
+import starlette.exceptions
 import json
 import os
 import datetime
@@ -171,6 +173,15 @@ class Paginator:
 ##############################################################################
 
 app = FastAPI()
+
+@app.exception_handler(starlette.exceptions.HTTPException)
+async def http_exception_handler(_req, exc):
+    return PlainTextResponse(str(exc.detail), status_code=exc.status_code)
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request, exc):
+    return PlainTextResponse("Invalid request", status_code=400)
+
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/packages", StaticFiles(directory=os.path.join(HTML_DIR, "packages")), name="packages")

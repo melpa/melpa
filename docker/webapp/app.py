@@ -1,14 +1,16 @@
 # TODO:
 #  - rss
 #  - opensearch
-#  - unify static files
-#  - toggle stable vs. non-stable
+#  - unify static files, no dup melpa.css etc
+#  - toggle stable vs. non-stable, add link at top-right to the other
 #  - build timestamps
 #  - page titles
 #  - entity-quote package URLs containing +
 #  - case-insensitive search
+#  - full URLs for badges
 #  - gist recipes
 #  - escaping chars in description etc.
+#  - serve packages statically by default, use /packages/foo URLs.
 
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.exceptions import RequestValidationError

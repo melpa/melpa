@@ -1,1 +1,4 @@
-(rcirc-alert :repo "csantosb/rcirc-alert" :files ("*.el" "*.sh") :fetcher github)
+(rcirc-alert
+ :fetcher github
+ :repo "csantosb/rcirc-alert"
+ :files ("*.el" "*.sh"))

@@ -1,0 +1,1 @@
+(chordpro-mode :fetcher sourcehut :repo "breatheoutbreathein/chordpro-mode.el")

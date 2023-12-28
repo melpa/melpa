@@ -1,6 +1,6 @@
 # MELPA
 
-[![Build Status](https://github.com/melpa/melpa/workflows/CI/badge.svg)](https://github.com/melpa/melpa/actions)
+[![Build Status](https://github.com/melpa/melpa/actions/workflows/ci.yml/badge.svg)](https://github.com/melpa/melpa/actions/workflows/ci.yml)
 
 MELPA is a growing collection of `package.el`-compatible Emacs Lisp
 packages built automatically on our server from the upstream source
@@ -114,12 +114,12 @@ the following form (`[...]` denotes optional or conditional values),
 
   Melpa supports the Git and Mercurial version control systems and
   provides generic fetcher types for them: `git` and `hg`. When you
-  use one of these fetchers, you most specify the `:url` property.
+  use one of these fetchers, you must specify the `:url` property.
 
-  Melpa also provides dedicate fetchers for certain Git forges (aka
+  Melpa also provides dedicated fetchers for certain Git forges (aka
   "Git repository hosting platforms"), which should always be
   preferred over the generic `git` fetcher. When using a dedicated
-  fetcher, you must specify `:repo`, not `:url`. Currently the these
+  fetcher, you must specify `:repo`, not `:url`. Currently these
   Git forge fetchers exist: [`github`], [`gitlab`], [`codeberg`] and
   [`sourcehut`].
 
@@ -185,21 +185,40 @@ the following form (`[...]` denotes optional or conditional values),
   containing directory to the `load-path` or from otherwise getting
   confused.
 
-  The elements of the `:files` list are glob-expanded and processed
-  from left to right to make a list of paths that will be copied into
-  the root of the new package, as if by using `cp -R [SRCPATHS]
-  DEST`. This means a directory like `foo/bar` would become `bar` in
-  the new package. To specify a destination subdirectory, use a list
-  element of the form `(SUBDIR SRCPATH ...)`. Likewise, to filter out
-  paths expanded earlier in the list, use `(:exclude SRCPATH ...)`.
+  The elements of the `:files` list are glob-expanded to make a list
+  of paths that will be copied into the root of the new package. This
+  means a file like `lisp/foo.el` would become `foo.el` in the new
+  package. To specify a destination subdirectory, use a list element
+  of the form `(TARGET-DIR SOURCE-PATH ...)`.
+
+  To exclude certain paths, use `(:exclude SOURCE-PATH ...)`.  There
+  should only be one element that begins with `:exclude` and it should
+  be the last element, though that is not enforced at this time.
 
   If your package requires some additional files, but is otherwise
-  fine with the defaults, it's recommended to use the special element
-  `:defaults` as the very first element of the `:files` list, which
-  causes the default value shown above to be prepended to the
-  specified file list. For example `:files (:defaults "snippets")`
-  would cause the "snippets" subdir to be copied in addition to the
-  defaults.
+  fine with the defaults, use the special element `:defaults` as the
+  first element of the `:files` list.  This causes the default value
+  shown above to be prepended to the specified file list. For example
+  `:files (:defaults "snippets")` would cause the `snippets` subdir
+  to be copied in addition to the defaults.
+
+  **Warning:** Elements of `:files` are (no longer) processed in order
+  because we feed these globs to `git log` or `hg log` to determine the
+  last commit that touched a relevant file. These commands unfortunately
+  process all exclude globs after all include globs. Therefore it is not
+  possible to override the `:exclude` element that appears in `:defaults`
+  in a later element of `:files`. This means that a package whose name
+  ends with `-test` cannot use `:defaults`. Likewise if the name of a
+  *library* (as opposed to a file implementing tests) ends with `-test.el`,
+  then `:defaults` cannot be used.
+
+  **Warning:** Once the appropriate commit has been determined
+  `file-expand-wildcards` is used to determine the files matched by
+  each glob. Unfortunately (unlike in a shell) a glob that begins with
+  `*` may also match filenames that begin with `.`, so you might have
+  to add exclude globs to prevent those from being included. `:defaults`
+  takes care to exclude `.dir-locals.el`; if you don't use `:defaults`,
+  then you might have to exclude that explicitly.
 
 * `:old-names` specifies former names of the package, if any. The
   value is a list of symbols.
@@ -212,10 +231,10 @@ the following form (`[...]` denotes optional or conditional values),
 * `smex.el`
 
 Since there is only one `.el` file, this package only needs the
-`:repo` and `:fetcher` specified,
+`:fetcher` and `:repo` specified,
 
 ```elisp
-(smex :repo "nonsequitur/smex" :fetcher github)
+(smex :fetcher github :repo "nonsequitur/smex")
 ```
 
 ### Example: Multiple Packages in one Repository
@@ -232,21 +251,24 @@ The three packages have to be declared in three separate files
 `recipes/persp-mypackage`:
 
 ```elisp
-(mypackage :repo "someuser/mypackage"
-           :fetcher github
-           :files ("mypackage.el"))
+(mypackage
+ :fetcher github
+ :repo "someuser/mypackage"
+ :files ("mypackage.el"))
 ```
 
 ```elisp
-(helm-mypackage :repo "someuser/mypackage"
-                :fetcher github
-                :files ("helm-mypackage.el"))
+(helm-mypackage
+ :fetcher github
+ :repo "someuser/mypackage"
+ :files ("helm-mypackage.el"))
 ```
 
 ```elisp
-(persp-mypackage :repo "someuser/mypackage"
-                 :fetcher github
-                 :files ("persp-mypackage.el"))
+(persp-mypackage
+ :fetcher github
+ :repo "someuser/mypackage"
+ :files ("persp-mypackage.el"))
 ```
 
 ### Example: Multiple Files in Multiple Directories
@@ -258,15 +280,16 @@ sub-directories need to be explicitly set.
 Consider the `flymake-perlcritic` recipe,
 
 ```elisp
-(flymake-perlcritic :repo "illusori/emacs-flymake-perlcritic"
-                    :fetcher github
-                    :files ("*.el" ("bin" "bin/flymake_perlcritic")))
+(flymake-perlcritic
+ :fetcher github
+ :repo "illusori/emacs-flymake-perlcritic"
+ :files ("*.el" ("bin" "bin/flymake_perlcritic")))
 ```
 
 which will result in a package structure of,
 
 ```
-flymake-perlcritic-YYYMMDD
+flymake-perlcritic-YYYYMMDD
 |-- bin
 |   `-- flymake_perlcritic
 |-- flymake-perlcritic-pkg.el
@@ -274,28 +297,7 @@ flymake-perlcritic-YYYMMDD
 ```
 
 Notice that specifying an entry in `:files` that is a list takes the
-first element to be the destination directory. These can be embedded
-further, such as the following---hypothetical---entry for `:files`,
-
-```elisp
-("*.el" ("snippets"
-         ("html-mode" "snippets/html-mode/*")
-         ("python-mode" "snippets/python-mode/*")))
-```
-
-which would result in a package with `*.el` in something like,
-
-```
-package-YYYYMMDD
-|-- snippets
-|   |-- html-mode
-|   |   |-- div
-|   |   `-- html
-|   `-- python-mode
-|       |-- for
-|       `-- main
-`-- package.el
-```
+first element to be the destination directory.
 
 But a better solution, given that we probably want to copy the
 *entire* `snippets` directory to the root of the package, we could
@@ -303,8 +305,8 @@ just specify that directory. Consider the `pony-mode` recipe,
 
 ```elisp
 (pony-mode
- :repo "davidmiller/pony-mode"
  :fetcher github
+ :repo "davidmiller/pony-mode"
  :files ("src/*.el" "snippets"))
 ```
 
@@ -433,6 +435,13 @@ Only the packages are mirrored, not the web site front-end itself.
 
 _We are NOT responsible for the contents of any UNOFFICIAL mirror of
 our packages._
+
+Use `rsync` to get started with your own mirror:
+
+```
+rsync -avz --delete rsync://melpa.org/packages/ snapshots/
+rsync -avz --delete rsync://melpa.org/packages-stable/ releases/
+```
 
 ## About
 

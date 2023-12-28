@@ -1,6 +1,6 @@
 ;;; package-recipe.el --- Package recipes as EIEIO objects  -*- lexical-binding:t; coding:utf-8 -*-
 
-;; Copyright (C) 2018-2022 Jonas Bernoulli
+;; Copyright (C) 2018-2023 Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Homepage: https://github.com/melpa/package-build
@@ -28,8 +28,10 @@
 ;;; Code:
 
 (require 'eieio)
+(require 'subr-x)
 (require 'url-parse)
 
+(defvar package-build-use-git-remote-hg)
 (defvar package-build-recipes-dir)
 (defvar package-build-working-dir)
 
@@ -46,34 +48,11 @@
    (files           :initarg :files          :initform nil)
    (branch          :initarg :branch         :initform nil)
    (commit          :initarg :commit         :initform nil)
+   (time                                     :initform nil)
+   (version                                  :initform nil)
    (version-regexp  :initarg :version-regexp :initform nil)
    (old-names       :initarg :old-names      :initform nil))
   :abstract t)
-
-(cl-defmethod package-recipe--working-tree ((rcp package-recipe))
-  (file-name-as-directory
-   (expand-file-name (oref rcp name) package-build-working-dir)))
-
-(cl-defmethod package-recipe--upstream-url ((rcp package-recipe))
-  (or (oref rcp url)
-      (format (oref rcp url-format)
-              (oref rcp repo))))
-
-(cl-defmethod package-recipe--upstream-protocol ((rcp package-recipe))
-  (let ((url (package-recipe--upstream-url rcp)))
-    (cond ((string-match "\\`\\([a-z]+\\)://" url)
-           (match-string 1 url))
-          ((string-match "\\`[^:/ ]+:" url) "ssh")
-          (t "file"))))
-
-(cl-defmethod package-recipe--fetcher ((rcp package-recipe))
-  (substring (symbol-name (eieio-object-class rcp)) 8 -7))
-
-(defconst package-recipe--forge-fetchers
-  '(github gitlab codeberg sourcehut))
-
-(defconst package-recipe--fetchers
-  (append '(git hg) package-recipe--forge-fetchers))
 
 ;;;; Git
 
@@ -98,6 +77,40 @@
 ;;;; Mercurial
 
 (defclass package-hg-recipe (package-recipe) ())
+
+(defclass package-git-remote-hg-recipe (package-git-recipe) ())
+
+;;; Methods
+
+(cl-defmethod package-recipe--working-tree ((rcp package-recipe))
+  (file-name-as-directory
+   (expand-file-name (oref rcp name) package-build-working-dir)))
+
+(cl-defmethod package-recipe--upstream-url ((rcp package-recipe))
+  (or (oref rcp url)
+      (format (oref rcp url-format)
+              (oref rcp repo))))
+
+(cl-defmethod package-recipe--upstream-url ((rcp package-git-remote-hg-recipe))
+  (concat "hg::" (oref rcp url)))
+
+(cl-defmethod package-recipe--upstream-protocol ((rcp package-recipe))
+  (let ((url (package-recipe--upstream-url rcp)))
+    (cond ((string-match "\\`\\([a-z]+\\)://" url)
+           (match-string 1 url))
+          ((string-match "\\`[^:/ ]+:" url) "ssh")
+          (t "file"))))
+
+(cl-defmethod package-recipe--fetcher ((rcp package-recipe))
+  (substring (symbol-name (eieio-object-class rcp)) 8 -7))
+
+;;; Constants
+
+(defconst package-recipe--forge-fetchers
+  '(github gitlab codeberg sourcehut))
+
+(defconst package-recipe--fetchers
+  (append '(git hg) package-recipe--forge-fetchers))
 
 ;;; Interface
 
@@ -127,11 +140,23 @@ file is invalid, then raise an error."
             (unless (eq key :fetcher)
               (push val args)
               (push key args)))
+          (when (and package-build-use-git-remote-hg (eq fetcher 'hg))
+            (setq fetcher 'git-remote-hg))
           (apply (intern (format "package-%s-recipe" fetcher))
                  name :name name args))
       (error "No such recipe: %s" name))))
 
 ;;; Validation
+
+;;;###autoload
+(defun package-recipe-validate-all ()
+  "Validate all recipes."
+  (interactive)
+  (dolist-with-progress-reporter (name (package-recipe-recipes))
+      "Validating recipes..."
+    (condition-case err
+        (package-recipe-lookup name)
+      (error (message "Invalid recipe for %s: %S" name (cdr err))))))
 
 (defun package-recipe--validate (recipe name)
   "Perform some basic checks on the raw RECIPE for the package named NAME."
@@ -168,6 +193,25 @@ file is invalid, then raise an error."
         (let ((val (plist-get plist key)))
           (when val
             (cl-assert (stringp val) nil "%s must be a string but is %S" key val))))
+      (when-let ((spec (plist-get plist :files)))
+        ;; `:defaults' is only allowed as the first element.
+        ;; If we find it in that position, skip over it.
+        (when (eq (car spec) :defaults)
+          (setq spec (cdr spec)))
+        ;; All other elements have to be strings or lists of strings.
+        ;; A list whose first element is `:exclude' is also valid.
+        (dolist (entry spec)
+          (unless (cond ((stringp entry)
+                         (not (equal entry "*")))
+                        ((listp entry)
+                         (and-let* ((globs (cdr entry)))
+                           (and (or (eq (car entry) :exclude)
+                                    (stringp (car entry)))
+                                (seq-every-p (lambda (glob)
+                                               (and (stringp glob)
+                                                    (not (equal glob "*"))))
+                                             globs)))))
+            (error "Invalid files spec entry %S" entry))))
       ;; Silence byte compiler of Emacs 28.  It appears that uses
       ;; inside cl-assert sometimes, but not always, do not count.
       (list name ident all-keys))

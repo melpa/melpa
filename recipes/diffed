@@ -1,0 +1,4 @@
+(diffed
+ :fetcher github
+ :repo "ber-ro/diffed"
+ :old-names (diffsync))

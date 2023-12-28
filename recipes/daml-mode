@@ -1,0 +1,2 @@
+(daml-mode :repo "bartfailt/daml-mode"
+           :fetcher github)

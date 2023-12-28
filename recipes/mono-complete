@@ -1,0 +1,4 @@
+(mono-complete
+  :fetcher codeberg
+  :repo "ideasman42/emacs-mono-complete"
+  :files (:defaults "mono-complete-backend-word-predict.py"))

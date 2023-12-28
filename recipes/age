@@ -1,0 +1,1 @@
+(age :fetcher github :repo "anticomputer/age.el")

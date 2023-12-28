@@ -1,1 +1,1 @@
-(pcap-mode :repo "orgcandman/pcap-mode" :fetcher github)
+(pcap-mode :repo "apconole/pcap-mode" :fetcher github)

@@ -1,0 +1,3 @@
+(lesim-mode
+ :fetcher github
+ :repo "drghirlanda/lesim-mode")

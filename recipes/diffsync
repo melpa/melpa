@@ -1,3 +1,0 @@
-(diffsync
- :fetcher github
- :repo "ber-ro/diffsync")

@@ -1,0 +1,1 @@
+(ring-mode :repo "thechampagne/ring-mode" :fetcher github)

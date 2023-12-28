@@ -1,2 +1,5 @@
-(helm-org-recent-headings :fetcher github :repo "alphapapa/org-recent-headings"
-                          :files ("helm-org-recent-headings.el"))
+(helm-org-recent-headings
+ :fetcher github
+ :repo "alphapapa/org-recent-headings"
+ :files ("helm-org-recent-headings.el")
+ :version-regexp "helm-org-recent-headings-v\\(.*\\)")

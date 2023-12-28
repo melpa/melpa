@@ -1,0 +1,1 @@
+(ruff-format :fetcher github :repo "scop/emacs-ruff-format")

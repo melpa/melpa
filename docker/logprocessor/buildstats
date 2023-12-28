@@ -1,0 +1,54 @@
+#!/bin/bash
+
+set -euo pipefail
+
+THIS_DIR=$(dirname "$0")
+logdir="$1"
+shift
+parquetdir="$1"
+shift
+jsonfile="$1"
+
+if [ -z "$logdir" ] || [ -z "$parquetdir" ] || [ -z "$jsonfile" ]; then
+    echo "usage: $0 logdir parquetdir jsonfile" >&2
+    exit 1
+fi
+
+logcat() {
+    local logfile="$1"
+    if [ "${logfile##*.}" = "gz" ]; then
+        gunzip -c "$logfile"
+    else
+        cat "$logfile"
+    fi
+}
+function refresh_parquet() {
+    echo "Checking for stale or missing parquet files..." >&2
+    find "$logdir" -type f -name '*access.log*' -print0 | while IFS= read -r -d $'\0' f; do
+        parquet_file="$parquetdir/$(realpath --relative-to "$logdir" "$f").parquet"
+        if ! [ "$parquet_file" -nt "$f" ]; then
+            echo "Building $parquet_file" >&2
+            p=$(mktemp)
+            logcat "$f" | "$THIS_DIR"/log_to_parquet.py > "$p"
+            mkdir -p "$(dirname "$parquet_file")"
+            mv "$p" "$parquet_file"
+        fi
+    done
+}
+
+# Remove parquet files that no longer have corresponding log files
+function flush_parquet() {
+    find "$parquetdir" -type f -name '*access.log*.parquet' -print0 | while IFS= read -r -d $'\0' f; do
+        log_file="$logdir/$(realpath --relative-to "$parquetdir" "${f%.*}")"
+       # echo "looking for $log_file"
+        if ! [ -f "$log_file" ]; then
+            echo "Removing defunct parquet file: $f" >&2
+            rm "$f"
+        fi
+    done
+}
+
+mkdir -p "$parquetdir"
+refresh_parquet
+flush_parquet
+"$THIS_DIR/summarise" "$parquetdir" "$jsonfile"

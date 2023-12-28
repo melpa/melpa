@@ -35,11 +35,9 @@ New recipe submissions should adhere to the following guidelines:
      comments which may or may not be blockers for addition to MELPA.
 
 - One recipe per pull request :: If you have several packages to
-     submit, open several pull requests. If the packages are very
-     closely related and maintained in the same repository (see below
-     for why it might not be a good idea), you might open only
-     one pull request for them all; in this case, keep adding one
-     recipe per commit.
+     submit, open several pull requests.  If one of your packages is a
+     dependency of the others, open the pull request for that one
+     first.  Avoid circular dependencies.
 
 - Reasonably innovative package :: MELPA provides a curated set of
      Emacs Lisp packages, not an exhaustive list of every single Emacs
@@ -114,7 +112,7 @@ will delay the process.
 - Use quality-checking tools :: Use [[https://melpa.org/#/flycheck][flycheck]], [[https://github.com/purcell/package-lint][package-lint]] and
      [[https://github.com/purcell/flycheck-package][flycheck-package]] to help you identify common errors in your
      package metadata. Use [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Tips.html][checkdoc]] to make sure that your package
-     follows the conventions for documentation strings.
+     follows the conventions for documentation strings, within reason.
 
 - Avoid long functions :: The longer a function the harder it is for a
      MELPA maintainer to understand what is happening and to give
@@ -190,13 +188,11 @@ Please test that the package builds properly by following the steps
 below.
 
 Let ~<NAME>~ denote the filename of the new recipe. Build the recipe
-via ~make recipes/<NAME>~, or with ~C-c C-c~ (~M-x package-build-current-recipe~) in the recipe
-file buffer. Be sure that the ~emacs~ binary on your ~PATH~ is at
-least version 23, or set ~$EMACS_COMMAND~ to the location of a
-suitable binary.
+via ~make recipes/<NAME>~, or with ~C-c C-c~ (~M-x package-build-current-recipe~)
+in the recipe file buffer.
 
 If the repository contains tags for releases, confirm that the correct
-version is detected by running ~STABLE=t make recipes/<NAME>~.  The
+version is detected by running ~MELPA_CHANNEL=stable make recipes/<NAME>~.  The
 version detection can be adjusted by specifying ~:version-regexp~ in
 the recipe (see [[file:README.md#recipe-format][recipe format]] in the README).
 
@@ -212,7 +208,7 @@ packages will be available for installation along with those already
 in MELPA:
 
 #+BEGIN_SRC shell
-EMACS_COMMAND=/path/to/emacs make sandbox INSTALL=<NAME>
+make sandbox INSTALL=<NAME>
 #+END_SRC
 
 From within Emacs, install and test your package as appropriate. This

@@ -1,4 +1,5 @@
 (wgrep-helm
  :fetcher github
  :repo "mhayashi1120/Emacs-wgrep"
- :files ("wgrep-helm.el"))
+ :files ("wgrep-helm.el")
+ :version-regexp "\\`helm-\\(.*\\)")

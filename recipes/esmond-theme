@@ -1,0 +1,2 @@
+(esmond-theme :repo "hsnovel/esmond-theme"
+              :fetcher github)

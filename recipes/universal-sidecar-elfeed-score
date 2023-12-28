@@ -1,0 +1,4 @@
+(universal-sidecar-elfeed-score
+ :fetcher sourcehut
+ :repo "swflint/emacs-universal-sidecar"
+ :files ("universal-sidecar-elfeed-score.el"))

@@ -1,1 +1,3 @@
-(oauth :fetcher github :repo "psanford/emacs-oauth")
+(oauth
+ :fetcher gitlab
+ :repo "fvdbeek/emacs-oauth")

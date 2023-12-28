@@ -1,1 +1,1 @@
-(terraform-mode :repo "emacsorphanage/terraform-mode" :fetcher github)
+(terraform-mode :repo "hcl-emacs/terraform-mode" :fetcher github)

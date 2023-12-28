@@ -1,1 +1,1 @@
-(borland-blue-theme :fetcher github :repo "fourier/borland-blue-theme")
+(borland-blue-theme :fetcher codeberg :repo "fourier/borland-blue-theme")

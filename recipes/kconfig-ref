@@ -1,0 +1,3 @@
+(kconfig-ref
+ :fetcher github
+ :repo "seokbeomKim/kconfig-ref")

@@ -1,1 +1,3 @@
-(helm-gitignore :fetcher github :repo "jupl/helm-gitignore")
+(helm-gitignore
+ :fetcher github
+ :repo "emacsorphanage/helm-gitignore")

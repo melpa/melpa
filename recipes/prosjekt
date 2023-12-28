@@ -1,2 +1,5 @@
-(prosjekt :fetcher github :repo "abingham/prosjekt"
-          :files ("prosjekt/*.el" "prosjekt/ext/*.el"))
+(prosjekt
+ :fetcher github
+ :repo "abingham/prosjekt"
+ :files ("prosjekt/*.el"
+         "prosjekt/ext/*.el"))

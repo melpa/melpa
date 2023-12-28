@@ -134,16 +134,16 @@
         patched by some <em>advice</em>.
       </p>
 
-      <pre><code> (defadvice package-compute-transaction
-  (before package-compute-transaction-reverse (package-list requirements) activate compile)
-    "reverse the requirements"
-    (setq requirements (reverse requirements))
-    (print requirements))</code></pre>
-
-      <p>
-        <strong>Note:</strong> <em>This fix is included in
-        the <code>package-filter.el</code> package.</em>
-      </p>
+      <pre><code>(defadvice package-compute-transaction
+    (around package-compute-transaction-fix activate)
+  "Fix order of requirements."
+  (let ((package-list (ad-get-arg 0)))
+    (let (package-list)
+      (ad-set-args 0 (list nil  (ad-get-arg 1)))
+      ad-do-it)
+    (dolist (elt (nreverse ad-return-value))
+      (setq package-list (cons elt (delq elt package-list))))
+    (setq ad-return-value package-list)))</code></pre>
     </section>
     <section>
       <a name="updating"></a>

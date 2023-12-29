@@ -1,0 +1,3 @@
+(totp-auth
+ :fetcher gitlab
+ :repo "fledermaus/totp.el")

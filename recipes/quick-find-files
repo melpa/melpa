@@ -1,0 +1,1 @@
+(quick-find-files :fetcher git :url "https://labs.phundrak.com/phundrak/quick-find-files.el")

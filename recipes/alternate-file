@@ -1,0 +1,3 @@
+(alternate-file :repo "tap349/alternate-file"
+                :fetcher github
+                :files ("alternate-file.el"))

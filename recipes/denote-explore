@@ -1,0 +1,1 @@
+(citar-denote :repo "pprevos/denote-explore" :fetcher github :files ("*.el" "*.R"))

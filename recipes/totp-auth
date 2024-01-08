@@ -1,5 +1,4 @@
 (totp-auth
  :fetcher gitlab
- :files ("totp-*.el"
-         (:exclude ".dir-locals.el"))
+ :files ("totp-*.el")
  :repo "fledermaus/totp.el")

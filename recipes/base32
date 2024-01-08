@@ -1,5 +1,4 @@
 (base32
  :fetcher gitlab
- :files ("base32.el"
-         (:exclude ".dir-locals.el"))
+ :files ("base32.el")
  :repo "fledermaus/totp.el")

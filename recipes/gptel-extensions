@@ -1,0 +1,1 @@
+(gptel-extensions :fetcher github :repo "kamushadenes/gptel-extensions.el")

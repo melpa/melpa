@@ -30,7 +30,12 @@
         <input type="hidden" name="page" value="1">
         <h2>Current List of {{ total_packages }} Packages <small>{{ "{:,d}".format(downloads) }} downloads to date</small></h2>
         <p>
-          <input type="search" placeholder="Enter search terms" autofocus="" class="form-control" name="q" value="{{ q }}">
+          <input id="search" type="search" autocomplete="off"
+                 placeholder="Enter search terms" autofocus=""
+                 class="form-control" name="q" value="{{ q }}"
+                 hx-trigger="keyup changed delay:350ms"
+                 hx-get="/?asc={{asc}}&sort={{sort}}" hx-target="#packages"
+                 hx-select="#packages" hx-replace-url="true">
           <span class= "help-block">{{ "{:,d}".format(match_count) }} matching package(s)</span>
         </p>
         <table id="package-list" class="table table-bordered table-responsive table-hover">

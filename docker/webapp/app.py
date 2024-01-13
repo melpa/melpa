@@ -159,7 +159,7 @@ class Paginator:
         items = list(items)
         self.page_size = page_size
         self.first_page = 1
-        self.last_page = ceil(len(items) / page_size)
+        self.last_page = max(1, ceil(len(items) / page_size))
         self.page_numbers = range(max(page - 5, 1), min(page + 5, self.last_page))
 
         if page < self.first_page or page > self.last_page:
@@ -189,7 +189,7 @@ templates = Jinja2Templates(directory="templates")
 templates.env.globals['URL'] = URL
 
 @app.get("/", response_class=HTMLResponse)
-async def index(request: Request, q='', sort='package', asc: bool = True, page: int = 1):
+async def index(request: Request, q : str ='', sort='package', asc: bool = True, page: int = 1):
     data = load_package_data()
     page = int(page)
 

@@ -1,8 +1,9 @@
+{% set stable = (request.host == 'stable.melpa.org') %}
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-US" class="{% if stable %}stable{% endif %}">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>MELPA</title>
+  <title>{% if stable %}MELPA Stable{% else %}MELPA{% endif %}</title>
   <meta name="description" lang="en" content="The largest and most up-to-date repository of Emacs packages.">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="shortcut icon" href="favicon.ico">
@@ -24,7 +25,11 @@
           <li><a href="https://twitter.com/melpa_emacs">Twitter</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a class="other-melpa-link hidden"></a></li>
+          <li>
+            <a class="other-melpa-link" href="https://{% if not stable %}stable.{% endif %}melpa.org">
+              <span class="glyphicon glyphicon-arrow-right"></span>
+              {% if stable %}MELPA{% else %}MELPA Stable{% endif %}
+          </a></li>
         </ul>
       </nav>
     </div>

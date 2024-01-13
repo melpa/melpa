@@ -36,42 +36,42 @@ HTML_DIR="../../html"
 BuildStatus = namedtuple("BuildStatus", ['started_at', 'completed_at', 'next_at', 'duration'])
 
 def calculate_source_url(recipe, commit):
-      fetcher = recipe["fetcher"]
-      url = recipe.get("url")
-      repo = recipe.get("repo")
-      branch = recipe.get("branch")
-      match fetcher:
-          case 'github':
-              ref = commit or branch
-              extra = ref and f"/tree/{ref}" or ""
-              return f"https://github.com/{repo}{extra}"
-          case "gitlab":
-              ref = commit or branch
-              extra = ref and f"/tree/{ref}" or ""
-              return f"https://gitlab.com/{repo}{extra}"
-          case "sourcehut":
-              ref = commit or branch
-              extra = ref and f"/tree/{ref}" or ""
-              return f"https://git.sr.ht/~{repo}{extra}"
-          case "bitbucket":
-              extra = ""
-              if commit: extra = "/src/" + commit
-              elif branch: extra = "/branch/" + branch
-              return f"https://bitbucket.com/{repo}{extra}"
-          case _:
-              if not url: return None
-              def url_match(pat, rep=''):
-                  new_url = re.sub(pat, rep, url)
-                  if new_url != url: return new_url
-                  else: return None
-              return (url_match(r'(bitbucket\.org\/[^\/]+\/[^\/\?]+)', "https://") or
-                      url_match(r'(gitorious\.org\/[^\/]+\/[^.]+)', "https://") or
-                      url_match(r'(gitlab\.com\/[^\/]+\/[^.]+)', "https://") or
-                      url_match(r'^lp:(.*)', "https://launchpad.net/") or
-                      url_match(r'^(https?:\/\/code\.google\.com\/p\/[^\/]+\/)') or
-                      url_match(r'^(https?:\/\/[^.]+\.googlecode\.com\/)') or
-                      url_match(r'^https:\/\/git\.code\.sf\.net\/p\/([^\/]+)', "https://sourceforge.net/p/") or
-                      url_match(r'^(https?:\/\/git\..*)'));
+    fetcher = recipe["fetcher"]
+    url = recipe.get("url")
+    repo = recipe.get("repo")
+    branch = recipe.get("branch")
+    match fetcher:
+        case 'github':
+            ref = commit or branch
+            extra = ref and f"/tree/{ref}" or ""
+            return f"https://github.com/{repo}{extra}"
+        case "gitlab":
+            ref = commit or branch
+            extra = ref and f"/tree/{ref}" or ""
+            return f"https://gitlab.com/{repo}{extra}"
+        case "sourcehut":
+            ref = commit or branch
+            extra = ref and f"/tree/{ref}" or ""
+            return f"https://git.sr.ht/~{repo}{extra}"
+        case "bitbucket":
+            extra = ""
+            if commit: extra = "/src/" + commit
+            elif branch: extra = "/branch/" + branch
+            return f"https://bitbucket.com/{repo}{extra}"
+        case _:
+            if not url: return None
+            def url_match(pat, rep=''):
+                new_url = re.sub(pat, rep, url)
+                if new_url != url: return new_url
+                else: return None
+            return (url_match(r'(bitbucket\.org\/[^\/]+\/[^\/\?]+)', "https://") or
+                    url_match(r'(gitorious\.org\/[^\/]+\/[^.]+)', "https://") or
+                    url_match(r'(gitlab\.com\/[^\/]+\/[^.]+)', "https://") or
+                    url_match(r'^lp:(.*)', "https://launchpad.net/") or
+                    url_match(r'^(https?:\/\/code\.google\.com\/p\/[^\/]+\/)') or
+                    url_match(r'^(https?:\/\/[^.]+\.googlecode\.com\/)') or
+                    url_match(r'^https:\/\/git\.code\.sf\.net\/p\/([^\/]+)', "https://sourceforge.net/p/") or
+                    url_match(r'^(https?:\/\/git\..*)'));
 
 Dependency = namedtuple("Dependency", ['name', 'version'])
 

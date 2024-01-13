@@ -1,12 +1,10 @@
 # TODO:
-#  - rss
-#  - opensearch
+#  - Bring rss into this webapp
 #  - unify static files, no dup melpa.css etc
-#  - toggle stable vs. non-stable, add link at top-right to the other
 #  - build timestamps
 #  - page titles
 #  - entity-quote package URLs containing +
-#  - case-insensitive search
+#  - refresh data when stale
 #  - gist recipes
 #  - escaping chars in description etc.
 #  - serve packages statically by default, use /packages/foo URLs.

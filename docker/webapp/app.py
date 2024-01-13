@@ -2,7 +2,6 @@
 #  - Bring rss into this webapp
 #  - unify static files, no dup melpa.css etc
 #  - build timestamps
-#  - page titles
 #  - entity-quote package URLs containing +
 #  - refresh data when stale
 #  - gist recipes

@@ -1,5 +1,7 @@
-{% extends "layout.html" %}
-{% block content %}
+{%- set page_title = package.name %}
+{%- set page_description = package.description %}
+{%- extends "layout.html" %}
+{%- block content %}
   <section>
     <h1>{{package.name}}
       <small>{{package.version}}</small></h1>
@@ -68,7 +70,7 @@
     </section>
     <section>
       <h4>Description</h4>
-      <pre>{{ readme_text|e }}</pre>
+      <pre>{{ (readme_text or "No description provided")|e }}</pre>
     </section>
   </section>
   <section>

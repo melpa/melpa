@@ -1,14 +1,15 @@
-{% set stable = (request.host == 'stable.melpa.org') %}
+{%- set stable = (request.host == 'stable.melpa.org') %}
+{%- set archive_name = "MELPA Stable" if stable else "MELPA" %}
 <!DOCTYPE html>
 <html lang="en-US" class="{% if stable %}stable{% endif %}">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>{% if stable %}MELPA Stable{% else %}MELPA{% endif %}</title>
-  <meta name="description" lang="en" content="The largest and most up-to-date repository of Emacs packages.">
+  <title>{% if page_title %}{{page_title}} | {% endif %}{{ archive_name }}</title>
+  <meta name="description" lang="en" content="{{ page_description | e }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Melpa" >
-  <link href="/updates.rss" rel="alternate" title="MELPA updates" type="application/rss+xml">
+  <link href="/updates.rss" rel="alternate" title="{{ archive_name }} updates" type="application/rss+xml">
   <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/melpa.css" type="text/css">
 </head>
@@ -16,7 +17,7 @@
   <header class="navbar navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
-        <a href="/" class="navbar-brand archive-name">MELPA</a>
+        <a href="/" class="navbar-brand archive-name">{{ archive_name }}</a>
       </div>
       <nav class="collapse navbar-collapse">
         <ul class="nav navbar-nav">

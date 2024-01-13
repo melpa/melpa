@@ -97,7 +97,7 @@ class PackageDescriptor:
         self.log_url = f"/packages/{name}.log"
 
     def search_text(self):
-        return " ".join(x for x in [self.name, self.description, self.version, self._search_extra] if x)
+        return " ".join(x for x in [self.name, self.description, self.version, self._search_extra] if x).lower()
 
 def maybe_timestamp(t):
     if t is not None: return datetime.datetime.fromtimestamp(t)

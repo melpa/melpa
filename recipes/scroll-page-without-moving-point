@@ -1,0 +1,1 @@
+(scroll-page-without-moving-point :repo "tanrax/scroll-page-without-moving-point.el" :fetcher github)

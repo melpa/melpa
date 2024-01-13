@@ -3,7 +3,7 @@
   <section>
     <h1>{{package.name}}
       <small>{{package.version}}</small></h1>
-    <p class="lead">{{package.description}}</p>
+    <p class="lead">{{package.description|e}}</p>
     <p>
       <a href="{{package.recipe_url}}" class="btn btn-default">
         <span class="glyphicon glyphicon-cutlery"></span>
@@ -68,7 +68,7 @@
     </section>
     <section>
       <h4>Description</h4>
-      <pre>{{ readme_text }}</pre>
+      <pre>{{ readme_text|e }}</pre>
     </section>
   </section>
   <section>

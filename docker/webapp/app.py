@@ -7,7 +7,6 @@
 #  - page titles
 #  - entity-quote package URLs containing +
 #  - case-insensitive search
-#  - full URLs for badges
 #  - gist recipes
 #  - escaping chars in description etc.
 #  - serve packages statically by default, use /packages/foo URLs.
@@ -26,6 +25,7 @@ from collections import namedtuple
 import re
 from itertools import groupby
 from math import ceil
+from urllib.parse import urljoin
 
 ##############################################################################
 # Data models
@@ -250,7 +250,8 @@ async def package(name, request: Request):
         "readme_text": readme_text,
         "downloads_percentile": data.download_percentiles[package.name],
         "packages_by_name": data.packages_by_name,
-        "needed_by": needed_by
+        "needed_by": needed_by,
+        "relative_url": lambda path: urljoin(str(request.url), path)
     })
 
 

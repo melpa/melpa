@@ -73,20 +73,21 @@
   </section>
   <section>
     <h4>Badge code</h4>
+    {% set full_badge_url = relative_url(package.badge_url) %}
     <div class="well">
       <dl>
         <dt>Preview</dt>
-        <dd><a href="/#/sesman"><img alt="MELPA" src="{{package.badge_url}}"></a></dd>
+        <dd><a href="/#/sesman"><img alt="MELPA" src="{{full_badge_url}}"></a></dd>
       </dl>
       <dl>
         <dt>HTML</dt>
-        <dd><pre>&lt;a href="{{ request.url }}"&gt;&lt;img alt="MELPA" src="{{package.badge_url}}"/&gt;&lt;/a&gt;</pre></dd>
+        <dd><pre>&lt;a href="{{ request.url }}"&gt;&lt;img alt="MELPA" src="{{full_badge_url}}"/&gt;&lt;/a&gt;</pre></dd>
 
         <dt>Markdown</dt>
-        <dd><pre>[![MELPA]({{ package.badge_url }})]({{request.url}})</pre></dd>
+        <dd><pre>[![MELPA]({{ full_badge_url }})]({{request.url}})</pre></dd>
 
         <dt>Org</dt>
-        <dd><pre>[[{{request.url}}][file:{{package.badge_url}}]]</pre></dd>
+        <dd><pre>[[{{request.url}}][file:{{full_badge_url}}]]</pre></dd>
       </dl>
     </div>
   </section>

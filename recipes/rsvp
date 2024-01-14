@@ -1,0 +1,2 @@
+(rsvp :fetcher github
+      :repo "miketz/rapid-serial-visual-presentation")

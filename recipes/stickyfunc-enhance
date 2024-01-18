@@ -1,1 +1,3 @@
-(stickyfunc-enhance :fetcher github :repo "tuhdo/semantic-stickyfunc-enhance")
+(stickyfunc-enhance
+ :fetcher github
+ :repo "emacsattic/semantic-stickyfunc-enhance")

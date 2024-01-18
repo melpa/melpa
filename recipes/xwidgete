@@ -1,1 +1,1 @@
-(xwidgete :fetcher github :repo "tuhdo/xwidgete")
+(xwidgete :fetcher github :repo "emacsattic/xwidgete")

@@ -1,0 +1,1 @@
+(haproxy-mode :fetcher git :url "https://github.com/port19x/haproxy-mode")

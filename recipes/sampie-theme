@@ -1,0 +1,3 @@
+(sampie-theme
+  :repo "Sampie159/sampie-theme"
+  :fetcher github)

@@ -1,1 +1,6 @@
-(gnosis :fetcher git :url "https://git.thanosapollo.org/gnosis")
+(gnosis :fetcher git
+        :url "https://git.thanosapollo.org/gnosis"
+        :files (:defaults
+                "*.el doc/*"
+                (:exclude
+                 "*-dev.el" "doc/*.org")))

@@ -1,0 +1,2 @@
+(ert-results :repo "rswgnu/ert-results"
+            :fetcher github)

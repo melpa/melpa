@@ -1,0 +1,4 @@
+(org-agenda-files-track-ql
+ :fetcher sourcehut
+ :repo "ngraves/org-agenda-files-track"
+ :files ("org-agenda-files-track-ql.el"))

@@ -1,0 +1,4 @@
+(org-cite-sidecar
+ :fetcher sourcehut
+ :repo "swflint/emacs-universal-sidecar"
+ :files ("org-cite-sidecar.el"))

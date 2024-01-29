@@ -1,0 +1,4 @@
+(totp-auth
+ :fetcher gitlab
+ :files (:defaults (:exclude "base32.el"))
+ :repo "fledermaus/totp.el")

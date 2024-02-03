@@ -1,0 +1,4 @@
+(org-appointments-sidecar
+ :fetcher sourcehut
+ :repo "swflint/emacs-universal-sidecar"
+ :files ("org-appointments-sidecar.el"))

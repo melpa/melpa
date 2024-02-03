@@ -1,0 +1,1 @@
+(eshell-extensions :fetcher github :repo "rajasegar/eshell-extensions")

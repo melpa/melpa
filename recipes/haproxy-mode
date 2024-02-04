@@ -1,0 +1,1 @@
+(haproxy-mode :fetcher github :repo "port19x/haproxy-mode")

@@ -1,1 +1,1 @@
-(transducers :fetcher sourcehut :repo "fosskers/transducers.el")
+(transducers :fetcher github :repo "fosskers/transducers.el")

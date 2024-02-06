@@ -1,1 +1,1 @@
-(sly-overlay :fetcher sourcehut :repo "fosskers/sly-overlay")
+(sly-overlay :fetcher github :repo "fosskers/sly-overlay")

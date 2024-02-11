@@ -1,0 +1,1 @@
+(dired-e :fetcher github :repo "Anoncheg1/dired-e")

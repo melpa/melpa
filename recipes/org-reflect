@@ -1,0 +1,4 @@
+(org-reflect
+ :fetcher sourcehut
+ :repo "flandrew/org-reflect"
+ :files (:defaults "README.org" "README.org.license" "examples" "LICENSES"))

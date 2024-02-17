@@ -1,0 +1,3 @@
+(sdml-ispell :fetcher github
+             :repo "johnstonskj/emacs-sdml-mode"
+             :files ("sdml-ispell.el"))

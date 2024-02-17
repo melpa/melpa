@@ -1,0 +1,3 @@
+(elsa-lambda-calculus-mode
+  :fetcher github
+  :repo "Kab1r/elsa-lambda-calculus-mode")

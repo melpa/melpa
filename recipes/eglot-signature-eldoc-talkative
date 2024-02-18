@@ -1,0 +1,3 @@
+(eglot-signature-eldoc-talkative
+ :fetcher codeberg
+ :repo "mekeor/emacs-eglot-signature-eldoc-talkative")

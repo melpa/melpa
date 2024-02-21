@@ -1,0 +1,1 @@
+(semver :repo "binary-ec/semver.el" :fetcher gitlab :files ("semver.el"))

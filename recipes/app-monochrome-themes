@@ -1,4 +1,3 @@
 (app-monochrome-themes
  :fetcher github
- :repo "Greybeard-Entertainment/app-monochrome"
- :branch "barba")
+ :repo "Greybeard-Entertainment/app-monochrome")

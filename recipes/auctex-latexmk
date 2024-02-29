@@ -1,1 +1,1 @@
-(auctex-latexmk :repo "tom-tan/auctex-latexmk" :fetcher github)
+(auctex-latexmk :fetcher github :repo "emacsmirror/auctex-latexmk")

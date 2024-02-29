@@ -1,0 +1,1 @@
+(jirascope :fetcher github :repo "Duckonaut/jirascope" :files ("jirascope/jirascope*.el"))

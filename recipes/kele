@@ -1,0 +1,1 @@
+(kele :repo "jinnovation/kele.el" :fetcher github)

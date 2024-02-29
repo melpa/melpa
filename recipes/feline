@@ -1,0 +1,1 @@
+(feline :fetcher git :url "https://opensource.chee.party/chee/feline-mode")

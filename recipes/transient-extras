@@ -1,0 +1,4 @@
+(transient-extras
+ :fetcher github
+ :repo "haji-ali/transient-extras"
+ :files ("transient-extras.el"))

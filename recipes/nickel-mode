@@ -1,0 +1,1 @@
+(nickel-mode :repo "nickel-lang/nickel-mode" :fetcher github)

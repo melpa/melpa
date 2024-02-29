@@ -1,2 +1,3 @@
-(cfengine-code-style :repo "cfengine/core" :fetcher github
-                     :files ("contrib/cfengine-code-style.el"))
+(cfengine-code-style
+ :fetcher github
+ :repo "cfengine/cfengine-code-style")

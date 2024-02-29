@@ -1,0 +1,3 @@
+(cloak-mode
+  :fetcher github
+  :repo "erickgnavar/cloak-mode")

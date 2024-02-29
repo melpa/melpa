@@ -1,2 +1,2 @@
-(symex :repo "countvajhula/symex.el"
+(symex :repo "drym-org/symex.el"
        :fetcher github)

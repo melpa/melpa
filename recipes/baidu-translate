@@ -1,1 +1,1 @@
-(baidu-translate :repo "LiShiZhensPi/baidu-translate" :fetcher github)
+(baidu-translate :repo "suxiaogang223/baidu-translate" :fetcher github)

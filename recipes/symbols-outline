@@ -1,0 +1,4 @@
+(symbols-outline :repo "liushihao456/symbols-outline.el"
+                 :fetcher github
+                 :files (:defaults
+                         "icons"))

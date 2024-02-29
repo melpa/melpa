@@ -1,5 +1,4 @@
-FROM nginx
-RUN echo "deb http://ftp.debian.org/debian stretch-backports main" > /etc/apt/sources.list.d/backports.list
+FROM nginx:bullseye
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get --yes install certbot openssl logrotate
 COPY default.conf /etc/nginx/conf.d/

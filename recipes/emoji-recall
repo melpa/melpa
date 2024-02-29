@@ -1,1 +1,4 @@
-(emoji-recall :fetcher github :repo "lujun9972/emoji-recall.el" :files (:defaults "emoji-cheat-sheet/*.png"))
+(emoji-recall
+ :fetcher github
+ :repo "lujun9972/emoji-recall.el"
+ :files (:defaults "emoji-cheat-sheet/*.png"))

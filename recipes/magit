@@ -1,7 +1,6 @@
 (magit :fetcher github
        :repo "magit/magit"
-       :files ("lisp/magit"
-               "lisp/magit*.el"
+       :files ("lisp/magit*.el"
                "lisp/git-rebase.el"
                "docs/magit.texi"
                "docs/AUTHORS.md"

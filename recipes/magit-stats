@@ -1,0 +1,3 @@
+(magit-stats
+  :repo "LionyxML/magit-stats"
+  :fetcher github)

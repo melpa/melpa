@@ -1,0 +1,1 @@
+(kanagawa-theme :repo "meritamen/emacs-kanagawa-theme" :fetcher github)

@@ -1,3 +1,0 @@
-(pallet :fetcher github
-        :repo "rdallasgray/pallet"
-        :files ("lib/*"))

@@ -1,0 +1,1 @@
+(ocaml-ts-mode :fetcher github :repo "dmitrig/ocaml-ts-mode")

@@ -1,2 +1,4 @@
-(status :fetcher github :repo "tromey/emacs-status"
-	 :files (:defaults "*.py" "*.png"))
+(status
+ :fetcher github
+ :repo "tromey/emacs-status"
+ :files (:defaults "*.py" "*.png"))

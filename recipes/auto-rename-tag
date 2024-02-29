@@ -1,1 +1,1 @@
-(auto-rename-tag :repo "jcs-elpa/auto-rename-tag" :fetcher github)
+(auto-rename-tag :repo "emacs-vs/auto-rename-tag" :fetcher github)

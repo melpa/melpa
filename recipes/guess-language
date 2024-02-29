@@ -1,4 +1,4 @@
 (guess-language
-  :fetcher github
-  :repo "tmalsburg/guess-language.el"
-  :files ("guess-language.el" "trigrams/*"))
+ :fetcher github
+ :repo "tmalsburg/guess-language.el"
+ :files ("guess-language.el" "trigrams/*"))

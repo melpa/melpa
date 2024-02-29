@@ -1,1 +1,1 @@
-(metronome :repo "jagrg/metronome" :fetcher gitlab :files (:defaults "sounds"))
+(metronome :fetcher sourcehut :repo "jagrg/metronome" :fetcher sourcehut :files (:defaults "sounds"))

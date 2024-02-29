@@ -1,0 +1,1 @@
+(pd-remote :repo "agraef/pd-remote" :fetcher github)

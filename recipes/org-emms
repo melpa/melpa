@@ -1,1 +1,1 @@
-(org-emms :repo "jagrg/org-emms" :fetcher gitlab)
+(org-emms :fetcher sourcehut :repo "jagrg/org-emms")

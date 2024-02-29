@@ -1,5 +1,6 @@
 (ergoemacs-mode
- :fetcher github :repo "ergoemacs/ergoemacs-mode"
+ :fetcher github
+ :repo "ergoemacs/ergoemacs-mode"
  :files ("*.el"
          "*.svg"
          "*.ahk"

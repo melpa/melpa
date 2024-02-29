@@ -1,0 +1,1 @@
+(lgr :fetcher github :repo "Fuco1/emacs-lgr" :files ("lgr.el"))

@@ -1,3 +1,4 @@
-(company :repo "company-mode/company-mode"
-         :fetcher github
-         :files (:defaults "icons" ("images/small" "doc/images/small/*.png")))
+(company
+ :fetcher github
+ :repo "company-mode/company-mode"
+ :files (:defaults "icons" ("images/small" "doc/images/small/*.png")))

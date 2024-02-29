@@ -1,0 +1,3 @@
+(nushell-mode
+ :fetcher github
+ :repo "mrkkrp/nushell-mode")

@@ -1,1 +1,4 @@
-(monky :fetcher github :repo "ananthakumaran/monky" :files ("*.el" "*.info" "style"))
+(monky
+ :fetcher github
+ :repo "ananthakumaran/monky"
+ :files ("*.el" "*.info" "style"))

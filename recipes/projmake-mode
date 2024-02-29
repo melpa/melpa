@@ -1,4 +1,4 @@
 (projmake-mode
+ :fetcher github
  :repo "ericbmerritt/projmake-mode"
- :files ("src/*.el")
- :fetcher github)
+ :files ("src/*.el"))

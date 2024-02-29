@@ -1,0 +1,1 @@
+(flymake-relint :fetcher github :repo "liuyinz/flymake-relint")

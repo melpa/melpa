@@ -1,3 +1,7 @@
-(ph :repo "gromnitsky/ph"
-	:fetcher github
-	:files ("*.el" "meta.json" "README" ("bin" "bin/ph-project-new")))
+(ph
+ :fetcher github
+ :repo "gromnitsky/ph"
+ :files ("*.el"
+         "meta.json"
+         "README"
+         ("bin" "bin/ph-project-new")))

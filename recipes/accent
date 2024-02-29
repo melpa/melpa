@@ -1,1 +1,1 @@
-(accent :repo "elias94/accent" :fetcher github)
+(accent :repo "eliascotto/accent" :fetcher github)

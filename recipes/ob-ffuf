@@ -1,0 +1,1 @@
+(ob-ffuf :repo "daniel-ts/ob-ffuf" :fetcher github)

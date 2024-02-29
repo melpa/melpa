@@ -1,2 +1,4 @@
-(skeletor :fetcher github :repo "chrisbarrett/skeletor.el"
-          :files ("*.el" "doc/*.texi" "licenses" "project-skeletons"))
+(skeletor
+ :fetcher github
+ :repo "chrisbarrett/skeletor.el"
+ :files ("*.el" "doc/*.texi" "licenses" "project-skeletons"))

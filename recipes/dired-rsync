@@ -1,1 +1,3 @@
-(dired-rsync :repo "stsquad/dired-rsync" :fetcher github)
+(dired-rsync :repo "stsquad/dired-rsync"
+             :fetcher github
+             :files ("dired-rsync.el"))

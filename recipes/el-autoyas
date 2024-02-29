@@ -1,1 +1,6 @@
-(el-autoyas :fetcher github :repo "mattfidler/el-autoyas.el")
+(el-autoyas
+ :fetcher github
+ :repo "mattfidler/el-autoyas.el"
+ ;; Building the manual fails, so don't try, removing some noise that
+ ;; makes it harder to focus on issues we actually have control over.
+ :files (:defaults (:exclude "*.texi")))

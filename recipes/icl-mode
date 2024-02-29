@@ -1,0 +1,1 @@
+(icl-mode :fetcher github :repo "CeleritasCelery/icl-mode")

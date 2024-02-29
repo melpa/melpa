@@ -1,1 +1,1 @@
-(stripes :fetcher gitlab :repo "stepnem/stripes-el")
+(stripes :fetcher git :url "https://git.smrk.net/stripes.el")

@@ -2,16 +2,11 @@
 *.elc
 *~
 .#*
-/.cask
-/.ecukes-failing-scenarios
-/config.el
 /config.mk
 /download_log.db
 /download_log.json.gz
 /download_log_stable.db
 /download_log_stable.json.gz
-/elpa
-/epkgs
 /html*/archive.json
 /html*/build-status.json
 /html*/download_counts.json
@@ -24,5 +19,4 @@
 /service/*/log
 /service/*/supervise
 /service/caddy/.caddy
-/sync
 /working/

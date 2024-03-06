@@ -3,15 +3,23 @@ include default.mk
 
 .PHONY: test
 
+# https://github.com/emacscollective/workflows/blob/main/bin/install-deps
+# expects this to find this in this file.
+DEPS  = compat
+
 all: lisp
 
 help:
 	$(info make all          - generate byte-code and autoloads)
 	$(info make lisp         - generate byte-code and autoloads)
+	$(info make redo         - re-generate byte-code and autoloads)
 	$(info make test         - run tests)
 	$(info make demo         - run tests showing their documentation)
 	$(info make clean        - remove generated files)
 	@printf "\n"
+
+redo: clean $(ELCS) loaddefs check-declare
+	@$(MAKE) -C test lisp
 
 lisp: $(ELCS) loaddefs check-declare
 	@$(MAKE) -C test lisp

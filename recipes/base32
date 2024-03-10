@@ -1,0 +1,4 @@
+(base32
+ :fetcher gitlab
+ :files ("base32.el")
+ :repo "fledermaus/totp.el")

@@ -1,2 +1,1 @@
-(tbx2org :repo "istib/tbx2org" :fetcher github)
-
+(tbx2org :repo "emacsattic/tbx2org" :fetcher github)

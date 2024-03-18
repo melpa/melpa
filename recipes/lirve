@@ -1,1 +1,1 @@
-(learning-irregular-verbs-in-english :repo "tanrax/lirve.el" :fetcher github)
+(lirve :repo "tanrax/lirve.el" :fetcher github)

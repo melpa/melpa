@@ -1,7 +1,7 @@
 (hyperbole
     :url "https://git.savannah.gnu.org/git/hyperbole.git"
     :fetcher git
-    :files ("*.el" "MANIFEST" "dir" ".mailmap" "ChangeLog" "COPYING" "Makefile"
+    :files ("*.el" "MANIFEST" "dir" "ChangeLog" "Makefile"
             "HY-ABOUT" "HY-ANNOUNCE" "HY-CONCEPTS.kotl" "HY-NEWS"
             "HY-WHY.kotl" "INSTALL" "DEMO" "DEMO-ROLO.otl" "FAST-DEMO"
             "README.md" "TAGS" "_hypb" ".hypb" "smart-clib-sym" "topwin.py"

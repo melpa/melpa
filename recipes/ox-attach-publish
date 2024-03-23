@@ -1,0 +1,6 @@
+(ox-attach-publish :fetcher github
+                   :repo "simoninireland/ox-attach-publish"
+                   :files ("ox-attach-publish.el"
+                           "ox-attach-publish-f.el"
+                           "ox-attach-publish-machinery.el"
+                           "ox-attach-publish-frontend.el"))

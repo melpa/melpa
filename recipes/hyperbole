@@ -1,0 +1,16 @@
+(hyperbole
+    :url "https://git.savannah.gnu.org/git/hyperbole.git"
+    :fetcher git
+    :files ("*.el" "MANIFEST" "dir" "ChangeLog" "Makefile"
+            "HY-ABOUT" "HY-ANNOUNCE" "HY-CONCEPTS.kotl" "HY-NEWS"
+            "HY-WHY.kotl" "INSTALL" "DEMO" "DEMO-ROLO.otl" "FAST-DEMO"
+            "README.md" "TAGS" "_hypb" ".hypb" "smart-clib-sym" "topwin.py"
+            "hyperbole-banner.png"
+            ("kotl" "MANIFEST" "EXAMPLE.kotl" "kotl/*.el")
+            ("man" "man/hyperbole.texi" "man/version.texi" "man/hyperbole.css"
+             "man/hkey-help.txt" "man/hyperbole.info" "man/hyperbole.html"
+             "man/hyperbole.pdf")
+            ("man/im" "man/im/*.png")
+            ("HY-TALK" "HY-TALK/.hypb" "HY-TALK/HYPB" "HY-TALK/HY-TALK.org"
+             "HY-TALK/HYPERAMP.org" "HY-TALK/HYPERORG.org")
+            ("test" "MANIFEST" "test/*tests.el" "test/hy-test-*.el")))

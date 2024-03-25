@@ -1,0 +1,65 @@
+name: Review PR
+on:
+  pull_request:
+    paths:
+      - 'recipes/**'
+
+# Explicitly set workflow permissions to avoid additional permissions being added from 
+# the Github UI.
+permissions:
+  contents: read
+
+env:
+  PR_NUMBER: ${{ github.event.number }}
+
+jobs:
+  # Check if the PR is the valid PR we can review.
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      status: ${{ steps.export.outputs.status }}
+    steps:
+    - name: Check valid PR
+      id: valid-pr
+      continue-on-error: true
+      uses: JJ/github-pr-contains-action@releases/v12.1
+      with:
+        github-token: ${{ github.token }}
+        bodyContains: '### Direct link to the package repository'
+
+    - name: Export result
+      id: export
+      if: steps.valid-pr.outcome == 'success'
+      run: |
+        echo "status=success" >> "$GITHUB_OUTPUT"
+
+  # Start the review process.
+  review:
+    needs: [check]
+    if: ${{ needs.check.outputs.status == 'success' }}
+    runs-on: ubuntu-20.04
+    permissions:
+      pull-requests: write
+    
+    steps:
+    - uses: purcell/setup-emacs@master
+      with:
+        version: 29.2
+
+    - uses: actions/checkout@v4
+      with:
+        repository: riscy/melpazoid
+        ref: 719ce96c151765aa5ca9950286027afca0e550c2
+
+    - name: Setup Env
+      run: |
+        echo "NO_COLOR=true" >> $GITHUB_ENV
+
+    - name: Review package
+      continue-on-error: true
+      run: MELPA_PR_URL=https://github.com/melpa/melpa/pull/${{ env.PR_NUMBER }} make
+
+    - name: Comment the result to the PR
+      uses: mshick/add-pr-comment@v2
+      with:
+        message-path: ~/pr-output

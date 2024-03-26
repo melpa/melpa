@@ -1,0 +1,2 @@
+(roc-ts-mode :repo "miilyn/roc-ts-mode"
+             :fetcher github)

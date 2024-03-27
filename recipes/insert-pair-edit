@@ -1,9 +1,0 @@
-(insert-pair-edit :fetcher github
-                  :branch  "melpa"
-                  :repo    "BriansEmacs/insert-pair-edit.el"
-                  :files   ("*.el"
-                            "modes/*.el"
-                            "ipe.texi"
-                            "DEPENDENCIES.txt"
-                            "README.md"
-                            (:exclude "ipe-mc.el")))

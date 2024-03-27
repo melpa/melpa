@@ -1,0 +1,6 @@
+(ipe :fetcher github
+     :repo    "BriansEmacs/insert-pair-edit.el"
+     :files   ("ipe*.el"
+               "modes/ipe-*.el"
+               "ipe.texi"
+               "LICENSE"))

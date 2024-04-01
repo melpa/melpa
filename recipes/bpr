@@ -1,1 +1,1 @@
-(bpr :repo "ilya-babanov/emacs-bpr" :fetcher github)
+(bpr :repo "iliabv/emacs-bpr" :fetcher github)

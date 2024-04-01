@@ -1,0 +1,3 @@
+(flymake-margin
+  :repo "LionyxML/flymake-margin"
+  :fetcher github)

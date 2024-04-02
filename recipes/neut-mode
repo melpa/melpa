@@ -1,0 +1,3 @@
+(neut-mode
+ :fetcher github
+ :repo "vekatze/neut-mode")

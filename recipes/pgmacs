@@ -1,0 +1,3 @@
+(pgmacs
+ :repo "emarsden/pgmacs"
+ :fetcher github)

@@ -7,7 +7,7 @@
             "README.md" "TAGS" "_hypb" ".hypb" "smart-clib-sym" "topwin.py"
             "hyperbole-banner.png"
             ("kotl" "kotl/MANIFEST" "kotl/EXAMPLE.kotl" "kotl/*.el")
-            ("man" "man/hyperbole.texi" "man/version.texi" "man/hyperbole.css"
+            ("man" "man/hyperbole.texi" "man/hyperbole.css"
              "man/hkey-help.txt" "man/hyperbole.info" "man/hyperbole.html"
              "man/hyperbole.pdf")
             ("man/im" "man/im/*.png")

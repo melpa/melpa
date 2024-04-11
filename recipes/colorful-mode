@@ -1,0 +1,4 @@
+(colorful-mode
+ :fetcher github
+ :repo "DevelopmentCool2449/colorful-mode"
+ :url "https://github.com/DevelopmentCool2449/colorful-mode")

@@ -1,1 +1,1 @@
-(scala-ts-mode :fetcher github :repo "sheepduke/scala-repl.el")
+(scala-repl :fetcher github :repo "sheepduke/scala-repl.el")

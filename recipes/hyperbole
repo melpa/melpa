@@ -4,8 +4,8 @@
     :files ("*.el" "MANIFEST" "dir" "ChangeLog" "Makefile"
             "HY-ABOUT" "HY-ANNOUNCE" "HY-CONCEPTS.kotl" "HY-NEWS"
             "HY-WHY.kotl" "INSTALL" "DEMO" "DEMO-ROLO.otl" "FAST-DEMO"
-            "README.md" "TAGS" "_hypb" ".hypb" "smart-clib-sym" "topwin.py"
-            "hyperbole-banner.png"
+            "README.md" "_hypb" ".hypb" "hyrolo.py" "smart-clib-sym"
+            "topwin.py" "hyperbole-banner.png"
             ("kotl" "kotl/MANIFEST" "kotl/EXAMPLE.kotl" "kotl/*.el")
             ("man" "man/hyperbole.texi" "man/hyperbole.css"
              "man/hkey-help.txt" "man/hyperbole.info" "man/hyperbole.html"

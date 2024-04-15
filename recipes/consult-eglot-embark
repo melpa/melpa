@@ -1,0 +1,3 @@
+(consult-eglot-embark
+ :fetcher github :repo "mohkale/consult-eglot"
+ :files ("extensions/consult-eglot-embark/consult-eglot-embark*.el"))

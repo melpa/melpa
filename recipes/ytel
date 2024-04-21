@@ -1,1 +1,1 @@
-(ytel :repo "grastello/ytel" :fetcher github)
+(ytel :repo "manabiseijin/ytel" :fetcher github)

@@ -1,0 +1,1 @@
+(repo-transient :repo "licht1stein/repo-transient.el" :fetcher github)

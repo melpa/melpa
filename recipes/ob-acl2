@@ -1,0 +1,4 @@
+(ob-acl2
+ :fetcher github
+ :repo "tani/ob-acl2"
+ :files ("ob-acl2.el"))

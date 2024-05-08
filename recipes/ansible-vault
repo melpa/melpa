@@ -1,2 +1,3 @@
 (ansible-vault :fetcher github
-               :repo "zellio/ansible-vault-mode")
+               :repo "zellio/ansible-vault-mode"
+               :branch "master")

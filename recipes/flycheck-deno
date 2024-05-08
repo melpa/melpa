@@ -1,0 +1,1 @@
+(flycheck-deno :repo "flycheck/flycheck-deno" :fetcher github)

@@ -1,2 +1,4 @@
-(fuz :repo "rustify-emacs/fuz.el" :fetcher github
-     :files ("fuz*.el" "Cargo.toml" "Cargo.lock" "src"))
+(fuz
+ :fetcher github
+ :repo "rustify-emacs/fuz.el"
+ :files ("fuz*.el" "Cargo.toml" "Cargo.lock" "src"))

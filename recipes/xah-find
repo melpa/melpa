@@ -1,1 +1,0 @@
-(xah-find :repo "xahlee/xah-find" :fetcher github)

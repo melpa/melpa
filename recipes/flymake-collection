@@ -1,0 +1,5 @@
+(flymake-collection
+ :fetcher github
+ :repo "mohkale/flymake-collection"
+ :files (:defaults "src/*.el" "src/checkers/*.el")
+ :old-names (flymake-rest))

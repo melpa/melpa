@@ -1,6 +1,8 @@
 (ddskk
- :repo "skk-dev/ddskk"
  :fetcher github
+ :repo "skk-dev/ddskk"
  :old-names (skk)
- :files ("context-skk.el" "ddskk*.el" "skk*.el" "tar-util.el" "doc/skk.texi" "etc/skk.xpm"
+ :files ("context-skk.el" "ddskk*.el" "skk*.el" "tar-util.el"
+         "doc/skk.texi"
+         "etc/skk.xpm"
          (:exclude "skk-xemacs.el" "skk-lookup.el")))

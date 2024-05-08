@@ -1,0 +1,1 @@
+(agenix :repo "t4ccer/agenix.el" :fetcher github)

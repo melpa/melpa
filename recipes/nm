@@ -1,3 +1,0 @@
-(nm
- :repo "tjim/nevermore"
- :fetcher github)

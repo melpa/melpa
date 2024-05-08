@@ -1,4 +1,1 @@
-(modus-themes
- :fetcher gitlab
- :repo "protesilaos/modus-themes"
- :branch "main")
+(modus-themes :fetcher github :repo "protesilaos/modus-themes")

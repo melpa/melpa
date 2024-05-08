@@ -1,0 +1,4 @@
+(ado-mode
+ :fetcher github
+ :repo "louabill/ado-mode"
+ :files (:defaults "scripts" "templates"))

@@ -1,0 +1,7 @@
+(cfn-mode
+ :fetcher gitlab
+ :repo "worr/cfn-mode"
+ :version-regexp "cfn-mode/v\\(.+\\)"
+ :files ("cfn-mode/cfn-mode.el"
+         "cfn-mode/cfn-properties.dat"
+         "cfn-mode/cfn-resources.dat"))

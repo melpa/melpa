@@ -1,0 +1,4 @@
+(org-re-reveal-citeproc
+ :repo "oer/org-re-reveal-citeproc"
+ :fetcher gitlab
+ :files (:defaults "README.org" "local.css" "references.bib"))

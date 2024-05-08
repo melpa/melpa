@@ -1,2 +1,2 @@
 (helm-pt :fetcher github
-         :repo "ralesi/helm-pt")
+         :repo "punassuming/helm-pt")

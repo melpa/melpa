@@ -1,0 +1,4 @@
+(chatgpt-shell
+ :fetcher github
+ :repo "xenodium/chatgpt-shell"
+ :files ("chatgpt-shell.el"))

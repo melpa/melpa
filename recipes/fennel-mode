@@ -1,2 +1,1 @@
-(fennel-mode :repo "technomancy/fennel-mode"
-             :fetcher gitlab)
+(fennel-mode :fetcher sourcehut :repo "technomancy/fennel-mode")

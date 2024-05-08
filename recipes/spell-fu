@@ -1,3 +1,1 @@
-(spell-fu
- :repo "ideasman42/emacs-spell-fu"
- :fetcher gitlab)
+(spell-fu :fetcher codeberg :repo "ideasman42/emacs-spell-fu")

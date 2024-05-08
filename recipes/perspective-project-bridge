@@ -1,0 +1,2 @@
+(perspective-project-bridge :repo "arunkmv/perspective-project-bridge"
+                            :fetcher github)

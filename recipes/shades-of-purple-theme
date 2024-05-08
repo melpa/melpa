@@ -1,0 +1,3 @@
+(shades-of-purple-theme
+ :fetcher github
+ :repo    "arturovm/shades-of-purple-emacs")

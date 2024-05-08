@@ -17,7 +17,8 @@ mkdir -p /etc/letsencrypt/ssl 2> /dev/null
     -d melpa.org \
     -d stable.melpa.org \
     -d test.melpa.org \
-    -d stable-test.melpa.org
+    -d stable-test.melpa.org \
+    -d www.melpa.org
     
 nginx -g 'daemon off;' &
 nginx_pid=$!
@@ -43,7 +44,8 @@ while true; do
         -d melpa.org \
         -d stable.melpa.org \
         -d test.melpa.org \
-        -d stable-test.melpa.org
+        -d stable-test.melpa.org \
+        -d www.melpa.org
 
     echo "restarting nginx..."
     kill -HUP $nginx_pid

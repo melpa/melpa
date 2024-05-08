@@ -1,1 +1,1 @@
-(muban :repo "jiahaowork/muban.el" :fetcher github)
+(muban :repo "jiahaoli95/muban.el" :fetcher github)

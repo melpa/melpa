@@ -1,0 +1,1 @@
+(cargo-transient :repo "peterstuart/cargo-transient" :fetcher github)

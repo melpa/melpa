@@ -1,0 +1,3 @@
+(modelica-mode :repo "modelica-tools/modelica-mode"
+               :fetcher github
+               :files ("modelica-mode.el"))

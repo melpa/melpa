@@ -1,1 +1,1 @@
-(scpaste :fetcher github :repo "technomancy/scpaste")
+(scpaste :fetcher sourcehut :repo "technomancy/scpaste")

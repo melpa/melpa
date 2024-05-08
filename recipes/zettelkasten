@@ -1,0 +1,1 @@
+(zettelkasten :repo "ymherklotz/emacs-zettelkasten" :fetcher github :files ("zettelkasten.el"))

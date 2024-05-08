@@ -1,0 +1,1 @@
+(babashka :repo "licht1stein/babashka.el" :fetcher github)

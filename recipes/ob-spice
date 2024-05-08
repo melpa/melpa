@@ -1,0 +1,1 @@
+(ob-spice :fetcher git :url "https://repo.or.cz/ob-spice.git")

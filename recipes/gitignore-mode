@@ -1,3 +1,0 @@
-(gitignore-mode :repo "magit/git-modes"
-                :fetcher github
-                :files ("gitignore-mode.el"))

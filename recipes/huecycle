@@ -1,0 +1,3 @@
+(huecycle
+ :repo "pnor/huecycle"
+ :fetcher github)

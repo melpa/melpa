@@ -1,4 +1,1 @@
-(paxedit
- :fetcher github
- :repo "promethial/paxedit"
- :files ("paxedit.el"))
+(paxedit :fetcher github :repo "promethial/paxedit")

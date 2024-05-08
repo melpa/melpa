@@ -1,0 +1,4 @@
+(detached
+ :fetcher sourcehut
+ :repo "niklaseklund/detached.el"
+ :old-names (dtache))

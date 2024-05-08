@@ -1,2 +1,3 @@
-(org-ql :fetcher github :repo "alphapapa/org-ql"
+(org-ql :fetcher github
+        :repo "alphapapa/org-ql"
         :files (:defaults (:exclude "helm-org-ql.el")))

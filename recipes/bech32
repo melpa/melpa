@@ -1,0 +1,4 @@
+(bech32
+ :fetcher github
+ :repo "Titan-C/cardano.el"
+ :files ("bech32.el"))

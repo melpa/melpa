@@ -1,1 +1,1 @@
-(bufshow :fetcher github :repo "pjones/bufshow" :files ("lisp/*.el"))
+(bufshow :fetcher github :repo "pjones/bufshow")

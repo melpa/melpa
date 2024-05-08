@@ -1,3 +1,1 @@
-(nntwitter :repo "dickmao/nntwitter"
-           :fetcher github
-           :files ("lisp/*.el"))
+(nntwitter :fetcher github :repo "dickmao/nntwitter")

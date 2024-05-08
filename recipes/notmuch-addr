@@ -1,0 +1,1 @@
+(notmuch-addr :fetcher sourcehut :repo "tarsius/notmuch-addr")

@@ -1,0 +1,3 @@
+(talonscript-mode
+ :repo "jcaw/talonscript-mode"
+ :fetcher github)

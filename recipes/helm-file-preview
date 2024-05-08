@@ -1,1 +1,1 @@
-(helm-file-preview :repo "jcs-elpa/helm-file-preview" :fetcher github)
+(helm-file-preview :repo "jcs-legacy/helm-file-preview" :fetcher github)

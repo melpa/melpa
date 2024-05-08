@@ -1,4 +1,5 @@
-(tree-sitter-langs :repo "ubolonton/emacs-tree-sitter"
+(tree-sitter-langs :repo "emacs-tree-sitter/tree-sitter-langs"
                    :fetcher github
-                   :files ("langs/*.el"
-                           "langs/queries"))
+                   :branch "release"
+                   :files (:defaults
+                           "queries"))

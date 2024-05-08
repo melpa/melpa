@@ -1,0 +1,1 @@
+(code-review :repo "wandersoncferreira/code-review" :fetcher github)

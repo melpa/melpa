@@ -1,0 +1,2 @@
+(kuronami-theme :repo "inj0h/kuronami"
+                :fetcher github)

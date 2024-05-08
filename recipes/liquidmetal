@@ -1,0 +1,1 @@
+(liquidmetal :repo "jcs-legacy/liquidmetal" :fetcher github)

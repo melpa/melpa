@@ -1,1 +1,1 @@
-(company-nginx :fetcher github :repo "stardiviner/company-nginx")
+(company-nginx :fetcher git :url "https://repo.or.cz/company-nginx.git")

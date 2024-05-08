@@ -1,0 +1,3 @@
+(cape
+ :repo "minad/cape"
+ :fetcher github)

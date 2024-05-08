@@ -1,4 +1,4 @@
 (lua-mode
  :repo "immerrr/lua-mode"
  :fetcher github
- :files (:defaults "scripts"))
+ :files (:defaults (:exclude "init-tryout.el")))

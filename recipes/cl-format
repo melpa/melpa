@@ -1,1 +1,1 @@
-(cl-format :fetcher github :repo "alvinfrancis/cl-format")
+(cl-format :fetcher gitlab :repo "akater/elisp-cl-format")

@@ -1,1 +1,1 @@
-(helm-searcher :repo "jcs-elpa/helm-searcher" :fetcher github)
+(helm-searcher :repo "emacs-helm/helm-searcher" :fetcher github)

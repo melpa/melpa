@@ -1,3 +1,1 @@
-(jss :fetcher github :repo "segv/jss" :files ("jss*.el"))
-
-        
+(jss :fetcher github :repo "segv/jss")

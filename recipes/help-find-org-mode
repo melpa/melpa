@@ -1,1 +1,3 @@
-(help-find-org-mode :fetcher github :repo "EricCrosson/help-find-org-mode")
+(help-find-org-mode
+ :fetcher github
+ :repo "emacsorphanage/help-find-org-mode")

@@ -1,0 +1,4 @@
+(prettify-math
+ :fetcher github
+ :repo "shaqtsui/prettify-math"
+ :files (:defaults "mathjax-jsonrpc.js"))

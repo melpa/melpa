@@ -1,1 +1,1 @@
-(evil-escape :repo "syl20bnr/evil-escape" :fetcher github)
+(evil-escape :fetcher github :repo "emacsorphanage/evil-escape")

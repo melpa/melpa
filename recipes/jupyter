@@ -1,4 +1,4 @@
 (jupyter
  :fetcher github
- :repo "nnicandro/emacs-jupyter"
+ :repo "emacs-jupyter/jupyter"
  :files (:defaults "Makefile" "widget.html" "js"))

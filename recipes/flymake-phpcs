@@ -1,1 +1,1 @@
-(flymake-phpcs :repo "senda-akiha/flymake-phpcs" :fetcher github)
+(flymake-phpcs :repo "flymake/flymake-phpcs" :fetcher github)

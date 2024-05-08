@@ -1,2 +1,3 @@
-(keg :fetcher github :repo "conao3/keg.el"
+(keg :fetcher github
+     :repo "conao3/keg.el"
      :files (:defaults (:exclude "keg-mode.el" "flycheck-keg.el")))

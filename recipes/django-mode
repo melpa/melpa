@@ -1,1 +1,4 @@
-(django-mode :fetcher github :repo "myfreeweb/django-mode" :files ("*.el" (:exclude "*-snippets.el")))
+(django-mode
+ :fetcher github
+ :repo "unrelentingtech/django-mode"
+ :files ("*.el" (:exclude "*-snippets.el")))

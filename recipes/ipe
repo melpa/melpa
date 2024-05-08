@@ -1,0 +1,3 @@
+(ipe :fetcher github
+     :repo    "BriansEmacs/insert-pair-edit.el"
+     :files   (:defaults "modes/ipe-*.el"))

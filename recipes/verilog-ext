@@ -1,0 +1,3 @@
+(verilog-ext :fetcher github
+             :repo "gmlarumbe/verilog-ext"
+             :files (:defaults "snippets" "langserver"))

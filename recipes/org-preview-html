@@ -1,1 +1,1 @@
-(org-preview-html :fetcher github :repo "lujun9972/org-preview-html")
+(org-preview-html :fetcher github :repo "jakebox/org-preview-html")

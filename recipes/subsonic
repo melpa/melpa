@@ -1,0 +1,1 @@
+(subsonic :fetcher sourcehut :repo "amk/subsonic.el")

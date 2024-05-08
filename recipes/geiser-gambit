@@ -1,0 +1,4 @@
+(geiser-gambit
+ :fetcher gitlab
+ :repo "emacs-geiser/gambit"
+ :files (:defaults ("src" "src/*")))

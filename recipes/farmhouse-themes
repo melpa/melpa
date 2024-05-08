@@ -1,0 +1,4 @@
+(farmhouse-themes
+ :fetcher github
+ :repo "emacsorphanage/farmhouse-themes"
+ :old-names (farmhouse-theme))

@@ -1,3 +1,4 @@
-(kaleidoscope-evil-state-flash :repo "algernon/kaleidoscope.el"
-                               :fetcher github
-                               :files ("kaleidoscope-evil-state-flash.el"))
+(kaleidoscope-evil-state-flash
+ :fetcher git
+ :url "https://git.madhouse-project.org/algernon/kaleidoscope.el"
+ :files ("kaleidoscope-evil-state-flash.el"))

@@ -1,0 +1,2 @@
+(ob-powershell :repo "rkiggen/ob-powershell"
+               :fetcher github)

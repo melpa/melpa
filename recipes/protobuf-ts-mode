@@ -1,0 +1,1 @@
+(protobuf-ts-mode :fetcher github :repo "emacsattic/protobuf-ts-mode")

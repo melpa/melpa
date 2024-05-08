@@ -1,2 +1,2 @@
-(auto-highlight-symbol :repo "jcs-elpa/auto-highlight-symbol" :fetcher github)
+(auto-highlight-symbol :repo "elp-revive/auto-highlight-symbol" :fetcher github)
 

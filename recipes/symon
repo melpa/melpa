@@ -1,4 +1,1 @@
-(symon
- :repo "zk-phi/symon"
- :fetcher github
- :files ("symon.el"))
+(symon :fetcher github :repo "zk-phi/symon")

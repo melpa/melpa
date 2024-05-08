@@ -1,0 +1,1 @@
+(consult-recoll :fetcher codeberg :repo "jao/consult-recoll")

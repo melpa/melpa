@@ -1,0 +1,3 @@
+(retraction-viewer :fetcher sourcehut
+                   :repo "swflint/retraction-viewer"
+                   :files ("retraction-viewer.el"))

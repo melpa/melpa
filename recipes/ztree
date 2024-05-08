@@ -1,1 +1,1 @@
-(ztree :fetcher github :repo "fourier/ztree")
+(ztree :fetcher codeberg :repo "fourier/ztree")

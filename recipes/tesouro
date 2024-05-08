@@ -1,0 +1,3 @@
+(tesouro
+ :repo "rberaldo/tesouro.el"
+ :fetcher github)

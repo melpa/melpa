@@ -1,0 +1,1 @@
+(nushell-ts-mode :fetcher github :repo "herbertjones/nushell-ts-mode")

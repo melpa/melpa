@@ -1,4 +1,3 @@
 (consult
  :repo "minad/consult"
- :fetcher github
- :files (:defaults (:exclude "consult-flycheck.el" "consult-selectrum.el")))
+ :fetcher github)

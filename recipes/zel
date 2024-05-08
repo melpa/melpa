@@ -1,3 +1,0 @@
-(zel :repo "rudolfochrist/zel"
-     :fetcher github
-     :version-regexp "zel-\\(.*\\)")

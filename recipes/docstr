@@ -1,0 +1,4 @@
+(docstr
+ :fetcher github
+ :repo "emacs-vs/docstr"
+ :files (:defaults "langs/*.el"))

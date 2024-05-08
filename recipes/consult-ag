@@ -1,0 +1,1 @@
+(consult-ag :fetcher github :repo "yadex205/consult-ag")

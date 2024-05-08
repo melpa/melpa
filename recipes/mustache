@@ -1,4 +1,1 @@
-(mustache
- :repo "Wilfred/mustache.el"
- :files ("*.el" (:exclude "*-tests.el"))
- :fetcher github)
+(mustache :fetcher github :repo "Wilfred/mustache.el")

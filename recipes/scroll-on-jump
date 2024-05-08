@@ -1,0 +1,3 @@
+(scroll-on-jump
+ :fetcher codeberg
+ :repo "ideasman42/emacs-scroll-on-jump")

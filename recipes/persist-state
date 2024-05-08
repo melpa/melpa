@@ -1,0 +1,3 @@
+(persist-state
+ :fetcher codeberg
+ :repo "bram85/emacs-persist-state")

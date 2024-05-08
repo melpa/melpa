@@ -1,0 +1,1 @@
+(clojure-ts-mode :repo "clojure-emacs/clojure-ts-mode" :fetcher github)

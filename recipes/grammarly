@@ -1,1 +1,1 @@
-(grammarly :repo "jcs-elpa/grammarly" :fetcher github)
+(grammarly :repo "emacs-grammarly/grammarly" :fetcher github)

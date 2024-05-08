@@ -1,0 +1,1 @@
+(ibrowse :fetcher sourcehut :repo "ngraves/ibrowse.el")

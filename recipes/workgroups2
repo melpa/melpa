@@ -1,4 +1,4 @@
 (workgroups2
- :repo "pashinin/workgroups2"
  :fetcher github
+ :repo "pashinin/workgroups2"
  :files ("src/*.el"))

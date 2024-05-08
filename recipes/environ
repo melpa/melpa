@@ -1,0 +1,2 @@
+(environ :fetcher github
+         :repo "cfclrk/environ")

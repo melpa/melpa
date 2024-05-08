@@ -1,0 +1,3 @@
+(doc-show-inline
+ :fetcher codeberg
+ :repo "ideasman42/emacs-doc-show-inline")

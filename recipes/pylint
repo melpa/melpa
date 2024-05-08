@@ -1,4 +1,4 @@
 (pylint
- :repo "PyCQA/pylint"
  :fetcher github
- :files ("elisp/pylint.el"))
+ :repo "emacsorphanage/pylint"
+ :files (:defaults "epylint.py"))

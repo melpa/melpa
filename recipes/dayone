@@ -1,4 +1,4 @@
 (dayone
-  :repo "mori-dev/emacs-dayone"
-  :fetcher github
-  :files ("*.el" "*.mustache"))
+ :fetcher github
+ :repo "mori-dev/emacs-dayone"
+ :files ("*.el" "*.mustache"))

@@ -2,4 +2,4 @@
  :fetcher github
  :repo "jcaw/elnode"
  :branch "melpa"
- :files ("*"))
+ :files ("default*" "elnode*"))

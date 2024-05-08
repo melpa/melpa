@@ -1,1 +1,1 @@
-(flymake-golangci :fetcher gitlab :repo "shackra/flymake-golangci")
+(flymake-golangci :fetcher github :repo "emacsattic/flymake-golangci")

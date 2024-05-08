@@ -1,5 +1,5 @@
 (history
  :fetcher github
- :repo "boyw165/history"
+ :repo "tcw165/history"
  :files (:defaults ("images" "images/*.xpm" "images/*.png")))
 

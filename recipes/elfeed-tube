@@ -1,0 +1,2 @@
+(elfeed-tube :repo "karthink/elfeed-tube" :fetcher github
+             :files ("elfeed-tube.el" "elfeed-tube-utils.el" "elfeed-tube-fill.el"))

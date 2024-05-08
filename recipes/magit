@@ -1,13 +1,13 @@
 (magit :fetcher github
        :repo "magit/magit"
-       :files ("lisp/magit"
-               "lisp/magit*.el"
+       :files ("lisp/magit*.el"
                "lisp/git-rebase.el"
-               "Documentation/magit.texi"
-               "Documentation/AUTHORS.md"
+               "docs/magit.texi"
+               "docs/AUTHORS.md"
                "LICENSE"
-	       (:exclude "lisp/magit-libgit.el"
-			 ;; Cannot remove this yet because it would
-			 ;; also be removed from the stable version.
-			 ;; "lisp/magit-section.el"
-			 )))
+               "Documentation/magit.texi" ; temporarily for stable
+               "Documentation/AUTHORS.md" ; temporarily for stable
+               (:exclude "lisp/magit-libgit.el"
+                         "lisp/magit-libgit-pkg.el"
+                         "lisp/magit-section.el"
+                         "lisp/magit-section-pkg.el")))

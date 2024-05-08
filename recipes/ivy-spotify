@@ -1,0 +1,4 @@
+(ivy-spotify
+ :fetcher codeberg
+ :repo "jao/espotify"
+ :files ("ivy-spotify.el"))

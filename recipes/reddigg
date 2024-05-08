@@ -1,0 +1,1 @@
+(reddigg :fetcher github :repo "thanhvg/emacs-reddigg")

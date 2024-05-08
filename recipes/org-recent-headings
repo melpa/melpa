@@ -1,2 +1,4 @@
-(org-recent-headings :fetcher github :repo "alphapapa/org-recent-headings"
-                     :files (:defaults (:exclude "helm-org-recent-headings.el")))
+(org-recent-headings
+ :fetcher github
+ :repo "alphapapa/org-recent-headings"
+ :files (:defaults (:exclude "helm-org-recent-headings.el")))

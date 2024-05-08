@@ -1,0 +1,3 @@
+(ob-d2
+ :repo "xcapaldi/ob-d2"
+ :fetcher github)

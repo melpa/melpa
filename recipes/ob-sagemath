@@ -1,3 +1,4 @@
-(ob-sagemath :repo "sagemath/ob-sagemath"
-             :fetcher github
-             :files ("ob-sagemath.el" "*.py"))
+(ob-sagemath
+ :fetcher github
+ :repo "sagemath/ob-sagemath"
+ :files ("ob-sagemath.el" "*.py"))

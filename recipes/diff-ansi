@@ -1,0 +1,1 @@
+(diff-ansi :fetcher codeberg :repo "ideasman42/emacs-diff-ansi")

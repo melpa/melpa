@@ -1,0 +1,3 @@
+(semantic-thrift
+ :fetcher github
+ :repo "jerryxgh/semantic-thrift")

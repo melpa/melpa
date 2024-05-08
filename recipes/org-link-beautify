@@ -1,1 +1,1 @@
-(org-link-beautify :repo "stardiviner/org-link-beautify" :fetcher github)
+(org-link-beautify :url "https://repo.or.cz/org-link-beautify.git" :fetcher git :files (:defaults "scripts"))

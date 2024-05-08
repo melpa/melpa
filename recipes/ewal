@@ -1,4 +1,4 @@
 (ewal
  :fetcher github
- :repo "wurosh/ewal"
+ :repo "cyruseuros/ewal"
  :files ("ewal.el" "palettes"))

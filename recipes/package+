@@ -1,4 +1,1 @@
-(package+
- :fetcher github
- :repo "zenspider/package"
- :files ("package+.el"))
+(package+ :repo "zenspider/package" :fetcher github)

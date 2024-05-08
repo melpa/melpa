@@ -1,0 +1,1 @@
+(flycheck-languagetool :repo "emacs-languagetool/flycheck-languagetool" :fetcher github)

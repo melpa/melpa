@@ -1,1 +1,1 @@
-(helm-fuzzy :repo "jcs-elpa/helm-fuzzy" :fetcher github)
+(helm-fuzzy :repo "jcs-legacy/helm-fuzzy" :fetcher github)

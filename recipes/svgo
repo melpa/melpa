@@ -1,0 +1,1 @@
+(svgo :repo "hupf/svgo.el" :fetcher github)

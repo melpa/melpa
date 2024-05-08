@@ -1,1 +1,3 @@
-(org-octopress :fetcher github :repo "yoshinari-nomura/org-octopress" :files ("*.el" "setup-sample.org"))
+(org-octopress :fetcher github
+               :repo "yoshinari-nomura/org-octopress"
+               :files (:defaults "setupfile-sample.org"))

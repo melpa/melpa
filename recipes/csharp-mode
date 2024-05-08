@@ -1,2 +1,2 @@
 (csharp-mode
- :fetcher github :repo "josteink/csharp-mode")
+ :fetcher github :repo "emacs-csharp/csharp-mode")

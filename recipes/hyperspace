@@ -1,1 +1,1 @@
-(hyperspace :fetcher github :repo "ieure/hyperspace-el")
+(hyperspace :fetcher codeberg :repo "emacs-weirdware/hyperspace")

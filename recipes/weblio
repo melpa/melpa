@@ -1,0 +1,1 @@
+(weblio :repo "pzel/weblio" :fetcher github)

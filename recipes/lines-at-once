@@ -1,1 +1,1 @@
-(lines-at-once :repo "jiahaowork/lines-at-once.el" :fetcher github)
+(lines-at-once :repo "jiahaoli95/lines-at-once.el" :fetcher github)

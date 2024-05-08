@@ -1,0 +1,1 @@
+(mu4e-marker-icons :url "https://repo.or.cz/mu4e-marker-icons.git" :fetcher git)

@@ -1,0 +1,3 @@
+(diffpdf
+ :repo "ShuguangSun/diffpdf.el"
+ :fetcher github)

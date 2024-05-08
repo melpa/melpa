@@ -1,3 +1,4 @@
-(launch-mode :fetcher github
-              :repo "iory/launch-mode"
-              :files (:defaults "*.py"))
+(launch-mode
+ :fetcher github
+ :repo "iory/launch-mode"
+ :files (:defaults "*.py"))

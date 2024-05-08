@@ -1,0 +1,1 @@
+(archive-phar :repo "emacs-php/archive-phar.el" :fetcher github)

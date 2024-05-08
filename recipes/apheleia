@@ -1,0 +1,4 @@
+(apheleia :fetcher github
+          :repo "radian-software/apheleia"
+          :files (:defaults
+                  ("scripts" "scripts/formatters")))

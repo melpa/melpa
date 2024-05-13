@@ -1,1 +1,1 @@
-(twtxt :fetcher github :repo "deadblackclover/ride-mode")
+(ride-mode :fetcher github :repo "deadblackclover/ride-mode")

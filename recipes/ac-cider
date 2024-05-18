@@ -1,3 +1,0 @@
-(ac-cider :fetcher github
-          :repo "clojure-emacs/ac-cider"
-          :old-names (ac-cider-compliment))

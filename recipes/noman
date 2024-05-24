@@ -1,1 +1,1 @@
-(noman :repo "andykuszyk/noman.el" :fetcher github :files ("noman.el"))
+(noman :repo "andykuszyk/noman.el" :fetcher github)

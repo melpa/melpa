@@ -1,0 +1,4 @@
+(qwen-chat-shell
+ :fetcher github
+ :repo "Pavinberg/qwen-chat-shell"
+ :files ("qwen-chat-shell.el"))

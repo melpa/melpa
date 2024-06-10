@@ -1,0 +1,3 @@
+(mowie
+ :fetcher codeberg
+ :repo "mekeor/mowie")

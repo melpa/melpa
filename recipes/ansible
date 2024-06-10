@@ -1,4 +1,4 @@
 (ansible
- :fetcher github
- :repo "k1LoW/emacs-ansible"
+ :fetcher gitlab
+ :repo "emacs-ansible/emacs-ansible"
  :files ("*.el" "snippets" "dict"))

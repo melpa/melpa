@@ -1,0 +1,3 @@
+(dumber-jump :fetcher github
+             :repo "zenspider/dumber-jump"
+             :branch "dumber-jump")

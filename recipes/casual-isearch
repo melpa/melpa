@@ -1,0 +1,1 @@
+(casual-isearch :fetcher github :repo "kickingvegas/casual-isearch" :old-names (cc-isearch-menu))

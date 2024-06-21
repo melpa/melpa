@@ -1,0 +1,3 @@
+(greader
+ :fetcher gitlab
+ :repo "https://gitlab.com/michelangelo-rodriguez/greader")

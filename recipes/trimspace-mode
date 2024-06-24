@@ -1,0 +1,1 @@
+(trimspace-mode :fetcher sourcehut :repo "bkhl/trimspace-mode")

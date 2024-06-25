@@ -1,0 +1,3 @@
+(selected-window-accent-mode
+ :fetcher github
+ :repo "captainflasmr/selected-window-accent-mode")

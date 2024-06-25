@@ -1,5 +1,5 @@
 (gams-mode
  :repo "ShiroTakeda/gams-mode"
  :fetcher github
- :files ("gams-mode.el" "gams-logo.xpm")
+ :files ("gams-mode.el" "gams-logo.xpm" "gams-commands.txt")
 )

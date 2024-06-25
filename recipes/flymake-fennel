@@ -1,0 +1,3 @@
+(flymake-fennel
+ :fetcher github
+ :repo "mgmarlow/flymake-fennel")

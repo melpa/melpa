@@ -1,1 +1,1 @@
-(multi-line :repo "IvanMalison/multi-line" :fetcher github)
+(multi-line :repo "colonelpanic8/multi-line" :fetcher github)

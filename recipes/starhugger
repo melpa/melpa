@@ -1,0 +1,1 @@
+(starhugger :fetcher gitlab :repo "daanturo/starhugger.el" :files (:defaults "*.py"))

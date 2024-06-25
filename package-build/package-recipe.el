@@ -1,6 +1,6 @@
 ;;; package-recipe.el --- Package recipes as EIEIO objects  -*- lexical-binding:t; coding:utf-8 -*-
 
-;; Copyright (C) 2018-2023 Jonas Bernoulli
+;; Copyright (C) 2018-2024 Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Homepage: https://github.com/melpa/package-build
@@ -27,6 +27,7 @@
 
 ;;; Code:
 
+(require 'compat nil t)
 (require 'eieio)
 (require 'subr-x)
 (require 'url-parse)
@@ -148,10 +149,12 @@ file is invalid, then raise an error."
 
 ;;; Validation
 
+;;;###autoload
 (defun package-recipe-validate-all ()
   "Validate all recipes."
   (interactive)
-  (dolist (name (package-recipe-recipes))
+  (dolist-with-progress-reporter (name (package-recipe-recipes))
+      "Validating recipes..."
     (condition-case err
         (package-recipe-lookup name)
       (error (message "Invalid recipe for %s: %S" name (cdr err))))))
@@ -180,17 +183,14 @@ file is invalid, then raise an error."
               (cl-assert (not (plist-get plist :url)) ":url is redundant"))
           (cl-assert (plist-get plist :url) ":url is missing")))
       (dolist (key symbol-keys)
-        (let ((val (plist-get plist key)))
-          (when val
-            (cl-assert (symbolp val) nil "%s must be a symbol but is %S" key val))))
+        (when-let ((val (plist-get plist key)))
+          (cl-assert (symbolp val) nil "%s must be a symbol but is %S" key val)))
       (dolist (key list-keys)
-        (let ((val (plist-get plist key)))
-          (when val
-            (cl-assert (listp val) nil "%s must be a list but is %S" key val))))
+        (when-let ((val (plist-get plist key)))
+          (cl-assert (listp val) nil "%s must be a list but is %S" key val)))
       (dolist (key string-keys)
-        (let ((val (plist-get plist key)))
-          (when val
-            (cl-assert (stringp val) nil "%s must be a string but is %S" key val))))
+        (when-let ((val (plist-get plist key)))
+          (cl-assert (stringp val) nil "%s must be a string but is %S" key val)))
       (when-let ((spec (plist-get plist :files)))
         ;; `:defaults' is only allowed as the first element.
         ;; If we find it in that position, skip over it.
@@ -199,15 +199,16 @@ file is invalid, then raise an error."
         ;; All other elements have to be strings or lists of strings.
         ;; A list whose first element is `:exclude' is also valid.
         (dolist (entry spec)
-          (unless (or (and (stringp entry)
-                           (not (equal entry "*")))
-                      (and (listp entry)
-                           (or (eq (car entry) :exclude)
-                               (stringp (car entry)))
-                           (seq-every-p (lambda (e)
-                                          (and (stringp e)
-                                               (not (equal e "*"))))
-                                        (cdr entry))))
+          (unless (cond ((stringp entry)
+                         (not (equal entry "*")))
+                        ((listp entry)
+                         (and-let* ((globs (cdr entry)))
+                           (and (or (eq (car entry) :exclude)
+                                    (stringp (car entry)))
+                                (seq-every-p (lambda (glob)
+                                               (and (stringp glob)
+                                                    (not (equal glob "*"))))
+                                             globs)))))
             (error "Invalid files spec entry %S" entry))))
       ;; Silence byte compiler of Emacs 28.  It appears that uses
       ;; inside cl-assert sometimes, but not always, do not count.

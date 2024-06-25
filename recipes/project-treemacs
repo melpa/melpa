@@ -1,0 +1,1 @@
+(project-treemacs :repo "cmccloud/project-treemacs" :fetcher github)

@@ -1,1 +1,1 @@
-(my-repo-pins :fetcher github :repo "NinjaTrappeur/my-repo-pins")
+(my-repo-pins :fetcher github :repo "picnoir/my-repo-pins")

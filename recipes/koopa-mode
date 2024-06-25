@@ -1,0 +1,3 @@
+(koopa-mode
+ :fetcher github
+ :repo "sch0lars/koopa-mode")

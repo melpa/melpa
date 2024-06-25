@@ -1,0 +1,1 @@
+(slint-mode :fetcher github :repo "nilclass/slint-mode")

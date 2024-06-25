@@ -2,7 +2,10 @@
         :url "https://git.savannah.nongnu.org/git/emacs-shroud.git"
         :files ("src/shroud"
                 "src/shroud*.el"
-                "doc/emacs-shroud.texi"
+                ;; Building the manual fails, so don't try, removing
+                ;; some noise that makes it harder to focus on issues
+                ;; we actually have control over.
+                ;; "doc/emacs-shroud.texi"
                 "README"
                 "NEWS"
                 "AUTHORS"

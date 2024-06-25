@@ -1,6 +1,6 @@
 (eldev
  :fetcher github
- :repo "doublep/eldev"
+ :repo "emacs-eldev/eldev"
  :files (:defaults
          ("bin" "bin/*")
          (:exclude "bin/*.in" "bin/*.part")))

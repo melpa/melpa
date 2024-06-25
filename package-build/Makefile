@@ -1,29 +1,28 @@
 -include config.mk
+include default.mk
 
-PKG = package-build
+.PHONY: test
 
-ELS   = package-recipe.el
-ELS  += package-build-badges.el
-ELS  += $(PKG).el
-ELS  += package-recipe-mode.el
-ELCS  = $(ELS:.el=.elc)
-
-DEPS  =
-
-EMACS      ?= emacs
-EMACS_ARGS ?=
-
-LOAD_PATH  ?= $(addprefix -L ../,$(DEPS))
-LOAD_PATH  += -L .
+# https://github.com/emacscollective/workflows/blob/main/bin/install-deps
+# expects this to find this in this file.
+DEPS  = compat
 
 all: lisp
 
 help:
-	$(info make [all|lisp]   - generate byte-code and autoloads)
+	$(info make all          - generate byte-code and autoloads)
+	$(info make lisp         - generate byte-code and autoloads)
+	$(info make redo         - re-generate byte-code and autoloads)
+	$(info make test         - run tests)
+	$(info make demo         - run tests showing their documentation)
 	$(info make clean        - remove generated files)
 	@printf "\n"
 
+redo: clean $(ELCS) loaddefs check-declare
+	@$(MAKE) -C test lisp
+
 lisp: $(ELCS) loaddefs check-declare
+	@$(MAKE) -C test lisp
 
 loaddefs: $(PKG)-autoloads.el
 
@@ -36,7 +35,13 @@ check-declare:
 	@$(EMACS) -Q --batch $(EMACS_ARGS) $(LOAD_PATH) \
 	--eval "(check-declare-directory default-directory)"
 
-CLEAN  = $(ELCS) $(PKG)-autoloads.el
+test:
+	@$(MAKE) -C test test
+
+demo:
+	@$(MAKE) -C test demo
+
+CLEAN = $(ELCS) $(PKG)-autoloads.el test/$(PKG)-tests.elc
 
 clean:
 	@printf " Cleaning...\n"

@@ -1,0 +1,3 @@
+(git-cliff
+ :fetcher github
+ :repo "liuyinz/git-cliff.el")

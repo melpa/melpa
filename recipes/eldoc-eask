@@ -1,0 +1,1 @@
+(eldoc-eask :repo "emacs-eask/eldoc-eask" :fetcher github)

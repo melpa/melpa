@@ -1,8 +1,8 @@
-;;; package-build-badges.el --- Create batches for packages  -*- lexical-binding:t; coding:utf-8 -*-
+;;; package-build-badges.el --- Create badges for packages  -*- lexical-binding:t; coding:utf-8 -*-
 
-;; Copyright (C) 2011-2023 Donald Ephraim Curtis
-;; Copyright (C) 2012-2023 Steve Purcell
-;; Copyright (C) 2018-2023 Jonas Bernoulli
+;; Copyright (C) 2011-2024 Donald Ephraim Curtis
+;; Copyright (C) 2012-2024 Steve Purcell
+;; Copyright (C) 2018-2024 Jonas Bernoulli
 ;; Copyright (C) 2021-2023 Free Software Foundation, Inc
 ;; Copyright (C) 2009 Phil Hagelberg
 
@@ -27,21 +27,21 @@
 
 ;;; Commentary:
 
-;; Create batches for packages.
+;; Create badges for packages.
 ;; The code in this file was lifted from `elpa-admin'.
 
 ;;; Code:
 
-(defvar package-build-stable)
+(defvar package-build-badge-data)
 
-(defun package-build--write-melpa-badge-image ( name version target-dir
-                                                &optional archive color)
+(defun package-build--write-badge-image ( name version target-dir
+                                          &optional archive color)
   "Make badge svg file.
 This is essentially a copy of `elpaa--make-badge'."
   (let* ((file (expand-file-name (concat name "-badge.svg") target-dir))
-         (left (or archive (if package-build-stable "melpa stable" "melpa")))
-         (right (url-hexify-string version))
-         (color (or color (if package-build-stable "#3e999f" "#922793")))
+         (left (or archive (car package-build-badge-data) "myElpa"))
+         (right version)
+         (color (or color (cadr package-build-badge-data) "#ff491b"))
          (lw (package-build-badge--string-width left))
          (rw (package-build-badge--string-width right))
          (pad (package-build-badge--string-width "x"))

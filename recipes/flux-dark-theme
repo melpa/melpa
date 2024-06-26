@@ -1,0 +1,3 @@
+(flux-dark-theme
+ :repo "convict-real/Flux-Dark-Theme"
+ :fetcher github)

@@ -1,0 +1,3 @@
+(terraform-cli
+ :fetcher github
+ :repo "pataquets/terraform-cli.el")

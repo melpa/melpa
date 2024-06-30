@@ -1,1 +1,1 @@
-(weblorg :fetcher github :repo "emacs-love/weblorg" :files (:defaults "themes"))
+(weblorg :fetcher github :repo "markokocic/weblorg" :files (:defaults "themes"))

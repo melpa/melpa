@@ -1,0 +1,3 @@
+(vue3-mode
+ :fetcher github
+ :repo "vsalvino/vue3-mode")

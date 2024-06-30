@@ -1,0 +1,3 @@
+(proact
+ :repo "rafaelcn/proact"
+ :fetcher github)

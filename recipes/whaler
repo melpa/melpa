@@ -1,0 +1,3 @@
+(whaler
+ :fetcher github
+ :repo "SalOrak/whaler.el")

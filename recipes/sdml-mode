@@ -1,7 +1,1 @@
-(sdml-mode :fetcher github
-           :repo "sdm-lang/emacs-sdml-mode"
-           :files ("sdml-mode-cli.el"
-                   "sdml-mode-abbrev.el"
-                   "sdml-mode-hl.el"
-                   "sdml-mode-indent.el"
-                   "sdml-mode.el"))
+(sdml-mode :repo "sdm-lang/emacs-sdml-mode" :fetcher github)

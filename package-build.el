@@ -7,7 +7,7 @@
 
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
 ;;     Steve Purcell <steve@sanityinc.com>
-;;     Jonas Bernoulli <jonas@bernoul.li>
+;;     Jonas Bernoulli <emacs.package-build@jonas.bernoulli.dev>
 ;;     Phil Hagelberg <technomancy@gmail.com>
 ;; Homepage: https://github.com/melpa/package-build
 ;; Keywords: maint tools
@@ -1094,7 +1094,7 @@ value specified in the file \"NAME.el\"."
                           (lm-header-multiline "package-requires")))
                 (package--prepare-dependencies
                  (package-read-from-string
-                  (mapconcat #'identity require-lines " "))))))
+                  (string-join require-lines " "))))))
             ;; `:kind' and `:archive' are handled separately.
             :kind       (or kind 'single)
             ;; The other keyword arguments are appended to the alist
@@ -1678,14 +1678,13 @@ a package."
 
 (defun package-build--archive-alist-for-json ()
   "Return the archive alist in a form suitable for JSON encoding."
-  (cl-flet ((format-person
-             (person)
-             (let ((name (car person))
-                   (mail (cdr person)))
-               (if (and name mail)
-                   (format "%s <%s>" name mail)
-                 (or name
-                     (format "<%s>" mail))))))
+  (cl-flet ((format-person (person)
+              (let ((name (car person))
+                    (mail (cdr person)))
+                (if (and name mail)
+                    (format "%s <%s>" name mail)
+                  (or name
+                      (format "<%s>" mail))))))
     (cl-mapcan (lambda (entry)
                  (list (intern (format ":%s" (car entry)))
                        (let* ((info (cdr entry))

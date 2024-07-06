@@ -1,4 +1,4 @@
-FROM nginx:bullseye
+FROM nginx:bookworm
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get --yes install certbot openssl logrotate
 COPY default.conf /etc/nginx/conf.d/

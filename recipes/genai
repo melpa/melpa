@@ -1,0 +1,1 @@
+(genai :repo "ywatanabe1989/genai" :fetcher github)

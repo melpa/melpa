@@ -1,0 +1,3 @@
+(clang-format-lite
+ :fetcher github
+ :repo "arteen1000/clang-format-lite")

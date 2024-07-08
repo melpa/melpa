@@ -1,0 +1,3 @@
+(org-capture+ :repo "sharad/occ"
+            :fetcher github
+            :files ("deps/org-capture+/*.el"))

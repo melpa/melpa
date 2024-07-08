@@ -1,0 +1,3 @@
+(lotus-helm :repo "sharad/occ"
+            :fetcher github
+            :files ("deps/lotus-helm/*.el"))

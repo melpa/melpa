@@ -1,0 +1,3 @@
+(occ :repo "sharad/occ"
+            :fetcher github
+            :files ("*.el"))

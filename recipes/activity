@@ -1,0 +1,3 @@
+(activity :repo "sharad/occ"
+            :fetcher github
+            :files ("deps/activity/*.el"))

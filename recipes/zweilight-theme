@@ -1,3 +1,3 @@
 (zweilight-theme
- :repo "philiparvidsson/Zweilight-Theme-for-Emacs"
+ :repo "vexx9/Zweilight-Theme-for-Emacs"
  :fetcher github)

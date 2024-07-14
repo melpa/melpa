@@ -1,0 +1,3 @@
+(gemini-code-completion
+ :repo "shishimaru/gemini-code-completion.el"
+ :fetcher github)

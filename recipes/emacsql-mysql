@@ -1,4 +1,5 @@
 (emacsql-mysql
  :fetcher github
  :repo "magit/emacsql"
+ :branch "legacy-stubs"
  :files ("emacsql-mysql.el"))

@@ -1,4 +1,5 @@
 (emacsql-psql
  :fetcher github
  :repo "magit/emacsql"
+ :branch "legacy-stubs"
  :files ("emacsql-psql.el"))

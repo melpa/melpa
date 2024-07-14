@@ -1,0 +1,3 @@
+(aichat
+ :fetcher github
+ :repo "andreasjansson/aichat.el")

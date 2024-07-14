@@ -1,0 +1,1 @@
+(compile-multi :fetcher github :repo "mohkale/compile-multi")

@@ -1,0 +1,1 @@
+(tmux-mode :repo "nverno/tmux-mode" :fetcher github)

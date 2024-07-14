@@ -1,0 +1,1 @@
+(eshell-command-not-found :fetcher github :repo "jaeyeom/eshell-command-not-found")

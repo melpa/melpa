@@ -1,2 +1,4 @@
-(angular-snippets :fetcher github :repo "magnars/angular-snippets.el"
-                  :files ("*.el" "*.info" "dir" "snippets"))
+(angular-snippets
+ :fetcher github
+ :repo "magnars/angular-snippets.el"
+ :files ("*.el" "*.info" "dir" "snippets"))

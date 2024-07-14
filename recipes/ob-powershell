@@ -1,2 +1,2 @@
-(ob-powershell :repo "MoisMoshev/ob-powershell"
+(ob-powershell :repo "rkiggen/ob-powershell"
                :fetcher github)

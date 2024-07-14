@@ -1,1 +1,4 @@
-(jdee :fetcher github :repo "jdee-emacs/jdee" :files (:defaults "jdee-test.el"))
+(jdee
+ :fetcher github
+ :repo "jdee-emacs/jdee"
+ :files ("*.el" "*.info" (:exclude ".dir-locals.el")))

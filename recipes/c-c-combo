@@ -1,3 +1,4 @@
-(c-c-combo :repo "CestDiego/c-c-combo.el"
-           :fetcher github
-           :files (:defaults "*.wav"))
+(c-c-combo
+ :fetcher github
+ :repo "CestDiego/c-c-combo.el"
+ :files (:defaults "*.wav"))

@@ -1,0 +1,1 @@
+(org-jami-bot :fetcher gitlab :repo "hperrey/org-jami-bot")

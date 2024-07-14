@@ -1,1 +1,4 @@
-(org-noter :fetcher github :repo "weirdNox/org-noter")
+(org-noter :fetcher github
+           :repo "org-noter/org-noter"
+           :files ("*.el" "modules"
+                  (:exclude "*-test-utils.el" "*-devel.el")))

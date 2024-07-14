@@ -1,0 +1,3 @@
+(haki-theme
+ :fetcher github
+ :repo "idlip/haki")

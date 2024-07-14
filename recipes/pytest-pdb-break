@@ -2,5 +2,6 @@
  :fetcher github
  :repo "poppyschmo/pytest-pdb-break"
  :files ("emacs/*.el"
-         ("lib" "*.py" "helpers" ("emacs" "emacs/*.py"))
+         ("lib" "*.py" "helpers")
+         ("lib/emacs" "emacs/*.py")
          (:exclude "emacs/*-test.el")))

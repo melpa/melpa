@@ -1,1 +1,1 @@
-(noaa :fetcher github :repo "thomp/noaa")
+(noaa :fetcher codeberg :repo "thomp/noaa")

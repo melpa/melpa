@@ -1,0 +1,3 @@
+(nerd-icons-ibuffer
+ :repo "seagle0128/nerd-icons-ibuffer"
+ :fetcher github)

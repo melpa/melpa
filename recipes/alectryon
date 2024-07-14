@@ -1,1 +1,4 @@
-(alectryon :fetcher github :repo "cpitclaudel/alectryon" :files ("etc/elisp/*"))
+(alectryon
+ :fetcher github
+ :repo "cpitclaudel/alectryon"
+ :files ("etc/elisp/*"))

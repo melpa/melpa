@@ -1,0 +1,4 @@
+(rom-party
+ :repo "LaurenceWarne/rom-party.el"
+ :fetcher github
+ :files (:defaults "index.extmap.gz"))

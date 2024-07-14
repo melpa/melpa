@@ -1,0 +1,3 @@
+(orgtbl-fit
+ :fetcher github
+ :repo "tbanel/orgtblfit")

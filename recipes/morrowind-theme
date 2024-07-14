@@ -1,0 +1,3 @@
+(morrowind-theme
+ :fetcher github
+ :repo "SamuelBanya/morrowind-theme")

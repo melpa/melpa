@@ -1,0 +1,3 @@
+(sas-py
+ :repo "ShuguangSun/sas-py"
+ :fetcher github)

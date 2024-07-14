@@ -1,0 +1,4 @@
+(denote-sections
+ :fetcher sourcehut
+ :repo "swflint/denote-sections"
+ :files ("denote-sections.el"))

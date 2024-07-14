@@ -1,0 +1,3 @@
+(doctest
+ :fetcher github
+ :repo "ag91/doctest")

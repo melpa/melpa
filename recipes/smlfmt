@@ -1,0 +1,1 @@
+(smlfmt :repo "diku-dk/smlfmt.el" :fetcher github)

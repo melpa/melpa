@@ -1,0 +1,2 @@
+(flexoki-themes :fetcher github
+                :repo "crmsnbleyd/flexoki-emacs-theme")

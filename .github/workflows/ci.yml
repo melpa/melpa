@@ -33,4 +33,4 @@ jobs:
             curl --silent https://api.github.com/repos/"$GITHUB_REPOSITORY"/pulls/${{ github.event.pull_request.number }}/files \
               | jq -r '.[] | .filename')
 
-        ./run-ci.sh
+        ./.github/workflows/ci.sh

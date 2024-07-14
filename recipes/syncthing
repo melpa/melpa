@@ -1,0 +1,3 @@
+(syncthing
+ :fetcher github
+ :repo "KeyWeeUsr/emacs-syncthing")

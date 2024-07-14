@@ -1,0 +1,4 @@
+(corfu
+ :repo "minad/corfu"
+ :files (:defaults "extensions/corfu-*.el")
+ :fetcher github)

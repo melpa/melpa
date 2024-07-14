@@ -1,0 +1,3 @@
+(mini-echo
+ :fetcher github
+ :repo "liuyinz/mini-echo.el")

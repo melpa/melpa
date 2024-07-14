@@ -1,3 +1,4 @@
-(ivariants :repo "kawabata/emacs-ivariants"
-           :fetcher github
-           :files ("ivariants*.el" "tables"))
+(ivariants
+ :fetcher github
+ :repo "kawabata/emacs-ivariants"
+ :files ("ivariants*.el" "tables"))

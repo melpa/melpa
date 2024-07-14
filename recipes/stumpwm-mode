@@ -1,2 +1,4 @@
-(stumpwm-mode :url "https://git.savannah.nongnu.org/git/stumpwm.git" :fetcher git
-              :files ("contrib/stumpwm-mode.el"))
+(stumpwm-mode
+ :fetcher github
+ :repo "stumpwm/stumpwm-contrib"
+ :files ("util/swm-emacs/*.el"))

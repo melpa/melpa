@@ -1,1 +1,1 @@
-(undersea-theme :repo "jcs-elpa/undersea-theme" :fetcher github)
+(undersea-theme :repo "jcs-legacy/undersea-theme" :fetcher github)

@@ -1,0 +1,1 @@
+(casual-calc :fetcher github :repo "kickingvegas/casual-calc" :old-names (casual))

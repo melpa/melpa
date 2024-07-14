@@ -1,0 +1,1 @@
+(gptai :repo "antonhibl/gptai" :fetcher github)

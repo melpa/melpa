@@ -1,0 +1,3 @@
+(magit-file-icons
+ :fetcher github
+ :repo "gekoke/magit-file-icons")

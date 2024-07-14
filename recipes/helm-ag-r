@@ -1,1 +1,0 @@
-(helm-ag-r :fetcher github :repo "yuutayamada/helm-ag-r")

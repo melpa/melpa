@@ -1,3 +1,0 @@
-(proact-mode
- :repo "rafaelcn/proact"
- :fetcher github)

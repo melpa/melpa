@@ -1,1 +1,1 @@
-(atl-long-lines :repo "jcs-elpa/atl-long-lines" :fetcher github)
+(atl-long-lines :repo "jcs-legacy/atl-long-lines" :fetcher github)

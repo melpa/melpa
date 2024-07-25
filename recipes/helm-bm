@@ -1,1 +1,1 @@
-(helm-bm :fetcher github :repo "thierryvolpiatto/helm-bm")
+(helm-bm :fetcher github :repo "emacs-helm/helm-bm")

@@ -1,0 +1,3 @@
+(sql-ts-mode
+ :repo "nverno/sql-ts-mode"
+ :fetcher github)

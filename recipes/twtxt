@@ -1,1 +1,1 @@
-(twtxt :fetcher github :repo "deadblackclover/twtxt-el")
+(twtxt :fetcher codeberg :repo "deadblackclover/twtxt-el")

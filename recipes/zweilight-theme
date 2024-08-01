@@ -1,3 +1,0 @@
-(zweilight-theme
- :repo "tx46/Zweilight-Theme-for-Emacs"
- :fetcher github)

@@ -1,3 +1,0 @@
-(github-theme
- :repo "tx46/GitHub-Theme-for-Emacs"
- :fetcher github)

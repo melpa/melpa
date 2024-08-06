@@ -1,0 +1,1 @@
+(python-vterm :repo "vale981/python-vterm.el" :fetcher github)

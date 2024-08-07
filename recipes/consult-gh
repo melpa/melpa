@@ -1,11 +1,4 @@
 (consult-gh
  :fetcher github
  :repo "armindarvish/consult-gh"
- :files ("*.el" "lisp/*.el"
-  "dir" "*.info" "*.texi" "*.texinfo"
-  "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
-  "docs/dir" "docs/*.info" "docs/*.texi" "docs/*.texinfo"
-  (:exclude
-   "screenshots/*.*" ".dir-locals.el" "lisp/.dir-locals.el"
-   "test.el" "tests.el" "*-test.el" "*-tests.el"
-   "lisp/test.el" "lisp/tests.el" "lisp/*-test.el" "lisp/*-tests.el")))
+ :files ("consult-gh.el"))

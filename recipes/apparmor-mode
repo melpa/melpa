@@ -1,1 +1,3 @@
-(apparmor-mode :fetcher github :repo "alexmurray/apparmor-mode")
+(apparmor-mode
+ :fetcher gitlab
+ :repo "apparmor/apparmor-mode")

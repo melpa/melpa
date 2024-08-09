@@ -1,0 +1,5 @@
+(poly-gams
+ :repo "ShiroTakeda/poly-gams"
+ :fetcher github
+ :files ("poly-gams.el")
+)

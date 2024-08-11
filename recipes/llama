@@ -1,1 +1,1 @@
-(llama :fetcher sourcehut :repo "tarsius/llama")
+(llama :fetcher github :repo "tarsius/llama")

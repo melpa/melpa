@@ -1,4 +1,4 @@
 (company-lean
- :repo "leanprover/lean-mode"
  :fetcher github
+ :repo "leanprover/lean3-mode"
  :files ("company-lean.el"))

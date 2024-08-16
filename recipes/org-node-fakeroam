@@ -1,0 +1,5 @@
+(org-node-fakeroam :repo "meedstrom/org-node"
+                   :fetcher github
+                   :branch "melpa"
+                   :version-regexp "a^" ;; Opt out of Melpa Stable
+                   :files ("org-node-fakeroam.el"))

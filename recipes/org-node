@@ -1,5 +1,4 @@
 (org-node :repo "meedstrom/org-node"
           :fetcher github
           :branch "melpa"
-          :version-regexp "a^" ;; Opt out of Melpa Stable
           :files (:defaults (:exclude "org-node-fakeroam.el")))

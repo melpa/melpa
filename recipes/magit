@@ -1,9 +1,11 @@
-(magit :fetcher github
-       :repo "magit/magit"
-       :files ("lisp/magit*.el"
-               "lisp/git-rebase.el"
-               "docs/magit.texi"
-               "docs/AUTHORS.md"
-               "LICENSE"
-               (:exclude "lisp/magit-section.el"
-                         "lisp/magit-section-pkg.el")))
+(magit
+ :fetcher github
+ :repo "magit/magit"
+ :branch "melpa"
+ :files ("lisp/magit*.el"
+         "lisp/git-rebase.el"
+         "docs/magit.texi"
+         "docs/AUTHORS.md"
+         "LICENSE"
+         (:exclude "lisp/magit-section.el"
+                   "lisp/magit-section-pkg.el")))

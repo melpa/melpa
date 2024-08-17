@@ -1,1 +1,4 @@
-(epkg :fetcher github :repo "emacscollective/epkg")
+(epkg
+ :fetcher github
+ :repo "emacscollective/epkg"
+ :branch "melpa")

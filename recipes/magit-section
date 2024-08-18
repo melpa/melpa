@@ -3,5 +3,5 @@
  :repo "magit/magit"
  :branch "melpa"
  :files ("lisp/magit-section.el"
-         "lisp/magit-section-pkg.el"
-         "docs/magit-section.texi"))
+         "docs/magit-section.texi"
+         "magit-section-pkg.el"))

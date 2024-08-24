@@ -1,0 +1,1 @@
+(haskell-ts-mode :fetcher codeberg :repo "pranshu/haskell-ts-mode")

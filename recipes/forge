@@ -1,4 +1,3 @@
 (forge
  :fetcher github
- :repo "magit/forge"
- :branch "melpa")
+ :repo "magit/forge")

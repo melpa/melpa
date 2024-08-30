@@ -1,4 +1,3 @@
 (with-editor
  :fetcher github
- :repo "magit/with-editor"
- :branch "melpa")
+ :repo "magit/with-editor")

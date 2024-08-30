@@ -1,4 +1,3 @@
 (ghub
  :fetcher github
- :repo "magit/ghub"
- :branch "melpa")
+ :repo "magit/ghub")

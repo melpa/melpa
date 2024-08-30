@@ -1,4 +1,3 @@
 (transient
  :fetcher github
- :repo "magit/transient"
- :branch "melpa")
+ :repo "magit/transient")

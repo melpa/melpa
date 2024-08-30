@@ -1,7 +1,6 @@
 (magit-section
  :fetcher github
  :repo "magit/magit"
- :branch "melpa"
  :files ("lisp/magit-section.el"
          "docs/magit-section.texi"
          "magit-section-pkg.el"))

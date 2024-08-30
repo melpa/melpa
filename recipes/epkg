@@ -1,4 +1,3 @@
 (epkg
  :fetcher github
- :repo "emacscollective/epkg"
- :branch "melpa")
+ :repo "emacscollective/epkg")

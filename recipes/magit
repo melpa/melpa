@@ -2,7 +2,7 @@
  :fetcher github
  :repo "magit/magit"
  :files ("lisp/magit*.el"
-         "lisp/git-rebase.el"
+         "lisp/git-*.el"
          "docs/magit.texi"
          "docs/AUTHORS.md"
          "LICENSE"

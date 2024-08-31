@@ -1,6 +1,5 @@
 (git-commit
  :fetcher github
  :repo "magit/magit"
- :files ("lisp/git-commit.el"
-         "git-commit-pkg.el")
+ :branch "legacy-stub"
  :old-names (git-commit-mode))

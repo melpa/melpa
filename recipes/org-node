@@ -1,0 +1,4 @@
+(org-node :repo "meedstrom/org-node"
+          :fetcher github
+          :branch "melpa"
+          :files (:defaults (:exclude "org-node-fakeroam.el")))

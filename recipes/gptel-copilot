@@ -1,0 +1,3 @@
+(gptel-copilot
+ :fetcher github
+ :repo "lanceberge/gptel-copilot")

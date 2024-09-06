@@ -1,0 +1,1 @@
+(on :fetcher gitlab :repo "ajgrf/on.el")

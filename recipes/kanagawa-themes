@@ -1,0 +1,3 @@
+(kanagawa-themes
+ :fetcher github
+ :repo "Fabiokleis/kanagawa-emacs")

@@ -3,7 +3,8 @@
  :repo "emacs-helm/helm"
  :files ("*.el"
          "emacs-helm.sh"
-         (:exclude "helm-lib.el"
+         (:exclude ".dir-locals.el"
+                   "helm-lib.el"
                    "helm-source.el"
                    "helm-multi-match.el"
                    "helm-core.el")))

@@ -1,21 +1,21 @@
 ;;; package-build-tests.el --- Tests for Package-Build  -*- lexical-binding:t -*-
 
-;; Copyright (C) 2023 Jonas Bernoulli
+;; Copyright (C) 2023-2024 Jonas Bernoulli
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
-;; Magit is free software: you can redistribute it and/or modify it
-;; under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or
-;; (at your option) any later version.
+;; This file is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published
+;; by the Free Software Foundation, either version 3 of the License,
+;; or (at your option) any later version.
 ;;
-;; Magit is distributed in the hope that it will be useful, but WITHOUT
-;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-;; or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
-;; License for more details.
+;; This file is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
 ;;
 ;; You should have received a copy of the GNU General Public License
-;; along with Magit.  If not, see <https://www.gnu.org/licenses/>.
+;; along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Code:
 
@@ -26,8 +26,8 @@
 (defmacro package-build-test-package (&rest body)
   (declare (indent 0) (debug t))
   `(let* ((package-build-verbose nil)
-          (package-build-fetch-function #'ignore)
-          (package-build-checkout-function #'ignore)
+          (package-build--inhibit-fetch 'strict)
+          (package-build--inhibit-checkout t)
           (package-build-stable nil)
           (package-build-snapshot-version-functions
            (list #'package-build-release+count-version))

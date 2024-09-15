@@ -6,6 +6,7 @@ cd "${MELPA_REPO}"
 MELPA_CHANNEL=unstable make archive-contents json html
 MELPA_CHANNEL=stable   make archive-contents json html
 MELPA_CHANNEL=snapshot make archive-contents json html
+MELPA_CHANNEL=release  make archive-contents json html
 
 # Sync every 5 minutes.
 sleep 5m

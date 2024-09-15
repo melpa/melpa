@@ -25,9 +25,11 @@ helpall::
 	$(info )
 help helpall::
 	$(info make recipes/<package>    Build <package>)
-	$(info make build                Build all packages)
+	$(info make [-k] [-j 8] build    Build all packages)
 	$(info make all                  Build everything)
 helpall::
+	$(info make -k -j 8 build; make summarise)
+	$(info .                         Build everything faster)
 	$(info make summarise            Build all package and indices)
 	$(info make archive-contents     Build main package index)
 	$(info make json                 Build json package index)

@@ -232,7 +232,7 @@ docker-build-rebuild:
 	docker build \
 	--build-arg UID=$$(id --user) \
 	--build-arg GID=$$(id --group) \
-	-t melpa_builder docker/builder
+	-t melpa_builder docker/builder-ng
 
 get-pkgdir: .FORCE
 	@echo $(PKGDIR)

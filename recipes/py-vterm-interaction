@@ -1,1 +1,1 @@
-(python-vterm :repo "vale981/py-vterm-interaction.el" :fetcher github)
+(py-vterm-interaction :repo "vale981/py-vterm-interaction.el" :fetcher github)

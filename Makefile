@@ -1,3 +1,52 @@
+## Help
+
+.DEFAULT_GOAL := all
+
+help helpall::
+	$(info )
+	$(info Getting Help)
+	$(info ============)
+	$(info make help                 Show brief help)
+	$(info make helpall              Show extended help)
+	$(info )
+	$(info Building)
+	$(info ========)
+	$(info )
+	$(info Use "MELPA_CHANNEL=<channel> make <target>")
+	$(info .    to build like MELPA channel <channel> does.)
+	$(info .    <channel> is one of "stable" or "unstable".)
+	$(info or use "make <target>")
+	$(info .    to build using package-build.el’s default)
+	$(info .    settings (which is like channel "unstable").)
+	$(info )
+	$(info make recipes/<package>    Build <package>)
+	$(info make build                Build all packages)
+	$(info make all                  Build everything)
+helpall::
+	$(info make summarise            Build all package and indices)
+	$(info make archive-contents     Build main package index)
+	$(info make json                 Build json package index)
+	$(info make html                 Build html package index)
+help helpall::
+	$(info )
+	$(info Cleaning)
+	$(info ========)
+	$(info make clean                Empty output directories of all channels)
+	$(info .                         Also clean indices but not cloned repos)
+	$(info make clean-packages       Empty current channel’s output directory)
+helpall::
+	$(info make clean-json           Clean current channel’s json index)
+	$(info make clean-sandbox        Clean sandbox)
+	$(info make clean-working        [DANGER] Remove all cloned repositories)
+help helpall::
+	$(info )
+helpall::
+	$(info Maintenance)
+	$(info ===========)
+	$(info make pull-package-build   Merge new package-build.el version)
+help helpall::
+	@printf "\n"
+
 ## Settings
 
 TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))

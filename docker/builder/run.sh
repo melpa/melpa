@@ -13,6 +13,8 @@ cd "${MELPA_REPO}"
 
 BUILD_STATUS_FILE="${MELPA_REPO}/html/build-status.json"
 
+export INSIDE_DOCKER=true
+
 git config --global safe.directory "*"
 
 if [ -z "$INHIBIT_MELPA_PULL" ]

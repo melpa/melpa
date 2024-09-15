@@ -19,6 +19,11 @@ help helpall::
 	$(info .    to build using package-build.el’s default)
 	$(info .    settings (which is like channel "unstable").)
 	$(info )
+helpall::
+	$(info Use "PACKAGE_BUILD_REPO=<dir> make <target>")
+	$(info .    to use an out-of-tree package-build.el.)
+	$(info )
+help helpall::
 	$(info make recipes/<package>    Build <package>)
 	$(info make build                Build all packages)
 	$(info make all                  Build everything)
@@ -116,7 +121,13 @@ LOCATION_CONFIG ?= "(progn\
   (setq package-build-archive-dir \"$(TOP)/$(PKGDIR)/\")\
   (setq package-build-recipes-dir \"$(TOP)/$(RCPDIR)/\"))"
 
-LOAD_PATH ?= $(TOP)/package-build
+ifeq ($(INSIDE_DOCKER), true)
+LOAD_PATH := $(TOP)/package-build
+else ifdef PACKAGE_BUILD_REPO
+LOAD_PATH := $(PACKAGE_BUILD_REPO)
+else
+LOAD_PATH := $(TOP)/package-build
+endif
 
 EVAL := $(EMACS) --no-site-file --batch \
 $(addprefix -L ,$(LOAD_PATH)) \

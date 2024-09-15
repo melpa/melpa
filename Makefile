@@ -44,6 +44,9 @@ helpall::
 	$(info Maintenance)
 	$(info ===========)
 	$(info make pull-package-build   Merge new package-build.el version)
+	$(info make docker-build-run     Build everything like melpa.org does)
+	$(info make docker-build-shell   Run interactive shell in the container)
+	$(info make docker-build-rebuild Re-build the build container)
 help helpall::
 	@printf "\n"
 
@@ -198,7 +201,27 @@ pull-package-build:
 	-m "Merge Package-Build $$(git describe FETCH_HEAD)" \
 	--squash -P package-build FETCH_HEAD
 
-## Docker support
+## Docker
+
+docker-build-run:
+	docker run -it \
+	--mount type=bind,src=$$PWD,target=/mnt/store/melpa \
+	--mount type=bind,src=$(LOAD_PATH),target=/mnt/store/package-build \
+	-e INHIBIT_MELPA_PULL=t \
+	melpa_builder
+
+docker-build-shell:
+	docker run -it \
+	--mount type=bind,src=$$PWD,target=/mnt/store/melpa \
+	--mount type=bind,src=$(LOAD_PATH),target=/mnt/store/package-build \
+	-e INHIBIT_MELPA_PULL=t \
+	melpa_builder bash
+
+docker-build-rebuild:
+	docker build \
+	--build-arg UID=$$(id --user) \
+	--build-arg GID=$$(id --group) \
+	-t melpa_builder docker/builder
 
 get-pkgdir: .FORCE
 	@echo $(PKGDIR)

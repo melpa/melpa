@@ -1,0 +1,3 @@
+(work-timer
+ :fetcher github
+ :repo "krisbalintona/work-timer")

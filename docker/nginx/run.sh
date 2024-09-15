@@ -43,8 +43,10 @@ while true; do
         --expand \
         -d melpa.org \
         -d stable.melpa.org \
+        -d snapshot.melpa.org \
         -d test.melpa.org \
         -d stable-test.melpa.org \
+        -d snapshot-test.melpa.org \
         -d www.melpa.org
 
     echo "restarting nginx..."

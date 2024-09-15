@@ -2,5 +2,4 @@
  :fetcher github
  :repo "jscheid/prettier.el"
  :branch "release"
- :version-regexp "^release-\\(.*\\)"
  :files (:defaults "*.js" "*.base64"))

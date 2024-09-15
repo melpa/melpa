@@ -1,3 +1,6 @@
-(ninja-mode :fetcher github
-            :repo "ninja-build/ninja"
-            :files ("misc/*.el"))
+(ninja-mode
+ :fetcher github
+ :repo "ninja-build/ninja"
+ ;; Ignore ancient "release-NNNNNN" tags.
+ :version-regexp "v%v"
+ :files ("misc/*.el"))

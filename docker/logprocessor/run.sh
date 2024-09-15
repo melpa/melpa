@@ -10,5 +10,8 @@ THIS_DIR=$(dirname "$0")
 # Stable
 "$THIS_DIR/buildstats" /mnt/store/log-stable /mnt/db/parquet-stable html-stable/download_counts.json
 
+# Snapshot
+"$THIS_DIR/buildstats" /mnt/store/log-snapshot /mnt/db/parquet-snapshot html-snapshot/download_counts.json
+
 echo "Sleeping"
 sleep 1800

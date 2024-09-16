@@ -1,4 +1,0 @@
-(ox-impress-js :fetcher github
-               :repo "emacsattic/org-impress-js"
-               :files ("*.el" "resources")
-               :old-names (org-impress-js))

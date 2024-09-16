@@ -71,6 +71,12 @@ export BUILD_CONFIG="(progn $LISP_CONFIG\
   (setq package-build-fetch-function 'ignore))"
 build_all
 
+echo ">>> Starting RELEASE build"
+export MELPA_CHANNEL=release
+export BUILD_CONFIG="(progn $LISP_CONFIG\
+  (setq package-build-fetch-function 'ignore))"
+build_all
+
 # Indicate that the build has completed
 BUILD_COMPLETED=$(date "+%s")
 BUILD_DURATION=$((BUILD_COMPLETED - BUILD_STARTED))

@@ -4,7 +4,7 @@
 #   ran docker.  That way, newly created files in mounted directories
 #   do not end up being owned by root.
 #
-# - Also build the experimental "snapshot" channel.
+# - Also build the experimental "snapshot" and "release" channels.
 
 FROM debian:bookworm
 ARG UID

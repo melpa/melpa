@@ -3,6 +3,8 @@
 # - The user inside docker uses the same UID and GID as the user that
 #   ran docker.  That way, newly created files in mounted directories
 #   do not end up being owned by root.
+#
+# - Also build the experimental "snapshot" channel.
 
 FROM debian:bookworm
 ARG UID

@@ -1063,7 +1063,8 @@ is the same as the value of `export_file_name'."
                       (or (member src orgs) (assoc src orgs))
                       src))
            (texi (and (member ext '("texi" "texinfo")) src))
-           (info (and (equal ext "info") src)))
+           (info (and (equal ext "info")
+                      (file-name-nondirectory src))))
       (when org
         (let ((default-directory (file-name-directory (expand-file-name org)))
               (next (or (cadr (assoc src orgs))

@@ -1,3 +1,9 @@
-(rtags-xref :repo "Andersbakken/rtags"
-            :fetcher github
-            :files ("src/rtags-xref.el"))
+(rtags-xref
+ :fetcher github
+ :repo "Andersbakken/rtags"
+ ;; It appears that the Emacs package is versioned seperately from
+ ;; the non-elisp parts.  The tags are used to version the latter.
+ ;; Use the version from the library header instead.
+ ;; See https://github.com/melpa/melpa/issues/8692.
+ :version-regexp "use-header-instead"
+ :files ("src/rtags-xref.el"))

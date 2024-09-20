@@ -1,0 +1,4 @@
+(uniline
+ :fetcher github
+ :repo "tbanel/uniline"
+ :files ("uniline.el"))

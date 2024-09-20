@@ -1,0 +1,1 @@
+(git-riddance :repo "jjba23/git-riddance" :fetcher github)

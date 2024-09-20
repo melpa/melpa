@@ -1,3 +1,1 @@
-(org-node-fakeroam :repo "meedstrom/org-node-fakeroam"
-                   :fetcher github
-                   :branch "melpa")
+(org-node-fakeroam :fetcher github :repo "meedstrom/org-node-fakeroam")

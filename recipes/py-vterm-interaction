@@ -1,4 +1,4 @@
 (py-vterm-interaction
  :repo "vale981/py-vterm-interaction.el"
  :fetcher github
- :files '("*.el" ("scripts/" "scripts/*.py")))
+ :files ("py-vterm-interaction*.el" ("scripts/" "scripts/*.py")))

@@ -42,7 +42,6 @@
 (defclass package-recipe ()
   ((url-format      :allocation :class       :initform nil)
    (repopage-format :allocation :class       :initform nil)
-   (stable-p        :allocation :class       :initform nil)
    (name            :initarg :name           :initform nil)
    (url             :initarg :url            :initform nil)
    (repo            :initarg :repo           :initform nil)
@@ -64,15 +63,15 @@
 (defclass package-git-recipe (package-recipe) ())
 
 (defclass package-github-recipe (package-git-recipe)
-  ((url-format      :initform "https://github.com/%s.git")
+  ((url-format      :initform "https://github.com/%s")
    (repopage-format :initform "https://github.com/%s")))
 
 (defclass package-gitlab-recipe (package-git-recipe)
-  ((url-format      :initform "https://gitlab.com/%s.git")
+  ((url-format      :initform "https://gitlab.com/%s")
    (repopage-format :initform "https://gitlab.com/%s")))
 
 (defclass package-codeberg-recipe (package-git-recipe)
-  ((url-format      :initform "https://codeberg.org/%s.git")
+  ((url-format      :initform "https://codeberg.org/%s")
    (repopage-format :initform "https://codeberg.org/%s")))
 
 (defclass package-sourcehut-recipe (package-git-recipe)
@@ -92,15 +91,11 @@
    (expand-file-name (oref rcp name) package-build-working-dir)))
 
 (cl-defmethod package-recipe--upstream-url ((rcp package-recipe))
-  (or (oref rcp url)
-      (format (oref rcp url-format)
-              (oref rcp repo))))
-
-(cl-defmethod package-recipe--upstream-url ((rcp package-git-remote-hg-recipe))
-  (concat "hg::" (oref rcp url)))
+  (oref rcp url))
+(make-obsolete 'package-recipe--upstream-url 'oref  "5.0.0")
 
 (cl-defmethod package-recipe--upstream-protocol ((rcp package-recipe))
-  (let ((url (package-recipe--upstream-url rcp)))
+  (let ((url (oref rcp url)))
     (cond ((string-match "\\`\\([a-z]+\\)://" url)
            (match-string 1 url))
           ((string-match "\\`[^:/ ]+:" url) "ssh")
@@ -138,30 +133,39 @@ file is invalid, then raise an error."
                          (read (current-buffer))))
                (plist (cdr recipe))
                (fetcher (plist-get plist :fetcher))
-               key val args)
+               key val args rcp)
           (package-recipe--validate recipe name)
-          (while (and (setq key (pop plist))
-                      (setq val (pop plist)))
+          (while (setq key (pop plist))
+            (setq val (pop plist))
             (unless (eq key :fetcher)
               (push val args)
               (push key args)))
           (when (and package-build-use-git-remote-hg (eq fetcher 'hg))
-            (setq fetcher 'git-remote-hg))
-          (apply (intern (format "package-%s-recipe" fetcher))
-                 name :name name args))
+            (setq fetcher 'git-remote-hg)
+            (setq args (plist-put args :url (concat "hg::" (oref rcp url)))))
+          (setq rcp (apply (intern (format "package-%s-recipe" fetcher))
+                           name :name name args))
+          (unless (oref rcp url)
+            (oset rcp url (format (oref rcp url-format) (oref rcp repo))))
+          rcp)
       (error "No such recipe: %s" name))))
 
 ;;; Validation
 
 ;;;###autoload
 (defun package-recipe-validate-all ()
-  "Validate all recipes."
+  "Validate all package recipes.
+Return a boolean indicating whether all recipes are valid and show
+a message for each invalid recipe."
   (interactive)
-  (dolist-with-progress-reporter (name (package-recipe-recipes))
-      "Validating recipes..."
-    (condition-case err
-        (package-recipe-lookup name)
-      (error (message "Invalid recipe for %s: %S" name (cdr err))))))
+  (let ((all-valid t))
+    (dolist-with-progress-reporter (name (package-recipe-recipes))
+        "Validating recipes..."
+      (condition-case err
+          (package-recipe-lookup name)
+        (error (message "Invalid recipe for %s: %S" name (cdr err))
+               (setq all-valid nil))))
+    all-valid))
 
 (defun package-recipe--validate (recipe name)
   "Perform some basic checks on the raw RECIPE for the package named NAME."

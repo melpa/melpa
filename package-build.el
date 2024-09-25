@@ -878,7 +878,7 @@ Use a sandbox if `package-build--use-sandbox' is non-nil."
 
 (cl-defmethod package-build--fetch ((rcp package-git-recipe))
   (let ((dir (package-recipe--working-tree rcp))
-        (url (package-recipe--upstream-url rcp))
+        (url (oref rcp url))
         (protocol (package-recipe--upstream-protocol rcp)))
     (cond
      ((eq package-build--inhibit-fetch 'strict))
@@ -908,7 +908,7 @@ Use a sandbox if `package-build--use-sandbox' is non-nil."
 
 (cl-defmethod package-build--fetch ((rcp package-hg-recipe))
   (let ((dir (package-recipe--working-tree rcp))
-        (url (package-recipe--upstream-url rcp)))
+        (url (oref rcp url)))
     (cond
      ((eq package-build--inhibit-fetch 'strict))
      ((and (file-exists-p (expand-file-name ".hg" dir))
@@ -949,20 +949,12 @@ Use a sandbox if `package-build--use-sandbox' is non-nil."
       (pp `(define-package ,(symbol-name name)
              ,(package-version-join (package-desc-version desc))
              ,(package-desc-summary desc)
-             ',(mapcar (pcase-lambda (`(,pkg ,ver))
+             ,(macroexp-quote
+               (mapcar (pcase-lambda (`(,pkg ,ver))
                          (list pkg (package-version-join ver)))
-                       (package-desc-reqs desc))
+                       (package-desc-reqs desc)))
              ,@(cl-mapcan (pcase-lambda (`(,key . ,val))
-                            (when (or (symbolp val) (listp val))
-                              ;; We must quote lists and symbols,
-                              ;; because Emacs 24.3 and earlier evaluate
-                              ;; the package information, which would
-                              ;; break for unquoted symbols or lists.
-                              ;; While this library does not support
-                              ;; such old Emacsen, the packages that
-                              ;; we produce should remain compatible.
-                              (setq val (list 'quote val)))
-                            (list key val))
+                            (list key (macroexp-quote val)))
                           (package-desc-extras desc)))
           (current-buffer))
       (princ ";; Local Variables:\n;; no-byte-compile: t\n;; End:\n"
@@ -996,7 +988,7 @@ that is put in the tarball."
        package-build-tar-executable nil
        (get-buffer-create "*package-build-checkout*") nil
        "-cf" tar dir
-       ;; Arguments that are need to strip metadata that
+       ;; Arguments that are needed to strip metadata that
        ;; prevent a reproducible tarball as described at
        ;; https://reproducible-builds.org/docs/archives.
        "--sort=name"
@@ -1466,7 +1458,7 @@ are subsequently dumped."
     (make-directory package-build-archive-dir))
   (let* ((start-time (current-time))
          (rcp (package-recipe-lookup name))
-         (url (package-recipe--upstream-url rcp))
+         (url (oref rcp url))
          (repo (oref rcp repo))
          (fetcher (package-recipe--fetcher rcp))
          (version nil))
@@ -1695,7 +1687,7 @@ If optional PRETTY-PRINT is non-nil, then pretty-print
           (and-let* ((recipe (with-demoted-errors "Recipe error: %S"
                                (package-recipe-lookup name))))
             (push `(,symbol
-                    :url ,(package-recipe--upstream-url recipe)
+                    :url ,(oref recipe url)
                     ,@(and (cl-typep recipe 'package-hg-recipe)
                            (list :vc-backend 'Hg))
                     ,@(and-let* ((branch (oref recipe branch)))

@@ -244,7 +244,7 @@ PACKAGE_BUILD_REPO ?= "https://github.com/melpa/package-build"
 pull-package-build:
 	git fetch $(PACKAGE_BUILD_REPO)
 	git -c "commit.gpgSign=true" subtree merge \
-	-m "Merge Package-Build $$(git describe FETCH_HEAD)" \
+	-m "Merge Package-Build $$(git describe --always FETCH_HEAD)" \
 	--squash -P package-build FETCH_HEAD
 
 ## Docker

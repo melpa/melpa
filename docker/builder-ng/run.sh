@@ -46,7 +46,7 @@ function build_all {
         mv "$pkgdir/errors.log" "$pkgdir/errors-previous.log"
     export LANG=en_US.UTF-8
     make -k -j8 build || true
-    make summarise
+    make archive-contents json
 }
 
 # Indicate that the build is in progress
@@ -54,16 +54,16 @@ BUILD_DURATION=$(jq ".duration" ${BUILD_STATUS_FILE} || true)
 BUILD_STARTED=$(date "+%s")
 record_build_status
 
-echo ">>> Starting UNSTABLE build"
-export MELPA_CHANNEL=unstable
-export BUILD_CONFIG="$LISP_CONFIG"
-build_all
+# echo ">>> Starting UNSTABLE build"
+# export MELPA_CHANNEL=unstable
+# export BUILD_CONFIG="$LISP_CONFIG"
+# build_all
 
-echo ">>> Starting STABLE build"
-export MELPA_CHANNEL=stable
-export BUILD_CONFIG="(progn $LISP_CONFIG\
-  (setq package-build-fetch-function 'ignore))"
-build_all
+# echo ">>> Starting STABLE build"
+# export MELPA_CHANNEL=stable
+# export BUILD_CONFIG="(progn $LISP_CONFIG\
+#   (setq package-build-fetch-function 'ignore))"
+# build_all
 
 echo ">>> Starting SNAPSHOT build"
 export MELPA_CHANNEL=snapshot
@@ -82,6 +82,3 @@ BUILD_COMPLETED=$(date "+%s")
 BUILD_DURATION=$((BUILD_COMPLETED - BUILD_STARTED))
 BUILD_NEXT=$((BUILD_COMPLETED + BUILD_DELAY))
 record_build_status
-
-echo "Sleeping for $BUILD_DELAY seconds before next build"
-sleep $BUILD_DELAY

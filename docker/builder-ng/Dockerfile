@@ -5,6 +5,10 @@
 #   do not end up being owned by root.
 #
 # - Also build the experimental "snapshot" and "release" channels.
+#
+# - Don't generate any html files.
+#
+# - Don't take a nap afterwards.
 
 FROM debian:bookworm
 ARG UID
@@ -17,4 +21,4 @@ RUN apt-get update && \
     adduser --uid $UID --gid $GID --disabled-password --gecos "" builder
 USER builder
 WORKDIR /mnt/store/melpa
-CMD docker/builder/run.sh
+CMD docker/builder-ng/run.sh

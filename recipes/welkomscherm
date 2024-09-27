@@ -1,1 +1,1 @@
-(welkomscherm :repo "jjba23/welkomscherm" :fetcher github)
+(welkomscherm :repo "jjba23/welkomscherm.el" :fetcher github)

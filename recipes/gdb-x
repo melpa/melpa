@@ -1,1 +1,1 @@
-(gdb-x :fetcher codeberg :repo "shepherd/gdb-x")
+(gdb-x :fetcher codeberg :repo "pastor/gdb-x")

@@ -90,7 +90,9 @@ SANDBOX := sandbox
 ifndef MELPA_CHANNEL
 PKGDIR  := packages
 HTMLDIR := html
-CHANNEL_CONFIG := "()"
+CHANNEL_CONFIG := "(progn\
+  (setq package-build-build-function\
+        'package-build--build-multi-file-package))"
 
 else ifeq ($(MELPA_CHANNEL), unstable)
 PKGDIR  := packages
@@ -98,6 +100,8 @@ HTMLDIR := html
 CHANNEL_CONFIG := "(progn\
   (setq package-build-stable nil)\
   (setq package-build-all-publishable t)\
+  (setq package-build-build-function\
+        'package-build--build-multi-file-package)\
   (setq package-build-snapshot-version-functions\
         '(package-build-timestamp-version))\
   (setq package-build-badge-data '(\"melpa\" \"\#922793\")))"
@@ -108,6 +112,8 @@ HTMLDIR := html-stable
 CHANNEL_CONFIG := "(progn\
   (setq package-build-stable t)\
   (setq package-build-all-publishable nil)\
+  (setq package-build-build-function\
+        'package-build--build-multi-file-package)\
   (setq package-build-release-version-functions\
         '(package-build-tag-version))\
   (setq package-build-badge-data '(\"melpa stable\" \"\#3e999f\")))"
@@ -120,6 +126,7 @@ HTMLDIR := html-snapshot
 CHANNEL_CONFIG := "(progn\
   (setq package-build-stable nil)\
   (setq package-build-all-publishable t)\
+  (setq package-build-build-function 'package-build--build-package)\
   (setq package-build-snapshot-version-functions\
         '(package-build-release+count-version))\
   (setq package-build-release-version-functions\
@@ -135,6 +142,7 @@ HTMLDIR := html-release
 CHANNEL_CONFIG := "(progn\
   (setq package-build-stable t)\
   (setq package-build-all-publishable t)\
+  (setq package-build-build-function 'package-build--build-package)\
   (setq package-build-snapshot-version-functions\
         '(package-build-release+count-version))\
   (setq package-build-release-version-functions\

@@ -283,8 +283,8 @@ such as \"1A\" or \".5\", and only supports \".\" as separator.
 
 The part before the first capture group should match prefixes
 commonly used in version tags.  To support tags that contain
-the name package of the package (e.g., \"foobar-0.1.3\"), the
-name of the package is substituted for \"%p\".
+the name of the package (e.g., \"foobar-0.1.3\"), the name of
+the package is substituted for \"%p\".
 
 Note that this variable can be overridden in a package's recipe,
 using the `:version-regexp' slot."
@@ -1019,8 +1019,7 @@ Use a sandbox if `package-build--use-sandbox' is non-nil."
 (defun package-build--write-pkg-file (rcp dir)
   (pcase-let (((eieio name version summary dependencies) rcp))
     (with-temp-file (expand-file-name (format "%s-pkg.el" name) dir)
-      (insert
-       ";; -*- mode: lisp-data; no-byte-compile: t; lexical-binding: nil -*-\n")
+      (insert ";; -*- no-byte-compile: t; lexical-binding: nil -*-\n")
       (insert (format "(define-package \"%s\" \"%s\"\n" name version))
       (insert (format "  \"%s.\"\n" summary))
       (if dependencies

@@ -1,0 +1,1 @@
+(torrent-mode :fetcher github :repo "sarg/torrent-mode.el")

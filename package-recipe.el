@@ -98,10 +98,6 @@
   (file-name-as-directory
    (expand-file-name (oref rcp name) package-build-working-dir)))
 
-(cl-defmethod package-recipe--upstream-url ((rcp package-recipe))
-  (oref rcp url))
-(make-obsolete 'package-recipe--upstream-url 'oref  "5.0.0")
-
 (cl-defmethod package-recipe--upstream-protocol ((rcp package-recipe))
   (let ((url (oref rcp url)))
     (cond ((string-match "\\`\\([a-z]+\\)://" url)

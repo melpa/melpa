@@ -1,1 +1,1 @@
-(sticky-shell :repo "andyjda/sticky-shell" :fetcher github)
+(sticky-shell :repo "andrewdea/sticky-shell" :fetcher github)

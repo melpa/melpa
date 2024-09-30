@@ -1013,7 +1013,7 @@ Use a sandbox if `package-build--use-sandbox' is non-nil."
                                            (list (cons key val))))
                                        package-build--extras)
                                (and-let* ((v (oref rcp maintainers)))
-                                 `((:maintainer ,(car v)))))))
+                                 (list (cons :maintainer (car v)))))))
           (current-buffer)))))
 
 (defun package-build--write-pkg-file (rcp dir)

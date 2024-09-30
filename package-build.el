@@ -1021,7 +1021,7 @@ Use a sandbox if `package-build--use-sandbox' is non-nil."
     (with-temp-file (expand-file-name (format "%s-pkg.el" name) dir)
       (insert ";; -*- no-byte-compile: t; lexical-binding: nil -*-\n")
       (insert (format "(define-package \"%s\" \"%s\"\n" name version))
-      (insert (format "  \"%s.\"\n" summary))
+      (insert (format "  %s\n" (prin1-to-string (concat summary "."))))
       (if dependencies
           (let ((format (format "(%%-%ds \"%%s\")"
                                 (apply #'max 0

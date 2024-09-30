@@ -203,6 +203,7 @@ $(RCPDIR)/%: .FORCE
 ## Metadata
 
 archive-contents: .FORCE
+	@echo " • Building archive-contents ..."
 	@$(EVAL) "(package-build-dump-archive-contents)"
 
 json: .FORCE

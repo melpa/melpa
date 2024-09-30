@@ -211,7 +211,7 @@ json: .FORCE
 	@$(EVAL) "(package-build-archive-alist-as-json \"$(HTMLDIR)/archive.json\")"
 	@$(EVAL) "(package-build-recipe-alist-as-json \"$(HTMLDIR)/recipes.json\")"
 
-html: json
+html: .FORCE
 	@echo " • Building html index ..."
 	$(MAKE) -C $(HTMLDIR)
 

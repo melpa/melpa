@@ -1,4 +1,1 @@
-(corsair
- :fetcher github
- :repo "rob137/corsair"
- :files ("corsair.el"))
+(corsair :fetcher github :repo "rob137/corsair")

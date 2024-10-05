@@ -1,1 +1,1 @@
-(trimspace-mode :fetcher sourcehut :repo "bkhl/trimspace-mode")
+(trimspace-mode :fetcher github :repo "bkhl/trimspace-mode")

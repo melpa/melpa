@@ -20,3 +20,5 @@
 /service/*/supervise
 /service/caddy/.caddy
 /working/
+/**/.direnv
+/**/__pycache__

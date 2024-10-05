@@ -1,0 +1,138 @@
+{% set page_description = "The largest and most up-to-date repository of Emacs packages." %}
+{% extends "layout.html" %}
+{% block content %}
+  <div>
+    <section class="page-header">
+      <h1><span>MELPA</span> <small>(Milkypostman’s Emacs Lisp Package Archive)</small></h1>
+    </section>
+    <div class="row">
+      <div class="col-md-8">
+        <section class="jumbotron">
+          <ul>
+            <li><strong>Up-to-date packages built on our servers from upstream source</strong></li>
+            <li><strong>Installable in any Emacs with 'package.el'</strong> - no local version-control tools needed</li>
+            <li><strong>Curated</strong> - no obsolete, renamed, forked or randomly hacked packages</li>
+            <li><strong>Comprehensive</strong> - more packages than any other archive</li>
+            <li><strong>Automatic updates</strong> - new commits result in new packages</li>
+            <li><strong>Extensible</strong> - contribute new recipes, and we'll build the packages</li>
+          </ul>
+        </section>
+      </div>
+      <div class="col-md-4">
+        <div class="alert alert-warning">
+          <strong>Current build started:</strong> <span>xxxx an hour
+            ago</span><span>, last took 2 hours</span>
+        </div>
+      </div>
+    </div>
+    <section id="packages">
+      <form method="get">
+        <input type="hidden" name="page" value="1">
+        <h2>Current List of {{ total_packages }} Packages <small>{{ "{:,d}".format(downloads) }} downloads to date</small></h2>
+        <p>
+          <input id="search" type="search" autocomplete="off"
+                 placeholder="Enter search terms" autofocus=""
+                 class="form-control" name="q" value="{{ q }}"
+                 hx-trigger="keyup changed delay:350ms"
+                 hx-get="/?asc={{asc}}&sort={{sort}}" hx-target="#packages"
+                 hx-select="#packages" hx-replace-url="true">
+          <span class= "help-block">{{ "{:,d}".format(match_count) }} matching package(s)</span>
+        </p>
+        <table id="package-list" class="table table-bordered table-responsive table-hover">
+          <thead>
+            <tr>
+              {% for title, sort_key in [["Package", "package"], ["Description", None], ["Version", "version"], ["Recipe", None], ["Source", "source"], ["DLs", "downloads"]] %}
+                {% if sort_key %}
+                  <th class="sortable"
+                      {% if sort == sort_key %}
+                        aria-sort="{{ asc and "ascending" or "descending" }}"
+                      {% endif %}>
+                      <a href="{{ request.url.include_query_params(sort=sort_key, asc=(not asc if sort == sort_key else True), page=1) }}">{{title}}
+                        {% if sort == sort_key %}
+                          <span class="glyphicon {{ asc and "glyphicon-chevron-down" or "glyphicon-chevron-up" }}"></span>
+                        {% endif %}
+                      </a>
+                  </th>
+                {% else %}
+                  <th>{{title}}</th>
+                {% endif %}
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for package in pages.page_items %}
+              <tr>
+                <td>
+                  <a href="/package/{{package.name}}">{{package.name}}</a>
+                </td>
+                <td>
+                  <a href="/package/{{package.name}}">{{package.description|e}}</a>
+                </td>
+                <td class="version">
+                  <a href=
+                     "{{package.download_url}}">{{package.version}}
+                     <span class="glyphicon glyphicon-download"></span></a>
+                </td>
+                <td class="recipe">
+                  <a href=
+                     "{{package.recipe_url}}">
+                     <span class="glyphicon glyphicon-cutlery"></span></a>
+                </td>
+                <td class="source">
+                  <a href=
+                     "{{package.source_url}}">
+                     {{package.fetcher}}</a>
+                </td>
+                <td>{{ "{:,d}".format(package.downloads) }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </form>
+      <nav>
+        <ul class="pagination">
+          {% if pages.page_number != 1 %}
+            <li>
+              <a href="{{ request.url.include_query_params(page=(pages.page_number - 1)) }}">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+          {% endif %}
+          {% for page in pages.page_numbers %}
+            {% if page == pages.page_number %}
+              <li class="active">
+                <span>{{ pages.page_number }}
+                  <span class="sr-only">(current)</span>
+                </span>
+              </li>
+            {% else %}
+              <li>
+                <a href="{{ request.url.include_query_params(page=page) }}">
+                  <span>{{page}}</span>
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          {% if pages.page_number != pages.last_page %}
+            <li>
+              <a href="{{ request.url.include_query_params(page=(pages.page_number + 1)) }}"<span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </section>
+  </div>
+  <script language="javascript">
+    // Redirect old URLs
+    var m = window.location.hash.match("^#(/getting-started|/\\?.*)");
+    if (m) {
+      window.location.href = m[1];
+    } else {
+      var m2 = window.location.hash.match("^#(/[a-z0-9\-]+)");
+      if (m2) { window.location.href = "/package" + m2[1]; }
+    }
+  </script>
+{% endblock %}

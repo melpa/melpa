@@ -1,0 +1,5 @@
+(fancy-joiner
+ :fetcher sourcehut
+ :repo "flandrew/fancy-joiner"
+ :files (:defaults "README.org" "README.org.license"
+         ("LICENSES" "LICENSES/GPL-3.0-or-later.txt")))

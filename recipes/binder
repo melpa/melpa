@@ -1,1 +1,1 @@
-(binder :fetcher github :repo "rnkn/binder")
+(binder :fetcher codeberg :repo "divyaranjan/binder")

@@ -1,0 +1,1 @@
+(sml-ts-mode :repo "nverno/sml-ts-mode" :fetcher github)

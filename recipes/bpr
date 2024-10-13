@@ -1,1 +1,1 @@
-(bpr :repo "iliabv/emacs-bpr" :fetcher github)
+(bpr :repo "iliabv/emacs-bpr" :fetcher github :files (:defaults (:exclude "test-bpr.el")))

@@ -1,0 +1,4 @@
+(coc-damage-calculator
+ :fetcher github
+ :repo "S0mbr3/coc-damage-calculator"
+ :files "coc-damage-calculator.el")

@@ -1,0 +1,3 @@
+(nael
+ :fetcher codeberg
+ :repo "mekeor/nael")

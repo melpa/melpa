@@ -1,0 +1,2 @@
+(visual-replace :fetcher github
+                :repo "szermatt/visual-replace")

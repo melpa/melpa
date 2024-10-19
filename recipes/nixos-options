@@ -1,3 +1,3 @@
 (nixos-options :fetcher github
-               :repo "travisbhartwell/nix-emacs"
+               :repo "nix-community/nix-emacs"
                :files ("nixos-options.el"))

@@ -1,1 +1,1 @@
-(copilot-mode :fetcher github :repo "https://github.com/copilot-emacs/copilot.el")
+(copilot :fetcher github :repo "copilot-emacs/copilot.el")

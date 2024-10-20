@@ -1,4 +1,0 @@
-(helm-lean
- :fetcher github
- :repo "leanprover/lean3-mode"
- :files ("helm-lean.el"))

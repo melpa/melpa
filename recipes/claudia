@@ -1,0 +1,3 @@
+(claudia
+ :fetcher github
+ :repo "mzacho/claudia")

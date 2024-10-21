@@ -1,6 +1,6 @@
 (nix-sandbox
  :fetcher github
- :repo "travisbhartwell/nix-emacs"
+ :repo "nix-community/nix-emacs"
  ;; The latest release tag is from before this library was added
  ;; to this repository, which is shared with other packages.
  ;; See https://github.com/melpa/melpa/issues/8692.

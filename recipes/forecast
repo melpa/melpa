@@ -1,1 +1,4 @@
-(forecast :fetcher github :repo "cadadr/elisp" :files ("forecast.el"))
+(forecast
+ :fetcher codeberg
+ :repo "kutuptiyini/elisp"
+ :files ("forecast.el"))

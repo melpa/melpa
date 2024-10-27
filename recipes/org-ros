@@ -1,4 +1,4 @@
 (org-ros
-  :repo "LionyxML/ros"
   :fetcher github
-  :files ("*.el" "*.ps1"))
+  :repo "LionyxML/ros"
+  :files (:defaults "*.ps1"))

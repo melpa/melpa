@@ -1,1 +1,1 @@
-(recall :repo "svaante/recall" :fetcher github)
+(recall :fetcher github :repo "svaante/recall")

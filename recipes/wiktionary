@@ -1,0 +1,4 @@
+(wiktionary
+ :fetcher github
+ :repo "umanwizard/emacs-wiktionary"
+ :commit "995402334dd6ca85c05d50b16b454aba21011ca8")

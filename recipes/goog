@@ -1,0 +1,1 @@
+(goog :repo "askdkc/goog.el" :fetcher github)

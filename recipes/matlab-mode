@@ -2,9 +2,11 @@
  :fetcher github
  :repo "mathworks/Emacs-MATLAB-Mode"
  :files (:defaults "*.m" ("toolbox" "toolbox/*.m")
-         ("toolbox/+emacs" "toolbox/+emacs/*.m")
-         ("toolbox/+emacs/@Breakpoints" "toolbox/+emacs/@Breakpoints/*.m")
-         ("toolbox/+emacs/@EmacsServer" "toolbox/+emacs/@EmacsServer/*.m")
-         ("toolbox/+emacs/@Stack" "toolbox/+emacs/@Stack/*.m")
-         ("bin" "bin/*.sh")))
-         
+                   ("toolbox/+emacs" "toolbox/+emacs/*.m")
+                   ("toolbox/+emacs/@Breakpoints" "toolbox/+emacs/@Breakpoints/*.m")
+                   ("toolbox/+emacs/@EmacsServer" "toolbox/+emacs/@EmacsServer/*.m")
+                   ("toolbox/+emacs/@Stack" "toolbox/+emacs/@Stack/*.m")
+                   ("bin" "bin/*.sh")
+                   (:exclude
+                    ".dir-locals.el" "matlab-maint.el")))
+

@@ -1,4 +1,3 @@
 (dall-e-shell
  :fetcher github
- :repo "xenodium/chatgpt-shell"
- :files ("dall-e-shell.el"))
+ :repo "xenodium/dall-e-shell")

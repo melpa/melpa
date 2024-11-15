@@ -1,4 +1,4 @@
-(edts
+(edts-mode
  :fetcher github
  :repo   "sebastiw/edts"
  :files  ("*.el"
@@ -43,4 +43,5 @@
           (:exclude "elisp/edts/*-test.el"
                     "lib/edts_debug/*-test.el"
                     "lib/edts_dialyzer/*-test.el"
-                    "lib/edts_xref/*-test.el")))
+                    "lib/edts_xref/*-test.el"))
+ :old-names (edts))

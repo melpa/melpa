@@ -1,1 +1,1 @@
-(miasma-theme :repo "daut/miasma-theme.el" :fetcher github)
+(miasma-theme :fetcher github :repo "daut/miasma-theme.el")

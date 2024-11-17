@@ -1,1 +1,1 @@
-(slack :fetcher github :repo "yuya373/emacs-slack")
+(slack :fetcher github :repo "emacs-slack/emacs-slack")

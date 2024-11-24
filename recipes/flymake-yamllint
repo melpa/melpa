@@ -1,1 +1,1 @@
-(flymake-yamllint :fetcher github :repo "shaohme/flymake-yamllint")
+(flymake-yamllint :fetcher codeberg :repo "shaohme/flymake-yamllint")

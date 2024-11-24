@@ -1,6 +1,6 @@
 (apel
  :fetcher github
- :repo "wanderlust/apel"
+ :repo "emacsmirror/apel"
  ;; All tags are from more than two decades ago.
  :version-regexp "ignore-all-tags"
  :files ("alist.el"

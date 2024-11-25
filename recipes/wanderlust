@@ -4,7 +4,6 @@
  :files ("doc/wl.texi"
          "doc/wl-ja.texi"
          "elmo/*.el"
-         "wanderlust-pkg.el"
          "wl/*.el"
          "etc/icons"
          (:exclude

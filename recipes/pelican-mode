@@ -1,2 +1,2 @@
 (pelican-mode :fetcher gitlab
-              :url "joewreschnig/pelican-mode")
+              :repo "joewreschnig/pelican-mode")

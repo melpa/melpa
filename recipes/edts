@@ -1,7 +1,6 @@
 (edts
  :fetcher github
- ;; See https://github.com/sebastiw/edts/issues/282.
- :repo   "emacsmirror/edts"
+ :repo   "sebastiw/edts"
  :files  ("*.el"
           "COPYING"
           "COPYING.LESSER"

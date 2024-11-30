@@ -1,0 +1,5 @@
+(nice-org-html
+ :fetcher github
+ :repo "ewantown/nice-org-html"
+ :branch "release/1.0"
+ :files (:defaults "code/*.el" "code/*.css" "code/*.js"))

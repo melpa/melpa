@@ -1,0 +1,3 @@
+(tab-line-nerd-icons
+ :fetcher github
+ :repo "lucius-martius/tab-line-nerd-icons")

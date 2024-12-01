@@ -18,8 +18,7 @@ for recipe_name in $changed_recipes; do
         echo "Building new/modified recipe: $recipe_name"
         emacs --batch --eval "(let ((debug-on-error t)) (add-to-list 'load-path \"$PWD/package-build/\")(load-file \"package-build/package-build.el\")(package-build-archive \"$recipe_name\"))"
     else
-        echo "Invalid file or directory: ${PWD}/${recipe_name}"
-        exit 1
+        echo "File or directory unbuildable: ./recipes/${recipe_name}"
     fi
 done
 

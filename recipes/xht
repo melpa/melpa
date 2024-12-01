@@ -1,0 +1,5 @@
+(xht
+ :fetcher sourcehut
+ :repo "flandrew/xht"
+ :files (:defaults "README.org" "README.org.license"
+         ("LICENSES" "LICENSES/GPL-3.0-or-later.txt")))

@@ -1,0 +1,3 @@
+(ob-pic
+ :fetcher github
+ [:url "ddoherty03/ob-pic"])

@@ -136,7 +136,7 @@ VERSION is the version string derived from the selected tag and
 COUNT is the number of commits from that tag to the selected
 commit.
 
-Inject the \"separator\" \".0\" inbetween the VERSION and the
+Inject the \"separator\" \".0\" in between the VERSION and the
 COUNT to sufficiently decrease the odds that the version for a
 future release is smaller than the version for this snapshot.
 
@@ -274,7 +274,7 @@ would be even more confusing to users.)"
 may have multiple count parts.  Compare the new count with the
 last of these.  If the new count is smaller than the last count,
 then append the new count.  Otherwise remove the old count part.
-Continue this process for preceeding count parts until there are
+Continue this process for preceding count parts until there are
 none left, or it is larger than the new count."
   (package-build-test-package
     (tag "1.0")

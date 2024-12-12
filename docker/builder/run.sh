@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # Break taken between runs, in seconds.
-BUILD_DELAY=300
+BUILD_DELAY=${BUILD_DELAY:-300}
 
 # A timeout is only needed for unattended builds, so we set this
 # here instead of forcing it on everyone in the Makefile or even
@@ -71,5 +71,8 @@ BUILD_DURATION=$((BUILD_COMPLETED - BUILD_STARTED))
 BUILD_NEXT=$((BUILD_COMPLETED + BUILD_DELAY))
 record_build_status
 
-echo "Sleeping for $BUILD_DELAY seconds before next build"
-sleep $BUILD_DELAY
+if [ ! "$BUILD_DELAY" = 0 ]
+then
+    echo "Sleeping for $BUILD_DELAY seconds before next build"
+    sleep $BUILD_DELAY
+fi

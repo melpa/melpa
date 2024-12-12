@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # Break taken between runs, in seconds.
-BUILD_DELAY=300
+DOCKER_BUILD_PAUSE=${DOCKER_BUILD_PAUSE:-300}
 
 # A timeout is only needed for unattended builds, so we set this
 # here instead of forcing it on everyone in the Makefile or even
@@ -80,5 +80,11 @@ build_all
 # Indicate that the build has completed
 BUILD_COMPLETED=$(date "+%s")
 BUILD_DURATION=$((BUILD_COMPLETED - BUILD_STARTED))
-BUILD_NEXT=$((BUILD_COMPLETED + BUILD_DELAY))
+BUILD_NEXT=$((BUILD_COMPLETED + DOCKER_BUILD_PAUSE))
 record_build_status
+
+if [ ! "$DOCKER_BUILD_PAUSE" = 0 ]
+then
+    echo "Sleeping for $DOCKER_BUILD_PAUSE seconds before next build"
+    sleep $DOCKER_BUILD_PAUSE
+fi

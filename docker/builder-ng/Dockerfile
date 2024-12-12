@@ -7,8 +7,6 @@
 # - Also build the experimental "snapshot" and "release" channels.
 #
 # - Don't generate any html files.
-#
-# - Don't take a nap afterwards.
 
 FROM debian:bookworm
 ARG UID

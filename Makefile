@@ -73,6 +73,7 @@ USER_CONFIG ?= "()"
 # quoting needed in scripts.
 BUILD_CONFIG ?= ()
 
+# Seconds to sleep after building a single package.
 SLEEP ?= 0
 
 SHELL := bash
@@ -262,14 +263,16 @@ docker-build-run:
 	docker run -it \
 	--mount type=bind,src=$$PWD,target=/mnt/store/melpa \
 	--mount type=bind,src=$(LOAD_PATH),target=/mnt/store/package-build \
-	-e INHIBIT_MELPA_PULL=t \
+	--env INHIBIT_MELPA_PULL=t \
+	--env DOCKER_BUILD_PAUSE=0 \
 	melpa_builder
 
 docker-build-shell:
 	docker run -it \
 	--mount type=bind,src=$$PWD,target=/mnt/store/melpa \
 	--mount type=bind,src=$(LOAD_PATH),target=/mnt/store/package-build \
-	-e INHIBIT_MELPA_PULL=t \
+	--env INHIBIT_MELPA_PULL=t \
+	--env DOCKER_BUILD_PAUSE=0 \
 	melpa_builder bash
 
 docker-build-rebuild:

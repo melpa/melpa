@@ -15,6 +15,8 @@ BUILD_STATUS_FILE="${MELPA_REPO}/html/build-status.json"
 
 export INSIDE_DOCKER=true
 
+export LANG=en_US.UTF-8
+
 git config --global safe.directory "*"
 
 if [ -z "$INHIBIT_MELPA_PULL" ]
@@ -39,43 +41,28 @@ record_build_status() {
 EOF
 }
 
-function build_all {
-    local pkgdir
-    pkgdir=$(make get-pkgdir)
-    [ -e "$pkgdir/errors.log" ] &&
-        mv "$pkgdir/errors.log" "$pkgdir/errors-previous.log"
-    export LANG=en_US.UTF-8
-    make -k -j8 build || true
-    make archive-contents json
-}
-
 # Indicate that the build is in progress
 BUILD_DURATION=$(jq ".duration" ${BUILD_STATUS_FILE} || true)
 BUILD_STARTED=$(date "+%s")
 record_build_status
 
-# echo ">>> Starting UNSTABLE build"
-# export MELPA_CHANNEL=unstable
-# export BUILD_CONFIG="$LISP_CONFIG"
-# build_all
+export BUILD_CONFIG="$LISP_CONFIG"
 
-# echo ">>> Starting STABLE build"
-# export MELPA_CHANNEL=stable
-# export BUILD_CONFIG="(progn $LISP_CONFIG\
-#   (setq package-build-fetch-function 'ignore))"
-# build_all
-
-echo ">>> Starting SNAPSHOT build"
-export MELPA_CHANNEL=snapshot
-export BUILD_CONFIG="(progn $LISP_CONFIG\
-  (setq package-build-fetch-function 'ignore))"
-build_all
-
-echo ">>> Starting RELEASE build"
-export MELPA_CHANNEL=release
-export BUILD_CONFIG="(progn $LISP_CONFIG\
-  (setq package-build-fetch-function 'ignore))"
-build_all
+for channel in $(echo "$DOCKER_BUILD_CHANNELS" | tr ":" " ")
+do
+    echo ">>> Starting to build \"$channel\" channel"
+    export MELPA_CHANNEL=$channel
+    pkgdir=$(make get-pkgdir)
+    if [ -e "$pkgdir/errors.log" ];
+    then
+        mv "$pkgdir/errors.log" "$pkgdir/errors-previous.log"
+    fi
+    make -k -j8 build || true
+    make archive-contents json
+    # Don't fetch packages a second time.
+    export BUILD_CONFIG="(progn $LISP_CONFIG\
+      (setq package-build-fetch-function 'ignore))"
+done
 
 # Indicate that the build has completed
 BUILD_COMPLETED=$(date "+%s")

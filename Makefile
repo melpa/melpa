@@ -73,6 +73,14 @@ USER_CONFIG ?= "()"
 # quoting needed in scripts.
 BUILD_CONFIG ?= ()
 
+# Channel build/targeted by other make targets.
+# When empty, use "package-build.el"'s default channel settings.
+MELPA_CHANNEL ?=
+
+# Channels build by "docker-build-run" target.
+# To build all channels use "unstable:stable:snapshot:release".
+DOCKER_BUILD_CHANNELS ?= unstable:stable
+
 # Seconds to sleep after building a single package.
 SLEEP ?= 0
 
@@ -265,6 +273,7 @@ docker-build-run:
 	--mount type=bind,src=$(LOAD_PATH),target=/mnt/store/package-build \
 	--env INHIBIT_MELPA_PULL=t \
 	--env DOCKER_BUILD_PAUSE=0 \
+	--env DOCKER_BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
 	melpa_builder
 
 docker-build-shell:
@@ -273,6 +282,7 @@ docker-build-shell:
 	--mount type=bind,src=$(LOAD_PATH),target=/mnt/store/package-build \
 	--env INHIBIT_MELPA_PULL=t \
 	--env DOCKER_BUILD_PAUSE=0 \
+	--env DOCKER_BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
 	melpa_builder bash
 
 docker-build-rebuild:

@@ -4,7 +4,8 @@
 #   ran docker.  That way, newly created files in mounted directories
 #   do not end up being owned by root.
 #
-# - Also build the experimental "snapshot" and "release" channels.
+# - Build the channels specified by the DOCKER_BUILD_CHANNELS envvar,
+#   instead of hardcoding "unstable" and "stable".
 #
 # - Don't generate any html files.
 

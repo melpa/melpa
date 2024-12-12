@@ -270,23 +270,21 @@ pull-package-build:
 
 ## Docker
 
+DOCKER_RUN_ARGS = -it \
+ --mount type=bind,src=$$PWD,target=/mnt/store/melpa \
+ --mount type=bind,src=$(LOAD_PATH),target=/mnt/store/package-build \
+ --env INHIBIT_MELPA_PULL=t \
+ --env DOCKER_BUILD_PAUSE=0
+
 docker-build-run:
-	docker run -it \
-	--mount type=bind,src=$$PWD,target=/mnt/store/melpa \
-	--mount type=bind,src=$(LOAD_PATH),target=/mnt/store/package-build \
+	docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL=$(INHIBIT_PACKAGE_PULL) \
-	--env INHIBIT_MELPA_PULL=t \
-	--env DOCKER_BUILD_PAUSE=0 \
 	--env DOCKER_BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
 	melpa_builder
 
 docker-build-shell:
-	docker run -it \
-	--mount type=bind,src=$$PWD,target=/mnt/store/melpa \
-	--mount type=bind,src=$(LOAD_PATH),target=/mnt/store/package-build \
+	docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL=$(INHIBIT_PACKAGE_PULL) \
-	--env INHIBIT_MELPA_PULL=t \
-	--env DOCKER_BUILD_PAUSE=0 \
 	--env DOCKER_BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
 	melpa_builder bash
 

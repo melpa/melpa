@@ -1,1 +1,1 @@
-(call-graph :fetcher github :repo "emacsattic/call-graph")
+(call-graph :fetcher github :repo "beacoder/call-graph")

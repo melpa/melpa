@@ -46,7 +46,14 @@ BUILD_DURATION=$(jq ".duration" ${BUILD_STATUS_FILE} || true)
 BUILD_STARTED=$(date "+%s")
 record_build_status
 
-export BUILD_CONFIG="$LISP_CONFIG"
+if [ -z "$INHIBIT_PACKAGE_PULL" ]
+then
+    export BUILD_CONFIG="$LISP_CONFIG"
+else
+    # Don't fetch packages.
+    export BUILD_CONFIG="(progn $LISP_CONFIG\
+      (setq package-build-fetch-function 'ignore))"
+fi
 
 for channel in $(echo "$DOCKER_BUILD_CHANNELS" | tr ":" " ")
 do

@@ -81,6 +81,9 @@ MELPA_CHANNEL ?=
 # To build all channels use "unstable:stable:snapshot:release".
 DOCKER_BUILD_CHANNELS ?= unstable:stable
 
+# To instruct "docker-build-run" target to build package without
+# first pulling them first use non-emtpy INHIBIT_PACKAGE_PULL.
+
 # Seconds to sleep after building a single package.
 SLEEP ?= 0
 
@@ -271,6 +274,7 @@ docker-build-run:
 	docker run -it \
 	--mount type=bind,src=$$PWD,target=/mnt/store/melpa \
 	--mount type=bind,src=$(LOAD_PATH),target=/mnt/store/package-build \
+	--env INHIBIT_PACKAGE_PULL=$(INHIBIT_PACKAGE_PULL) \
 	--env INHIBIT_MELPA_PULL=t \
 	--env DOCKER_BUILD_PAUSE=0 \
 	--env DOCKER_BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
@@ -280,6 +284,7 @@ docker-build-shell:
 	docker run -it \
 	--mount type=bind,src=$$PWD,target=/mnt/store/melpa \
 	--mount type=bind,src=$(LOAD_PATH),target=/mnt/store/package-build \
+	--env INHIBIT_PACKAGE_PULL=$(INHIBIT_PACKAGE_PULL) \
 	--env INHIBIT_MELPA_PULL=t \
 	--env DOCKER_BUILD_PAUSE=0 \
 	--env DOCKER_BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \

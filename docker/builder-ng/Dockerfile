@@ -7,6 +7,8 @@
 # - Build the channels specified by the DOCKER_BUILD_CHANNELS envvar,
 #   instead of hardcoding "unstable" and "stable".
 #
+# - Respect INHIBIT_PACKAGE_PULL envvar.
+#
 # - Don't generate any html files.
 
 FROM debian:bookworm

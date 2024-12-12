@@ -34,6 +34,7 @@ helpall::
 	$(info make archive-contents     Build main package index)
 	$(info make json                 Build json package index)
 	$(info make html                 Build html package index)
+	$(info make sign                 Sign packages and main indices)
 help helpall::
 	$(info )
 	$(info Cleaning)
@@ -206,6 +207,22 @@ $(RCPDIR)/%: .FORCE
 	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." \
 	  && sleep $(SLEEP) || true
 	@echo
+
+## Sign
+
+ifdef OPENPGP_KEY
+signatures := $(patsubst %, %.sig, $(wildcard \
+	$(PKGDIR)/*.tar \
+	$(PKGDIR)/archive-contents \
+	$(PKGDIR)/elpa-packages.eld))
+sign: $(signatures)
+else
+sign: ;
+	@echo "No signing key configured"
+endif
+
+%.sig: %
+	gpg --yes --no-tty --detach-sign --local-user ${OPENPGP_KEY} $<
 
 ## Metadata
 

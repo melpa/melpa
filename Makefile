@@ -52,6 +52,7 @@ helpall::
 	$(info ===========)
 	$(info make pull-package-build   Merge new package-build.el version)
 	$(info make docker-build-run     Build everything like melpa.org does)
+	$(info make docker-build-fetch   Fetch upstream repositories)
 	$(info make docker-build-shell   Run interactive shell in the container)
 	$(info make docker-build-rebuild Re-build the build container)
 help helpall::
@@ -79,6 +80,8 @@ MELPA_CHANNEL ?=
 
 # Channels build by "docker-build-run" target.
 # To build all channels use "unstable:stable:snapshot:release".
+# To fetch without building use "", which the "docker-build-fetch"
+# target does.
 DOCKER_BUILD_CHANNELS ?= unstable:stable
 
 # To instruct "docker-build-run" target to build package without
@@ -280,6 +283,12 @@ docker-build-run:
 	docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL=$(INHIBIT_PACKAGE_PULL) \
 	--env DOCKER_BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
+	melpa_builder
+
+docker-build-fetch:
+	docker run $(DOCKER_RUN_ARGS) \
+	--env INHIBIT_PACKAGE_PULL="" \
+	--env DOCKER_BUILD_CHANNELS=""
 	melpa_builder
 
 docker-build-shell:

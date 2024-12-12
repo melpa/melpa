@@ -48,7 +48,16 @@ record_build_status
 
 if [ -z "$INHIBIT_PACKAGE_PULL" ]
 then
-    export BUILD_CONFIG="$LISP_CONFIG"
+    if [ -n "$DOCKER_BUILD_CHANNELS" ]
+    then
+        # Fetch all packages when updating first channel.
+        export BUILD_CONFIG="$LISP_CONFIG"
+    else
+        # Fetch all packages but don't build any channel.
+        export BUILD_CONFIG="(progn $LISP_CONFIG\
+          (setq package-build-build-function 'ignore))"
+        make -k -j8 build || true
+    fi
 else
     # Don't fetch packages.
     export BUILD_CONFIG="(progn $LISP_CONFIG\

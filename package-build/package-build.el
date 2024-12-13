@@ -424,8 +424,15 @@ or snapshots are build.")
                           "--abbrev=12" "--match" tag rev))
     (car (process-lines "git" "rev-parse" "--short=12" rev))))
 
-(cl-defmethod package-build--revdesc ((_rcp package-hg-recipe) rev &optional _tag)
-  rev)
+(cl-defmethod package-build--revdesc ((_rcp package-hg-recipe) rev &optional tag)
+  ;; Cannot use "{shortest(node, minlength=12)}" because that results
+  ;; in "hg: parse error: can't use a key-value pair in this context".
+  (car (process-lines
+        "hg" "id" "--id" "--rev" rev "--template"
+        (if tag
+            (format "{latesttag('%s') %% '{tag}-{distance}-m{short(node)}'}\n"
+                    tag)
+          "{short(node)}\n"))))
 
 ;;;; Tag
 
@@ -458,7 +465,7 @@ Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING REVDESC TAG) or nil."
   (process-lines "git" "tag" "--list"))
 
 (cl-defmethod package-build--list-tags ((_rcp package-hg-recipe))
-  (process-lines "hg" "tags" "--quiet"))
+  (delete "tip" (process-lines "hg" "tags" "--quiet")))
 
 (define-obsolete-function-alias 'package-build-get-tag-version
   'package-build-tag-version "Package-Build 5.0.0")

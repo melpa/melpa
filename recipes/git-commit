@@ -1,5 +1,0 @@
-(git-commit
- :fetcher github
- :repo "magit/magit"
- :branch "legacy-stub"
- :old-names (git-commit-mode))

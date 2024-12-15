@@ -1,4 +1,4 @@
 (lurk-mode
  :fetcher github
- :repo "argumentcomputer/lurk-emacs"
+ :repo "lurk-lab/lurk-emacs"
  :files ("lurk-mode.el"))

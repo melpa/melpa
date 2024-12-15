@@ -1,1 +1,1 @@
-(russian-calendar :fetcher github :repo "Anoncheg1/emacs-russian-calendar")
+(russian-calendar :fetcher codeberg :repo "Anoncheg/emacs-russian-calendar")

@@ -391,13 +391,19 @@ repository is imported using `git subtree`.
   to build a single archive. NAME is a symbol for the package to
   be built. Packages are staged in the directory specified by
   `package-build-working-dir` and built packages are placed in the
-  directory specified by `package-build-archive-dir`. Packages are
-  versioned based on the most recent commit date to package files
-  based on commits to upstream package repository. For multi-file
-  packages, the file `<NAME>-pkg.el` is automatically generated and
-  contains *description*, *version*, and *requires* information
-  determined by searching `<NAME>-pkg.el`, `<NAME>.el`, and
-  `<NAME>-pkg.el.in`, if they exist in the repository.
+  directory specified by `package-build-archive-dir`.
+
+  Packages are versioned based on the most recent commit date to
+  package files based on commits to upstream package repository.
+
+  A file named `<NAME>-pkg.el`, which contains *description*,
+  *version*, and *requires* information about the package is
+  automatically generated.  The information is extracted from
+  the summary line and headers of `<NAME>.el`.  For historic
+  reasons, if some of these values cannot be extracted from
+  that file, then Melpa also extracts information from
+  `<NAME>-pkg.el` if such a file is tracked in the upstream
+  repository (but this fallback will be removed eventually).
 
 ### Variables
 

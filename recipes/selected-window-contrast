@@ -1,1 +1,1 @@
-(selected-window-contrast :fetcher github :repo "Anoncheg1/selected-window-contrast")
+(selected-window-contrast :fetcher codeberg :repo "Anoncheg/selected-window-contrast")

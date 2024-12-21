@@ -1,0 +1,5 @@
+(fold-and-focus
+ :fetcher sourcehut
+ :repo "flandrew/fold-and-focus"
+ :files (:defaults "README.org" "README.org.license"
+         ("LICENSES" "LICENSES/GPL-3.0-or-later.txt")))

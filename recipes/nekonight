@@ -1,0 +1,4 @@
+(package! nekonight
+  :recipe (:host github :repo "BrunoCiccarino/nekonight"
+           :files ("emacs/*.el" "nekonight-pkg.el")))
+

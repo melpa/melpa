@@ -1,0 +1,3 @@
+(symbol-overlay-mc
+ :fetcher github
+ :repo "xenodium/symbol-overlay-mc")

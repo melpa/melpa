@@ -1,5 +1,5 @@
 (nekonight-themes
  :fetcher github
- :repo "neko-night/nekonight-themes"
+ :repo "neko-night/emacs"
  :files ("themes/*.el"))
 

@@ -1,1 +1,4 @@
-(denote-explore :repo "pprevos/denote-explore" :fetcher github :files (:defaults "*.R"))
+(denote-explore
+ :repo "pprevos/denote-explore"
+ :fetcher github
+ :files (:defaults "*.html"))

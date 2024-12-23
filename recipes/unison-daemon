@@ -1,0 +1,1 @@
+(unison-daemon :fetcher github :repo "jmibanez/unison-daemon-el")

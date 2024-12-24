@@ -1,0 +1,3 @@
+(hyprlang-ts-mode
+ :fetcher github
+ :repo "Nathan-Melaku/hyprlang-ts-mode")

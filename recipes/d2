@@ -1,0 +1,3 @@
+(d2
+ :fetcher github
+ :repo "eki3z/d2.el")

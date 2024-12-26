@@ -175,6 +175,8 @@ LOCATION_CONFIG ?= "(progn\
   (setq package-build-recipes-dir \"$(TOP)/$(RCPDIR)/\"))"
 
 ifeq ($(INSIDE_DOCKER), true)
+# When building on the server, this is the vendored copy.
+# When building locally, PACKAGE_BUILD_REPO is mounted here.
 LOAD_PATH := $(TOP)/package-build
 else ifdef PACKAGE_BUILD_REPO
 LOAD_PATH := $(PACKAGE_BUILD_REPO)
@@ -288,7 +290,7 @@ pull-package-build:
 
 DOCKER_RUN_ARGS = -it \
  --mount type=bind,src=$$PWD,target=/mnt/store/melpa \
- --mount type=bind,src=$(LOAD_PATH),target=/mnt/store/package-build \
+ --mount type=bind,src=$(LOAD_PATH),target=/mnt/store/melpa/package-build \
  --env INHIBIT_MELPA_PULL=t \
  --env DOCKER_BUILD_PAUSE=0
 

@@ -1,4 +1,3 @@
 (neon-green-theme
- :description "Neon Green is a vibrant green theme for Emacs"
  :fetcher github
  :repo "0xsbNick/neon-green-theme")

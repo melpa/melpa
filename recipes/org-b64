@@ -1,0 +1,4 @@
+(org-b64
+ :fetcher sourcehut
+ :repo "flandrew/org-b64"
+ :files (:defaults "README.org" "README.org.license" "LICENSES"))

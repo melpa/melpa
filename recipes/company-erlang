@@ -1,2 +1,3 @@
-(company-erlang :repo "s-kostyaev/company-erlang" :fetcher github
-                :files (:defaults))
+(company-erlang
+ :fetcher github
+ :repo "s-kostyaev/company-erlang")

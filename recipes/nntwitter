@@ -1,1 +1,1 @@
-(nntwitter :fetcher github :repo "dickmao/nntwitter")
+(nntwitter :fetcher git :url "https://gitawonk.com/dickmao/nntwitter.git")

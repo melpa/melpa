@@ -1,4 +1,4 @@
 (nnreddit
-  :fetcher github
-  :repo "dickmao/nnreddit"
+  :fetcher git
+  :url "https://gitawonk.com/dickmao/nnreddit.git"
   :files (:defaults "setup.py" "requirements.txt" "nnreddit"))

@@ -1,3 +1,3 @@
 (org-shortcut
-:repo "endi1/org-shortcut"
-:fetcher github)
+ :fetcher github
+ :repo "endi1/org-shortcut")

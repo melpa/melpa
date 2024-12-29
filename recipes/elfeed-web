@@ -1,3 +1,0 @@
-(elfeed-web :repo "skeeto/elfeed"
-            :fetcher github
-            :files ("web/*"))

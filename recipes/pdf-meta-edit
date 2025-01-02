@@ -1,0 +1,3 @@
+(pdf-meta-edit
+ :fetcher github
+ :repo "krisbalintona/pdf-meta-edit")

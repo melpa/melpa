@@ -1,2 +1,2 @@
-(nnhackernews :repo "dickmao/nnhackernews"
-              :fetcher github)
+(nnhackernews :url "https://gitawonk.com/dickmao/nnhackernews.git"
+              :fetcher git)

@@ -1,1 +1,1 @@
-(romanian-holidays :repo "petrem/romanian-holidays" :fetcher github)
+(romanian-holidays :fetcher github :repo "petrem/romanian-holidays")

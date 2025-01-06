@@ -1,8 +1,4 @@
 (consult-eglot-embark
  :fetcher github
  :repo "mohkale/consult-eglot"
- ;; The latest release tag is from before this library was added
- ;; to this repository, which is shared with other packages.
- ;; See https://github.com/melpa/melpa/issues/8692.
- :version-regexp "missing-from-latest"
  :files ("extensions/consult-eglot-embark/consult-eglot-embark*.el"))

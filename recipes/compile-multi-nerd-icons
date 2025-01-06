@@ -1,9 +1,4 @@
 (compile-multi-nerd-icons
  :fetcher github
  :repo "mohkale/compile-multi"
- ;; The latest release tag is from before this library was added
- ;; to this repository, which is shared with other packages.
- ;; See https://github.com/melpa/melpa/issues/8692,
- ;; and https://github.com/melpa/melpa/pull/9183#issuecomment-2377925788.
- :version-regexp "missing-from-latest"
  :files ("extensions/compile-multi-nerd-icons/compile-multi-nerd-icons.el"))

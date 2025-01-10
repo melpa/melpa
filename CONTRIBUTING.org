@@ -88,9 +88,9 @@ New recipe submissions should adhere to the following guidelines:
      update the README at the old location with a link to the new
      location.
 
-- GPL compatible license :: The package is released under a 
-     [[https://www.gnu.org/licenses/license-list.en.html#GPLCompatibleLicenses][GPL-Compatible Free Software License]], preferably the
-     GNU General Public License (GPL) version 3.  The license
+- Licensing :: If the package includes elisp code, as with most packages, most likely the package must be licensed so that it can absorb code licensed under the GNU General Public License (GPL) version 3, such as [[https://spdx.org/licenses/GPL-3.0-or-later.html][GPL version 3 /or any later version/ ]], [[https://spdx.org/licenses/GPL-3.0-only.html][GPL v3.0 /only/ ]], [[https://spdx.org/licenses/AGPL-3.0-or-later.html][GNU Affero General Public License v3.0 or later]].
+     This is because typically elisp code links with Emacs as its dependencies like a library and the integration between them is almost always more than a few function calls, hence the elisp code is likely treated as a derivative work of Emacs. Since Emacs is licensed under the GPL version 3 or any later version, the package likely must be licensed so that at leat one GPL version, such as GPL version 3, or a later version that may emerge in the future, must be compatible with. We prefer GPL version 3 /or any later version/, as [[https://www.gnu.org/licenses/gpl-faq.html#VersionThreeOrLater][recommended by the Free Software Foundation]].
+     The license
      boilerplate should be applied above the  ~;;; Commentary~ of each
      source file.  The repository should contain a LICENSE or COPYING
      file, formatted so that it can be detected by [[https://github.com/licensee/licensee][common tooling]].
@@ -114,7 +114,7 @@ will delay the process.
      package metadata. Use [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Tips.html][checkdoc]] to make sure that your package
      follows the conventions for documentation strings, within reason.
 
-- Avoid long functions :: The longer a function the harder it is for a
+- Avoid long functions :: The longer a function the harder it is for ahttps://github.com/melpa/melpa/issues/9318
      MELPA maintainer to understand what is happening and to give
      feedback. It is also much harder to point to a specific portion
      of the code we believe could be improved. Please spend time

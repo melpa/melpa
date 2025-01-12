@@ -1,0 +1,3 @@
+(avy-act
+ :fetcher gitlab
+ :repo "nameiwillforget/avy-act")

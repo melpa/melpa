@@ -1,0 +1,3 @@
+(lte
+ :fetcher github
+ :repo "fredericgiquel/lte.el")

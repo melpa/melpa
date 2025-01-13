@@ -1,0 +1,3 @@
+(persp-project
+ :fetcher github
+ :repo "PauloPhagula/persp-project")

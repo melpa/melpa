@@ -1,0 +1,4 @@
+(erlang-ts
+ :fetcher github
+ :repo "erlang/emacs-erlang-ts"
+)

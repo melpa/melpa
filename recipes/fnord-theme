@@ -1,0 +1,3 @@
+(fnord-theme
+ :fetcher github
+ :repo "rjekker/fnord-theme")

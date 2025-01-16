@@ -1,0 +1,4 @@
+(bullet-proof-general
+ :fetcher github
+ :repo "yaitskov/proof-general-bullet"
+ )

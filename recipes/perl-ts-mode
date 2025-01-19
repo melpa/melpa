@@ -1,0 +1,3 @@
+(perl-ts-mode
+ :fetcher 'hg
+ :url "https://hg.bauherren.ovh/perl-ts/")

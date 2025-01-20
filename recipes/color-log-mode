@@ -1,0 +1,3 @@
+(color-log-mode
+ :repo "yaitskov/color-log-mode"
+ :fetcher github)

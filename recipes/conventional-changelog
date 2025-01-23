@@ -1,3 +1,3 @@
 (conventional-changelog
  :fetcher github
- :repo "liuyinz/emacs-conventional-changelog")
+ :repo "eki3z/emacs-conventional-changelog")

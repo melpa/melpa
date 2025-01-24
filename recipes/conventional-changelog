@@ -1,3 +1,0 @@
-(conventional-changelog
- :fetcher github
- :repo "eki3z/emacs-conventional-changelog")

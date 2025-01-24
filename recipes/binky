@@ -1,4 +1,4 @@
 (binky
  :fetcher github
- :repo "liuyinz/binky.el"
+ :repo "eki3z/binky.el"
  :old-names (binky-mode))

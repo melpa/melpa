@@ -1,0 +1,3 @@
+(xmltokf
+ :fetcher github
+ :repo "paddymcall/xmltokf.el")

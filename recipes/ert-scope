@@ -1,0 +1,3 @@
+(ert-scope
+ :repo "yaitskov/ert-scope"
+ :fetcher github)

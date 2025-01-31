@@ -6,5 +6,4 @@
          "docs/magit.texi"
          "docs/AUTHORS.md"
          "LICENSE"
-         "magit-pkg.el"
          (:exclude "lisp/magit-section.el")))

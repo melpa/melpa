@@ -1,3 +1,4 @@
 (ghub
  :fetcher github
- :repo "magit/ghub")
+ :repo "magit/ghub"
+ :files (:defaults ".dir-locals.el"))

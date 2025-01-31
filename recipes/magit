@@ -6,4 +6,5 @@
          "docs/magit.texi"
          "docs/AUTHORS.md"
          "LICENSE"
+         ".dir-locals.el"
          (:exclude "lisp/magit-section.el")))

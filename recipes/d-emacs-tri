@@ -1,4 +1,4 @@
 (d-emacs-tri
  :fetcher gitlab
  :repo "nameiwillforget/d-emacs"
- :files ("d-emacs-tri/d-emacs-tri.el"))
+ :files ("d-emacs-tri/d-emacs-tri.el" "d-emacs-tri/d-emacs-tri.dbl"))

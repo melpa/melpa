@@ -1,0 +1,4 @@
+(d-emacs-stump
+ :fetcher gitlab
+ :repo "nameiwillforget/d-emacs"
+ :files ("d-emacs-stump/d-emacs-stump.el" "d-emacs-stump/pkg-configs"))

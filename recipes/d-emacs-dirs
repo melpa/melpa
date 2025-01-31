@@ -1,0 +1,4 @@
+(d-emacs-dirs
+ :fetcher gitlab
+ :repo "nameiwillforget/d-emacs"
+ :files ("d-emacs-dirs/d-emacs-dirs.el"))

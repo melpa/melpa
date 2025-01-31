@@ -1,0 +1,4 @@
+(d-emacs-bind
+ :fetcher gitlab
+ :repo "nameiwillforget/d-emacs"
+ :files ("d-emacs-bind/d-emacs-bind.el"))

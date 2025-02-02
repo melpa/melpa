@@ -1,1 +1,3 @@
-(shift-number :repo "alezost/shift-number.el" :fetcher github)
+(shift-number
+ :repo "ideasman42/emacs-shift-number"
+ :fetcher codeberg)

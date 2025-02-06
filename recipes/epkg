@@ -1,3 +1,4 @@
 (epkg
  :fetcher github
- :repo "emacscollective/epkg")
+ :repo "emacscollective/epkg"
+ :files ("lisp/*.el" "docs/*.texi" ".dir-locals.el"))

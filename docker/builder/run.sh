@@ -14,6 +14,7 @@ cd "${MELPA_REPO}"
 BUILD_STATUS_FILE="${MELPA_REPO}/html/build-status.json"
 
 export INSIDE_DOCKER=true
+export GIT_HTTP_USER_AGENT="melpa.org"
 
 git config --global safe.directory "*"
 

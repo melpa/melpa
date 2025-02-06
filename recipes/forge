@@ -1,4 +1,4 @@
 (forge
  :fetcher github
  :repo "magit/forge"
- :files (:defaults ".dir-locals.el"))
+ :files ("lisp/*.el" "docs/*.texi" ".dir-locals.el"))

@@ -1,0 +1,2 @@
+(org-gnosis-ui :fetcher git
+               :url "https://git.thanosapollo.org/org-gnosis-ui")

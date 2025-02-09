@@ -1,1 +1,6 @@
-(kixtart-mode :fetcher github :repo "ryrun/kixtart-mode")
+(kixtart-mode
+ :fetcher sourcehut
+ :repo "mew/kixtart-mode"
+ :files ("doc/kixtart-mode.texi"
+         "kixtart-docstrings.el"
+         "kixtart-mode.el"))

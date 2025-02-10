@@ -1,0 +1,4 @@
+(denote-journal-capture
+ :fetcher sourcehut
+ :repo "swflint/denote-extras"
+ :files ("denote-journal-capture.el"))

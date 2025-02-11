@@ -1,1 +1,1 @@
-(gptel-aibo :repo "dolmens/gptel-aibo" :fetcher github)
+(gptel-aibo :fetcher github :repo "dolmens/gptel-aibo")

@@ -1,0 +1,1 @@
+(gptel-fn-complete :repo "mwolson/gptel-fn-complete" :fetcher github)

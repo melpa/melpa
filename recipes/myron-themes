@@ -1,0 +1,1 @@
+(myron-themes :fetcher github :repo "neeasade/myron-themes" :files (:defaults "themes/*.el"))

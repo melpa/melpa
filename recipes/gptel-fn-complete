@@ -1,1 +1,1 @@
-(gptel-fn-complete :fetcher :repo "mwolson/gptel-fn-complete")
+(gptel-fn-complete :fetcher github :repo "mwolson/gptel-fn-complete")

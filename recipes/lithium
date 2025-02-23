@@ -1,2 +1,2 @@
-(lithium :repo "countvajhula/lithium"
-         :fetcher github)
+(lithium :fetcher github
+         :repo "countvajhula/lithium")

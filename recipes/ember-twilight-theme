@@ -1,0 +1,5 @@
+(ember-twilight-theme
+ :repo "madara123pain/unique-emacs-theme-pack"
+ :fetcher github
+ :files ("Themes/ember-twilight-theme.el"))
+

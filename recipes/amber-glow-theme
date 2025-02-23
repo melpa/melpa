@@ -1,0 +1,5 @@
+(amber-glow-theme
+ :repo "madara123pain/unique-emacs-theme-pack"
+ :fetcher github
+ :files ("Themes/amber-glow-theme.el"))
+

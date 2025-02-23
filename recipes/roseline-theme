@@ -1,0 +1,5 @@
+(roseline-theme
+ :repo "madara123pain/unique-emacs-theme-pack"
+ :fetcher github
+ :files ("Themes/roseline-theme.el"))
+

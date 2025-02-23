@@ -1,0 +1,5 @@
+(marron-gold-theme
+ :repo "madara123pain/unique-emacs-theme-pack"
+ :fetcher github
+ :files ("Themes/marron-gold-theme.el"))
+

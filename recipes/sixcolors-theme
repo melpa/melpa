@@ -1,1 +1,1 @@
-(sixcolors-theme :repo "mastro35/sixcolors-theme" :fetcher github)
+(sixcolors-theme :fetcher github :repo "mastro35/sixcolors-theme")

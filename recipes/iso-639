@@ -1,1 +1,1 @@
-(iso-639 :fetcher codeberg :repo "WammKD/emacs-iso-639")
+(iso-639 :fetcher codeberg :repo "Jaft/emacs-iso-639")

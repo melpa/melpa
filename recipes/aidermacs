@@ -1,0 +1,4 @@
+(aidermacs
+ :fetcher github
+ :repo "MatthewZMD/aidermacs"
+ :files ("*.el" "LICENSE"))

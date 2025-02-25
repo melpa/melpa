@@ -1,1 +1,1 @@
-(mode-line-keyboard :repo "Lindydancer/mode-line-keyboard" :fetcher github)
+(mode-line-keyboard :fetcher github :repo "Lindydancer/mode-line-keyboard")

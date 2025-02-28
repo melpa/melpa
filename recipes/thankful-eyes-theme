@@ -1,0 +1,4 @@
+(thankful-eyes-theme
+ :repo "tanrax/thankful-eyes-theme.el"
+ :fetcher github
+ :files ("thankful-eyes-theme.el"))

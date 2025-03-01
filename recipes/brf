@@ -1,1 +1,3 @@
-(brf :fetcher git :url "https://bitbucket.org/MikeWoolley/brf-mode")
+(brf :fetcher git
+     :url "https://bitbucket.org/MikeWoolley/brf-mode"
+     :files ("*.el" "*.org" "*.info"))

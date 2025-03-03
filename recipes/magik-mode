@@ -1,2 +1,4 @@
-(magik-mode :fetcher github
-	    :repo "roadrunner1776/magik")
+(magik-mode
+ :repo "roadrunner1776/magik"
+ :fetcher github
+ :files (:defaults "snippets"))

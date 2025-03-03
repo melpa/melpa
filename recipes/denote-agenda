@@ -1,4 +1,3 @@
 (denote-agenda
  :fetcher sourcehut
- :repo "swflint/denote-extras"
- :files ("denote-agenda.el"))
+ :repo "swflint/denote-agenda")

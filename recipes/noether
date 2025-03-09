@@ -1,4 +1,1 @@
-(noether
- :fetcher sourcehut
- :repo "lxsameer/noether"
- :files (:defaults (:exclude "test-noether.el")))
+(noether :fetcher sourcehut :repo "lxsameer/noether")

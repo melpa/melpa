@@ -1,0 +1,1 @@
+(raq :repo "lorniu/raq.el" :fetcher github)

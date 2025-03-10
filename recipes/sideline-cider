@@ -1,0 +1,1 @@
+(sideline-cider :fetcher github :repo "emacs-sideline/sideline-cider")

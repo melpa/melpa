@@ -1,3 +1,4 @@
 (aider
   :fetcher github
-  :repo "tninja/aider.el")
+  :repo "tninja/aider.el"
+  :files ("*.el" "snippets"))

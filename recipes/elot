@@ -1,5 +1,5 @@
-(elot :repo "johanwk/elot"
-      :fetcher github
+(elot :fetcher github
+      :repo "johanwk/elot"
       :files ("elot-package/elot.el"
               "elot-package/elot-defaults.el"
               "elot-package/elot-label-display.el"

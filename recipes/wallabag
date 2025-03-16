@@ -1,1 +1,1 @@
-(wallabag :fetcher github :repo "chenyanming/wallabag.el")
+(wallabag :fetcher github :repo "chenyanming/wallabag.el" :files ("*.el" "*.css" "*.alist"))

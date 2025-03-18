@@ -1,3 +1,1 @@
-(aidev-mode
- :fetcher github
- :repo "inaimathi/aidev-mode")
+(aidev-mode :fetcher github :repo "inaimathi/aidev-mode")

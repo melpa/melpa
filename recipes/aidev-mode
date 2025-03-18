@@ -1,4 +1,3 @@
 (aidev-mode
  :fetcher github
- :repo "inaimathi/aidev-mode"
- :files ("aidev-mode.el"))
+ :repo "inaimathi/aidev-mode")

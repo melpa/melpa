@@ -1,0 +1,3 @@
+(multiple-cursors-shell-command
+ :files ("multiple-cursors-shell-command.el")
+ :repo "hrehfeld/emacs-multiple-cursors-shell-command" :fetcher github)

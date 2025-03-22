@@ -1,0 +1,1 @@
+(sql-ts-mode :repo "emacs-pe/sql-ts-mode" :fetcher github)

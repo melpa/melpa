@@ -1,1 +1,1 @@
-(forge-llm :fetcher gitlab :repo "rogs/forge-llm" :files ("forge-llm.el"))
+(forge-llm :fetcher gitlab :repo "rogs/forge-llm")

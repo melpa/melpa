@@ -1,4 +1,0 @@
-(d-emacs-xkb
- :fetcher gitlab
- :repo "nameiwillforget/d-emacs"
- :files ("d-emacs-xkb/d-emacs-xkb.el"))

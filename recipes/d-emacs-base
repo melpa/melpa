@@ -1,4 +1,0 @@
-(d-emacs-base
- :fetcher gitlab
- :repo "nameiwillforget/d-emacs"
- :files ("d-emacs-base/d-emacs-base.el"))

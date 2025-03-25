@@ -1,0 +1,4 @@
+(empv-hydra
+ :fetcher github
+ :repo "isamert/empv.el"
+ :files ("empv-hydra.el"))

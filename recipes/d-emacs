@@ -1,0 +1,14 @@
+(d-emacs
+ :fetcher gitlab
+ :repo "nameiwillforget/d-emacs"
+ :files ("d-emacs.el"
+         "d-emacs-base.el"
+         "d-emacs-coords.el"
+         "d-emacs-xkb.el"
+         "d-emacs-dfk.el"
+         "d-emacs-bind.el"
+         "d-emacs-dirs.el"
+         "example-user-defined-bindlist.dbl"
+         ("d-emacs-stump" "d-emacs-stump/d-emacs-stump.el" "d-emacs-stump/pkg-configs")
+         ("d-emacs-tri" "d-emacs-tri/d-emacs-tri.el" "d-emacs-tri/d-emacs-tri.dbl")
+         ("d-emacs-mode" "d-emacs-mode/d-emacs-mode.el" "d-emacs-mode/pkg-configs")))

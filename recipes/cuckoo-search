@@ -1,0 +1,3 @@
+(cuckoo-search :repo "rtrppl/cuckoo-search"
+               :fetcher github
+               :files (:defaults "readme.org"))

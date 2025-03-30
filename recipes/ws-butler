@@ -1,1 +1,3 @@
-(ws-butler :fetcher github :repo "lewang/ws-butler")
+(ws-butler :fetcher git
+	   :url "https://git.savannah.gnu.org/git/emacs/nongnu.git"
+	   :branch "elpa/ws-butler")

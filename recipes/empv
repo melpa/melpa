@@ -1,1 +1,4 @@
-(empv :fetcher github :repo "isamert/empv.el")
+(empv
+ :fetcher github
+ :repo "isamert/empv.el"
+ :files (:defaults (:exclude "empv-hydra.el")))

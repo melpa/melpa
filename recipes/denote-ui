@@ -1,0 +1,1 @@
+(denote-ui :repo "s10a/denote-ui" :fetcher codeberg)

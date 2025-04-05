@@ -1,4 +1,4 @@
 (feature-mode
- :repo "michaelklishin/cucumber.el"
+ :repo "freesteph/cucumber.el"
  :fetcher github
  :files ("*.el" "i18n.yml" "snippets" "support"))

@@ -1,0 +1,2 @@
+(evangelion-theme :fetcher github
+                  :repo "crmsnbleyd/evangelion-theme")

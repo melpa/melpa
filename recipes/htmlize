@@ -1,4 +1,3 @@
 (htmlize
  :fetcher github
- :repo "hniksic/emacs-htmlize"
- :version-regexp "release/\\(.*\\)")
+ :repo "hniksic/emacs-htmlize")

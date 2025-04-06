@@ -1,4 +1,3 @@
 (howm
  :fetcher github
- :repo "kaorahi/howm"
- :files (:defaults (:exclude "*.el.in")))
+ :repo "kaorahi/howm")

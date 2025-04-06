@@ -1,0 +1,1 @@
+(dir-config :fetcher github :repo "jamescherti/dir-config.el")

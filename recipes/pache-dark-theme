@@ -1,0 +1,3 @@
+(pache-dark-theme
+	:fetcher github
+	:repo "0xhenrique/pache-dark-theme")

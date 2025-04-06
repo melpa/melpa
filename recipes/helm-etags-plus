@@ -1,2 +1,0 @@
-(helm-etags-plus :repo "jixiuf/helm-etags-plus"
-              :fetcher github)

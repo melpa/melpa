@@ -2,4 +2,4 @@
  :fetcher github
  :repo "mhayashi1120/Emacs-kaesar"
  :files ("kaesar-file.el")
- :version-regexp "\\`file-\\(.*\\)")
+ :version-regexp "file-%v")

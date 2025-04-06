@@ -1,0 +1,1 @@
+(coc-dc :fetcher github :repo "S0mbr3/coc-damage-calculator")

@@ -1,1 +1,1 @@
-(nix-ts-mode :fetcher github :repo "remi-gelinas/nix-ts-mode")
+(nix-ts-mode :fetcher github :repo "nix-community/nix-ts-mode")

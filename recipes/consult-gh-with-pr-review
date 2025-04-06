@@ -1,0 +1,4 @@
+(consult-gh-with-pr-review
+ :fetcher github
+ :repo "armindarvish/consult-gh"
+ :files ("consult-gh-with-pr-review.el"))

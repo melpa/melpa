@@ -1,4 +1,0 @@
-(emacsql-psql
- :fetcher github
- :repo "magit/emacsql"
- :files ("emacsql-psql.el"))

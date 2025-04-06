@@ -1,2 +1,0 @@
-(persp-mode-project-bridge :repo "CIAvash/persp-mode-project-bridge"
-                           :fetcher github)

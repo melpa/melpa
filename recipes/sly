@@ -7,4 +7,4 @@
              "doc/images"
              (:exclude "sly-autoloads.el"))
      ;; The greater tags that are prefixed with "v", are from Slime.
-     :version-regexp "\\`\\([0-9.]*\\)")
+     :version-regexp "%v")

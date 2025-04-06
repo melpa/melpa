@@ -1,6 +1,6 @@
-(wanderlust 
+(wanderlust
  :fetcher github
- :repo "wanderlust/wanderlust"
+ :repo "emacsmirror/wanderlust"
  :files ("doc/wl.texi"
          "doc/wl-ja.texi"
          "elmo/*.el"

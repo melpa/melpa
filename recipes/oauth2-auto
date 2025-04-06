@@ -1,0 +1,1 @@
+(oauth2-auto :fetcher github :repo "telotortium/emacs-oauth2-auto")

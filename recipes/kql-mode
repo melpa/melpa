@@ -1,0 +1,3 @@
+(kql-mode
+  :fetcher gitlab
+  :repo "aimebertrand/kql-mode")

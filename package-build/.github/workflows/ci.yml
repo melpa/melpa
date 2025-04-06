@@ -3,20 +3,20 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
         package: [evil, magit, realgud, edts, elpher, which-key-posframe]
     steps:
     - name: checkout package-build
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         path: package-build
         fetch-depth: 1
 
     - name: checkout melpa
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         path: melpa
         repository: melpa/melpa

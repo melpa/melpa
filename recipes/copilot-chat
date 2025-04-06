@@ -1,0 +1,3 @@
+(copilot-chat
+  :fetcher github 
+  :repo "chep/copilot-chat.el")

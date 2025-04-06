@@ -1,4 +1,4 @@
 (feature-mode
  :fetcher github
  :repo "freesteph/cucumber.el"
- :files ("*.el" "gherkin-translations.json" "snippets" "support"))
+ :files (:defaults "gherkin-translations.json" "snippets" "support"))

@@ -1,2 +1,1 @@
-(votd :repo "kristjoc/votd" :fetcher github)
-
+(votd :fetcher github :repo "kristjoc/votd")

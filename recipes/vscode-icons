@@ -1,0 +1,5 @@
+(vscode-icons
+ :fetcher github
+ :repo "taquangtrung/vscode-icons.el"
+ :files (:defaults
+         "icons"))

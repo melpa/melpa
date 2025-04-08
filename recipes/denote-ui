@@ -1,1 +1,1 @@
-(denote-ui :repo "s10a/denote-ui" :fetcher codeberg)
+(denote-ui :fetcher codeberg :repo "s10a/denote-ui")

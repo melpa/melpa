@@ -1,0 +1,5 @@
+(jupyter-ascending
+ :fetcher github
+ :repo "Duncan-Britt/jupyter-ascending"
+ :files ("jupyter-ascending.el"
+         "COPYING"))

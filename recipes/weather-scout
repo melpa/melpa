@@ -1,3 +1,8 @@
 (weather-scout
  :fetcher github
- :repo "hsolg/emacs-weather-scout")
+ :repo "hsolg/emacs-weather-scout"
+ :files ("weather-scout.el"
+         "weather-scout-icons.el"
+         "icons/LICENSE"
+         "icons/README.md"
+         "icons/weather/*.svg"))

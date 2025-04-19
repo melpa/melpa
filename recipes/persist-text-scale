@@ -1,0 +1,1 @@
+(persist-text-scale :fetcher github :repo "jamescherti/persist-text-scale.el")

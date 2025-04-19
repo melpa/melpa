@@ -1,0 +1,3 @@
+(weather-scout
+ :fetcher github
+ :repo "hsolg/emacs-weather-scout")

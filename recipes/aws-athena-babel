@@ -1,4 +1,1 @@
-(aws-athena-babel
- :fetcher github
- :repo "will-abb/aws-athena-babel"
- :files ("aws-athena-babel.el"))
+(aws-athena-babel :fetcher github :repo "will-abb/aws-athena-babel")

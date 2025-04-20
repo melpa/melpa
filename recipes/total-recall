@@ -1,0 +1,3 @@
+(total-recall
+ :fetcher github
+ :repo "phf-1/total-recall")

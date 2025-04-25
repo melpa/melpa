@@ -1,0 +1,2 @@
+(ob-bigquery :repo "lhernanz/ob-bigquery" :fetcher github)
+

@@ -1,3 +1,1 @@
-(cuckoo-search :fetcher github
-               :repo "rtrppl/cuckoo-search"
-               :files (:defaults))
+(cuckoo-search :fetcher github :repo "rtrppl/cuckoo-search")

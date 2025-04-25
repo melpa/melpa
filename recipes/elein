@@ -1,1 +1,1 @@
-(elein :fetcher github :repo "remvee/elein")
+(elein :fetcher codeberg :repo "rwv/elein")

@@ -1,2 +1,1 @@
-(ob-bigquery :repo "lhernanz/ob-bigquery" :fetcher github)
-
+(ob-bigquery :fetcher github :repo "lhernanz/ob-bigquery")

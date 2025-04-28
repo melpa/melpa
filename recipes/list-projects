@@ -1,1 +1,1 @@
-(list-projects :repo "MatthewTromp/list-projects" :fetcher github)
+(list-projects :fetcher github :repo "MatthewTromp/list-projects")

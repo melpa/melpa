@@ -1,0 +1,2 @@
+(skk-capf :repo "myuhe/skk-capf"
+        :fetcher github)

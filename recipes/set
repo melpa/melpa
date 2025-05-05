@@ -1,0 +1,1 @@
+(set :fetcher github :repo "kisaragi-hiu/set.el" :files ("set.el"))

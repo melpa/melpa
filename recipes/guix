@@ -1,6 +1,6 @@
 (guix
  :fetcher codeberg
- :url "https://codeberg.org/guix/emacs-guix"
+ :repo "guix/emacs-guix"
  :files ("elisp/*.el"
          "doc/*.texi"
          ("images" "images/*.svg")

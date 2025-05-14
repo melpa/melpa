@@ -1,0 +1,2 @@
+(cppinsights :fetcher github
+             :repo "chrischen3121/cppinsights.el")

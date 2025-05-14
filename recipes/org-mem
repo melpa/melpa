@@ -1,0 +1,2 @@
+(org-mem :fetcher github :repo "meedstrom/org-mem"
+         :old-names (indexed))

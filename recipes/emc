@@ -1,1 +1,1 @@
-(emc :fetcher github :github "marcoxa/emc")
+(emc :fetcher github :repo "marcoxa/emc")

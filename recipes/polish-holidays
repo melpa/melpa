@@ -1,0 +1,3 @@
+(polish-holidays
+ :repo "przemarbor/polish-holidays"
+ :fetcher github)

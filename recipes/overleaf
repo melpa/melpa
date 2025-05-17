@@ -1,0 +1,3 @@
+(overleaf
+ :repo "vale981/overleaf.el"
+ :fetcher github)

@@ -1,0 +1,3 @@
+(magik-mode
+ :fetcher github
+ :repo "reinierkof/magik-company")

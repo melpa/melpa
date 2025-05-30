@@ -1,0 +1,4 @@
+(hdf5-viewer
+ :fetcher github
+ :repo "hdf5-viewer/hdf5-viewer"
+ :files (:defaults "h5parse.py"))

@@ -1,1 +1,1 @@
-(helm-mode-manager :fetcher github :repo "istib/helm-mode-manager")
+(helm-mode-manager :fetcher github :repo "emacsattic/helm-mode-manager")

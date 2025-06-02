@@ -1,1 +1,1 @@
-(ssh-deploy :repo "cjohansson/emacs-ssh-deploy" :fetcher github)
+(ssh-deploy :fetcher github :repo "emacsattic/emacs-ssh-deploy")

@@ -1,4 +1,4 @@
-easy-find
-:repo "gnarledgrip/easy-find"
-:fetcher github
-:stable t
+(easy-find
+ :repo "gnarledgrip/easy-find"
+ :fetcher github
+ :stable t)

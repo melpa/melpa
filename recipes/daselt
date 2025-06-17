@@ -9,6 +9,9 @@
          "daselt-bind.el"
          "daselt-dirs.el"
          "example-user-defined-bindlist.dbl"
-         ("daselt-stump" "daselt-stump/daselt-stump.el" "daselt-stump/pkg-configs")
-         ("daselt-tri" "daselt-tri/daselt-tri.el" "daselt-tri/daselt-tri.dbl")
-         ("daselt-mode" "daselt-mode/daselt-mode.el" "daselt-mode/pkg-configs")))
+         "daselt-stump.el"
+         "daselt-stump-configs"
+         "daselt-tri.el"
+         "daselt-tri-configs"
+         "daselt-mode.el"
+         "daselt-mode-configs"))

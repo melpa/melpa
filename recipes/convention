@@ -1,0 +1,3 @@
+(convention
+ :fetcher github
+ :repo "KeyWeeUsr/convention")

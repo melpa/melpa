@@ -1,0 +1,2 @@
+(helix :repo "mgmarlow/helix-mode"
+       :fetcher github)

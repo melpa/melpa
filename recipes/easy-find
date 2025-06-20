@@ -1,0 +1,3 @@
+(easy-find
+ :fetcher github
+ :repo "emacselements/easy-find")

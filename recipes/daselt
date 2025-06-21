@@ -8,10 +8,10 @@
          "daselt-dfk.el"
          "daselt-bind.el"
          "daselt-dirs.el"
-         "example-user-defined-bindlist.dbl"
          "daselt-stump.el"
-         "daselt-stump-configs"
+         "stump-configs"
          "daselt-tri.el"
-         "daselt-tri-configs"
+         "tri-configs"
          "daselt-mode.el"
-         "daselt-mode-configs"))
+         "mode-configs"
+         "example-user-defined-bindlist.dbl"))

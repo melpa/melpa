@@ -1,0 +1,1 @@
+(eca :repo "editor-code-assistant/eca-emacs" :fetcher github)

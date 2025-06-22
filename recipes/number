@@ -1,1 +1,1 @@
-(number :fetcher github :repo "chrisdone/number")
+(number :fetcher github :repo "emacsattic/number")

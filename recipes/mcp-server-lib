@@ -1,0 +1,4 @@
+(mcp-server-lib
+ :fetcher github
+ :repo "laurynas-biveinis/mcp-server-lib.el"
+ :files (:defaults "emacs-mcp-stdio.sh"))

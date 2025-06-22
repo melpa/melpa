@@ -1,5 +1,5 @@
 (helm-org-recent-headings
  :fetcher github
  :repo "alphapapa/org-recent-headings"
- :files ("helm-org-recent-headings.el")
- :version-regexp "helm-org-recent-headings-v\\(.*\\)")
+ :version-regexp "helm-org-recent-headings-v%v"
+ :files ("helm-org-recent-headings.el"))

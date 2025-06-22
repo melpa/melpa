@@ -1,3 +1,0 @@
-(github-modern-theme
- :repo "philiparvidsson/GitHub-Modern-Theme-for-Emacs"
- :fetcher github)

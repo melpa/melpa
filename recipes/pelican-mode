@@ -1,2 +1,2 @@
-(pelican-mode :fetcher git
-              :url "https://git.korewanetadesu.com/pelican-mode.git")
+(pelican-mode :fetcher gitlab
+              :repo "joewreschnig/pelican-mode")

@@ -1,1 +1,1 @@
-(php-cs-fixer :repo "OVYA/php-cs-fixer" :fetcher github)
+(php-cs-fixer :repo "pivaldi/php-cs-fixer" :fetcher github)

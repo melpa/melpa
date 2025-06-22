@@ -1,2 +1,2 @@
 
-(org-easy-img-insert :fetcher github :repo "tashrifsanil/org-easy-img-insert" :old-names (auto-img-link-insert))
+(org-easy-img-insert :fetcher github :repo "my7h3le/org-easy-img-insert" :old-names (auto-img-link-insert))

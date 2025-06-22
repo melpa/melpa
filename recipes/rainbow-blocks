@@ -1,1 +1,1 @@
-(rainbow-blocks :fetcher github :repo "istib/rainbow-blocks")
+(rainbow-blocks :fetcher github :repo "emacsattic/rainbow-blocks")

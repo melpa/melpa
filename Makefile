@@ -1,3 +1,64 @@
+## Help
+
+.DEFAULT_GOAL := all
+
+help helpall::
+	$(info )
+	$(info Getting Help)
+	$(info ============)
+	$(info make help                 Show brief help)
+	$(info make helpall              Show extended help)
+	$(info )
+	$(info Building)
+	$(info ========)
+	$(info )
+	$(info Use "MELPA_CHANNEL=<channel> make <target>")
+	$(info .    to build like MELPA channel <channel> does.)
+	$(info .    <channel> is one of "stable" or "unstable".)
+	$(info or use "make <target>")
+	$(info .    to build using package-build.el’s default)
+	$(info .    settings (which is like channel "unstable").)
+	$(info )
+helpall::
+	$(info Use "PACKAGE_BUILD_REPO=<dir> make <target>")
+	$(info .    to use an out-of-tree package-build.el.)
+	$(info )
+help helpall::
+	$(info make recipes/<package>    Build <package>)
+	$(info make [-k] [-j 8] build    Build all packages)
+	$(info make all                  Build everything)
+helpall::
+	$(info make -k -j 8 build; make summarise)
+	$(info .                         Build everything faster)
+	$(info make summarise            Build all package and indices)
+	$(info make archive-contents     Build main package index)
+	$(info make json                 Build json package index)
+	$(info make html                 Build html package index)
+	$(info make sign                 Sign packages and main indices)
+help helpall::
+	$(info )
+	$(info Cleaning)
+	$(info ========)
+	$(info make clean                Empty output directories of all channels)
+	$(info .                         Also clean indices but not cloned repos)
+	$(info make clean-packages       Empty current channel’s output directory)
+helpall::
+	$(info make clean-json           Clean current channel’s json index)
+	$(info make clean-sandbox        Clean sandbox)
+	$(info make clean-working        [DANGER] Remove all cloned repositories)
+help helpall::
+	$(info )
+helpall::
+	$(info Maintenance)
+	$(info ===========)
+	$(info make pull-package-build   Merge new package-build.el version)
+	$(info make docker-build-run     Build everything like melpa.org does)
+	$(info make docker-build-fetch   Fetch upstream repositories)
+	$(info make docker-build-shell   Run interactive shell in the container)
+	$(info make docker-build-rebuild Re-build the build container)
+help helpall::
+	@printf "\n"
+
 ## Settings
 
 TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
@@ -14,6 +75,20 @@ USER_CONFIG ?= "()"
 # quoting needed in scripts.
 BUILD_CONFIG ?= ()
 
+# Channel build/targeted by other make targets.
+# When empty, use "package-build.el"'s default channel settings.
+MELPA_CHANNEL ?=
+
+# Channels build by "docker-build-run" target.
+# To build all channels use "unstable:stable:snapshot:release".
+# To fetch without building use "", which the "docker-build-fetch"
+# target does.
+DOCKER_BUILD_CHANNELS ?= unstable:stable
+
+# To instruct "docker-build-run" target to build package without
+# first pulling them first use non-emtpy INHIBIT_PACKAGE_PULL.
+
+# Seconds to sleep after building a single package.
 SLEEP ?= 0
 
 SHELL := bash
@@ -39,6 +114,8 @@ HTMLDIR := html
 CHANNEL_CONFIG := "(progn\
   (setq package-build-stable nil)\
   (setq package-build-all-publishable t)\
+  (setq package-build-build-function\
+        'package-build--build-multi-file-package)\
   (setq package-build-snapshot-version-functions\
         '(package-build-timestamp-version))\
   (setq package-build-badge-data '(\"melpa\" \"\#922793\")))"
@@ -49,9 +126,42 @@ HTMLDIR := html-stable
 CHANNEL_CONFIG := "(progn\
   (setq package-build-stable t)\
   (setq package-build-all-publishable nil)\
+  (setq package-build-build-function\
+        'package-build--build-multi-file-package)\
   (setq package-build-release-version-functions\
         '(package-build-tag-version))\
   (setq package-build-badge-data '(\"melpa stable\" \"\#3e999f\")))"
+
+else ifeq ($(MELPA_CHANNEL), snapshot)
+# This is an experimental channel, which may
+# eventually replace the "unstable" channel.
+PKGDIR  := packages-snapshot
+HTMLDIR := html-snapshot
+CHANNEL_CONFIG := "(progn\
+  (setq package-build-stable nil)\
+  (setq package-build-all-publishable t)\
+  (setq package-build-snapshot-version-functions\
+        '(package-build-release+count-version))\
+  (setq package-build-release-version-functions\
+        '(package-build-tag-version\
+          package-build-header-version))\
+  (setq package-build-badge-data '(\"snapshot\" \"\#30a14e\")))"
+
+else ifeq ($(MELPA_CHANNEL), release)
+# This is an experimental channel, which may
+# eventually replace the "stable" channel.
+PKGDIR  := packages-release
+HTMLDIR := html-release
+CHANNEL_CONFIG := "(progn\
+  (setq package-build-stable t)\
+  (setq package-build-all-publishable t)\
+  (setq package-build-snapshot-version-functions\
+        '(package-build-release+count-version))\
+  (setq package-build-release-version-functions\
+        '(package-build-tag-version\
+          package-build-header-version\
+          package-build-fallback-count-version))\
+  (setq package-build-badge-data '(\"release\" \"\#9be9a8\")))"
 
 else
 $(error Unknown MELPA_CHANNEL: $(MELPA_CHANNEL))
@@ -64,7 +174,15 @@ LOCATION_CONFIG ?= "(progn\
   (setq package-build-archive-dir \"$(TOP)/$(PKGDIR)/\")\
   (setq package-build-recipes-dir \"$(TOP)/$(RCPDIR)/\"))"
 
-LOAD_PATH ?= $(TOP)/package-build
+ifeq ($(INSIDE_DOCKER), true)
+# When building on the server, this is the vendored copy.
+# When building locally, PACKAGE_BUILD_REPO is mounted here.
+LOAD_PATH := $(TOP)/package-build
+else ifdef PACKAGE_BUILD_REPO
+LOAD_PATH := $(PACKAGE_BUILD_REPO)
+else
+LOAD_PATH := $(TOP)/package-build
+endif
 
 EVAL := $(EMACS) --no-site-file --batch \
 $(addprefix -L ,$(LOAD_PATH)) \
@@ -96,9 +214,26 @@ $(RCPDIR)/%: .FORCE
 	  && sleep $(SLEEP) || true
 	@echo
 
+## Sign
+
+ifdef OPENPGP_KEY
+signatures := $(patsubst %, %.sig, $(wildcard \
+	$(PKGDIR)/*.tar \
+	$(PKGDIR)/archive-contents \
+	$(PKGDIR)/elpa-packages.eld))
+sign: $(signatures)
+else
+sign: ;
+	@echo "No signing key configured"
+endif
+
+%.sig: %
+	gpg --yes --no-tty --detach-sign --local-user ${OPENPGP_KEY} $<
+
 ## Metadata
 
 archive-contents: .FORCE
+	@echo " • Building archive-contents ..."
 	@$(EVAL) "(package-build-dump-archive-contents)"
 
 json: .FORCE
@@ -106,7 +241,7 @@ json: .FORCE
 	@$(EVAL) "(package-build-archive-alist-as-json \"$(HTMLDIR)/archive.json\")"
 	@$(EVAL) "(package-build-recipe-alist-as-json \"$(HTMLDIR)/recipes.json\")"
 
-html: json
+html: .FORCE
 	@echo " • Building html index ..."
 	$(MAKE) -C $(HTMLDIR)
 
@@ -138,6 +273,8 @@ clean-sandbox:
 clean: .FORCE
 	MELPA_CHANNEL=unstable make clean-packages clean-json clean-sandbox
 	MELPA_CHANNEL=stable   make clean-packages clean-json clean-sandbox
+	MELPA_CHANNEL=snapshot make clean-packages clean-json clean-sandbox
+	MELPA_CHANNEL=release  make clean-packages clean-json clean-sandbox
 
 ## Update package-build
 
@@ -146,10 +283,40 @@ PACKAGE_BUILD_REPO ?= "https://github.com/melpa/package-build"
 pull-package-build:
 	git fetch $(PACKAGE_BUILD_REPO)
 	git -c "commit.gpgSign=true" subtree merge \
-	-m "Merge Package-Build $$(git describe FETCH_HEAD)" \
+	-m "Merge Package-Build $$(git describe --always FETCH_HEAD)" \
 	--squash -P package-build FETCH_HEAD
 
-## Docker support
+## Docker
+
+DOCKER_RUN_ARGS = -it \
+ --mount type=bind,src=$$PWD,target=/mnt/store/melpa \
+ --mount type=bind,src=$(LOAD_PATH),target=/mnt/store/melpa/package-build \
+ --env INHIBIT_MELPA_PULL=t \
+ --env DOCKER_BUILD_PAUSE=0
+
+docker-build-run:
+	docker run $(DOCKER_RUN_ARGS) \
+	--env INHIBIT_PACKAGE_PULL=$(INHIBIT_PACKAGE_PULL) \
+	--env DOCKER_BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
+	melpa_builder
+
+docker-build-fetch:
+	docker run $(DOCKER_RUN_ARGS) \
+	--env INHIBIT_PACKAGE_PULL="" \
+	--env DOCKER_BUILD_CHANNELS="" \
+	melpa_builder
+
+docker-build-shell:
+	docker run $(DOCKER_RUN_ARGS) \
+	--env INHIBIT_PACKAGE_PULL=$(INHIBIT_PACKAGE_PULL) \
+	--env DOCKER_BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
+	melpa_builder bash
+
+docker-build-rebuild:
+	docker build \
+	--build-arg UID=$$(id --user) \
+	--build-arg GID=$$(id --group) \
+	-t melpa_builder docker/builder-ng
 
 get-pkgdir: .FORCE
 	@echo $(PKGDIR)

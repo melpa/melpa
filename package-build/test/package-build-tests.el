@@ -1,21 +1,21 @@
 ;;; package-build-tests.el --- Tests for Package-Build  -*- lexical-binding:t -*-
 
-;; Copyright (C) 2023 Jonas Bernoulli
+;; Copyright (C) 2023-2024 Jonas Bernoulli
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
-;; Magit is free software: you can redistribute it and/or modify it
-;; under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or
-;; (at your option) any later version.
+;; This file is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published
+;; by the Free Software Foundation, either version 3 of the License,
+;; or (at your option) any later version.
 ;;
-;; Magit is distributed in the hope that it will be useful, but WITHOUT
-;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-;; or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
-;; License for more details.
+;; This file is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
 ;;
 ;; You should have received a copy of the GNU General Public License
-;; along with Magit.  If not, see <https://www.gnu.org/licenses/>.
+;; along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Code:
 
@@ -26,8 +26,8 @@
 (defmacro package-build-test-package (&rest body)
   (declare (indent 0) (debug t))
   `(let* ((package-build-verbose nil)
-          (package-build-fetch-function #'ignore)
-          (package-build-checkout-function #'ignore)
+          (package-build--inhibit-fetch 'strict)
+          (package-build--inhibit-checkout t)
           (package-build-stable nil)
           (package-build-snapshot-version-functions
            (list #'package-build-release+count-version))
@@ -136,7 +136,7 @@ VERSION is the version string derived from the selected tag and
 COUNT is the number of commits from that tag to the selected
 commit.
 
-Inject the \"separator\" \".0\" inbetween the VERSION and the
+Inject the \"separator\" \".0\" in between the VERSION and the
 COUNT to sufficiently decrease the odds that the version for a
 future release is smaller than the version for this snapshot.
 
@@ -274,7 +274,7 @@ would be even more confusing to users.)"
 may have multiple count parts.  Compare the new count with the
 last of these.  If the new count is smaller than the last count,
 then append the new count.  Otherwise remove the old count part.
-Continue this process for preceeding count parts until there are
+Continue this process for preceding count parts until there are
 none left, or it is larger than the new count."
   (package-build-test-package
     (tag "1.0")

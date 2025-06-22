@@ -1,0 +1,1 @@
+(bitbake-ts-mode :fetcher github :repo "seokbeomKim/bitbake-ts-mode")

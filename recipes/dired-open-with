@@ -1,0 +1,3 @@
+(dired-open-with
+ :fetcher github
+ :repo "FrostyX/dired-open-with")

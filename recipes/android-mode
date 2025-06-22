@@ -1,1 +1,1 @@
-(android-mode :fetcher github :repo "remvee/android-mode")
+(android-mode :fetcher codeberg :repo "rwv/android-mode")

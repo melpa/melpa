@@ -1,1 +1,1 @@
-(nav :fetcher github :repo "ijt/emacs-nav" :files ("ack*" "nav.el"))
+(nav :fetcher github :repo "emacsorphanage/nav" :files ("ack*" "nav.el"))

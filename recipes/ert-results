@@ -1,2 +1,1 @@
-(ert-results :repo "rswgnu/ert-results"
-            :fetcher github)
+(ert-results :fetcher github :repo "rswgnu/ert-results")

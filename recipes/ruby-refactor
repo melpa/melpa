@@ -1,1 +1,1 @@
-(ruby-refactor :fetcher github :repo "ajvargo/ruby-refactor")
+(ruby-refactor :fetcher github :repo "vargonaut/ruby-refactor")

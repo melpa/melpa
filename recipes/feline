@@ -1,1 +1,1 @@
-(feline :fetcher git :url "https://opensource.chee.party/chee/feline-mode")
+(feline :fetcher github :url "https://github.com/chee/feline-mode")

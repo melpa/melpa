@@ -1,8 +1,0 @@
-(use-package
- :fetcher github
- :repo "jwiegley/use-package"
- :files (:defaults
-         (:exclude "bind-key.el"
-                   "bind-chord.el"
-                   "use-package-chords.el"
-                   "use-package-ensure-system-package.el")))

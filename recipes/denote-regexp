@@ -1,0 +1,3 @@
+(denote-regexp
+ :fetcher sourcehut
+ :repo "swflint/denote-regexp")

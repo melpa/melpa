@@ -1,3 +1,8 @@
-(nix-sandbox :fetcher github
-             :repo "travisbhartwell/nix-emacs"
-             :files ("nix-sandbox.el"))
+(nix-sandbox
+ :fetcher github
+ :repo "nix-community/nix-emacs"
+ ;; The latest release tag is from before this library was added
+ ;; to this repository, which is shared with other packages.
+ ;; See https://github.com/melpa/melpa/issues/8692.
+ :version-regexp "missing-from-latest"
+ :files ("nix-sandbox.el"))

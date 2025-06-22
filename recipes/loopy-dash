@@ -1,3 +1,3 @@
 (loopy-dash :fetcher github
-            :repo "okamsn/loopy"
+            :repo "okamsn/loopy-dash"
             :files ("loopy-dash.el"))

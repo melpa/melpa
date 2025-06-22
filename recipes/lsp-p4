@@ -1,4 +1,0 @@
-(lsp-p4
- :fetcher github
- :repo "dmakarov/p4ls"
- :files ("clients/emacs/*.el"))

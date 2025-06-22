@@ -1,0 +1,3 @@
+(departure-times-norway
+ :fetcher github
+ :repo "hsolg/emacs-departure-times-norway")

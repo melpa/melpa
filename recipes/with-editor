@@ -1,1 +1,3 @@
-(with-editor :fetcher github :repo "magit/with-editor")
+(with-editor
+ :fetcher github
+ :repo "magit/with-editor")

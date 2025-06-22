@@ -1,1 +1,1 @@
-(australia-holidays :repo "jmibanez/australia-holidays.el" :fetcher github)
+(australia-holidays :fetcher github :repo "jmibanez/australia-holidays.el")

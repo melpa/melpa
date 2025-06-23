@@ -1,2 +1,1 @@
-(helix :repo "mgmarlow/helix-mode"
-       :fetcher github)
+(helix :fetcher github :repo "mgmarlow/helix-mode")

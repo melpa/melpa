@@ -1,4 +1,3 @@
 (greger
  :fetcher github
- :repo "andreasjansson/greger.el"
- :files ("*.el" "README.md" "LICENSE"))
+ :repo "andreasjansson/greger.el")

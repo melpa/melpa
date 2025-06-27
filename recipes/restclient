@@ -1,3 +1,3 @@
-(restclient :repo "pashky/restclient.el"
+(restclient :repo "emacsorphanage/restclient"
             :fetcher github
             :files ("restclient.el"))

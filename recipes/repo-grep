@@ -1,5 +1,4 @@
 (repo-grep
  :fetcher github
  :repo "BHFock/repo-grep"
- :commit "6c92412ab8d021c5042e99481eb559920cfc9456"
  :files ("repo-grep.el"))

@@ -1,4 +1,1 @@
-(repo-grep
- :fetcher github
- :repo "BHFock/repo-grep"
- :files ("repo-grep.el"))
+(repo-grep :fetcher github :repo "BHFock/repo-grep")

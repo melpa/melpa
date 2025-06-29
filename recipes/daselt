@@ -1,14 +1,8 @@
 (daselt
  :fetcher gitlab
  :repo "nameiwillforget/d-emacs"
- :files ("daselt.el"
-         "daselt-base.el"
-         "daselt-coords.el"
-         "daselt-xkb.el"
-         "daselt-dfk.el"
-         "daselt-bind.el"
-         "daselt-dirs.el"
+ :files (:defaults
          "example-user-defined-bindlist.dbl"
-         ("daselt-stump" "daselt-stump/daselt-stump.el" "daselt-stump/pkg-configs")
-         ("daselt-tri" "daselt-tri/daselt-tri.el" "daselt-tri/daselt-tri.dbl")
-         ("daselt-mode" "daselt-mode/daselt-mode.el" "daselt-mode/pkg-configs")))
+         "stump-configs"
+         "tri-configs"
+         "mode-configs"))

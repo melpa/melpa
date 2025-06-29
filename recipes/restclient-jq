@@ -1,4 +1,4 @@
 (restclient-jq
  :fetcher github
- :repo "emacsorphanage/restclient.el"
+ :repo "emacsorphanage/restclient"
  :files ("restclient-jq.el"))

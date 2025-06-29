@@ -1,4 +1,4 @@
 (restclient
  :fetcher github
- :repo "emacsorphanage/restclient.el"
+ :repo "emacsorphanage/restclient"
  :files ("restclient.el"))

@@ -1,0 +1,3 @@
+(claude-code-emacs
+ :fetcher github
+ :repo "yuya373/claude-code-emacs")

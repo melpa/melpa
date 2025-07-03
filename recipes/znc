@@ -1,1 +1,1 @@
-(znc :fetcher github :repo "sshirokov/ZNC.el")
+(znc :fetcher github :repo "enzuru/ZNC.el")

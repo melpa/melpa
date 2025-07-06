@@ -1,0 +1,4 @@
+(flyover 
+    :fetcher github
+    :repo "konrad1977/flyover" 
+    :files ("flyover.el"))

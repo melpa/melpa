@@ -1,0 +1,4 @@
+(awqat
+ :fetcher github
+ :repo "zkry/awqat"
+ :files ("awqat.el"))

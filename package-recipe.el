@@ -1,6 +1,6 @@
 ;;; package-recipe.el --- Package recipes as EIEIO objects  -*- lexical-binding:t; coding:utf-8 -*-
 
-;; Copyright (C) 2018-2024 Jonas Bernoulli
+;; Copyright (C) 2018-2025 Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <emacs.package-build@jonas.bernoulli.dev>
 ;; Maintainer: Jonas Bernoulli <emacs.package-build@jonas.bernoulli.dev>
@@ -148,7 +148,7 @@ file is invalid, then raise an error."
             (setq fetcher 'git-remote-hg)
             (setq args (plist-put args :url (concat "hg::" (oref rcp url)))))
           (setq rcp (apply (intern (format "package-%s-recipe" fetcher))
-                           name :name name args))
+                           :name name args))
           (unless (oref rcp url)
             (oset rcp url (format (oref rcp url-format) (oref rcp repo))))
           rcp)

@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2011-2024 Donald Ephraim Curtis
 ;; Copyright (C) 2012-2024 Steve Purcell
-;; Copyright (C) 2016-2024 Jonas Bernoulli
+;; Copyright (C) 2016-2025 Jonas Bernoulli
 ;; Copyright (C) 2009 Phil Hagelberg
 
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
@@ -107,7 +107,7 @@ This option is used to determine whether failure to come up with
 a version string should be considered an error or not.
 
 Currently this defaults to (not package-build-stable), but the
-default is likely to be changed to just `t' in the future.  See
+default is likely to be changed to just t in the future.  See
 also the commit that added this option."
   :group 'package-build
   :type 'boolean
@@ -232,8 +232,8 @@ applied.  This setting requires
   "Path to a (preferably GNU) tar command.
 Certain package names (e.g., \"@\") may not work properly with a BSD tar.
 
-On MacOS it is possible to install coreutils using Homebrew or
-similar, which will provide the GNU timeout program as
+On MacOS it is possible to install gnu-tar using Homebrew or
+similar, which will provide the GNU tar program as
 \"gtar\"."
   :group 'package-build
   :type '(file :must-match t))
@@ -390,33 +390,35 @@ or snapshots are build.")
       (oset rcp revdesc revdesc))))
 
 (cl-defmethod package-build--select-commit ((rcp package-git-recipe) rev exact)
-  (pcase-let*
-      ((`(,hash ,time)
-        (split-string
-         (car (apply #'process-lines
-                     "git" "log" "-n1" "--first-parent" "--no-show-signature"
-                     "--pretty=format:%H %cd" "--date=unix" rev
-                     (and (not exact)
-                          (cons "--" (package-build--spec-globs rcp)))))
-         " ")))
-    (list hash (string-to-number time))))
+  (if-let ((commit
+            (car (apply #'process-lines
+                        "git" "log" "-n1" "--first-parent" "--no-show-signature"
+                        "--pretty=format:%H %cd" "--date=unix" rev
+                        (and (not exact)
+                             (cons "--" (package-build--spec-globs rcp)))))))
+      (pcase-let ((`(,hash ,time) (split-string commit " ")))
+        (list hash (string-to-number time)))
+    (package-build--error (oref rcp name)
+      "No matching file(s) found in any reachable commit using %S files spec"
+      (or (oref rcp files) 'default))))
 
 (cl-defmethod package-build--select-commit ((rcp package-hg-recipe) rev exact)
-  (pcase-let*
-      ((`(,hash ,time ,_timezone)
-        (split-string
-         (car (apply #'process-lines
-                     ;; The "date" keyword uses UTC. The "hgdate" filter
-                     ;; returns two integers separated by a space; the
-                     ;; unix timestamp and the timezone offset.  We use
-                     ;; "hgdate" because that makes it easier to discard
-                     ;; the time zone offset, which doesn't interest us.
-                     "hg" "log" "--limit" "1"
-                     "--template" "{node} {date|hgdate}\n" "--rev" rev
-                     (and (not exact)
-                          (cons "--" (package-build--spec-globs rcp)))))
-         " ")))
-    (list hash (string-to-number time))))
+  (if-let ((commit
+            (car (apply #'process-lines
+                        ;; The "date" keyword uses UTC. The "hgdate" filter
+                        ;; returns two integers separated by a space; the
+                        ;; unix timestamp and the timezone offset.  We use
+                        ;; "hgdate" because that makes it easier to discard
+                        ;; the time zone offset, which doesn't interest us.
+                        "hg" "log" "--limit" "1"
+                        "--template" "{node} {date|hgdate}\n" "--rev" rev
+                        (and (not exact)
+                             (cons "--" (package-build--spec-globs rcp)))))))
+      (pcase-let ((`(,hash ,time ,_timezone) (split-string commit " ")))
+        (list hash (string-to-number time)))
+    (package-build--error (oref rcp name)
+      "No matching file(s) found in any reachable commit using %S files spec"
+      (or (oref rcp files) 'default))))
 
 (cl-defmethod package-build--revdesc ((_rcp package-git-recipe) rev &optional tag)
   (if tag
@@ -1329,8 +1331,8 @@ order and can have the following form:
 - :defaults
 
   If the first element is `:defaults', then that means to prepend
-  the default files spec to the SPEC specified by the remaining
-  elements.
+  the default files spec (`package-build-default-files-spec') to
+  the SPEC specified by the remaining elements.
 
 - GLOB
 
@@ -1345,11 +1347,14 @@ order and can have the following form:
 
 - (:exclude GLOB...)
 
-  A list that begins with `:exclude' causes files that were
-  matched by earlier elements that are also matched by the second
-  and subsequent elements of this list to be removed from the
-  returned alist.  Files matched by later elements are not
-  affected.
+  A list that begins with `:exclude' causes files that are also
+  matched by the second and subsequent elements of this list to
+  be removed from the returned alist.
+
+  Note that `:defaults' includes a `:exclude' and that it is not
+  possible to override its entries to include files that are
+  excluded by default.  If a file needs to be included that would
+  be excluded by default, then `:defaults' cannot be used.
 
 - (:inputs GLOB...)
 

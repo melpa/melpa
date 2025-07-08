@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # Break taken between runs, in seconds.
-DOCKER_BUILD_PAUSE=${DOCKER_BUILD_PAUSE:-300}
+: ${DOCKER_BUILD_PAUSE="-300"}
 
 # A timeout is only needed for unattended builds, so we set this
 # here instead of forcing it on everyone in the Makefile or even
@@ -15,7 +15,6 @@ BUILD_STATUS_FILE="${MELPA_REPO}/html/build-status.json"
 
 export INSIDE_DOCKER=true
 export GIT_HTTP_USER_AGENT="melpa.org"
-
 export LANG=en_US.UTF-8
 
 git config --global safe.directory "*"
@@ -42,7 +41,7 @@ record_build_status() {
 EOF
 }
 
-# Indicate that the build is in progress
+# Indicate that the build is in progress.
 BUILD_DURATION=$(jq ".duration" ${BUILD_STATUS_FILE} || true)
 BUILD_STARTED=$(date "+%s")
 record_build_status
@@ -81,7 +80,7 @@ do
       (setq package-build-fetch-function 'ignore))"
 done
 
-# Indicate that the build has completed
+# Indicate that the build has completed.
 BUILD_COMPLETED=$(date "+%s")
 BUILD_DURATION=$((BUILD_COMPLETED - BUILD_STARTED))
 BUILD_NEXT=$((BUILD_COMPLETED + DOCKER_BUILD_PAUSE))

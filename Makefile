@@ -92,7 +92,7 @@ MELPA_CHANNEL ?= unstable
 DOCKER_BUILD_CHANNELS ?= unstable:stable
 
 # To instruct "docker-build-run" target to build package without
-# first pulling them first use non-emtpy INHIBIT_PACKAGE_PULL.
+# first pulling them, use non-emtpy DOCKER_INHIBIT_PACKAGE_PULL.
 
 # Seconds to sleep after building a single package.
 SLEEP ?= 0
@@ -313,24 +313,24 @@ DOCKER_RUN_ARGS = -it \
  --mount type=bind,src=$$PWD,target=/mnt/store/melpa \
  --mount type=bind,src=$(LOAD_PATH),target=/mnt/store/melpa/package-build \
  --env INHIBIT_MELPA_PULL=t \
- --env DOCKER_BUILD_PAUSE=0
+ --env BUILD_PAUSE=0
 
 docker-build-run:
 	docker run $(DOCKER_RUN_ARGS) \
-	--env INHIBIT_PACKAGE_PULL=$(INHIBIT_PACKAGE_PULL) \
-	--env DOCKER_BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
+	--env INHIBIT_PACKAGE_PULL=$(DOCKER_INHIBIT_PACKAGE_PULL) \
+	--env BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
 	melpa_builder
 
 docker-build-fetch:
 	docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL="" \
-	--env DOCKER_BUILD_CHANNELS="" \
+	--env BUILD_CHANNELS="" \
 	melpa_builder
 
 docker-build-shell:
 	docker run $(DOCKER_RUN_ARGS) \
-	--env INHIBIT_PACKAGE_PULL=$(INHIBIT_PACKAGE_PULL) \
-	--env DOCKER_BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
+	--env INHIBIT_PACKAGE_PULL=$(DOCKER_INHIBIT_PACKAGE_PULL) \
+	--env BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
 	melpa_builder bash
 
 docker-build-rebuild:

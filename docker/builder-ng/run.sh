@@ -1,9 +1,13 @@
 #!/bin/bash -e
 
-: ${DOCKER_BUILD_CHANNELS="unstable:stable"}
+# Envvars with empty defaults:
+# - INHIBIT_PACKAGE_PULL
+# - INHIBIT_MELPA_PULL
+
+: ${BUILD_CHANNELS="unstable:stable"}
 
 # Break taken between runs, in seconds.
-: ${DOCKER_BUILD_PAUSE="-300"}
+: ${BUILD_PAUSE="-300"}
 
 # A timeout is only needed for unattended builds, so we set this
 # here instead of forcing it on everyone in the Makefile or even
@@ -55,7 +59,7 @@ record_build_status
 
 if [ -z "$INHIBIT_PACKAGE_PULL" ]
 then
-    if [ -n "$DOCKER_BUILD_CHANNELS" ]
+    if [ -n "$BUILD_CHANNELS" ]
     then
         # Fetch all packages when updating first channel.
         export BUILD_CONFIG="$LISP_CONFIG"
@@ -71,7 +75,7 @@ else
       (setq package-build-fetch-function 'ignore))"
 fi
 
-for channel in $(echo "$DOCKER_BUILD_CHANNELS" | tr ":" " ")
+for channel in $(echo "$BUILD_CHANNELS" | tr ":" " ")
 do
     echo ">>> Starting to build \"$channel\" channel"
     export MELPA_CHANNEL=$channel
@@ -90,11 +94,11 @@ done
 # Indicate that the build has completed.
 BUILD_COMPLETED=$(date "+%s")
 BUILD_DURATION=$((BUILD_COMPLETED - BUILD_STARTED))
-BUILD_NEXT=$((BUILD_COMPLETED + DOCKER_BUILD_PAUSE))
+BUILD_NEXT=$((BUILD_COMPLETED + BUILD_PAUSE))
 record_build_status
 
-if [ ! "$DOCKER_BUILD_PAUSE" = 0 ]
+if [ ! "$BUILD_PAUSE" = 0 ]
 then
-    echo "Sleeping for $DOCKER_BUILD_PAUSE seconds before next build"
-    sleep $DOCKER_BUILD_PAUSE
+    echo "Sleeping for $BUILD_PAUSE seconds before next build"
+    sleep $BUILD_PAUSE
 fi

@@ -1,0 +1,12 @@
+(symex-evil
+ :fetcher github
+ :repo "drym-org/symex.el"
+ :branch "2.0-integration"
+ :files ("symex-evil/*.el" "symex-evil/lisp/*.el"
+         "symex-evil/dir" "symex-evil/*.info" "symex-evil/*.texi" "symex-evil/*.texinfo"
+         "symex-evil/doc/dir" "symex-evil/doc/*.info" "symex-evil/doc/*.texi" "symex-evil/doc/*.texinfo"
+         "symex-evil/docs/dir" "symex-evil/docs/*.info" "symex-evil/docs/*.texi" "symex-evil/docs/*.texinfo"
+         (:exclude
+          "symex-evil/.dir-locals.el" "symex-evil/lisp/.dir-locals.el"
+          "symex-evil/test.el" "symex-evil/tests.el" "symex-evil/*-test.el" "symex-evil/*-tests.el"
+          "symex-evil/lisp/test.el" "symex-evil/lisp/tests.el" "symex-evil/lisp/*-test.el" "symex-evil/lisp/*-tests.el")))

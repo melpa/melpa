@@ -74,6 +74,9 @@ USER_CONFIG ?= "()"
 # quoting needed in scripts.
 BUILD_CONFIG ?= ()
 
+# If BUILD_PACKAGES is non-empty, all targets that would otherwise
+# build all packages, build only those listed.
+
 # Channel build by targets that don't use docker.  When empty, use
 # "package-build.el"'s default settings, which are similar to the
 # settings for the "unstable" channel, but not currently identical.
@@ -206,7 +209,11 @@ all-async:
 	make -k -j 8 build || true
 	make indices
 
+ifdef BUILD_PACKAGES
+build: $(addprefix recipes/,$(BUILD_PACKAGES))
+else
 build: $(RCPDIR)/*
+endif
 
 $(RCPDIR)/%: .FORCE
 	@echo " • Building package $(@F) ..."

@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+: ${DOCKER_BUILD_CHANNELS="unstable:stable"}
+
 # Break taken between runs, in seconds.
 : ${DOCKER_BUILD_PAUSE="-300"}
 

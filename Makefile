@@ -85,10 +85,10 @@ MELPA_CHANNELS = unstable stable snapshot release
 # settings for the "unstable" channel, but not currently identical.
 MELPA_CHANNEL ?= unstable
 
-# Channels build by "docker-build-run" target.
+# Channels build by the "docker-build-run" target.
 # To build all channels use "unstable:stable:snapshot:release".
 # To fetch without building use "", which the "docker-build-fetch"
-# target does.
+# target does.  (Keep in sync with "docker/builder/run.sh".)
 DOCKER_BUILD_CHANNELS ?= unstable:stable
 
 # To instruct "docker-build-run" target to build package without

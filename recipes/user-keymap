@@ -1,0 +1,1 @@
+(user-keymap :repo "viandant/user-keymap" :fetcher github)

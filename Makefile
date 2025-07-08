@@ -29,7 +29,7 @@ help helpall::
 	$(info make all                  Build everything)
 	$(info make all-async            Build everything asynchronously)
 helpall::
-	$(info make summarise            Build all package and indices)
+	$(info make indices              Build all package indices)
 	$(info make archive-contents     Build main package index)
 	$(info make json                 Build json package index)
 	$(info make html                 Build html package index)
@@ -194,18 +194,16 @@ $(addprefix -L ,$(LOAD_PATH)) \
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
 
-.PHONY: clean build summarise json html sandbox
+.PHONY: clean build indices json html sandbox
 .FORCE:
-
-summarise: archive-contents json html
 
 ## Build
 
-all: build summarise
+all: build indices
 
 all-async:
 	make -k -j 8 build || true
-	make summarise
+	make indices
 
 build: $(RCPDIR)/*
 
@@ -235,12 +233,14 @@ endif
 
 ## Metadata
 
+indices: archive-contents json html
+
 archive-contents: .FORCE
 	@echo " • Building archive-contents ..."
 	@$(EVAL) "(package-build-dump-archive-contents)"
 
 json: .FORCE
-	@echo " • Building json indexes ..."
+	@echo " • Building json indices ..."
 	@$(EVAL) "(package-build-archive-alist-as-json \"$(HTMLDIR)/archive.json\")"
 	@$(EVAL) "(package-build-recipe-alist-as-json \"$(HTMLDIR)/recipes.json\")"
 

@@ -47,7 +47,7 @@ function build_all {
         mv "$pkgdir/errors.log" "$pkgdir/errors-previous.log"
     export LANG=en_US.UTF-8
     make -k -j8 build || true
-    make summarise
+    make indices
 }
 
 # Indicate that the build is in progress

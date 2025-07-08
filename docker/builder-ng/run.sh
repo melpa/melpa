@@ -44,7 +44,12 @@ EOF
 }
 
 # Indicate that the build is in progress.
-BUILD_DURATION=$(jq ".duration" ${BUILD_STATUS_FILE} || true)
+if [ -e ${BUILD_STATUS_FILE} ]
+then
+    BUILD_DURATION=$(jq ".duration" ${BUILD_STATUS_FILE})
+else
+    BUILD_DURATION=0
+fi
 BUILD_STARTED=$(date "+%s")
 record_build_status
 

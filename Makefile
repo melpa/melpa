@@ -334,7 +334,7 @@ docker-build-shell:
 	melpa_builder bash
 
 docker-build-rebuild:
-	docker build -t melpa_builder docker/builder-ng
+	docker build -t melpa_builder docker/builder
 
 get-pkgdir: .FORCE
 	@echo $(PKGDIR)

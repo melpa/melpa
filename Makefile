@@ -245,10 +245,6 @@ html: .FORCE
 	@echo " • Building html index ..."
 	$(MAKE) -C $(HTMLDIR)
 
-$(RCPDIR)/.dirstamp: .FORCE
-	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] \
-	&& touch $@ || exit 0
-
 ## Cleanup rules
 
 clean-working:

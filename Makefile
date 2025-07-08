@@ -27,9 +27,8 @@ help helpall::
 	$(info make recipes/<package>    Build <package>)
 	$(info make [-k] [-j 8] build    Build all packages)
 	$(info make all                  Build everything)
+	$(info make all-async            Build everything asynchronously)
 helpall::
-	$(info make -k -j 8 build; make summarise)
-	$(info .                         Build everything faster)
 	$(info make summarise            Build all package and indices)
 	$(info make archive-contents     Build main package index)
 	$(info make json                 Build json package index)
@@ -198,11 +197,15 @@ TIMEOUT := $(shell which timeout && echo "-k 60 600")
 .PHONY: clean build summarise json html sandbox
 .FORCE:
 
-all: build summarise
-
 summarise: archive-contents json html
 
 ## Build
+
+all: build summarise
+
+all-async:
+	make -k -j 8 build || true
+	make summarise
 
 build: $(RCPDIR)/*
 

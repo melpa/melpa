@@ -38,13 +38,12 @@ help helpall::
 	$(info )
 	$(info Cleaning)
 	$(info ========)
-	$(info make clean                Empty output directories of all channels)
-	$(info .                         Also clean indices but not cloned repos)
-	$(info make clean-packages       Empty current channel’s output directory)
+	$(info make clean                Remove all generated files)
+	$(info make clean-packages       Remove all generated package-specific files)
 helpall::
-	$(info make clean-json           Clean current channel’s json index)
-	$(info make clean-sandbox        Clean sandbox)
-	$(info make clean-working        [DANGER] Remove all cloned repositories)
+	$(info make clean-indices        Remove all generated indices)
+	$(info make remove-sandbox       Remove package test installations)
+	$(info make remove-repositories  Remove all cloned package repositories)
 help helpall::
 	$(info )
 helpall::
@@ -76,6 +75,10 @@ BUILD_CONFIG ?= ()
 
 # If BUILD_PACKAGES is non-empty, all targets that would otherwise
 # build all packages, build only those listed.
+
+# Available channels.  Only "unstable" and "stable" are currently
+# being published on melpa.org.  Users should not modify this.
+MELPA_CHANNELS = unstable stable snapshot release
 
 # Channel build by targets that don't use docker.  When empty, use
 # "package-build.el"'s default settings, which are similar to the
@@ -258,30 +261,40 @@ html: .FORCE
 
 ## Cleanup rules
 
-clean-working:
-	@echo " • Removing package sources ..."
-	@git clean -dffX $(WORKDIR)/.
+HTMLDIRS = html html-stable html-snapshot html-release
+PKGDIRS  = packages packages-stable packages-snapshot packages-release
+# If we used consistent names we could use this instead.
+# HTMLDIRS = $(addprefix html-,$(MELPA_CHANNELS))
+# PKGDIRS  = $(addprefix packages-,$(MELPA_CHANNELS))
+
+INDICES  = $(addsuffix /archive.json,$(HTMLDIRS))
+INDICES += $(addsuffix /recipes.json,$(HTMLDIRS))
+INDICES += $(addsuffix /updates.rss,$(HTMLDIRS))
+INDICES += $(addsuffix /archive-contents,$(PKGDIRS))
+INDICES += $(addsuffix /elpa-packages.eld,$(PKGDIRS))
+# Only created by docker targets:
+INDICES += $(addsuffix /errors.log,$(PKGDIRS))
+INDICES += $(addsuffix /errors-previous.log,$(PKGDIRS))
+# Directory hardcoded in "run.sh" and symlinked for channels.
+INDICES += /html/build-status.json
+
+clean: clean-packages clean-indices
 
 clean-packages:
-	@echo " • Removing $(PKGDIR)/* ..."
-	@git clean -dffX $(PKGDIR)/.
+	@echo " • Removing packages ..."
+	@git clean -qxf $(addprefix -e /,$(INDICES) $(SANDBOX) config.mk)
 
-clean-json:
-	@echo " • Removing $(HTMLDIR)/*.json ..."
-	@-rm -vf $(HTMLDIR)/archive.json $(HTMLDIR)/recipes.json
+clean-indices:
+	@echo " • Removing indices ..."
+	@rm -vf $(sort $(INDICES))
 
-clean-sandbox:
-	@echo " • Removing sandbox files ..."
-	@if [ -d "$(SANDBOX)" ]; then \
-	  rm -rfv "$(SANDBOX)/elpa"; \
-	  rmdir "$(SANDBOX)"; \
-	fi
+remove-sandbox:
+	@echo " • Removing $(SANDBOX) ..."
+	@rm -rf $(SANDBOX)
 
-clean: .FORCE
-	MELPA_CHANNEL=unstable make clean-packages clean-json clean-sandbox
-	MELPA_CHANNEL=stable   make clean-packages clean-json clean-sandbox
-	MELPA_CHANNEL=snapshot make clean-packages clean-json clean-sandbox
-	MELPA_CHANNEL=release  make clean-packages clean-json clean-sandbox
+remove-repositories:
+	@echo " • Removing $(WORKDIR) ..."
+	@rm -rf $(WORKDIR)
 
 ## Update package-build
 

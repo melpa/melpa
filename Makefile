@@ -309,6 +309,7 @@ pull-package-build:
 ## Docker
 
 DOCKER_RUN_ARGS = -it \
+ --user $$(id --user):$$(id --group) \
  --mount type=bind,src=$$PWD,target=/mnt/store/melpa \
  --mount type=bind,src=$(LOAD_PATH),target=/mnt/store/melpa/package-build \
  --env INHIBIT_MELPA_PULL=t \
@@ -333,10 +334,7 @@ docker-build-shell:
 	melpa_builder bash
 
 docker-build-rebuild:
-	docker build \
-	--build-arg UID=$$(id --user) \
-	--build-arg GID=$$(id --group) \
-	-t melpa_builder docker/builder-ng
+	docker build -t melpa_builder docker/builder-ng
 
 get-pkgdir: .FORCE
 	@echo $(PKGDIR)

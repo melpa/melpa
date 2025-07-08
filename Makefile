@@ -74,9 +74,10 @@ USER_CONFIG ?= "()"
 # quoting needed in scripts.
 BUILD_CONFIG ?= ()
 
-# Channel build/targeted by other make targets.
-# When empty, use "package-build.el"'s default channel settings.
-MELPA_CHANNEL ?=
+# Channel build by targets that don't use docker.  When empty, use
+# "package-build.el"'s default settings, which are similar to the
+# settings for the "unstable" channel, but not currently identical.
+MELPA_CHANNEL ?= unstable
 
 # Channels build by "docker-build-run" target.
 # To build all channels use "unstable:stable:snapshot:release".

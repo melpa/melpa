@@ -1,0 +1,3 @@
+(ultra-scroll
+ :repo "jdtsmith/ultra-scroll"
+ :fetcher github)

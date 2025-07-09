@@ -1,0 +1,12 @@
+(symex-core
+ :fetcher github
+ :repo "drym-org/symex.el"
+ :branch "2.0-integration"
+ :files ("symex-core/*.el" "symex-core/lisp/*.el"
+         "symex-core/dir" "symex-core/*.info" "symex-core/*.texi" "symex-core/*.texinfo"
+         "symex-core/doc/dir" "symex-core/doc/*.info" "symex-core/doc/*.texi" "symex-core/doc/*.texinfo"
+         "symex-core/docs/dir" "symex-core/docs/*.info" "symex-core/docs/*.texi" "symex-core/docs/*.texinfo"
+         (:exclude
+          "symex-core/.dir-locals.el" "symex-core/lisp/.dir-locals.el"
+          "symex-core/test.el" "symex-core/tests.el" "symex-core/*-test.el" "symex-core/*-tests.el"
+          "symex-core/lisp/test.el" "symex-core/lisp/tests.el" "symex-core/lisp/*-test.el" "symex-core/lisp/*-tests.el")))

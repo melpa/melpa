@@ -1,0 +1,4 @@
+(pasvortilo
+ :fetcher codeberg
+ :repo "mester/pasvortilo"
+ :files ("pasvortilo.el"))

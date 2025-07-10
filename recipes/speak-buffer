@@ -1,0 +1,1 @@
+(speak-buffer :fetcher github :repo "lorniu/speak-buffer.el")

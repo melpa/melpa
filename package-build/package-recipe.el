@@ -171,6 +171,41 @@ a message for each invalid recipe."
                (setq all-valid nil))))
     all-valid))
 
+(defconst package-recipe-default-files-spec
+  '("*.el" "lisp/*.el"
+    "dir" "*.info" "*.texi" "*.texinfo"
+    "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
+    "docs/dir" "docs/*.info" "docs/*.texi" "docs/*.texinfo"
+    (:exclude
+     ".dir-locals.el" "lisp/.dir-locals.el"
+     "test.el" "tests.el" "*-test.el" "*-tests.el"
+     "lisp/test.el" "lisp/tests.el" "lisp/*-test.el" "lisp/*-tests.el"))
+  "Default value for `:files' attribute in recipes.")
+
+(defun package-recipe--prefix-path (prefix path)
+  "Prefix PATH with PREFIX.
+
+PATH could be a string or a nested :exclude list. In the latter case,
+the members of the excluded list are prefixed."
+  (pcase path
+    ((pred stringp) (concat prefix path))
+    (`(:exclude . ,paths)
+     `(:exclude
+       ,@(mapcar (apply-partially #'package-recipe--prefix-path
+                                  prefix)
+                 paths)))
+    ;; Otherwise, return the path unchanged.
+    (_ path)))
+
+(defun package-recipe-prefix-paths (prefix paths)
+  "Prefix each path in PATHS with PREFIX.
+
+This handles lists that contain both strings and a nested :exclude
+list, prefixing the paths in both."
+  (mapcar (apply-partially #'package-recipe--prefix-path
+                           prefix)
+          paths))
+
 (defun package-recipe--validate (recipe name)
   "Perform some basic checks on the raw RECIPE for the package named NAME."
   (pcase-let ((`(,ident . ,plist) recipe))
@@ -208,7 +243,13 @@ a message for each invalid recipe."
         ;; `:defaults' is only allowed as the first element.
         ;; If we find it in that position, skip over it.
         (when (eq (car spec) :defaults)
-          (setq spec (cdr spec)))
+          (setq spec
+                (pcase spec
+		          (`(:defaults (:prefix ,prefix))
+                   (package-recipe-prefix-paths prefix
+                                                package-recipe-default-files-spec))
+		          (_ (append package-recipe-default-files-spec
+                             (cdr spec))))))
         ;; All other elements have to be strings or lists of strings.
         ;; Lists whose first element is `:exclude', `:inputs' or
         ;; `:rename' are also valid.

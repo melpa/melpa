@@ -1305,15 +1305,9 @@ is the same as the value of `export_file_name'."
 
 ;;; Files Spec
 
-(defconst package-build-default-files-spec
-  '("*.el" "lisp/*.el"
-    "dir" "*.info" "*.texi" "*.texinfo"
-    "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
-    "docs/dir" "docs/*.info" "docs/*.texi" "docs/*.texinfo"
-    (:exclude
-     ".dir-locals.el" "lisp/.dir-locals.el"
-     "test.el" "tests.el" "*-test.el" "*-tests.el"
-     "lisp/test.el" "lisp/tests.el" "lisp/*-test.el" "lisp/*-tests.el"))
+;; TODO: use `package-recipe-default-files-spec' directly
+;; if there are no external applications relying on this binding
+(defconst package-build-default-files-spec package-recipe-default-files-spec
   "Default value for `:files' attribute in recipes.")
 
 (defun package-build-expand-files-spec (rcp &optional assert repo spec)
@@ -1380,7 +1374,12 @@ order and can have the following form:
         (spec (or spec (oref rcp files)))
         (name (oref rcp name)))
     (when (eq (car spec) :defaults)
-      (setq spec (append package-build-default-files-spec (cdr spec))))
+      (setq spec
+            (pcase spec
+		      (`(:defaults (:prefix ,prefix))
+               (package-recipe-prefix-paths prefix
+                                            package-build-default-files-spec))
+		      (_ (append package-build-default-files-spec (cdr spec))))))
     (let ((files (package-build--expand-files-spec-1
                   (or spec package-build-default-files-spec))))
       (when assert
@@ -1486,9 +1485,13 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
                  dir ; Silence byte-compiler of Emacs < 28.1.
                  (mapcan #'toargs globs))))
             (let ((spec (or (oref rcp files) package-build-default-files-spec)))
-              (if (eq (car spec) :defaults)
-                  (append package-build-default-files-spec (cdr spec))
-                spec)))))
+              (pcase spec
+                (`(:defaults (:prefix ,prefix))
+                 (package-recipe-prefix-paths prefix
+                                              package-build-default-files-spec))
+                (`(:defaults . ,paths)
+                 (append package-build-default-files-spec paths))
+		        (_ spec))))))
 
 ;;; Commands
 

@@ -1,3 +1,4 @@
-(minitest :repo "arthurnn/minitest-emacs"
-          :fetcher github
-          :files ("minitest.el" "snippets"))
+(minitest
+ :fetcher sourcehut
+ :repo "shoshin/minitest-emacs"
+ :files (:defaults "snippets"))

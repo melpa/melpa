@@ -1,1 +1,4 @@
-(org-todoist :fetcher github :repo "Lillenne/org-todoist")
+(org-todoist
+ :fetcher github
+ :repo "Lillenne/org-todoist"
+ :files ("org-todoist.el"))

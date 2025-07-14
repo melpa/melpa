@@ -1,2 +1,0 @@
-(go-translate :fetcher github
-              :repo "lorniu/go-translate")

@@ -1,0 +1,1 @@
+(zathura :fetcher codeberg :repo "treflip/zathura.el")

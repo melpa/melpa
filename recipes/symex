@@ -1,2 +1,5 @@
-(symex :repo "drym-org/symex.el"
-       :fetcher github)
+(symex
+ :fetcher github
+ :repo "drym-org/symex.el"
+ :branch "2.0-integration"
+ :files ("symex/symex*.el" "symex/doc/*.texi"))

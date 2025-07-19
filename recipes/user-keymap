@@ -1,1 +1,1 @@
-(user-keymap :repo "viandant/user-keymap" :fetcher github)
+(user-keymap  :fetcher github :repo "viandant/user-keymap")

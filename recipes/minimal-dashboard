@@ -1,0 +1,2 @@
+(minimal-dashboard :fetcher github
+       :repo "dheerajshenoy/minimal-dashboard.el")

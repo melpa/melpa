@@ -1,1 +1,1 @@
-(modern-icons :fetcher github :repo "taquangtrung/modern-icons.el")
+(modern-icons :fetcher github :repo "emacs-modern-icons/modern-icons.el")

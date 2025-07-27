@@ -1,4 +1,4 @@
 (ecb
  :fetcher github
- :repo "ecb-home/ecb"
+ :repo "Atomlogik/ecb"
  :files ("*.el" "ecb-images" "ecb2" "ecb.texi"))

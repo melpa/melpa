@@ -2,4 +2,4 @@
  :fetcher github
  :repo "drym-org/symex.el"
  :branch "2.0-integration"
- :files ("symex/symex*.el" "symex/doc/*.texi"))
+ :files ("symex/symex*.el" "symex/doc/*.texi" "symex/doc/figures"))

@@ -1,0 +1,5 @@
+(symex-evil
+ :fetcher github
+ :repo "drym-org/symex.el"
+ :branch "2.0-integration"
+ :files ("symex-evil/symex*.el"))

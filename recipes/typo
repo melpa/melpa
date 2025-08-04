@@ -1,1 +1,1 @@
-(typo :fetcher codeberg :repo "pkal/typo.el")
+(typo :fetcher github :repo "jorgenschaefer/typoel")

@@ -1,0 +1,5 @@
+(solarized-gruvbox-theme
+ :fetcher github
+ :repo "madara123pain/unique-emacs-theme-pack" 
+ :files ("Themes/solarized-gruvbox-theme.el"))
+

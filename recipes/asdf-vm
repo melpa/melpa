@@ -1,0 +1,1 @@
+(asdf-vm :fetcher github :repo "zellio/emacs-asdf-vm")

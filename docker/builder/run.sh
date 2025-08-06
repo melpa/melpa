@@ -1,7 +1,13 @@
 #!/bin/bash -e
 
+# Envvars with empty defaults:
+# - INHIBIT_PACKAGE_PULL
+# - INHIBIT_MELPA_PULL
+
+: ${BUILD_CHANNELS="unstable:stable"}
+
 # Break taken between runs, in seconds.
-BUILD_DELAY=${BUILD_DELAY:-300}
+: ${BUILD_PAUSE="-300"}
 
 # A timeout is only needed for unattended builds, so we set this
 # here instead of forcing it on everyone in the Makefile or even
@@ -15,8 +21,7 @@ BUILD_STATUS_FILE="${MELPA_REPO}/html/build-status.json"
 
 export INSIDE_DOCKER=true
 export GIT_HTTP_USER_AGENT="melpa.org"
-
-git config --global safe.directory "*"
+export LANG=en_US.UTF-8
 
 if [ -z "$INHIBIT_MELPA_PULL" ]
 then
@@ -40,40 +45,58 @@ record_build_status() {
 EOF
 }
 
-function build_all {
-    local pkgdir
-    pkgdir=$(make get-pkgdir)
-    [ -e "$pkgdir/errors.log" ] &&
-        mv "$pkgdir/errors.log" "$pkgdir/errors-previous.log"
-    export LANG=en_US.UTF-8
-    make -k -j8 build || true
-    make summarise
-}
-
-# Indicate that the build is in progress
-BUILD_DURATION=$(jq ".duration" ${BUILD_STATUS_FILE} || true)
+# Indicate that the build is in progress.
+if [ -e ${BUILD_STATUS_FILE} ]
+then
+    BUILD_DURATION=$(jq ".duration" ${BUILD_STATUS_FILE})
+else
+    BUILD_DURATION=0
+fi
 BUILD_STARTED=$(date "+%s")
 record_build_status
 
-echo ">>> Starting UNSTABLE build"
-export MELPA_CHANNEL=unstable
-export BUILD_CONFIG="$LISP_CONFIG"
-build_all
+if [ -z "$INHIBIT_PACKAGE_PULL" ]
+then
+    if [ -n "$BUILD_CHANNELS" ]
+    then
+        # Fetch all packages when updating first channel.
+        export BUILD_CONFIG="$LISP_CONFIG"
+    else
+        # Fetch all packages but don't build any channel.
+        export BUILD_CONFIG="(progn $LISP_CONFIG\
+          (setq package-build-build-function 'ignore))"
+        make -k -j8 build || true
+    fi
+else
+    # Don't fetch packages.
+    export BUILD_CONFIG="(progn $LISP_CONFIG\
+      (setq package-build-fetch-function 'ignore))"
+fi
 
-echo ">>> Starting STABLE build"
-export MELPA_CHANNEL=stable
-export BUILD_CONFIG="(progn $LISP_CONFIG\
-  (setq package-build-fetch-function 'ignore))"
-build_all
+for channel in $(echo "$BUILD_CHANNELS" | tr ":" " ")
+do
+    echo ">>> Starting to build \"$channel\" channel"
+    export MELPA_CHANNEL=$channel
+    pkgdir=$(make get-pkgdir)
+    if [ -e "$pkgdir/errors.log" ];
+    then
+        mv "$pkgdir/errors.log" "$pkgdir/errors-previous.log"
+    fi
+    make -k -j8 build || true
+    make indices
+    # Don't fetch packages a second time.
+    export BUILD_CONFIG="(progn $LISP_CONFIG\
+      (setq package-build-fetch-function 'ignore))"
+done
 
-# Indicate that the build has completed
+# Indicate that the build has completed.
 BUILD_COMPLETED=$(date "+%s")
 BUILD_DURATION=$((BUILD_COMPLETED - BUILD_STARTED))
-BUILD_NEXT=$((BUILD_COMPLETED + BUILD_DELAY))
+BUILD_NEXT=$((BUILD_COMPLETED + BUILD_PAUSE))
 record_build_status
 
-if [ ! "$BUILD_DELAY" = 0 ]
+if [ ! "$BUILD_PAUSE" = 0 ]
 then
-    echo "Sleeping for $BUILD_DELAY seconds before next build"
-    sleep $BUILD_DELAY
+    echo "Sleeping for $BUILD_PAUSE seconds before next build"
+    sleep $BUILD_PAUSE
 fi

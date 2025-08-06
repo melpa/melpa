@@ -1,1 +1,0 @@
-(helm-swoop :fetcher github :repo "emacsorphanage/helm-swoop")

@@ -1,4 +1,4 @@
 (feature-mode
- :repo "michaelklishin/cucumber.el"
  :fetcher github
- :files ("*.el" "i18n.yml" "snippets" "support"))
+ :repo "freesteph/cucumber.el"
+ :files (:defaults "gherkin-languages.json" "snippets" "support"))

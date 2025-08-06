@@ -1,0 +1,1 @@
+(aider :fetcher github :repo "tninja/aider.el" :files (:defaults "snippets"))

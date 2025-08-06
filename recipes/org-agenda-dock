@@ -1,0 +1,3 @@
+(org-agenda-dock
+ :fetcher github
+ :repo "hron/org-agenda-dock")

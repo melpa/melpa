@@ -1,0 +1,1 @@
+(quotient :repo "tvirolai/quotient" :fetcher github)

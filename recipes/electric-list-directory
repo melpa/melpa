@@ -1,0 +1,4 @@
+(electric-list-directory
+ :fetcher github
+ :repo "kshartman/electric-directory-list"
+ :files ("electric-list-directory.el"))

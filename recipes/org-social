@@ -1,0 +1,1 @@
+(org-social :fetcher github :repo "tanrax/org-social.el")

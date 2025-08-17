@@ -1,1 +1,1 @@
-(quotient :repo "tvirolai/quotient" :fetcher github)
+(quotient :fetcher github :repo "tvirolai/quotient")

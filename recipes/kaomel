@@ -1,1 +1,1 @@
-(kaomel :repo "gicrisf/kaomel" :fetcher github)
+(kaomel :fetcher github :repo "gicrisf/kaomel")

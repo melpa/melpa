@@ -1,0 +1,5 @@
+(kjv
+ :fetcher github
+ :repo "port19x/bible-kjv-info"
+ ;; Use the tracked info file as with sicp package.
+ :files (:defaults (:exclude "kjv.texi" "preview.png")))

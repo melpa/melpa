@@ -1,0 +1,1 @@
+(puffin :repo "Abu-Daud/puffin" :fetcher github :files ("emacs/puffin/*.el"))

@@ -1,0 +1,1 @@
+(indentinator :repo "xendk/indentinator.el" :fetcher github)

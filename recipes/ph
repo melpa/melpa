@@ -1,7 +1,0 @@
-(ph
- :fetcher github
- :repo "gromnitsky/ph"
- :files ("*.el"
-         "meta.json"
-         "README"
-         ("bin" "bin/ph-project-new")))

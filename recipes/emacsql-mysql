@@ -1,4 +1,0 @@
-(emacsql-mysql
- :fetcher github
- :repo "magit/emacsql"
- :files ("emacsql-mysql.el"))

@@ -2,6 +2,8 @@
  :fetcher github
  :repo "skk-dev/ddskk"
  :old-names (skk)
+ ;; Never tags end with a release nickname.
+ :version-regexp "ddskk-%v_.*"
  :files ("context-skk.el" "ddskk*.el" "skk*.el" "tar-util.el"
          "doc/skk.texi"
          "etc/skk.xpm"

@@ -1,3 +1,3 @@
 (duplexer
  :fetcher github
- :repo "liuyinz/duplexer.el")
+ :repo "eki3z/duplexer.el")

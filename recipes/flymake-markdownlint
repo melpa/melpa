@@ -1,1 +1,1 @@
-(flymake-markdownlint :fetcher github :repo "shaohme/flymake-markdownlint")
+(flymake-markdownlint :fetcher codeberg :repo "shaohme/flymake-markdownlint")

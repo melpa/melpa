@@ -1,0 +1,2 @@
+(lithium :fetcher github
+         :repo "countvajhula/lithium")

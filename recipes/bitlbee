@@ -1,4 +1,3 @@
 (bitlbee
- :repo "pjones/bitlbee-el"
  :fetcher github
- :files ("lisp/bitlbee.el"))
+ :repo "pjones/bitlbee-el")

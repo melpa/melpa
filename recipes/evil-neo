@@ -1,0 +1,3 @@
+(evil-neo
+ :fetcher sourcehut
+ :repo "p-conrad/evil-neo")

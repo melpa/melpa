@@ -1,3 +1,3 @@
 (phoenix-dark-pink-theme
- :repo "j0ni/phoenix-dark-pink"
- :fetcher github)
+ :repo "mhcat/emacs-phoenix-dark-pink-theme"
+ :fetcher sourcehut)

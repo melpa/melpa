@@ -2,4 +2,4 @@
  :fetcher github
  :repo "mhayashi1120/Emacs-wgrep"
  :files ("wgrep-ack.el")
- :version-regexp "\\`ack-\\(.*\\)")
+ :version-regexp "ack-%v")

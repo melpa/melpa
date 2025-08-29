@@ -1,3 +1,0 @@
-(yasnippet-lean :fetcher github
-                :repo "leanprover-community/yasnippet-lean"
-                :files ("yasnippet-lean.el" "snippets"))

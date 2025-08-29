@@ -1,0 +1,1 @@
+(eros-inspector :repo "port19x/eros-inspector" :fetcher github)

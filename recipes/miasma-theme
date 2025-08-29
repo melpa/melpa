@@ -1,0 +1,1 @@
+(miasma-theme :fetcher github :repo "daut/miasma-theme.el")

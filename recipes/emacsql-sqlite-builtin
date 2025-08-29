@@ -1,8 +1,0 @@
-(emacsql-sqlite-builtin
- :fetcher github
- :repo "magit/emacsql"
- :files ("emacsql-sqlite-builtin.el")
- ;; Starting with the next release, this library won't be distributed
- ;; as a separate package anymore.  It's complicated, see 4872ef038db.
- ;; Meanwhile, this kludge is need to deal with #8692.
- :version-regexp "no-version")

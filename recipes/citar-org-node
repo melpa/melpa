@@ -1,0 +1,3 @@
+(citar-org-node
+ :fetcher github
+ :repo "krisbalintona/citar-org-node")

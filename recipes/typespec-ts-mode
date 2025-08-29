@@ -1,0 +1,1 @@
+(typespec-ts-mode :fetcher github :repo "pradyuman/typespec-ts-mode")

@@ -1,1 +1,1 @@
-(tsort :repo "ehawkvu/tsort.el" :fetcher github)
+(tsort :repo "echawk/tsort.el" :fetcher github)

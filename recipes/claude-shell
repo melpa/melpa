@@ -1,0 +1,3 @@
+(claude-shell
+ :fetcher github
+ :repo "arminfriedl/claude-shell")

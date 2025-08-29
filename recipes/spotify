@@ -1,1 +1,1 @@
-(spotify :fetcher github :repo "remvee/spotify-el")
+(spotify :fetcher codeberg :repo "rwv/spotify-el")

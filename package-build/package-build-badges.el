@@ -1,12 +1,13 @@
 ;;; package-build-badges.el --- Create badges for packages  -*- lexical-binding:t; coding:utf-8 -*-
 
-;; Copyright (C) 2011-2023 Donald Ephraim Curtis
-;; Copyright (C) 2012-2023 Steve Purcell
-;; Copyright (C) 2018-2023 Jonas Bernoulli
+;; Copyright (C) 2011-2024 Donald Ephraim Curtis
+;; Copyright (C) 2012-2024 Steve Purcell
+;; Copyright (C) 2018-2025 Jonas Bernoulli
 ;; Copyright (C) 2021-2023 Free Software Foundation, Inc
 ;; Copyright (C) 2009 Phil Hagelberg
 
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
+;; Maintainer: Jonas Bernoulli <emacs.package-build@jonas.bernoulli.dev>
 ;; Homepage: https://github.com/melpa/package-build
 ;; Keywords: maint tools
 
@@ -40,7 +41,7 @@
 This is essentially a copy of `elpaa--make-badge'."
   (let* ((file (expand-file-name (concat name "-badge.svg") target-dir))
          (left (or archive (car package-build-badge-data) "myElpa"))
-         (right (url-hexify-string version))
+         (right version)
          (color (or color (cadr package-build-badge-data) "#ff491b"))
          (lw (package-build-badge--string-width left))
          (rw (package-build-badge--string-width right))

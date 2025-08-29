@@ -1,0 +1,3 @@
+(magik-company
+ :fetcher github
+ :repo "reinierkof/magik-company")

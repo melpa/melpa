@@ -1,4 +1,0 @@
-(lean-mode
- :fetcher github
- :repo "leanprover/lean-mode"
- :files ("lean-*.el"))

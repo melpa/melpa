@@ -1,0 +1,1 @@
+(evil-god-toggle :fetcher github :repo "jam1015/evil-god-toggle")

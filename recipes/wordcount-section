@@ -1,0 +1,1 @@
+(wordcount-section :fetcher sourcehut :repo "swflint/emacs-universal-sidecar" :files ("wordcount-section.el"))

@@ -1,1 +1,1 @@
-(ruff-format :fetcher github :repo "scop/emacs-ruff-format")
+(ruff-format :fetcher github :repo "JoshHayes/emacs-ruff-format")

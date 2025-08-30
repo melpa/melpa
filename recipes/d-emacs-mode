@@ -1,4 +1,0 @@
-(d-emacs-mode
- :fetcher gitlab
- :repo "nameiwillforget/d-emacs"
- :files ("d-emacs-mode/d-emacs-mode.el" "d-emacs-mode/pkg-configs"))

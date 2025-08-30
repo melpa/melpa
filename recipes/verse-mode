@@ -1,0 +1,3 @@
+(verse-mode
+ :repo "sness23/verse-mode"
+ :fetcher github)

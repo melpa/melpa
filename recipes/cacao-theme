@@ -1,4 +1,5 @@
-(cacao-theme :fetcher github :repo "Michael-Garibaldi/Cacao-theme")
+(cacao-theme :fetcher github :repo "Michael-Garibaldi/cacao-theme")
+
 
 
 

@@ -1,4 +1,1 @@
-(codex-cli
- :fetcher github
- :repo "bennfocus/codex-cli.el"
- :files ("codex-cli/*.el" "README.md" "LICENSE"))
+(codex-cli :fetcher github :repo "bennfocus/codex-cli.el")

@@ -1,0 +1,3 @@
+(numeri
+ :fetcher github
+ :repo "kickingvegas/numeri")

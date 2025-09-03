@@ -1,0 +1,6 @@
+(doxymacs
+ :fetcher github
+ :repo "pniedzielski/doxymacs"
+ :files (:defaults
+         "README.md"
+         ("c" "c/*")))

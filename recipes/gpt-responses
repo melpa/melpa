@@ -1,4 +1,1 @@
-(gpt-responses
- :fetcher github
- :repo "kanubacode/gpt-responses.el"
- :files ("gpt-responses.el"))
+(gpt-responses :fetcher github :repo "kanubacode/gpt-responses.el")

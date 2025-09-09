@@ -1,0 +1,3 @@
+(crystal-point :fetcher github
+               :repo "laluxx/crystal-point"
+               :branch "main")

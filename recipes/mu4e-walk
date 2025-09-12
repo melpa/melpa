@@ -1,0 +1,1 @@
+(mu4e-walk :repo "timmli/mu4e-walk" :fetcher codeberg)

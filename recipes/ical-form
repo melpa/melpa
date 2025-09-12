@@ -1,0 +1,3 @@
+(ical-form :repo "haji-ali/maccalfw"
+           :fetcher github
+           :files ("ical-form.el"))

@@ -1,0 +1,4 @@
+(double-press
+ :fetcher github
+ :repo "k-talo/double-press.el"
+ :files ("double-press.el"))

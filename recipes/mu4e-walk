@@ -1,1 +1,1 @@
-(mu4e-walk :repo "timmli/mu4e-walk" :fetcher codeberg)
+(mu4e-walk :fetcher codeberg :repo "timmli/mu4e-walk")

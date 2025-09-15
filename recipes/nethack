@@ -1,0 +1,6 @@
+(nethack
+ :fetcher github
+ :repo "Feyorsh/nethack-el"
+ :branch "dev"
+ :files ("nethack*.el"
+         "enh-*.patch"))

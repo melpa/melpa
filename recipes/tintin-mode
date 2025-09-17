@@ -1,0 +1,2 @@
+(tintin-mode :repo "lesharris/tintin-mode" :fetcher github)
+

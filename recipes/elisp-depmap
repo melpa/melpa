@@ -1,1 +1,1 @@
-(elisp-depmap :fetcher gitlab :repo "mtekman/elisp-depmap.el" )
+(elisp-depmap :fetcher github :repo "mtekman/elisp-depmap.el" )

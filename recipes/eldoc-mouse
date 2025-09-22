@@ -1,1 +1,1 @@
-(eldoc-mouse :repo "huangfeiyu/eldoc-mouse" :fetcher github)
+(eldoc-mouse :fetcher github :repo "huangfeiyu/eldoc-mouse")

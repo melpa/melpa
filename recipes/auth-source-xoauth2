@@ -1,3 +1,3 @@
 (auth-source-xoauth2
- :fetcher github
+ :fetcher codeberg
  :repo "ccrusius/auth-source-xoauth2")

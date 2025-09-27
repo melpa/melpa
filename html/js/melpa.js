@@ -123,6 +123,10 @@
         base = "https://git.sr.ht/~" + recipe.repo;
         ref = commit || recipe.branch;
         return base + (ref ? "/tree/" + ref : "");
+      } else if (recipe.fetcher == "codeberg") {
+        base = "https://codeberg.org/" + recipe.repo;
+        ref = commit || recipe.branch;
+        return base + (ref ? "/src/branch/" + (ref || "main") : "");
       } else if (recipe.fetcher == "bitbucket") {
         base = "https://bitbucket.com/" + recipe.repo;
         if (commit) return base + "/src/" + commit;
@@ -138,6 +142,7 @@
         return (urlMatch(/(bitbucket\.org\/[^\/]+\/[^\/\?]+)/, "https://") ||
                 urlMatch(/(gitorious\.org\/[^\/]+\/[^.]+)/, "https://") ||
                 urlMatch(/(gitlab\.com\/[^\/]+\/[^.]+)/, "https://") ||
+                urlMatch(/(codeberg\.org\/[^\/]+\/[^.]+)/, "https://") ||
                 urlMatch(/^lp:(.*)/, "https://launchpad.net/") ||
                 urlMatch(/^(https?:\/\/code\.google\.com\/p\/[^\/]+\/)/) ||
                 urlMatch(/^(https?:\/\/[^.]+\.googlecode\.com\/)/) ||

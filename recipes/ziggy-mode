@@ -1,1 +1,1 @@
-(ziggy-mode :repo "dcolazin/ziggy-mode" :fetcher github)
+(ziggy-mode :fetcher github :repo "dcolazin/ziggy-mode")

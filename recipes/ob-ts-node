@@ -1,1 +1,1 @@
-(ob-ts-node :repo "tmythicator/ob-ts-node" :fetcher github :files ("ob-ts-node.el"))
+(ob-ts-node :fetcher github :repo "tmythicator/ob-ts-node")

@@ -1,1 +1,3 @@
-(iedit :repo "victorhge/iedit" :fetcher github)
+(iedit :repo "victorhge/iedit"
+  :fetcher github 
+  :branch "master")

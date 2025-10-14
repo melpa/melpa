@@ -1,0 +1,3 @@
+(nov-highlights :fetcher github
+                :repo "emacselements/nov-highlights"
+                :files (:defaults))

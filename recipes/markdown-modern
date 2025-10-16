@@ -1,0 +1,3 @@
+(markdown-modern :fetcher github
+                 :repo "ahmetus/markdown-modern"
+                 :files ("markdown-modern.el"))

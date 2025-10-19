@@ -1,0 +1,2 @@
+(starling :repo "draxil/starling-el" :fetcher codeberg
+:files ("starling.el"))

@@ -1,0 +1,1 @@
+(agda-lib-mode :fetcher codeberg :repo "heraplem/agda-lib-mode")

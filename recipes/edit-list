@@ -1,1 +1,1 @@
-(edit-list :fetcher github :repo "emacsmirror/edit-list")
+(edit-list :fetcher github :repo "emacsattic/edit-list")

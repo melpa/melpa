@@ -1,0 +1,4 @@
+(shaoline
+ :fetcher github
+ :repo "11111000000/shaoline"
+ :files ("lisp/*.el" "README.org" "LICENSE*" "screenshot-*.png"))

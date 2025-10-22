@@ -1,0 +1,4 @@
+(renpy-mode
+ :fetcher github
+ :repo "Reagankm/renpy-mode"
+ :old-names (renpy))

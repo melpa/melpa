@@ -1,1 +1,3 @@
-(org-social :fetcher github :repo "tanrax/org-social.el")
+(org-social :fetcher github
+            :repo "tanrax/org-social.el"
+            :files (:defaults "ui/*.el" "ui/buffers/*.el"))

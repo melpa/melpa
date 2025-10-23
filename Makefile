@@ -270,6 +270,7 @@ PKGDIRS  = packages packages-stable packages-snapshot packages-release
 INDICES  = $(addsuffix /archive.json,$(HTMLDIRS))
 INDICES += $(addsuffix /recipes.json,$(HTMLDIRS))
 INDICES += $(addsuffix /updates.rss,$(HTMLDIRS))
+INDICES += $(addsuffix /social.org,$(HTMLDIRS))
 INDICES += $(addsuffix /archive-contents,$(PKGDIRS))
 INDICES += $(addsuffix /elpa-packages.eld,$(PKGDIRS))
 # Only created by docker targets:

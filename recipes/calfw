@@ -1,3 +1,3 @@
-(calfw :repo "kiwanami/emacs-calfw"
-       :fetcher github
+(calfw :fetcher github
+       :repo "kiwanami/emacs-calfw"
        :files ("calfw.el" "calfw-compat.el"))

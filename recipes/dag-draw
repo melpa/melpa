@@ -1,5 +1,3 @@
 (dag-draw :fetcher codeberg
 	   :repo "trevoke/dag-draw.el"
-	   :files ("*.el"
-		   (:exclude "dag-draw-test-harness.el"
-			     "dag-draw.el-autoloads.el")))
+	   :files (:defaults))

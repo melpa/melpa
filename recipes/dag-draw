@@ -1,3 +1,2 @@
 (dag-draw :fetcher codeberg
-	   :repo "trevoke/dag-draw.el"
-	   :files (:defaults))
+	   :repo "trevoke/dag-draw.el")

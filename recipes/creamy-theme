@@ -1,0 +1,3 @@
+(creamy-theme
+ :fetcher github
+ :repo "smallwat3r/emacs-creamy-theme")

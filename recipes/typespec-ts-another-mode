@@ -1,0 +1,1 @@
+(typespec-ts-another-mode :fetcher github :repo "ncaq/typespec-ts-another-mode")

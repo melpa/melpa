@@ -1,4 +1,3 @@
 (typst-preview
  :fetcher github
- ;; :url "https://github.com/havarddj/typst-preview.el"
  :repo "havarddj/typst-preview.el")

@@ -1,0 +1,1 @@
+(fuzzy-clock :fetcher github :repo "trevoke/fuzzy-clock.el")

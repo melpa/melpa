@@ -1,1 +1,1 @@
-(rrepo:fetcher codeberg :repo "ZeniesQis/rrepo")
+(rrepo:fetcher codeberg :repo "ZeniesQis/rrepo" :files (:defaults "*.eld") )

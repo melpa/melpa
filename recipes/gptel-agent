@@ -1,0 +1,1 @@
+(gptel-agent :repo "karthink/gptel-agent" :fetcher github)

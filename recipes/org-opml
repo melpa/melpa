@@ -1,0 +1,3 @@
+(org-opml :fetcher github
+          :repo "gfrmin/org-opml"
+          :files ("org-opml.el" "ox-opml.el"))

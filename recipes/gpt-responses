@@ -1,0 +1,1 @@
+(gpt-responses :fetcher github :repo "kanubacode/gpt-responses.el")

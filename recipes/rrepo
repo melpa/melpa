@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-(rrepo:fetcher codeberg :repo "ZeniesQis/rrepo" :files (:defaults "*.eld") )
-=======
-(rrepo :fetcher codeberg :repo "ZeniesQis/rrepo")
->>>>>>> a9ffa9462c1368f93e033caec01332096a9c3de5
+(rrepo:fetcher codeberg :repo "ZeniesQis/rrepo" :files (:defaults "*.eld"))

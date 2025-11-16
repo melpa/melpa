@@ -1,0 +1,1 @@
+(dired-actions :fetcher github :repo "justinlime/dired-actions.el")

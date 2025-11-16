@@ -1,1 +1,1 @@
-(typing :fetcher git :repo "https://src.alexschroeder.ch/typing.git")
+(typing :fetcher git :url "https://src.alexschroeder.ch/typing.git")

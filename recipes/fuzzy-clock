@@ -1,1 +1,1 @@
-(fuzzy-clock :fetcher github :repo "trevoke/fuzzy-clock.el")
+(fuzzy-clock :fetcher github :repo "Trevoke/fuzzy-clock.el")

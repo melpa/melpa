@@ -1,3 +1,2 @@
-(roambatch :repo "abdvswmdr/roambatch.el"
-           :fetcher github
-           :branch "master")
+(roambatch :fetcher github
+           :repo "abdvswmdr/roambatch.el")

@@ -1,0 +1,4 @@
+(theo
+ :fetcher codeberg
+ :repo "amadaluzia/theo.el"
+ :branch "main")

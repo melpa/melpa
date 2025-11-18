@@ -1,0 +1,2 @@
+(cpp-func-impl :fetcher github
+               :repo "dheerajshenoy/cpp-func-impl.el")

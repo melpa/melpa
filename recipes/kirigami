@@ -1,0 +1,4 @@
+(kirigami
+ :fetcher github
+ :repo "jamescherti/kirigami.el"
+ :files (:defaults "extensions/kirigami*.el"))

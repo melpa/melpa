@@ -1,0 +1,3 @@
+(real-mono-themes
+ :repo "NestorLiao/real-mono-themes"
+ :fetcher github)

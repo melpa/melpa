@@ -64,6 +64,7 @@ then
     else
         # Fetch all packages but don't build any channel.
         export BUILD_CONFIG="(progn $LISP_CONFIG\
+          (setq package-build--inhibit-update t)\
           (setq package-build-build-function 'ignore))"
         make -k -j8 build || true
     fi

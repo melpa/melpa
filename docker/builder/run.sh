@@ -35,7 +35,7 @@ fi
 
 record_build_status() {
     echo "Recording build status in $BUILD_STATUS_FILE"
-    cat <<EOF | tee $BUILD_STATUS_FILE
+    cat <<EOF > $BUILD_STATUS_FILE
 {
   "started": $BUILD_STARTED,
   "completed": ${BUILD_COMPLETED-null},

@@ -55,7 +55,7 @@ helpall::
 	$(info make docker-build-shell   Run interactive shell in the container)
 	$(info make docker-build-rebuild Re-build the build container)
 help helpall::
-	@printf "\n"
+	@echo
 
 ## Settings
 

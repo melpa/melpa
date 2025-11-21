@@ -223,7 +223,6 @@ $(RCPDIR)/%: .FORCE
 	  $(TIMEOUT) $(EVAL) "(package-build-archive \"$(@F)\")"
 	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." \
 	  && sleep $(SLEEP) || true
-	@echo
 
 ## Sign
 

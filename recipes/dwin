@@ -1,0 +1,4 @@
+(dwin :fetcher github :repo "lsth/dwin"
+      :files (:defaults
+              "etc/bin"
+              "etc/_local-share-applications"))

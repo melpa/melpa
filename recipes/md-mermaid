@@ -1,0 +1,7 @@
+(md-mermaid
+ :fetcher github
+ :repo "ahmetus/md-mermaid"
+ :files (:defaults
+         "scripts/*.py"
+         "scripts/*.sh"
+         "*.json"))

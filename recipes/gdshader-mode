@@ -1,1 +1,1 @@
-(gdshader-mode :repo "bbbscarter/gdshader-mode" :fetcher github)
+(gdshader-mode :fetcher github :repo "bbbscarter/gdshader-mode")

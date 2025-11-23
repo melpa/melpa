@@ -1,0 +1,3 @@
+(easy-theme-preview
+ :fetcher github
+ :repo "ayys/easy-theme-preview.el")

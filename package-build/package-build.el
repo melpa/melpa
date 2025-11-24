@@ -14,7 +14,9 @@
 ;; Keywords: maint tools
 
 ;; Package-Version: 4.0.0.50-git
-;; Package-Requires: ((emacs "26.1") (compat "30.0.0.0"))
+;; Package-Requires: (
+;;     (emacs  "26.1")
+;;     (compat "30.1"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -1506,16 +1508,18 @@ are subsequently dumped."
          (url (oref rcp url))
          (repo (oref rcp repo))
          (fetcher (package-recipe--fetcher rcp))
-         (version nil))
-    (cond ((not noninteractive)
-           (message " • %s package %s (from %s)..."
-                    (if package-build--inhibit-update "Fetching" "Building")
-                    name
-                    (if repo (format "%s:%s" fetcher repo) url)))
-          (package-build-verbose
+         (version nil)
+         (msg (format "%s%s package %s"
+                      (if noninteractive " • " "")
+                      (if package-build--inhibit-update "Fetching" "Building")
+                      name)))
+    (cond ((and package-build-verbose (not noninteractive))
+           (message "%s..." msg)
            (message "Package: %s" name)
            (message "Fetcher: %s" fetcher)
-           (message "Source:  %s\n" url)))
+           (message "Source:  %s\n" url))
+          ((message "%s (from %s)..." msg
+                    (if repo (format "%s:%s" fetcher repo) url))))
     (package-build--fetch rcp)
     (unless package-build--inhibit-update
       (package-build--select-version rcp)
@@ -1554,12 +1558,12 @@ in `package-build-archive-dir'."
           (setenv "PACKAGE_VERSION" version)
           (setenv "PACKAGE_REVISION" commit)
           (setenv "PACKAGE_REVDESC" revdesc)
-          (when-let* ((package-build-run-recipe-shell-command)
+          (when-let* ((_ package-build-run-recipe-shell-command)
                       (command (oref rcp shell-command)))
             (package-build--message "Running %s" command)
             (package-build--call-sandboxed
              rcp shell-file-name shell-command-switch command))
-          (when-let ((package-build-run-recipe-make-targets)
+          (when-let ((_ package-build-run-recipe-make-targets)
                      (targets (oref rcp make-targets)))
             (package-build--message "Running make %s" (string-join targets " "))
             (apply #'package-build--call-sandboxed rcp "make" targets))

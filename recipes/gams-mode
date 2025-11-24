@@ -1,7 +1,8 @@
 (gams-mode
- :repo "ShiroTakeda/gams-mode"
  :fetcher github
- :files ("*.el"
+ :repo "ShiroTakeda/gams-mode"
+ :files ("gams-mode.el"
+         "gams-install.el"
          "gams-logo.xpm"
          "gams-commands.txt"
          "gams-commands-dollar.txt"

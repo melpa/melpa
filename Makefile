@@ -356,8 +356,3 @@ sandbox: .FORCE
     (package-install (intern sandbox-install-package)))\
   (when (get-buffer \"*Compile-Log*\")\
     (display-buffer \"*Compile-Log*\")))"
-
-# Local Variables:
-# outline-regexp: "#\\(#+\\)"
-# eval: (outline-minor-mode)
-# End:

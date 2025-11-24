@@ -109,6 +109,10 @@ RCPDIR  := recipes
 WORKDIR := working
 SANDBOX := sandbox
 
+ifdef DOCKER_MELPA_CHANNEL
+MELPA_CHANNEL = $(DOCKER_MELPA_CHANNEL)
+endif
+
 ifndef MELPA_CHANNEL
 PKGDIR  := packages
 HTMLDIR := html

@@ -78,7 +78,7 @@ fi
 for channel in $(echo "$BUILD_CHANNELS" | tr ":" " ")
 do
     echo ">>> Starting to build \"$channel\" channel"
-    export MELPA_CHANNEL=$channel
+    export DOCKER_MELPA_CHANNEL=$channel
     pkgdir=$(make get-pkgdir)
     if [ -e "$pkgdir/errors.log" ];
     then

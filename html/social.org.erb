@@ -1,0 +1,71 @@
+<%
+  repo_title = "MELPA"
+  repo_nick = "MELPA"
+  base_url = "https://melpa.org"
+  description = "The largest and most up-to-date repository of Emacs packages"
+
+  if File.absolute_path(__FILE__).include? "html-stable"
+    repo_title = "MELPA Stable"
+    repo_nick = "MELPA_Stable"
+    base_url = "https://stable.melpa.org"
+    description = "Stable releases of Emacs packages from MELPA"
+  end
+%>#+TITLE: <%= repo_title %>
+#+NICK: <%= repo_nick %>
+#+DESCRIPTION: <%= description %>
+#+AVATAR: <%= base_url %>/logo.svg
+#+LINK: <%= base_url %>
+#+CONTACT: https://github.com/melpa/melpa
+
+* Posts
+<%
+  require 'json'
+  require 'time'
+  require 'ostruct'
+
+  packages = JSON.parse(File.read("archive.json")).map do |pkgname, info|
+    versions = info["ver"]
+    deps = info["deps"]
+    descr = info["desc"]
+    pkgtype = info["type"]
+    version = versions.join('.')
+
+    package = OpenStruct.new
+    package.name = pkgname
+    package.version = version
+    package.description = descr.gsub(/ \[source:.*$/, '')
+
+    begin
+      hour_portion = versions[1] ? sprintf("%04d", versions[1]) : "0000"
+      package.build_time = Time.new(
+        version[0..3].to_i,
+        version[4..5].to_i,
+        version[6..7].to_i,
+        hour_portion[0..1].to_i,
+        hour_portion[2..3].to_i
+      )
+    rescue ArgumentError
+      package.build_time = Time.now()
+    end
+
+    package.url = "#{base_url}/packages/#{pkgname}-#{version}." + (pkgtype == "single" ? "el" : "tar")
+    package.info_url = "#{base_url}/#/#{pkgname}"
+    package
+  end
+
+  packages.sort_by { |p| p.version }.reverse[0..200].each do |package|
+%>**
+:PROPERTIES:
+:ID: <%= package.build_time.iso8601 %>
+:LANG: en
+:TAGS: emacs package <%= package.name %>
+:END:
+
+📦 *<%= package.name %>* updated to version ~<%= package.version %>~
+
+<%= package.description %>
+
+🔗 [[<%= package.info_url %>][View package details]]
+⬇️  [[<%= package.url %>][Download]]
+
+<% end %>

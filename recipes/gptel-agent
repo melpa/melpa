@@ -1,1 +1,1 @@
-(gptel-agent :fetcher github :repo "karthink/gptel-agent")
+(gptel-agent :fetcher github :repo "karthink/gptel-agent" :files (:defaults "agents"))

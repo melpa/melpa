@@ -1,0 +1,3 @@
+(timu-symbol-extract
+ :repo "aimebertrand/timu-symbol-extract"
+ :fetcher gitlab)

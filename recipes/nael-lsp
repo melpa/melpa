@@ -1,0 +1,4 @@
+(nael-lsp
+ :fetcher codeberg
+ :repo "mekeor/nael"
+ :files ("nael-lsp/nael-lsp*.el"))

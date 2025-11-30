@@ -1,0 +1,4 @@
+(capnp2-mode
+ :repo "HaoZeke/capnp2-mode"
+ :fetcher github
+ :files ("capnp2-mode.el"))

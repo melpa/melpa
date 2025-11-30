@@ -1,0 +1,1 @@
+(eldc :fetcher github :repo "gicrisf/eldc")

@@ -309,7 +309,8 @@ PACKAGE_BUILD_REPO ?= "https://github.com/melpa/package-build"
 
 pull-package-build:
 	git fetch $(PACKAGE_BUILD_REPO)
-	git -c "commit.gpgSign=true" subtree merge \
+	git -c "commit.gpgSign=true" subtree \
+	$(shell test -e package-build && echo merge || echo add) \
 	-m "Merge Package-Build $$(git describe --always FETCH_HEAD)" \
 	--squash -P package-build FETCH_HEAD
 

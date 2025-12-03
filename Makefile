@@ -281,12 +281,14 @@ INDICES += $(addsuffix /errors-previous.log,$(PKGDIRS))
 # Directory hardcoded in "run.sh" and symlinked for channels.
 INDICES += html/build-status.json
 
-clean: clean-indices clean-packages
+clean:
+	@echo " • Removing indices ..."
+	@echo " • Removing packages ..."
+	@git clean --quiet --force -x $(HTMLDIRS) $(PKGDIRS)
 
 clean-packages:
 	@echo " • Removing packages ..."
-	@git clean --quiet --force \
-	-x $(addsuffix /*,$(HTMLDIRS) $(PKGDIRS)) \
+	@git clean --quiet --force -x $(HTMLDIRS) $(PKGDIRS) \
 	$(addprefix -e /,$(INDICES))
 
 clean-indices:

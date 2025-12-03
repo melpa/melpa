@@ -39,10 +39,10 @@ help helpall::
 	$(info Cleaning)
 	$(info ========)
 	$(info make clean                Remove all generated files)
-	$(info make clean-packages       Remove all generated package-specific files)
+	$(info make clean-packages       Remove all generated packages)
 helpall::
 	$(info make clean-indices        Remove all generated indices)
-	$(info make remove-sandbox       Remove package test installations)
+	$(info make remove-sandbox       Remove all package test installations)
 	$(info make remove-repositories  Remove all cloned package repositories)
 help helpall::
 	$(info )
@@ -279,17 +279,19 @@ INDICES += $(addsuffix /elpa-packages.eld,$(PKGDIRS))
 INDICES += $(addsuffix /errors.log,$(PKGDIRS))
 INDICES += $(addsuffix /errors-previous.log,$(PKGDIRS))
 # Directory hardcoded in "run.sh" and symlinked for channels.
-INDICES += /html/build-status.json
+INDICES += html/build-status.json
 
-clean: clean-packages clean-indices
+clean: clean-indices clean-packages
 
 clean-packages:
 	@echo " • Removing packages ..."
-	@git clean -qxf $(addprefix -e /,$(INDICES) $(SANDBOX) config.mk)
+	@git clean --quiet --force \
+	-x $(addsuffix /*,$(HTMLDIRS) $(PKGDIRS)) \
+	$(addprefix -e /,$(INDICES))
 
 clean-indices:
 	@echo " • Removing indices ..."
-	@rm -vf $(sort $(INDICES))
+	@rm -f $(sort $(INDICES))
 
 remove-sandbox:
 	@echo " • Removing $(SANDBOX) ..."

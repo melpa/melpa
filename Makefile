@@ -316,7 +316,7 @@ pull-package-build:
 
 ## Docker
 
-DOCKER_RUN_ARGS = -it \
+DOCKER_RUN_ARGS = \
  --user $$(id --user):$$(id --group) \
  --mount type=bind,src=$$PWD,target=/mnt/store/melpa \
  --mount type=bind,src=$(LOAD_PATH),target=/mnt/store/melpa/package-build \

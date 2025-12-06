@@ -1,0 +1,4 @@
+(nael-markdown
+ :fetcher codeberg
+ :repo "mekeor/nael"
+ :files ("nael-markdown/*.el"))

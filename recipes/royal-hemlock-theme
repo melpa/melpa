@@ -1,0 +1,3 @@
+(royal-hemlock-theme
+  :fetcher github
+  :repo "vs-123/royal-hemlock-theme")

@@ -1,0 +1,4 @@
+(fairyfloss-theme
+ :fetcher github
+ :repo "icunhacorrea/fairyfloss-emacs"
+ :files ("fairyfloss-theme.el"))

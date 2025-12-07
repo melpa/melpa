@@ -1,0 +1,2 @@
+(e-unit :fetcher codeberg
+	   :repo "trevoke/e-unit.el")

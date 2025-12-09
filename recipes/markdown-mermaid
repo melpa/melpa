@@ -1,0 +1,3 @@
+(markdown-mermaid
+ :fetcher github
+ :repo "pasunboneleve/markdown-mermaid")

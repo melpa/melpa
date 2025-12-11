@@ -1,4 +1,3 @@
 (lumos-mode
- :repo "getlumos/lumos-mode"
  :fetcher github
- :files ("*.el"))
+ :repo "getlumos/lumos-mode")

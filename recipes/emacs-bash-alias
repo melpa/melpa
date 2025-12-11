@@ -1,1 +1,1 @@
-(emacs-bash-alias :repo "amno1/emacs-bash-alias" :fetcher github)
+(emacs-bash-alias :repo "amno1/emacs-bash-alias" :fetcher github :files ("bash-alias.el"))

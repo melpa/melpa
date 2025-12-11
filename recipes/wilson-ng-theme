@@ -1,3 +1,0 @@
-(wilson-ng-theme
- :fetcher github
- :repo "levindue/emacs-wilson-theme")

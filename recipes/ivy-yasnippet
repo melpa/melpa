@@ -1,1 +1,1 @@
-(ivy-yasnippet :fetcher github :repo "mkcms/ivy-yasnippet")
+(ivy-yasnippet :fetcher github :repo "emacsattic/ivy-yasnippet")

@@ -10,13 +10,13 @@ jobs:
         package: [evil, magit, realgud, edts, elpher, which-key-posframe]
     steps:
     - name: checkout package-build
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         path: package-build
         fetch-depth: 1
 
     - name: checkout melpa
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         path: melpa
         repository: melpa/melpa

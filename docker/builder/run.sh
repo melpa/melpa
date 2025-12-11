@@ -35,7 +35,8 @@ fi
 
 record_build_status() {
     echo "Recording build status in $BUILD_STATUS_FILE"
-    cat <<EOF | tee $BUILD_STATUS_FILE
+    mkdir -p $(dirname $BUILD_STATUS_FILE)
+    cat <<EOF > $BUILD_STATUS_FILE
 {
   "started": $BUILD_STARTED,
   "completed": ${BUILD_COMPLETED-null},
@@ -64,6 +65,7 @@ then
     else
         # Fetch all packages but don't build any channel.
         export BUILD_CONFIG="(progn $LISP_CONFIG\
+          (setq package-build--inhibit-update t)\
           (setq package-build-build-function 'ignore))"
         make -k -j8 build || true
     fi
@@ -76,7 +78,7 @@ fi
 for channel in $(echo "$BUILD_CHANNELS" | tr ":" " ")
 do
     echo ">>> Starting to build \"$channel\" channel"
-    export MELPA_CHANNEL=$channel
+    export DOCKER_MELPA_CHANNEL=$channel
     pkgdir=$(make get-pkgdir)
     if [ -e "$pkgdir/errors.log" ];
     then

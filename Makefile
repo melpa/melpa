@@ -39,10 +39,10 @@ help helpall::
 	$(info Cleaning)
 	$(info ========)
 	$(info make clean                Remove all generated files)
-	$(info make clean-packages       Remove all generated package-specific files)
+	$(info make clean-packages       Remove all generated packages)
 helpall::
 	$(info make clean-indices        Remove all generated indices)
-	$(info make remove-sandbox       Remove package test installations)
+	$(info make remove-sandbox       Remove all package test installations)
 	$(info make remove-repositories  Remove all cloned package repositories)
 help helpall::
 	$(info )
@@ -55,7 +55,7 @@ helpall::
 	$(info make docker-build-shell   Run interactive shell in the container)
 	$(info make docker-build-rebuild Re-build the build container)
 help helpall::
-	@printf "\n"
+	@echo
 
 ## Settings
 
@@ -108,6 +108,10 @@ endif
 RCPDIR  := recipes
 WORKDIR := working
 SANDBOX := sandbox
+
+ifdef DOCKER_MELPA_CHANNEL
+MELPA_CHANNEL = $(DOCKER_MELPA_CHANNEL)
+endif
 
 ifndef MELPA_CHANNEL
 PKGDIR  := packages
@@ -219,12 +223,11 @@ build: $(RCPDIR)/*
 endif
 
 $(RCPDIR)/%: .FORCE
-	@echo " • Building package $(@F) ..."
+	@mkdir -p $(PKGDIR)
 	@exec 2>&1; exec &> >(tee $(PKGDIR)/$(@F).log); \
 	  $(TIMEOUT) $(EVAL) "(package-build-archive \"$(@F)\")"
 	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." \
 	  && sleep $(SLEEP) || true
-	@echo
 
 ## Sign
 
@@ -276,17 +279,21 @@ INDICES += $(addsuffix /elpa-packages.eld,$(PKGDIRS))
 INDICES += $(addsuffix /errors.log,$(PKGDIRS))
 INDICES += $(addsuffix /errors-previous.log,$(PKGDIRS))
 # Directory hardcoded in "run.sh" and symlinked for channels.
-INDICES += /html/build-status.json
+INDICES += html/build-status.json
 
-clean: clean-packages clean-indices
+clean:
+	@echo " • Removing indices ..."
+	@echo " • Removing packages ..."
+	@git clean --quiet --force -x $(HTMLDIRS) $(PKGDIRS)
 
 clean-packages:
 	@echo " • Removing packages ..."
-	@git clean -qxf $(addprefix -e /,$(INDICES) $(SANDBOX) config.mk)
+	@git clean --quiet --force -x $(HTMLDIRS) $(PKGDIRS) \
+	$(addprefix -e /,$(INDICES))
 
 clean-indices:
 	@echo " • Removing indices ..."
-	@rm -vf $(sort $(INDICES))
+	@rm -f $(sort $(INDICES))
 
 remove-sandbox:
 	@echo " • Removing $(SANDBOX) ..."
@@ -302,13 +309,14 @@ PACKAGE_BUILD_REPO ?= "https://github.com/melpa/package-build"
 
 pull-package-build:
 	git fetch $(PACKAGE_BUILD_REPO)
-	git -c "commit.gpgSign=true" subtree merge \
+	git -c "commit.gpgSign=true" subtree \
+	$(shell test -e package-build && echo merge || echo add) \
 	-m "Merge Package-Build $$(git describe --always FETCH_HEAD)" \
 	--squash -P package-build FETCH_HEAD
 
 ## Docker
 
-DOCKER_RUN_ARGS = -it \
+DOCKER_RUN_ARGS = \
  --user $$(id --user):$$(id --group) \
  --mount type=bind,src=$$PWD,target=/mnt/store/melpa \
  --mount type=bind,src=$(LOAD_PATH),target=/mnt/store/melpa/package-build \
@@ -358,8 +366,3 @@ sandbox: .FORCE
     (package-install (intern sandbox-install-package)))\
   (when (get-buffer \"*Compile-Log*\")\
     (display-buffer \"*Compile-Log*\")))"
-
-# Local Variables:
-# outline-regexp: "#\\(#+\\)"
-# eval: (outline-minor-mode)
-# End:

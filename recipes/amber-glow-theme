@@ -1,0 +1,5 @@
+(amber-glow-theme
+ :fetcher github
+ :repo "Umer-Arif/unique-emacs-theme-pack"
+ :files ("Themes/amber-glow-theme.el"))
+

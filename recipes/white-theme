@@ -1,1 +1,1 @@
-(white-theme :repo "anler/white-theme.el" :fetcher github)
+(white-theme :fetcher github :repo "nullvec/white-theme.el")

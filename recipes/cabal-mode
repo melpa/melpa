@@ -1,0 +1,1 @@
+(cabal-mode :fetcher github :repo "webdevred/cabal-mode")

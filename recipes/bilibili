@@ -1,0 +1,2 @@
+(bilibili :fetcher github
+          :repo "lorniu/bilibili.el")

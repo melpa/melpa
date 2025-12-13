@@ -1,0 +1,3 @@
+(flymake-x
+ :fetcher github
+ :repo "mkcms/flymake-x")

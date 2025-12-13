@@ -27,10 +27,9 @@ help helpall::
 	$(info make recipes/<package>    Build <package>)
 	$(info make [-k] [-j 8] build    Build all packages)
 	$(info make all                  Build everything)
+	$(info make all-async            Build everything asynchronously)
 helpall::
-	$(info make -k -j 8 build; make summarise)
-	$(info .                         Build everything faster)
-	$(info make summarise            Build all package and indices)
+	$(info make indices              Build all package indices)
 	$(info make archive-contents     Build main package index)
 	$(info make json                 Build json package index)
 	$(info make html                 Build html package index)
@@ -39,13 +38,12 @@ help helpall::
 	$(info )
 	$(info Cleaning)
 	$(info ========)
-	$(info make clean                Empty output directories of all channels)
-	$(info .                         Also clean indices but not cloned repos)
-	$(info make clean-packages       Empty current channel’s output directory)
+	$(info make clean                Remove all generated files)
+	$(info make clean-packages       Remove all generated packages)
 helpall::
-	$(info make clean-json           Clean current channel’s json index)
-	$(info make clean-sandbox        Clean sandbox)
-	$(info make clean-working        [DANGER] Remove all cloned repositories)
+	$(info make clean-indices        Remove all generated indices)
+	$(info make remove-sandbox       Remove all package test installations)
+	$(info make remove-repositories  Remove all cloned package repositories)
 help helpall::
 	$(info )
 helpall::
@@ -57,7 +55,7 @@ helpall::
 	$(info make docker-build-shell   Run interactive shell in the container)
 	$(info make docker-build-rebuild Re-build the build container)
 help helpall::
-	@printf "\n"
+	@echo
 
 ## Settings
 
@@ -75,18 +73,26 @@ USER_CONFIG ?= "()"
 # quoting needed in scripts.
 BUILD_CONFIG ?= ()
 
-# Channel build/targeted by other make targets.
-# When empty, use "package-build.el"'s default channel settings.
-MELPA_CHANNEL ?=
+# If BUILD_PACKAGES is non-empty, all targets that would otherwise
+# build all packages, build only those listed.
 
-# Channels build by "docker-build-run" target.
+# Available channels.  Only "unstable" and "stable" are currently
+# being published on melpa.org.  Users should not modify this.
+MELPA_CHANNELS = unstable stable snapshot release
+
+# Channel build by targets that don't use docker.  When empty, use
+# "package-build.el"'s default settings, which are similar to the
+# settings for the "unstable" channel, but not currently identical.
+MELPA_CHANNEL ?= unstable
+
+# Channels build by the "docker-build-run" target.
 # To build all channels use "unstable:stable:snapshot:release".
 # To fetch without building use "", which the "docker-build-fetch"
-# target does.
+# target does.  (Keep in sync with "docker/builder/run.sh".)
 DOCKER_BUILD_CHANNELS ?= unstable:stable
 
 # To instruct "docker-build-run" target to build package without
-# first pulling them first use non-emtpy INHIBIT_PACKAGE_PULL.
+# first pulling them, use non-emtpy DOCKER_INHIBIT_PACKAGE_PULL.
 
 # Seconds to sleep after building a single package.
 SLEEP ?= 0
@@ -102,6 +108,10 @@ endif
 RCPDIR  := recipes
 WORKDIR := working
 SANDBOX := sandbox
+
+ifdef DOCKER_MELPA_CHANNEL
+MELPA_CHANNEL = $(DOCKER_MELPA_CHANNEL)
+endif
 
 ifndef MELPA_CHANNEL
 PKGDIR  := packages
@@ -195,24 +205,29 @@ $(addprefix -L ,$(LOAD_PATH)) \
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
 
-.PHONY: clean build summarise json html sandbox
+.PHONY: clean build indices json html sandbox
 .FORCE:
-
-all: build summarise
-
-summarise: archive-contents json html
 
 ## Build
 
+all: build indices
+
+all-async:
+	make -k -j 8 build || true
+	make indices
+
+ifdef BUILD_PACKAGES
+build: $(addprefix recipes/,$(BUILD_PACKAGES))
+else
 build: $(RCPDIR)/*
+endif
 
 $(RCPDIR)/%: .FORCE
-	@echo " • Building package $(@F) ..."
+	@mkdir -p $(PKGDIR)
 	@exec 2>&1; exec &> >(tee $(PKGDIR)/$(@F).log); \
 	  $(TIMEOUT) $(EVAL) "(package-build-archive \"$(@F)\")"
 	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." \
 	  && sleep $(SLEEP) || true
-	@echo
 
 ## Sign
 
@@ -232,12 +247,14 @@ endif
 
 ## Metadata
 
+indices: archive-contents json html
+
 archive-contents: .FORCE
 	@echo " • Building archive-contents ..."
 	@$(EVAL) "(package-build-dump-archive-contents)"
 
 json: .FORCE
-	@echo " • Building json indexes ..."
+	@echo " • Building json indices ..."
 	@$(EVAL) "(package-build-archive-alist-as-json \"$(HTMLDIR)/archive.json\")"
 	@$(EVAL) "(package-build-recipe-alist-as-json \"$(HTMLDIR)/recipes.json\")"
 
@@ -245,36 +262,46 @@ html: .FORCE
 	@echo " • Building html index ..."
 	$(MAKE) -C $(HTMLDIR)
 
-$(RCPDIR)/.dirstamp: .FORCE
-	@[[ ! -e $@ || "$$(find $(@D) -newer $@ -print -quit)" != "" ]] \
-	&& touch $@ || exit 0
-
 ## Cleanup rules
 
-clean-working:
-	@echo " • Removing package sources ..."
-	@git clean -dffX $(WORKDIR)/.
+HTMLDIRS = html html-stable html-snapshot html-release
+PKGDIRS  = packages packages-stable packages-snapshot packages-release
+# If we used consistent names we could use this instead.
+# HTMLDIRS = $(addprefix html-,$(MELPA_CHANNELS))
+# PKGDIRS  = $(addprefix packages-,$(MELPA_CHANNELS))
+
+INDICES  = $(addsuffix /archive.json,$(HTMLDIRS))
+INDICES += $(addsuffix /recipes.json,$(HTMLDIRS))
+INDICES += $(addsuffix /updates.rss,$(HTMLDIRS))
+INDICES += $(addsuffix /archive-contents,$(PKGDIRS))
+INDICES += $(addsuffix /elpa-packages.eld,$(PKGDIRS))
+# Only created by docker targets:
+INDICES += $(addsuffix /errors.log,$(PKGDIRS))
+INDICES += $(addsuffix /errors-previous.log,$(PKGDIRS))
+# Directory hardcoded in "run.sh" and symlinked for channels.
+INDICES += html/build-status.json
+
+clean:
+	@echo " • Removing indices ..."
+	@echo " • Removing packages ..."
+	@git clean --quiet --force -x $(HTMLDIRS) $(PKGDIRS)
 
 clean-packages:
-	@echo " • Removing $(PKGDIR)/* ..."
-	@git clean -dffX $(PKGDIR)/.
+	@echo " • Removing packages ..."
+	@git clean --quiet --force -x $(HTMLDIRS) $(PKGDIRS) \
+	$(addprefix -e /,$(INDICES))
 
-clean-json:
-	@echo " • Removing $(HTMLDIR)/*.json ..."
-	@-rm -vf $(HTMLDIR)/archive.json $(HTMLDIR)/recipes.json
+clean-indices:
+	@echo " • Removing indices ..."
+	@rm -f $(sort $(INDICES))
 
-clean-sandbox:
-	@echo " • Removing sandbox files ..."
-	@if [ -d "$(SANDBOX)" ]; then \
-	  rm -rfv "$(SANDBOX)/elpa"; \
-	  rmdir "$(SANDBOX)"; \
-	fi
+remove-sandbox:
+	@echo " • Removing $(SANDBOX) ..."
+	@rm -rf $(SANDBOX)
 
-clean: .FORCE
-	MELPA_CHANNEL=unstable make clean-packages clean-json clean-sandbox
-	MELPA_CHANNEL=stable   make clean-packages clean-json clean-sandbox
-	MELPA_CHANNEL=snapshot make clean-packages clean-json clean-sandbox
-	MELPA_CHANNEL=release  make clean-packages clean-json clean-sandbox
+remove-repositories:
+	@echo " • Removing $(WORKDIR) ..."
+	@rm -rf $(WORKDIR)
 
 ## Update package-build
 
@@ -282,41 +309,40 @@ PACKAGE_BUILD_REPO ?= "https://github.com/melpa/package-build"
 
 pull-package-build:
 	git fetch $(PACKAGE_BUILD_REPO)
-	git -c "commit.gpgSign=true" subtree merge \
+	git -c "commit.gpgSign=true" subtree \
+	$(shell test -e package-build && echo merge || echo add) \
 	-m "Merge Package-Build $$(git describe --always FETCH_HEAD)" \
 	--squash -P package-build FETCH_HEAD
 
 ## Docker
 
-DOCKER_RUN_ARGS = -it \
+DOCKER_RUN_ARGS = \
+ --user $$(id --user):$$(id --group) \
  --mount type=bind,src=$$PWD,target=/mnt/store/melpa \
  --mount type=bind,src=$(LOAD_PATH),target=/mnt/store/melpa/package-build \
  --env INHIBIT_MELPA_PULL=t \
- --env DOCKER_BUILD_PAUSE=0
+ --env BUILD_PAUSE=0
 
 docker-build-run:
 	docker run $(DOCKER_RUN_ARGS) \
-	--env INHIBIT_PACKAGE_PULL=$(INHIBIT_PACKAGE_PULL) \
-	--env DOCKER_BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
+	--env INHIBIT_PACKAGE_PULL=$(DOCKER_INHIBIT_PACKAGE_PULL) \
+	--env BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
 	melpa_builder
 
 docker-build-fetch:
 	docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL="" \
-	--env DOCKER_BUILD_CHANNELS="" \
+	--env BUILD_CHANNELS="" \
 	melpa_builder
 
 docker-build-shell:
 	docker run $(DOCKER_RUN_ARGS) \
-	--env INHIBIT_PACKAGE_PULL=$(INHIBIT_PACKAGE_PULL) \
-	--env DOCKER_BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
+	--env INHIBIT_PACKAGE_PULL=$(DOCKER_INHIBIT_PACKAGE_PULL) \
+	--env BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
 	melpa_builder bash
 
 docker-build-rebuild:
-	docker build \
-	--build-arg UID=$$(id --user) \
-	--build-arg GID=$$(id --group) \
-	-t melpa_builder docker/builder-ng
+	docker build -t melpa_builder docker/builder
 
 get-pkgdir: .FORCE
 	@echo $(PKGDIR)
@@ -340,8 +366,3 @@ sandbox: .FORCE
     (package-install (intern sandbox-install-package)))\
   (when (get-buffer \"*Compile-Log*\")\
     (display-buffer \"*Compile-Log*\")))"
-
-# Local Variables:
-# outline-regexp: "#\\(#+\\)"
-# eval: (outline-minor-mode)
-# End:

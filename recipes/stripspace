@@ -1,0 +1,1 @@
+(stripspace :fetcher github :repo "jamescherti/stripspace.el")

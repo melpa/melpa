@@ -189,7 +189,10 @@ below.
 
 Let ~<NAME>~ denote the filename of the new recipe. Build the recipe
 via ~make recipes/<NAME>~, or with ~C-c C-c~ (~M-x package-build-current-recipe~)
-in the recipe file buffer.
+in the recipe file buffer.  When using (~package-build-current-recipe~), ensure
+that the variables ~package-build-timeout-executable~ and ~package-build-tar-executable~
+reference compliant versions of the ~timeout~ and ~tar~ commands.  You can view the
+documentation and customize these variables with (~M-x customize-group package-build~).
 
 If the repository contains tags for releases, confirm that the correct
 version is detected by running ~MELPA_CHANNEL=stable make recipes/<NAME>~.  The

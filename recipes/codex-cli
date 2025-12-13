@@ -1,0 +1,1 @@
+(codex-cli :fetcher github :repo "bennfocus/codex-cli.el")

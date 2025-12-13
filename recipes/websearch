@@ -1,1 +1,4 @@
-(websearch :fetcher gitlab :repo "xgqt/emacs-websearch")
+(websearch
+ :fetcher gitlab
+ :repo "xgqt/xgqt-elisp-lib-websearch"
+ :files ("code/source/v3/websearch-lib/src/main/elisp/websearch/websearch*.el"))

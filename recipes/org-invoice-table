@@ -1,0 +1,1 @@
+(org-invoice-table :fetcher codeberg :repo "trevdev/org-invoice-table")

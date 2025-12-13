@@ -1,6 +1,6 @@
 ;;; package-build-tests.el --- Tests for Package-Build  -*- lexical-binding:t -*-
 
-;; Copyright (C) 2023-2024 Jonas Bernoulli
+;; Copyright (C) 2023-2025 Jonas Bernoulli
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 

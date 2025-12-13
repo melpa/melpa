@@ -1,0 +1,2 @@
+(quick-weather :fetcher github
+               :repo "tanrax/quick-weather.el")

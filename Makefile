@@ -105,6 +105,11 @@ else
 EMACS ?= emacs
 endif
 
+EMACS_ARGS  ?=
+EMACS_Q_ARG ?= -Q
+EMACS_BATCH ?= $(EMACS) $(EMACS_Q_ARG) --batch $(EMACS_ARGS) \
+  $(addprefix -L ,$(LOAD_PATH))
+
 RCPDIR  := recipes
 WORKDIR := working
 SANDBOX := sandbox
@@ -194,8 +199,7 @@ else
 LOAD_PATH := $(TOP)/package-build
 endif
 
-EVAL := $(EMACS) --no-site-file --batch \
-$(addprefix -L ,$(LOAD_PATH)) \
+EMACS_EVAL := $(EMACS_BATCH) \
 --eval $(CHANNEL_CONFIG) \
 --eval $(LOCATION_CONFIG) \
 --eval "$(BUILD_CONFIG)" \
@@ -225,7 +229,7 @@ endif
 $(RCPDIR)/%: .FORCE
 	@mkdir -p $(PKGDIR)
 	@exec 2>&1; exec &> >(tee $(PKGDIR)/$(@F).log); \
-	  $(TIMEOUT) $(EVAL) "(package-build-archive \"$(@F)\")"
+	  $(TIMEOUT) $(EMACS_EVAL) "(package-build-archive \"$(@F)\")"
 	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." \
 	  && sleep $(SLEEP) || true
 

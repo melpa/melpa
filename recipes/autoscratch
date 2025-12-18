@@ -1,1 +1,1 @@
-(autoscratch :repo "TLINDEN/autoscratch" :fetcher github)
+(autoscratch :repo "scip/autoscratch" :fetcher codeberg)

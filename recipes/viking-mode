@@ -1,2 +1,1 @@
-(viking-mode :repo "TLINDEN/viking-mode" :fetcher github)
-
+(viking-mode :repo "scip/viking-mode" :fetcher codeberg)

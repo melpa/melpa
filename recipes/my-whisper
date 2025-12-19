@@ -1,2 +1,0 @@
-(my-whisper :fetcher github
-            :repo "emacselements/my-whisper")

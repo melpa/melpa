@@ -68,9 +68,9 @@ TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 USER_CONFIG ?= "()"
 
 # Only intended for "docker/builder/run.sh" and similar scripts.
-# That is also why we add extra quoting when setting EVAL below,
-# instead of here.  Not doing it like that would complicate the
-# quoting needed in scripts.
+# That is also why we add extra quoting when setting EMACS_EVAL
+# below, instead of here.  Not doing it like that would complicate
+# the quoting needed in scripts.
 BUILD_CONFIG ?= ()
 
 # If BUILD_PACKAGES is non-empty, all targets that would otherwise
@@ -104,6 +104,11 @@ EMACS := $(EMACS_COMMAND)
 else
 EMACS ?= emacs
 endif
+
+EMACS_ARGS  ?=
+EMACS_Q_ARG ?= -Q
+EMACS_BATCH ?= $(EMACS) $(EMACS_Q_ARG) --batch $(EMACS_ARGS) \
+  $(addprefix -L ,$(LOAD_PATH))
 
 RCPDIR  := recipes
 WORKDIR := working
@@ -194,8 +199,7 @@ else
 LOAD_PATH := $(TOP)/package-build
 endif
 
-EVAL := $(EMACS) --no-site-file --batch \
-$(addprefix -L ,$(LOAD_PATH)) \
+EMACS_EVAL := $(EMACS_BATCH) \
 --eval $(CHANNEL_CONFIG) \
 --eval $(LOCATION_CONFIG) \
 --eval "$(BUILD_CONFIG)" \
@@ -225,7 +229,7 @@ endif
 $(RCPDIR)/%: .FORCE
 	@mkdir -p $(PKGDIR)
 	@exec 2>&1; exec &> >(tee $(PKGDIR)/$(@F).log); \
-	  $(TIMEOUT) $(EVAL) "(package-build-archive \"$(@F)\")"
+	  $(TIMEOUT) $(EMACS_EVAL) "(package-build-archive \"$(@F)\")"
 	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." \
 	  && sleep $(SLEEP) || true
 
@@ -251,12 +255,12 @@ indices: archive-contents json html
 
 archive-contents: .FORCE
 	@echo " • Building archive-contents ..."
-	@$(EVAL) "(package-build-dump-archive-contents)"
+	@$(EMACS_EVAL) "(package-build-dump-archive-contents)"
 
 json: .FORCE
 	@echo " • Building json indices ..."
-	@$(EVAL) "(package-build-archive-alist-as-json \"$(HTMLDIR)/archive.json\")"
-	@$(EVAL) "(package-build-recipe-alist-as-json \"$(HTMLDIR)/recipes.json\")"
+	@$(EMACS_EVAL) "(package-build-archive-alist-as-json \"$(HTMLDIR)/archive.json\")"
+	@$(EMACS_EVAL) "(package-build-recipe-alist-as-json \"$(HTMLDIR)/recipes.json\")"
 
 html: .FORCE
 	@echo " • Building html index ..."
@@ -352,7 +356,7 @@ get-pkgdir: .FORCE
 sandbox: .FORCE
 	@echo " • Building sandbox ..."
 	@mkdir -p $(SANDBOX)
-	@$(EVAL) "(progn\
+	@$(EMACS_EVAL) "(progn\
   (package-build-dump-archive-contents)\
   (setq user-emacs-directory (file-truename \"$(SANDBOX)\"))\
   (setq package-user-dir (locate-user-emacs-file \"elpa\"))\

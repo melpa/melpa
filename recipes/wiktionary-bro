@@ -1,0 +1,1 @@
+(wiktionary-bro :fetcher github :repo "agzam/wiktionary-bro.el")

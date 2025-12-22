@@ -1,0 +1,4 @@
+(rare-words
+ :fetcher github
+ :repo "amolv06/rare-words"
+ :files (:defaults "words.db"))

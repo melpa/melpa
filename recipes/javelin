@@ -1,1 +1,1 @@
-(javelin :repo "DamianB-BitFlipper/javelin.el" :fetcher github)
+(javelin :fetcher github :repo "DamianB-BitFlipper/javelin.el")

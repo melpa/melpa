@@ -1,1 +1,1 @@
-(gptel-cpp-complete :repo "beacoder/gptel-cpp-complete" :fetcher github)
+(gptel-cpp-complete :fetcher github :repo "beacoder/gptel-cpp-complete")

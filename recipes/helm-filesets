@@ -1,2 +1,0 @@
-(helm-filesets :repo "gcla/helm-filesets"
-	       :fetcher github)

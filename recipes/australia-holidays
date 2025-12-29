@@ -1,0 +1,1 @@
+(australia-holidays :fetcher github :repo "jmibanez/australia-holidays.el")

@@ -1,1 +1,1 @@
-(helm-aws :fetcher github :repo "istib/helm-aws")
+(helm-aws :fetcher github :repo "emacsattic/helm-aws")

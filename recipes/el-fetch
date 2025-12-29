@@ -1,4 +1,4 @@
 (el-fetch
  :fetcher gitlab
- :repo "xgqt/emacs-el-fetch"
- :files ("src/el-fetch/*"))
+ :repo "xgqt/xgqt-elisp-app-el-fetch"
+ :files ("code/source/v4/el-fetch-app/src/main/elisp/el-fetch/el-fetch*.el"))

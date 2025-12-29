@@ -1,0 +1,4 @@
+(linkin-org
+ :fetcher github
+ :repo "Judafa/linkin-org"
+ )

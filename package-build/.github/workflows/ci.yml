@@ -9,14 +9,14 @@ jobs:
       matrix:
         package: [evil, magit, realgud, edts, elpher, which-key-posframe]
     steps:
-    - name: checkout package-build
-      uses: actions/checkout@v4
+    - name: Checkout package-build
+      uses: actions/checkout@v6
       with:
         path: package-build
         fetch-depth: 1
 
-    - name: checkout melpa
-      uses: actions/checkout@v4
+    - name: Checkout melpa
+      uses: actions/checkout@v6
       with:
         path: melpa
         repository: melpa/melpa
@@ -24,12 +24,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt-get install emacs
-        sudo apt-get install git mercurial texinfo
-
-        # Work around SSL-related failures, see
-        # https://stackoverflow.com/questions/21477683/mercurial-https-clone-abort-error-wrong-version-number
-        echo "[ui]\ntls = False" > $HOME/.hgrc
+        sudo apt-get install emacs git mercurial texinfo imagemagick
 
     - name: Setup config path
       run: |
@@ -38,5 +33,4 @@ jobs:
     - name: Build ${{ matrix.package }}
       run: |
         cd melpa
-
         make recipes/${{ matrix.package }}

@@ -1,0 +1,1 @@
+(eldoc-mouse :fetcher github :repo "huangfeiyu/eldoc-mouse")

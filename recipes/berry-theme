@@ -1,0 +1,4 @@
+(berry-theme
+ :fetcher github
+ :repo "Umer-Arif/unique-emacs-theme-pack"
+ :files ("Themes/berry-theme.el"))

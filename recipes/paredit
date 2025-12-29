@@ -1,1 +1,1 @@
-(paredit :fetcher git :url "https://mumble.net/~campbell/git/paredit.git")
+(paredit :fetcher git :url "https://paredit.org/paredit.git")

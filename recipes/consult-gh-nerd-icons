@@ -1,0 +1,4 @@
+(consult-gh-nerd-icons
+ :fetcher github
+ :repo "armindarvish/consult-gh"
+ :files ("consult-gh-nerd-icons.el"))

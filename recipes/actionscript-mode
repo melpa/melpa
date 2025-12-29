@@ -1,4 +1,4 @@
 (actionscript-mode 
- :fetcher github
+ :fetcher codeberg
  :repo "austinhaas/actionscript-mode"
  :files ("actionscript-mode.el"))

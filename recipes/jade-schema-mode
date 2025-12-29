@@ -1,0 +1,1 @@
+(jade-schema-mode :fetcher github :repo "danjacka/jade-schema-mode")

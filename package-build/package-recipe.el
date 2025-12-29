@@ -1,6 +1,6 @@
 ;;; package-recipe.el --- Package recipes as EIEIO objects  -*- lexical-binding:t; coding:utf-8 -*-
 
-;; Copyright (C) 2018-2024 Jonas Bernoulli
+;; Copyright (C) 2018-2025 Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <emacs.package-build@jonas.bernoulli.dev>
 ;; Maintainer: Jonas Bernoulli <emacs.package-build@jonas.bernoulli.dev>
@@ -48,6 +48,7 @@
    (repopage        :initarg :repopage       :initform nil)
    (files           :initarg :files          :initform nil)
    (branch          :initarg :branch         :initform nil)
+   (tag             :initarg :tag            :initform nil)
    (commit          :initarg :commit         :initform nil)
    (version-regexp  :initarg :version-regexp :initform nil)
    (shell-command   :initarg :shell-command  :initform nil)
@@ -148,7 +149,7 @@ file is invalid, then raise an error."
             (setq fetcher 'git-remote-hg)
             (setq args (plist-put args :url (concat "hg::" (oref rcp url)))))
           (setq rcp (apply (intern (format "package-%s-recipe" fetcher))
-                           name :name name args))
+                           :name name args))
           (unless (oref rcp url)
             (oset rcp url (format (oref rcp url-format) (oref rcp repo))))
           rcp)
@@ -181,7 +182,7 @@ a message for each invalid recipe."
                name ident)
     (cl-assert plist)
     (let* ((symbol-keys '(:fetcher))
-           (string-keys '( :url :repo :commit :branch
+           (string-keys '( :url :repo :branch :tag :commit
                            :version-regexp :shell-command))
            (list-keys '(:files :make-targets :org-exports :old-names))
            (all-keys (append symbol-keys string-keys list-keys)))

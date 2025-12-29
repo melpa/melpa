@@ -1,4 +1,4 @@
-(org-roam-timeline 
- :fetcher github 
+(org-roam-timeline
+ :fetcher github
  :repo "GerardoCendejas/org-roam-timeline"
- :files ("*.el" "html"))
+ :files (:defaults "html"))

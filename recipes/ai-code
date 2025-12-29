@@ -1,0 +1,1 @@
+(ai-code :fetcher github :repo "tninja/ai-code-interface.el" :files (:defaults "snippets"))

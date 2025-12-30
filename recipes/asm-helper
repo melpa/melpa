@@ -1,0 +1,1 @@
+(asm-helper :fetcher codeberg :repo "celesteornato/asm-helper-el" :files ("asm-helper.el" "asm-helper-doc.org"))

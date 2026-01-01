@@ -1,4 +1,1 @@
-(pass-coffin
- :repo "rch/emacs-pass-coffin"
- :fetcher codeberg
- :files ("pass-coffin.el"))
+(pass-coffin :fetcher codeberg :repo "rch/emacs-pass-coffin")

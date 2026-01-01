@@ -1,0 +1,1 @@
+(pi :fetcher github :repo "dnouri/pi.el")

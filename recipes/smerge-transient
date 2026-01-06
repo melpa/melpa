@@ -1,0 +1,1 @@
+(smerge-transient :repo "mpenet/smerge-transient" :fetcher github)

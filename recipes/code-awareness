@@ -1,0 +1,3 @@
+(code-awareness
+ :fetcher github
+ :repo "CodeAwareness/kawa.emacs")

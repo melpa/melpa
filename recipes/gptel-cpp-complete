@@ -1,0 +1,4 @@
+(gptel-cpp-complete
+ :fetcher github
+ :repo "beacoder/gptel-cpp-complete"
+ :files (:defaults "treesit-grammars"))

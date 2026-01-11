@@ -1,0 +1,1 @@
+(ob-duckdb :fetcher github :repo "gggion/ob-duckdb")

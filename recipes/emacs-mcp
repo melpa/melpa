@@ -1,0 +1,3 @@
+(emacs-mcp :fetcher github
+           :repo "BuddhiLW/emacs-mcp"
+           :files ("elisp/*.el" "elisp/addons/*.el"))

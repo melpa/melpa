@@ -1,0 +1,1 @@
+(bash-alias :repo "amno1/bash-alias" :fetcher github)

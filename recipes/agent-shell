@@ -1,1 +1,1 @@
-(agent-shell :fetcher github :repo "xenodium/agent-shell")
+(agent-shell :fetcher github :repo "xenodium/agent-shell" :version-regexp "v%v")

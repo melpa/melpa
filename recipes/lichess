@@ -1,0 +1,1 @@
+(lichess :fetcher github :repo "tmythicator/lichess.el")

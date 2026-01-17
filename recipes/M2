@@ -1,0 +1,1 @@
+(M2 :fetcher github :repo "Macaulay2/M2-emacs")

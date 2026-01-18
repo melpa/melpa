@@ -1,3 +1,4 @@
-(lichess :fetcher github
-         :repo "tmythicator/Lichess.el"
-         :files (:defaults "test" "Makefile" (:exclude "lichess-debug.el" "demo")))
+(lichess
+ :fetcher github
+ :repo "tmythicator/lichess.el"
+ :files ("assets" :defaults (:exclude "lichess-debug.el")))

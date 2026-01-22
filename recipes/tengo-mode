@@ -1,1 +1,3 @@
-(yaml-mode :repo "CsBigDataHub/tengo-mode" :fetcher github)
+(tengo-mode :repo "CsBigDataHub/tengo-mode"
+            :fetcher github
+            :files ("tengo-mode.el"))

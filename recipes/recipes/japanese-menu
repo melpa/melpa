@@ -1,4 +1,0 @@
-(japanese-menu
- :repo "yt-emacs-ja/emacs-japanese-menu"
- :fetcher github
- :files ("japanese-menu.el"))

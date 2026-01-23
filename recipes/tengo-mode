@@ -1,3 +1,2 @@
 (tengo-mode :repo "CsBigDataHub/tengo-mode"
-            :fetcher github
-            :files ("tengo-mode.el"))
+            :fetcher github)

@@ -1,1 +1,3 @@
-(doing :repo "xiaoxinghu/doing.el" :fetcher github)
+(doing :fetcher github
+         :repo "xiaoxinghu/doing.el"
+         :files (:defaults "README.org" (:exclude "batch.el")))

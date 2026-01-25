@@ -1,0 +1,1 @@
+(magit-pre-commit :fetcher github :repo "DamianB-BitFlipper/magit-pre-commit.el")

@@ -1,0 +1,4 @@
+(consult-spotlight
+ :fetcher github
+ :repo "guibor/consult-spotlight"
+ :files ("consult-spotlight.el" "README.md" "LICENSE"))

@@ -1,3 +1,1 @@
-(elsqlite :fetcher github
-          :repo "dusanx/elsqlite"
-          :files ("*.el" "LICENSE" "README.md"))
+(elsqlite :fetcher github :repo "dusanx/elsqlite")

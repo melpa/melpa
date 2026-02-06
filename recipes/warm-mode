@@ -1,1 +1,1 @@
-(warm-mode :fetcher github.com :repo "smallwat3r/emacs-warm-mode")
+(warm-mode :fetcher github :repo "smallwat3r/emacs-warm-mode")

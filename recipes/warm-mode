@@ -1,0 +1,1 @@
+(warm-mode :fetcher github.com :repo "smallwat3r/emacs-warm-mode")

@@ -1,0 +1,3 @@
+(magnus :fetcher github
+        :repo "hrishikeshs/magnus"
+        :files ("*.el"))

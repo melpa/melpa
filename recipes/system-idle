@@ -1,0 +1,1 @@
+(system-idle :fetcher github :repo "meedstrom/system-idle")

@@ -1,0 +1,3 @@
+(project-rails
+  :fetcher github
+  :repo "harrybournis/project.el-rails")

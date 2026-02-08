@@ -1,0 +1,5 @@
+(sly-system-browser :fetcher github
+               :repo "Karscist/sly-system-browser"
+               :files (:defaults
+                       "*.lisp"
+                       "*.asd"))

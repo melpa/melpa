@@ -1,0 +1,3 @@
+(lazy-numbers
+ :repo "yingyu5658/lazy-numbers.el"
+ :fetcher github)

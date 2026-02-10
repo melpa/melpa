@@ -1,0 +1,3 @@
+(doing :fetcher github
+         :repo "xiaoxinghu/doing.el"
+         :files (:defaults (:exclude "batch.el")))

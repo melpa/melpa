@@ -1,0 +1,3 @@
+(mark-graf :fetcher github
+           :repo "hyperZphere/mark-graf"
+           :files ("lisp/*.el"))

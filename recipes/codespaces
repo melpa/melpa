@@ -1,1 +1,1 @@
-(codespaces :fetcher github :repo "patrickt/codespaces.el")
+(codespaces :fetcher github :repo "f4ban/codespaces.el")

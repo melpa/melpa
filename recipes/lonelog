@@ -1,0 +1,3 @@
+(lonelog
+ :fetcher github
+ :repo "enfors/lonelog")

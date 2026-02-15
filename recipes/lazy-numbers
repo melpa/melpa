@@ -1,3 +1,1 @@
-(lazy-numbers
- :repo "yingyu5658/lazy-numbers"
- :fetcher github)
+(lazy-numbers :fetcher github :repo "yingyu5658/lazy-numbers.el")

@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:trixie
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get --yes install \
     curl emacs-nox git make mercurial ruby texinfo imagemagick jq \

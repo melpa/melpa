@@ -1,4 +1,4 @@
 (persp-gumshoe
  :fetcher github
  :repo "Overdr0ne/gumshoe"
- :files ("extensions/persp-gumshoe/*.el"))
+ :files ("extensions/persp-gumshoe/persp-gumshoe*.el"))

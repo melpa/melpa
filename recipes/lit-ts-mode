@@ -1,0 +1,3 @@
+(lit-ts-mode
+ :fetcher github
+ :repo "ispringle/lit-ts-mode")

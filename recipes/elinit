@@ -10,11 +10,11 @@
          ;; C helpers (logd, runas, rlimits) compiled on demand via
          ;; M-x elinit-build-libexec-helpers or automatically when
          ;; elinit-libexec-build-on-startup is set to 'automatic
-         "libexec/*.c"
+         ("libexec" "libexec/*.c")
          ;; elinitctl is the CLI admin tool; logrotate and log-prune
          ;; are default oneshot log management helpers; elinit-import
          ;; converts systemd units to elinit format
-         "sbin/elinitctl"
-         "sbin/elinit-logrotate"
-         "sbin/elinit-log-prune"
-         "sbin/elinit-import"))
+         ("sbin" "sbin/elinitctl"
+                 "sbin/elinit-logrotate"
+                 "sbin/elinit-log-prune"
+                 "sbin/elinit-import")))

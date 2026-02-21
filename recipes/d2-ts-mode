@@ -1,0 +1,3 @@
+(d2-ts-mode :repo "chaploud/d2-ts-mode"
+            :fetcher github
+            :files ("*.el" (:exclude ".dir-locals.el")))

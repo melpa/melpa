@@ -1,0 +1,3 @@
+(tagref
+ :fetcher github
+ :repo "vedang/tagref.el")

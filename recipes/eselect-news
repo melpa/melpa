@@ -1,4 +1,3 @@
 (eselect-news
  :fetcher gitlab
- :repo "cestrand/emacs-eselect-news"
- :files ("eselect-news.el"))
+ :repo "cestrand/emacs-eselect-news")

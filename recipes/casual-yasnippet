@@ -1,0 +1,4 @@
+(casual-yasnippet :fetcher github :repo "dmgerman/casual-yasnippet"
+                  :files ("casual-yasnippet.el"
+                          "casual-yasnippet-utils.el"
+                          "casual-yasnippet-settings.el"))

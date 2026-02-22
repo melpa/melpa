@@ -1,0 +1,3 @@
+(eselect-news
+ :fetcher gitlab
+ :repo "cestrand/emacs-eselect-news")

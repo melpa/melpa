@@ -1,0 +1,4 @@
+(consult-gumshoe
+ :fetcher github
+ :repo "Overdr0ne/gumshoe"
+ :files ("extensions/consult-gumshoe/consult-gumshoe*.el"))

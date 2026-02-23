@@ -1,0 +1,3 @@
+(hackernews-modern :fetcher git
+                   :url "https://git.andros.dev/andros/hackernews-modern-el"
+                   :files ("*.el"))

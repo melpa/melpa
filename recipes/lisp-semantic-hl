@@ -1,0 +1,3 @@
+(lisp-semantic-hl
+ :fetcher github
+ :repo "calsys456/lisp-semantic-hl.el")

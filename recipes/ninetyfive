@@ -1,1 +1,1 @@
-(ninetyfive :fetcher github :repo "ninetyfive-gg/ninetyfive.el")
+(ninetyfive :fetcher github :repo "numerataz/ninetyfive.el")

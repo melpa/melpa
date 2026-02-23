@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2011-2024 Donald Ephraim Curtis
 ;; Copyright (C) 2012-2024 Steve Purcell
-;; Copyright (C) 2016-2025 Jonas Bernoulli
+;; Copyright (C) 2016-2026 Jonas Bernoulli
 ;; Copyright (C) 2009 Phil Hagelberg
 
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
@@ -327,6 +327,8 @@ Otherwise do nothing.  FORMAT-STRING and ARGS are as per that function."
   (when package-build-verbose
     (apply #'message format-string args)))
 
+(define-error 'package-build-error "Package build error")
+
 (defun package-build--error (package format-string &rest args)
   "Behave similar to `error' but with additional logging.
 Log the error to \"errors.log\" in `package-build-archive-dir'.
@@ -335,23 +337,49 @@ package.  PACKAGE identifies a package, it must be a package
 name, a `package-recipe' object or nil, if the command is not
 being run for a particular package."
   (declare (indent defun))
-  (let ((err (apply #'format-message format-string args)))
-    ;; That's a bit of an inconvenient interface...
-    (with-temp-buffer
-      (insert (format "%s  %-25s  %s\n"
-                      (format-time-string "%FT%T%z" nil t)
-                      (if (cl-typep package 'package-recipe)
-                          (oref package name)
-                        (or package "n/a"))
-                      err))
-      (unless (eq (char-before) ?\n)
-        (insert "\n"))
-      (goto-char (point-min))
-      (append-to-file
-       (point)
-       (1+ (line-end-position))
-       (expand-file-name "errors.log" package-build-archive-dir)))
-    (error "%s" err)))
+  (let ((message (apply #'format-message format-string args)))
+    (package-build--log package message)
+    (signal 'package-build-error message)))
+
+(defun package-build--log (package message)
+  (with-temp-buffer
+    (insert (format "%s  %-25s  %s\n"
+                    (format-time-string "%FT%T%z" nil t)
+                    (if (cl-typep package 'package-recipe)
+                        (oref package name)
+                      (or package "n/a"))
+                    message))
+    (let ((file (expand-file-name "errors.log" package-build-archive-dir))
+          (delay 0.1))
+      (while (and (< delay 5)
+                  (condition-case err
+                      (progn (append-to-file (point-min) (point-max) file) nil)
+                    (file-locked (setq delay (* 2 delay)) :retry)
+                    (t (message "LOGGING ERROR: %s" err) nil)))))))
+
+(defmacro package-build--static-if (condition then-form &rest else-forms)
+  (declare (indent 2)
+           (debug (sexp sexp &rest sexp)))
+  (if (eval condition lexical-binding)
+      then-form
+    (cons 'progn else-forms)))
+
+(defmacro package-build--log-errors (&rest body)
+  (declare (indent 1))
+  (package-build--static-if (fboundp 'handler-bind) ;Emacs >= 30.1
+      `(handler-bind
+           ((error (lambda (err)
+                     (unless (eq (car err) 'package-build-error)
+                       (package-build--log name err)))))
+         ,@body)
+    ;; When using Emacs < 30.1 we have to choose between
+    ;; 1. Logging a summary to errors.log
+    ;; `(condition-case err
+    ;;      (progn ,@body)
+    ;;    (package-build-error nil)
+    ;;    (error (package-build--log name err)))
+    ;; 2. Logging the (correct) backtrace to NAME.log and stdout.
+    `(progn ,@body)))
 
 ;;; Version Handling
 ;;;; Common
@@ -392,33 +420,33 @@ or snapshots are build.")
       (oset rcp revdesc revdesc))))
 
 (cl-defmethod package-build--select-commit ((rcp package-git-recipe) rev exact)
-  (if-let ((commit
-            (car (apply #'process-lines
-                        "git" "log" "-n1" "--first-parent" "--no-show-signature"
-                        "--pretty=format:%H %cd" "--date=unix" rev
-                        (and (not exact)
-                             (cons "--" (package-build--spec-globs rcp)))))))
+  (if-let* ((commit
+             (car (apply #'process-lines
+                         "git" "log" "-n1" "--first-parent" "--no-show-signature"
+                         "--pretty=format:%H %cd" "--date=unix" rev
+                         (and (not exact)
+                              (cons "--" (package-build--spec-globs rcp)))))))
       (pcase-let ((`(,hash ,time) (split-string commit " ")))
         (list hash (string-to-number time)))
-    (package-build--error (oref rcp name)
+    (package-build--error rcp
       "No matching file(s) found in any reachable commit using %S files spec"
       (or (oref rcp files) 'default))))
 
 (cl-defmethod package-build--select-commit ((rcp package-hg-recipe) rev exact)
-  (if-let ((commit
-            (car (apply #'process-lines
-                        ;; The "date" keyword uses UTC. The "hgdate" filter
-                        ;; returns two integers separated by a space; the
-                        ;; unix timestamp and the timezone offset.  We use
-                        ;; "hgdate" because that makes it easier to discard
-                        ;; the time zone offset, which doesn't interest us.
-                        "hg" "log" "--limit" "1"
-                        "--template" "{node} {date|hgdate}\n" "--rev" rev
-                        (and (not exact)
-                             (cons "--" (package-build--spec-globs rcp)))))))
+  (if-let* ((commit
+             (car (apply #'process-lines
+                         ;; The "date" keyword uses UTC. The "hgdate" filter
+                         ;; returns two integers separated by a space; the
+                         ;; unix timestamp and the timezone offset.  We use
+                         ;; "hgdate" because that makes it easier to discard
+                         ;; the time zone offset, which doesn't interest us.
+                         "hg" "log" "--limit" "1"
+                         "--template" "{node} {date|hgdate}\n" "--rev" rev
+                         (and (not exact)
+                              (cons "--" (package-build--spec-globs rcp)))))))
       (pcase-let ((`(,hash ,time ,_timezone) (split-string commit " ")))
         (list hash (string-to-number time)))
-    (package-build--error (oref rcp name)
+    (package-build--error rcp
       "No matching file(s) found in any reachable commit using %S files spec"
       (or (oref rcp files) 'default))))
 
@@ -743,8 +771,8 @@ Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING REVDESC) or nil.
       (list rcommit rtime (package-version-join version) rrevdesc tag)))))
 
 (defun package-build--adjust-commit-count (rcp commit version ahead)
-  (if-let ((previous (cdr (assq (intern (oref rcp name))
-                                (package-build-archive-alist)))))
+  (if-let* ((previous (cdr (assq (intern (oref rcp name))
+                                 (package-build-archive-alist)))))
       ;; Because upstream may have rewritten history, we cannot be certain
       ;; that appending the new count of commits would result in a version
       ;; string that is greater than the version string used for the
@@ -1022,6 +1050,7 @@ Use a sandbox if `package-build--use-sandbox' is non-nil."
 (defun package-build--write-pkg-file (rcp dir)
   (pcase-let (((eieio name version summary dependencies) rcp))
     (with-temp-file (expand-file-name (format "%s-pkg.el" name) dir)
+      (set-buffer-file-coding-system 'utf-8)
       (insert ";; -*- no-byte-compile: t; lexical-binding: nil -*-\n")
       (insert (format "(define-package \"%s\" \"%s\"\n" name version))
       (insert (format "  %s\n" (prin1-to-string (concat summary "."))))
@@ -1230,6 +1259,11 @@ is the same as the value of `export_file_name'."
 
 ;;; Extract Metadata
 
+(defconst package-build--http-regexp
+  (concat
+   "\\`\\(http\\)://"
+   (regexp-opt (list "github.com" "gitlab.com" "codeberg.org" "git.sr.ht"))))
+
 (defun package-build--extract-from-library (rcp files)
   "Store information from the main-library from FILES in RCP."
   (let* ((name (oref rcp name))
@@ -1256,19 +1290,22 @@ is the same as the value of `export_file_name'."
                    (package-read-from-string
                     (string-join require-lines " ")))))))
         (oset rcp webpage
-              (or (if (fboundp 'lm-website)
-                      (lm-website)
-                    (with-no-warnings
-                      (lm-homepage)))
+              (or (and-let* ((site (cond ((fboundp 'lm-website)
+                                          (lm-website))
+                                         ((fboundp 'lm-homepage)
+                                          (lm-homepage)))))
+                    (if (string-match package-build--http-regexp site)
+                        (replace-match "https" t t site 1)
+                      site))
                   (and-let* ((format (oref rcp repopage-format)))
                     (format format (oref rcp repo)))))
         (oset rcp keywords (lm-keywords-list))
         (oset rcp maintainers
-              (if (fboundp 'lm-maintainers)
-                  (lm-maintainers)
-                (with-no-warnings
-                  (and-let* ((maintainer (lm-maintainer)))
-                    (list maintainer)))))
+              (cond ((fboundp 'lm-maintainers)
+                     (lm-maintainers))
+                    ((fboundp 'lm-maintainer)
+                     (and-let* ((maintainer (lm-maintainer)))
+                       (list maintainer)))))
         (oset rcp authors (lm-authors))))))
 
 (defun package-build--extract-from-package (rcp files)
@@ -1295,14 +1332,17 @@ is the same as the value of `export_file_name'."
                               "Invalid package name in dependency: %S" pkg))
                           (list pkg ver))
                         (eval deps)))
-          (when-let ((v (or (alist-get :url plist)
-                            (alist-get :homepage plist))))
-            (oset rcp webpage v))
-          (when-let ((v (alist-get :keywords plist)))
+          (when-let* ((v (or (alist-get :url plist)
+                             (alist-get :homepage plist))))
+            (oset rcp webpage
+                  (if (string-match package-build--http-regexp v)
+                      (replace-match "https" t t v 1)
+                    v)))
+          (when-let* ((v (alist-get :keywords plist)))
             (oset rcp keywords v))
-          (when-let ((v (alist-get :maintainers plist)))
+          (when-let* ((v (alist-get :maintainers plist)))
             (oset rcp maintainers v))
-          (when-let ((v (alist-get :authors plist)))
+          (when-let* ((v (alist-get :authors plist)))
             (oset rcp authors v)))))))
 
 (defun package-build--normalize-summary (summary)
@@ -1512,47 +1552,49 @@ are subsequently dumped."
   (unless (file-exists-p package-build-archive-dir)
     (package-build--message "Creating directory %s" package-build-archive-dir)
     (make-directory package-build-archive-dir))
-  (let* ((start-time (current-time))
-         (rcp (package-recipe-lookup name))
-         (url (oref rcp url))
-         (repo (oref rcp repo))
-         (fetcher (package-recipe--fetcher rcp))
-         (version nil)
-         (msg (format "%s%s package %s"
-                      (if noninteractive " • " "")
-                      (if package-build--inhibit-update "Fetching" "Building")
-                      name)))
-    (cond ((and package-build-verbose (not noninteractive))
-           (message "%s..." msg)
-           (message "Package: %s" name)
-           (message "Fetcher: %s" fetcher)
-           (message "Source:  %s\n" url))
-          ((message "%s (from %s)..." msg
-                    (if repo (format "%s:%s" fetcher repo) url))))
-    (package-build--fetch rcp)
-    (unless package-build--inhibit-update
-      (package-build--select-version rcp)
-      (setq version (oref rcp version))
-      (when version
-        (package-build--package rcp)
-        (when dump-archive-contents
-          (package-build-dump-archive-contents)))
-      (if (not version)
-          (message " ✗ Cannot determine version!")
-        (message " ✓ Success:")
-        (pcase-dolist (`(,file . ,attrs)
-                       (directory-files-and-attributes
-                        package-build-archive-dir nil
-                        (format "\\`%s-[0-9]+" name)))
-          (message "  %s  %s"
-                   (format-time-string
-                    "%FT%T%z" (file-attribute-modification-time attrs) t)
-                   file))))
-    (message "%s %s in %.3fs, finished at %s"
-             (if version "Built" "Fetched")
-             name
-             (float-time (time-since start-time))
-             (format-time-string "%FT%T%z" nil t))))
+  ;; On Emacs < 30.1 this expands to just `progn'.
+  (package-build--log-errors
+    (let* ((start-time (current-time))
+           (rcp (package-recipe-lookup name))
+           (url (oref rcp url))
+           (repo (oref rcp repo))
+           (fetcher (package-recipe--fetcher rcp))
+           (version nil)
+           (msg (format "%s%s package %s"
+                        (if noninteractive " • " "")
+                        (if package-build--inhibit-update "Fetching" "Building")
+                        name)))
+      (cond ((and package-build-verbose (not noninteractive))
+             (message "%s..." msg)
+             (message "Package: %s" name)
+             (message "Fetcher: %s" fetcher)
+             (message "Source:  %s\n" url))
+            ((message "%s (from %s)..." msg
+                      (if repo (format "%s:%s" fetcher repo) url))))
+      (package-build--fetch rcp)
+      (unless package-build--inhibit-update
+        (package-build--select-version rcp)
+        (setq version (oref rcp version))
+        (when version
+          (package-build--package rcp)
+          (when dump-archive-contents
+            (package-build-dump-archive-contents)))
+        (if (not version)
+            (message " ✗ Cannot determine version!")
+          (message " ✓ Success:")
+          (pcase-dolist (`(,file . ,attrs)
+                         (directory-files-and-attributes
+                          package-build-archive-dir nil
+                          (format "\\`%s-[0-9]+" name)))
+            (message "  %s  %s"
+                     (format-time-string
+                      "%FT%T%z" (file-attribute-modification-time attrs) t)
+                     file))))
+      (message "%s %s in %.3fs, finished at %s"
+               (if version "Built" "Fetched")
+               name
+               (float-time (time-since start-time))
+               (format-time-string "%FT%T%z" nil t)))))
 
 ;;;###autoload
 (defun package-build--package (rcp)
@@ -1572,11 +1614,11 @@ in `package-build-archive-dir'."
             (package-build--message "Running %s" command)
             (package-build--call-sandboxed
              rcp shell-file-name shell-command-switch command))
-          (when-let ((_ package-build-run-recipe-make-targets)
-                     (targets (oref rcp make-targets)))
+          (when-let* ((_ package-build-run-recipe-make-targets)
+                      (targets (oref rcp make-targets)))
             (package-build--message "Running make %s" (string-join targets " "))
             (apply #'package-build--call-sandboxed rcp "make" targets))
-          (if-let ((files (package-build-expand-files-spec rcp t)))
+          (if-let* ((files (package-build-expand-files-spec rcp t)))
               (funcall (or package-build-build-function
                            'package-build--legacy-build)
                        rcp files)
@@ -1589,7 +1631,8 @@ in `package-build-archive-dir'."
 
 (defun package-build--build-package (rcp files)
   (pcase-let* (((eieio name version) rcp)
-               (tmpdir (file-name-as-directory (make-temp-file name t)))
+               (tmpdir (file-name-as-directory
+                        (make-temp-file (concat name "-") t)))
                (target (expand-file-name (concat name "-" version) tmpdir)))
     (unless (rassoc (concat name ".el") files)
       (package-build--error name
@@ -1637,7 +1680,8 @@ in `package-build-archive-dir'."
 (defun package-build--build-multi-file-package (rcp files)
   (declare (obsolete package-build--build-package "Package-Build 5.0.0"))
   (pcase-let* (((eieio name version) rcp)
-               (tmpdir (file-name-as-directory (make-temp-file name t)))
+               (tmpdir (file-name-as-directory
+                        (make-temp-file (concat name "-") t)))
                (target (expand-file-name (concat name "-" version) tmpdir)))
     (unless (or (rassoc (concat name ".el") files)
                 (rassoc (concat name "-pkg.el") files))
@@ -1778,6 +1822,7 @@ If optional PRETTY-PRINT is non-nil, then pretty-print
                   vc-pkgs))))))
     (setq entries (cl-sort entries #'string< :key #'car))
     (with-temp-file (or file (expand-file-name "archive-contents"))
+      (set-buffer-file-coding-system 'utf-8)
       (let ((print-level nil)
             (print-length nil))
         (if pretty-print
@@ -1791,6 +1836,7 @@ If optional PRETTY-PRINT is non-nil, then pretty-print
     (setq vc-pkgs (cl-sort vc-pkgs #'string< :key #'car))
     (with-temp-file (expand-file-name "elpa-packages.eld"
                                       (and file (file-name-nondirectory file)))
+      (set-buffer-file-coding-system 'utf-8)
       (let ((print-level nil)
             (print-length nil))
         (insert "((")

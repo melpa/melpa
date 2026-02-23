@@ -1,0 +1,3 @@
+(fancy-fill-paragraph
+ :fetcher codeberg
+ :repo "ideasman42/emacs-fancy-fill-paragraph")

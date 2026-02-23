@@ -53,10 +53,9 @@
     package
   end
 
-  packages.sort_by { |p| p.version }.reverse[0..200].each do |package|
-%>**
+  packages.sort_by { |p| p.build_time }.reverse[0...200].each do |package|
+%>** <%= package.build_time.strftime("%Y-%m-%dT%H:%M:%S%z") %>
 :PROPERTIES:
-:ID: <%= package.build_time.iso8601 %>
 :LANG: en
 :TAGS: emacs package <%= package.name %>
 :END:

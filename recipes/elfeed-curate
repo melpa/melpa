@@ -1,0 +1,1 @@
+(elfeed-curate :repo "rnadler/elfeed-curate" :fetcher github)

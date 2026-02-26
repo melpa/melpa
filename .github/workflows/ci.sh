@@ -3,7 +3,6 @@
 set -eo pipefail
 
 exec 2>&1
-cd "$(dirname "$0")"
 
 EMACS=${EMACS:-$(command -v emacs)}
 
@@ -18,6 +17,8 @@ for recipe_name in $changed_recipes; do
         echo "----------------------------------------------------"
         echo "Building new/modified recipe: $recipe_name"
         emacs --batch --eval "(let ((debug-on-error t)) (add-to-list 'load-path \"$PWD/package-build/\")(load-file \"package-build/package-build.el\")(package-build-archive \"$recipe_name\"))"
+    else
+        echo "File or directory unbuildable: ./recipes/${recipe_name}"
     fi
 done
 

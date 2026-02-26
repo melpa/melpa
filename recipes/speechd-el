@@ -1,3 +1,6 @@
 (speechd-el
  :fetcher github
- :repo "brailcom/speechd-el")
+ :repo "brailcom/speechd-el"
+ ;; Building the manual fails, so don't try, removing some noise that
+ ;; makes it harder to focus on issues we actually have control over.
+ :files (:defaults (:exclude "*.texi")))

@@ -1,0 +1,1 @@
+(micromamba :fetcher github :repo "SqrtMinusOne/micromamba.el")

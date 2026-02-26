@@ -1,1 +1,1 @@
-(emms-soundcloud :fetcher github :repo "osener/emms-soundcloud")
+(emms-soundcloud :fetcher github :repo "ozanmakes/emms-soundcloud")

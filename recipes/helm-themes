@@ -1,3 +1,0 @@
-(helm-themes
- :repo "emacsorphanage/helm-themes"
- :fetcher github)

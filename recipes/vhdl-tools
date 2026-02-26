@@ -1,1 +1,0 @@
-(vhdl-tools :repo "emacs-elisp/vhdl-tools" :fetcher gitlab)

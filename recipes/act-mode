@@ -1,0 +1,3 @@
+(act-mode
+ :repo "rafaelcn/act"
+ :fetcher github)

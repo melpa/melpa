@@ -1,0 +1,3 @@
+(communinfo
+ :fetcher codeberg
+ :repo "mekeor/communinfo")

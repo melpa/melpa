@@ -1,0 +1,3 @@
+(kagi
+ :fetcher codeberg
+ :repo "bram85/kagi.el")

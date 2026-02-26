@@ -1,0 +1,3 @@
+(firebase-rules-mode
+ :fetcher github
+ :repo "dherbst/firebase-rules-mode")

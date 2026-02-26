@@ -1,5 +1,4 @@
 (flycheck-cfn
  :fetcher gitlab
  :repo "worr/cfn-mode"
- :version-regexp "flycheck-cfn/v\\(.+\\)"
  :files ("flycheck-cfn/flycheck-cfn.el"))

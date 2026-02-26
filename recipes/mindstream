@@ -1,0 +1,2 @@
+(mindstream :repo "countvajhula/mindstream"
+            :fetcher github)

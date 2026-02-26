@@ -1,0 +1,3 @@
+(sqlite-mode-extras
+ :fetcher github
+ :repo "xenodium/sqlite-mode-extras")

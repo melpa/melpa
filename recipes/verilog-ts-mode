@@ -1,0 +1,1 @@
+(verilog-ts-mode :repo "gmlarumbe/verilog-ts-mode" :fetcher github)

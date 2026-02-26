@@ -1,0 +1,1 @@
+(transform-symbol-at-point :fetcher github :repo "waymondo/transform-symbol-at-point")

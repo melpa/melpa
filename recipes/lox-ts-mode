@@ -1,0 +1,1 @@
+(lox-ts-mode :repo "nverno/lox-ts-mode" :fetcher github)

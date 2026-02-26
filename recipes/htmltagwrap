@@ -1,1 +1,1 @@
-(htmltagwrap :repo "jcs-elpa/htmltagwrap" :fetcher github)
+(htmltagwrap :repo "emacs-vs/htmltagwrap" :fetcher github)

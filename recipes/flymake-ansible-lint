@@ -1,0 +1,1 @@
+(flymake-ansible-lint :fetcher github :repo "jamescherti/flymake-ansible-lint.el")

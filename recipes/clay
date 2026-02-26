@@ -1,0 +1,2 @@
+(clay :fetcher github
+      :repo "scicloj/clay.el")

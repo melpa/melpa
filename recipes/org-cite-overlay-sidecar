@@ -1,0 +1,4 @@
+(org-cite-overlay-sidecar
+ :fetcher sourcehut
+ :repo "swflint/org-cite-overlay"
+ :files ("org-cite-overlay-sidecar.el"))

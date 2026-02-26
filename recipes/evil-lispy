@@ -1,2 +1,2 @@
-(evil-lispy :repo "sp3ctum/evil-lispy"
+(evil-lispy :repo "mikavilpas/evil-lispy"
             :fetcher github)

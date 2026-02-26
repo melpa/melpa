@@ -1,1 +1,0 @@
-(package-safe-delete :fetcher github :repo "Fanael/package-safe-delete")

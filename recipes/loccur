@@ -1,1 +1,1 @@
-(loccur :fetcher github :repo "fourier/loccur")
+(loccur :fetcher codeberg :repo "fourier/loccur")

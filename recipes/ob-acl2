@@ -1,0 +1,1 @@
+(ob-acl2 :fetcher github :repo "tani/ob-acl2")

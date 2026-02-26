@@ -1,0 +1,3 @@
+(p4-ts-mode
+ :fetcher github
+ :repo "oxidecomputer/p4-ts-mode")

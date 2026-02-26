@@ -1,0 +1,1 @@
+(org-daily-reflection :fetcher github :repo "emacsomancer/org-daily-reflection")

@@ -1,2 +1,2 @@
-(fortune-cookie :repo "andschwa/fortune-cookie" :fetcher github)
+(fortune-cookie :repo "andyleejordan/fortune-cookie" :fetcher github)
 

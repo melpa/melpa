@@ -1,2 +1,2 @@
-(tile :repo "IvanMalison/tile"
+(tile :repo "colonelpanic8/tile"
       :fetcher github)

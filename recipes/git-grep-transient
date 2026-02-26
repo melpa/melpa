@@ -1,0 +1,1 @@
+(git-grep-transient :repo "adelplanque/git-grep-transient" :fetcher github)

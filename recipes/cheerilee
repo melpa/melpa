@@ -1,3 +1,6 @@
 (cheerilee
  :fetcher github
- :repo "Vannil/cheerilee.el")
+ :repo "Vannil/cheerilee.el"
+ ;; Use the tracked info file.  Re-generating that from the texi file
+ ;; fails because the included fdl.texi is missing.
+ :files (:defaults (:exclude "cheerilee.texi")))

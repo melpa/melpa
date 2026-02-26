@@ -1,1 +1,1 @@
-(json-mode :fetcher github :repo "joshwnj/json-mode")
+(json-mode :fetcher github :repo "json-emacs/json-mode")

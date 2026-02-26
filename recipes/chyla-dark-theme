@@ -1,0 +1,3 @@
+(chyla-dark-theme
+ :repo "chyla/ChylaDarkThemeForEmacs"
+ :fetcher github)

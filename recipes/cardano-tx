@@ -1,6 +1,0 @@
-(cardano-tx
- :fetcher github
- :repo "Titan-C/cardano.el"
- :files (:defaults "snippets"
-         (:exclude "cbor.el" "bech32.el" "readable-numbers.el"
-                   "cardano-wallet.el" "ouroboros.el")))

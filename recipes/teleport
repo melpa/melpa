@@ -1,0 +1,1 @@
+(teleport :repo "caramelhooves/teleport.el" :fetcher github)

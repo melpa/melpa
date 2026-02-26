@@ -1,1 +1,1 @@
-(cff :fetcher github :repo "fourier/cff")
+(cff :fetcher codeberg :repo "fourier/cff")

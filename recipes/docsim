@@ -1,0 +1,2 @@
+(docsim :fetcher github
+        :repo "hrs/docsim.el")

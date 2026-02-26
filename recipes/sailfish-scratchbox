@@ -1,1 +1,1 @@
-(sailfish-scratchbox :repo "vityafx/sailfish-scratchbox.el" :fetcher github)
+(sailfish-scratchbox :repo "iddm/sailfish-scratchbox.el" :fetcher github)

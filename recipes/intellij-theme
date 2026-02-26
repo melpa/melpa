@@ -1,2 +1,2 @@
-(intellij-theme :fetcher gitlab
-                :repo "fommil/emacs-intellij-theme")
+(intellij-theme :fetcher github
+                :repo "fommil/intellij-theme.el")

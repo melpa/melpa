@@ -1,1 +1,1 @@
-(eshell-outline :fetcher git :url "https://git.jamzattack.xyz/eshell-outline")
+(eshell-outline :fetcher github :repo "emacsattic/eshell-outline")

@@ -1,0 +1,1 @@
+(dtext-mode :fetcher github :repo "JohnDevlopment/dtext-mode.el")

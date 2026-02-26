@@ -1,1 +1,1 @@
-(templatel :fetcher github :repo "clarete/templatel")
+(templatel :fetcher github :repo "emacs-love/templatel")

@@ -1,1 +1,1 @@
-(alsamixer :fetcher github :repo "remvee/alsamixer-el")
+(alsamixer :fetcher codeberg :repo "rwv/alsamixer-el")

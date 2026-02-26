@@ -1,1 +1,1 @@
-(ol-notmuch :fetcher sourcehut :repo "tarsius/ol-notmuch")
+(ol-notmuch :fetcher github :repo "tarsius/ol-notmuch")

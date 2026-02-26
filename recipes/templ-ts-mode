@@ -1,0 +1,1 @@
+(templ-ts-mode :fetcher github :repo "danderson/templ-ts-mode")

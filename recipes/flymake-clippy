@@ -1,0 +1,3 @@
+(flymake-clippy
+ :fetcher github
+ :repo "mgmarlow/flymake-clippy")

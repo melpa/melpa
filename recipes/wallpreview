@@ -1,1 +1,1 @@
-(wallpreview :repo "nryotaro/wallpreview" :fetcher github)
+(wallpreview :repo "ryotaro612/wallpreview" :fetcher github)

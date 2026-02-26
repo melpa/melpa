@@ -1,1 +1,1 @@
-(protobuf-ts-mode :fetcher git :url "https://git.ookami.one/cgit/protobuf-ts-mode")
+(protobuf-ts-mode :fetcher github :repo "emacsattic/protobuf-ts-mode")

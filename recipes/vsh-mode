@@ -1,0 +1,8 @@
+(vsh-mode
+ :fetcher github
+ :repo "hardenedapple/vsh"
+ :files ("vsh-mode-1.0/vsh-mode.el"
+         "vsh-mode-1.0/integration_with_gdb.py"
+         "vsh-mode-1.0/vsh_tell_editor_bindings.py"
+         "vsh-mode-1.0/vsh_man_pager"
+         "vsh-mode-1.0/vsh_shell_start"))

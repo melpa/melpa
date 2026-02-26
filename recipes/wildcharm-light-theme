@@ -1,0 +1,4 @@
+(wildcharm-light-theme
+ :repo "habamax/wildcharm-theme"
+ :fetcher github
+ :files ("wildcharm-light-theme.el"))

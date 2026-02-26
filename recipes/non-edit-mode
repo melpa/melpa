@@ -1,0 +1,3 @@
+(non-edit-mode
+ :fetcher gitlab
+ :repo "aragaer/non-edit-mode")

@@ -1,6 +1,6 @@
 (flim
  :fetcher github
- :repo "wanderlust/flim"
+ :repo "emacsmirror/flim"
  :files ("*.texi"
          "*.el"
          (:exclude "md5-dl.el"

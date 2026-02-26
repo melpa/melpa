@@ -1,1 +1,1 @@
-(mo-git-blame :repo "mbunkus/mo-git-blame" :fetcher gitlab)
+(mo-git-blame :repo "mbunkus/mo-git-blame" :fetcher codeberg)

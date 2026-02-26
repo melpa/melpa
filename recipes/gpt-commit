@@ -1,0 +1,1 @@
+(gpt-commit :fetcher github :repo "ywkim/gpt-commit")

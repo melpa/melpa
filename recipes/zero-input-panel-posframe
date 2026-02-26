@@ -1,0 +1,3 @@
+(zero-input-panel-posframe
+ :fetcher git
+ :url "https://gitlab.emacsos.com/sylecn/zero-input-panel-posframe.git")

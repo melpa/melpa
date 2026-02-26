@@ -1,0 +1,4 @@
+(opencl-c-mode
+ :fetcher github
+ :repo "salmanebah/opencl-mode"
+ :old-names (opencl-mode))

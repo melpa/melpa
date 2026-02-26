@@ -1,2 +1,2 @@
-(apt-sources-list :fetcher git
-                  :url "https://git.korewanetadesu.com/apt-sources-list.git")
+(apt-sources-list :fetcher gitlab
+                  :repo "joewreschnig/apt-sources-list-mode")

@@ -1,0 +1,1 @@
+(js-pkg-mode :fetcher github :repo "ovistoica/js-pkg-mode")

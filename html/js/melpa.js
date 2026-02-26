@@ -118,8 +118,11 @@
       } else if (recipe.fetcher == "gitlab") {
         base = "https://gitlab.com/" + recipe.repo;
         ref = commit || recipe.branch;
-        return "https://gitlab.com/" + recipe.repo +
-          (ref ? "/tree/" + ref : "");
+        return base + (ref ? "/tree/" + ref : "");
+      } else if (recipe.fetcher == "sourcehut") {
+        base = "https://git.sr.ht/~" + recipe.repo;
+        ref = commit || recipe.branch;
+        return base + (ref ? "/tree/" + ref : "");
       } else if (recipe.fetcher == "bitbucket") {
         base = "https://bitbucket.com/" + recipe.repo;
         if (commit) return base + "/src/" + commit;

@@ -1,0 +1,3 @@
+(gpr-ts-mode
+ :fetcher github
+ :repo "brownts/gpr-ts-mode")

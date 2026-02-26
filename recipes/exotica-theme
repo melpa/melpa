@@ -1,3 +1,3 @@
 (exotica-theme
- :repo "zenobht/exotica-theme"
+ :repo "sacredyak/exotica-theme"
  :fetcher github)

@@ -1,0 +1,3 @@
+(le-gpt :fetcher github
+        :repo "AnselmC/le-gpt.el"
+        :files (:defaults "le-gpt.py"))

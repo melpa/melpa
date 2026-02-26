@@ -1,0 +1,4 @@
+(ob-athena
+ :fetcher github
+ :repo "will-abb/aws-athena-babel"
+ :old-names (aws-athena-babel))

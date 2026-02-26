@@ -1,0 +1,3 @@
+(leader-key
+ :fetcher github
+ :repo "Havner/leader-key")

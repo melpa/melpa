@@ -1,2 +1,0 @@
-(finalize :repo "skeeto/elisp-finalize"
-          :fetcher github)

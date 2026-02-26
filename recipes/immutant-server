@@ -1,1 +1,0 @@
-(immutant-server :fetcher github :repo "leathekd/immutant-server.el")

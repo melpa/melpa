@@ -1,0 +1,2 @@
+(astute :fetcher github
+        :repo "rnkn/astute")

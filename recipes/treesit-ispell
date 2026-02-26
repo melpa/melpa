@@ -1,0 +1,3 @@
+(treesit-ispell
+  :fetcher github
+  :repo "erickgnavar/treesit-ispell.el")

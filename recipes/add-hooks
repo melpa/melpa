@@ -1,1 +1,1 @@
-(add-hooks :repo "nickmccurdy/add-hooks" :fetcher github)
+(add-hooks :repo "nickserv/add-hooks" :fetcher github)

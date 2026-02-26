@@ -1,0 +1,3 @@
+(arscript-mode
+ :fetcher github
+ :repo "captainflasmr/arscript-mode")

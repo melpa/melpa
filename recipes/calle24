@@ -1,0 +1,5 @@
+(calle24
+ :fetcher github
+ :repo "kickingvegas/calle24"
+ :files
+ (:defaults "images"))

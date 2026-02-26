@@ -1,0 +1,1 @@
+(quick-sdcv :fetcher github :repo "jamescherti/quick-sdcv.el")

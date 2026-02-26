@@ -1,0 +1,3 @@
+(minuet
+  :fetcher github
+  :repo "milanglacier/minuet-ai.el")

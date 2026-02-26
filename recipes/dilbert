@@ -1,1 +1,1 @@
-(dilbert :fetcher github :repo "DaniruKun/dilbert-el")
+(dilbert :fetcher github :repo "danirukun/dilbert-el")

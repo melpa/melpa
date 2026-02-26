@@ -1,0 +1,1 @@
+(sourcepawn-mode :fetcher github :repo "agrif/sourcepawn-mode")

@@ -1,0 +1,3 @@
+(tabnine
+ :fetcher github
+ :repo "shuxiao9058/tabnine")

@@ -1,4 +1,4 @@
-(prettify-math :fetcher git
-               :url "https://gitee.com/shaqxu/prettify-math.git"
-               :files (:defaults
-                       "mathjax-jsonrpc.js"))
+(prettify-math
+ :fetcher github
+ :repo "shaqtsui/prettify-math"
+ :files (:defaults "mathjax-jsonrpc.js"))

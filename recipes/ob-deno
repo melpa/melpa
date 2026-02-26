@@ -1,1 +1,1 @@
-(ob-deno :repo "taiju/ob-deno" :fetcher github)
+(ob-deno :repo "isamert/ob-deno" :fetcher github)

@@ -1,0 +1,1 @@
+(vhdl-ts-mode :repo "gmlarumbe/vhdl-ts-mode" :fetcher github)

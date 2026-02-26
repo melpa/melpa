@@ -1,0 +1,1 @@
+(async-status :repo "seokbeomKim/async-status" :fetcher github)

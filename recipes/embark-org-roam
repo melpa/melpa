@@ -1,0 +1,1 @@
+(embark-org-roam :fetcher github :repo "bramadams/embark-org-roam")

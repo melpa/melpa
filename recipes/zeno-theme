@@ -1,3 +1,3 @@
 (zeno-theme
- :repo "zenobht/zeno-theme"
+ :repo "sacredyak/zeno-theme"
  :fetcher github)

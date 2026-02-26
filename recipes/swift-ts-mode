@@ -1,0 +1,1 @@
+(swift-ts-mode :fetcher github :repo "rechsteiner/swift-ts-mode")

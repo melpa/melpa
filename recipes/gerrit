@@ -1,1 +1,1 @@
-(gerrit :fetcher github :repo "thisch/gerrit.el")
+(gerrit :fetcher github :repo "twmr/gerrit.el")

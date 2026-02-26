@@ -1,0 +1,15 @@
+(casual
+ :fetcher github
+ :repo "kickingvegas/casual"
+ :old-names (casual-agenda
+             casual-bookmarks
+             casual-calc
+             casual-dired
+             casual-editkit
+             casual-ibuffer
+             casual-info
+             casual-isearch
+             cc-isearch-menu
+             casual-lib
+             casual-re-builder)
+ :files (:defaults "docs/images"))

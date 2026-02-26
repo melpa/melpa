@@ -1,1 +1,1 @@
-(wordsmith-mode :repo "istib/wordsmith-mode" :fetcher github)
+(wordsmith-mode :repo "emacsattic/wordsmith-mode" :fetcher github)

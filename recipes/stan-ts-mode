@@ -1,0 +1,4 @@
+(stan-ts-mode
+ :fetcher github
+ :repo "WardBrian/stan-ts-mode"
+ :files ("stan-ts-mode.el"))

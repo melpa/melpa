@@ -1,0 +1,3 @@
+(caterm
+  :fetcher github
+  :repo "Catalina-sys456/caterm")

@@ -1,5 +1,5 @@
 (ekg
  :fetcher github
  :repo "ahyatt/ekg"
- :files ("README.md" "doc/*.md" "ekg.el" "ekg-embedding.el" "ekg-llm.el"
+ :files ("doc/*.md" "ekg.el" "ekg-embedding.el" "ekg-llm.el"
          "ekg-auto-save.el" "ekg-org-roam.el" "ekg-org.el"))

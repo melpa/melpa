@@ -1,1 +1,1 @@
-(stan-ts-modey :fetcher github  :repo "WardBrian/stan-ts-mode")
+(stan-ts-mode :fetcher github  :repo "WardBrian/stan-ts-mode")

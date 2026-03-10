@@ -1,0 +1,1 @@
+(flymake-zizmor :repo "unhammer/flymake-zizmor" :fetcher github)

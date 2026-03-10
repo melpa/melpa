@@ -14,6 +14,7 @@ jobs:
       with:
         path: package-build
         fetch-depth: 1
+        persist-credentials: false
 
     - name: Checkout melpa
       uses: actions/checkout@v6
@@ -21,6 +22,7 @@ jobs:
         path: melpa
         repository: melpa/melpa
         fetch-depth: 1
+        persist-credentials: false
 
     - name: Install dependencies
       run: |

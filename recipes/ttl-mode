@@ -1,5 +1,1 @@
-(ttl-mode
- :fetcher github
- :repo "nxg/ttl-mode"
- ;; See https://github.com/nxg/ttl-mode/pull/4.
- :files ((:rename "ttl-mode.el.in" "ttl-mode.el")))
+(ttl-mode :fetcher github :repo "emacsattic/ttl-mode")

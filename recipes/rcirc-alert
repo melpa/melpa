@@ -1,4 +1,0 @@
-(rcirc-alert
- :fetcher github
- :repo "csantosb/rcirc-alert"
- :files ("*.el" "*.sh"))

@@ -1,0 +1,2 @@
+(iwd-manager :fetcher github :repo "sarg/wifi-manager"
+             :files ("iwd-manager.el"))

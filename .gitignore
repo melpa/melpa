@@ -15,7 +15,7 @@
 /packages*/
 /process_log.pid
 /recipes/.dirstamp
-/sandbox
+/sandbox/
 /service/*/log
 /service/*/supervise
 /service/caddy/.caddy

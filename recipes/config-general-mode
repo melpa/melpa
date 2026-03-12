@@ -1,2 +1,1 @@
-(config-general-mode :repo "TLINDEN/config-general-mode" :fetcher github)
-
+(config-general-mode :fetcher codeberg :repo "scip/config-general-mode")

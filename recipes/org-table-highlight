@@ -1,0 +1,1 @@
+(org-table-highlight :fetcher github :repo "llcc/org-table-highlight")

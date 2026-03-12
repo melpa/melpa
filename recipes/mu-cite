@@ -1,6 +1,6 @@
 (mu-cite
- :repo "ksato9700/mu-cite"
  :fetcher github
+ :repo "cvs-m17n-org/MU-CITE"
  ;; All tags are from more than two decades ago.
  :version-regexp "ignore-all-tags"
  :files ("*.el" (:exclude "mu-bbdb.el")))

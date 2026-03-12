@@ -167,7 +167,7 @@ the following form (`[...]` denotes optional or conditional values),
     "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
     "docs/dir" "docs/*.info" "docs/*.texi" "docs/*.texinfo"
     (:exclude
-     ".dir-locals.el" "lisp/.dir-locals.el"
+     ".*.el" "lisp/.*.el"
      "test.el" "tests.el" "*-test.el" "*-tests.el"
      "lisp/test.el" "lisp/tests.el" "lisp/*-test.el" "lisp/*-tests.el"))
   ```
@@ -175,8 +175,12 @@ the following form (`[...]` denotes optional or conditional values),
   Note that you should place Emacs Lisp libraries in the root of the
   repository or in the `lisp/` directory. Test files should be placed
   in the `test/` directory and they should not provide a feature.
-  Likewise `NAME-pkg.el` isn't a library, so you might want to place
-  it in the root directory, even when libraries reside in `lisp/`.
+  Note that all Emacs Lisp files whose name begin with a period are
+  excluded.
+
+  No `NAME-pkg.el` should be checked into version control.  This file
+  is generated from metadata found in the "main library" (`NAME.el`).
+  This is true not only for MELPA, but also GNU ELPA and NonGNU ELPA.
 
   Please do not track any third-party libraries and test utilities in
   your repository. If you absolutely must do it, then place these

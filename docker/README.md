@@ -15,6 +15,5 @@ docker compose exec <component> /bin/bash
 
 ## Setup
 
-- The `daemon.json` file should be installed to `/etc/docker/` to limit the number of logs.
-
-
+- The `daemon.json` file should be installed to `/etc/docker/` to limit the
+  number of logs.

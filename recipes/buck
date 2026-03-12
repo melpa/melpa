@@ -1,0 +1,1 @@
+(buck :fetcher github :repo "emacsattic/buck")

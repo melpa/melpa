@@ -11,4 +11,5 @@
              casual-isearch
              cc-isearch-menu
              casual-lib
-             casual-re-builder))
+             casual-re-builder)
+ :files (:defaults "docs/images"))

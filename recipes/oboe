@@ -1,0 +1,1 @@
+(oboe :fetcher github :repo "gynamics/oboe.el")

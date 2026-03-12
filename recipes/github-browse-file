@@ -1,1 +1,1 @@
-(github-browse-file :fetcher github :repo "ozanmakes/github-browse-file")
+(github-browse-file :fetcher github :repo "emacsattic/github-browse-file")

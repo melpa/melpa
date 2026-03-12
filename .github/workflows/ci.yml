@@ -10,9 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-24.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
       with:
         fetch-depth: 2
+        persist-credentials: false
     - name: Install dependencies
       run: |
         sudo apt-get install emacs

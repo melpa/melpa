@@ -1,0 +1,2 @@
+(virtual-ring :fetcher github
+              :repo "countvajhula/virtual-ring")

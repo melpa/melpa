@@ -1,5 +1,4 @@
 (spider-man-theme
  :fetcher github
- :repo "madara123pain/unique-emacs-theme-pack" 
+ :repo "Umer-Arif/unique-emacs-theme-pack"
  :files ("Themes/spider-man-theme.el"))
-

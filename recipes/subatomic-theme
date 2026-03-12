@@ -1,1 +1,3 @@
-(subatomic-theme :repo "cryon/subatomic-theme" :fetcher github)
+(subatomic-theme
+ :fetcher codeberg
+ :repo "cryon/subatomic-theme")

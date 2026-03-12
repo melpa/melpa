@@ -1,0 +1,1 @@
+(gogs :fetcher github :repo "emacsattic/gogs")

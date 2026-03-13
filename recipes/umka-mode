@@ -1,0 +1,3 @@
+(umka-mode
+ :fetcher github
+ :repo "rexim/umka-mode")

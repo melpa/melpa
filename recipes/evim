@@ -1,1 +1,1 @@
-(evim :fetcher github :repo "Prgebish/multi-cursor-evil")
+(evim :fetcher github :repo "Prgebish/evim")

@@ -1,0 +1,1 @@
+(vterm-editor :fetcher git :url "https://git.andros.dev/andros/vterm-editor.el.git")

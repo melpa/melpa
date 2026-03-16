@@ -1,0 +1,3 @@
+(async-http-queue
+ :fetcher git
+ :url "https://git.andros.dev/andros/async-http-queue-el.git")

@@ -1,0 +1,3 @@
+(ros-mode
+  :repo "smallwat3r/emacs-ros-mode"
+  :fetcher github)

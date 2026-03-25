@@ -1,1 +1,1 @@
-(flywrite :repo "awdeorio/flywrite" :fetcher github)
+(flywrite :repo "awdeorio/flywrite" :fetcher github :files ("flywrite.el"))

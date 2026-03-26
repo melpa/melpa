@@ -1,0 +1,2 @@
+(org-pdf-slide-shower :fetcher github :repo "99702/org-pdf-slide-shower")
+

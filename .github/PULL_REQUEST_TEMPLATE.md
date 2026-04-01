@@ -1,3 +1,9 @@
+<!-- Use this template when adding a new package recipe. -->
+<!-- You don't have to use this when modifing an existing recipe. -->
+
+<!-- Please use "Add recipe for name-of-package" as the title. -->
+<!--             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                -->
+
 ### Brief summary of what the package does
 
 [Please write a quick summary of the package.]

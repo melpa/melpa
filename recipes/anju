@@ -1,0 +1,4 @@
+(anju
+ :fetcher github
+ :repo "kickingvegas/anju"
+ :files (:defaults "docs/images"))

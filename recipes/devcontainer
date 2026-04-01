@@ -1,0 +1,1 @@
+(devcontainer :fetcher github :repo "johannes-mueller/devcontainer.el")

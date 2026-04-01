@@ -1,0 +1,3 @@
+(ros-face
+  :fetcher github
+  :repo "smallwat3r/emacs-ros-face")

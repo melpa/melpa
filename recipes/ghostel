@@ -1,0 +1,4 @@
+(ghostel
+ :fetcher github
+ :repo "dakra/ghostel"
+ :files (:defaults "etc"))

@@ -1,0 +1,3 @@
+(org-grimoire :fetcher github
+              :repo "spiperac/org-grimoire"
+              :files ("org-grimoire.el" "themes"))

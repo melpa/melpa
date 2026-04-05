@@ -1,0 +1,3 @@
+(markdown-table-wrap
+ :fetcher github
+ :repo "dnouri/markdown-table-wrap")

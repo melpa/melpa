@@ -1,0 +1,3 @@
+(magit-browse-commit
+ :fetcher github
+ :repo "bbw9n/magit-browse-commit")

@@ -1,3 +1,5 @@
 (ekg
  :fetcher github
- :repo "ahyatt/ekg")
+ :repo "ahyatt/ekg"
+ :files ("doc/*.texi" "ekg.el" "ekg-embedding.el" "ekg-llm.el"
+         "ekg-auto-save.el" "ekg-org-roam.el" "ekg-org.el" "ekg-apple-notes.el"))

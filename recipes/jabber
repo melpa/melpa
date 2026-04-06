@@ -1,6 +1,0 @@
-(jabber
- :fetcher codeberg
- :repo "emacs-jabber/emacs-jabber"
- :files (:defaults
-         "*.org"
-         ("jabber-fallback-lib" "jabber-fallback-lib/hexrgb.el")))

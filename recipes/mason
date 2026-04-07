@@ -1,1 +1,1 @@
-(mason :fetcher github :repo "deirn/mason.el")
+(mason :fetcher github :repo "mason-org/mason.el")

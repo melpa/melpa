@@ -1,0 +1,1 @@
+(python-unicode-escape :fetcher github :repo "jb3/python-unicode-escape")

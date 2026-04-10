@@ -1,0 +1,1 @@
+(trust-manager :fetcher github :repo "eshelyaron/trust-manager")

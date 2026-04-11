@@ -1,1 +1,1 @@
-(python-cell :fetcher github :repo "thisch/python-cell.el")
+(python-cell :fetcher github :repo "twmr/python-cell.el")

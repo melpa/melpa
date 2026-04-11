@@ -1,1 +1,1 @@
-(hoa-mode :fetcher git :url "https://gitlab.lrde.epita.fr/spot/emacs-modes.git")
+(hoa-mode :fetcher git :url "https://gitlab.lre.epita.fr/spot/emacs-modes.git")

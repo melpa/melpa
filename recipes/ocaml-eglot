@@ -1,0 +1,3 @@
+(ocaml-eglot
+ :fetcher github
+ :repo "tarides/ocaml-eglot")

@@ -1,0 +1,2 @@
+(noir-ts-mode :repo "hhamud/noir-ts-mode"
+                :fetcher github)

@@ -1,0 +1,1 @@
+(eask-mode :repo "emacs-eask/eask-mode" :fetcher github)

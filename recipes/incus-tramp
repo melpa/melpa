@@ -1,0 +1,1 @@
+(incus-tramp :repo "lckarssen/incus-tramp" :fetcher gitlab)

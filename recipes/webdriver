@@ -1,0 +1,3 @@
+(webdriver :fetcher gitlab
+           :repo "mauroaranda/emacs-webdriver"
+           :files (:defaults (:exclude "doclicense.texi" "docstyle.texi")))

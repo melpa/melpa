@@ -1,1 +1,3 @@
-(transient-posframe :fetcher github :repo "yanghaoxie/transient-posframe")
+(transient-posframe
+ :fetcher github
+ :repo "emacsorphanage/transient-posframe")

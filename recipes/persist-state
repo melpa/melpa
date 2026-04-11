@@ -1,0 +1,3 @@
+(persist-state
+ :fetcher codeberg
+ :repo "meedstrom/emacs-persist-state")

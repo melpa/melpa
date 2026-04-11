@@ -1,2 +1,2 @@
-(semi :repo "wanderlust/semi" 
+(semi :repo "emacsmirror/semi"
       :fetcher github)

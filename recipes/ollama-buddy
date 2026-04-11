@@ -1,0 +1,3 @@
+(ollama-buddy
+ :fetcher github
+ :repo "captainflasmr/ollama-buddy")

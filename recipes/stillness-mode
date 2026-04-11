@@ -1,0 +1,1 @@
+(stillness-mode :fetcher github :repo "neeasade/stillness-mode.el")

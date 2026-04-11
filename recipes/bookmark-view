@@ -1,3 +1,0 @@
-(bookmark-view
- :repo "minad/bookmark-view"
- :fetcher github)

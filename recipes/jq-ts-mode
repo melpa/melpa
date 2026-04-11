@@ -1,0 +1,1 @@
+(jq-ts-mode :repo "nverno/jq-ts-mode" :fetcher github)

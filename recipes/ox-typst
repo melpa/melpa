@@ -1,0 +1,1 @@
+(ox-typst :fetcher github :repo "jmpunkt/ox-typst")

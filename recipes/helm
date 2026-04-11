@@ -1,7 +1,7 @@
 (helm
  :fetcher github
  :repo "emacs-helm/helm"
- :files ("*.el"
+ :files (:defaults
          "emacs-helm.sh"
          (:exclude "helm-lib.el"
                    "helm-source.el"

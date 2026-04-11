@@ -1,0 +1,1 @@
+(lobsters :fetcher github :repo "tanrax/lobsters.el")

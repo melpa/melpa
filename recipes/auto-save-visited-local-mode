@@ -1,0 +1,3 @@
+(auto-save-visited-local-mode
+  :fetcher github
+  :repo "pierrelegall/auto-save-visited-local-mode")

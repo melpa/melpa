@@ -1,0 +1,3 @@
+(astro-ts-mode
+ :fetcher git
+ :url "https://git.isincredibly.gay/srxl/astro-ts-mode.git")

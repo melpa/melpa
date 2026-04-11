@@ -1,1 +1,1 @@
-(anki-editor :fetcher github :repo "louietan/anki-editor")
+(anki-editor :fetcher github :repo "anki-editor/anki-editor")

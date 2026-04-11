@@ -1,5 +1,5 @@
 (frontside-javascript
  :fetcher github
  :repo "thefrontside/frontmacs"
- :files ("packages/javascript/*.el"
+ :files ("packages/javascript/frontside-javascript*.el"
          (:exclude "packages/javascript/*-test.el")))

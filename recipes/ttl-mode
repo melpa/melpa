@@ -1,1 +1,1 @@
-(ttl-mode :fetcher github :repo "nxg/ttl-mode" :files ("ttl-mode.el.in"))
+(ttl-mode :fetcher github :repo "emacsattic/ttl-mode")

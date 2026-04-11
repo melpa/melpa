@@ -1,4 +1,10 @@
 (w3m
  :fetcher github
  :repo "emacs-w3m/emacs-w3m"
- :files (:defaults "icons" (:exclude "octet.el" "mew-w3m.el" "w3m-xmas.el")))
+ :files (:defaults
+         "icons"
+         (:exclude "octet.el" "mew-w3m.el" "w3m-xmas.el"
+                   ;; Building the manual fails, so don't try,
+                   ;; removing some noise that makes it harder to
+                   ;; focus on issues we actually have control over.
+                   "doc/*.texi")))

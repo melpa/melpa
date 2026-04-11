@@ -1,0 +1,1 @@
+(fixed-page-mode :fetcher gitlab :repo "igorwojnicki/fixed-page-mode")

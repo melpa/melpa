@@ -1,1 +1,1 @@
-(hcl-mode :repo "purcell/emacs-hcl-mode" :fetcher github)
+(hcl-mode :repo "hcl-emacs/hcl-mode" :fetcher github)

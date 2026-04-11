@@ -1,2 +1,2 @@
 (wttrin :fetcher github
-        :repo "bcbcarl/emacs-wttrin")
+        :repo "cjennings/emacs-wttrin")

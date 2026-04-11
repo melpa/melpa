@@ -1,0 +1,1 @@
+(ursa-ts-mode :fetcher github :repo "ursalang/ursa-ts-mode")

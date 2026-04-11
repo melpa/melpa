@@ -1,2 +1,1 @@
-(dart-server :fetcher github :repo "bradyt/dart-server"
-             :version-regexp "dart-server-\\(.*\\)")
+(dart-server :fetcher github :repo "bradyt/dart-server")

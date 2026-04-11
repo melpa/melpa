@@ -1,0 +1,3 @@
+(scratch-plus
+ :fetcher sourcehut
+ :repo "swflint/scratch-plus")

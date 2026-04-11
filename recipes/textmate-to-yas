@@ -1,1 +1,9 @@
-(textmate-to-yas :fetcher github :repo "mattfidler/textmate-to-yas.el" :files (:defaults "*.pl"))
+(textmate-to-yas
+ :fetcher github
+ :repo "mattfidler/textmate-to-yas.el"
+ :files (:defaults
+         "*.pl"
+         ;; Building the manual fails, so don't try, removing some
+         ;; noise that makes it harder to focus on issues we actually
+         ;; have control over.
+         (:exclude "*.texi")))

@@ -1,0 +1,3 @@
+(zig-ts-mode
+ :fetcher codeberg
+ :repo "meow_king/zig-ts-mode")

@@ -1,2 +1,6 @@
-(sicp :repo "webframp/sicp-info"
-      :fetcher github)
+(sicp
+ :fetcher github
+ :repo "webframp/sicp-info"
+ ;; Use the tracked info file.  Re-generating that from the texi file
+ ;; fails.
+ :files (:defaults (:exclude "sicp.texi")))

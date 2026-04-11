@@ -1,1 +1,1 @@
-(0x0 :fetcher gitlab :repo "willvaughn/emacs-0x0")
+(0x0 :fetcher sourcehut :repo "willvaughn/emacs-0x0")

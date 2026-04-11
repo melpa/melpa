@@ -1,1 +1,1 @@
-(memento-mori :fetcher github :repo "lassik/emacs-memento-mori")
+(memento-mori :fetcher github :repo "gvol/emacs-memento-mori")

@@ -8,14 +8,15 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
       with:
         fetch-depth: 2
+        persist-credentials: false
     - name: Install dependencies
       run: |
-        sudo apt-get install emacs # emacs 26 on ubuntu 20
+        sudo apt-get install emacs
         sudo apt-get install git jq mercurial texinfo
 
         # Work around SSL-related failures, see
@@ -33,4 +34,4 @@ jobs:
             curl --silent https://api.github.com/repos/"$GITHUB_REPOSITORY"/pulls/${{ github.event.pull_request.number }}/files \
               | jq -r '.[] | .filename')
 
-        ./run-ci.sh
+        ./.github/workflows/ci.sh

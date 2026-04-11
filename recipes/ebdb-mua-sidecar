@@ -1,0 +1,4 @@
+(ebdb-mua-sidecar
+ :fetcher sourcehut
+ :repo "swflint/emacs-universal-sidecar"
+ :files ("ebdb-mua-sidecar.el"))

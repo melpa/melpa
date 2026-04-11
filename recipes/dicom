@@ -1,0 +1,3 @@
+(dicom
+ :fetcher github
+ :repo "minad/dicom")

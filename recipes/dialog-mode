@@ -1,0 +1,5 @@
+(dialog-mode
+ :fetcher sourcehut
+ :repo "mew/dialog-mode"
+ :files ("doc/dialog-mode.texi"
+         "dialog-mode.el"))

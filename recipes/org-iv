@@ -1,7 +1,3 @@
 (org-iv
  :fetcher github
- :repo "kuangdash/org-iv"
- :files (:defaults
-         ("default"
-          "default/org-iv-front-file"
-          "default/org-back-file")))
+ :repo "kuangdash/org-iv")

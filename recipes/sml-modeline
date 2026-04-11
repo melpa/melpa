@@ -1,1 +1,3 @@
-(sml-modeline :fetcher github :repo "emacsorphanage/sml-modeline")
+(sml-modeline
+ :fetcher github
+ :repo "emacsattic/sml-modeline")

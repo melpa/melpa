@@ -1,0 +1,1 @@
+(bril-mode :repo "nverno/bril-mode" :fetcher github)

@@ -1,5 +1,4 @@
 (openfoam
  :fetcher github
  :repo "ralph-schleicher/emacs-openfoam"
- :version-regexp "openfoam-\\(.*\\)"
  :files ("openfoam.el"))

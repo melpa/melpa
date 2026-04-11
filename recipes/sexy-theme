@@ -1,0 +1,3 @@
+(sexy-theme
+ :fetcher github
+ :repo "thebigcicca/sexy-theme.el")

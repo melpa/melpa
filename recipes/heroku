@@ -1,0 +1,1 @@
+(heroku :repo "licht1stein/heroku.el" :fetcher github)

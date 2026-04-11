@@ -1,1 +1,1 @@
-(atl-markup :repo "jcs-elpa/atl-markup" :fetcher github)
+(atl-markup :repo "jcs-legacy/atl-markup" :fetcher github)

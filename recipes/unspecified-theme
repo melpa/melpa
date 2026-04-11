@@ -1,0 +1,3 @@
+(unspecified-theme
+ :fetcher codeberg
+ :repo "mekeor/unspecified-theme")

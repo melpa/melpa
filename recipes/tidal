@@ -1,1 +1,1 @@
-(tidal :fetcher github :repo "tidalcycles/Tidal")
+(tidal :fetcher codeberg :repo "uzu/tidal")

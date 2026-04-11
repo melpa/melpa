@@ -1,4 +1,4 @@
 (el-get
  :fetcher github
  :repo "dimitri/el-get"
- :files ("*.el" ("recipes" "recipes/el-get.rcp") "methods"))
+ :files (:defaults "methods" ("recipes" "recipes/el-get.rcp")))

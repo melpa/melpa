@@ -1,3 +1,4 @@
-(borg :fetcher github
-      :repo "emacscollective/borg"
-      :files (:defaults "borg.mk"))
+(borg
+ :fetcher github
+ :repo "emacscollective/borg"
+ :files (:defaults "borg.mk"))

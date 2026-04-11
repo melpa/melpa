@@ -1,0 +1,1 @@
+(ulisp-mode :fetcher codeberg :repo "deadblackclover/ulisp-mode")

@@ -1,1 +1,1 @@
-(liquidmetal :repo "jcs-elpa/liquidmetal" :fetcher github)
+(liquidmetal :repo "jcs-legacy/liquidmetal" :fetcher github)

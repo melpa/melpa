@@ -1,0 +1,1 @@
+(flymake-hledger :fetcher github :repo "DamienCassou/flymake-hledger")

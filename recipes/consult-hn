@@ -1,0 +1,1 @@
+(consult-hn :fetcher github :repo "agzam/consult-hn")

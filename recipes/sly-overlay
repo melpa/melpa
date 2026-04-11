@@ -1,0 +1,1 @@
+(sly-overlay :fetcher github :repo "fosskers/sly-overlay")

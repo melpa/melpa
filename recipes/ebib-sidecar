@@ -1,0 +1,4 @@
+(ebib-sidecar
+ :fetcher sourcehut
+ :repo "swflint/emacs-universal-sidecar"
+ :files ("ebib-sidecar.el"))

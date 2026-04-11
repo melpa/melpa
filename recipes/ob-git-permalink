@@ -1,1 +1,1 @@
-(ob-git-permalink :fetcher github :repo "kijimaD/ob-git-permalink")
+(ob-git-permalink :fetcher github :repo "kijimad/ob-git-permalink")

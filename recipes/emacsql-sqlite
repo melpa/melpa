@@ -1,4 +1,0 @@
-(emacsql-sqlite
- :fetcher github
- :repo "magit/emacsql"
- :files ("emacsql-sqlite.el" "sqlite"))

@@ -1,0 +1,3 @@
+(greger
+ :fetcher github
+ :repo "andreasjansson/greger.el")

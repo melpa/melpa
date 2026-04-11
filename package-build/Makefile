@@ -1,42 +1,42 @@
 -include config.mk
+include default.mk
 
-PKG = package-build
-
-ELS   = package-recipe.el
-ELS  += package-build-badges.el
-ELS  += $(PKG).el
-ELS  += package-recipe-mode.el
-ELCS  = $(ELS:.el=.elc)
-
-DEPS  =
-
-EMACS      ?= emacs
-EMACS_ARGS ?=
-
-LOAD_PATH  ?= $(addprefix -L ../,$(DEPS))
-LOAD_PATH  += -L .
+.PHONY: test
 
 all: lisp
 
 help:
-	$(info make [all|lisp]   - generate byte-code and autoloads)
-	$(info make clean        - remove generated files)
+	$(info make all     -- Build lisp)
+	$(info make lisp    -- Build lisp)
+	$(info make redo    -- Build lisp from scratch)
+	$(info make test    -- Run tests)
+	$(info make demo    -- Demo version generation)
+	$(info make clean   -- Remove built files)
 	@printf "\n"
 
-lisp: $(ELCS) loaddefs check-declare
+redo: clean $(ELCS) autoloads check-declare
+	@$(MAKE) -C test lisp
 
-loaddefs: $(PKG)-autoloads.el
+lisp: $(ELCS) autoloads check-declare
+	@$(MAKE) -C test lisp
+
+autoloads: $(PKG)-autoloads.el
 
 %.elc: %.el
 	@printf "Compiling $<\n"
-	@$(EMACS) -Q --batch $(EMACS_ARGS) $(LOAD_PATH) -f batch-byte-compile $<
+	@$(EMACS_BATCH) --funcall batch-byte-compile $<
 
 check-declare:
 	@printf " Checking function declarations\n"
-	@$(EMACS) -Q --batch $(EMACS_ARGS) $(LOAD_PATH) \
-	--eval "(check-declare-directory default-directory)"
+	@$(EMACS_BATCH) --eval "(check-declare-directory default-directory)"
 
-CLEAN  = $(ELCS) $(PKG)-autoloads.el
+test:
+	@$(MAKE) -C test test
+
+demo:
+	@$(MAKE) -C test demo
+
+CLEAN = $(ELCS) $(PKG)-autoloads.el test/$(PKG)-tests.elc
 
 clean:
 	@printf " Cleaning...\n"
@@ -44,15 +44,13 @@ clean:
 
 $(PKG)-autoloads.el: $(ELS)
 	@printf " Creating $@\n"
-	@$(EMACS) -Q --batch -l autoload -l cl-lib --eval "\
-(let ((file (expand-file-name \"$@\"))\
-      (autoload-timestamps nil) \
-      (backup-inhibited t)\
-      (version-control 'never)\
-      (coding-system-for-write 'utf-8-emacs-unix))\
-  (write-region (autoload-rubric file \"package\" nil) nil file nil 'silent)\
-  (cl-letf (((symbol-function 'progress-reporter-do-update) (lambda (&rest _)))\
-            ((symbol-function 'progress-reporter-done) (lambda (_))))\
-    (let ((generated-autoload-file file))\
-      (update-directory-autoloads default-directory))))" \
+	@$(EMACS_BATCH) --load autoload --eval "\
+(let* ((file (expand-file-name \"$@\"))\
+       (generated-autoload-file file)\
+       (coding-system-for-write 'utf-8-emacs-unix)\
+       (backup-inhibited t)\
+       (version-control 'never)\
+       (inhibit-message t))\
+  (write-region (autoload-rubric file \"package\" t) nil file)\
+  (update-directory-autoloads default-directory))" \
 	2>&1 | sed "/^Package autoload is deprecated$$/d"

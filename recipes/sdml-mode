@@ -1,0 +1,1 @@
+(sdml-mode :repo "sdm-lang/emacs-sdml-mode" :fetcher github)

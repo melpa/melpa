@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+
+import argparse
+import duckdb
+import sys
+import json
+from timeit import default_timer as timer
+
+def main():
+    parser = argparse.ArgumentParser(description='MELPA Log File Parser')
+    parser.add_argument('parquetdir', help='Directory of parquet files from logs')
+    parser.add_argument('jsonfile', help='Path for json summary file')
+    args = parser.parse_args()
+
+    print("Querying totals", file=sys.stderr)
+    start = timer()
+    pkgcount = {p: c for p, c in duckdb.execute(f'''
+      WITH stats AS (SELECT * FROM read_parquet('{args.parquetdir}/**/*.parquet'))
+      SELECT package, SUM(count) AS count FROM stats
+      GROUP BY package;
+    ''').fetchall()}
+    print("-> Done in {}s".format(timer() - start), file=sys.stderr)
+
+    with open(args.jsonfile, 'w') as json_stream:
+        json.dump(pkgcount, json_stream, indent=1)
+    print(f"-> Wrote {args.jsonfile}", file=sys.stderr)
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())

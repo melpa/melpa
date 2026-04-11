@@ -1,5 +1,5 @@
 (org-vcard
  :fetcher github
- :repo "flexibeast/org-vcard"
+ :repo "pinoaffe/org-vcard"
  :files ("org-vcard.el"
          "styles"))

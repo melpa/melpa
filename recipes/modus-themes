@@ -1,1 +1,1 @@
-(modus-themes :fetcher sourcehut :repo "protesilaos/modus-themes")
+(modus-themes :fetcher github :repo "protesilaos/modus-themes")

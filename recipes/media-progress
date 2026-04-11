@@ -1,0 +1,4 @@
+(media-progress
+ :repo "jumper047/media-progress"
+ :fetcher github
+ :files ("media-progress.el"))

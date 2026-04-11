@@ -1,1 +1,1 @@
-(helm-flymake :fetcher github :repo "tam17aki/helm-flymake")
+(helm-flymake :fetcher github :repo "emacs-helm/helm-flymake")

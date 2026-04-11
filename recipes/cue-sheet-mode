@@ -1,0 +1,1 @@
+(cue-sheet-mode :repo "peterhoeg/cue-sheet-mode" :fetcher github)

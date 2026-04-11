@@ -1,1 +1,1 @@
-(ox-tufte :fetcher github :repo "dakrone/ox-tufte")
+(ox-tufte :fetcher github :repo "ox-tufte/ox-tufte" :files (:defaults "src"))

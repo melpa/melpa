@@ -1,0 +1,1 @@
+(inhibit-mouse :fetcher github :repo "jamescherti/inhibit-mouse.el")

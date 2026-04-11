@@ -1,0 +1,1 @@
+(diredfd :repo "knu/diredfd.el" :fetcher github)

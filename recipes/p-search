@@ -1,0 +1,4 @@
+(p-search
+ :fetcher github
+ :repo "zkry/p-search"
+ :files (:defaults "extensions/p-search-*.el"))

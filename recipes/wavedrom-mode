@@ -1,0 +1,1 @@
+(wavedrom-mode :fetcher github :repo "gmlarumbe/wavedrom-mode")

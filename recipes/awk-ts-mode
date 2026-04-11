@@ -1,0 +1,1 @@
+(awk-ts-mode :repo "nverno/awk-ts-mode" :fetcher github)

@@ -1,0 +1,1 @@
+(dot-env :fetcher github :repo "amodelbello/dot-env.el")

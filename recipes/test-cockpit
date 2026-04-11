@@ -1,0 +1,1 @@
+(test-cockpit :repo "johannes-mueller/test-cockpit.el" :fetcher github)

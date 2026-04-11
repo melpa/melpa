@@ -1,6 +1,6 @@
 # MELPA
 
-[![Build Status](https://github.com/melpa/melpa/workflows/CI/badge.svg)](https://github.com/melpa/melpa/actions)
+[![Build Status](https://github.com/melpa/melpa/actions/workflows/ci.yml/badge.svg)](https://github.com/melpa/melpa/actions/workflows/ci.yml)
 
 MELPA is a growing collection of `package.el`-compatible Emacs Lisp
 packages built automatically on our server from the upstream source
@@ -114,7 +114,7 @@ the following form (`[...]` denotes optional or conditional values),
 
   Melpa supports the Git and Mercurial version control systems and
   provides generic fetcher types for them: `git` and `hg`. When you
-  use one of these fetchers, you most specify the `:url` property.
+  use one of these fetchers, you must specify the `:url` property.
 
   Melpa also provides dedicated fetchers for certain Git forges (aka
   "Git repository hosting platforms"), which should always be
@@ -167,7 +167,7 @@ the following form (`[...]` denotes optional or conditional values),
     "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
     "docs/dir" "docs/*.info" "docs/*.texi" "docs/*.texinfo"
     (:exclude
-     ".dir-locals.el" "lisp/.dir-locals.el"
+     ".*.el" "lisp/.*.el"
      "test.el" "tests.el" "*-test.el" "*-tests.el"
      "lisp/test.el" "lisp/tests.el" "lisp/*-test.el" "lisp/*-tests.el"))
   ```
@@ -175,8 +175,12 @@ the following form (`[...]` denotes optional or conditional values),
   Note that you should place Emacs Lisp libraries in the root of the
   repository or in the `lisp/` directory. Test files should be placed
   in the `test/` directory and they should not provide a feature.
-  Likewise `NAME-pkg.el` isn't a library, so you might want to place
-  it in the root directory, even when libraries reside in `lisp/`.
+  Note that all Emacs Lisp files whose name begin with a period are
+  excluded.
+
+  No `NAME-pkg.el` should be checked into version control.  This file
+  is generated from metadata found in the "main library" (`NAME.el`).
+  This is true not only for MELPA, but also GNU ELPA and NonGNU ELPA.
 
   Please do not track any third-party libraries and test utilities in
   your repository. If you absolutely must do it, then place these
@@ -391,13 +395,19 @@ repository is imported using `git subtree`.
   to build a single archive. NAME is a symbol for the package to
   be built. Packages are staged in the directory specified by
   `package-build-working-dir` and built packages are placed in the
-  directory specified by `package-build-archive-dir`. Packages are
-  versioned based on the most recent commit date to package files
-  based on commits to upstream package repository. For multi-file
-  packages, the file `<NAME>-pkg.el` is automatically generated and
-  contains *description*, *version*, and *requires* information
-  determined by searching `<NAME>-pkg.el`, `<NAME>.el`, and
-  `<NAME>-pkg.el.in`, if they exist in the repository.
+  directory specified by `package-build-archive-dir`.
+
+  Packages are versioned based on the most recent commit date to
+  package files based on commits to upstream package repository.
+
+  A file named `<NAME>-pkg.el`, which contains *description*,
+  *version*, and *requires* information about the package is
+  automatically generated.  The information is extracted from
+  the summary line and headers of `<NAME>.el`.  For historic
+  reasons, if some of these values cannot be extracted from
+  that file, then Melpa also extracts information from
+  `<NAME>-pkg.el` if such a file is tracked in the upstream
+  repository (but this fallback will be removed eventually).
 
 ### Variables
 

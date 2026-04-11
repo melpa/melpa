@@ -1,0 +1,1 @@
+(acton-mode :fetcher github :repo "actonlang/acton-mode")

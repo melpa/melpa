@@ -1,1 +1,1 @@
-(narumi :repo "nryotaro/narumi" :fetcher github)
+(narumi :repo "ryotaro612/narumi" :fetcher github)

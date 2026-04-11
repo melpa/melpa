@@ -1,0 +1,2 @@
+(occurx-mode :repo "k32/occurx-mode"
+             :fetcher github)

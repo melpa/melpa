@@ -1,4 +1,0 @@
-(omtose-phellack-theme
- :fetcher github
- :repo "emacsmirror/omtose-phellack-theme"
- :files ("variants/*.el"))

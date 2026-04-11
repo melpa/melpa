@@ -1,1 +1,1 @@
-(flycheck-eglot :fetcher github :repo "intramurz/flycheck-eglot")
+(flycheck-eglot :fetcher github :repo "flycheck/flycheck-eglot")

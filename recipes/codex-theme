@@ -1,0 +1,2 @@
+(codex-theme :repo "hsnovel/codex-theme"
+                     :fetcher github)

@@ -3,7 +3,4 @@
  :repo "contrapunctus/chronometrist"
  :branch "dev"
  :files (:defaults
-         "elisp/*.el"
-         "elisp/*.org"
-         (:exclude "elisp/chronometrist.*"
-                   "elisp/chronometrist-goal*")))
+         "elisp/chronometrist-key-values.*"))

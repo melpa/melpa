@@ -1,0 +1,1 @@
+(magit-gptcommit :fetcher github :repo "douo/magit-gptcommit")

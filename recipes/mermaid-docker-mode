@@ -1,0 +1,3 @@
+(mermaid-docker-mode
+ :fetcher github
+ :repo "KeyWeeUsr/mermaid-docker-mode")

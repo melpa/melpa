@@ -1,0 +1,3 @@
+(shortcuts-mode
+ :fetcher github
+ :repo "tetron/shortcuts-mode")

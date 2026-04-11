@@ -1,0 +1,1 @@
+(vim-tab-bar :fetcher github :repo "jamescherti/vim-tab-bar.el")

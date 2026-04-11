@@ -1,0 +1,1 @@
+(swagg :fetcher github :repo "isamert/swagg.el")

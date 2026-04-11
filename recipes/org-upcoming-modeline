@@ -1,0 +1,2 @@
+(org-upcoming-modeline :fetcher github
+               :repo "unhammer/org-upcoming-modeline")

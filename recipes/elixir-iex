@@ -1,0 +1,3 @@
+(elixir-iex
+ :fetcher github
+ :repo "mojochao/elixir-iex")

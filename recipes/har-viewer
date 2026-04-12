@@ -1,2 +1,1 @@
-(har-viewer :fetcher github
-            :repo "gregnewman/har-viewer.el")
+(har-viewer :fetcher github :repo "bozoslivehere/har-viewer.el")

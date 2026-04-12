@@ -1,0 +1,2 @@
+(har-viewer :fetcher github
+            :repo "gregnewman/har-viewer.el")

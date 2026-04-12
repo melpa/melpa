@@ -1,0 +1,3 @@
+(auto-sort-lines
+ :fetcher github
+ :repo "skx/auto-sort-lines")

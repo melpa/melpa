@@ -4,7 +4,7 @@
 # - INHIBIT_PACKAGE_PULL
 # - INHIBIT_MELPA_PULL
 
-: ${BUILD_CHANNELS="unstable:stable"}
+: ${BUILD_CHANNELS="unstable:stable:snapshot:release"}
 
 # Break taken between runs, in seconds.
 : ${BUILD_PAUSE="-300"}

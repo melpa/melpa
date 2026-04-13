@@ -1,1 +1,1 @@
-(org-mindmap :repo "krvkir/org-mindmap" :fetcher github)
+(org-mindmap :fetcher github :repo "krvkir/org-mindmap")

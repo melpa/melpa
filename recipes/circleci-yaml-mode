@@ -1,0 +1,4 @@
+(circleci-yaml-mode
+ :fetcher github
+ :repo "CircleCI-Public/circleci-yaml-language-server"
+ :files ("editors/emacs/*.el"))

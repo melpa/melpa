@@ -1,0 +1,2 @@
+(goto-line-with-numbers :fetcher gitlab
+                        :repo "wavexx/goto-line-with-numbers.el")

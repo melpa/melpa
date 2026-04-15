@@ -1,0 +1,1 @@
+(denote-wordcloud :fetcher codeberg :repo "treflip/denote-wordcloud")

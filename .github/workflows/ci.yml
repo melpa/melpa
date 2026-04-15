@@ -1,6 +1,9 @@
 name: ci
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -14,6 +17,7 @@ jobs:
       with:
         path: package-build
         fetch-depth: 1
+        persist-credentials: false
 
     - name: Checkout melpa
       uses: actions/checkout@v6
@@ -21,6 +25,7 @@ jobs:
         path: melpa
         repository: melpa/melpa
         fetch-depth: 1
+        persist-credentials: false
 
     - name: Install dependencies
       run: |

@@ -191,7 +191,7 @@ channel."
 (ert-deftest package-build-test-004-use-zeros-if-no-tag ()
   "If there is no release tag, use two zero parts before the
 separator zero part and count part.  In this case the count is
-the total number of commit, reachable from the selected commit.
+the total number of commits, reachable from the selected commit.
 
 So, if there are no tags, then the count part is always prefixed
 with exactly three zero parts.  If the package author later uses
@@ -251,7 +251,9 @@ would be even more confusing to users.)"
     ))
 
 (ert-deftest package-build-test-007-amending-adds-count-part ()
-  "If HEAD is amended, add an additional count version part."
+  "If HEAD is amended, add an additional count version part.
+This ensures that the version number gets larger, despite there
+still being the same number of commits."
   (package-build-test-package
     (tag "7.0")
     (mod "pkg.el" "a" "Edit pkg.el")
@@ -260,7 +262,9 @@ would be even more confusing to users.)"
     (run "7.0.0.1.1" "6d26f69fa2fa150d12b0b485b6f3e5f4948151fe")))
 
 (ert-deftest package-build-test-008-dropping-adds-count-part ()
-  "If HEAD is removed, add an additional count version part."
+  "If HEAD is removed, add an additional count version part.
+This ensures that the version number gets larger, despite there
+actually being fewer commits than before."
   (package-build-test-package
     (tag "8.0.0")
     (mod "pkg.el" "a" "Edit pkg.el")
@@ -272,10 +276,10 @@ would be even more confusing to users.)"
 (ert-deftest package-build-test-009-dropping-adds-count-part ()
   "Accumulate and shed smaller count parts.  The previous snapshot
 may have multiple count parts.  Compare the new count with the
-last of these.  If the new count is smaller than the last count,
-then append the new count.  Otherwise remove the old count part.
-Continue this process for preceding count parts until there are
-none left, or it is larger than the new count."
+last of these.  If the new count is smaller or equal to the last
+count, then append the new count.  Otherwise remove the old count
+part.  Continue this process for preceding count parts until there
+are none left, or it is larger than the new count."
   (package-build-test-package
     (tag "1.0")
     (mod "pkg.el" "1" "1")

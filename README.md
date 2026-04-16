@@ -74,8 +74,6 @@ Some notes:
   in 24.4 and later) and/or `package-archive-priorities`, you can
   customize or modify those variables as needed.
 
-* You can use the [`package-filter`] package which we provide.
-
 * You will probably want to remove all packages and then reinstall
   them. Any packages you already have installed from MELPA will never
   get "updated" to the stable version because of the way version

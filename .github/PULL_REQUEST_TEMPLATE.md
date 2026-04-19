@@ -29,6 +29,5 @@ https://github.com/your/awesome_package
 - [] I've used the latest version of [package-lint](https://github.com/purcell/package-lint) to check for packaging issues, and addressed its feedback
 - [] My elisp byte-compiles cleanly
 - [] I've used `M-x checkdoc` to check the package's documentation strings
-- [] I've built and installed the package using the instructions in [CONTRIBUTING.org](https://github.com/melpa/melpa/blob/master/CONTRIBUTING.org)
 
 <!-- After submitting, please fix any problems the CI reports. -->

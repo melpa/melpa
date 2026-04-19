@@ -47,6 +47,13 @@ New recipe submissions should adhere to the following guidelines:
      maintenance.  Please try to improve existing packages instead of
      creating new ones when possible.
 
+- Full responsibility for AI-generated code :: Using AI to assist in
+     writing code or opening pull requests is fine, but a human should
+     be the *first* and *most thorough* reviewer of any such output.
+     While not a strict requirement, you can help the community track
+     AI assistance by providing an [[https://docs.kernel.org/process/coding-assistants.html#attribution][Assisted-by tag]] near the top of your
+     package's main file.
+
 - Official repository :: Packages should be built from the official
      package repository.  Forks of the official repository will not be
      accepted except in extreme circumstances.

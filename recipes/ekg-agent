@@ -1,4 +1,4 @@
 (ekg-agent
  :fetcher github
  :repo "ahyatt/ekg"
- :files ("ekg-agent.el"))
+ :files ("ekg-agent.el" "agent_tools/*"))

@@ -39,11 +39,12 @@ New recipe submissions should adhere to the following guidelines:
      dependency of the others, open the pull request for that one
      first.  Avoid circular dependencies.
 
-- Reasonably innovative package :: MELPA provides a curated set of
+- Reasonably innovative and mature :: MELPA provides a curated set of
      Emacs Lisp packages, not an exhaustive list of every single Emacs
      Lisp file ever created. By default, MELPA maintainers will reject
      packages that duplicate functionality provided by existing
-     packages. Please try to improve existing packages instead of
+     packages, or nascent packages that haven't had time to see real
+     maintenance.  Please try to improve existing packages instead of
      creating new ones when possible.
 
 - Official repository :: Packages should be built from the official

@@ -1,0 +1,1 @@
+(rocq-timing :fetcher github :repo "Chobbes/rocq-timing-el")

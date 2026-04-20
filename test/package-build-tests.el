@@ -84,8 +84,8 @@
                   (git "update-ref" "refs/remotes/origin/main" "main"))
                 (build ()
                   (when verbose
-                    (message "Building from %s/working/%s/pkg"
-                             package-build--melpa-base num))
+                    (message "Building from %s/%s/pkg"
+                             package-build-working-dir num))
                   (package-build-archive "pkg" t))
                 (check (version commit &optional silent)
                   (when (zerop (call-process "git" nil t nil

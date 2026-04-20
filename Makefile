@@ -184,7 +184,7 @@ endif
 
 # You probably don't want to change this.
 LOCATION_CONFIG ?= "(progn\
-  (setq package-build--melpa-base \"$(TOP)/\")\
+  (setq package-build-directory \"$(TOP)/\")\
   (setq package-build-working-dir \"$(TOP)/$(WORKDIR)/\")\
   (setq package-build-archive-dir \"$(TOP)/$(PKGDIR)/\")\
   (setq package-build-recipes-dir \"$(TOP)/$(RCPDIR)/\"))"

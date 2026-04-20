@@ -1,13 +1,12 @@
-* Publish an archive of Emacs packages
+* Curate an Emacs Lisp package archive
 
-~package-build~ allows a curator to publish an archive of Emacs
-packages.  [[https://melpa.org][MELPA]] uses ~package-build~ and a few downstream projects are
-listed [[https://github.com/melpa/melpa/wiki/Downstream-Projects][here]].
+This package allows a curator to publish an Emacs Lisp package
+archive.  The archive is generated from a set of recipes, which
+describe Emacs Lisp projects and repositories from which to get
+them.
 
-The archive is generated from a set of recipes, which describe elisp
-projects and repositories from which to get them.  The term "package"
-here is used to mean a specific version of a project that is prepared
-for download and installation.  The recipe format is documented [[https://github.com/melpa/melpa#recipe-format][here]].
+This package is used by, and maintained as part of, [[https://melpa.org][MELPA]].  It
+is also used by [[https://github.com/melpa/melpa/wiki/Downstream-Projects][a few other]] tools and projects.
 
 #+html: <br><br>
 #+html: <a href="https://github.com/melpa/package-build/actions/workflows/compile.yml"><img alt="Compile" src="https://github.com/melpa/package-build/actions/workflows/compile.yml/badge.svg"/></a>

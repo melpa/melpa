@@ -1,1 +1,1 @@
-(http-server :fetcher git :url "https://codeberg.org/martenlienen/http-server.el.git")
+(http-server :fetcher codeberg :repo "martenlienen/http-server.el")

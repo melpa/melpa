@@ -1,4 +1,4 @@
 (cljvindent
  :fetcher github
  :repo "narocath/cljvindent-emacs"
- :files (:defaults "clj-vindent-engine"))
+ :files (:defaults "src" "Cargo.toml"))

@@ -1,0 +1,9 @@
+(indigo :repo "gicrisf/emacs-indigo"
+        :fetcher github
+        :files (:defaults
+                "Makefile"
+                "install.sh"
+                "install-indigo.sh"
+                "install-dependencies.sh"
+                ("src" "src/*.c")
+                ("src" "src/*.h")))

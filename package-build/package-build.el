@@ -70,7 +70,6 @@
                (file-name-directory
                 (or load-file-name (buffer-file-name)))))))
     (if (and (file-directory-p (expand-file-name "package-build" dir))
-             (file-directory-p (expand-file-name "working" dir))
              (file-directory-p (expand-file-name "packages" dir))
              (file-directory-p (expand-file-name "recipes" dir)))
         dir

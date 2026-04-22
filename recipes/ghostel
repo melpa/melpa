@@ -1,4 +1,10 @@
 (ghostel
  :fetcher github
  :repo "dakra/ghostel"
- :files (:defaults "etc"))
+ :files (:defaults
+         "etc"
+         "src"
+         "vendor"
+         "build.zig"
+         "build.zig.zon"
+         "symbols.map"))

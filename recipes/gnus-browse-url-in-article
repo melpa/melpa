@@ -1,0 +1,1 @@
+(gnus-browse-url-in-article :fetcher github :repo "jmibanez/gnus-browse-url-in-article")

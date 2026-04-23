@@ -1,1 +1,1 @@
-(blamer :repo "Artawower/blamer.el" :fetcher github)
+(blamer :fetcher github :repo "fvi-att/blamer-emacs")

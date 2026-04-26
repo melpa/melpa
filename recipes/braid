@@ -1,0 +1,3 @@
+(braid :fetcher github                                                                                                                   
+       :repo "braid-org/braid-emacs"                                                                                                     
+       :files ("braid.el" "braid-http.el" "braid-text.el" "braid-mode.el"))

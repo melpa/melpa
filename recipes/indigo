@@ -1,5 +1,5 @@
-(indigo :repo "gicrisf/emacs-indigo"
-        :fetcher github
+(indigo :fetcher github
+        :repo "gicrisf/emacs-indigo"
         :files (:defaults
                 "Makefile"
                 "install.sh"

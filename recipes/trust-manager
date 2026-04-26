@@ -1,1 +1,1 @@
-(trust-manager :fetcher github :repo "eshelyaron/trust-manager")
+(trust-manager :fetcher sourcehut :repo "eshel/trust-manager")

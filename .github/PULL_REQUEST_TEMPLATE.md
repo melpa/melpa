@@ -26,6 +26,7 @@ https://github.com/your/awesome_package
 
 - [] The package is released under a [GPL-Compatible Free Software License](https://www.gnu.org/licenses/license-list.en.html#GPLCompatibleLicenses)
 - [] I've read [CONTRIBUTING.org](https://github.com/melpa/melpa/blob/master/CONTRIBUTING.org)
+- [] LLMs were used to generate some of the code, and the tools have been credited with an `Assisted-by` tag
 - [] The package has been maintained in a public repository for 1 month or more
 - [] I've used the latest version of [package-lint](https://github.com/purcell/package-lint) to check for packaging issues, and addressed its feedback
 - [] My elisp byte-compiles cleanly

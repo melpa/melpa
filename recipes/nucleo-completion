@@ -1,0 +1,4 @@
+(nucleo-completion
+ :repo "kn66/nucleo-completion.el"
+ :fetcher github
+ :files ("nucleo-completion.el" "bin"))

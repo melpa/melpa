@@ -47,12 +47,6 @@ New recipe submissions should adhere to the following guidelines:
      maintenance.  Please try to improve existing packages instead of
      creating new ones when possible.
 
-- Full responsibility for AI-generated code :: Using AI to assist in
-     writing code or opening pull requests is fine, but the human
-     author should be the *first* and *most thorough* reviewer of any
-     such output.  Please help the community track AI assistance by
-     providing an [[https://docs.kernel.org/process/coding-assistants.html#attribution][Assisted-by tag]] under your files' Author tags.
-
 - Official repository :: Packages should be built from the official
      package repository.  Forks of the official repository will not be
      accepted except in extreme circumstances.
@@ -92,6 +86,21 @@ New recipe submissions should adhere to the following guidelines:
      boilerplate should be applied above the  ~;;; Commentary~ of each
      source file.  The repository should contain a LICENSE or COPYING
      file, formatted so that it can be detected by [[https://github.com/licensee/licensee][common tooling]].
+
+*** Attribution for AI-generated code
+
+Using AI to assist in writing code or opening pull requests is fine, but the
+human author should be the *first* and *most thorough* reviewer of any such
+output.  Please help the MELPA community track AI assistance by providing a
+[[https://docs.kernel.org/process/coding-assistants.html#attribution][Linux-style "Assisted-by" line]] under your files' Author line:
+
+#+BEGIN_SRC elisp
+;; Author: Author Name <email@domain>
+;; Assisted-by: AGENT_NAME:MODEL_VERSION
+#+END_SRC
+
+Where ~AGENT_NAME~ is the name of the product or framework (e.g. "Claude")
+and ~MODEL_VERSION~ is the corresponding version (e.g. ~claude-opus-4-7~).
 
 ** Making your package ready for inclusion
 

@@ -1,3 +1,0 @@
-(zprint-format
- :fetcher github
- :repo "dpassen/zprint-format")

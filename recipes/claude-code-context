@@ -1,0 +1,4 @@
+(claude-code-context
+ :repo "lukehoersten/claude-code-context"
+ :fetcher github
+ :files ("claude-code-context.el"))

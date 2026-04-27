@@ -1,0 +1,1 @@
+(sops-file :repo "ajarara/sops-file.el" :fetcher github)

@@ -1,0 +1,3 @@
+(font-picker
+ :fetcher github
+ :repo "yabobay/font-picker")

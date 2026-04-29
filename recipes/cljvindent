@@ -1,0 +1,4 @@
+(cljvindent
+ :fetcher github
+ :repo "narocath/cljvindent-emacs"
+ :files (:defaults "src" "Cargo.toml"))

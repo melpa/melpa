@@ -1,4 +1,4 @@
 (geiser-gambit
- :fetcher gitlab
- :repo "emacs-geiser/gambit"
+ :fetcher codeberg
+ :repo "geiser/gambit"
  :files (:defaults ("src" "src/*")))

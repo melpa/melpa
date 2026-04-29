@@ -1,0 +1,3 @@
+(typst-watch
+ :fetcher github
+ :repo "pasunboneleve/typst-watch")

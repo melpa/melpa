@@ -1,0 +1,3 @@
+(shannon-max :fetcher github
+             :repo "sstraust/shannonmax"
+             :commit "8da487ccf61d0d8f52127da95d067fe002a68216")

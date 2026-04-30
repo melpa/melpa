@@ -125,7 +125,6 @@
         return base + (ref ? "/tree/" + ref : "");
       } else if (recipe.fetcher == "codeberg") {
         base = "https://codeberg.org/" + recipe.repo;
-        ref = commit || recipe.branch;
         if (commit) return base + "/src/commit/" + commit;
         if (recipe.branch) return base + "/src/branch/" + recipe.branch;
         return base;

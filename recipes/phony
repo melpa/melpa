@@ -1,0 +1,3 @@
+(phony
+ :fetcher github
+ :repo "ErikPrantare/phony.el")

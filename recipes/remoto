@@ -1,0 +1,3 @@
+(remoto
+ :fetcher github
+ :repo "agzam/remoto.el")

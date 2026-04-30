@@ -1,0 +1,1 @@
+(sql-bigquery :fetcher github :repo "regadas/sql-bigquery")

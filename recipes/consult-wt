@@ -1,0 +1,3 @@
+(consult-wt
+ :repo "tomoya/consult-wt"
+ :fetcher github)

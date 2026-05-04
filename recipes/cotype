@@ -1,0 +1,1 @@
+(cotype :fetcher github :repo "yurug/cotype" :files ("editors/emacs/cotype.el"))

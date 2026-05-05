@@ -1,0 +1,2 @@
+(blame-reveal :fetcher github
+              :repo "LuciusChen/blame-reveal")

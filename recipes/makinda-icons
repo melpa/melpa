@@ -1,0 +1,4 @@
+(makinda-icons
+ :fetcher github
+ :repo "makindajack/makinda-icons"
+ :files ("packages/emacs/makinda-icons.el"))

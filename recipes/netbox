@@ -1,0 +1,3 @@
+(netbox
+ :fetcher github
+ :repo "sraupach/netbox.el")

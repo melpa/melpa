@@ -109,7 +109,10 @@ Usually this is a subdirectory of `package-build-directory'."
   "Whether to print additional progress information during builds."
   :type 'boolean)
 
-(defcustom package-build-stable nil
+(define-obsolete-variable-alias 'package-build-stable
+  'package-build-releases "Package-Build 5.0.0")
+
+(defcustom package-build-releases nil
   "Whether to build release or snapshot packages.
 
 If nil, snapshot packages are build, otherwise release packages
@@ -127,7 +130,7 @@ a version string should be considered an error or not."
   :type 'boolean)
 
 (make-obsolete-variable 'package-build-get-version-function
-                        'package-build-stable
+                        'package-build-releases
                         "Package-Build 5.0.0")
 (defvar package-build-get-version-function nil
   "This variable is obsolete and its value should be nil.
@@ -183,10 +186,11 @@ then that overrides the value set here."
   :type 'hook
   :options (list #'package-build-release+count-version
                  #'package-build-release+onecount-version
+                 #'package-build-release+date+count-version
                  #'package-build-release+timestamp-version
                  #'package-build-timestamp-version))
 
-(defcustom package-build-minimal-release-components 3
+(defcustom package-build-minimal-release-components 0
   "Minimal number of version components before \".0.SNAPSHOT\".
 When constructing a snapshot version of the form \"RELEASE.0.SNAPSHOT\",
 this option controls whether additional \".0\" components are appended
@@ -232,16 +236,19 @@ This must be a version which supports the \"-k\" option.
 On MacOS it is possible to install coreutils using Homebrew or
 similar, which will provide the GNU timeout program as
 \"gtimeout\"."
-  :type '(file :must-match t))
+  :type '(file :tag "Executable"))
 
-(defcustom package-build-timeout-secs nil
-  "Wait this many seconds for external processes to complete.
+(define-obsolete-variable-alias 'package-build-timeout-secs
+  'package-build-timeout "Package-Build 5.0.0")
 
-If an external process takes longer than specified here to
-complete, then it is terminated.  If nil, then no time limit is
-applied.  This setting requires
-`package-build-timeout-executable' to be set."
-  :type 'number)
+(defcustom package-build-timeout nil
+  "Timeout if a process takes more seconds to complete.
+
+If an external process takes longer to complete, than this limit,
+specified in seconds, then it is terminated.  For no limit use nil.
+This setting requires `package-build-timeout-executable' to be set."
+  :type '(choice (natnum :tag "Seconds" number)
+                 (const  :tag "No timeout" nil)))
 
 (defcustom package-build-tar-executable "tar"
   "Path to a (preferably GNU) tar command.
@@ -250,7 +257,7 @@ Certain package names (e.g., \"@\") may not work properly with a BSD tar.
 On MacOS it is possible to install gnu-tar using Homebrew or
 similar, which will provide the GNU tar program as
 \"gtar\"."
-  :type '(file :must-match t))
+  :type '(file :tag "Executable"))
 
 (defvar package-build--tar-type nil
   "Type of `package-build-tar-executable'.
@@ -266,7 +273,8 @@ If nil (the default), then no badge images are generated,
 otherwise this has the form (NAME COLOR).  MELPA sets the value
 in its top-level Makefile, to different values, depending on the
 channel that is being build."
-  :type '(list (string :tag "Archive name") color))
+  :type '(choice (list (string :tag "Archive name") color)
+                 (const :tag "Do not create badges")))
 
 (defcustom package-build-version-regexp
   "\\`\\(?:\\|[vVrR]\\|\\(?:release\\|%p\\)[-/]v?\\)?\
@@ -412,10 +420,10 @@ being run for a particular package."
 Variable `package-build-get-version-function' is obsolete.
 Instead set `package-build-release-version-functions'
 and/or `package-build-snapshot-version-functions', and
-set `package-build-stable' to control whether releases
+set `package-build-releases' to control whether releases
 or snapshots are build.")
           (with-no-warnings (funcall package-build-get-version-function rcp)))
-         (package-build-stable
+         (package-build-releases
           (run-hook-with-args-until-success
            'package-build-release-version-functions rcp))
          ((run-hook-with-args-until-success
@@ -615,8 +623,8 @@ this might help overcome the release channel's chicken and egg
 problem.
 
 Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING REVDESC) or
-nil if `package-build-stable' is non-nil."
-  (and package-build-stable
+nil if `package-build-releases' is non-nil."
+  (and package-build-releases
        (let ((package-build-release-version-functions nil))
          (run-hook-with-args-until-success
           'package-build-snapshot-version-functions rcp))))
@@ -956,12 +964,12 @@ for logging purposes."
                  (`(,command . ,args)
                   (nconc (and (not (eq system-type 'windows-nt))
                               (list "env" "LC_ALL=C"))
-                         (if (and package-build-timeout-secs
+                         (if (and package-build-timeout
                                   package-build-timeout-executable)
                              (nconc (list package-build-timeout-executable
                                           "-k" "60"
                                           (number-to-string
-                                           package-build-timeout-secs)
+                                           package-build-timeout)
                                           command)
                                     args)
                            (cons command args))))

@@ -1,0 +1,1 @@
+(har-viewer :fetcher github :repo "bozoslivehere/har-viewer.el")

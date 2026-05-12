@@ -1,0 +1,1 @@
+(wallabag :fetcher github :repo "chenyanming/wallabag.el" :files (:defaults "*.css" "*.alist"))

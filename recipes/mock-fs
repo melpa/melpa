@@ -1,0 +1,1 @@
+(mock-fs :fetcher codeberg :repo "trevoke/mock-fs.el")

@@ -1,0 +1,1 @@
+(pdd :fetcher github :repo "lorniu/pdd.el")

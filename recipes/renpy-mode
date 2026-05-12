@@ -1,0 +1,5 @@
+(renpy-mode
+ :fetcher github
+ :repo "Reagankm/renpy-mode"
+ :files (:defaults "emacs.edit.py")
+ :old-names (renpy))

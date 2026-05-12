@@ -1,1 +1,1 @@
-(minimal-theme :repo "anler/minimal-theme" :fetcher github)
+(minimal-theme :fetcher github :repo "nullvec/minimal-theme")

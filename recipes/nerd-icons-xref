@@ -1,0 +1,3 @@
+(nerd-icons-xref
+ :fetcher github
+ :repo "hron/nerd-icons-xref")

@@ -1,0 +1,2 @@
+(d2-ts-mode :fetcher github
+            :repo "chaploud/d2-ts-mode")

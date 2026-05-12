@@ -1,0 +1,1 @@
+(pyasm-mode :fetcher github :repo "rocky/emacs-pyasm-mode")

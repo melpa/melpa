@@ -1,0 +1,4 @@
+(kawacode
+ :fetcher github
+ :repo "CodeAwareness/kawa.emacs"
+ :old-names (code-awareness))

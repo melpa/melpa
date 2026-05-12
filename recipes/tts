@@ -1,0 +1,3 @@
+(tts
+ :fetcher github
+ :repo "DiogoDoreto/emacs-tts")

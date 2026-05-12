@@ -1,0 +1,3 @@
+(signel
+ :fetcher github
+ :repo "keenban/signel")

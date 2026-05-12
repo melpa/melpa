@@ -1,0 +1,3 @@
+(simulacrum
+ :fetcher github
+ :repo "ErikPrantare/simulacrum.el")

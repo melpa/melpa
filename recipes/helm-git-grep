@@ -1,1 +1,0 @@
-(helm-git-grep :fetcher github :repo "yasuyk/helm-git-grep")

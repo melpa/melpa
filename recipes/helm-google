@@ -1,1 +1,0 @@
-(helm-google :fetcher git :url "https://framagit.org/steckerhalter/helm-google.git")

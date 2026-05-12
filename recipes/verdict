@@ -1,0 +1,5 @@
+(verdict
+   :fetcher github
+   :repo "tjarvstrand/verdict.el"
+   :files ("packages/verdict/verdict.el")
+   :version-regexp "verdict-v\\([.0-9]*\\)")

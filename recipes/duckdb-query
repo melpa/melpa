@@ -1,0 +1,1 @@
+(duckdb-query :fetcher github :repo "gggion/duckdb-query.el")

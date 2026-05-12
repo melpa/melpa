@@ -123,6 +123,11 @@
         base = "https://git.sr.ht/~" + recipe.repo;
         ref = commit || recipe.branch;
         return base + (ref ? "/tree/" + ref : "");
+      } else if (recipe.fetcher == "codeberg") {
+        base = "https://codeberg.org/" + recipe.repo;
+        if (commit) return base + "/src/commit/" + commit;
+        if (recipe.branch) return base + "/src/branch/" + recipe.branch;
+        return base;
       } else if (recipe.fetcher == "bitbucket") {
         base = "https://bitbucket.com/" + recipe.repo;
         if (commit) return base + "/src/" + commit;

@@ -1,4 +1,4 @@
 (insert-kaomoji
- :fetcher sourcehut
- :repo "pkal/insert-kaomoji"
+ :fetcher codeberg
+ :repo "pkal/insert-kaomoji.el"
  :files (:defaults "KAOMOJIS"))

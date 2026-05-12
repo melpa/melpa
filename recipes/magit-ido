@@ -1,0 +1,1 @@
+(magit-ido :fetcher github :repo "emacsorphanage/magit-ido")

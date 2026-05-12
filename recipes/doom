@@ -1,1 +1,1 @@
-(doom :fetcher github :repo "kensanata/doom" :old-names (dom))
+(doom :fetcher git :url "https://src.alexschroeder.ch/doom.git" :old-names (dom))

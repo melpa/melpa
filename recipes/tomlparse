@@ -1,0 +1,1 @@
+(tomlparse :fetcher github :repo "johannes-mueller/tomlparse.el")

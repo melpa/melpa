@@ -1,0 +1,1 @@
+(agent-shell :fetcher github :repo "xenodium/agent-shell")

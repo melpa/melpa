@@ -1,0 +1,8 @@
+(daselt
+ :fetcher codeberg
+ :repo "nameiwillforget/d-emacs"
+ :files (:defaults
+         "example-user-defined-bindlist.dbl"
+         "stump-configs"
+         "tri-configs"
+         "mode-configs"))

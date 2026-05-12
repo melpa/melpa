@@ -1,0 +1,1 @@
+(elsqlite :fetcher github :repo "dusanx/elsqlite")

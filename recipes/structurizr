@@ -1,0 +1,4 @@
+(structurizr
+ :fetcher github
+ :repo "papadakis-k/structurizr.el"
+ :files (:defaults "logback.xml"))

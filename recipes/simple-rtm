@@ -1,1 +1,1 @@
-(simple-rtm :fetcher gitlab :repo "mbunkus/simple-rtm")
+(simple-rtm :fetcher codeberg :repo "mbunkus/simple-rtm")

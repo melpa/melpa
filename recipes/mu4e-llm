@@ -1,0 +1,1 @@
+(mu4e-llm :fetcher github :repo "sillyfellow/mu4e-llm")

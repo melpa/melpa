@@ -1,0 +1,1 @@
+(insta-pocket :fetcher github :repo "thanhvg/emacs-insta-pocket")

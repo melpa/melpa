@@ -1,0 +1,1 @@
+(lisp-docstring-toggle :fetcher github :repo "gggion/lisp-docstring-toggle")

@@ -1,0 +1,1 @@
+(custom-keymap  :fetcher github :repo "viandant/custom-keymap")

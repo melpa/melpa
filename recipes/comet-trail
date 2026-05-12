@@ -1,0 +1,1 @@
+(comet-trail :fetcher git :url "https://git.andros.dev/andros/comet-trail.el")

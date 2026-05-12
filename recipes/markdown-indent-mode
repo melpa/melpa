@@ -1,0 +1,1 @@
+(markdown-indent-mode :fetcher github :repo "whhone/markdown-indent-mode")

@@ -1,0 +1,1 @@
+(fsrs :fetcher github :repo "open-spaced-repetition/lisp-fsrs")

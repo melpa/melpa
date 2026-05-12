@@ -1,0 +1,1 @@
+(mcp :fetcher github :repo "lizqwerscott/mcp.el")

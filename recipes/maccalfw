@@ -1,0 +1,3 @@
+(maccalfw :fetcher github
+          :repo "haji-ali/maccalfw"
+          :files ("maccalfw.el" "src"))

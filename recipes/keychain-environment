@@ -1,1 +1,3 @@
-(keychain-environment :repo "tarsius/keychain-environment" :fetcher github)
+(keychain-environment
+ :fetcher github
+ :repo "emacsorphanage/keychain-environment")

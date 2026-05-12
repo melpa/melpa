@@ -1,6 +1,6 @@
 (guix
- :fetcher git
- :url "https://git.savannah.gnu.org/git/guix/emacs-guix.git"
+ :fetcher codeberg
+ :repo "guix/emacs-guix"
  :files ("elisp/*.el"
          "doc/*.texi"
          ("images" "images/*.svg")

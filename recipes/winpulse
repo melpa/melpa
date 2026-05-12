@@ -1,0 +1,3 @@
+(winpulse
+ :fetcher github
+ :repo "xenodium/winpulse")

@@ -1,2 +1,0 @@
-(helm-pt :fetcher github
-         :repo "punassuming/helm-pt")

@@ -1,0 +1,4 @@
+(claude-code
+ :fetcher github
+ :repo "yuya373/claude-code-emacs"
+ :files (:defaults (:exclude "install-deps.el")))

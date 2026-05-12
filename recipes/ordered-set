@@ -1,0 +1,1 @@
+(ordered-set :fetcher github :repo "kisaragi-hiu/ordered-set.el")

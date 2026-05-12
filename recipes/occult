@@ -1,0 +1,1 @@
+(occult :fetcher github :repo "agzam/occult.el")

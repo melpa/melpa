@@ -1,5 +1,9 @@
-(elot :fetcher github
-      :repo "johanwk/elot"
-      :files ("elot-package/elot*.el"
-              "elot-package/elot-lob.org"
-              "elot-package/theme-readtheorg.setup"))
+(elot
+ :fetcher github
+ :repo "johanwk/elot"
+ :files ("elot-package/*.el"
+         "elot-package/schema.sql"
+         "elot-package/elot-lob.org"
+         "elot-package/*.css"
+         "elot-package/*.js"
+         "elot-package/*.setup"))

@@ -1,0 +1,4 @@
+(tya-mode
+ :fetcher github
+ :repo "komagata/tya"
+ :files ("editors/emacs/tya-mode.el"))

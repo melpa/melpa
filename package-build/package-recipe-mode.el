@@ -71,9 +71,9 @@ Use \\[package-build-current-recipe] to build this recipe, \
 (defun package-build-create-recipe (name fetcher)
   "Create a new recipe for the package named NAME using FETCHER."
   (interactive
-   (list (read-string "Package name: ")
-         (intern (completing-read "Fetcher: " package-recipe--fetchers
-                                  nil t nil nil "github"))))
+    (list (read-string "Package name: ")
+          (intern (completing-read "Fetcher: " package-recipe--fetchers
+                                   nil t nil nil "github"))))
   (let ((recipe-file (expand-file-name name package-build-recipes-dir)))
     (when (file-exists-p recipe-file)
       (error "Recipe already exists"))

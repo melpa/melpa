@@ -290,7 +290,7 @@ pull-package-build:
 # To build all channels use "unstable stable snapshots releases".
 # To fetch without building use "", which the "docker-build-fetch"
 # target does.  (Keep in sync with "docker/builder/run.sh".)
-DOCKER_CHANNELS ?= unstable stable
+DOCKER_CHANNELS ?= unstable stable snapshots releases
 
 # Only intended for "docker/builder/run.sh" and similar scripts.  That
 # is also why we add extra quoting when setting EMACS_EVAL, instead of

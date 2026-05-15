@@ -4,7 +4,7 @@
 # - INHIBIT_PACKAGE_PULL
 # - INHIBIT_MELPA_PULL
 
-: ${DOCKER_CHANNELS="unstable stable"}
+: ${DOCKER_CHANNELS="unstable stable snapshots releases"}
 
 # Break taken between runs, in seconds.
 : ${BUILD_PAUSE="-300"}

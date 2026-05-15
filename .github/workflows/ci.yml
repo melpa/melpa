@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        package: [evil, magit, realgud, edts, elpher, which-key-posframe]
+        package: [evil, magit, realgud, edts, org-contacts, which-key-posframe]
     steps:
     - name: Checkout package-build
       uses: actions/checkout@v6

@@ -11,6 +11,7 @@ services:
       - /mnt/volume/log:/mnt/store/log
       - /mnt/volume/log-stable:/mnt/store/log-stable
       - /mnt/volume/log-snapshots:/mnt/store/log-snapshots
+      - /mnt/volume/log-releases:/mnt/store/log-releases
     ports:
       - "80:80"
       - "443:443"
@@ -34,6 +35,7 @@ services:
       - /mnt/volume/log:/mnt/store/log:ro
       - /mnt/volume/log-stable:/mnt/store/log-stable:ro
       - /mnt/volume/log-snapshots:/mnt/store/log-snapshots:ro
+      - /mnt/volume/log-releases:/mnt/store/log-releases:ro
   syncer:
     build: ./syncer
     image: melpa/syncer:v2
@@ -50,3 +52,4 @@ services:
       - /mnt/volume/melpa/packages:/packages:ro
       - /mnt/volume/melpa/packages-stable:/packages-stable:ro
       - /mnt/volume/melpa/packages-snapshots:/packages-snapshots:ro
+      - /mnt/volume/melpa/packages-releases:/packages-releases:ro

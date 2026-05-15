@@ -44,9 +44,11 @@ while true; do
         -d melpa.org \
         -d stable.melpa.org \
         -d snapshots.melpa.org \
+        -d releases.melpa.org \
         -d test.melpa.org \
         -d stable-test.melpa.org \
         -d snapshots-test.melpa.org \
+        -d releases-test.melpa.org \
         -d www.melpa.org
 
     echo "restarting nginx..."

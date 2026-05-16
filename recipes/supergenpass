@@ -1,3 +1,0 @@
-(supergenpass
- :fetcher github
- :repo "ober/sgpass")

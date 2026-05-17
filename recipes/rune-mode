@@ -1,0 +1,3 @@
+(rune-mode
+:fetcher codeberg
+:repo "mester/rune-mode")

@@ -1,0 +1,2 @@
+(stock-watch :fetcher github
+             :repo "angelaresjun/stock-watch")

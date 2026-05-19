@@ -275,8 +275,8 @@ remove-repositories:
 PACKAGE_BUILD_REPO ?= "https://github.com/melpa/package-build"
 
 pull-package-build:
-	git fetch $(PACKAGE_BUILD_REPO)
-	git -c "commit.gpgSign=true" subtree \
+	@git fetch $(PACKAGE_BUILD_REPO)
+	@git -c "commit.gpgSign=true" subtree \
 	$(shell test -e package-build && echo merge || echo add) \
 	-m "Merge Package-Build $$(git describe --always FETCH_HEAD)" \
 	--squash -P package-build FETCH_HEAD
@@ -305,25 +305,25 @@ DOCKER_RUN_ARGS = \
  --env BUILD_PAUSE=0
 
 docker-build-run:
-	docker run $(DOCKER_RUN_ARGS) \
+	@docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL=$(DOCKER_INHIBIT_PACKAGE_PULL) \
 	--env DOCKER_CHANNELS="$(DOCKER_CHANNELS)" \
 	melpa_builder
 
 docker-build-fetch:
-	docker run $(DOCKER_RUN_ARGS) \
+	@docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL="" \
 	--env DOCKER_CHANNELS="" \
 	melpa_builder
 
 docker-build-shell:
-	docker run $(DOCKER_RUN_ARGS) \
+	@docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL=$(DOCKER_INHIBIT_PACKAGE_PULL) \
 	--env DOCKER_CHANNELS="$(DOCKER_CHANNELS)" \
 	melpa_builder bash
 
 docker-build-rebuild:
-	docker build -t melpa_builder docker/builder
+	@docker build -t melpa_builder docker/builder
 
 get-pkgdir: .FORCE
 	@echo $(PKGDIR)

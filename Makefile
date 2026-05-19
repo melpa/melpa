@@ -1,3 +1,4 @@
+TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 ## Help
 
 help helpall::
@@ -55,9 +56,7 @@ helpall::
 help helpall::
 	@echo
 
-## Settings
-
-TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
+## Config
 
 -include ./config.mk
 
@@ -200,6 +199,8 @@ all-async:
 	make -k -j 8 build || true
 	make indices
 
+indices: archive-contents json html
+
 ifdef BUILD_PACKAGES
 build: $(addprefix recipes/,$(BUILD_PACKAGES))
 else
@@ -212,7 +213,9 @@ $(RCPDIR)/%: .FORCE
 	  $(TIMEOUT) $(EMACS_EVAL) "(package-build-archive \"$(@F)\")"
 	@test $(PAUSE) -gt 0 && sleep $(PAUSE) || true
 
-## Sign
+archive-contents: .FORCE
+	@echo " • Building archive-contents ..."
+	@$(EMACS_EVAL) "(package-build-dump-archive-contents)"
 
 ifdef OPENPGP_KEY
 signing ?= $(patsubst %, %.sig, $(wildcard\
@@ -227,14 +230,6 @@ endif
 
 %.sig: %
 	@$(OPENPGP_CMD) $(OPENPGP_KEY) $<
-
-## Metadata
-
-indices: archive-contents json html
-
-archive-contents: .FORCE
-	@echo " • Building archive-contents ..."
-	@$(EMACS_EVAL) "(package-build-dump-archive-contents)"
 
 json: .FORCE
 	@echo " • Building json indices ..."

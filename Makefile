@@ -60,6 +60,12 @@ help helpall::
 
 -include ./config.mk
 
+ifeq ($(INSIDE_DOCKER), true)
+PACKAGE_BUILD_DIRECTORY := $(TOP)/package-build
+else
+PACKAGE_BUILD_DIRECTORY ?= $(TOP)/package-build
+endif
+
 # Users should usually prefer this over other *_CONFIG variables.
 # We recommend that the value is set in the included "config.mk".
 USER_CONFIG ?= "()"
@@ -98,10 +104,6 @@ DOCKER_BUILD_CHANNELS ?= unstable stable
 
 # To instruct "docker-build-run" target to build package without
 # first pulling them, use non-emtpy DOCKER_INHIBIT_PACKAGE_PULL.
-
-RCPDIR  := recipes
-WORKDIR := working
-SANDBOX := sandbox
 
 ifdef DOCKER_MELPA_CHANNEL
 MELPA_CHANNEL = $(DOCKER_MELPA_CHANNEL)
@@ -150,31 +152,23 @@ else
 $(error Unknown MELPA_CHANNEL: $(MELPA_CHANNEL))
 endif
 
-# You probably don't want to change this.
-LOCATION_CONFIG ?= "(progn\
-  (setq package-build-directory \"$(TOP)/\")\
-  (setq package-build-working-dir \"$(TOP)/$(WORKDIR)/\")\
-  (setq package-build-archive-dir \"$(TOP)/$(PKGDIR)/\")\
-  (setq package-build-recipes-dir \"$(TOP)/$(RCPDIR)/\"))"
-
-ifeq ($(INSIDE_DOCKER), true)
-# When building on the server, this is the vendored copy.
-# When building locally, PACKAGE_BUILD_REPO is mounted here.
-LOAD_PATH := $(TOP)/package-build
-else ifdef PACKAGE_BUILD_REPO
-LOAD_PATH := $(PACKAGE_BUILD_REPO)
-else
-LOAD_PATH := $(TOP)/package-build
-endif
+PKGDIR ?= $(MELPA_CHANNEL)
+RCPDIR ?= recipes
+SRCDIR ?= working
+PATH_CONFIG ?= '(progn\
+  (setq package-build-directory "$(TOP)")\
+  (setq package-build-archive-dir "$(TOP)/$(PKGDIR)")\
+  (setq package-build-recipes-dir "$(TOP)/$(RCPDIR)")\
+  (setq package-build-working-dir "$(TOP)/$(SRCDIR)"))'
 
 EMACS       ?= emacs
 EMACS_ARGS  ?=
 EMACS_Q_ARG ?= -Q
 EMACS_BATCH ?= $(EMACS) $(EMACS_Q_ARG) --batch $(EMACS_ARGS)\
-  $(addprefix -L ,$(LOAD_PATH))
-EMACS_EVAL  := $(EMACS_BATCH)\
+  -L $(PACKAGE_BUILD_DIRECTORY)
+EMACS_EVAL   = $(EMACS_BATCH)\
   --eval $(CHANNEL_CONFIG)\
-  --eval $(LOCATION_CONFIG)\
+  --eval $(PATH_CONFIG)\
   --eval "$(BUILD_CONFIG)"\
   --eval $(USER_CONFIG)\
   --load package-build.el\
@@ -196,7 +190,7 @@ all-async:
 indices: archive-contents json html
 
 ifdef BUILD_PACKAGES
-build: $(addprefix recipes/,$(BUILD_PACKAGES))
+build: $(addprefix $(RCPDIR)/,$(BUILD_PACKAGES))
 else
 build: $(RCPDIR)/*
 endif
@@ -291,7 +285,7 @@ pull-package-build:
 DOCKER_RUN_ARGS = \
  --user $$(id --user):$$(id --group) \
  --mount type=bind,src=$$PWD,target=/mnt/store/melpa \
- --mount type=bind,src=$(LOAD_PATH),target=/mnt/store/melpa/package-build \
+ --mount type=bind,src=$(PACKAGE_BUILD_DIRECTORY),target=/mnt/store/melpa/package-build \
  --env INHIBIT_MELPA_PULL=t \
  --env BUILD_PAUSE=0
 
@@ -320,6 +314,8 @@ get-pkgdir: .FORCE
 	@echo $(PKGDIR)
 
 ## Sandbox
+
+SANDBOX ?= sandbox
 
 sandbox: .FORCE
 	@echo " • Building sandbox ..."

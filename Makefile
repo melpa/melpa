@@ -67,6 +67,9 @@ TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 # We recommend that the value is set in the included "config.mk".
 USER_CONFIG ?= "()"
 
+OPENPGP_CMD ?= gpg --yes --no-tty --detach-sign --local-user
+OPENPGP_KEY ?=
+
 # Only intended for "docker/builder/run.sh" and similar scripts.
 # That is also why we add extra quoting when setting EMACS_EVAL
 # below, instead of here.  Not doing it like that would complicate
@@ -215,18 +218,18 @@ $(RCPDIR)/%: .FORCE
 ## Sign
 
 ifdef OPENPGP_KEY
-signatures := $(patsubst %, %.sig, $(wildcard \
-	$(PKGDIR)/*.tar \
-	$(PKGDIR)/archive-contents \
+signing ?= $(patsubst %, %.sig, $(wildcard\
+	$(PKGDIR)/*.tar\
+	$(PKGDIR)/archive-contents\
 	$(PKGDIR)/elpa-packages.eld))
-sign: $(signatures)
+sign: $(signing)
 else
 sign: ;
-	@echo "No signing key configured"
+	@echo -e "\nNo signing key configured!"
 endif
 
 %.sig: %
-	gpg --yes --no-tty --detach-sign --local-user ${OPENPGP_KEY} $<
+	@$(OPENPGP_CMD) $(OPENPGP_KEY) $<
 
 ## Metadata
 

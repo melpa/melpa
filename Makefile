@@ -19,6 +19,7 @@ help helpall::
 	$(info )
 	$(info make BUILD_PACKAGES="<p1> <p2>..." ...    Limit to <p1>, <p2> ...)
 	$(info make ASYNC=t ...                          Build asynchronously)
+	$(info make V=t ...                              Show commands run by make)
 	$(info make NOFETCH=t ...                        Build without fetching)
 	$(info make [BUILD_PACKAGES=...] [ASYNC=t] fetch Fetch without building)
 helpall::
@@ -162,7 +163,13 @@ EMACS_EVAL   = $(EMACS_BATCH)\
 
 SHELL := bash
 
+ifdef V
+Q=
+MAKE += V=$(V)
+else
+Q=@
 MAKEFLAGS += --no-print-directory
+endif
 
 .FORCE:
 .PHONY: help fetch build-channels build-channel build \
@@ -173,22 +180,22 @@ MAKEFLAGS += --no-print-directory
 all: build-channels
 
 fetch:
-	@make NOBUILD=t build-channel
+	$(Q)$(MAKE) NOBUILD=t build-channel
 
 build-channels:
-	@for channel in $(CHANNELS); do\
-	  NOFETCH=$${NOFETCH=$(NOFETCH)} CHANNEL=$$channel make build-channel;\
+	$(Q)for channel in $(CHANNELS); do\
+	  NOFETCH=$${NOFETCH=$(NOFETCH)} CHANNEL=$$channel $(MAKE) build-channel;\
 	  NOFETCH=t;\
 	done
 
 build-channel:
 	@echo -e "\n•••Building channel $(CHANNEL)..."
 ifneq ($(ASYNC), nil)
-	@make -k -j 8 build || true
+	$(Q)$(MAKE) -k -j 8 build || true
 else
-	@make build || true
+	$(Q)$(MAKE) build || true
 endif
-	@make $(BUILD_TARGETS)
+	$(Q)$(MAKE) $(BUILD_TARGETS)
 
 ifdef BUILD_PACKAGES
 build: $(addprefix $(RCPDIR)/,$(BUILD_PACKAGES))
@@ -197,14 +204,14 @@ build: $(RCPDIR)/*
 endif
 
 $(RCPDIR)/%: .FORCE
-	@mkdir -p $(PKGDIR)
-	@exec 2>&1; exec &> >(tee $(PKGDIR)/$(@F).log); \
+	$(Q)mkdir -p $(PKGDIR)
+	$(Q)exec 2>&1; exec &> >(tee $(PKGDIR)/$(@F).log); \
 	  $(TIMEOUT) $(EMACS_EVAL) "(package-build-archive \"$(@F)\")"
-	@test $(PAUSE) -gt 0 && sleep $(PAUSE) || true
+	$(Q)test $(PAUSE) -gt 0 && sleep $(PAUSE) || true
 
 archive-contents: .FORCE
 	@echo " • Building archive-contents ..."
-	@$(EMACS_EVAL) "(package-build-dump-archive-contents)"
+	$(Q)$(EMACS_EVAL) "(package-build-dump-archive-contents)"
 
 ifdef OPENPGP_KEY
 signing ?= $(patsubst %, %.sig, $(wildcard\
@@ -218,16 +225,16 @@ sign: ;
 endif
 
 %.sig: %
-	@$(OPENPGP_CMD) $(OPENPGP_KEY) $<
+	$(Q)$(OPENPGP_CMD) $(OPENPGP_KEY) $<
 
 json: .FORCE
 	@echo " • Building json indices ..."
-	@$(EMACS_EVAL) "(package-build-archive-alist-as-json \"$(HTMLDIR)/archive.json\")"
-	@$(EMACS_EVAL) "(package-build-recipe-alist-as-json \"$(HTMLDIR)/recipes.json\")"
+	$(Q)$(EMACS_EVAL) "(package-build-archive-alist-as-json \"$(HTMLDIR)/archive.json\")"
+	$(Q)$(EMACS_EVAL) "(package-build-recipe-alist-as-json \"$(HTMLDIR)/recipes.json\")"
 
 html: .FORCE
 	@echo " • Building html index ..."
-	$(MAKE) -C $(HTMLDIR)
+	$(Q)$(MAKE) -C $(HTMLDIR)
 
 ## Cleanup rules
 
@@ -251,32 +258,32 @@ INDICES += html/build-status.json
 clean:
 	@echo " • Removing indices ..."
 	@echo " • Removing packages ..."
-	@git clean --quiet --force -x $(HTMLDIRS) $(PKGDIRS)
+	$(Q)git clean --quiet --force -x $(HTMLDIRS) $(PKGDIRS)
 
 clean-packages:
 	@echo " • Removing packages ..."
-	@git clean --quiet --force -x $(HTMLDIRS) $(PKGDIRS) \
+	$(Q)git clean --quiet --force -x $(HTMLDIRS) $(PKGDIRS) \
 	$(addprefix -e /,$(INDICES))
 
 clean-indices:
 	@echo " • Removing indices ..."
-	@rm -f $(sort $(INDICES))
+	$(Q)rm -f $(sort $(INDICES))
 
 remove-sandbox:
 	@echo " • Removing $(SANDBOX) ..."
-	@rm -rf $(SANDBOX)
+	$(Q)rm -rf $(SANDBOX)
 
 remove-repositories:
 	@echo " • Removing $(WORKDIR) ..."
-	@rm -rf $(WORKDIR)
+	$(Q)rm -rf $(WORKDIR)
 
 ## Update package-build
 
 PACKAGE_BUILD_REPO ?= "https://github.com/melpa/package-build"
 
 pull-package-build:
-	@git fetch $(PACKAGE_BUILD_REPO)
-	@git -c "commit.gpgSign=true" subtree \
+	$(Q)git fetch $(PACKAGE_BUILD_REPO)
+	$(Q)git -c "commit.gpgSign=true" subtree \
 	$(shell test -e package-build && echo merge || echo add) \
 	-m "Merge Package-Build $$(git describe --always FETCH_HEAD)" \
 	--squash -P package-build FETCH_HEAD
@@ -334,8 +341,8 @@ SANDBOX ?= sandbox
 
 sandbox: .FORCE
 	@echo " • Building sandbox ..."
-	@mkdir -p $(SANDBOX)
-	@$(EMACS_EVAL) "(progn\
+	$(Q)mkdir -p $(SANDBOX)
+	$(Q)$(EMACS_EVAL) "(progn\
   (package-build-dump-archive-contents)\
   (setq user-emacs-directory (file-truename \"$(SANDBOX)\"))\
   (setq package-user-dir (locate-user-emacs-file \"elpa\"))\

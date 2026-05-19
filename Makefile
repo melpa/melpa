@@ -78,7 +78,7 @@ BUILD_CONFIG ?= ()
 
 # Available channels.  Only "unstable" and "stable" are currently
 # being published on melpa.org.  Users should not modify this.
-MELPA_CHANNELS = unstable stable snapshot release
+MELPA_CHANNELS = unstable stable snapshots releases
 
 # Channel build by targets that don't use docker.  When empty, use
 # "package-build.el"'s default settings, which are similar to the
@@ -86,7 +86,7 @@ MELPA_CHANNELS = unstable stable snapshot release
 MELPA_CHANNEL ?= unstable
 
 # Channels build by the "docker-build-run" target.
-# To build all channels use "unstable:stable:snapshot:release".
+# To build all channels use "unstable:stable:snapshots:releases".
 # To fetch without building use "", which the "docker-build-fetch"
 # target does.  (Keep in sync with "docker/builder/run.sh".)
 DOCKER_BUILD_CHANNELS ?= unstable:stable
@@ -139,23 +139,23 @@ CHANNEL_CONFIG := "(progn\
   (setq package-build-release-version-functions '(package-build-tag-version))\
   (setq package-build-badge-data '(\"melpa stable\" \"\#3e999f\")))"
 
-else ifeq ($(MELPA_CHANNEL), snapshot)
+else ifeq ($(MELPA_CHANNEL), snapshots)
 # This is an experimental channel, which may
 # eventually replace the "unstable" channel.
-PKGDIR  := packages-snapshot
-HTMLDIR := html-snapshot
+PKGDIR  := packages-snapshots
+HTMLDIR := html-snapshots
 CHANNEL_CONFIG := "(progn\
   (setq package-build-stable nil)\
-  (setq package-build-badge-data '(\"snapshot\" \"\#30a14e\")))"
+  (setq package-build-badge-data '(\"snapshots\" \"\#30a14e\")))"
 
-else ifeq ($(MELPA_CHANNEL), release)
+else ifeq ($(MELPA_CHANNEL), releases)
 # This is an experimental channel, which may
 # eventually replace the "stable" channel.
-PKGDIR  := packages-release
-HTMLDIR := html-release
+PKGDIR  := packages-releases
+HTMLDIR := html-releases
 CHANNEL_CONFIG := "(progn\
   (setq package-build-stable t)\
-  (setq package-build-badge-data '(\"release\" \"\#9be9a8\")))"
+  (setq package-build-badge-data '(\"releases\" \"\#9be9a8\")))"
 
 else
 $(error Unknown MELPA_CHANNEL: $(MELPA_CHANNEL))
@@ -247,8 +247,8 @@ html: .FORCE
 
 ## Cleanup rules
 
-HTMLDIRS = html html-stable html-snapshot html-release
-PKGDIRS  = packages packages-stable packages-snapshot packages-release
+HTMLDIRS = html html-stable html-snapshots html-releases
+PKGDIRS  = packages packages-stable packages-snapshots packages-releases
 # If we used consistent names we could use this instead.
 # HTMLDIRS = $(addprefix html-,$(MELPA_CHANNELS))
 # PKGDIRS  = $(addprefix packages-,$(MELPA_CHANNELS))

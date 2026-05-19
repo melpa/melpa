@@ -99,14 +99,6 @@ DOCKER_BUILD_CHANNELS ?= unstable stable
 # To instruct "docker-build-run" target to build package without
 # first pulling them, use non-emtpy DOCKER_INHIBIT_PACKAGE_PULL.
 
-SHELL := bash
-
-EMACS       ?= emacs
-EMACS_ARGS  ?=
-EMACS_Q_ARG ?= -Q
-EMACS_BATCH ?= $(EMACS) $(EMACS_Q_ARG) --batch $(EMACS_ARGS) \
-  $(addprefix -L ,$(LOAD_PATH))
-
 RCPDIR  := recipes
 WORKDIR := working
 SANDBOX := sandbox
@@ -175,13 +167,20 @@ else
 LOAD_PATH := $(TOP)/package-build
 endif
 
-EMACS_EVAL := $(EMACS_BATCH) \
---eval $(CHANNEL_CONFIG) \
---eval $(LOCATION_CONFIG) \
---eval "$(BUILD_CONFIG)" \
---eval $(USER_CONFIG) \
---load package-build.el \
---eval
+EMACS       ?= emacs
+EMACS_ARGS  ?=
+EMACS_Q_ARG ?= -Q
+EMACS_BATCH ?= $(EMACS) $(EMACS_Q_ARG) --batch $(EMACS_ARGS)\
+  $(addprefix -L ,$(LOAD_PATH))
+EMACS_EVAL  := $(EMACS_BATCH)\
+  --eval $(CHANNEL_CONFIG)\
+  --eval $(LOCATION_CONFIG)\
+  --eval "$(BUILD_CONFIG)"\
+  --eval $(USER_CONFIG)\
+  --load package-build.el\
+  --eval
+
+SHELL := bash
 
 .PHONY: clean build indices json html sandbox
 .FORCE:

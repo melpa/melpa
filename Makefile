@@ -11,7 +11,7 @@ help helpall::
 	$(info Building)
 	$(info ========)
 	$(info )
-	$(info Use "MELPA_CHANNEL=<channel> make <target>")
+	$(info Use "CHANNEL=<channel> make <target>")
 	$(info .    to build like MELPA channel <channel> does.)
 	$(info .    <channel> is one of "stable" or "unstable".)
 	$(info or use "make <target>")
@@ -78,40 +78,18 @@ PAUSE ?= 0
 OPENPGP_CMD ?= gpg --yes --no-tty --detach-sign --local-user
 OPENPGP_KEY ?=
 
-# Only intended for "docker/builder/run.sh" and similar scripts.
-# That is also why we add extra quoting when setting EMACS_EVAL
-# below, instead of here.  Not doing it like that would complicate
-# the quoting needed in scripts.
-BUILD_CONFIG ?= ()
-
-# If BUILD_PACKAGES is non-empty, all targets that would otherwise
-# build all packages, build only those listed.
-
 # Available channels.  Only "unstable" and "stable" are currently
 # being published on melpa.org.  Users should not modify this.
-MELPA_CHANNELS = unstable stable snapshots releases
+CHANNELS = unstable stable snapshots releases
 
-# Channel build by targets that don't use docker.  When empty, use
-# "package-build.el"'s default settings, which are similar to the
-# settings for the "unstable" channel, but not currently identical.
-MELPA_CHANNEL ?= unstable
+# Channel build by targets that don't use docker.
+CHANNEL ?= unstable
 
-# Channels build by the "docker-build-run" target.
-# To build all channels use "unstable stable snapshots releases".
-# To fetch without building use "", which the "docker-build-fetch"
-# target does.  (Keep in sync with "docker/builder/run.sh".)
-DOCKER_BUILD_CHANNELS ?= unstable stable
-
-# To instruct "docker-build-run" target to build package without
-# first pulling them, use non-emtpy DOCKER_INHIBIT_PACKAGE_PULL.
-
-ifdef DOCKER_MELPA_CHANNEL
-MELPA_CHANNEL = $(DOCKER_MELPA_CHANNEL)
+ifdef DOCKER_CHANNEL
+CHANNEL := $(DOCKER_CHANNEL)
 endif
 
-MELPA_CHANNEL ?= unstable
-
-ifeq ($(MELPA_CHANNEL), unstable)
+ifeq ($(CHANNEL), unstable)
 PKGDIR  := packages
 HTMLDIR := html
 CHANNEL_CONFIG := "(progn\
@@ -120,7 +98,7 @@ CHANNEL_CONFIG := "(progn\
   (setq package-build-snapshot-version-functions '(package-build-timestamp-version))\
   (setq package-build-badge-data '(\"melpa\" \"\#922793\")))"
 
-else ifeq ($(MELPA_CHANNEL), stable)
+else ifeq ($(CHANNEL), stable)
 PKGDIR  := packages-stable
 HTMLDIR := html-stable
 CHANNEL_CONFIG := "(progn\
@@ -130,7 +108,7 @@ CHANNEL_CONFIG := "(progn\
   (setq package-build-release-version-functions '(package-build-tag-version))\
   (setq package-build-badge-data '(\"melpa stable\" \"\#3e999f\")))"
 
-else ifeq ($(MELPA_CHANNEL), snapshots)
+else ifeq ($(CHANNEL), snapshots)
 # This is an experimental channel, which may
 # eventually replace the "unstable" channel.
 PKGDIR  := packages-snapshots
@@ -139,7 +117,7 @@ CHANNEL_CONFIG := "(progn\
   (setq package-build-stable nil)\
   (setq package-build-badge-data '(\"snapshots\" \"\#30a14e\")))"
 
-else ifeq ($(MELPA_CHANNEL), releases)
+else ifeq ($(CHANNEL), releases)
 # This is an experimental channel, which may
 # eventually replace the "stable" channel.
 PKGDIR  := packages-releases
@@ -149,10 +127,10 @@ CHANNEL_CONFIG := "(progn\
   (setq package-build-badge-data '(\"releases\" \"\#9be9a8\")))"
 
 else
-$(error Unknown MELPA_CHANNEL: $(MELPA_CHANNEL))
+$(error Unknown CHANNEL: $(CHANNEL))
 endif
 
-PKGDIR ?= $(MELPA_CHANNEL)
+PKGDIR ?= $(CHANNEL)
 RCPDIR ?= recipes
 SRCDIR ?= working
 PATH_CONFIG ?= '(progn\
@@ -169,7 +147,7 @@ EMACS_BATCH ?= $(EMACS) $(EMACS_Q_ARG) --batch $(EMACS_ARGS)\
 EMACS_EVAL   = $(EMACS_BATCH)\
   --eval $(CHANNEL_CONFIG)\
   --eval $(PATH_CONFIG)\
-  --eval "$(BUILD_CONFIG)"\
+  --eval "$(DOCKER_BUILD_CONFIG)"\
   --eval $(USER_CONFIG)\
   --load package-build.el\
   --eval
@@ -233,8 +211,8 @@ html: .FORCE
 HTMLDIRS = html html-stable html-snapshots html-releases
 PKGDIRS  = packages packages-stable packages-snapshots packages-releases
 # If we used consistent names we could use this instead.
-# HTMLDIRS = $(addprefix html-,$(MELPA_CHANNELS))
-# PKGDIRS  = $(addprefix packages-,$(MELPA_CHANNELS))
+# HTMLDIRS = $(addprefix html-,$(CHANNELS))
+# PKGDIRS  = $(addprefix packages-,$(CHANNELS))
 
 INDICES  = $(addsuffix /archive.json,$(HTMLDIRS))
 INDICES += $(addsuffix /recipes.json,$(HTMLDIRS))
@@ -282,6 +260,18 @@ pull-package-build:
 
 ## Docker
 
+# Channels build by the "docker-build-run" target.
+# To build all channels use "unstable stable snapshots releases".
+# To fetch without building use "", which the "docker-build-fetch"
+# target does.  (Keep in sync with "docker/builder/run.sh".)
+DOCKER_CHANNELS ?= unstable stable
+
+# Only intended for "docker/builder/run.sh" and similar scripts.  That
+# is also why we add extra quoting when setting EMACS_EVAL, instead of
+# here.  Not doing it like that would complicate the quoting needed in
+# scripts.
+DOCKER_BUILD_CONFIG ?= ()
+
 DOCKER_RUN_ARGS = \
  --user $$(id --user):$$(id --group) \
  --mount type=bind,src=$$PWD,target=/mnt/store/melpa \
@@ -292,19 +282,19 @@ DOCKER_RUN_ARGS = \
 docker-build-run:
 	docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL=$(DOCKER_INHIBIT_PACKAGE_PULL) \
-	--env BUILD_CHANNELS="$(DOCKER_BUILD_CHANNELS)" \
+	--env DOCKER_CHANNELS="$(DOCKER_CHANNELS)" \
 	melpa_builder
 
 docker-build-fetch:
 	docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL="" \
-	--env BUILD_CHANNELS="" \
+	--env DOCKER_CHANNELS="" \
 	melpa_builder
 
 docker-build-shell:
 	docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL=$(DOCKER_INHIBIT_PACKAGE_PULL) \
-	--env BUILD_CHANNELS="$(DOCKER_BUILD_CHANNELS)" \
+	--env DOCKER_CHANNELS="$(DOCKER_CHANNELS)" \
 	melpa_builder bash
 
 docker-build-rebuild:

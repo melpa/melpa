@@ -4,7 +4,7 @@
 # - INHIBIT_PACKAGE_PULL
 # - INHIBIT_MELPA_PULL
 
-: ${BUILD_CHANNELS="unstable stable"}
+: ${DOCKER_CHANNELS="unstable stable"}
 
 # Break taken between runs, in seconds.
 : ${BUILD_PAUSE="-300"}
@@ -55,27 +55,27 @@ record_build_status
 
 if [ -z "$INHIBIT_PACKAGE_PULL" ]
 then
-    if [ -n "$BUILD_CHANNELS" ]
+    if [ -n "$DOCKER_CHANNELS" ]
     then
         # Fetch all packages when updating first channel.
-        export BUILD_CONFIG="$LISP_CONFIG"
+        export DOCKER_BUILD_CONFIG="$LISP_CONFIG"
     else
         # Fetch all packages but don't build any channel.
-        export BUILD_CONFIG="(progn $LISP_CONFIG\
+        export DOCKER_BUILD_CONFIG="(progn $LISP_CONFIG\
           (setq package-build--inhibit-update t)\
           (setq package-build-build-function 'ignore))"
         make -k -j8 build || true
     fi
 else
     # Don't fetch packages.
-    export BUILD_CONFIG="(progn $LISP_CONFIG\
+    export DOCKER_BUILD_CONFIG="(progn $LISP_CONFIG\
       (setq package-build-fetch-function 'ignore))"
 fi
 
-for channel in $BUILD_CHANNELS
+for channel in $DOCKER_CHANNELS
 do
     echo ">>> Starting to build \"$channel\" channel"
-    export DOCKER_MELPA_CHANNEL=$channel
+    export DOCKER_CHANNEL=$channel
     pkgdir=$(make get-pkgdir)
     if [ -e "$pkgdir/errors.log" ];
     then
@@ -84,7 +84,7 @@ do
     make -k -j8 build || true
     make indices
     # Don't fetch packages a second time.
-    export BUILD_CONFIG="(progn $LISP_CONFIG\
+    export DOCKER_BUILD_CONFIG="(progn $LISP_CONFIG\
       (setq package-build-fetch-function 'ignore))"
 done
 

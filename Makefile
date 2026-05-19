@@ -48,10 +48,10 @@ helpall::
 	$(info Building with Docker)
 	$(info ====================)
 	$(info make pull-package-build                   Merge new package-build.el version)
-	$(info make docker-build-run                     Build everything like melpa.org does)
-	$(info make docker-build-fetch                   Fetch upstream repositories)
-	$(info make docker-build-shell                   Run interactive shell in the container)
-	$(info make docker-build-rebuild                 Re-build the build container)
+	$(info make docker-build                         Build everything like melpa.org does)
+	$(info make docker-fetch                         Fetch upstream repositories)
+	$(info make docker-shell                         Run interactive shell in the container)
+	$(info make docker-image                         Re-build the build container)
 help helpall::
 	$(info )
 	@:
@@ -311,25 +311,25 @@ DOCKER_RUN_ARGS = \
  --env INHIBIT_MELPA_PULL=t \
  --env BUILD_PAUSE=0
 
-docker-build-run:
+docker-build:
 	@docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL=$(DOCKER_INHIBIT_PACKAGE_PULL) \
 	--env DOCKER_CHANNELS="$(DOCKER_CHANNELS)" \
 	melpa_builder
 
-docker-build-fetch:
+docker-fetch:
 	@docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL="" \
 	--env DOCKER_CHANNELS="" \
 	melpa_builder
 
-docker-build-shell:
+docker-shell:
 	@docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL=$(DOCKER_INHIBIT_PACKAGE_PULL) \
 	--env DOCKER_CHANNELS="$(DOCKER_CHANNELS)" \
 	melpa_builder bash
 
-docker-build-rebuild:
+docker-image:
 	@docker build -t melpa_builder docker/builder
 
 get-pkgdir: .FORCE

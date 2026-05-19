@@ -1,7 +1,5 @@
 ## Help
 
-.DEFAULT_GOAL := all
-
 help helpall::
 	$(info )
 	$(info Getting Help)

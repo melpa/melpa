@@ -61,9 +61,9 @@ help helpall::
 -include ./config.mk
 
 ifeq ($(INSIDE_DOCKER), true)
-PACKAGE_BUILD_DIRECTORY := $(TOP)/package-build
+  PACKAGE_BUILD_DIRECTORY := $(TOP)/package-build
 else
-PACKAGE_BUILD_DIRECTORY ?= $(TOP)/package-build
+  PACKAGE_BUILD_DIRECTORY ?= $(TOP)/package-build
 endif
 
 # Users should usually prefer this over other *_CONFIG variables.
@@ -93,22 +93,22 @@ CHANNELS = unstable stable snapshots releases
 CHANNEL ?= unstable
 
 ifdef DOCKER_CHANNEL
-CHANNEL := $(DOCKER_CHANNEL)
+  CHANNEL := $(DOCKER_CHANNEL)
 endif
 
 ifeq ($(CHANNEL), unstable)
-PKGDIR  := packages
-HTMLDIR := html
-CHANNEL_CONFIG := "(progn\
+  PKGDIR  := packages
+  HTMLDIR := html
+  CHANNEL_CONFIG := "(progn\
   (setq package-build-stable nil)\
   (setq package-build-build-function 'package-build--build-multi-file-package)\
   (setq package-build-snapshot-version-functions '(package-build-timestamp-version))\
   (setq package-build-badge-data '(\"melpa\" \"\#922793\")))"
 
 else ifeq ($(CHANNEL), stable)
-PKGDIR  := packages-stable
-HTMLDIR := html-stable
-CHANNEL_CONFIG := "(progn\
+  PKGDIR  := packages-stable
+  HTMLDIR := html-stable
+  CHANNEL_CONFIG := "(progn\
   (setq package-build-stable t)\
   (setq package-build-all-publishable nil)\
   (setq package-build-build-function 'package-build--build-multi-file-package)\
@@ -116,25 +116,25 @@ CHANNEL_CONFIG := "(progn\
   (setq package-build-badge-data '(\"melpa stable\" \"\#3e999f\")))"
 
 else ifeq ($(CHANNEL), snapshots)
-# This is an experimental channel, which may
-# eventually replace the "unstable" channel.
-PKGDIR  := packages-snapshots
-HTMLDIR := html-snapshots
-CHANNEL_CONFIG := "(progn\
+  # This is an experimental channel, which may
+  # eventually replace the "unstable" channel.
+  PKGDIR  := packages-snapshots
+  HTMLDIR := html-snapshots
+  CHANNEL_CONFIG := "(progn\
   (setq package-build-stable nil)\
   (setq package-build-badge-data '(\"snapshots\" \"\#30a14e\")))"
 
 else ifeq ($(CHANNEL), releases)
-# This is an experimental channel, which may
-# eventually replace the "stable" channel.
-PKGDIR  := packages-releases
-HTMLDIR := html-releases
-CHANNEL_CONFIG := "(progn\
+  # This is an experimental channel, which may
+  # eventually replace the "stable" channel.
+  PKGDIR  := packages-releases
+  HTMLDIR := html-releases
+  CHANNEL_CONFIG := "(progn\
   (setq package-build-stable t)\
   (setq package-build-badge-data '(\"releases\" \"\#9be9a8\")))"
 
 else
-$(error Unknown CHANNEL: $(CHANNEL))
+  $(error Unknown CHANNEL: $(CHANNEL))
 endif
 
 PKGDIR ?= $(CHANNEL)
@@ -164,11 +164,11 @@ EMACS_EVAL   = $(EMACS_BATCH)\
 SHELL := bash
 
 ifdef V
-Q=
-MAKE += V=$(V)
+  Q=
+  MAKE += V=$(V)
 else
-Q=@
-MAKEFLAGS += --no-print-directory
+  Q=@
+  MAKEFLAGS += --no-print-directory
 endif
 
 .FORCE:

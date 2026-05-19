@@ -1,9 +1,9 @@
 SHELL  := bash
 
 ifdef V
-Q=
+  Q=
 else
-Q=@
+  Q=@
 endif
 
 .PHONY: all clean updates.rss

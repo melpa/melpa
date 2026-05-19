@@ -53,7 +53,7 @@ fi
 BUILD_STARTED=$(date "+%s")
 record_build_status
 
-if [ -z "$INHIBIT_PACKAGE_PULL" ]
+if [ "$INHIBIT_PACKAGE_PULL" != nil ]
 then
     if [ -n "$DOCKER_CHANNELS" ]
     then

@@ -295,6 +295,8 @@ DOCKER_CHANNELS ?= unstable stable
 # scripts.
 DOCKER_BUILD_CONFIG ?= ()
 
+DOCKER_INHIBIT_PACKAGE_PULL ?= nil
+
 DOCKER_RUN_ARGS = \
  --user $$(id --user):$$(id --group) \
  --mount type=bind,src=$$PWD,target=/mnt/store/melpa \

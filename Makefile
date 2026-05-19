@@ -67,7 +67,7 @@ endif
 
 # Users should usually prefer this over other *_CONFIG variables.
 # We recommend that the value is set in the included "config.mk".
-USER_CONFIG ?= "()"
+CONFIG ?= "()"
 
 NOFETCH ?= nil
 NOBUILD ?= nil
@@ -154,7 +154,7 @@ EMACS_EVAL   = $(EMACS_BATCH)\
   --eval $(CHANNEL_CONFIG)\
   --eval $(PATH_CONFIG)\
   --eval "$(DOCKER_BUILD_CONFIG)"\
-  --eval $(USER_CONFIG)\
+  --eval $(CONFIG)\
   --eval "(setq package-build--inhibit-fetch $(NOFETCH))"\
   --eval "(setq package-build--inhibit-build $(NOBUILD))"\
   --load package-build.el\

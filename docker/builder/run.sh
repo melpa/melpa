@@ -82,7 +82,7 @@ do
         mv "$pkgdir/errors.log" "$pkgdir/errors-previous.log"
     fi
     make -k -j8 build || true
-    make indices
+    make archive-contents json html
     # Don't fetch packages a second time.
     export DOCKER_BUILD_CONFIG="(progn $LISP_CONFIG\
       (setq package-build-fetch-function 'ignore))"

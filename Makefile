@@ -5,56 +5,55 @@ help helpall::
 	$(info )
 	$(info Getting Help)
 	$(info ============)
-	$(info make help                 Show brief help)
-	$(info make helpall              Show extended help)
+	$(info make help                                 Show brief help)
+	$(info make helpall                              Show extended help)
 	$(info )
 	$(info Building)
 	$(info ========)
 	$(info )
-	$(info Use "CHANNEL=<channel> make <target>")
-	$(info .    to build like MELPA channel <channel> does.)
-	$(info .    <channel> is one of "stable" or "unstable".)
-	$(info or use "make <target>")
-	$(info .    to build using package-build.el’s default)
-	$(info .    settings (which is like channel "unstable").)
+	$(info make recipes/<package>                    Build <package>)
+	$(info make build-channel                        Build "$(CHANNEL)" channel)
+	$(info make build-channels                       Build all channels)
+	$(info make CHANNEL=<channel> recipes/<package>  Build <package> on <channel>)
+	$(info make CHANNEL=<channel> build-channel      Build <channel>)
 	$(info )
+	$(info make BUILD_PACKAGES="<p1> <p2>..." ...    Limit to <p1>, <p2> ...)
+	$(info make ASYNC=t ...                          Build asynchronously)
+	$(info make NOFETCH=t ...                        Build without fetching)
+	$(info make [BUILD_PACKAGES=...] [ASYNC=t] fetch Fetch without building)
 helpall::
-	$(info Use "PACKAGE_BUILD_REPO=<dir> make <target>")
-	$(info .    to use an out-of-tree package-build.el.)
+	$(info make PACKAGE_BUILD_DIRECTORY=<dir> ...    Use package-build.el from <dir>)
 	$(info )
+	$(info make [CHANNEL=<channel>] ...              On <channel> (else "$(CHANNEL)"):)
+	$(info make sign                                 Sign packages et al.)
+	$(info make archive-contents                     Create archive-contents)
+	$(info make html                                 Create index.html)
+	$(info make json                                 Create TODO)
 help helpall::
-	$(info make recipes/<package>    Build <package>)
-	$(info make [-k] [-j 8] build    Build all packages)
-	$(info make all                  Build everything)
-	$(info make all-async            Build everything asynchronously)
-helpall::
-	$(info make indices              Build all package indices)
-	$(info make archive-contents     Build main package index)
-	$(info make json                 Build json package index)
-	$(info make html                 Build html package index)
-	$(info make sign                 Sign packages and main indices)
-help helpall::
+	$(info )
+	$(info Testing)
+	$(info =======)
+	$(info make INSTALL=<package> sandbox            Install <package> in sandbox)
 	$(info )
 	$(info Cleaning)
 	$(info ========)
-	$(info make clean                Remove all generated files)
-	$(info make clean-packages       Remove all generated packages)
+	$(info make clean                                Remove all generated files)
+	$(info make clean-packages                       Remove all generated packages)
 helpall::
-	$(info make clean-indices        Remove all generated indices)
-	$(info make remove-sandbox       Remove all package test installations)
-	$(info make remove-repositories  Remove all cloned package repositories)
+	$(info make clean-indices                        Remove all generated indices)
+	$(info make remove-sandbox                       Remove all package test installations)
+	$(info make remove-repositories                  Remove all cloned package repositories)
+	$(info )
+	$(info Building with Docker)
+	$(info ====================)
+	$(info make pull-package-build                   Merge new package-build.el version)
+	$(info make docker-build-run                     Build everything like melpa.org does)
+	$(info make docker-build-fetch                   Fetch upstream repositories)
+	$(info make docker-build-shell                   Run interactive shell in the container)
+	$(info make docker-build-rebuild                 Re-build the build container)
 help helpall::
 	$(info )
-helpall::
-	$(info Maintenance)
-	$(info ===========)
-	$(info make pull-package-build   Merge new package-build.el version)
-	$(info make docker-build-run     Build everything like melpa.org does)
-	$(info make docker-build-fetch   Fetch upstream repositories)
-	$(info make docker-build-shell   Run interactive shell in the container)
-	$(info make docker-build-rebuild Re-build the build container)
-help helpall::
-	@echo
+	@:
 
 ## Config
 
@@ -69,6 +68,13 @@ endif
 # Users should usually prefer this over other *_CONFIG variables.
 # We recommend that the value is set in the included "config.mk".
 USER_CONFIG ?= "()"
+
+NOFETCH ?= nil
+NOBUILD ?= nil
+ASYNC   ?= nil
+
+BUILD_PACKAGES ?=
+BUILD_TARGETS  ?= archive-contents sign
 
 # Timeout used when building a package.
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
@@ -149,23 +155,40 @@ EMACS_EVAL   = $(EMACS_BATCH)\
   --eval $(PATH_CONFIG)\
   --eval "$(DOCKER_BUILD_CONFIG)"\
   --eval $(USER_CONFIG)\
+  --eval "(setq package-build--inhibit-fetch $(NOFETCH))"\
+  --eval "(setq package-build--inhibit-build $(NOBUILD))"\
   --load package-build.el\
   --eval
 
 SHELL := bash
 
-.PHONY: clean build indices json html sandbox
+MAKEFLAGS += --no-print-directory
+
 .FORCE:
+.PHONY: help fetch build-channels build-channel build \
+  archive-contents sign json html clean
 
 ## Build
 
-all: build indices
+all: build-channels
 
-all-async:
-	make -k -j 8 build || true
-	make indices
+fetch:
+	@make NOBUILD=t build-channel
 
-indices: archive-contents json html
+build-channels:
+	@for channel in $(CHANNELS); do\
+	  NOFETCH=$${NOFETCH=$(NOFETCH)} CHANNEL=$$channel make build-channel;\
+	  NOFETCH=t;\
+	done
+
+build-channel:
+	@echo -e "\n•••Building channel $(CHANNEL)..."
+ifneq ($(ASYNC), nil)
+	@make -k -j 8 build || true
+else
+	@make build || true
+endif
+	@make $(BUILD_TARGETS)
 
 ifdef BUILD_PACKAGES
 build: $(addprefix $(RCPDIR)/,$(BUILD_PACKAGES))

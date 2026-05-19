@@ -4,7 +4,7 @@
 # - INHIBIT_PACKAGE_PULL
 # - INHIBIT_MELPA_PULL
 
-: ${BUILD_CHANNELS="unstable:stable"}
+: ${BUILD_CHANNELS="unstable stable"}
 
 # Break taken between runs, in seconds.
 : ${BUILD_PAUSE="-300"}
@@ -72,7 +72,7 @@ else
       (setq package-build-fetch-function 'ignore))"
 fi
 
-for channel in $(echo "$BUILD_CHANNELS" | tr ":" " ")
+for channel in $BUILD_CHANNELS
 do
     echo ">>> Starting to build \"$channel\" channel"
     export DOCKER_MELPA_CHANNEL=$channel

@@ -86,10 +86,10 @@ MELPA_CHANNELS = unstable stable snapshots releases
 MELPA_CHANNEL ?= unstable
 
 # Channels build by the "docker-build-run" target.
-# To build all channels use "unstable:stable:snapshots:releases".
+# To build all channels use "unstable stable snapshots releases".
 # To fetch without building use "", which the "docker-build-fetch"
 # target does.  (Keep in sync with "docker/builder/run.sh".)
-DOCKER_BUILD_CHANNELS ?= unstable:stable
+DOCKER_BUILD_CHANNELS ?= unstable stable
 
 # To instruct "docker-build-run" target to build package without
 # first pulling them, use non-emtpy DOCKER_INHIBIT_PACKAGE_PULL.
@@ -309,7 +309,7 @@ DOCKER_RUN_ARGS = \
 docker-build-run:
 	docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL=$(DOCKER_INHIBIT_PACKAGE_PULL) \
-	--env BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
+	--env BUILD_CHANNELS="$(DOCKER_BUILD_CHANNELS)" \
 	melpa_builder
 
 docker-build-fetch:
@@ -321,7 +321,7 @@ docker-build-fetch:
 docker-build-shell:
 	docker run $(DOCKER_RUN_ARGS) \
 	--env INHIBIT_PACKAGE_PULL=$(DOCKER_INHIBIT_PACKAGE_PULL) \
-	--env BUILD_CHANNELS=$(DOCKER_BUILD_CHANNELS) \
+	--env BUILD_CHANNELS="$(DOCKER_BUILD_CHANNELS)" \
 	melpa_builder bash
 
 docker-build-rebuild:

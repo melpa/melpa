@@ -101,12 +101,7 @@ DOCKER_BUILD_CHANNELS ?= unstable stable
 
 SHELL := bash
 
-ifdef EMACS_COMMAND
-EMACS := $(EMACS_COMMAND)
-else
-EMACS ?= emacs
-endif
-
+EMACS       ?= emacs
 EMACS_ARGS  ?=
 EMACS_Q_ARG ?= -Q
 EMACS_BATCH ?= $(EMACS) $(EMACS_Q_ARG) --batch $(EMACS_ARGS) \

@@ -67,6 +67,11 @@ TOP := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 # We recommend that the value is set in the included "config.mk".
 USER_CONFIG ?= "()"
 
+# Timeout used when building a package.
+TIMEOUT := $(shell which timeout && echo "-k 60 600")
+# Seconds to sleep after building a single package.
+PAUSE ?= 0
+
 OPENPGP_CMD ?= gpg --yes --no-tty --detach-sign --local-user
 OPENPGP_KEY ?=
 
@@ -96,9 +101,6 @@ DOCKER_BUILD_CHANNELS ?= unstable stable
 
 # To instruct "docker-build-run" target to build package without
 # first pulling them, use non-emtpy DOCKER_INHIBIT_PACKAGE_PULL.
-
-# Seconds to sleep after building a single package.
-SLEEP ?= 0
 
 SHELL := bash
 
@@ -189,8 +191,6 @@ EMACS_EVAL := $(EMACS_BATCH) \
 --load package-build.el \
 --eval
 
-TIMEOUT := $(shell which timeout && echo "-k 60 600")
-
 .PHONY: clean build indices json html sandbox
 .FORCE:
 
@@ -212,8 +212,7 @@ $(RCPDIR)/%: .FORCE
 	@mkdir -p $(PKGDIR)
 	@exec 2>&1; exec &> >(tee $(PKGDIR)/$(@F).log); \
 	  $(TIMEOUT) $(EMACS_EVAL) "(package-build-archive \"$(@F)\")"
-	@test $(SLEEP) -gt 0 && echo " Sleeping $(SLEEP) seconds ..." \
-	  && sleep $(SLEEP) || true
+	@test $(PAUSE) -gt 0 && sleep $(PAUSE) || true
 
 ## Sign
 

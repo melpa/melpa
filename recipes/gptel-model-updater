@@ -1,0 +1,1 @@
+(gptel-model-updater :fetcher github :repo "chuxubank/gptel-model-updater")

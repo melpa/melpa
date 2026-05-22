@@ -1,0 +1,3 @@
+(annotated-completing-read
+ :fetcher github
+ :repo "tychoish/annotated-completing-read.el")

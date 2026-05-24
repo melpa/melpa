@@ -1,0 +1,3 @@
+(org-bake
+ :fetcher github
+ :repo "bitbloxhub/org-bake")

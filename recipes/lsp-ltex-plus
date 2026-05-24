@@ -1,4 +1,3 @@
  (lsp-ltex-plus
    :fetcher github
-   :repo "ltex-plus/emacs-ltex-plus"
-   :files (:defaults))
+   :repo "ltex-plus/emacs-ltex-plus")

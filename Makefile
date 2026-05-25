@@ -21,7 +21,7 @@ help helpall::
 	$(info make ASYNC=t ...                          Build asynchronously)
 	$(info make V=t ...                              Show commands run by make)
 	$(info make NOFETCH=t ...                        Build without fetching)
-	$(info make [BUILD_PACKAGES=...] [ASYNC=t] fetch Fetch without building)
+	$(info make [ASYNC=t] fetch                      Fetch without building)
 helpall::
 	$(info make PACKAGE_BUILD_DIRECTORY=<dir> ...    Use package-build.el from <dir>)
 	$(info )
@@ -47,11 +47,14 @@ helpall::
 	$(info )
 	$(info Building with Docker)
 	$(info ====================)
-	$(info make pull-package-build                   Merge new package-build.el version)
 	$(info make docker-build                         Build everything like melpa.org does)
 	$(info make docker-fetch                         Fetch upstream repositories)
 	$(info make docker-shell                         Run interactive shell in the container)
 	$(info make docker-image                         Re-build the build container)
+	$(info )
+	$(info Maintenance)
+	$(info ===========)
+	$(info make pull-package-build                   Merge new package-build.el version)
 help helpall::
 	$(info )
 	@:
@@ -66,8 +69,6 @@ else
   PACKAGE_BUILD_DIRECTORY ?= $(TOP)/package-build
 endif
 
-# Users should usually prefer this over other *_CONFIG variables.
-# We recommend that the value is set in the included "config.mk".
 CONFIG ?= "()"
 
 NOFETCH ?= nil
@@ -77,20 +78,14 @@ ASYNC   ?= nil
 BUILD_PACKAGES ?=
 BUILD_TARGETS  ?= archive-contents sign
 
-# Timeout used when building a package.
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
-# Seconds to sleep after building a single package.
-PAUSE ?= 0
+PAUSE   ?= 0
 
 OPENPGP_CMD ?= gpg --yes --no-tty --detach-sign --local-user
 OPENPGP_KEY ?=
 
-# Available channels.  Only "unstable" and "stable" are currently
-# being published on melpa.org.  Users should not modify this.
-CHANNELS = unstable stable snapshots releases
-
-# Channel build by targets that don't use docker.
-CHANNEL ?= unstable
+CHANNELS  = unstable stable snapshots releases
+CHANNEL  ?= unstable
 
 ifdef DOCKER_CHANNEL
   CHANNEL := $(DOCKER_CHANNEL)
@@ -236,13 +231,10 @@ html: .FORCE
 	@echo " • Building html index ..."
 	$(Q)$(MAKE) -C $(HTMLDIR)
 
-## Cleanup rules
+## Cleanup
 
 HTMLDIRS = html html-stable html-snapshots html-releases
 PKGDIRS  = packages packages-stable packages-snapshots packages-releases
-# If we used consistent names we could use this instead.
-# HTMLDIRS = $(addprefix html-,$(CHANNELS))
-# PKGDIRS  = $(addprefix packages-,$(CHANNELS))
 
 INDICES  = $(addsuffix /archive.json,$(HTMLDIRS))
 INDICES += $(addsuffix /recipes.json,$(HTMLDIRS))

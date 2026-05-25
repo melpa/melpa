@@ -158,6 +158,8 @@ EMACS_EVAL   = $(EMACS_BATCH)\
 
 SHELL := bash
 
+M ?= @echo " • "
+
 ifdef V
   Q=
   MAKE += V=$(V)
@@ -184,7 +186,8 @@ build-channels:
 	done
 
 build-channel:
-	@echo -e "\n•••Building channel $(CHANNEL)..."
+	@echo
+	$(M)"Building channel $(CHANNEL)..."
 ifneq ($(ASYNC), nil)
 	$(Q)$(MAKE) -k -j 8 build || true
 else
@@ -205,7 +208,7 @@ $(RCPDIR)/%: .FORCE
 	$(Q)test $(PAUSE) -gt 0 && sleep $(PAUSE) || true
 
 archive-contents: .FORCE
-	@echo " • Building archive-contents ..."
+	$(M)"Building archive-contents..."
 	$(Q)$(EMACS_EVAL) "(package-build-dump-archive-contents)"
 
 ifdef OPENPGP_KEY
@@ -223,12 +226,12 @@ endif
 	$(Q)$(OPENPGP_CMD) $(OPENPGP_KEY) $<
 
 json: .FORCE
-	@echo " • Building json indices ..."
+	$(M)"Building json indices..."
 	$(Q)$(EMACS_EVAL) "(package-build-archive-alist-as-json \"$(HTMLDIR)/archive.json\")"
 	$(Q)$(EMACS_EVAL) "(package-build-recipe-alist-as-json \"$(HTMLDIR)/recipes.json\")"
 
 html: .FORCE
-	@echo " • Building html index ..."
+	$(M)"Building html index..."
 	$(Q)$(MAKE) -C $(HTMLDIR)
 
 ## Cleanup
@@ -248,25 +251,25 @@ INDICES += $(addsuffix /errors-previous.log,$(PKGDIRS))
 INDICES += html/build-status.json
 
 clean:
-	@echo " • Removing indices ..."
-	@echo " • Removing packages ..."
+	$(M)"Removing indices..."
+	$(M)"Removing packages..."
 	$(Q)git clean --quiet --force -x $(HTMLDIRS) $(PKGDIRS)
 
 clean-packages:
-	@echo " • Removing packages ..."
+	$(M)"Removing packages..."
 	$(Q)git clean --quiet --force -x $(HTMLDIRS) $(PKGDIRS) \
 	$(addprefix -e /,$(INDICES))
 
 clean-indices:
-	@echo " • Removing indices ..."
+	$(M)"Removing indices..."
 	$(Q)rm -f $(sort $(INDICES))
 
 remove-sandbox:
-	@echo " • Removing $(SANDBOX) ..."
+	$(M)"Removing $(SANDBOX)..."
 	$(Q)rm -rf $(SANDBOX)
 
 remove-repositories:
-	@echo " • Removing $(WORKDIR) ..."
+	$(M)"Removing $(WORKDIR)..."
 	$(Q)rm -rf $(WORKDIR)
 
 ## Update package-build
@@ -332,7 +335,7 @@ get-pkgdir: .FORCE
 SANDBOX ?= sandbox
 
 sandbox: .FORCE
-	@echo " • Building sandbox ..."
+	$(M)"Building sandbox..."
 	$(Q)mkdir -p $(SANDBOX)
 	$(Q)$(EMACS_EVAL) "(progn\
   (package-build-dump-archive-contents)\

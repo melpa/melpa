@@ -76,7 +76,7 @@ NOBUILD ?= nil
 ASYNC   ?= nil
 
 BUILD_PACKAGES ?=
-BUILD_TARGETS  ?= archive-contents sign
+BUILD_TARGETS  ?= archive-contents json sign
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
 PAUSE   ?= 0

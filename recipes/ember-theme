@@ -1,0 +1,1 @@
+(ember-theme :fetcher github :repo "ember-theme/emacs")

@@ -84,7 +84,7 @@ PAUSE   ?= 0
 OPENPGP_CMD ?= gpg --yes --no-tty --detach-sign --local-user
 OPENPGP_KEY ?=
 
-CHANNELS  = unstable stable snapshots releases
+CHANNELS ?= unstable stable snapshots releases
 CHANNEL  ?= unstable
 
 ifdef DOCKER_CHANNEL

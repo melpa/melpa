@@ -80,6 +80,7 @@ BUILD_TARGETS  ?= archive-contents sign
 
 TIMEOUT := $(shell which timeout && echo "-k 60 600")
 PAUSE   ?= 0
+NOERROR ?= true
 
 OPENPGP_CMD ?= gpg --yes --no-tty --detach-sign --local-user
 OPENPGP_KEY ?=
@@ -181,17 +182,17 @@ fetch:
 
 build-channels:
 	$(Q)for channel in $(CHANNELS); do\
-	  NOFETCH=$${NOFETCH=$(NOFETCH)} CHANNEL=$$channel $(MAKE) build-channel;\
-	  NOFETCH=t;\
+	  NOFETCH=$${NOFETCH=$(NOFETCH)} CHANNEL=$$channel $(MAKE) build-channel\
+	  && NOFETCH=t;\
 	done
 
 build-channel:
 	@echo
 	$(M)"Building channel $(CHANNEL)..."
 ifneq ($(ASYNC), nil)
-	$(Q)$(MAKE) -k -j 8 build || true
+	$(Q)$(MAKE) -k -j 8 build || $(NOERROR)
 else
-	$(Q)$(MAKE) build || true
+	$(Q)$(MAKE) build || $(NOERROR)
 endif
 	$(Q)$(MAKE) $(BUILD_TARGETS)
 

@@ -1,1 +1,1 @@
-(hl-todo :repo "tarsius/hl-todo" :fetcher github)
+(hl-todo :fetcher github :repo "tarsius/hl-todo")

@@ -1,0 +1,3 @@
+(hercules-theme
+ :fetcher github
+ :repo "0xcefaedfe/hercules-theme")

@@ -1,0 +1,3 @@
+(persp-harpoon
+ :fetcher github
+ :repo "ahmed-shariff/persp-harpoon")

@@ -1,0 +1,1 @@
+(testscript-mode :fetcher github :repo "wwade/emacs-testscript-mode")

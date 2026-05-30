@@ -1,1 +1,1 @@
-(eterm-256color :fetcher github :repo "dieggsy/eterm-256color" :files (:defaults "eterm-256color.ti"))
+(eterm-256color :fetcher sourcehut :repo "dieggsy/eterm-256color" :files (:defaults "eterm-256color.ti"))

@@ -1,0 +1,3 @@
+(sleek-modeline
+ :repo "abidanBrito/sleek-modeline"
+ :fetcher github)

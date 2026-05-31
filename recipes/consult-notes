@@ -1,1 +1,1 @@
-(consult-notes :fetcher git :url "https://codeberg.org/mclear-tools/consult-notes.git")
+(consult-notes :fetcher codeberg :url "https://codeberg.org/mclear-tools/consult-notes")

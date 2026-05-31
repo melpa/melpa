@@ -1,1 +1,1 @@
-(bibtex-capf :fetcher github :repo "mclear-tools/bibtex-capf")
+(bibtex-capf :fetcher git :url "https://codeberg.org/mclear-tools/bibtex-capf.git")

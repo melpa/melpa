@@ -1,1 +1,1 @@
-(tabspaces :fetcher git :url "https://codeberg.org/mclear-tools/tabspaces.git")
+(tabspaces :fetcher codeberg :url "https://codeberg.org/mclear-tools/tabspaces")

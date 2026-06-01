@@ -1,0 +1,4 @@
+(howm-use-any-markup
+ :fetcher github
+ :repo "artsi0m/howm-use-any-markup"
+ :files ("howm-use-any-markup.el"))

@@ -1,0 +1,3 @@
+(gemini-cli-mode
+ :fetcher github
+ :repo "davidpham87/gemini-cli-mode")

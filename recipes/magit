@@ -7,5 +7,6 @@
          "docs/AUTHORS.md"
          "LICENSE"
          ".dir-locals.el"
+         ("githooks" "githooks/*")
          ("git-hooks" "git-hooks/*")
          (:exclude "lisp/magit-section.el")))

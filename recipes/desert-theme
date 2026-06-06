@@ -1,0 +1,3 @@
+(desert-theme
+ :fetcher github
+ :repo "bkc39/desert-theme")

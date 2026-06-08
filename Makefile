@@ -96,7 +96,7 @@ ifeq ($(CHANNEL), unstable)
   PKGDIR  := packages
   HTMLDIR := html
   CHANNEL_CONFIG := "(progn\
-  (setq package-build-stable nil)\
+  (setq package-build-releases nil)\
   (setq package-build-build-function 'package-build--build-multi-file-package)\
   (setq package-build-snapshot-version-functions '(package-build-timestamp-version))\
   (setq package-build-badge-data '(\"melpa\" \"\#922793\")))"
@@ -105,7 +105,7 @@ else ifeq ($(CHANNEL), stable)
   PKGDIR  := packages-stable
   HTMLDIR := html-stable
   CHANNEL_CONFIG := "(progn\
-  (setq package-build-stable t)\
+  (setq package-build-releases t)\
   (setq package-build-all-publishable nil)\
   (setq package-build-build-function 'package-build--build-multi-file-package)\
   (setq package-build-release-version-functions '(package-build-tag-version))\
@@ -117,7 +117,7 @@ else ifeq ($(CHANNEL), snapshots)
   PKGDIR  := packages-snapshots
   HTMLDIR := html-snapshots
   CHANNEL_CONFIG := "(progn\
-  (setq package-build-stable nil)\
+  (setq package-build-releases nil)\
   (setq package-build-badge-data '(\"snapshots\" \"\#30a14e\")))"
 
 else ifeq ($(CHANNEL), releases)
@@ -126,7 +126,7 @@ else ifeq ($(CHANNEL), releases)
   PKGDIR  := packages-releases
   HTMLDIR := html-releases
   CHANNEL_CONFIG := "(progn\
-  (setq package-build-stable t)\
+  (setq package-build-releases t)\
   (setq package-build-badge-data '(\"releases\" \"\#9be9a8\")))"
 
 else

@@ -1,0 +1,125 @@
+# -*- mode: org -*-
+* v5.0.0     UNRELEASED
+
+- The option ~package-build-releases~ now controls whether release
+  or snapshot packages are built.  Previously, under its old name
+  ~package-build-stable~, it only controlled what value the option
+  ~package-build-get-version-function~ was initialized to.
+
+- The new options ~package-build-release-version-functions~ and
+  ~package-build-snapshot-version-functions~ control how release and
+  snapshot packages are built.
+
+  These options replace ~package-build-get-version-function~, whose
+  value had to be manually changed, if one wanted to build both
+  releases and snapshots.  It is important that you do not set this
+  obsolete option to anything but ~nil~, else it overrides the new
+  options, and most of the improvements of this release are lost.
+
+  While the value of the old option was a single function, the new
+  options are hooks, i.e., the values are lists of functions, which
+  allows for greater flexibility.
+
+- Previously the latest release was solely determined based on
+  release tags.  This is still the preferred source of versioning
+  information, because it unambiguously names a precise commit that
+  corresponds to a release.  But now, if there are no release tags,
+  then by default the ~Package-Version~ or ~Version~ header in the main
+  library is used as fallback.
+
+  If that information is also missing, then the same commit and
+  version string is used as on the snapshot channel.  The hope is,
+  that this makes it more appealing for users to use the release
+  channel, and that the increased popularity of that channel will
+  motivate package maintainers to finally create a first release.
+
+  Determining the version is implemented using the new functions
+  ~package-build-tag-version~, ~package-build-header-version~ and
+  ~package-build-fallback-version~, which appear in the default value
+  of option ~package-build-release-version-functions~, in that order.
+
+- At this time it is still possible to extract version information and
+  other metadata from ~<name>-pkg.el~, but this is strongly discouraged,
+  and support will be removed soon.  There are only a dozen packages,
+  which provide version information exclusively in this file.
+
+- The version string format used for snapshots was changed from
+  ~YYYYMMDD.HHMM~ to ~RELEASE.0.YYYYMMDD.COUNT~.  ~RELEASE~ is the latest
+  release, i.e., the version distributed on the release channel.  If
+  no new commits since that release touch any files that are included
+  in the package, then just ~RELEASE~ is used on the snapshot channel
+  too.  ~YYYYMMDD~ is the committer date.  Instead of appending the time
+  to the date, ~COUNT~ is used, the number of commits since the latest
+  release.  If no release information can be determined, then ~0.0~ is
+  used as ~RELEASE~.
+
+- All packages are distributed as tarballs now, even if they consist
+  of a single library and nothing else.  This is a simplification
+  and also makes it possible to ship the same set of metadata with
+  all packages in the generated ~<name>-pkg.el~ file.  The version
+  information in ~<name>.el~ is now also updated, stripping incorrect
+  data.
+
+- ~<name>-pkg.el~ now set the ~:revdesc~ property and ~<name>.el~ the
+  ~Package-Revision~ header, which precisely name the commit that the
+  package was built from.  When the latest release was determined from
+  a Git tag, then the value is generated using ~git describe~, and has
+  the format ~TAG-COUNT-gHASH~.  If a version header had to be used to
+  determine the release, then its just an abbreviated commit hash.
+
+- A new file ~package-build.mk~ was added, to allow users to easily
+  distribute their own ELPA.  To learn how to build and distribute
+  your own ELPA, visit https://codeberg.org/tarsius/myelpa/wiki.  You
+  can build your ELPA locally and/or using Forgejo or Github actions.
+
+- Added major-mode ~package-recipe-mode~, replacing the minor-mode
+  ~package-build-minor-mode~.
+
+- Package version badges are now created locally, instead of using
+  a third-party web service.
+
+- Support for Emacs 25 was dropped.
+
+** Upcoming breaking changes
+
+Support for Emacs 26, 27 and 28 will be dropped.
+
+These obsolete variable and function aliases will be removed about
+a month after this release, because making the necessary downstream
+adjustments is trivial.
+
+- ~package-build--melpa-base~ (use ~package-build-directory~ instead)
+- ~package-build-stable~ (use ~package-build-releases~)
+- ~package-build-timeout-secs~ (use ~package-build-timeout~)
+- ~package-build-write-melpa-badge-images~ (use ~package-build-badge-data~)
+- ~package-build-get-tag-version~ (use ~package-build-tag-version~)
+- ~package-build-get-snapshot-version~ (use ~package-build-snapshot-version~)
+
+This obsolete function will be removed about a month after this
+release, because is was only intended for internal use anyway, and
+the necessary downstream adjustments are trivial.
+
+- ~package-build--run-process~ (use ~package-build--call-process~ instead)
+
+The following variables and functions might stick around a bit longer,
+two months or so.  See also the related explanations above.
+
+- Option ~package-build-get-version-function~, which should not be used
+  anymore, because it was replaced by two options, which allow for
+  finer control.  Setting this to anything but ~nil~, discards many of
+  the improvements in this release, so it's best to avoid doing that.
+
+- ~package-build-pkg-version~ and ~package-build--extract-from-package~,
+  which should not, and are not, used anymore, unless you customize
+  ~package-build-build-function~, which you shouldn't do.  While some
+  package repositories track a ~<name>-pkg.el~ file, more often than
+  not, they contain severely outdated information, which is best
+  ignored.
+
+- ~package-build--legacy-build~, ~package-build--build-single-file-package~
+  and ~package-build--build-multi-file-package~, which should not be used
+  anymore.  Unless you set ~package-build-build-function~, these functions
+  are not used.  The new ~package-build-build-package~ is very similar
+  to ~package-build--build-multi-file-package~, except it is intended to
+  be used with all packages, and it ignores the usually outdated data
+  from upstream ~<name>-pkg.el~.

@@ -87,12 +87,12 @@ endif
 
 ifeq ($(CHANNEL), snapshots)
   CHANNEL_CONFIG := "(progn\
-  (setq package-build-stable nil)\
+  (setq package-build-releases nil)\
   (setq package-build-badge-data '(\"snapshots\" \"\#30a14e\")))"
 
 else ifeq ($(CHANNEL), releases)
   CHANNEL_CONFIG := "(progn\
-  (setq package-build-stable t)\
+  (setq package-build-releases t)\
   (setq package-build-badge-data '(\"releases\" \"\#9be9a8\")))"
 
 else
@@ -199,12 +199,13 @@ json: .FORCE
 	$(Q)$(EMACS_EVAL) "(package-build-archive-alist-as-json \"$(PKGDIR)/archive.json\")"
 	$(Q)$(EMACS_EVAL) "(package-build-recipe-alist-as-json \"$(PKGDIR)/recipes.json\")"
 
+START_URL ?= https://codeberg.org/tarsius/myelpa/wiki/
+
 page: .FORCE
 	$(M)"Building page..."
 	$(Q)ELPA_NAME=$(ELPA_NAME) ELPA_URL=$(ELPA_URL) \
 	REPO_URL=$(REPO_URL) WIKI_URL=$(WIKI_URL) \
-	PACKAGE_BUILD_URL=https://wiki.codeberg.org/tarsius/package-build/wiki \
-	$(EMACS_EVAL) \
+	START_URL=$(START_URL) $(EMACS_EVAL) \
 	'(package-build--format-webpage "index.html" "$(or $(PUBDIR),$(CHANNEL))")'
 
 ## Container
@@ -222,7 +223,7 @@ container-image:
 
 action-setup:
 ifdef GITHUB_WORKSPACE
-	$(Q) git config --global --add safe.directory $(GITHUB_WORKSPACE)/sources/*
+	$(Q)git config --global --add safe.directory '$(GITHUB_WORKSPACE)/sources/*'
 else
 	@:
 endif

@@ -1,0 +1,4 @@
+(shexc-ts-mode
+ :fetcher github
+ :repo "ericprud/shexc-mode-for-emacs"
+ :files (:defaults (:exclude "shexc-mode.el")))

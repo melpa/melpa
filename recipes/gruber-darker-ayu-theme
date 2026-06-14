@@ -1,0 +1,3 @@
+(gruber-darker-ayu-theme
+ :repo "Hadi493/gruber-darker-ayu-theme"
+ :fetcher github)

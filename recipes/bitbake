@@ -1,1 +1,1 @@
-(bitbake :fetcher github :repo "canatella/bitbake-el")
+(bitbake :fetcher github :repo "danielcmccarthy/bitbake-el")

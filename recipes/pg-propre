@@ -1,0 +1,1 @@
+(pg-propre :fetcher github :repo "madtibo/emacs-pg-propre")

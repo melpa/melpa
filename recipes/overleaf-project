@@ -1,3 +1,0 @@
-(overleaf-project
- :fetcher github
- :repo "Jamie-Cui/overleaf-project")

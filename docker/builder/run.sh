@@ -7,7 +7,7 @@
 : ${DOCKER_CHANNELS="unstable stable"}
 
 # Break taken between runs, in seconds.
-: ${BUILD_PAUSE="-300"}
+: ${BUILD_PAUSE=300}
 
 # A timeout is only needed for unattended builds, so we set this
 # here instead of forcing it on everyone in the Makefile or even

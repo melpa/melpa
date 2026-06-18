@@ -1,0 +1,3 @@
+(nostr-publish
+ :fetcher github
+ :repo "941design/emacs-nostr-publish")

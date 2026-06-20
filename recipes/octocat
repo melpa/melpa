@@ -1,3 +1,1 @@
-(octopress
- :fetcher github
- :repo "razzmatazz/octocat")
+(octocat :fetcher github :repo "razzmatazz/octocat")

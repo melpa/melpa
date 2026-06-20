@@ -37,3 +37,7 @@
 		[ ! -f /var/run/nginx.pid ] || kill -USR1 `cat /var/run/nginx.pid`
 	endscript
 }
+
+# Local Variables:
+#   indent-tabs-mode: t
+# End:

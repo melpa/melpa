@@ -1,0 +1,4 @@
+(eglot-csharp
+ :fetcher github
+ :repo "kilesduli/eglot-csharp"
+ :files ("eglot-csharp.el"))

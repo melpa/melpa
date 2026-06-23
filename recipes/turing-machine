@@ -1,1 +1,1 @@
-(turing-machine :fetcher github :repo "dieggsy/turing-machine")
+(turing-machine :fetcher sourcehut :repo "dieggsy/turing-machine")

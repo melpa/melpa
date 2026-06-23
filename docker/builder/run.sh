@@ -4,20 +4,17 @@
 # - INHIBIT_PACKAGE_PULL
 # - INHIBIT_MELPA_PULL
 
-: ${BUILD_CHANNELS="unstable:stable"}
+: ${DOCKER_CHANNELS="unstable stable"}
 
 # Break taken between runs, in seconds.
-: ${BUILD_PAUSE="-300"}
+: ${BUILD_PAUSE=300}
 
 # A timeout is only needed for unattended builds, so we set this
 # here instead of forcing it on everyone in the Makefile or even
 # by giving the lisp variable a non-nil default value.
 LISP_CONFIG="(setq package-build-timeout-secs 600)"
 
-MELPA_REPO=/mnt/store/melpa
-cd "${MELPA_REPO}"
-
-BUILD_STATUS_FILE="${MELPA_REPO}/html/build-status.json"
+BUILD_STATUS_FILE="html/build-status.json"
 
 export INSIDE_DOCKER=true
 export GIT_HTTP_USER_AGENT="melpa.org"
@@ -56,38 +53,38 @@ fi
 BUILD_STARTED=$(date "+%s")
 record_build_status
 
-if [ -z "$INHIBIT_PACKAGE_PULL" ]
+if [ "$INHIBIT_PACKAGE_PULL" != nil ]
 then
-    if [ -n "$BUILD_CHANNELS" ]
+    if [ -n "$DOCKER_CHANNELS" ]
     then
         # Fetch all packages when updating first channel.
-        export BUILD_CONFIG="$LISP_CONFIG"
+        export DOCKER_BUILD_CONFIG="$LISP_CONFIG"
     else
         # Fetch all packages but don't build any channel.
-        export BUILD_CONFIG="(progn $LISP_CONFIG\
+        export DOCKER_BUILD_CONFIG="(progn $LISP_CONFIG\
           (setq package-build--inhibit-update t)\
           (setq package-build-build-function 'ignore))"
         make -k -j8 build || true
     fi
 else
     # Don't fetch packages.
-    export BUILD_CONFIG="(progn $LISP_CONFIG\
+    export DOCKER_BUILD_CONFIG="(progn $LISP_CONFIG\
       (setq package-build-fetch-function 'ignore))"
 fi
 
-for channel in $(echo "$BUILD_CHANNELS" | tr ":" " ")
+for channel in $DOCKER_CHANNELS
 do
     echo ">>> Starting to build \"$channel\" channel"
-    export DOCKER_MELPA_CHANNEL=$channel
+    export DOCKER_CHANNEL=$channel
     pkgdir=$(make get-pkgdir)
     if [ -e "$pkgdir/errors.log" ];
     then
         mv "$pkgdir/errors.log" "$pkgdir/errors-previous.log"
     fi
     make -k -j8 build || true
-    make indices
+    make archive-contents json html
     # Don't fetch packages a second time.
-    export BUILD_CONFIG="(progn $LISP_CONFIG\
+    export DOCKER_BUILD_CONFIG="(progn $LISP_CONFIG\
       (setq package-build-fetch-function 'ignore))"
 done
 

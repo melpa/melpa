@@ -1,0 +1,4 @@
+name: package-build
+runs:
+  using: docker
+  image: Dockerfile

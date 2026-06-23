@@ -1,1 +1,1 @@
-(orglink :repo "tarsius/orglink" :fetcher github)
+(orglink :fetcher github :repo "tarsius/orglink")

@@ -1,5 +1,4 @@
 (bracket-face
  :fetcher github
  :repo "tarsius/paren-face"
- :files ("bracket-face.el")
- :version-regexp "use-header-instead")
+ :files ("bracket-face.el"))

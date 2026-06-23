@@ -1,0 +1,1 @@
+(f90-ts-mode :fetcher github :repo "mscfd/emacs-f90-ts-mode")

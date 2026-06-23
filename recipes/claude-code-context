@@ -1,0 +1,1 @@
+(claude-code-context :fetcher github :repo "lukehoersten/claude-code-context")

@@ -1,1 +1,1 @@
-(keymap-utils :repo "tarsius/keymap-utils" :fetcher github)
+(keymap-utils :fetcher github :repo "tarsius/keymap-utils")

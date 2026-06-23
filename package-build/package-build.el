@@ -1,22 +1,20 @@
 ;;; package-build.el --- Curate an Emacs Lisp package archive  -*- lexical-binding:t; coding:utf-8 -*-
 
-;; Copyright (C) 2011-2024 Donald Ephraim Curtis
-;; Copyright (C) 2012-2024 Steve Purcell
+;; Copyright (C) 2011-2021 Donald Ephraim Curtis
+;; Copyright (C) 2012-2021 Steve Purcell
 ;; Copyright (C) 2016-2026 Jonas Bernoulli
-;; Copyright (C) 2009 Phil Hagelberg
 
 ;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
 ;;     Steve Purcell <steve@sanityinc.com>
-;;     Jonas Bernoulli <emacs.package-build@jonas.bernoulli.dev>
-;;     Phil Hagelberg <technomancy@gmail.com>
-;; Maintainer: Jonas Bernoulli <emacs.package-build@jonas.bernoulli.dev>
+;;     Jonas Bernoulli <jonas@bernoulli.dev>
+;; Maintainer: Jonas Bernoulli <jonas@bernoulli.dev>
 ;; Homepage: https://github.com/melpa/package-build
 ;; Keywords: maint tools
 
 ;; Package-Version: 4.0.0.50-git
 ;; Package-Requires: (
 ;;     (emacs  "26.1")
-;;     (compat "30.1"))
+;;     (compat "31.0"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -109,7 +107,10 @@ Usually this is a subdirectory of `package-build-directory'."
   "Whether to print additional progress information during builds."
   :type 'boolean)
 
-(defcustom package-build-stable nil
+(define-obsolete-variable-alias 'package-build-stable
+  'package-build-releases "Package-Build 5.0.0")
+
+(defcustom package-build-releases nil
   "Whether to build release or snapshot packages.
 
 If nil, snapshot packages are build, otherwise release packages
@@ -119,20 +120,15 @@ the appropriate version for each package and how the version
 string is formatted."
   :type 'boolean)
 
-(defcustom package-build-all-publishable (not package-build-stable)
+(defcustom package-build-all-publishable t
   "Whether even packages that lack a release can be published.
 
 This option is used to determine whether failure to come up with
-a version string should be considered an error or not.
-
-Currently this defaults to (not package-build-stable), but the
-default is likely to be changed to just t in the future.  See
-also the commit that added this option."
-  :type 'boolean
-  :set-after '(package-build-stable))
+a version string should be considered an error or not."
+  :type 'boolean)
 
 (make-obsolete-variable 'package-build-get-version-function
-                        'package-build-stable
+                        'package-build-releases
                         "Package-Build 5.0.0")
 (defvar package-build-get-version-function nil
   "This variable is obsolete and its value should be nil.
@@ -141,7 +137,9 @@ If this is non-nil, then it overrides
 `package-build-snapshot-version-functions'.")
 
 (defcustom package-build-release-version-functions
-  (list #'package-build-tag-version)
+  (list #'package-build-tag-version
+        #'package-build-header-version
+        #'package-build-fallback-version)
   "Functions used to determine the current release of a package.
 
 Each function is called in order, with the recipe object as argument,
@@ -159,10 +157,11 @@ If obsolete `package-build-get-version-function' is non-nil,
 then that overrides the value set here."
   :type 'hook
   :options (list #'package-build-tag-version
-                 #'package-build-header-version))
+                 #'package-build-header-version
+                 #'package-build-fallback-version))
 
 (defcustom package-build-snapshot-version-functions
-  (list #'package-build-timestamp-version)
+  (list #'package-build-release+date+count-version)
   "Function used to determine the current snapshot of a package.
 
 Each function is called in order, with the recipe object as argument,
@@ -184,8 +183,17 @@ If obsolete `package-build-get-version-function' is non-nil,
 then that overrides the value set here."
   :type 'hook
   :options (list #'package-build-release+count-version
+                 #'package-build-release+onecount-version
+                 #'package-build-release+date+count-version
                  #'package-build-release+timestamp-version
                  #'package-build-timestamp-version))
+
+(defcustom package-build-minimal-release-components 0
+  "Minimal number of version components before \".0.SNAPSHOT\".
+When constructing a snapshot version of the form \"RELEASE.0.SNAPSHOT\",
+this option controls whether additional \".0\" components are appended
+to RELEASE.  Use 0 to add no filling components."
+  :type 'natnum)
 
 (defcustom package-build-predicate-function nil
   "Predicate used by `package-build-all' to determine which packages to build.
@@ -226,16 +234,19 @@ This must be a version which supports the \"-k\" option.
 On MacOS it is possible to install coreutils using Homebrew or
 similar, which will provide the GNU timeout program as
 \"gtimeout\"."
-  :type '(file :must-match t))
+  :type '(file :tag "Executable"))
 
-(defcustom package-build-timeout-secs nil
-  "Wait this many seconds for external processes to complete.
+(define-obsolete-variable-alias 'package-build-timeout-secs
+  'package-build-timeout "Package-Build 5.0.0")
 
-If an external process takes longer than specified here to
-complete, then it is terminated.  If nil, then no time limit is
-applied.  This setting requires
-`package-build-timeout-executable' to be set."
-  :type 'number)
+(defcustom package-build-timeout nil
+  "Timeout if a process takes more seconds to complete.
+
+If an external process takes longer to complete, than this limit,
+specified in seconds, then it is terminated.  For no limit use nil.
+This setting requires `package-build-timeout-executable' to be set."
+  :type '(choice (natnum :tag "Seconds" number)
+                 (const  :tag "No timeout" nil)))
 
 (defcustom package-build-tar-executable "tar"
   "Path to a (preferably GNU) tar command.
@@ -244,7 +255,7 @@ Certain package names (e.g., \"@\") may not work properly with a BSD tar.
 On MacOS it is possible to install gnu-tar using Homebrew or
 similar, which will provide the GNU tar program as
 \"gtar\"."
-  :type '(file :must-match t))
+  :type '(file :tag "Executable"))
 
 (defvar package-build--tar-type nil
   "Type of `package-build-tar-executable'.
@@ -260,7 +271,8 @@ If nil (the default), then no badge images are generated,
 otherwise this has the form (NAME COLOR).  MELPA sets the value
 in its top-level Makefile, to different values, depending on the
 channel that is being build."
-  :type '(list (string :tag "Archive name") color))
+  :type '(choice (list (string :tag "Archive name") color)
+                 (const :tag "Do not create badges")))
 
 (defcustom package-build-version-regexp
   "\\`\\(?:\\|[vVrR]\\|\\(?:release\\|%p\\)[-/]v?\\)?\
@@ -368,7 +380,7 @@ being run for a particular package."
     (cons 'progn else-forms)))
 
 (defmacro package-build--log-errors (&rest body)
-  (declare (indent 1))
+  (declare (indent 0))
   (package-build--static-if (fboundp 'handler-bind) ;Emacs >= 30.1
       `(handler-bind
            ((error (lambda (err)
@@ -401,19 +413,19 @@ being run for a particular package."
       ((default-directory (package-recipe--working-tree rcp))
        (`(,commit ,time ,version ,revdesc)
         (cond
-         ((with-no-warnings package-build-get-version-function)
-          (display-warning 'package-build "\
+          ((with-no-warnings package-build-get-version-function)
+           (display-warning 'package-build "\
 Variable `package-build-get-version-function' is obsolete.
 Instead set `package-build-release-version-functions'
 and/or `package-build-snapshot-version-functions', and
-set `package-build-stable' to control whether releases
+set `package-build-releases' to control whether releases
 or snapshots are build.")
-          (with-no-warnings (funcall package-build-get-version-function rcp)))
-         (package-build-stable
-          (run-hook-with-args-until-success
-           'package-build-release-version-functions rcp))
-         ((run-hook-with-args-until-success
-           'package-build-snapshot-version-functions rcp)))))
+           (with-no-warnings (funcall package-build-get-version-function rcp)))
+          (package-build-releases
+           (run-hook-with-args-until-success
+            'package-build-release-version-functions rcp))
+          ((run-hook-with-args-until-success
+            'package-build-snapshot-version-functions rcp)))))
     (if (not version)
         (funcall (if package-build-all-publishable #'error #'message)
                  "Cannot determine version for %s" (oref rcp name))
@@ -421,6 +433,21 @@ or snapshots are build.")
       (oset rcp time time)
       (oset rcp version version)
       (oset rcp revdesc revdesc))))
+
+(cl-defmethod package-build--head ((rcp package-git-recipe))
+  (with-slots (commit branch) rcp
+    (or commit
+        (and branch (concat "origin/" branch))
+        "origin/HEAD")))
+
+(cl-defmethod package-build--head ((rcp package-hg-recipe))
+  ;; This isn't really HEAD, but the complicated argument "hg log"
+  ;; apparently needs, to show a simple list of the relevant commits.
+  (with-slots (commit branch) rcp
+    (format "sort(ancestors(%s), -rev)"
+            (or commit
+                (format "max(branch(%s))"
+                        (or branch "default"))))))
 
 (cl-defmethod package-build--select-commit ((rcp package-git-recipe) rev exact)
   (if-let* ((commit
@@ -468,6 +495,17 @@ or snapshots are build.")
             (format "{latesttag('%s') %% '{tag}-{distance}-m{short(node)}'}\n"
                     tag)
           "{short(node)}\n"))))
+
+(defun package-build--version-separator (release)
+  (make-list (max 1 (- (1+ package-build-minimal-release-components)
+                       (length release)))
+             0))
+
+(defun package-build--release-placeholder ()
+  ;; Always use at least three zero components before the snapshot
+  ;; component, even if `package-build-minimal-release-components' asks
+  ;; for fewer.  Subtract one because the separator is added elsewhere.
+  (make-list (1- (max 3 package-build-minimal-release-components)) 0))
 
 ;;;; Tag
 
@@ -552,9 +590,9 @@ Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING REVDESC) or nil."
   (let ((libs (package-build--list-libraries rcp))
         (filename (or filename (concat (oref rcp name) ".el"))))
     (cond
-     ((car (member (concat "lisp/" filename) libs)))
-     ((car (member filename libs)))
-     ((cl-find filename libs :test #'equal :key #'file-name-nondirectory)))))
+      ((car (member (concat "lisp/" filename) libs)))
+      ((car (member filename libs)))
+      ((cl-find filename libs :test #'equal :key #'file-name-nondirectory)))))
 
 (cl-defmethod package-build--list-libraries ((_rcp package-git-recipe))
   (process-lines "git" "ls-files" "*.el"))
@@ -563,18 +601,50 @@ Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING REVDESC) or nil."
   (process-lines "hg" "files" "--include" "**/*.el"))
 
 (cl-defmethod package-build--insert-version-header-log
-  ((_rcp package-git-recipe) lib)
+  ((rcp package-git-recipe) lib)
   (call-process "git" nil t nil
                 "log" "--first-parent" "--no-renames"
                 "--pretty=format:commit %H %cd" "--date=unix"
-                "-L" (format "/^;;* *\\(Package-\\)\\?Version:/,+1:%s" lib)))
+                "-L" (format "/^;;* *\\(Package-\\)\\?Version:/,+1:%s" lib)
+                (package-build--head rcp)))
 
 (cl-defmethod package-build--insert-version-header-log
-  ((_rcp package-hg-recipe) _lib)
+  ((rcp package-hg-recipe) lib)
   (call-process "hg" nil t nil
-                "log" "--first-parent"
-                "--template" "commit: {node} {date|hgdate}\n"
-                )) ; TODO What is the equivalent of Git's "-L"?
+                "log"
+                "--template" "commit {node} {date|hgdate}\n"
+                "--rev" (package-build--head rcp)
+                ;; Unlike Git's "-L" that prints the full diff for LIB,
+                ;; but that should be okay.
+                "-p" "--" lib))
+
+;;;; Fallback
+
+(defun package-build-fallback-version (rcp)
+  "Determine version string in a \"0.0.0.SNAPSHOT\" format for RCP.
+
+This function implements a fallback that can be used on the
+release channel, for packages that don't do releases.  It should
+be the last element of `package-build-release-version-functions',
+and at the same time `package-build-snapshot-version-functions'
+should contain only a `package-build-release+{*}-version' function.
+
+The result of such a configuration is that, for packages that
+don't do releases, the release and snapshot channels provide
+the same \"0.0.0.COUNT\" snapshot.  That way, all packages are
+available on the release channel, which makes that channel more
+attractive to users, which might encourage some maintainers to
+release more often, or if they have never done a release before,
+to finally get around to that initial release.  In other words,
+this might help overcome the release channel's chicken and egg
+problem.
+
+Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING REVDESC) or
+nil if `package-build-releases' is non-nil."
+  (and package-build-releases
+       (let ((package-build-release-version-functions nil))
+         (run-hook-with-args-until-success
+          'package-build-snapshot-version-functions rcp))))
 
 ;;;; NAME-pkg
 
@@ -652,9 +722,8 @@ VERSION-STRING has the format \"%Y%m%d.%H%M\"."
 
 (cl-defmethod package-build--timestamp-version ((rcp package-git-recipe))
   (pcase-let*
-      (((eieio commit branch) rcp)
-       (branch (and branch (concat "origin/" branch)))
-       (rev (or commit branch "origin/HEAD"))
+      (((eieio commit) rcp)
+       (rev (package-build--head rcp))
        (`(,rev-hash ,rev-time) (package-build--select-commit rcp rev commit))
        (`(,tag-hash ,tag-time) (package-build-tag-version rcp)))
     ;; If the latest commit that touches a relevant file is an ancestor of
@@ -672,12 +741,8 @@ VERSION-STRING has the format \"%Y%m%d.%H%M\"."
       (list rev-hash rev-time))))
 
 (cl-defmethod package-build--timestamp-version ((rcp package-hg-recipe))
-  (pcase-let* (((eieio commit branch) rcp)
-               (rev (format "sort(ancestors(%s), -rev)"
-                            (or commit
-                                (format "max(branch(%s))"
-                                        (or branch "default"))))))
-    (package-build--select-commit rcp rev nil)))
+  ;; Someone who likes hg can volunteer to implement the merge-base logic.
+  (package-build--select-commit rcp (package-build--head rcp) nil))
 
 (define-obsolete-function-alias 'package-build-get-snapshot-version
   'package-build-snapshot-version "Package-Build 5.0.0")
@@ -687,9 +752,9 @@ VERSION-STRING has the format \"%Y%m%d.%H%M\"."
 (defun package-build-release+timestamp-version (rcp)
   "Determine version string in the \"RELEASE.0.TIMESTAMP\" format for RCP.
 
-Use `package-build-release-version-functions' to determine
-RELEASE.  TIMESTAMP is the COMMITTER-DATE for the identified
-last relevant commit, using the format \"%Y%m%d.%H%M\".
+Use `package-build-release-version-functions' to determine RELEASE.
+TIMESTAMP is the COMMITTER-DATE for the identified last relevant
+commit, using the format \"%Y%m%d.%H%M\".
 
 Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING REVDESC) or nil."
   (pcase-let*
@@ -699,79 +764,86 @@ Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING REVDESC) or nil."
          'package-build-release-version-functions rcp))
        (ahead (package-build--commit-count rcp scommit rcommit)))
     (cond
-     ((> ahead 0)
-      (list scommit stime
-            (package-version-join
-             (nconc (if rversion (version-to-list rversion) (list 0 0))
-                    (list 0)
-                    (version-to-list sversion)))
-            (package-build--revdesc rcp scommit tag)))
-     (t
-      ;; The latest commit, which touched a relevant file, is either the
-      ;; latest release itself, or a commit before that.  Distribute the
-      ;; same commit/release as on the stable channel; as it would not
-      ;; make sense for the development channel to lag behind the latest
-      ;; release.
-      (list rcommit rtime (package-version-join rversion) rrevdesc tag)))))
+      ((> ahead 0)
+       (list scommit stime
+             (let ((release (if rversion
+                                (version-to-list rversion)
+                              (package-build--release-placeholder))))
+               (package-version-join
+                (nconc release
+                       (package-build--version-separator release)
+                       (version-to-list sversion))))
+             (package-build--revdesc rcp scommit tag)))
+      (t
+       ;; The latest commit, which touched a relevant file, is either the
+       ;; latest release itself, or a commit before that.  Distribute the
+       ;; same commit/release as on the stable channel; as it would not
+       ;; make sense for the development channel to lag behind the latest
+       ;; release.
+       (list rcommit rtime rversion rrevdesc tag)))))
 
 ;;;; Release+Count
 
-(defun package-build-release+count-version (rcp &optional single-count)
+(defun package-build-release+count-version (rcp &optional modifier)
   "Determine version string in the \"RELEASE.0.COUNT\" format for RCP.
 
-Use `package-build-release-version-functions' to determine
-RELEASE.  COUNT is the number of commits since RELEASE until the
-last relevant commit.  If RELEASE is the same as for the last
-snapshot but COUNT is not larger than for that snapshot because
-history was rewritten, then use \"RELEASE.0.OLDCOUNT.NEWCOUNT\".
+Use `package-build-release-version-functions' to determine RELEASE.
+COUNT is the number of commits since RELEASE until the last relevant
+commit.  If RELEASE is the same as for the last snapshot but COUNT is
+not larger than for that snapshot because history was rewritten, then
+use \"RELEASE.0.OLDCOUNT.NEWCOUNT\".
+
+Prefer this function over `package-build-release+onecount-version'.
+Both functions usually use just one COUNT, but this function has the
+advantage that it handles rewritten history.
 
 Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING REVDESC) or nil.
 \n(fn RCP)"
   (pcase-let*
-      ;; Get the commit but ignore the associated timestamp.
-      ((`(,scommit ,stime ,_) (package-build-timestamp-version rcp))
-       (`(,rcommit ,rtime ,version ,rrevdesc ,tag)
+      ((`(,scommit ,stime ,sversion) (package-build-timestamp-version rcp))
+       (`(,rcommit ,rtime ,rversion ,rrevdesc ,tag)
         (run-hook-with-args-until-success
          'package-build-release-version-functions rcp))
-       (version (and rcommit (version-to-list version)))
+       (version (and rcommit (version-to-list rversion)))
        (merge-base (and rcommit
                         (package-build--merge-base rcp scommit rcommit)))
        (ahead (package-build--commit-count rcp scommit rcommit)))
     (cond
-     ((or (when (not rcommit)
-            ;; No appropriate release detected.
-            (setq version (list 0 0))
-            t)
-          (when (not merge-base)
-            ;; As a result of butchered history rewriting, version tags
-            ;; share no history at all with what is currently reachable
-            ;; from the tip.  Completely ignore these unreachable tags and
-            ;; behave as if no version tags existed at all.  Unfortunately
-            ;; that means that users, who have installed a snapshot based
-            ;; on a now abandoned tag, are stuck on that snapshot until
-            ;; upstream creates a new version tag.
-            (setq version (list 0 0))
-            t)
-          ;; Snapshot commit is newer than latest release (or there is no
-          ;; release).
-          (> ahead 0))
-      (list scommit stime
-            (package-version-join
-             (append version
-                     (list 0)
-                     ;; (This argument *could* be used by a wrapper.)
-                     (if single-count
-                         ahead ; Pretend time-travel doesn't happen.
-                       (package-build--adjust-commit-count
-                        rcp scommit (copy-sequence version) ahead))))
-            (package-build--revdesc rcp scommit tag)))
-     (t
-      ;; The latest commit, which touched a relevant file, is either the
-      ;; latest release itself, or a commit before that.  Distribute the
-      ;; same commit/release as on the stable channel; as it would not
-      ;; make sense for the development channel to lag behind the latest
-      ;; release.
-      (list rcommit rtime (package-version-join version) rrevdesc tag)))))
+      ((or (when (not rcommit)
+             ;; No appropriate release detected.
+             (setq version (package-build--release-placeholder))
+             t)
+           (when (not merge-base)
+             ;; As a result of butchered history rewriting, version tags
+             ;; share no history at all with what is currently reachable
+             ;; from the tip.  Completely ignore these unreachable tags and
+             ;; behave as if no version tags existed at all.  Unfortunately
+             ;; that means that users, who have installed a snapshot based
+             ;; on a now abandoned tag, are stuck on that snapshot until
+             ;; upstream creates a new version tag.
+             (setq version (package-build--release-placeholder))
+             t)
+           ;; Snapshot commit is newer than latest release (or there is no
+           ;; release).
+           (> ahead 0))
+       (list scommit stime
+             (package-version-join
+              (append version
+                      (package-build--version-separator version)
+                      (and (eq modifier 'with-date)
+                           (list (car (version-to-list sversion))))
+                      (if (memq modifier '(one-count with-date))
+                          (list ahead) ; Pretend time-travel doesn't happen.
+                        (package-build--adjust-commit-count
+                         rcp scommit (copy-sequence version) ahead))))
+             (package-build--revdesc rcp scommit tag)))
+      (t
+       ;; The latest commit, which touched a relevant file, is either the
+       ;; latest release itself, or a commit before that.  Distribute the
+       ;; same commit/release as on the stable channel; as it would not
+       ;; make sense for the development channel to lag behind the latest
+       ;; release.
+       (list rcommit rtime (package-version-join version) rrevdesc tag)))))
 
 (defun package-build--adjust-commit-count (rcp commit version ahead)
   (if-let* ((previous (cdr (assq (intern (oref rcp name))
@@ -858,36 +930,40 @@ Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING REVDESC) or nil.
                              (format "only(%s, %s)" rev since)
                            (format "ancestors(%s)" rev)))))
 
-;;;; Fallback-Count
+;;;; Release+Onecount
 
-(defun package-build-fallback-count-version (rcp)
-  "Determine version string in the \"0.0.0.COUNT\" format for RCP.
+(defun package-build-release+onecount-version (rcp)
+  "Determine version string in the \"RELEASE.0.COUNT\" format for RCP.
 
-This function implements a fallback that can be used on the
-release channel, for packages that don't do releases.  It should
-be the last element of `package-build-release-version-functions',
-and at the same time `package-build-snapshot-version-functions'
-should contain only `package-build-release+count-version'.
+Use `package-build-release-version-functions' to determine RELEASE.
+COUNT is the number of commits since RELEASE until the last relevant
+commit.
 
-The result of such a configuration is that, for packages that
-don't do releases, the release and snapshot channels provide
-the same \"0.0.0.COUNT\" snapshot.  That way, all packages are
-available on the release channel, which makes that channel more
-attractive to users, which might encourage some maintainers to
-release more often, or if they have never done a release before,
-to finally get around to that initial release.  In other words,
-this might help overcome the release channel's chicken and egg
-problem.
+Prefer `package-build-release+count-version' over this function.
+Both functions usually use just one COUNT, but this function has
+the disadvantage that it does not handle rewritten history.
 
-Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING REVDESC)."
-  (let ((package-build-release-version-functions nil))
-    (package-build-release+count-version rcp)))
+Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING REVDESC) or nil."
+  (package-build-release+count-version rcp 'one-count))
+
+;;;; Release+Date+Count
+
+(defun package-build-release+date+count-version (rcp)
+  "Determine version string in the \"RELEASE.0.DATE.COUNT\" format for RCP.
+
+Use `package-build-release-version-functions' to determine RELEASE.
+DATE is the COMMITTER-DATE for the identified last relevant commit,
+using the format \"%Y%m%d\".  COUNT is the number of commits since
+RELEASE until the last relevant commit.
+
+Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING REVDESC) or nil."
+  (package-build-release+count-version rcp 'with-date))
 
 ;;; Call Process
 
 (defun package-build--call-process (package command &rest args)
   "For PACKAGE, run COMMAND with ARGS in `default-directory'.
-We use this to wrap commands is proper environment settings and
+We use this to wrap commands in proper environment settings and
 with a timeout so that no command can block the build process,
 and so we can properly log errors.  PACKAGE must be the name of
 a package, a `package-recipe' object or nil, and is only used
@@ -900,12 +976,12 @@ for logging purposes."
                  (`(,command . ,args)
                   (nconc (and (not (eq system-type 'windows-nt))
                               (list "env" "LC_ALL=C"))
-                         (if (and package-build-timeout-secs
+                         (if (and package-build-timeout
                                   package-build-timeout-executable)
                              (nconc (list package-build-timeout-executable
                                           "-k" "60"
                                           (number-to-string
-                                           package-build-timeout-secs)
+                                           package-build-timeout)
                                           command)
                                     args)
                            (cons command args))))
@@ -929,24 +1005,24 @@ for logging purposes."
   "Like `package-build--call-process' but maybe use a sandbox.
 Use a sandbox if `package-build--use-sandbox' is non-nil."
   (cond
-   (package-build--use-sandbox
-    (let* ((rcp (if (cl-typep package 'package-recipe)
-                    package
-                  (package-recipe-lookup package)))
-           (dir (package-recipe--working-tree rcp)))
-      (unless (file-in-directory-p default-directory dir)
-        (package-build--error rcp "Attempt to use sandbox outside of %s" dir)))
-    (apply #'package-build--call-process package "bwrap"
-           `(,@package-build--sandbox-args
-             ,@(list "--bind" default-directory default-directory)
-             ,@(mapcan (lambda (dir)
-                         (setq dir (expand-file-name dir))
-                         (and (file-exists-p dir)
-                              (list "--ro-bind" dir dir)))
-                       (append package-build--sandbox-readonly-binds
-                               (list ".git" ".hg")))
-             ,command ,@args)))
-   ((apply #'package-build--call-process package command args))))
+    (package-build--use-sandbox
+     (let* ((rcp (if (cl-typep package 'package-recipe)
+                     package
+                   (package-recipe-lookup package)))
+            (dir (package-recipe--working-tree rcp)))
+       (unless (file-in-directory-p default-directory dir)
+         (package-build--error rcp "Attempt to use sandbox outside of %s" dir)))
+     (apply #'package-build--call-process package "bwrap"
+            `(,@package-build--sandbox-args
+              ,@(list "--bind" default-directory default-directory)
+              ,@(mapcan (lambda (dir)
+                          (setq dir (expand-file-name dir))
+                          (and (file-exists-p dir)
+                               (list "--ro-bind" dir dir)))
+                        (append package-build--sandbox-readonly-binds
+                                (list ".git" ".hg")))
+              ,command ,@args)))
+    ((apply #'package-build--call-process package command args))))
 
 (defun package-build--run-process (command &rest args)
   "Like `package-build--call-process', but lacks the PACKAGE argument."
@@ -960,51 +1036,52 @@ Use a sandbox if `package-build--use-sandbox' is non-nil."
         (url (oref rcp url))
         (protocol (package-recipe--upstream-protocol rcp)))
     (cond
-     ((eq package-build--inhibit-fetch 'strict))
-     ((not (member protocol package-build-allowed-git-protocols))
-      (package-build--error rcp
-        "Fetching using the %s protocol is not allowed" protocol))
-     ((and (file-exists-p (expand-file-name ".git" dir))
-           (let ((default-directory dir))
-             (string= (car (process-lines "git" "config" "remote.origin.url"))
-                      url)))
-      (unless package-build--inhibit-fetch
-        (let ((default-directory dir))
-          (package-build--message "Updating %s" dir)
-          (package-build--call-process rcp "git" "fetch" "-f" "--tags" "origin")
-          ;; We might later checkout "origin/HEAD". Sadly "git fetch"
-          ;; cannot be told to keep it up-to-date, so we have to make
-          ;; a second request.
-          (package-build--call-process
-           rcp "git" "remote" "set-head" "origin" "--auto"))))
-     (t
-      (when (file-exists-p dir)
-        (delete-directory dir t))
-      (package-build--message "Cloning %s to %s" url dir)
-      (make-directory package-build-working-dir t)
-      (let ((default-directory package-build-working-dir))
-        (package-build--call-process rcp "git" "clone" url dir))))))
+      ((eq package-build--inhibit-fetch 'strict))
+      ((not (member protocol package-build-allowed-git-protocols))
+       (package-build--error rcp
+         "Fetching using the %s protocol is not allowed" protocol))
+      ((and (file-exists-p (expand-file-name ".git" dir))
+            (let ((default-directory dir))
+              (string= (car (process-lines "git" "config" "remote.origin.url"))
+                       url)))
+       (unless package-build--inhibit-fetch
+         (let ((default-directory dir))
+           (package-build--message "Updating %s" dir)
+           (package-build--call-process
+            rcp "git" "fetch" "-f" "--tags" "--prune" "--prune-tags" "origin")
+           ;; We might later checkout "origin/HEAD". Sadly "git fetch"
+           ;; cannot be told to keep it up-to-date, so we have to make
+           ;; a second request.
+           (package-build--call-process
+            rcp "git" "remote" "set-head" "origin" "--auto"))))
+      (t
+       (when (file-exists-p dir)
+         (delete-directory dir t))
+       (package-build--message "Cloning %s" url)
+       (make-directory package-build-working-dir t)
+       (let ((default-directory package-build-working-dir))
+         (package-build--call-process rcp "git" "clone" url dir))))))
 
 (cl-defmethod package-build--fetch ((rcp package-hg-recipe))
   (let ((dir (package-recipe--working-tree rcp))
         (url (oref rcp url)))
     (cond
-     ((eq package-build--inhibit-fetch 'strict))
-     ((and (file-exists-p (expand-file-name ".hg" dir))
-           (let ((default-directory dir))
-             (string= (car (process-lines "hg" "paths" "default")) url)))
-      (unless package-build--inhibit-fetch
-        (let ((default-directory dir))
-          (package-build--message "Updating %s" dir)
-          (package-build--call-process rcp "hg" "pull")
-          (package-build--call-process rcp "hg" "update"))))
-     (t
-      (when (file-exists-p dir)
-        (delete-directory dir t))
-      (package-build--message "Cloning %s to %s" url dir)
-      (make-directory package-build-working-dir t)
-      (let ((default-directory package-build-working-dir))
-        (package-build--call-process rcp "hg" "clone" url dir))))))
+      ((eq package-build--inhibit-fetch 'strict))
+      ((and (file-exists-p (expand-file-name ".hg" dir))
+            (let ((default-directory dir))
+              (string= (car (process-lines "hg" "paths" "default")) url)))
+       (unless package-build--inhibit-fetch
+         (let ((default-directory dir))
+           (package-build--message "Updating %s" dir)
+           (package-build--call-process rcp "hg" "pull")
+           (package-build--call-process rcp "hg" "update"))))
+      (t
+       (when (file-exists-p dir)
+         (delete-directory dir t))
+       (package-build--message "Cloning %s" url)
+       (make-directory package-build-working-dir t)
+       (let ((default-directory package-build-working-dir))
+         (package-build--call-process rcp "hg" "clone" url dir))))))
 
 ;;; Checkout
 
@@ -1072,16 +1149,16 @@ Use a sandbox if `package-build--use-sandbox' is non-nil."
       (pcase-dolist (`(,key ,slot) package-build--extras)
         (let ((val (eieio-oref rcp slot)))
           (cond
-           ((not val))
-           ((memq key '(:authors :maintainers))
-            (let ((sep (concat
-                        "\n"
-                        (make-string (+ 5 (length (symbol-name key))) ?\s))))
-              (insert (format "  %s '(" key)
-                      (mapconcat #'prin1-to-string val sep)
-                      ")\n")))
-           ((insert (format "  %s %s\n" key
-                            (prin1-to-string (macroexp-quote val))))))))
+            ((not val))
+            ((memq key '(:authors :maintainers))
+             (let ((sep (concat
+                         "\n"
+                         (make-string (+ 5 (length (symbol-name key))) ?\s))))
+               (insert (format "  %s '(" key)
+                       (mapconcat #'prin1-to-string val sep)
+                       ")\n")))
+            ((insert (format "  %s %s\n" key
+                             (prin1-to-string (macroexp-quote val))))))))
       (delete-char -1)
       (insert ")\n"))))
 
@@ -1112,7 +1189,7 @@ that is put in the tarball."
           (process-environment process-environment))
       (when (eq system-type 'darwin)
         ;; Files whose name begin with ._ are added to tarballs
-        ;; by, default, but at least we can turn that off.  See
+        ;; by default, but at least we can turn that off.  See
         ;; also https://superuser.com/a/260264.
         (setenv "COPYFILE_DISABLE" "true"))
       (process-file
@@ -1284,14 +1361,14 @@ is the same as the value of `export_file_name'."
                       (match-string-no-properties 1)))))
         (oset rcp dependencies
               (cond
-               ((fboundp 'lm-package-requires)
-                (lm-package-requires))
-               ((fboundp 'package--prepare-dependencies)
-                (and-let* ((require-lines
-                            (lm-header-multiline "package-requires")))
-                  (package--prepare-dependencies
-                   (package-read-from-string
-                    (string-join require-lines " ")))))))
+                ((fboundp 'lm-package-requires)
+                 (lm-package-requires))
+                ((fboundp 'package--prepare-dependencies)
+                 (and-let* ((require-lines
+                             (lm-header-multiline "package-requires")))
+                   (package--prepare-dependencies
+                    (package-read-from-string
+                     (string-join require-lines " ")))))))
         (oset rcp webpage
               (or (and-let* ((site (cond ((fboundp 'lm-website)
                                           (lm-website))
@@ -1303,13 +1380,8 @@ is the same as the value of `export_file_name'."
                   (and-let* ((format (oref rcp repopage-format)))
                     (format format (oref rcp repo)))))
         (oset rcp keywords (lm-keywords-list))
-        (oset rcp maintainers
-              (cond ((fboundp 'lm-maintainers)
-                     (lm-maintainers))
-                    ((fboundp 'lm-maintainer)
-                     (and-let* ((maintainer (lm-maintainer)))
-                       (list maintainer)))))
-        (oset rcp authors (lm-authors))))))
+        (oset rcp authors (package-build--authors))
+        (oset rcp maintainers (package-build--maintainers))))))
 
 (defun package-build--extract-from-package (rcp files)
   "Store information from the \"*-pkg.el\" file from FILES in RCP."
@@ -1356,6 +1428,20 @@ is the same as the value of `export_file_name'."
       (setq summary (substring summary 0 -1)))
     (concat (capitalize (substring summary 0 1))
             (substring summary 1))))
+
+(defun package-build--authors (&optional file)
+  (lm-with-file file
+    ;; 28.1; specifically 5809728bc502d58f4fe96e98b472c569da3d8879.
+    (funcall (if (< emacs-major-version 28) #'mapcar #'mapcan)
+             #'lm-crack-address
+             (lm-header-multiline "authors?"))))
+
+(defun package-build--maintainers (&optional file)
+  (lm-with-file file
+    (funcall (if (< emacs-major-version 28) #'mapcar #'mapcan)
+             #'lm-crack-address
+             (or (lm-header-multiline "maintainers?")
+                 (lm-header-multiline "authors?")))))
 
 ;;; Files Spec
 
@@ -1472,15 +1558,15 @@ be a partial files spec, consisting of either all include rules
 or all exclude rules (with the `:exclude' keyword removed)."
   (mapcan (lambda (entry)
             (cond
-             ((stringp entry)
-              (mapcar (lambda (f)
-                        (cons f (concat subdir (file-name-nondirectory f))))
-                      (file-expand-wildcards entry)))
-             ((eq (car-safe entry) :rename)
-              (list (cons (nth 1 entry) (nth 2 entry))))
-             ((package-build--expand-files-spec-2
-               (cdr entry)
-               (concat subdir (car entry) "/")))))
+              ((stringp entry)
+               (mapcar (lambda (f)
+                         (cons f (concat subdir (file-name-nondirectory f))))
+                       (file-expand-wildcards entry)))
+              ((eq (car-safe entry) :rename)
+               (list (cons (nth 1 entry) (nth 2 entry))))
+              ((package-build--expand-files-spec-2
+                (cdr entry)
+                (concat subdir (car entry) "/")))))
           spec))
 
 (defun package-build--copy-package-files (files target-dir)
@@ -1488,7 +1574,7 @@ or all exclude rules (with the `:exclude' keyword removed)."
 FILES is a list of (SOURCE . DEST) relative filepath pairs."
   (package-build--message
    "Copying files (->) and directories (=>)\n  from %s\n  to %s"
-   default-directory target-dir)
+   default-directory (file-name-as-directory target-dir))
   (pcase-dolist (`(,src . ,dst) files)
     (let ((src* (expand-file-name src))
           (dst* (expand-file-name dst target-dir)))
@@ -1547,7 +1633,7 @@ FILES is a list of (SOURCE . DEST) relative filepath pairs."
 ;;; Commands
 
 ;;;###autoload
-(defun package-build-archive (name &optional dump-archive-contents)
+(defun package-build-archive (name &optional dump-archive-contents silent)
   "Build a package archive for the package named NAME.
 If DUMP-ARCHIVE-CONTENTS is non-nil, the updated archive contents
 are subsequently dumped."
@@ -1560,20 +1646,18 @@ are subsequently dumped."
     (let* ((start-time (current-time))
            (rcp (package-recipe-lookup name))
            (url (oref rcp url))
-           (repo (oref rcp repo))
            (fetcher (package-recipe--fetcher rcp))
-           (version nil)
-           (msg (format "%s%s package %s"
-                        (if noninteractive " • " "")
-                        (if package-build--inhibit-update "Fetching" "Building")
-                        name)))
-      (cond ((and package-build-verbose (not noninteractive))
-             (message "%s..." msg)
-             (message "Package: %s" name)
-             (message "Fetcher: %s" fetcher)
-             (message "Source:  %s\n" url))
-            ((message "%s (from %s)..." msg
-                      (if repo (format "%s:%s" fetcher repo) url))))
+           (version nil))
+      (unless silent
+        (message "%s%s package %s"
+                 (if noninteractive "\n • " "")
+                 (if package-build--inhibit-update "Fetching" "Building")
+                 name)
+        (cond ((and package-build-verbose (not noninteractive))
+               (message "Package: %s" name)
+               (message "Fetcher: %s" fetcher)
+               (message "Source:  %s\n" url))
+              ((message "From %s" url))))
       (package-build--fetch rcp)
       (unless package-build--inhibit-update
         (package-build--select-version rcp)
@@ -1582,22 +1666,25 @@ are subsequently dumped."
           (package-build--package rcp)
           (when dump-archive-contents
             (package-build-dump-archive-contents)))
-        (if (not version)
-            (message " ✗ Cannot determine version!")
-          (message " ✓ Success:")
-          (pcase-dolist (`(,file . ,attrs)
-                         (directory-files-and-attributes
-                          package-build-archive-dir nil
-                          (format "\\`%s-[0-9]+" name)))
-            (message "  %s  %s"
-                     (format-time-string
-                      "%FT%T%z" (file-attribute-modification-time attrs) t)
-                     file))))
-      (message "%s %s in %.3fs, finished at %s"
-               (if version "Built" "Fetched")
-               name
-               (float-time (time-since start-time))
-               (format-time-string "%FT%T%z" nil t)))))
+        (cond (silent)
+              ((not version)
+               (message " ✗ Cannot determine version!"))
+              ((and package-build-verbose (not noninteractive))
+               (message " ✓ Success:")
+               (pcase-dolist (`(,file . ,attrs)
+                              (directory-files-and-attributes
+                               package-build-archive-dir nil
+                               (format "\\`%s-[0-9]+" name)))
+                 (message "  %s  %s"
+                          (format-time-string
+                           "%FT%T%z" (file-attribute-modification-time attrs) t)
+                          file)))))
+      (unless silent
+        (message "%s %s in %.3fs, finished at %s"
+                 (if version "Built" "Fetched")
+                 name
+                 (float-time (time-since start-time))
+                 (format-time-string "%FT%T%z" nil t))))))
 
 ;;;###autoload
 (defun package-build--package (rcp)
@@ -1767,13 +1854,16 @@ packages for which that returns non-nil are build."
 
 ;;; Archive
 
-(defun package-build-archive-alist ()
-  "Return the archive contents, without updating it first."
-  (let ((file (expand-file-name "archive-contents" package-build-archive-dir)))
-    (and (file-exists-p file)
-         (with-temp-buffer
-           (insert-file-contents file)
-           (cdr (read (current-buffer)))))))
+(defun package-build-archive-alist (&optional file)
+  "Return form in FILE, without updating it first.
+If optional FILE is nil, return from file \"archive-contents\"
+in `package-build-archive-dir'."
+  (unless file
+    (setq file (expand-file-name "archive-contents" package-build-archive-dir)))
+  (and (file-exists-p file)
+       (with-temp-buffer
+         (insert-file-contents file)
+         (cdr (read (current-buffer))))))
 
 (defun package-build-dump-archive-contents (&optional file pretty-print)
   "Update and return the archive contents.
@@ -1799,30 +1889,30 @@ If optional PRETTY-PRINT is non-nil, then pretty-print
              (name (symbol-name symbol))
              (outdated (assq symbol entries)))
         (cond
-         ((not (file-exists-p (expand-file-name name package-build-recipes-dir)))
-          ;; Recipe corresponding to this entry no longer exists.
-          (package-build--remove-archive-files entry))
-         (outdated
-          ;; Prefer the more recently built package, which may not
-          ;; necessarily have the highest version number, e.g., if
-          ;; commit histories were changed.
-          (package-build--remove-archive-files entry))
-         (t
-          (push entry entries)
-          ;; [Non]GNU ELPA recipes are not compatible with Melpa recipes.
-          ;; See around occurrences of "pkg-spec" in "package-vc.el";
-          ;; section "Specifications (elpa-packages)" in "README" of the
-          ;; "elpa-admin" branch in "emacs/elpa.git" repository; and also
-          ;; `elpaa--supported-keywords' and `elpaa--publish-package-spec'.
-          (and-let* ((recipe (with-demoted-errors "Recipe error: %S"
-                               (package-recipe-lookup name))))
-            (push `(,symbol
-                    :url ,(oref recipe url)
-                    ,@(and (cl-typep recipe 'package-hg-recipe)
-                           (list :vc-backend 'Hg))
-                    ,@(and-let* ((branch (oref recipe branch)))
-                        (list :branch branch)))
-                  vc-pkgs))))))
+          ((not (file-exists-p (expand-file-name name package-build-recipes-dir)))
+           ;; Recipe corresponding to this entry no longer exists.
+           (package-build--remove-archive-files entry))
+          (outdated
+           ;; Prefer the more recently built package, which may not
+           ;; necessarily have the highest version number, e.g., if
+           ;; commit histories were changed.
+           (package-build--remove-archive-files entry))
+          (t
+           (push entry entries)
+           ;; [Non]GNU ELPA recipes are not compatible with Melpa recipes.
+           ;; See around occurrences of "pkg-spec" in "package-vc.el";
+           ;; section "Specifications (elpa-packages)" in "README" of the
+           ;; "elpa-admin" branch in "emacs/elpa.git" repository; and also
+           ;; `elpaa--supported-keywords' and `elpaa--publish-package-spec'.
+           (and-let* ((recipe (with-demoted-errors "Recipe error: %S"
+                                (package-recipe-lookup name))))
+             (push `(,symbol
+                     :url ,(oref recipe url)
+                     ,@(and (cl-typep recipe 'package-hg-recipe)
+                            (list :vc-backend 'Hg))
+                     ,@(and-let* ((branch (oref recipe branch)))
+                         (list :branch branch)))
+                   vc-pkgs))))))
     (setq entries (cl-sort entries #'string< :key #'car))
     (with-temp-file (or file (expand-file-name "archive-contents"))
       (set-buffer-file-coding-system 'utf-8)
@@ -1956,6 +2046,43 @@ a package."
   "Dump the build packages list to FILE as json."
   (with-temp-file file
     (insert (json-encode (package-build--archive-alist-for-json)))))
+
+;;; Webpage
+
+(defun package-build--format-webpage (file dir)
+  (when (file-exists-p file)
+    (with-temp-file (expand-file-name file dir)
+      (save-excursion (insert-file-contents file))
+      (while (re-search-forward "${\\([^}]+\\)}" nil t)
+        (cond
+          ((string-prefix-p "list-" (match-string 1))
+           (let* ((channel (substring (match-string 1) 5))
+                  (beg (match-beginning 0))
+                  (col (- beg (save-excursion (goto-char beg) (pos-bol))))
+                  (sep (concat "\n" (make-string col ?\s)))
+                  (cnt (expand-file-name
+                        "archive-contents"
+                        (if (equal dir channel) dir (concat dir "/" channel))))
+                  (sig (concat cnt ".sig"))
+                  (pkgs (package-build-archive-alist cnt))
+                  (signed (file-exists-p sig)))
+             (replace-match "")
+             (insert
+              (mapconcat
+               (lambda (pkg)
+                 (pcase-let* ((`(,pkg . [,ver ,_ ,desc ,_ ,alist]) pkg)
+                              (ver (package-version-join ver))
+                              (url (alist-get :url alist))
+                              (pre (format "%s/%s" channel pkg)))
+                   (concat
+                    (format "<li><a href=\"%s\">%s</a> — " url pkg)
+                    (format "<a href=\"%s-%s.tar\">%s</a> " pre ver ver)
+                    (if signed
+                        (format "(<a href=\"%s-%s.tar.sig\">sig</a>) " pre ver)
+                      "— ")
+                    (format "<a href=\"%s-readme.txt\">%s</a></li>" pre desc))))
+               pkgs sep))))
+          ((replace-match (or (getenv (match-string 1)) "") t t)))))))
 
 ;;; _
 

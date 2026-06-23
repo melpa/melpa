@@ -1,0 +1,3 @@
+(sysml-mode
+ :fetcher github
+ :repo "DeciSym/sysml-mode")

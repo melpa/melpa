@@ -1,1 +1,1 @@
-(gemini-write :fetcher git :url "https://alexschroeder.ch/cgit/gemini-write")
+(gemini-write :fetcher git :url "https://src.alexschroeder.ch/gemini-write.git")

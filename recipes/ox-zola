@@ -1,0 +1,3 @@
+(ox-zola :fetcher github
+         :repo "gicrisf/ox-zola"
+	 :files ("ox-zola.el"))

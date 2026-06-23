@@ -19,7 +19,7 @@ mkdir -p /etc/letsencrypt/ssl 2> /dev/null
     -d test.melpa.org \
     -d stable-test.melpa.org \
     -d www.melpa.org
-    
+
 nginx -g 'daemon off;' &
 nginx_pid=$!
 
@@ -50,3 +50,7 @@ while true; do
     echo "restarting nginx..."
     kill -HUP $nginx_pid
 done
+
+# Local Variables:
+#   indent-tabs-mode: nil
+# End:

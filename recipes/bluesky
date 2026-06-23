@@ -1,0 +1,1 @@
+(bluesky :fetcher github :repo "ahyatt/emacs-bluesky")

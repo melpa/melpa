@@ -1,1 +1,1 @@
-(difflib :fetcher github :repo "dieggsy/difflib.el")
+(difflib :fetcher sourcehut :repo "dieggsy/difflib.el")

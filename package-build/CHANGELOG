@@ -46,12 +46,14 @@
 - The version string format used for snapshots was changed from
   ~YYYYMMDD.HHMM~ to ~RELEASE.0.YYYYMMDD.COUNT~.  ~RELEASE~ is the latest
   release, i.e., the version distributed on the release channel.  If
-  no new commits since that release touch any files that are included
-  in the package, then just ~RELEASE~ is used on the snapshot channel
-  too.  ~YYYYMMDD~ is the committer date.  Instead of appending the time
-  to the date, ~COUNT~ is used, the number of commits since the latest
-  release.  If no release information can be determined, then ~0.0~ is
-  used as ~RELEASE~.
+  no new commits since that release touch any files, that are included
+  in the package tarball, then the same release is distributed on the
+  snapshots channel as well; build from the same commit and using the
+  same ~RELEASE~ version string as on the releases channel.  ~YYYYMMDD~
+  is the committer date.  Instead of appending the time to the date,
+  ~COUNT~ is used; the number of commits since the latest release.
+  If no release information can be determined, then ~0.0~ is used as
+  ~RELEASE~ and ~COUNT~ is the number of commits since the initial commit.
 
 - All packages are distributed as tarballs now, even if they consist
   of a single library and nothing else.  This is a simplification
@@ -60,7 +62,7 @@
   information in ~<name>.el~ is now also updated, stripping incorrect
   data.
 
-- ~<name>-pkg.el~ now set the ~:revdesc~ property and ~<name>.el~ the
+- ~<name>-pkg.el~ now sets the ~:revdesc~ property, and ~<name>.el~ the
   ~Package-Revision~ header, which precisely name the commit that the
   package was built from.  When the latest release was determined from
   a Git tag, then the value is generated using ~git describe~, and has

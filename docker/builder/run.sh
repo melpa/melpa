@@ -62,8 +62,7 @@ then
     else
         # Fetch all packages but don't build any channel.
         export DOCKER_BUILD_CONFIG="(progn $LISP_CONFIG\
-          (setq package-build--inhibit-update t)\
-          (setq package-build-build-function 'ignore))"
+          (setq package-build--inhibit-update t))"
         make -k -j8 build || true
     fi
 else

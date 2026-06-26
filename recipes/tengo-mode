@@ -1,1 +1,1 @@
-(tengo-mode :fetcher github :repo "CsBigDataHub/tengo-mode")
+(tengo-mode :fetcher github :repo "ChetanKoneru/tengo-mode")

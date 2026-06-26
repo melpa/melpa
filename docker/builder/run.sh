@@ -69,7 +69,7 @@ then
 else
     # Don't fetch packages.
     export DOCKER_BUILD_CONFIG="(progn $LISP_CONFIG\
-      (setq package-build-fetch-function 'ignore))"
+      (setq package-build--inhibit-fetch t))"
 fi
 
 for channel in $DOCKER_CHANNELS
@@ -85,7 +85,7 @@ do
     make archive-contents json html
     # Don't fetch packages a second time.
     export DOCKER_BUILD_CONFIG="(progn $LISP_CONFIG\
-      (setq package-build-fetch-function 'ignore))"
+      (setq package-build--inhibit-fetch t))"
 done
 
 # Indicate that the build has completed.

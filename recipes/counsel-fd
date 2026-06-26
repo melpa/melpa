@@ -1,3 +1,1 @@
-(counsel-fd
-  :repo "CsBigDataHub/counsel-fd"
-  :fetcher github)
+(counsel-fd :fetcher github :repo "ChetanKoneru/counsel-fd")

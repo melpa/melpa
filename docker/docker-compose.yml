@@ -3,7 +3,7 @@ version: "3"
 services:
   nginx:
     build: ./nginx
-    image: melpa/nginx:v2
+    image: melpa/nginx:v3
     restart: unless-stopped
     volumes:
       - /mnt/volume/melpa:/mnt/store/melpa:ro
@@ -17,7 +17,7 @@ services:
       - "443:443"
   builder:
     build: ./builder
-    image: melpa/builder:v2
+    image: melpa/builder:v3
     restart: unless-stopped
     deploy:
       resources:
@@ -27,7 +27,7 @@ services:
       - /mnt/volume/melpa:/mnt/store/melpa
   logprocessor:
     build: ./logprocessor
-    image: melpa/logprocessor:v2
+    image: melpa/logprocessor:v3
     restart: unless-stopped
     volumes:
       - /mnt/volume/db:/mnt/db
@@ -38,13 +38,13 @@ services:
       - /mnt/volume/log-releases:/mnt/store/log-releases:ro
   syncer:
     build: ./syncer
-    image: melpa/syncer:v2
+    image: melpa/syncer:v3
     restart: unless-stopped
     volumes:
       - /mnt/volume/melpa:/mnt/store/melpa
   rsyncd:
     build: ./rsyncd
-    image: melpa/rsyncd:v2
+    image: melpa/rsyncd:v3
     restart: unless-stopped
     ports:
       - "873:873"

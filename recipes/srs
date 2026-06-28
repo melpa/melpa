@@ -1,4 +1,1 @@
-(srs
- :fetcher github
- :repo "Duncan-Britt/srs.el"
- :branch "release-v1")
+(srs :fetcher github :repo "Duncan-Britt/srs.el")

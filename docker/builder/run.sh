@@ -1,8 +1,7 @@
 #!/bin/bash -e
 
-# Envvars with empty defaults:
-# - INHIBIT_PACKAGE_PULL
-# - INHIBIT_MELPA_PULL
+: ${INHIBIT_MELPA_PULL=nil}
+: ${INHIBIT_PACKAGE_PULL=nil}
 
 : ${DOCKER_CHANNELS="unstable stable snapshots releases"}
 
@@ -20,7 +19,7 @@ export INSIDE_DOCKER=true
 export GIT_HTTP_USER_AGENT="melpa.org"
 export LANG=en_US.UTF-8
 
-if [ -z "$INHIBIT_MELPA_PULL" ]
+if [ ! "$INHIBIT_MELPA_PULL" != nil ]
 then
     echo ">>> Pulling MELPA repository"
     MELPA_BRANCH=$(git rev-parse --abbrev-ref HEAD)
@@ -55,20 +54,18 @@ record_build_status
 
 if [ "$INHIBIT_PACKAGE_PULL" != nil ]
 then
-    if [ -n "$DOCKER_CHANNELS" ]
-    then
-        # Fetch all packages when updating first channel.
-        export DOCKER_BUILD_CONFIG="$LISP_CONFIG"
-    else
-        # Fetch all packages but don't build any channel.
-        export DOCKER_BUILD_CONFIG="(progn $LISP_CONFIG\
-          (setq package-build--inhibit-update t))"
-        make -k -j8 build || true
-    fi
-else
     # Don't fetch packages.
     export DOCKER_BUILD_CONFIG="(progn $LISP_CONFIG\
       (setq package-build--inhibit-fetch t))"
+elif [ -n "$DOCKER_CHANNELS" ]
+then
+     # Fetch all packages when updating first channel.
+     export DOCKER_BUILD_CONFIG="$LISP_CONFIG"
+else
+    # Fetch all packages but don't build any channel.
+    export DOCKER_BUILD_CONFIG="(progn $LISP_CONFIG\
+      (setq package-build--inhibit-update t))"
+    make -k -j8 build || true
 fi
 
 for channel in $DOCKER_CHANNELS

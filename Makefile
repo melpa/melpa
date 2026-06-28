@@ -150,10 +150,10 @@ EMACS_BATCH ?= $(EMACS) $(EMACS_Q_ARG) --batch $(EMACS_ARGS)\
 EMACS_EVAL   = $(EMACS_BATCH)\
   --eval $(CHANNEL_CONFIG)\
   --eval $(PATH_CONFIG)\
-  --eval "$(DOCKER_BUILD_CONFIG)"\
   --eval $(CONFIG)\
   --eval "(setq package-build--inhibit-fetch $(NOFETCH))"\
   --eval "(setq package-build--inhibit-build $(NOBUILD))"\
+  --eval "$(DOCKER_BUILD_CONFIG)"\
   --load package-build.el\
   --eval
 

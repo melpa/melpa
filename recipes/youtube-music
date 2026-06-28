@@ -1,0 +1,3 @@
+(youtube-music
+ :fetcher github
+ :repo "cyberkm/emacs-youtube-music")

@@ -1,2 +1,2 @@
-(loopy :fetcher github
+(loopy :fetcher codeberg
        :repo "okamsn/loopy")

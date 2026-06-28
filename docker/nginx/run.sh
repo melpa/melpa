@@ -16,8 +16,8 @@ mkdir -p /etc/letsencrypt/ssl 2> /dev/null
     --expand \
     -d melpa.org \
     -d stable.melpa.org \
-    -d test.melpa.org \
-    -d stable-test.melpa.org \
+    -d releases.melpa.org \
+    -d snapshots.melpa.org \
     -d www.melpa.org
 
 nginx -g 'daemon off;' &
@@ -45,8 +45,6 @@ while true; do
         -d stable.melpa.org \
         -d snapshots.melpa.org \
         -d releases.melpa.org \
-        -d test.melpa.org \
-        -d stable-test.melpa.org \
         -d www.melpa.org
 
     echo "restarting nginx..."

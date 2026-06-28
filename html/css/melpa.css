@@ -8,6 +8,12 @@ h1, .navbar, .navbar .brand, .navbar a, .navbar .nav>li>a {
 .stable h1, .stable .navbar, .stable .navbar .brand, .stable .navbar a, .stable .navbar .nav>li>a {
   color: #3e999f;
 }
+.releases h1, .releases .navbar, .releases .navbar .brand, .releases .navbar a, .releases .navbar .nav>li>a {
+  color: #75653e;
+}
+.snapshots h1, .snapshots .navbar, .snapshots .navbar .brand, .snapshots .navbar a, .snapshots .navbar .nav>li>a {
+  color: #3e3e9f;
+}
 .table .text-right {
   text-align: right;
 }
@@ -47,4 +53,7 @@ a[name] { /* Stop navbar from hiding anchors */
 }
 .sortable {
   cursor: pointer;
+}
+.site-selector {
+    padding-top: 1em;
 }

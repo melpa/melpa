@@ -548,20 +548,23 @@
 
 
   //////////////////////////////////////////////////////////////////////////////
-  // Changing the appearance of the MELPA Stable page
+  // Changing the appearance of the various MELPA archive sites
   //////////////////////////////////////////////////////////////////////////////
 
-  melpa.sites = {
-    unstable: { name: "MELPA", hosts: ["melpa.org"] },
-    stable: { name: "MELPA Stable", hosts: ["stable.melpa.org", "stable-test.melpa.org"] }
-  };
+  melpa.sites = [
+    { name: "MELPA", host: "melpa.org" },
+    { name: "MELPA Stable", host: "stable.melpa.org", extraClass: 'stable' },
+    { name: "MELPA Releases (Beta)", host: "releases.melpa.org", extraClass: 'releases' },
+    { name: "MELPA Snapshots (Beta)", host: "snapshots.melpa.org", extraClass: 'snapshots' },
+  ];
 
-  melpa.stable = m.prop(_.findIndex(melpa.sites.stable.hosts,
-                                    function(s) { return s == window.location.host.toLowerCase(); }) != -1);
+  melpa.currentSite = m.prop(_.find(melpa.sites,
+    function(s) { return s.host == window.location.host.toLowerCase(); }) || melpa.sites[0]);
+
   melpa.archivename = {};
   melpa.archivename.controller = function() {
     this.archiveName = function() {
-      return melpa.stable() ? melpa.sites.stable.name : melpa.sites.unstable.name;
+      return melpa.currentSite().name;
     };
   };
   melpa.archivename.view = function(ctrl) {
@@ -575,16 +578,9 @@
       m.mount(e, melpa.archivename);
     });
 
-    if (melpa.stable()) {
-      document.getElementsByTagName("html")[0].className += " stable";
+    if (melpa.currentSite().extraClass) {
+      document.getElementsByTagName("html")[0].className += " " + melpa.currentSite().extraClass;
     }
-
-    // Add a link to the other MELPA site
-    var otherSite = melpa.stable() ? melpa.sites.unstable : melpa.sites.stable;
-    var otherSiteLink = document.getElementsByClassName("other-melpa-link")[0];
-    otherSiteLink.href = "//" + otherSite.hosts[0];
-    otherSiteLink.textContent = otherSite.name;
-    otherSiteLink.classList.remove("hidden");
   });
 
   //////////////////////////////////////////////////////////////////////////////
@@ -666,17 +662,26 @@
   };
 
   melpa.titleComponent = {
-    controller: function() {
-      this.archivename = new melpa.archivename.controller();
-    },
     view: function(ctrl) {
-      return _.compact([melpa.currentPageTitle(), ctrl.archivename.archiveName()]).join(" - ");
+      return _.compact([melpa.currentPageTitle(), melpa.currentSite().name]).join(" - ");
+    }
+  };
+
+  melpa.siteSelector = {
+    view: function(ctrl) {
+      return m("select",
+        {onchange: function(e) { document.location = "https://" + e.target.value; }},
+        melpa.sites.map(function (s) {
+          return m("option", { value: s.host, selected: (melpa.currentSite() === s) }, s.name )
+        })
+      )
     }
   };
 
   var titleElem = document.querySelector("title");
   titleElem.textContent = "";
   m.module(titleElem, melpa.titleComponent);
+  m.module(document.querySelector(".site-selector"), melpa.siteSelector);
 
   //////////////////////////////////////////////////////////////////////////////
   // Routing

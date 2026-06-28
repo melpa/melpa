@@ -14,6 +14,7 @@ mkdir -p /etc/letsencrypt/ssl 2> /dev/null
     --rsa-key-size 4096 \
     --force-renewal \
     --expand \
+    --cert-name melpa.org \
     -d melpa.org \
     -d stable.melpa.org \
     -d releases.melpa.org \
@@ -41,6 +42,7 @@ while true; do
         --non-interactive \
         --rsa-key-size 4096 \
         --expand \
+        --cert-name melpa.org \
         -d melpa.org \
         -d stable.melpa.org \
         -d snapshots.melpa.org \

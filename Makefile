@@ -118,7 +118,7 @@ else ifeq ($(CHANNEL), snapshots)
   HTMLDIR := html-snapshots
   CHANNEL_CONFIG := "(progn\
   (setq package-build-releases nil)\
-  (setq package-build-badge-data '(\"snapshots\" \"\#30a14e\")))"
+  (setq package-build-badge-data '(\"melpa snapshots\" \"\#922793\")))"
 
 else ifeq ($(CHANNEL), releases)
   # This is an experimental channel, which may
@@ -127,7 +127,7 @@ else ifeq ($(CHANNEL), releases)
   HTMLDIR := html-releases
   CHANNEL_CONFIG := "(progn\
   (setq package-build-releases t)\
-  (setq package-build-badge-data '(\"releases\" \"\#9be9a8\")))"
+  (setq package-build-badge-data '(\"melpa releases\" \"\#3e999f\")))"
 
 else
   $(error Unknown CHANNEL: $(CHANNEL))

@@ -1,1 +1,1 @@
-(check :fetcher github :repo "golproductions/check.el")
+(check :repo "golproductions/check.el" :fetcher github)

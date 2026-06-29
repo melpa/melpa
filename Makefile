@@ -99,7 +99,7 @@ ifeq ($(CHANNEL), unstable)
   (setq package-build-releases nil)\
   (setq package-build-build-function 'package-build--build-multi-file-package)\
   (setq package-build-snapshot-version-functions '(package-build-timestamp-version))\
-  (setq package-build-badge-data '(\"melpa\" \"\#922793\")))"
+  (setq package-build-badge-data '(\"MELPA\" \"\#922793\")))"
 
 else ifeq ($(CHANNEL), stable)
   PKGDIR  := packages-stable
@@ -109,7 +109,7 @@ else ifeq ($(CHANNEL), stable)
   (setq package-build-all-publishable nil)\
   (setq package-build-build-function 'package-build--build-multi-file-package)\
   (setq package-build-release-version-functions '(package-build-tag-version))\
-  (setq package-build-badge-data '(\"melpa stable\" \"\#3e999f\")))"
+  (setq package-build-badge-data '(\"MELPA Stable\" \"\#3e999f\")))"
 
 else ifeq ($(CHANNEL), snapshots)
   # This is an experimental channel, which may
@@ -118,7 +118,7 @@ else ifeq ($(CHANNEL), snapshots)
   HTMLDIR := html-snapshots
   CHANNEL_CONFIG := "(progn\
   (setq package-build-releases nil)\
-  (setq package-build-badge-data '(\"melpa snapshots\" \"\#922793\")))"
+  (setq package-build-badge-data '(\"MELPA Snapshots\" \"\#922793\")))"
 
 else ifeq ($(CHANNEL), releases)
   # This is an experimental channel, which may
@@ -127,7 +127,7 @@ else ifeq ($(CHANNEL), releases)
   HTMLDIR := html-releases
   CHANNEL_CONFIG := "(progn\
   (setq package-build-releases t)\
-  (setq package-build-badge-data '(\"melpa releases\" \"\#3e999f\")))"
+  (setq package-build-badge-data '(\"MELPA Releases\" \"\#3e999f\")))"
 
 else
   $(error Unknown CHANNEL: $(CHANNEL))

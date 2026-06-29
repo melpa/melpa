@@ -554,8 +554,8 @@
   melpa.sites = [
     { name: "MELPA", host: "melpa.org" },
     { name: "MELPA Stable", host: "stable.melpa.org", extraClass: 'stable' },
-    { name: "MELPA Releases (Beta)", host: "releases.melpa.org", extraClass: 'releases' },
-    { name: "MELPA Snapshots (Beta)", host: "snapshots.melpa.org", extraClass: 'snapshots' },
+    { name: "MELPA Releases [beta]", host: "releases.melpa.org", extraClass: 'releases' },
+    { name: "MELPA Snapshots [beta]", host: "snapshots.melpa.org", extraClass: 'snapshots' },
   ];
 
   melpa.currentSite = m.prop(_.find(melpa.sites,

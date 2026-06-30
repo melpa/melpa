@@ -1,0 +1,3 @@
+(ob-eqn
+ :fetcher github
+ :repo "hinman/ob-eqn")

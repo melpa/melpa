@@ -1,0 +1,1 @@
+(hutch :fetcher github :repo "adjaecent/magit-hutch")

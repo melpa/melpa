@@ -1,0 +1,3 @@
+(pomo-cat
+ :fetcher github
+ :repo "kn66/pomo-cat.el")

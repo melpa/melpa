@@ -1,1 +1,1 @@
-(highlight-indent-guides :fetcher github :repo "DarthFennec/highlight-indent-guides")
+(highlight-indent-guides :fetcher github :repo "bumblepup/highlight-indent-guides")

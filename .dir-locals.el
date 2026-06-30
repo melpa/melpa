@@ -1,4 +1,8 @@
-(("recipes"
+((makefile-mode
+  (indent-tabs-mode . t)
+  (outline-regexp . "#\\(#+\\)")
+  (mode . outline-minor))
+ ("recipes"
   (nil (eval . (and buffer-file-name
 		    (not (eq major-mode 'package-recipe-mode))
 		    (or (require 'package-recipe-mode nil t)

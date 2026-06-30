@@ -1,0 +1,2 @@
+(git-sync-mode :fetcher github
+               :repo "justinbarclay/git-sync-mode")

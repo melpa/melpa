@@ -1,1 +1,4 @@
-(easysession :fetcher github :repo "jamescherti/easysession.el")
+(easysession
+ :fetcher github
+ :repo "jamescherti/easysession.el"
+ :files (:defaults "extensions/easysession*.el"))

@@ -1,1 +1,1 @@
-(remember-last-theme :repo "anler/remember-last-theme" :fetcher github)
+(remember-last-theme :fetcher github :repo "nullvec/remember-last-theme")

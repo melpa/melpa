@@ -1,1 +1,1 @@
-(unicode-math-input :fetcher github :repo "astoff/unicode-math-input.el")
+(unicode-math-input :fetcher codeberg :repo "astoff/unicode-math-input.el" :files ("*.el" "*.eld"))

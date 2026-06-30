@@ -8,11 +8,12 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
       with:
         fetch-depth: 2
+        persist-credentials: false
     - name: Install dependencies
       run: |
         sudo apt-get install emacs

@@ -1,0 +1,3 @@
+(kirigami
+ :fetcher github
+ :repo "jamescherti/kirigami.el")

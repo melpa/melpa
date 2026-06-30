@@ -1,0 +1,4 @@
+(eglot-typescript-preset
+ :fetcher github
+ :repo "mwolson/eglot-typescript-preset"
+ :files (:defaults ("templates" "templates/*.tpl.py")))

@@ -1,0 +1,3 @@
+(calctape
+ :fetcher github
+ :repo "Boruch-Baum/emacs-calctape")

@@ -1,0 +1,2 @@
+(magnus :fetcher github
+        :repo "hrishikeshs/magnus")

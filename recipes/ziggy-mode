@@ -1,0 +1,1 @@
+(ziggy-mode :fetcher github :repo "dcolazin/ziggy-mode")

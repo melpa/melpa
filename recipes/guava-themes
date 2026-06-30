@@ -1,0 +1,5 @@
+(guava-themes
+ :fetcher github
+ :repo "bormoge/guava-themes"
+ :files (:defaults
+         "themes/guava-themes*.el"))

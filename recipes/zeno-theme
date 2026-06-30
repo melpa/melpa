@@ -1,3 +1,1 @@
-(zeno-theme
- :repo "sacredyak/zeno-theme"
- :fetcher github)
+(zeno-theme :fetcher github :repo "rokrdev/zeno-theme")

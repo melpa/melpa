@@ -1,42 +1,31 @@
 name: ci
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
-        package: [evil, magit, realgud, edts, elpher, which-key-posframe]
+        package: [evil, magit, realgud, org-contacts, which-key-posframe]
     steps:
-    - name: checkout package-build
-      uses: actions/checkout@v4
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        repository: melpa/melpa
+        fetch-depth: 1
+        persist-credentials: false
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         path: package-build
         fetch-depth: 1
-
-    - name: checkout melpa
-      uses: actions/checkout@v4
-      with:
-        path: melpa
-        repository: melpa/melpa
-        fetch-depth: 1
-
-    - name: Install dependencies
-      run: |
-        sudo apt-get install emacs
-        sudo apt-get install git mercurial texinfo
-
-        # Work around SSL-related failures, see
-        # https://stackoverflow.com/questions/21477683/mercurial-https-clone-abort-error-wrong-version-number
-        echo "[ui]\ntls = False" > $HOME/.hgrc
-
-    - name: Setup config path
-      run: |
-        echo "LOAD_PATH = $GITHUB_WORKSPACE/package-build" > melpa/config.mk
-
+        persist-credentials: false
     - name: Build ${{ matrix.package }}
-      run: |
-        cd melpa
-
-        make recipes/${{ matrix.package }}
+      uses: ./package-build
+      env:
+        NOERROR: nil
+        BUILD_PACKAGES: ${{ matrix.package }}
+      with:
+        args: build-channels

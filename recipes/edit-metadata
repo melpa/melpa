@@ -1,0 +1,3 @@
+(edit-metadata
+ :fetcher codeberg
+ :repo "mxpi/edit-metadata")

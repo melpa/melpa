@@ -14,12 +14,13 @@ mkdir -p /etc/letsencrypt/ssl 2> /dev/null
     --rsa-key-size 4096 \
     --force-renewal \
     --expand \
+    --cert-name melpa.org \
     -d melpa.org \
     -d stable.melpa.org \
-    -d test.melpa.org \
-    -d stable-test.melpa.org \
+    -d releases.melpa.org \
+    -d snapshots.melpa.org \
     -d www.melpa.org
-    
+
 nginx -g 'daemon off;' &
 nginx_pid=$!
 
@@ -41,12 +42,17 @@ while true; do
         --non-interactive \
         --rsa-key-size 4096 \
         --expand \
+        --cert-name melpa.org \
         -d melpa.org \
         -d stable.melpa.org \
-        -d test.melpa.org \
-        -d stable-test.melpa.org \
+        -d snapshots.melpa.org \
+        -d releases.melpa.org \
         -d www.melpa.org
 
     echo "restarting nginx..."
     kill -HUP $nginx_pid
 done
+
+# Local Variables:
+#   indent-tabs-mode: nil
+# End:

@@ -1,0 +1,1 @@
+(clj-doc-browse :fetcher github :repo "dcj/clj-doc-browse-el")

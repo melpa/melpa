@@ -1,0 +1,2 @@
+(sparkweather :fetcher github
+              :repo "aglet/sparkweather")

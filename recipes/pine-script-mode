@@ -1,1 +1,1 @@
-(pine-script-mode :fetcher github :repo "EricCrosson/pine-script-mode")
+(pine-script-mode :fetcher github :repo "darrylhebbes/pine-script-mode")

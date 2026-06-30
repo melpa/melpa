@@ -1,5 +1,5 @@
 (daselt
- :fetcher gitlab
+ :fetcher codeberg
  :repo "nameiwillforget/d-emacs"
  :files (:defaults
          "example-user-defined-bindlist.dbl"

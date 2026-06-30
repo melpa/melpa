@@ -1,0 +1,3 @@
+(consult-symbol
+ :fetcher github
+ :repo "danielfleischer/consult-symbol")

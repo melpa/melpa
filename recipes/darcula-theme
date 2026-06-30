@@ -1,2 +1,2 @@
-(darcula-theme :fetcher gitlab
-               :repo "fommil/emacs-darcula-theme")
+(darcula-theme :fetcher github
+               :repo "fommil/darcula-theme.el")

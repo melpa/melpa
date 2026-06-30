@@ -1,0 +1,3 @@
+(dired-video-thumbnail
+ :fetcher github
+ :repo "captainflasmr/dired-video-thumbnail")

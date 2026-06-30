@@ -1,0 +1,1 @@
+(magit-gh :fetcher github :repo "jonathanchu/magit-gh")

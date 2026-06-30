@@ -1,4 +1,4 @@
 (geiser-mit
- :fetcher gitlab
- :repo "emacs-geiser/mit"
+ :fetcher codeberg
+ :repo "geiser/mit"
  :files (:defaults ("src" "src/*")))

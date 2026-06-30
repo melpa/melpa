@@ -1,3 +1,1 @@
-(exotica-theme
- :repo "sacredyak/exotica-theme"
- :fetcher github)
+(exotica-theme :fetcher github :repo "rokrdev/exotica-theme")

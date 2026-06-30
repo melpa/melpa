@@ -5,9 +5,12 @@ body {
 h1, .navbar, .navbar .brand, .navbar a, .navbar .nav>li>a {
   color: #922793;
 }
-.stable h1, .stable .navbar, .stable .navbar .brand, .stable .navbar a, .stable .navbar .nav>li>a {
-  color: #3e999f;
+.stable, .releases {
+  h1, .navbar, .navbar .brand, .navbar a, .navbar .nav>li>a {
+    color: #3e999f;
+  }
 }
+
 .table .text-right {
   text-align: right;
 }
@@ -47,4 +50,7 @@ a[name] { /* Stop navbar from hiding anchors */
 }
 .sortable {
   cursor: pointer;
+}
+.site-selector {
+    padding-top: 1em;
 }

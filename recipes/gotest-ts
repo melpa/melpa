@@ -1,1 +1,0 @@
-(gotest-ts :fetcher github :repo "chmouel/gotest-ts.el")

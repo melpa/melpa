@@ -1,0 +1,1 @@
+(pass-coffin :fetcher codeberg :repo "rch/emacs-pass-coffin")

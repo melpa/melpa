@@ -1,4 +1,4 @@
 (pyim-smzmdict
  :fetcher github
- :repo "cor5corpii/pyim-smzmdict"
+ :repo "a5corpii/pyim-smzmdict"
  :files (:defaults "*.pyim"))

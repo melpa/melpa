@@ -1,3 +1,0 @@
-(flycheck-pact
-  :fetcher github
-  :repo "kadena-io/flycheck-pact")

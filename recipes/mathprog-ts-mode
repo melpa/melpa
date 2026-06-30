@@ -1,0 +1,1 @@
+(mathprog-ts-mode :fetcher github :repo "smoeding/mathprog-ts-mode")

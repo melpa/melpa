@@ -1,0 +1,3 @@
+(ol-bible
+ :fetcher sourcehut
+ :repo "swflint/ol-bible")

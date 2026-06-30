@@ -1,1 +1,1 @@
-(elx :repo "emacscollective/elx" :fetcher github)
+(elx :fetcher github :repo "emacscollective/elx")

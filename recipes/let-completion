@@ -1,0 +1,1 @@
+(let-completion :fetcher github :repo "gggion/let-completion.el")

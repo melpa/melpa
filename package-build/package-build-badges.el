@@ -1,13 +1,12 @@
 ;;; package-build-badges.el --- Create badges for packages  -*- lexical-binding:t; coding:utf-8 -*-
 
-;; Copyright (C) 2011-2024 Donald Ephraim Curtis
-;; Copyright (C) 2012-2024 Steve Purcell
-;; Copyright (C) 2018-2025 Jonas Bernoulli
-;; Copyright (C) 2021-2023 Free Software Foundation, Inc
-;; Copyright (C) 2009 Phil Hagelberg
+;; Copyright (C) 2011-2021 Donald Ephraim Curtis
+;; Copyright (C) 2012-2021 Steve Purcell
+;; Copyright (C) 2018-2026 Jonas Bernoulli
+;; Copyright (C) 2021-2023 Free Software Foundation, Inc.
 
-;; Author: Donald Ephraim Curtis <dcurtis@milkbox.net>
-;; Maintainer: Jonas Bernoulli <emacs.package-build@jonas.bernoulli.dev>
+;; Author: Jonas Bernoulli <jonas@bernoulli.dev>
+;; Maintainer: Jonas Bernoulli <jonas@bernoulli.dev>
 ;; Homepage: https://github.com/melpa/package-build
 ;; Keywords: maint tools
 
@@ -33,12 +32,21 @@
 
 ;;; Code:
 
+(require 'cl-lib)
+
 (defvar package-build-badge-data)
 
-(defun package-build--write-badge-image ( name version target-dir
-                                          &optional archive color)
+(cl-defun package-build--write-badge-image ( name version target-dir
+                                             &optional archive color)
   "Make badge svg file.
 This is essentially a copy of `elpaa--make-badge'."
+  (unless (or (executable-find "magick")
+              (executable-find "convert"))
+    (message "Install ImageMagick to create badges, or %s to ./config.mk %s"
+             "add CONFIG=\"(setq package-build-badge-data nil)\""
+             "to avoid this message")
+    (setq package-build-badge-data nil)
+    (cl-return-from package-build--write-badge-image))
   (let* ((file (expand-file-name (concat name "-badge.svg") target-dir))
          (left (or archive (car package-build-badge-data) "myElpa"))
          (right version)

@@ -1,0 +1,3 @@
+(solo-rpg
+ :fetcher github
+ :repo "Enfors/solo-rpg")

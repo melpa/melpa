@@ -1,0 +1,1 @@
+(ol-locate-file :fetcher github :repo "p-snow/ol-locate-file")

@@ -1,0 +1,1 @@
+(check :repo "golproductions/check.el" :fetcher github)

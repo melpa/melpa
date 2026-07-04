@@ -1,3 +1,4 @@
 (dicom
  :fetcher github
- :repo "minad/dicom")
+ :repo "minad/dicom"
+ :files (:defaults "*.sh"))

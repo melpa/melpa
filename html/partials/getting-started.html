@@ -1,58 +1,121 @@
 <h1>Getting started</h1>
 <section>
       <a name="installing"></a>
-      <h2>Installing Melpa</h2>
+      <h2>Making a Melpa channel available to <code>package.el</code></h2>
 
-      <p>To use the MELPA repository, you'll need an Emacs with
-        <code>package.el</code> and TLS support, ie. Emacs 24.1 or
-        greater. To test TLS support you can visit a HTTPS URL, for
-        example with <code>M-x eww RET https://wikipedia.org RET</code>.
+      <p>
+        Before you can install packages from a MELPA channel, you have
+        to add a entry to the variable <code>package-archives</code>,
+        in your init file (usually <code>~/.config/emacs/init.el</code>)
+        as shown below.
       </p>
 
       <p>
-        Consider using Emacs 26.3 or greater; otherwise you will have
-        to add a kludge to work around a bug described in
-        <a href="#knownIssues">Known Issues</a> below.
+        If you are using a very old Emacs release, you might have to
+        prefix that with <code>(require 'package)</code>.
+      </p>
+
+      <h3>Which MELPA channel should I use?</h3>
+
+      <p>
+        We strongly recommend using a channel that ships snapshots of
+        development versions, not a channel that ships upstream
+        releases.  Using just releases is appealing, because that way
+        you will be affected by fewer regressions.  Unfortunately many
+        package maintainers have stopped creating releases, so for
+        their packages, sticking to the latest release, often means
+        using a version with known bugs, which have been fixed many
+        years ago on the "development" branch.  In practice you won't
+        get a more stable experience by using the "stable" channel.
       </p>
 
       <p>
-        Enable installation of packages from MELPA by adding an entry
-        to <code>package-archives</code> after <code>(require
-        'package)</code> and before the call
-        to <code>package-initialize</code> in
-        your <code>init.el</code> or <code>.emacs</code> file:
+        Since July 2026 we offer two experimental channels, which are
+        intended to eventually replace the "regular" MELPA channel and
+        the MELPA Stable channel: MELPA Snapshots and MELPA Releases.
       </p>
-
-      <pre><code>(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
-;; and `package-pinned-packages`. Most users will not need or want to do this.
-;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(package-initialize)</code></pre>
 
       <p>
-        Note that you'll need to run <code>M-x package-refresh-contents</code> or
-        <code>M-x package-list-packages</code> to ensure that Emacs has fetched
-        the MELPA package list before you can install packages with
-        <code>M-x package-install</code> or similar.
+        Like "regular" MELPA, MELPA Snapshots ships snapshots build
+        from the default branches of upstream repositories.  Like
+        MELPA Stable, MELPA Releases ships packages build from the
+        latest upstream releases.
       </p>
 
-      <h3>Installing Melpa Stable</h2>
+      <p>
+        MELPA Stable uses only git/mercurial tags to determine the
+        latest release.  If there are no release tags, MELPA Releases
+        also considers the <code>Version</code> library header, and if
+        that is also unset, it uses the stand-in <code>0.0</code>,
+        which means that all package distributed on MELPA Snapshots
+        are also distributed on MELPA Releases.
+      </p>
 
+      <p>
+        The new MELPA Snapshots channel uses better version strings
+        than the "regular" MELPA channel.  The new version string
+        format is <code>RELEASE.0.DATE.COUNT</code>, while the old
+        format is just <code>DATE.TIME</code>.  <code>RELEASE</code>
+        is the version shipped on the MELPA Releases channel.
+      </p>
+
+      <p>
+        To learn more about the new experimental channels, see their
+        <a href="https://emacsair.me/2026/07/03/melpa-channels/" title="https://emacsair.me/2026/07/03/melpa-channels/">
+        announcement</a>.
+      </p>
+
+      <p>
+        It should be safe to use the new, experimental MELPA Snapshots
+        channel, but if you want to play it safe, stick to "regular"
+        MELPA for now.
+      </p>
+
+      <h3>Using the "regular" MELPA channel</h3>
+      <p>
+        To use the <a href="https://melpa.org" title="MELPA">
+        "regular" MELPA</a> channel, add this to your init file and evaluate it.
+        Then run <code>M-x package-refresh-contents</code> to fetch the package
+        definitions.
+      </p>
+      <pre><code>(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)</code></pre>
+
+      <h3>Using the MELPA Stable channel</h3>
       <p>
         To use the <a href="https://stable.melpa.org" title="MELPA Stable">
-          stable package repository</a> instead of the default
-        “bleeding-edge” repository, use this instead
-        of <code>"melpa"</code>:
+        MELPA Stable</a> channel, add this to your init file and evaluate it.
+        Then run <code>M-x package-refresh-contents</code> to fetch the package
+        definitions.
+      </p>
+      <pre><code>(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)</code></pre>
+
+      <h3>Using the experimental MELPA Snapshots channel</h3>
+      <p>
+        To use the <a href="https://snapshots.melpa.org" title="MELPA Snapshots">
+        MELPA Snapshots</a> channel, add this to your init file and evaluate it.
+        Then run <code>M-x package-refresh-contents</code> to fetch the package
+        definitions.
+      </p>
+      <pre><code>(add-to-list 'package-archives '("melpa-snapshots" . "https://snapshots.melpa.org/packages/") t)</code></pre>
+
+      <h3>Using the experimental MELPA Releases channel</h3>
+      <p>
+        To use the <a href="https://releases.melpa.org" title="MELPA Releases">
+        MELPA Releases</a> channel, add this to your init file and evaluate it.
+        Then run <code>M-x package-refresh-contents</code> to fetch the package
+        definitions.
+      </p>
+      <pre><code>(add-to-list 'package-archives '("melpa-releases" . "https://releases.melpa.org/packages/") t)</code></pre>
+
+      <h3>Installing a package</h3>
+      <p>
+        Once you have added a MELPA channel as shown above and then
+        ran <code>M-x package-refresh-contents</code> to fetch the
+        package definitions, you can install a package using
+        <code>M-x package-install</code>.
       </p>
 
-      <pre><code>(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)</code></pre>
-
-      <h3>Installing a package</h2>
-
       <p>
-        To install a package run <code>M-x package-install</code>.
         See <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html">
         Package Installation</a> for details about that and
         <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Packages.html">
@@ -63,10 +126,11 @@
       <h3>Customizations</h3>
       <p>
         What if you only want some of your packages to be installed
-        from MELPA, and the rest from Marmalade or elsewhere?
+        from MELPA, and the rest from GNU ELPA, NonGNU ELPA, or some
+        other ELPA?
       </p>
       <p>
-        In Emacs 24.4 and later, <code>package-pinned-packages</code>
+        The variable <code>package-pinned-packages</code>
         allows you to exclude or include versions according to their
         source. For users using older versions of Emacs, we provide
         a <code>package-filter.el</code> package (available in MELPA)
@@ -164,19 +228,16 @@
       <a name="adding"></a>
       <h2>Adding a Package</h2>
       <p>
-        In so many words, fork the project's source tree and create a
-        pull request with a recipe for your package.
-        The <a href="https://github.com/melpa/melpa/blob/master/README.md">README.md</a>
-        file on GitHub has more details.
+        Fork the <a href="https://github.com/melpa/melpa">melpa/melpa</a> repository.
+        Add a recipe for your package, as described in the
+        <a href="https://github.com/melpa/melpa/blob/master/README.md">README.md</a>
+        file on GitHub.
       </p>
       <a name="development"></a>
       <h2>Development</h2>
-      <p><a href="https://github.com/melpa/melpa">https://github.com/melpa/melpa</a></p>
       <p>
-        Contributions are welcome. Currently, the builder supports
-        packages using Git, Mercurial, and EmacsWiki (deprecated
-        due to security concerns). Support for Bazaar, CVS, Darcs,
-        Fossil and Subversion has been removed due to very limited
-        use.
+        Development happens mostly in the
+        <a href="https://github.com/melpa/package-build"><code>package-build</code></a>
+        repository.
       </p>
     </section>

@@ -1,0 +1,1 @@
+(gptel-agent-loop :fetcher github :repo "beacoder/gptel-agent-loop")

@@ -243,7 +243,8 @@ PKGDIRS  = packages packages-stable packages-snapshots packages-releases
 INDICES  = $(addsuffix /archive.json,$(HTMLDIRS))
 INDICES += $(addsuffix /recipes.json,$(HTMLDIRS))
 INDICES += $(addsuffix /updates.rss,$(HTMLDIRS))
-INDICES += $(addsuffix /social.org,$(HTMLDIRS))
+# social.org only for the channels whose versions encode build dates
+INDICES += html/social.org html-snapshots/social.org
 INDICES += $(addsuffix /archive-contents,$(PKGDIRS))
 INDICES += $(addsuffix /elpa-packages.eld,$(PKGDIRS))
 # Only created by docker targets:

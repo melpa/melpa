@@ -1,56 +1,461 @@
-body {
-  padding-top: 60px;
-  padding-bottom: 200px;
-}
-h1, .navbar, .navbar .brand, .navbar a, .navbar .nav>li>a {
-  color: #922793;
-}
-.stable, .releases {
-  h1, .navbar, .navbar .brand, .navbar a, .navbar .nav>li>a {
-    color: #3e999f;
-  }
+/* MELPA redesign: one palette derived from the brand purple, two type
+   families (sans for prose/UI, mono for identifiers), layered on top of
+   Bootstrap 3. Alternate archives (stable/releases/snapshots) keep their
+   own hue by overriding the custom properties below. */
+
+:root {
+  --brand-900: #4a1050;
+  --brand-700: #7a1f7c;
+  --brand-600: #922793; /* brand color */
+  --brand-500: #a93baa;
+  --brand-100: #f5e9f5;
+  --brand-50: #faf4fa;
+
+  --ink-900: #241726;
+  --ink-700: #4d3b4e;
+  --ink-500: #7d6b7e;
+  --line: #e8dde8;
+  --paper: #ffffff;
+  --paper-2: #fbf8fb;
+
+  --sans: "Inter", "SF Pro Text", -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas,
+    monospace;
 }
 
-.table .text-right {
-  text-align: right;
+html.stable,
+html.releases,
+html.snapshots {
+  --brand-900: #123c3f;
+  --brand-700: #2f7a7f;
+  --brand-600: #3e999f; /* stable brand color */
+  --brand-500: #55adb3;
+  --brand-100: #e6f3f4;
+  --brand-50: #f3fafa;
+  --ink-900: #172426;
+  --ink-700: #3b4d4e;
+  --ink-500: #6b7d7e;
+  --line: #dde8e8;
+  --paper-2: #f8fbfb;
 }
-header.navbar {
-  background-color: #fafafa;
+
+/* Base ------------------------------------------------------------------ */
+
+body {
+  padding-top: 76px;
+  padding-bottom: 120px;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-900);
+  background: var(--paper);
 }
-footer {
-  margin-top: 4em;
+
+a,
+a:link,
+a:visited {
+  color: var(--brand-600);
+  cursor: pointer;
+}
+a:hover,
+a:focus {
+  color: var(--brand-700);
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--mono);
+}
+code {
+  background: var(--brand-50);
+  color: var(--brand-700);
+  border: 1px solid var(--brand-100);
+  border-radius: 5px;
+}
+pre {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink-900);
 }
 pre code { /* Match highlight.js styles to bootstrap */
   padding: 0;
   background: transparent;
+  border: none;
 }
+
+.muted,
+.text-muted,
+.help-block,
+small {
+  color: var(--ink-500);
+}
+
+hr {
+  border-color: var(--line);
+}
+
+/* Navbar ----------------------------------------------------------------- */
+
+header.navbar {
+  background: var(--paper);
+  border: none;
+  border-bottom: 1px solid var(--line);
+  min-height: 58px;
+}
+.navbar .navbar-brand,
+.navbar .navbar-brand:hover {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 0.5px;
+  color: var(--brand-600);
+}
+.navbar .navbar-brand::before {
+  content: "(";
+  font-weight: 400;
+  color: var(--brand-500);
+}
+.navbar .navbar-brand::after {
+  content: ")";
+  font-weight: 400;
+  color: var(--brand-500);
+}
+.navbar .nav > li > a {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--ink-700);
+}
+.navbar .nav > li > a:hover,
+.navbar .nav > li > a:focus {
+  color: var(--brand-600);
+  background: transparent;
+}
+.site-selector {
+  padding-top: 12px;
+}
+.site-selector select {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  color: var(--ink-700);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+
+/* Page header ------------------------------------------------------------ */
+
+.page-header {
+  border-bottom: none;
+  margin: 34px 0 10px;
+  padding-bottom: 0;
+}
+h1 {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--ink-900);
+}
+h1 .archive-name,
+h1 > span:first-child {
+  color: var(--brand-600);
+}
+h1 small {
+  display: block;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--ink-500);
+  margin-top: 8px;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--ink-900);
+  margin: 44px 0 18px;
+}
+h2 small {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink-500);
+}
+
+h3,
+h4 {
+  color: var(--ink-900);
+  font-weight: 650;
+}
+
+/* Jumbotron (feature list) ------------------------------------------------ */
+
+.jumbotron {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 26px 30px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-700);
+}
+.jumbotron ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.jumbotron li {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 12px;
+}
+.jumbotron li:last-child {
+  margin-bottom: 0;
+}
+.jumbotron li::before {
+  content: "\03bb"; /* λ */
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--brand-500);
+}
+.jumbotron strong {
+  font-weight: 650;
+  color: var(--ink-900);
+}
+
+/* Build status ------------------------------------------------------------ */
+
+.alert,
+.alert-warning,
+.alert-success {
+  background: var(--brand-50);
+  border: 1px solid var(--brand-100);
+  border-radius: 14px;
+  padding: 18px 22px;
+  font-size: 14px;
+  color: var(--ink-700);
+  text-shadow: none;
+}
+.alert strong {
+  color: var(--brand-700);
+  font-weight: 650;
+}
+.alert::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand-500);
+  margin-right: 9px;
+  vertical-align: 2px;
+}
+.alert-success::before {
+  background: #3c9a5f;
+}
+
+/* Search ------------------------------------------------------------------ */
+
+input.form-control[type="search"] {
+  height: auto;
+  font-family: var(--sans);
+  font-size: 15px;
+  padding: 12px 18px;
+  color: var(--ink-900);
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  box-shadow: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+input.form-control[type="search"]:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 3px var(--brand-100);
+}
+input.form-control::placeholder {
+  color: var(--ink-500);
+}
+.help-block {
+  font-size: 13px;
+}
+
+/* Package table ------------------------------------------------------------ */
+
+.table {
+  font-size: 14.5px;
+}
+.table.table-bordered {
+  border: none;
+}
+.table.table-bordered > thead > tr > th,
+.table.table-bordered > tbody > tr > td {
+  border: none;
+  border-bottom: 1px solid var(--line);
+  padding: 11px 14px;
+  vertical-align: middle;
+}
+.table.table-bordered > thead > tr > th {
+  font-size: 12.5px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-500);
+  border-bottom: 2px solid var(--line);
+}
+.table-hover > tbody > tr:hover {
+  background: var(--brand-50);
+}
+.table .text-right {
+  text-align: right;
+}
+
 #package-list th .glyphicon {
   padding-left: 1em;
+  font-size: 10px;
 }
-#package-list th, #package-list td.version, #package-list td.recipe {
+#package-list th .glyphicon-minus {
+  visibility: hidden; /* only show an indicator on the sorted column */
+}
+#package-list th.sortable:hover {
+  color: var(--brand-600);
+}
+#package-list th,
+#package-list td.version,
+#package-list td.recipe {
   white-space: nowrap;
 }
 #package-list td a:link {
   display: block;
 }
-.jumbotron {
-  font-size: 18px;
-  line-height: 30px;
+
+/* Column roles: identifiers and numbers in mono */
+#package-list td:first-child a {
+  font-family: var(--mono);
+  font-size: 13.5px;
+  font-weight: 600;
 }
-a {
-  cursor: pointer;
+#package-list td.version a {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-700);
 }
+#package-list td.version a:hover {
+  color: var(--brand-600);
+}
+#package-list td.version .glyphicon,
+#package-list td.recipe .glyphicon {
+  font-size: 12px;
+  color: var(--brand-500);
+}
+#package-list td.source a,
+#package-list td.source {
+  color: var(--ink-700);
+}
+#package-list td.source a {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 1.5;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--brand-100);
+  color: var(--brand-700);
+}
+#package-list td.source a:hover {
+  text-decoration: none;
+  background: var(--brand-500);
+  color: #fff;
+}
+#package-list th:last-child,
+#package-list td:last-child {
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-700);
+}
+
+/* Pagination ---------------------------------------------------------------- */
+
+.pagination > li > a,
+.pagination > li > span {
+  color: var(--brand-600);
+  border-color: var(--line);
+}
+.pagination > .active > a,
+.pagination > .active > a:hover,
+.pagination > .active > span {
+  background: var(--brand-600);
+  border-color: var(--brand-600);
+}
+
+/* Buttons (package detail pages) -------------------------------------------- */
+
+.btn-default {
+  color: var(--brand-700);
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  font-weight: 500;
+}
+.btn-default:hover,
+.btn-default:focus {
+  color: #fff;
+  background: var(--brand-600);
+  border-color: var(--brand-600);
+}
+.btn-default .glyphicon {
+  color: var(--brand-500);
+}
+.btn-default:hover .glyphicon {
+  color: #fff;
+}
+
+/* Package detail pages ------------------------------------------------------- */
+
+.well {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: none;
+}
+dt {
+  color: var(--ink-900);
+}
+dd {
+  color: var(--ink-700);
+}
+.label {
+  font-weight: 550;
+  border-radius: 999px;
+}
+.label-default {
+  background: var(--brand-100);
+  color: var(--brand-700);
+}
+
+/* Misc ------------------------------------------------------------------------ */
+
 a[name] { /* Stop navbar from hiding anchors */
-  padding-top: 60px;
-  margin-top: -60px;
+  padding-top: 76px;
+  margin-top: -76px;
   display: inline-block; /* required for webkit browsers */
-}
-.muted {
-  color: #999;
 }
 .sortable {
   cursor: pointer;
 }
-.site-selector {
-    padding-top: 1em;
+footer {
+  margin-top: 4em;
+  color: var(--ink-500);
+}
+footer a {
+  color: var(--ink-500);
+}
+footer a:hover {
+  color: var(--brand-600);
 }

@@ -24,12 +24,10 @@
     monospace;
 }
 
-html.stable,
-html.releases,
-html.snapshots {
+html.stable {
   --brand-900: #123c3f;
   --brand-700: #2f7a7f;
-  --brand-600: #3e999f; /* stable brand color */
+  --brand-600: #3e999f; /* historical stable brand color */
   --brand-500: #55adb3;
   --brand-100: #e6f3f4;
   --brand-50: #f3fafa;
@@ -38,6 +36,34 @@ html.snapshots {
   --ink-500: #6b7d7e;
   --line: #dde8e8;
   --paper-2: #f8fbfb;
+}
+
+html.releases {
+  --brand-900: #1d2752;
+  --brand-700: #3a4fa5;
+  --brand-600: #4a63c8;
+  --brand-500: #6478d4;
+  --brand-100: #eaedfa;
+  --brand-50: #f5f7fd;
+  --ink-900: #1a1d29;
+  --ink-700: #3d4258;
+  --ink-500: #6d7288;
+  --line: #dfe2ee;
+  --paper-2: #f8f9fd;
+}
+
+html.snapshots {
+  --brand-900: #3f2506;
+  --brand-700: #7d4a0c;
+  --brand-600: #a05f10;
+  --brand-500: #c07a1e;
+  --brand-100: #f7edde;
+  --brand-50: #fbf6ec;
+  --ink-900: #262014;
+  --ink-700: #4e4433;
+  --ink-500: #7e7260;
+  --line: #eae1d2;
+  --paper-2: #fbf8f2;
 }
 
 /* Base ------------------------------------------------------------------ */
@@ -382,16 +408,49 @@ input.form-control::placeholder {
 
 /* Pagination ---------------------------------------------------------------- */
 
+.pagination {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 24px 0 8px;
+}
 .pagination > li > a,
 .pagination > li > span {
-  color: var(--brand-600);
-  border-color: var(--line);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-700);
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 12px;
+  margin-left: 0;
+  transition: border-color 0.15s, background 0.15s;
+}
+.pagination > li:first-child > a,
+.pagination > li:last-child > a {
+  border-radius: 8px;
+}
+.pagination > li > a:hover,
+.pagination > li > a:focus {
+  color: var(--brand-700);
+  background: var(--brand-50);
+  border-color: var(--brand-500);
 }
 .pagination > .active > a,
 .pagination > .active > a:hover,
+.pagination > .active > a:focus,
 .pagination > .active > span {
+  color: #fff;
   background: var(--brand-600);
   border-color: var(--brand-600);
+}
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover {
+  color: var(--ink-500);
+  background: var(--paper-2);
+  border-color: var(--line);
+  opacity: 0.55;
 }
 
 /* Buttons (package detail pages) -------------------------------------------- */
@@ -453,9 +512,11 @@ footer {
   margin-top: 4em;
   color: var(--ink-500);
 }
-footer a {
+footer a:link,
+footer a:visited {
   color: var(--ink-500);
 }
-footer a:hover {
+footer a:hover,
+footer a:focus {
   color: var(--brand-600);
 }

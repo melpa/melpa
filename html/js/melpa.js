@@ -669,8 +669,25 @@
 
   melpa.siteSelector = {
     view: function(ctrl) {
+      var isLocal = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(document.location.hostname);
+      var switchSite = function(e) {
+        var site = _.find(melpa.sites, function(s) { return s.host === e.target.value; });
+        if (!isLocal || !site) {
+          document.location = "https://" + e.target.value;
+          return;
+        }
+        // When developing locally there is no per-site hostname, so
+        // preview the selected site's theme instead of redirecting.
+        melpa.currentSite(site);
+        var htmlElem = document.getElementsByTagName("html")[0];
+        var extraClasses = _.compact(_.pluck(melpa.sites, "extraClass"));
+        htmlElem.className = _.union(
+          _.difference(htmlElem.className.split(/\s+/).filter(_.identity), extraClasses),
+          site.extraClass ? [site.extraClass] : []
+        ).join(" ");
+      };
       return m("select",
-        {onchange: function(e) { document.location = "https://" + e.target.value; }},
+        {onchange: switchSite},
         melpa.sites.map(function (s) {
           return m("option", { value: s.host, selected: (melpa.currentSite() === s) }, s.name )
         })

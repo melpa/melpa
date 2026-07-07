@@ -1,0 +1,4 @@
+(emagent
+ :fetcher github
+ :repo "etyurkin/emagent"
+ :files ("emagent.el" "lisp/*/*.el"))

@@ -1,0 +1,1 @@
+(sema-mode :repo "sema-lisp/emacs-sema" :fetcher github)

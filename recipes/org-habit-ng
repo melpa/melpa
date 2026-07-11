@@ -1,0 +1,3 @@
+(org-habit-ng
+ :fetcher codeberg
+ :repo "Trevoke/org-habit-ng")

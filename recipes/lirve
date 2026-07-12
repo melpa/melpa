@@ -1,1 +1,1 @@
-(lirve :repo "tanrax/lirve.el" :fetcher github)
+(lirve :fetcher git :url "https://git.andros.dev/andros/lirve.el")

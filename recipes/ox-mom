@@ -1,0 +1,3 @@
+(ox-mom
+ :fetcher github
+ :repo "hinman/ox-mom")

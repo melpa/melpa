@@ -1,1 +1,1 @@
-(mygptel :fetcher github :repo "TanukiMa/mygptel" :deps ("gptel"))
+(mygptel :fetcher github :repo "TanukiMa/mygptel")

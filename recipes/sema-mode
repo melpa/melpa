@@ -1,1 +1,4 @@
-(sema-mode :repo "sema-lisp/emacs-sema" :fetcher github)
+(sema-mode
+ :fetcher github
+ :repo "sema-lisp/emacs-sema"
+ :files ("*.el"))

@@ -1,0 +1,1 @@
+(magent :fetcher github :repo "Jamie-Cui/magent" :files ("lisp/*.el" "prompt" "skills" "capabilities"))

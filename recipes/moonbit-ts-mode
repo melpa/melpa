@@ -1,0 +1,3 @@
+(moonbit-ts-mode
+ :fetcher github
+ :repo "moonbit-community/moonbit-ts-mode")

@@ -1,0 +1,3 @@
+(flex-x
+ :fetcher github
+ :repo "kn66/flex-x")

@@ -1,0 +1,2 @@
+(hel :repo "anuvyklack/hel"
+     :fetcher github)

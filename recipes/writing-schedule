@@ -1,0 +1,4 @@
+(writing-schedule
+ :fetcher github
+ :repo "MooersLab/writing-schedule"
+ :files (:defaults (:exclude "test-*.el")))

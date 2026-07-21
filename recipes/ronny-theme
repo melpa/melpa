@@ -1,0 +1,1 @@
+(ronny-theme :repo "judaew/ronny.el" :fetcher github)

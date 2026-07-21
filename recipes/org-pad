@@ -1,0 +1,4 @@
+(org-pad
+ :fetcher github
+ :repo "larrasket/org-pad.el"
+ :files (:defaults ("web" "web/canvas.html")))

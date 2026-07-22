@@ -1,0 +1,3 @@
+(denote-smart-sluggify-title
+ :fetcher sourcehut
+ :repo "swflint/denote-smart-sluggify-title")

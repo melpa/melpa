@@ -1,0 +1,3 @@
+(objectscript-ts-mode
+ :fetcher github
+ :repo "intersystems/emacs-objectscript-ts-mode")

@@ -1,0 +1,3 @@
+(snippy
+ :fetcher github
+ :repo "MiniApollo/snippy")

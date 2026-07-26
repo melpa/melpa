@@ -1,0 +1,2 @@
+(fnm :fetcher github
+     :repo "nhojb/fnm.el")

@@ -1,4 +1,3 @@
 (ob-janet
  :fetcher codeberg
- :repo "zzkt/ob-janet"
- :files ("ob-janet.el"))
+ :repo "zzkt/ob-janet")

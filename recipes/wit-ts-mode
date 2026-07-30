@@ -1,0 +1,3 @@
+(wit-ts-mode
+    :repo "justjoheinz/wit-ts-mode"
+    :fetcher github)

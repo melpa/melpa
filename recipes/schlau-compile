@@ -1,4 +1,3 @@
 (schlau-compile
-  :fetcher github
-  :repo "flajann2/elisp"
-  :files ("schlau-compile.el"))
+ :fetcher github
+ :repo "flajann2/schlau-compile")

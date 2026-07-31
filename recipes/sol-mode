@@ -1,1 +1,1 @@
-(sol-mode :fetcher codeberg :repo "nlordell/sol-mode")
+(sol-mode :fetcher github :repo "nlordell/sol-mode")

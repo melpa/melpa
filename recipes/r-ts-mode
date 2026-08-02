@@ -1,0 +1,2 @@
+(r-ts-mode :fetcher codeberg
+           :repo "R-for-emacs/r-ts-mode")

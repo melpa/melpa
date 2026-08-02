@@ -1,0 +1,4 @@
+(gptel-agent-harness
+ :fetcher github
+ :repo "beacoder/gptel-agent-harness"
+ :files (:defaults "agents" "prompts" "rules"))

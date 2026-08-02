@@ -1,0 +1,3 @@
+(nu-ts-mode
+ :fetcher github
+ :repo "ItsOleks/nu-ts-mode")

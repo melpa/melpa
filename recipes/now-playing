@@ -1,0 +1,4 @@
+(now-playing
+ :fetcher github
+ :repo "kickingvegas/now-playing"
+ :files (:defaults "docs/images"))

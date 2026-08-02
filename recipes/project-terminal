@@ -1,0 +1,3 @@
+(project-terminal
+ :fetcher github
+ :repo "cowboyd/project-terminal.el")

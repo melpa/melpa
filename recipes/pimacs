@@ -1,0 +1,1 @@
+(pimacs :fetcher github :repo "ananthakumaran/pimacs.el")

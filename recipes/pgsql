@@ -1,0 +1,4 @@
+(pgsql
+ :fetcher github
+ :repo "LuciusChen/pgsql.el"
+ :files ("pgsql.el" "pgsql-saslprep.el"))

@@ -1,0 +1,4 @@
+(card-games
+ :fetcher git
+ :url "https://code.bru.st/corwin/card-game.el.git"
+ :files (:defaults (:exclude "build.el" "card-games-pkg.el")))

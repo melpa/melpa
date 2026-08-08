@@ -1,0 +1,1 @@
+(mlx-mode :fetcher github :repo "finalclass/emacs-mlx")

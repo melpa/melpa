@@ -1,0 +1,3 @@
+(bitbucket-devops
+ :fetcher github
+ :repo "will-abb/bitbucket-devops.el")

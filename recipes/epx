@@ -1,1 +1,1 @@
-(epx :fetcher sourcehut :repo "alex-iam/epx")
+(epx :fetcher codeberg :repo "alex-iam/epx")

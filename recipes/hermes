@@ -1,0 +1,1 @@
+(hermes :fetcher git :url "https://git.thanosapollo.org/emacs-hermes")

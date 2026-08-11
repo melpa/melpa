@@ -1,0 +1,1 @@
+(jsonyter :fetcher github :repo "EGuthrieWasTaken/jsonyter.el")

@@ -1,0 +1,3 @@
+(cursorfree
+ :fetcher github
+ :repo "ErikPrantare/cursorfree.el")

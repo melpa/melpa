@@ -1,0 +1,3 @@
+(auto-capitalize
+ :fetcher github
+ :repo "abdulnafe-t/auto-capitalize.el")

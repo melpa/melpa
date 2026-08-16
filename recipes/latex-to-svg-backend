@@ -1,0 +1,3 @@
+(latex-to-svg-backend
+ :fetcher github
+ :repo "alberti42/latex-to-svg-backend")

@@ -1,0 +1,3 @@
+(schlau-compile
+ :fetcher github
+ :repo "flajann2/schlau-compile")

@@ -1,0 +1,4 @@
+(modus-vague
+ :fetcher github
+ :repo "paniash/modus-vague"
+ :branch "main")

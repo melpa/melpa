@@ -1,0 +1,5 @@
+(rau :fetcher github
+     :repo "thkoch2001/rau"
+     :branch "stable"
+     :files (:defaults ("protocol" "protocol/*.xml")))
+

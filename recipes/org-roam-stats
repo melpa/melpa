@@ -1,0 +1,4 @@
+(org-roam-stats
+ :fetcher github
+ :repo "GerardoCendejas/org-roam-stats"
+ :files (:defaults "web"))

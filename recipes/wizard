@@ -1,0 +1,3 @@
+(wizard
+ :fetcher github
+ :repo "jamescherti/wizard.el")

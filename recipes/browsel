@@ -1,3 +1,0 @@
-(browsel
- :fetcher github
- :repo "dmgerman/browsel")

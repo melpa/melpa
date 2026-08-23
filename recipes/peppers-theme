@@ -1,0 +1,3 @@
+(peppers-theme
+ :fetcher codeberg
+ :repo "joar/peppers-theme")

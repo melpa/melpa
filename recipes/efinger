@@ -1,0 +1,1 @@
+(efinger :fetcher git :url "https://git.andros.dev/andros/efinger.el.git")

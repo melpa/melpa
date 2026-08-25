@@ -1,1 +1,1 @@
-(mlx-mode :fetcher github :repo "finalclass/emacs-mlx")
+(mlx-mode :fetcher github :repo "ocaml-mlx/emacs-mlx")

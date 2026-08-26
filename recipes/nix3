@@ -1,0 +1,1 @@
+(nix3 :fetcher github :repo "emacs-twist/nix3.el")

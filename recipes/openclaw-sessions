@@ -1,0 +1,3 @@
+(openclaw-sessions
+ :fetcher github
+ :repo "fstilman/openclaw-sessions")

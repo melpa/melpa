@@ -1,0 +1,3 @@
+(fz-index :fetcher github :repo "uppet/fz-index"
+          :files ("fz-index.el" "fz-index.c" "emacs-module.h"
+                  "Makefile" "README.org"))

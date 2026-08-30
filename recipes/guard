@@ -1,0 +1,1 @@
+(guard :fetcher github :repo "Dspil/guard.el")

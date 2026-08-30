@@ -1,0 +1,4 @@
+(shazam
+ :fetcher github
+ :repo "kickingvegas/shazam"
+ :files (:defaults "docs/images"))

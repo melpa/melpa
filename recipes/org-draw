@@ -1,0 +1,4 @@
+(org-draw
+ :fetcher github
+ :repo "larrasket/org-draw"
+ :files (:defaults ("web" "web/canvas.html")))

@@ -4,5 +4,8 @@
  :files (:defaults
          "bin"
          "CMakeLists.txt"
-         "*.c" "*.h"
-         (:exclude "*test*")))
+         "LICENSE"
+         ("etc" "etc/fzf_h_LICENSE")
+         "*.c" "*.h" "*.inc" "*.def" "*.map"
+         "utf8proc-2.10.0"
+         (:exclude "*test*" "*probe*")))

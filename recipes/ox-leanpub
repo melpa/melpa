@@ -1,1 +1,1 @@
-(ox-leanpub :fetcher gitlab :repo "zzamboni/ox-leanpub")
+(ox-leanpub :fetcher gitlab :repo "zzamboni/ox-leanpub" :branch "main")

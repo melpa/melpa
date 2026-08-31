@@ -2,4 +2,5 @@
                  :repo "joaotavora/sly-macrostep"
                  :files (:defaults
                          "*.lisp"
-                         "*.asd"))
+                         "*.asd"
+                         (:exclude "sly-macrostep-autoloads.el")))

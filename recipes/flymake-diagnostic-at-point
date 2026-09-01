@@ -1,1 +1,0 @@
-(flymake-diagnostic-at-point :repo "meqif/flymake-diagnostic-at-point" :fetcher github)

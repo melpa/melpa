@@ -1,5 +1,32 @@
 # -*- mode: org -*-
-* v5.0.0     UNRELEASED
+* v5.0.2     2026-09-01
+
+As announced when v5.0.0 was released, the following obsolete
+variables and functions have been removed:
+
+- ~package-build-get-version-function~ (use
+  ~package-build-release-version-functions~ and
+  ~package-build-snapshot-version-functions~)
+- ~package-build-pkg-version~ and ~package-build--extract-from-package~
+  (use default value of ~package-build-release-version-functions~)
+- ~package-build--legacy-build~, ~package-build--build-multi-file-package~
+  and ~package-build--build-single-file-package~ (use default value of
+  ~package-build-build-function~)
+
+* v5.0.1     2026-08-01
+
+As announced when v5.0.0 was released, the following obsolete
+variables and functions have been removed:
+
+- ~package-build--melpa-base~ (use ~package-build-directory~)
+- ~package-build-stable~ (use ~package-build-releases~)
+- ~package-build-timeout-secs~ (use ~package-build-timeout~)
+- ~package-build-write-melpa-badge-images~ (use ~package-build-badge-data~)
+- ~package-build-get-tag-version~ (use ~package-build-tag-version~)
+- ~package-build-get-snapshot-version~ (use ~package-build-snapshot-version~)
+- ~package-build--run-process~ (use ~package-build--call-process~)
+
+* v5.0.0     2026-07-01
 
 - The option ~package-build-releases~ now controls whether release
   or snapshot packages are built.  Previously, under its old name

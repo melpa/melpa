@@ -1,0 +1,2 @@
+(piem :fetcher github :repo "dnouri/piem"
+      :old-names (pi-coding-agent))

@@ -1,0 +1,3 @@
+(agent-shell-math-renderer
+ :fetcher github
+ :repo "alberti42/agent-shell-math-renderer")

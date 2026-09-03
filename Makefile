@@ -97,7 +97,6 @@ ifeq ($(CHANNEL), unstable)
   HTMLDIR := html
   CHANNEL_CONFIG := "(progn\
   (setq package-build-releases nil)\
-  (setq package-build-build-function 'package-build--build-multi-file-package)\
   (setq package-build-snapshot-version-functions '(package-build-timestamp-version))\
   (setq package-build-badge-data '(\"MELPA\" \"\#922793\")))"
 
@@ -107,7 +106,6 @@ else ifeq ($(CHANNEL), stable)
   CHANNEL_CONFIG := "(progn\
   (setq package-build-releases t)\
   (setq package-build-all-publishable nil)\
-  (setq package-build-build-function 'package-build--build-multi-file-package)\
   (setq package-build-release-version-functions '(package-build-tag-version))\
   (setq package-build-badge-data '(\"MELPA Stable\" \"\#3e999f\")))"
 

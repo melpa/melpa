@@ -1,2 +1,2 @@
-(sphinx-frontend :repo "kostafey/sphinx-frontend"
-                 :fetcher github)
+(sphinx-frontend :fetcher github
+                 :repo "kostafey/sphinx-frontend")

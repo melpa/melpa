@@ -1,0 +1,3 @@
+(org-roam-gt
+ :fetcher github
+ :repo "dmgerman/org-roam-gt")

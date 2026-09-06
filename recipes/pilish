@@ -1,1 +1,2 @@
-(pilish :fetcher github :repo "dnouri/pilish" :old-names (pi-coding-agent))
+(pilish :fetcher github :repo "dnouri/pilish" :old-names (pi-coding-agent)
+        :files (:defaults ("assets" "assets/pilish-logo.svg")))

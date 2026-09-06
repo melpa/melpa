@@ -1,2 +1,2 @@
 (sphinx-frontend :repo "kostafey/sphinx-frontend"
-                 :fetcher gitlab)
+                 :fetcher github)

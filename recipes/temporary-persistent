@@ -1,2 +1,2 @@
 (temporary-persistent :repo "kostafey/temporary-persistent"
-                      :fetcher gitlab)
+                      :fetcher github)

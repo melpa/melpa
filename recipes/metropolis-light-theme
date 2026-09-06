@@ -1,0 +1,3 @@
+(metropolis-light-theme
+ :fetcher github
+ :repo "bitorhugo/metropolis-light-theme")

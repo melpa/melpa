@@ -1,2 +1,2 @@
-(popup-switcher :repo "kostafey/popup-switcher"
-                :fetcher gitlab)
+(popup-switcher :fetcher github
+                :repo "kostafey/popup-switcher")

@@ -1,2 +1,2 @@
-(organic-green-theme :repo "kostafey/organic-green-theme"
-                     :fetcher gitlab)
+(organic-green-theme :fetcher github
+                     :repo "kostafey/organic-green-theme")

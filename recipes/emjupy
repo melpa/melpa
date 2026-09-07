@@ -1,1 +1,11 @@
-(emjupy :repo "mathren/emjupy" :fetcher github)
+(emjupy
+ :fetcher github
+ :repo "mathren/emjupy"
+ :files ("emjupy.el"
+         "emjupy-core.el"
+         "emjupy-http.el"
+         "emjupy-render.el"
+         "emjupy-cells.el"
+         "emjupy-kernel.el"
+         "emjupy-eglot.el"
+         "emjupy-notebook.el"))

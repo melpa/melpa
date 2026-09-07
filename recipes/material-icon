@@ -1,4 +1,4 @@
-(material-icon
+(material-icons
  :fetcher github
- :repo "zHaOdANiuu/material-icon.el"
+ :repo "zHaOdANiuu/material-icons.el"
  :files (:defaults "icons.tar.gz"))

@@ -1,0 +1,4 @@
+(nonogram
+ :fetcher git
+ :url "https://git.andros.dev/andros/nonogram.el.git"
+ :files (:defaults ("puzzles" "puzzles/*.non")))

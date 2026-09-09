@@ -1,0 +1,4 @@
+(restlib
+ :fetcher github
+ :repo "kickingvegas/restlib"
+ :files (:defaults "docs/images"))

@@ -1,0 +1,4 @@
+(aqui
+ :fetcher github
+ :repo "kickingvegas/aqui"
+ :files (:defaults "docs/images"))

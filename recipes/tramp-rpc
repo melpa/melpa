@@ -1,0 +1,3 @@
+(tramp-rpc :fetcher github
+           :repo "ArthurHeymans/emacs-tramp-rpc"
+           :files (:defaults "Cargo.toml" "Cargo.lock" "server" ".cargo"))

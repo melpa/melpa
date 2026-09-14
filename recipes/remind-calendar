@@ -1,0 +1,3 @@
+(remind-calendar
+ :fetcher github
+ :repo "jneidel/remind-calendar.el")

@@ -1,2 +1,1 @@
-(perinf :fetcher github :repo "algon236/perinf"
-        :files ("perinf*.el" (:exclude "perinf-pkg.el")))
+(perinf :fetcher github :repo "algon236/perinf" :files ("perinf*.el"))

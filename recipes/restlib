@@ -1,0 +1,3 @@
+(restlib
+ :fetcher github
+ :repo "kickingvegas/restlib")

@@ -1,0 +1,3 @@
+(flymake-biomejs
+ :fetcher github
+ :repo "lina-bh/flymake-biomejs")

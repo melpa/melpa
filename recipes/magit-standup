@@ -1,0 +1,1 @@
+(magit-standup :fetcher github :repo "function-artisans/magit-standup")

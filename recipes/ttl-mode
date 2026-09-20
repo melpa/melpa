@@ -1,1 +1,1 @@
-(ttl-mode :fetcher github :repo "emacsattic/ttl-mode")
+(ttl-mode :fetcher github :repo "jeeger/ttl-mode")

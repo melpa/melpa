@@ -1,0 +1,3 @@
+(typst-overlay
+ :fetcher github
+ :repo "hesampakdaman/typst-overlay")

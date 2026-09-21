@@ -1,0 +1,1 @@
+(consult-zoxide :fetcher github :repo "agzam/consult-zoxide.el")

@@ -1,4 +1,4 @@
 (react-snippets
  :fetcher github
- :repo "johnmastro/react-snippets.el"
+ :repo "svjson/react-snippets.el"
  :files ("*.el" "snippets"))

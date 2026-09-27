@@ -1,1 +1,1 @@
-(graphql-doc :repo "ifitzpatrick/graphql-doc.el" :fetcher github)
+(graphql-doc :repo "shivfitzpatrick/graphql-doc.el" :fetcher github)

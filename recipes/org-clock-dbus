@@ -1,0 +1,3 @@
+(org-clock-dbus
+  :fetcher github
+  :repo "pjones/org-clock-dbus")

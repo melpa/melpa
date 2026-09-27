@@ -1,0 +1,4 @@
+(latex-to-svg-for-org
+ :fetcher github
+ :repo "alberti42/latex-to-svg"
+ :files ("latex-to-svg-for-org.el"))

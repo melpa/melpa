@@ -1,0 +1,1 @@
+(surveyor :fetcher github :repo "mrcnski/surveyor.el")

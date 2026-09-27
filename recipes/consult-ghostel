@@ -1,0 +1,4 @@
+(consult-ghostel
+ :fetcher github
+ :repo "dakra/ghostel"
+ :files ("extensions/consult-ghostel/consult-ghostel.el"))

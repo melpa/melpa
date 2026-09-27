@@ -1,0 +1,3 @@
+(dharmamitra
+ :fetcher github
+ :repo "dharmamitra/dharmamitra-emacs")

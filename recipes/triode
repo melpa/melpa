@@ -1,0 +1,4 @@
+(triode
+ :fetcher github
+ :repo "kickingvegas/triode"
+ :files (:defaults "docs/images"))

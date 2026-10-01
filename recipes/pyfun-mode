@@ -1,0 +1,4 @@
+(pyfun-mode
+ :fetcher github
+ :repo "simontreanor/Pyfun"
+ :files ("editors/emacs/pyfun-mode.el"))

@@ -1,0 +1,11 @@
+(emjupy :fetcher github
+        :repo "mathren/emjupy"
+        :files ("src/emjupy.el"
+                "src/emjupy-core.el"
+                "src/emjupy-http.el"
+                "src/emjupy-render.el"
+                "src/emjupy-cells.el"
+                "src/emjupy-kernel.el"
+                "src/emjupy-lsp.el"
+                "src/emjupy-eglot.el"
+                "src/emjupy-notebook.el"))

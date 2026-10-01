@@ -1,2 +1,2 @@
-(projectile-rails :repo "asok/projectile-rails"
+(projectile-rails :repo "Silex/projectile-rails"
                   :fetcher github)

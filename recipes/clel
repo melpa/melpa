@@ -1,0 +1,2 @@
+(clel :fetcher github :repo "BuddhiLW/clojure-elisp"
+      :files ("resources/clojure-elisp/clel.el"))

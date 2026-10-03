@@ -1,0 +1,3 @@
+(antigravity-cli-ide
+ :fetcher github
+ :repo "iht/agy-cli-emacs")

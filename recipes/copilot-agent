@@ -1,0 +1,1 @@
+(copilot-agent :fetcher github :repo "yuankuns/emacs-copilot-agent" :files (:defaults "providers/copilot-agent*.el"))

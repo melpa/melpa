@@ -1,0 +1,1 @@
+(brewpage :fetcher github :repo "kochetkov-ma/brewpage-emacs")

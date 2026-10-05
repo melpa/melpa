@@ -1,4 +1,1 @@
-(bongo-cat-mode
- :fetcher github
- :repo "luyangliuable/bongo-cat-model.el"
- :files (:defaults "img"))
+(bongo-cat-mode :fetcher github :repo "luyangliuable/bongo-cat-model.el" :files ("*.el" ("img" "img/*.png")))

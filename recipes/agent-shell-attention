@@ -1,0 +1,3 @@
+(agent-shell-attention
+ :fetcher github
+ :repo "ultronozm/agent-shell-attention.el")

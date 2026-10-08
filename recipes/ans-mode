@@ -1,0 +1,3 @@
+(ans-mode
+ :fetcher github
+ :repo "theesfeld/ans-mode")

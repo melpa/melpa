@@ -1,0 +1,2 @@
+(efzf :fetcher github :repo "yoshinari-nomura/efzf"
+      :files (:defaults "efzf" "efzf.zsh"))

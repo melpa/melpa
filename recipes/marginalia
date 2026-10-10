@@ -1,3 +1,1 @@
-(marginalia
- :repo "minad/marginalia"
- :fetcher github)
+(marginalia :fetcher github :repo "minad/marginalia")

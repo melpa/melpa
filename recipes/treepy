@@ -1,1 +1,1 @@
-(treepy :repo "volrath/treepy.el" :fetcher github)
+(treepy :fetcher github :repo "volrath/treepy.el")

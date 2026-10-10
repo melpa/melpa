@@ -1,2 +1,1 @@
-(yaml :repo "zkry/yaml.el"
-      :fetcher github)
+(yaml :fetcher github :repo "zkry/yaml.el")

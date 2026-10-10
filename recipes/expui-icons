@@ -1,0 +1,3 @@
+(expui-icons :fetcher github
+             :repo "wwulfric/expui-icons"
+             :files (:defaults "icons"))

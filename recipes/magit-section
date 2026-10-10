@@ -2,5 +2,4 @@
  :fetcher github
  :repo "magit/magit"
  :files ("lisp/magit-section.el"
-         "docs/magit-section.texi"
-         "magit-section-pkg.el"))
+         "docs/magit-section.texi"))

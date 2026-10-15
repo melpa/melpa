@@ -1,1 +1,1 @@
-(lobsters :fetcher github :repo "tanrax/lobsters.el")
+(lobsters :fetcher git :url "https://git.andros.dev/andros/lobsters.el.git")

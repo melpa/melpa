@@ -1,0 +1,5 @@
+(elark
+ :fetcher github
+ :repo "bbw9n/elark"
+ :files ("elark*.el" "core/elark*.el" "ui/elark*.el"
+         "domain/elark*.el" "ai/elark*.el"))

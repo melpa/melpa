@@ -1,1 +1,1 @@
-(ox-rss :fetcher github :repo "bhw-foss/ox-rss")
+(ox-rss :fetcher github :repo "bhwdev/ox-rss")

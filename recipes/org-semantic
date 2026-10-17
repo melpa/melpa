@@ -1,0 +1,3 @@
+(org-semantic
+ :fetcher github
+ :repo "alberti42/org-semantic")

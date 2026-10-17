@@ -1,0 +1,3 @@
+(bookmark-gt
+ :fetcher github
+ :repo "dmgerman/bookmark-gt")

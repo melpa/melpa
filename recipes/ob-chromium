@@ -1,0 +1,2 @@
+(ob-chromium :fetcher github :repo "jgornet/ob-chromium"
+ :files ("ob-chromium.el"))

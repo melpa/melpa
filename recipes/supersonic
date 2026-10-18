@@ -1,0 +1,1 @@
+(supersonic :fetcher github :repo "systemfreund/supersonic.el")

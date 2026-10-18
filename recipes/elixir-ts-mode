@@ -1,2 +1,0 @@
-(elixir-ts-mode :repo "wkirschbaum/elixir-ts-mode"
-                :fetcher github)

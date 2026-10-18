@@ -1,2 +1,0 @@
-(heex-ts-mode :repo "wkirschbaum/heex-ts-mode"
-              :fetcher github)

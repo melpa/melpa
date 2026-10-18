@@ -1,0 +1,3 @@
+(ttl-ts-mode
+ :fetcher codeberg
+ :repo "nutcase/ttl-ts-mode")

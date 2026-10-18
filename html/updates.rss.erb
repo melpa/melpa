@@ -10,6 +10,12 @@
     if File.absolute_path(__FILE__).include? "html-stable"
       repo_title = "MELPA Stable"
       base_url = "https://stable.melpa.org"
+    elsif File.absolute_path(__FILE__).include? "html-snapshots"
+      repo_title = "MELPA Snapshots"
+      base_url = "https://snapshots.melpa.org"
+    elsif File.absolute_path(__FILE__).include? "html-releases"
+      repo_title = "MELPA Releases"
+      base_url = "https://releases.melpa.org"
     end
   %>
   <channel>

@@ -1,0 +1,2 @@
+(region-cursors :fetcher github
+                :repo "abidanBrito/region-cursors")

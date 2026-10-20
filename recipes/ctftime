@@ -1,0 +1,2 @@
+(ctftime :fetcher github
+         :repo "giovanni-iannaccone/ctftime.el")

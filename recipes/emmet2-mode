@@ -1,0 +1,2 @@
+(emmet2-mode :fetcher github :repo "P233/emmet2-mode"
+             :files (:defaults "data"))

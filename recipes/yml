@@ -1,0 +1,8 @@
+(yml
+ :fetcher github
+ :repo "isamert/yml.el"
+ :files ("yml.el"
+         "yml-module-install.el"
+         "Cargo.toml"
+         "Cargo.lock"
+         "src"))

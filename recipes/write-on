@@ -1,0 +1,3 @@
+(write-on
+ :fetcher github
+ :repo "bbw9n/write-on.el")

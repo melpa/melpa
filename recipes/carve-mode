@@ -1,0 +1,1 @@
+(carve-mode :fetcher github :repo "markup-carve/emacs-carve")

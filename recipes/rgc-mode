@@ -1,0 +1,3 @@
+(rgc-mode
+ :repo "rgc-lang/emacs-rgc"
+ :fetcher github)

@@ -1,0 +1,4 @@
+(ert-gwt
+ :fetcher github
+ :repo "OverbearingPearl/ert-gwt"
+ :files (:defaults (:exclude "ci")))

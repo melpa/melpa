@@ -1,2 +1,2 @@
 (chezmoi :fetcher github
-         :repo "tuh8888/chezmoi.el")
+         :repo "harrison-p-l/chezmoi.el")

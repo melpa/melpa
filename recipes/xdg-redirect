@@ -1,0 +1,1 @@
+(xdg-redirect :fetcher github :repo "francisco-colaco/xdg-redirect")

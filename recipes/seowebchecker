@@ -1,0 +1,1 @@
+(seowebchecker :repo "jaiganesh6999/seowebchecker.el" :fetcher github)

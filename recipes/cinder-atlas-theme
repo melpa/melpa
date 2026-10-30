@@ -1,0 +1,3 @@
+(cinder-atlas-theme
+ :fetcher github
+ :repo "Thyruh/cinder-atlas-theme")

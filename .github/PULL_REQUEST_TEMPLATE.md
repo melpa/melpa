@@ -29,12 +29,12 @@ https://github.com/your/awesome_package
      Visit the FAQ at https://github.com/melpa/melpa/wiki/FAQ -->
 
 - [ ] The package is released under a [GPL-Compatible Free Software License](https://www.gnu.org/licenses/license-list.en.html#GPLCompatibleLicenses)
-- [ ] I've read [CONTRIBUTING.org](https://github.com/melpa/melpa/blob/master/CONTRIBUTING.org)
-- [ ] LLMs were used to generate some of the code, and if so, I've added an `Assisted-by:` line as described in [CONTRIBUTING.org](https://github.com/melpa/melpa/blob/master/CONTRIBUTING.org#attribution-for-ai-generated-code)
+- [ ] I've read [CONTRIBUTING.org](https://github.com/melpa/melpa/blob/main/CONTRIBUTING.org)
+- [ ] LLMs were used to generate some of the code, and if so, I've added an `Assisted-by:` line as described in [CONTRIBUTING.org](https://github.com/melpa/melpa/blob/main/CONTRIBUTING.org#attribution-for-ai-generated-code)
 - [ ] I understand the package must have been maintained in a public repository for 1 month or more
 - [ ] I've used the latest version of [package-lint](https://github.com/purcell/package-lint) to check for packaging issues, and addressed its feedback
 - [ ] My elisp byte-compiles cleanly
 - [ ] I've used `M-x checkdoc` to check the package's documentation strings
-- [ ] I've built and installed the package using the instructions in [CONTRIBUTING.org](https://github.com/melpa/melpa/blob/master/CONTRIBUTING.org#test-your-recipe)
+- [ ] I've built and installed the package using the instructions in [CONTRIBUTING.org](https://github.com/melpa/melpa/blob/main/CONTRIBUTING.org#test-your-recipe)
 
 <!-- After submitting, please fix any problems the CI reports. -->

@@ -1,0 +1,3 @@
+(perl-live :fetcher github
+           :repo "vividsnow/perl-live"
+           :files (:defaults "perl-live.pl"))

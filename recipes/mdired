@@ -1,0 +1,3 @@
+(mdired
+ :fetcher github
+ :repo "kickingvegas/mdired")

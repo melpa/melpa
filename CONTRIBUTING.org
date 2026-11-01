@@ -87,10 +87,10 @@ New recipe submissions should adhere to the following guidelines:
      source file.  The repository should contain a LICENSE or COPYING
      file, formatted so that it can be detected by [[https://github.com/licensee/licensee][common tooling]].
 
-*** Attribution for AI-generated code
+*** Using AI
 
-Using AI to assist in writing code or opening pull requests is fine, but the
-human author should be the *first* and *most thorough* reviewer of any such
+Using AI to assist in writing your packages is not prohibited, but the
+human author must be the *first* and *most thorough* reviewer of any such
 output.  Please help the MELPA community track AI assistance by providing a
 [[https://docs.kernel.org/process/coding-assistants.html#attribution][Linux-style "Assisted-by" line]] under your files' Author line:
 
@@ -101,6 +101,9 @@ output.  Please help the MELPA community track AI assistance by providing a
 
 Where ~AGENT_NAME~ is the name of the product or framework (e.g. "Claude")
 and ~MODEL_VERSION~ is the corresponding version (e.g. ~claude-opus-4-7~).
+
+Note that at time of writing [[https://cgit.git.savannah.gnu.org/cgit/emacs.git/tree/AGENTS.md][Emacs itself prohibits LLM-generated contributions]]
+and MELPA's stance on AI-generated packages is under review.
 
 ** Making your package ready for inclusion
 

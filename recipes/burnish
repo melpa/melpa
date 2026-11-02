@@ -1,0 +1,3 @@
+(burnish
+ :fetcher github
+ :repo "kickingvegas/burnish")

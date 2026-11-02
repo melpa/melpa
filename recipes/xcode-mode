@@ -1,1 +1,1 @@
-(xcode-mode :fetcher github :repo "nicklanasa/xcode-mode")
+(xcode-mode :fetcher github :repo "emacsattic/xcode-mode")

@@ -1,0 +1,3 @@
+(chezmoi-age :fetcher github
+             :repo "harrison-p-l/chezmoi.el"
+             :files ("extensions/chezmoi-age.el"))

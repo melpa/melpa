@@ -1,0 +1,4 @@
+(licensel
+ :fetcher github
+ :repo "dkdwn/licensel"
+ :files ("licensel.el" "licenses/*"))

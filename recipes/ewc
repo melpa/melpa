@@ -1,0 +1,3 @@
+(ewc :fetcher github
+     :repo "thkoch2001/rau"
+     :files ("ewc.el"))

@@ -1,2 +1,3 @@
-(daml-mode :repo "bartfaitamas/daml-mode"
-           :fetcher github)
+(daml-mode :fetcher github
+           :repo "bartfaitamas/daml-mode"
+           :files ("daml-mode.el"))

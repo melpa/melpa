@@ -1,0 +1,6 @@
+(org-roam-viz
+ :fetcher github
+ :repo "mtekman/org-roam-viz"
+ :files (:defaults
+         "build" "lisp" "public" "src"
+         "build.mjs" "package.json"))

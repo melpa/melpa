@@ -1,0 +1,2 @@
+(ecc :fetcher github
+     :repo "wakamenod/emacs-claude-code")

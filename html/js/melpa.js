@@ -175,7 +175,7 @@
         source: recipe.fetcher,
         downloads: oldNames.concat(name).reduce(function(sum, n) { return sum + (downloads[n] || 0); }, 0),
         fetcher: recipe.fetcher,
-        recipeURL: "https://github.com/melpa/melpa/blob/master/recipes/" + name,
+        recipeURL: "https://github.com/melpa/melpa/blob/main/recipes/" + name,
         packageURL: "packages/" + name + "-" + version + "." + (built.type == "single" ? "el" : "tar"),
         homeURL: homeURL,
         sourceURL: sourceURL,

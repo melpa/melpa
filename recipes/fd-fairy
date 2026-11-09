@@ -1,0 +1,4 @@
+(fd-fairy
+ :fetcher git
+ :url "https://git.gay/agnes-li/fd-fairy.git"
+ :files ("fd-fairy.el" "Cargo.toml" "Cargo.lock" "src"))

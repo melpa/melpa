@@ -1,0 +1,1 @@
+(gosavetool :fetcher github :repo "mitolocya/gosavetool.el")

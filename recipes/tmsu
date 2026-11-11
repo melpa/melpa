@@ -1,2 +1,2 @@
-(tmsu :repo "vifon/tmsu.el" :fetcher github
+(tmsu :repo "vifon/tmsu.el" :fetcher codeberg
       :files (:defaults (:exclude "ol-tmsu.el")))

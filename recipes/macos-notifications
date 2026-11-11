@@ -1,0 +1,8 @@
+(macos-notifications
+ :fetcher github
+ :repo "dakra/macos-notifications"
+ :files (:defaults
+         "Makefile"
+         "emacs-module.h"
+         "macos-notifications-module.m"
+         (:exclude "macos-notifications-lint.el")))

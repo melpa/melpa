@@ -1,0 +1,1 @@
+(sv-kalender :repo "impaktor/sv-kalender" :fetcher github)

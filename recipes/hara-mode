@@ -1,0 +1,6 @@
+(hara-mode
+ :fetcher github
+ :repo "hara-lang/hara-extensions"
+ :files ("hara-emacs/hara-mode.el"
+         "hara-emacs/hara-manage.el"
+         ("bin" "hara-emacs/bin/hara")))

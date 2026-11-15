@@ -1,2 +1,2 @@
-(kmacro-x :repo "vifon/kmacro-x.el" :fetcher github
+(kmacro-x :repo "vifon/kmacro-x.el" :fetcher codeberg
           :old-names (kmacro-mc))

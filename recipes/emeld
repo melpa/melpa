@@ -1,0 +1,4 @@
+(emeld
+ :fetcher github
+ :repo "captainflasmr/emeld"
+ :files (:defaults "COPYING"))

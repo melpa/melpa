@@ -1,0 +1,3 @@
+(admin-delux
+ :fetcher codeberg
+ :repo "boosja/admin-delux.el")

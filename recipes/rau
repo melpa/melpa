@@ -1,0 +1,4 @@
+(rau :fetcher github
+     :repo "thkoch2001/rau"
+     :files ("rau.el" "rau-lib.el" "rau-be.el" ("protocol" "protocol/*.xml")))
+

@@ -1,0 +1,4 @@
+(epher
+ :fetcher github
+ :repo "upyesp/epher"
+ :files ("clients/emacs/epher.el"))

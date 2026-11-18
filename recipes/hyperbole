@@ -2,7 +2,7 @@
     :url "https://git.savannah.gnu.org/git/hyperbole.git"
     :fetcher git
     :files ("*.el" "MANIFEST" "dir" "ChangeLog" "Makefile"
-            "HY-ABOUT" "HY-ANNOUNCE" "HY-CONCEPTS.kotl" "HY-NEWS"
+            "HY-ABOUT" "HY-ANNOUNCE" "HY-CONCEPTS.kotl" "HY-NEWS.org"
             "HY-WHY.kotl" "INSTALL" "DEMO" "DEMO-ROLO.otl" "FAST-DEMO"
             "README.in.md" "README.md" "README.md.html" "TAGS" "_hypb"
             ".hypb" "hyrolo.py" "smart-clib-sym" "topwin.py"

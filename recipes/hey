@@ -1,0 +1,1 @@
+(hey :fetcher github :repo "codingquark/hey.el" :files (:defaults "LICENSE"))

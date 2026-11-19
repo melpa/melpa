@@ -1,0 +1,3 @@
+(yas-autoinsert
+ :fetcher gitlab
+ :repo "rchastel1/emacs/yas-autoinsert")

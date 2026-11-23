@@ -1,0 +1,3 @@
+(tandem :fetcher github
+        :repo "zombieleet/tandem"
+        :files ("lisp/*.el" "doc/tandem.texi"))

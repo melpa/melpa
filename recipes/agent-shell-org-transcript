@@ -1,0 +1,3 @@
+(agent-shell-org-transcript
+ :fetcher github
+ :repo "lllShamanlll/agent-shell-org-transcript")

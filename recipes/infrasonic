@@ -1,0 +1,3 @@
+(infrasonic
+ :repo "kaibagley/infrasonic"
+ :fetcher github)

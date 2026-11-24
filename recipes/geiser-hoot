@@ -1,0 +1,4 @@
+(geiser-hoot
+ :fetcher codeberg
+ :repo "spritely/geiser-hoot"
+ :files (:defaults ("src" "src/*")))

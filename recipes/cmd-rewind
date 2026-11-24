@@ -1,0 +1,1 @@
+(cmd-rewind :fetcher github :repo "redguardtoo/cmd-rewind")

@@ -1,0 +1,3 @@
+(unicode-style :fetcher github
+               :repo "SeppiSalttown/unicode-style.el"
+               :files ("unicode-style.el" "unicode-style-guide.txt"))

@@ -1,0 +1,1 @@
+(theman :fetcher codeberg :repo "celesteornato/theman-el" :files ("*.el"))

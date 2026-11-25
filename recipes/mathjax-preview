@@ -1,0 +1,1 @@
+(mathjax-preview :fetcher github :repo "ntalbs/mathjax-preview")

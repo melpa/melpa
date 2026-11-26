@@ -1,0 +1,1 @@
+(multi-magit :fetcher github :repo "luismbo/multi-magit")

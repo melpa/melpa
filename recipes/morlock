@@ -1,1 +1,1 @@
-(morlock :fetcher github :repo "tarsius/morlock")
+(morlock :fetcher github :repo "emacsattic/morlock")

@@ -1,0 +1,3 @@
+(terminal-colors
+ :fetcher github
+ :repo "jamescherti/terminal-colors.el")

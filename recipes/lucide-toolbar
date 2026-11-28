@@ -1,0 +1,2 @@
+(lucide-toolbar :fetcher github :repo "shogi-dojo/lucide-toolbar"
+                :files (:defaults "icons"))
